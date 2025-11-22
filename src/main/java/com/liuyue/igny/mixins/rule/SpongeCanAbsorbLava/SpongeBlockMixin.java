@@ -36,7 +36,7 @@ public class SpongeBlockMixin {
        }, (blockPos2) -> {
            if (blockPos2.equals(blockPos)) {
                //#if MC>=12104
-               //$$ return BlockPos.TraversalNodeStatus.SKIP;
+               //$$ return BlockPos.TraversalNodeStatus.ACCEPT;
                //#else
                return true;
                //#endif
@@ -45,7 +45,7 @@ public class SpongeBlockMixin {
                FluidState fluidState = level.getFluidState(blockPos2);
                if (!shouldAbsorb(fluidState)) {
                    //#if MC>=12104
-                   //$$ return BlockPos.TraversalNodeStatus.ACCEPT;
+                   //$$ return BlockPos.TraversalNodeStatus.SKIP;
                    //#else
                    return false;
                    //#endif
@@ -92,4 +92,5 @@ public class SpongeBlockMixin {
            return true;
        }else return fluidState.is(FluidTags.LAVA) && Objects.equals(IGNYSettings.SpongeCanAbsorbLava, "true");
    }
+
 }

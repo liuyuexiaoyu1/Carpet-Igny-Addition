@@ -1,19 +1,26 @@
 package com.liuyue.igny.mixins.carpet;
 
+import carpet.CarpetServer;
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.SettingsManager;
+import carpet.utils.Messenger;
+import com.liuyue.igny.IGNYServer;
+import com.liuyue.igny.IGNYServerMod;
 import com.liuyue.igny.data.RuleChangeDataManager;
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.tracker.RuleChangeTracker;
 import net.minecraft.commands.CommandSourceStack;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
 import java.util.Optional;
+import carpet.utils.Translations;
 
 @Mixin(SettingsManager.class)
 public class SettingsManagerMixin {
@@ -77,4 +84,41 @@ public class SettingsManagerMixin {
     private void onRuleChanged(CommandSourceStack source, CarpetRule<?> rule, String newValue, CallbackInfoReturnable<Integer> cir){
         RuleChangeTracker.ruleChanged(source, rule, newValue);
     }
+
+    @Unique
+    private static final String VERSION_TRANSLATION_KEY = "igny.settings.command.version";
+
+    @Unique
+    private static final String TOTAL_RULES_TRANSLATION_KEY = "igny.settings.command.total_rules";
+
+    @Inject(
+            method = "listAllSettings",
+            slice = @Slice(
+                    from = @At(
+                            value = "CONSTANT",
+                            args = "stringValue=carpet.settings.command.version",
+                            ordinal = 0
+                    )
+            ),
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lcarpet/api/settings/SettingsManager;getCategories()Ljava/lang/Iterable;",
+                    ordinal = 0
+            ),
+            remap = false
+    )
+    private void printVersion(CommandSourceStack source, CallbackInfoReturnable<Integer> cir) {
+        if ((Object)this == CarpetServer.settingsManager) {
+            Messenger.m(
+                    source,
+                    Messenger.c(
+                            String.format("g %s ", IGNYServer.fancyName),
+                            String.format("g %s: ", Translations.tr(VERSION_TRANSLATION_KEY, "Version")),
+                            String.format("g %s ", IGNYServerMod.getVersion()),
+                            String.format("g (%s: %d)", Translations.tr(TOTAL_RULES_TRANSLATION_KEY, "total rules"), IGNYServer.ruleCount)
+                    )
+            );
+        }
+    }
+
 }

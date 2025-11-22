@@ -1,4 +1,6 @@
 {
+  "igny.settings.command.version": "Version",
+  "igny.settings.command.total_rules": "total rules",
   "carpet.rule.WardenNeverDig.desc":"Warden Never Dig",
   "carpet.rule.PlayerLevitationFreeShulkerBullet.desc":"Player Immune to Shulker Levitation",
   "carpet.rule.PlayerMiningFatigueFreeGuardian.desc": "Player Immune to Guardian Mining Fatigue",

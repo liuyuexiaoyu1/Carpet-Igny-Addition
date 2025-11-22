@@ -1,4 +1,6 @@
 {
+  "igny.settings.command.version": "版本",
+  "igny.settings.command.total_rules": "总规则数",
   "carpet.rule.WardenNeverDig.name": "监守者永不钻地",
   "carpet.rule.WardenNeverDig.desc": "让监守者永远不会钻地",
   "carpet.rule.PlayerLevitationFreeShulkerBullet.name": "潜影贝攻击玩家没有漂浮状态",

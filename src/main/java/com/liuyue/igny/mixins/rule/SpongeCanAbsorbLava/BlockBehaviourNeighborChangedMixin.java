@@ -9,34 +9,44 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
+//#if MC>=12104
+//$$ import net.minecraft.world.level.redstone.Orientation;
+//#endif
 import java.util.Objects;
 
 import static net.minecraft.world.level.block.Block.dropResources;
 
-@Mixin(WetSpongeBlock.class)
-public class WetSpongeBlockMixin {
-    @Inject(method = "onPlace", at = @At("HEAD"), cancellable = true)
-    private void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl, CallbackInfo ci){
-        tryAbsorb(blockState, level, blockPos, blockState2, bl);
-    }
-    @Unique
-    public void tryAbsorb(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
-        if (!blockState2.is(blockState.getBlock())) {
-        if (removeFluidBreadthFirstSearch(level, blockPos)) {
-            level.setBlock(blockPos, Blocks.SPONGE.defaultBlockState(), 2);
-            level.playSound(null, blockPos, SoundEvents.SPONGE_ABSORB, SoundSource.BLOCKS, 1.0F, 1.0F);
+@Mixin(BlockBehaviour.class)
+public abstract class BlockBehaviourNeighborChangedMixin {
+
+    @Inject(method = "neighborChanged", at = @At("HEAD"))
+    private void onNeighborChanged(
+            //#if MC>=12104
+            //$$ BlockState blockState, Level level, BlockPos blockPos, Block block, Orientation orientation, boolean bl, CallbackInfo ci
+            //#else
+            BlockState blockState, Level level, BlockPos blockPos, Block block, BlockPos blockPos2, boolean bl, CallbackInfo ci
+            //#endif
+    ) {
+
+        if (blockState.getBlock() instanceof WetSpongeBlock) {
+            if (removeFluidBreadthFirstSearch(level, blockPos)) {
+                level.setBlock(blockPos, Blocks.SPONGE.defaultBlockState(), 2);
+                level.playSound(null, blockPos, SoundEvents.SPONGE_ABSORB, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
         }
-    }}
+    }
 
     @Unique
     private static final Direction[] ALL_DIRECTIONS = Direction.values();
+
     @Unique
     private boolean removeFluidBreadthFirstSearch(Level level, BlockPos blockPos) {
         return BlockPos.breadthFirstTraversal(
@@ -51,7 +61,7 @@ public class WetSpongeBlockMixin {
                 blockPos2 -> {
                     if (blockPos2.equals(blockPos)) {
                         //#if MC>=12104
-                        //$$ return BlockPos.TraversalNodeStatus.SKIP;
+                        //$$ return BlockPos.TraversalNodeStatus.ACCEPT;
                         //#else
                         return true;
                         //#endif
@@ -98,10 +108,12 @@ public class WetSpongeBlockMixin {
                         }
                     }
                 }
-        )
-                > 1;
+        ) > 1;
     }
+
     @Unique
-    private boolean shouldAbsorb(FluidState fluidState){return fluidState.is(FluidTags.LAVA) && Objects.equals(IGNYSettings.SpongeCanAbsorbLava, "wet_sponge");
+    private boolean shouldAbsorb(FluidState fluidState) {
+        return fluidState.is(FluidTags.LAVA) && Objects.equals(IGNYSettings.SpongeCanAbsorbLava, "wet_sponge");
     }
+
 }

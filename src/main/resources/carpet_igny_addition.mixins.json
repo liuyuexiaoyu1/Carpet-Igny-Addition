@@ -9,8 +9,8 @@
         "rule.FakePlayerCanPush.LivingEntityMixin",
         "rule.PlayerLevitationFreeShulkerBullet.ShulkerBulletMixin",
         "rule.PlayerMiningFatigueFreeGuardian.GuardianAttackGoalMixin",
+        "rule.SpongeCanAbsorbLava.BlockBehaviourNeighborChangedMixin",
         "rule.SpongeCanAbsorbLava.SpongeBlockMixin",
-        "rule.SpongeCanAbsorbLava.WetSpongeBlockMixin",
         "rule.WardenNeverDig.WardenMixin"
     ],
     "client": [],
