@@ -4,6 +4,8 @@
   "igny.settings.record.raw_value": "RawValue",
   "igny.settings.command.version": "Version",
   "igny.settings.command.total_rules": "total rules",
+  "igny.command.enderchest.no_permission": "You don't have permission to drop ender chest items",
+  "igny.command.enderchest.real_player_op_only": "Only operators can drop ender chest items of real players",
 
   "carpet.rule.WardenNeverDig.desc":"Warden Never Dig",
   "carpet.rule.PlayerLevitationFreeShulkerBullet.desc":"Player Immune to Shulker Levitation",
@@ -13,5 +15,13 @@
   "carpet.rule.SpongeCanAbsorbLava.desc": "Sponges can absorb lava",
   "carpet.rule.SpongeCanAbsorbLava.extra.0": "true: Dry sponges absorb lava (turn into wet sponges)",
   "carpet.rule.SpongeCanAbsorbLava.extra.1": "wet_sponge: Wet sponges absorb lava (turn into dry sponges)",
-  "carpet.rule.SpongeCanAbsorbLava.extra.2": "false: Sponges do not absorb lava"
+  "carpet.rule.SpongeCanAbsorbLava.extra.2": "false: Sponges do not absorb lava",
+  "carpet.rule.CommandPlayerEnderChestDrop.desc": "Permission to drop ender chest items",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.0": "Usage: /player <name> drop all - drops inventory + ender chest (if permitted)",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.1": "Usage: /player <name> drop inventory - drops only inventory items",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.2": "Usage: /player <name> drop enderchest - drops only ender chest items",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.3": "Without permission: 'all' drops only inventory items",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.4": "With permission: 'all' drops both inventory and ender chest items",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.5": "Real players: Only OPs can drop their ender chest items",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.6": "Fake players: Follows the permission setting above"
 }

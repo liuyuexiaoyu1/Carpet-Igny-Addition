@@ -4,6 +4,8 @@
   "igny.settings.record.raw_value": "原始值",
   "igny.settings.command.version": "版本",
   "igny.settings.command.total_rules": "总规则数",
+  "igny.command.enderchest.no_permission": "你没有权限丢弃末影箱物品",
+  "igny.command.enderchest.real_player_op_only": "只有OP可以丢弃真实玩家的末影箱物品",
 
   "carpet.rule.WardenNeverDig.name": "监守者永不钻地",
   "carpet.rule.WardenNeverDig.desc": "让监守者永远不会钻地",
@@ -19,5 +21,14 @@
   "carpet.rule.SpongeCanAbsorbLava.desc": "海绵可以吸收岩浆",
   "carpet.rule.SpongeCanAbsorbLava.extra.0": "true: 干海绵吸收岩浆（会变成湿海绵）",
   "carpet.rule.SpongeCanAbsorbLava.extra.1": "wet_sponge: 湿海绵吸收岩浆（会变成干海绵）",
-  "carpet.rule.SpongeCanAbsorbLava.extra.2": "false: 海绵不吸收岩浆"
+  "carpet.rule.SpongeCanAbsorbLava.extra.2": "false: 海绵不吸收岩浆",
+  "carpet.rule.CommandPlayerEnderChestDrop.name": "玩家丢弃末影箱物品权限",
+  "carpet.rule.CommandPlayerEnderChestDrop.desc": "控制玩家丢弃末影箱物品的权限等级",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.0": "用法: /player <玩家名> drop all - 丢弃背包+末影箱物品(如有权限)",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.1": "用法: /player <玩家名> drop inventory - 仅丢弃背包物品",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.2": "用法: /player <玩家名> drop enderchest - 仅丢弃末影箱物品",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.3": "无权限时: 'all' 仅丢弃背包物品",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.4": "有权限时: 'all' 同时丢弃背包和末影箱物品",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.5": "真实玩家: 只有OP可以丢弃其末影箱物品",
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.6": "假玩家: 遵循上述权限设置"
 }

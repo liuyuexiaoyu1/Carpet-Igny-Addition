@@ -57,7 +57,6 @@ public class SettingsManagerMixin {
     )
     private void addOperationInfoAfterCurrentValue(
             CommandSourceStack source, CarpetRule<?> rule, CallbackInfoReturnable<Integer> cir, String displayName, List tags) {
-        // 检查是否启用显示功能
         if (!IGNYSettings.ShowRuleChangeHistory) {
             return;
         }
@@ -67,7 +66,6 @@ public class SettingsManagerMixin {
             Optional<RuleChangeDataManager.RuleChangeRecord> lastChange =
                     RuleChangeDataManager.getLastChange(currentRule.name());
 
-            // 检查记录是否存在、有效且不是默认值
             if (lastChange.isPresent()) {
                 RuleChangeDataManager.RuleChangeRecord record = lastChange.get();
 

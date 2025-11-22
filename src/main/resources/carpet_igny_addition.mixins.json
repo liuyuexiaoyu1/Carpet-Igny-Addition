@@ -1,20 +1,23 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "com.liuyue.igny.mixins",
-    "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
-    "mixins": [
-        "MinecraftServerMixin",
-        "carpet.SettingsManagerMixin",
-        "rule.FakePlayerCanPush.LivingEntityMixin",
-        "rule.PlayerLevitationFreeShulkerBullet.ShulkerBulletMixin",
-        "rule.PlayerMiningFatigueFreeGuardian.GuardianAttackGoalMixin",
-        "rule.SpongeCanAbsorbLava.BlockBehaviourNeighborChangedMixin",
-        "rule.SpongeCanAbsorbLava.SpongeBlockMixin",
-        "rule.WardenNeverDig.WardenMixin"
-    ],
-    "client": [],
-    "injectors": {
-        "defaultRequire": 1
-    }
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.liuyue.igny.mixins",
+  "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
+  "mixins": [
+    "MinecraftServerMixin",
+    "carpet.SettingsManagerMixin",
+    "carpet.accessors.EntityPlayerActionPackAccessor",
+    "carpet.commands.EntityPlayerActionPackMixin",
+    "carpet.commands.PlayerCommandPermissionsMixin",
+    "rule.FakePlayerCanPush.EntityMixin",
+    "rule.PlayerLevitationFreeShulkerBullet.ShulkerBulletMixin",
+    "rule.PlayerMiningFatigueFreeGuardian.GuardianAttackGoalMixin",
+    "rule.SpongeCanAbsorbLava.BlockBehaviourNeighborChangedMixin",
+    "rule.SpongeCanAbsorbLava.SpongeBlockMixin",
+    "rule.WardenNeverDig.WardenMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

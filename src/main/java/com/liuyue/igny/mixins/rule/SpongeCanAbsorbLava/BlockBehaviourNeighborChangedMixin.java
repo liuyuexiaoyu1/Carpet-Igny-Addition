@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#if MC>=12104
+//#if MC>=12103
 //$$ import net.minecraft.world.level.redstone.Orientation;
 //#endif
 import java.util.Objects;
@@ -29,7 +29,7 @@ public abstract class BlockBehaviourNeighborChangedMixin {
 
     @Inject(method = "neighborChanged", at = @At("HEAD"))
     private void onNeighborChanged(
-            //#if MC>=12104
+            //#if MC>=12103
             //$$ BlockState blockState, Level level, BlockPos blockPos, Block block, Orientation orientation, boolean bl, CallbackInfo ci
             //#else
             BlockState blockState, Level level, BlockPos blockPos, Block block, BlockPos blockPos2, boolean bl, CallbackInfo ci

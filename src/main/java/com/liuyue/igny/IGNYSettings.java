@@ -35,4 +35,9 @@ public class IGNYSettings
             options = {"true", "false","wet_sponge"}
     )
     public static String SpongeCanAbsorbLava = "false";
+    @Rule(
+            categories = {IGNY, COMMAND, FEATURE},
+            options = {"false", "true", "ops", "0", "1", "2", "3", "4"}
+    )
+    public static String CommandPlayerEnderChestDrop = "ops";
 }
