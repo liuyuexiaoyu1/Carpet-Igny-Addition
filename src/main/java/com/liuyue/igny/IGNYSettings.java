@@ -40,4 +40,19 @@ public class IGNYSettings
             options = {"false", "true", "ops", "0", "1", "2", "3", "4"}
     )
     public static String CommandPlayerEnderChestDrop = "ops";
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean NoWardenDarkness = false;
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean FloatingIceWater = false;
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean NoZombifiedPiglinNetherPortalSpawn = false;
 }

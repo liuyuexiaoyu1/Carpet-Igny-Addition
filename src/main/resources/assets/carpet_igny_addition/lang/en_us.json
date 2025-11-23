@@ -23,5 +23,8 @@
   "carpet.rule.CommandPlayerEnderChestDrop.extra.3": "Without permission: 'all' drops only inventory items",
   "carpet.rule.CommandPlayerEnderChestDrop.extra.4": "With permission: 'all' drops both inventory and ender chest items",
   "carpet.rule.CommandPlayerEnderChestDrop.extra.5": "Real players: Only OPs can drop their ender chest items",
-  "carpet.rule.CommandPlayerEnderChestDrop.extra.6": "Fake players: Follows the permission setting above"
+  "carpet.rule.CommandPlayerEnderChestDrop.extra.6": "Fake players: Follows the permission setting above",
+  "carpet.rule.NoWardenDarkness.desc":"Warden attacks no longer apply darkness effect to players.",
+  "carpet.rule.FloatingIceWater.desc": "Ice melts into water anywhere, even when floating in air.",
+  "carpet.rule.NoZombifiedPiglinNetherPortalSpawn.desc": "Prevents Zombified Piglins from naturally spawning at Nether portals"
 }
