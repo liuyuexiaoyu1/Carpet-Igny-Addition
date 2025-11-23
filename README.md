@@ -86,7 +86,7 @@
 
 - 类型: `boolean`
 - 默认值: `false`
-- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`， `FEATURE`
 
 ### 悬空冰破坏产生水 (FloatingIceWater)
@@ -95,7 +95,7 @@
 
 - 类型: `boolean`
 - 默认值: `false`
-- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`， `FEATURE`
 
 ### 僵尸猪灵不会自然生成在下界传送门 (NoZombifiedPiglinNetherPortalSpawn)
@@ -104,5 +104,5 @@
 
 - 类型: `boolean`
 - 默认值: `false`
-- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`， `FEATURE`
