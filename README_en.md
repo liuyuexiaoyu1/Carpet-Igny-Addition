@@ -115,7 +115,7 @@ Zombified piglins will not naturally spawn in nether portals when difficulty is 
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### ProjectileDuplicationReintroduced
+### ProjectileDuplicationReintroduced `MC>=1.21.2`
 
 Reintroduces the projectile residual tick duplication behavior from versions below 1.21.2 (can be considered as restoring duplication behaviors for potions, eggs, snowballs, etc.).
 
