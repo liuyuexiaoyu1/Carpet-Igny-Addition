@@ -2,35 +2,21 @@ package com.liuyue.igny.mixins.rule.NoZombifiedPiglinNetherPortalSpawn;
 
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.monster.ZombifiedPiglin;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.NetherPortalBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ZombifiedPiglin.class)
+@Mixin(NetherPortalBlock.class)
 public class ZombifiedPiglinMixin {
-
-    @Inject(
-            method = "checkZombifiedPiglinSpawnRules",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    private static void preventSpawningInOrAbovePortal(
-            net.minecraft.world.entity.EntityType<ZombifiedPiglin> entityType,
-            LevelAccessor level,
-            net.minecraft.world.entity.MobSpawnType spawnType,
-            BlockPos pos,
-            net.minecraft.util.RandomSource random,
-            CallbackInfoReturnable<Boolean> cir
-    ) {
+    @Inject(method="randomTick", at=@At("HEAD"), cancellable = true)
+    private void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
         if (IGNYSettings.NoZombifiedPiglinNetherPortalSpawn) {
-            if (level.getBlockState(pos).is(Blocks.NETHER_PORTAL) ||
-                    level.getBlockState(pos.above()).is(Blocks.NETHER_PORTAL)) {
-                cir.setReturnValue(false);
-            }
+            ci.cancel();
         }
     }
 }
