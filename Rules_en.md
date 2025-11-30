@@ -160,4 +160,22 @@ Candle can place on incomplete block
 - Type: `boolean`
 - Default Value: `false`
 - Suggested Options: `false`, `true`
-- ategories: `IGNY`, `FEATURE`
+- Categories: `IGNY`, `FEATURE`
+
+### Commandfixnotepitch
+
+`/fixnotepitch` permission
+
+- Type: `string`
+- Default Value: `ops`
+- Suggested Options: `false`, `true`，`ops`，`0`，`1`，`2`，`3`，`4`
+- Categories: `IGNY`, `COMMAND`，`CREATIVE`,`FEATURE`
+
+### FixnotepitchUpdateBlock
+
+Control `CommandFixnotepitech` to sending block update
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggeted Options: `false`, `true`
+- Categories: `IGNY`, `COMMAND`，`CREATIVE`，`FEATURE`

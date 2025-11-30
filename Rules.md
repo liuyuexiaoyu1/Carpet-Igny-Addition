@@ -154,3 +154,21 @@ cantrade：当载具上没有村民或者流浪商人时移除载具，其他与
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
+
+### 音符盒音高指令权限 (Commandfixnotepitch)
+
+音符盒音高指令权限
+
+- 类型: `string`
+- 默认值: `ops`
+- 参考选项: `false`, `true`，`ops`，`0`，`1`，`2`，`3`，`4`
+- 分类: `IGNY`, `COMMAND`，`CREATIVE`,`FEATURE`
+
+### 控制Commandfixnotepitech是否产生方块更新 (FixnotepitchUpdateBlock)
+
+控制CommandFixnotepitech是否产生方块更新
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `COMMAND`，`CREATIVE`，`FEATURE`
