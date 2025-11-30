@@ -23,11 +23,11 @@
 
 ### Rules
 
-[所有规则](Rules_en.md)
+[All rules](Rules_en.md)
 
 ### Commands
 
-[所有命令](Commands_en.md)
+[All commands](Commands_en.md)
 
 ## Download
 

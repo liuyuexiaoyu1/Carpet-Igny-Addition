@@ -32,7 +32,7 @@
   "carpet.rule.FakePlayerBoatYawFix.desc": "Fake players will not correct yaw when riding boats.",
   "carpet.rule.KillFakePlayerRemoveVehicle.desc": "When removing a fake player, remove the vehicle they are riding in.",
   "carpet.rule.KillFakePlayerRemoveVehicle.extra.0": "cantrade: Remove the vehicle when there are no villagers or wandering merchants on it, and keep other options consistent with the false option.",
-  "carpet.rule.CandlePlaceOnIncompleteBlock.desc": "1",
+  "carpet.rule.CandlePlaceOnIncompleteBlock.desc": "Candle can place on incomplete block",
   "carpet.rule.CommandFixnotepitch.desc": "Adjust the pitch of the note blocks within the range to zero",
   "carpet.rule.CommandFixnotepitech.extra.0": "Whether or not to generate block updated is controlled by the FixnotepitchUpdateBlock rule",
   "carpet.rule.FixnotepitchUpdateBlock.desc":"Control whether the CommandFixnotepitech rule generates block updated"
