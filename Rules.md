@@ -173,11 +173,20 @@ cantrade：当载具上没有村民或者流浪商人时移除载具，其他与
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `COMMAND`, `CREATIVE`, `FEATURE`
 
-###  快乐恶魂无碰撞 (HappyGhastNoClip) `MC>1.21.6`
+### 快乐恶魂无碰撞 (HappyGhastNoClip) `MC>1.21.6`
 
-快乐恶魂有玩家骑乘时无视方块碰撞，可穿过方块。
+快乐恶魂有玩家骑乘时无视方块碰撞。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURIVIAL`, `FEATURE`
+
+### 只有玩家实体创建下界传送门 (OnlyPlayerCreateNetherPortal)
+
+只有玩家实体可以创建下界传送门。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`

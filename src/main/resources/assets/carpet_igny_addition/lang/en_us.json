@@ -36,5 +36,6 @@
   "carpet.rule.CommandFixnotepitch.desc": "Adjust the pitch of the note blocks within the range to zero",
   "carpet.rule.CommandFixnotepitech.extra.0": "Whether or not to generate block updated is controlled by the FixnotepitchUpdateBlock rule",
   "carpet.rule.FixnotepitchUpdateBlock.desc":"Control whether the CommandFixnotepitech rule generates block updated",
-  "carpet.rule.HappyGhastNoClip.desc":"Happy Ghast has players who ride while ignoring block collisions and can pass through blocks"
+  "carpet.rule.HappyGhastNoClip.desc":"Happy Ghast has players who ride while ignoring block collisions",
+  "carpet.rule.OnlyPlayerCreateNetherPortal.desc": "Only players can create nether portal"
 }

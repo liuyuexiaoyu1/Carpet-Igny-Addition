@@ -134,4 +134,10 @@ public class IGNYSettings
     //$$ )
     //$$ public static Boolean HappyGhastNoClip = false;
     //#endif
+
+    @Rule(
+            categories = {IGNY, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean OnlyPlayerCreateNetherPortal = false;
 }

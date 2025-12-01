@@ -188,3 +188,12 @@ Happy Ghast has players who ride while ignoring block collisions and can pass th
 - Default Value: `false`
 - Suggeted Options: `false`, `true`
 - Categories: `IGNY`, `SURIVIAL`, `FEATURE`
+
+### OnlyPlayerCreateNetherPortal
+
+Only players can create nether portal.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggeted Options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`

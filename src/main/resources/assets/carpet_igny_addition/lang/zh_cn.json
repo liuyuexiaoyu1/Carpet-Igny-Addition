@@ -53,5 +53,7 @@
   "carpet.rule.CommandFixnotepitech.extra.0": "是否产生方块更新由FixnotepitchUpdateBlock规则控制",
   "carpet.rule.FixnotepitchUpdateBlock.desc":"控制CommandFixnotepitech是否产生方块更新",
   "carpet.rule.HappyGhastNoClip.name": "快乐恶魂无碰撞",
-  "carpet.rule.HappyGhastNoClip.desc": "快乐恶魂有玩家骑乘时无视方块碰撞，可穿过方块"
+  "carpet.rule.HappyGhastNoClip.desc": "快乐恶魂有玩家骑乘时无视方块碰撞",
+  "carpet.rule.OnlyPlayerCreateNetherPortal.name": "只有玩家实体创建下界传送门",
+  "carpet.rule.OnlyPlayerCreateNetherPortal.desc": "只有玩家实体可以创建下界传送门"
 }

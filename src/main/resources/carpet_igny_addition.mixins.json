@@ -25,6 +25,7 @@
     "rule.MinecartMotionFix.NetherPortalBlockMixin",
     "rule.NoWardenDarkness.WardenMixin",
     "rule.NoZombifiedPiglinNetherPortalSpawn.ZombifiedPiglinMixin",
+    "rule.OnlyPlayerCreateNetherPortal.NetherPortalBlockMixin",
     "rule.PlayerLevitationFreeShulkerBullet.ShulkerBulletMixin",
     "rule.PlayerMiningFatigueFreeGuardian.GuardianAttackGoalMixin",
     "rule.ProjectileDuplicationReintroduced.EntityInvoker",
