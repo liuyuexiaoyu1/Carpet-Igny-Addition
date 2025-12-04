@@ -53,6 +53,7 @@ loom {
 		runDir '../../run'
 		vmArgs commonVmArgs
 	}
+    }
 }
 
 String modVersionSuffix = ''
