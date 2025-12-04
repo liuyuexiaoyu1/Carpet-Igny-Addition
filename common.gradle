@@ -53,6 +53,19 @@ loom {
 		runDir '../../run'
 		vmArgs commonVmArgs
 	}
+    runs {
+        mixinAudit {
+            server()
+            vmArgs '-Dcarpetignyaddition.mixin_audit=true'
+            ideConfigGenerated false
+        }
+
+        mixinAuditClient {
+            client()
+            vmArgs '-Dcarpetignyaddition.mixin_audit=true'
+            ideConfigGenerated false
+        }
+    }
 }
 
 String modVersionSuffix = ''

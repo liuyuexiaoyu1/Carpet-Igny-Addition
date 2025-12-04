@@ -1,5 +1,5 @@
 {
-  "required": true,
+  "required": false,
   "minVersion": "0.8",
   "package": "com.liuyue.igny.mixins",
   "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
@@ -47,6 +47,6 @@
     "rule.HappyGhastNoClip.LevelRendererMixin"
   ],
   "injectors": {
-    "defaultRequire": 1
+    "defaultRequire": 0
   }
 }
