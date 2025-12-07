@@ -187,12 +187,11 @@ jobs:
           loaders: fabric
           game-versions: ${{ steps.properties_v.outputs.game_versions }}
           game-version-filter: any
-          dependencies: ''  # declare the dependencies explicitly, so mc-publish won't try to load from fabric.mod.json
-          modrinth-dependencies: |
-             [
-               {"project_id": "P7dR8mSH", "dependency_type": "required"},
-               {"project_id": "TQTTVgYE", "dependency_type": "required"}
-             ]
+          dependencies: |
+            [
+              {"project_id": "P7dR8mSH", "dependency_type": "required"},
+              {"project_id": "TQTTVgYE", "dependency_type": "required"}
+            ]
           github-changelog: ${{ steps.get_release.outputs.body }}
           modrinth-changelog: ${{ steps.changelog.outputs.result }}
           curseforge-changelog: ${{ steps.changelog.outputs.result }}
