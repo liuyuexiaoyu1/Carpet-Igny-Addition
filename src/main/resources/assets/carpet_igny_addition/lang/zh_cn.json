@@ -71,7 +71,7 @@
   "carpet.rule.fakePlayerLoginLogoutNoChatInfo.name": "假玩家登录登出无聊天信息",
   "carpet.rule.fakePlayerLoginLogoutNoChatInfo.desc": "假玩家登录登出不在聊天栏显示登录登出的提示",
   "carpet.rule.commandPlayerOperate.name": "玩家动作指令权限",
-  "carpet.rule.commandPlayerOperate.desc": "使用/playerManager命令来控制玩家动作",
+  "carpet.rule.commandPlayerOperate.desc": "使用/PlayerOperate命令来控制玩家动作",
   "carpet.rule.commandClearLightQueue.name": "清除光照队列指令",
   "carpet.rule.commandClearLightQueue.desc": "使用/clearlightqueue命令来清除光照队列",
   "carpet.rule.fakePlayerNoBreakingCoolDown.name": "假玩家无挖掘冷却",

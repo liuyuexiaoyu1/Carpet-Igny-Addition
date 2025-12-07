@@ -11,7 +11,7 @@
 | Carpet | Required | [MC百科](https://www.mcmod.cn/class/2361.html) &#124; [Modrinth](https://modrinth.com/mod/carpet) &#124; [CurseForge](https://www.curseforge.com/minecraft/mc-mods/carpet) |
 | MixinExtras | Built-in | [MC百科](https://www.mcmod.cn/class/12750.html)                                                                                                                           |
 | Fabric API | Required | [MC百科](https://www.mcmod.cn/class/3124.html) &#124; [Official](https://fabricmc.net/)                                                                                         |
-| SQLite JDBC | Built-in |  [Github](https://github.com/xerial/sqlite-jdbc) &#124; [Maven Repository](https://central.sonatype.com/artifact/org.xerial/sqlite-jdbc)                                |
+| SQLite JDBC | Built-in |  [GitHub](https://github.com/xerial/sqlite-jdbc) &#124; [Maven Repository](https://central.sonatype.com/artifact/org.xerial/sqlite-jdbc)                                |
 
 ## Version Support
 
@@ -20,13 +20,11 @@
 | 1.21(.1) (Main) | Maintained | - |
 | 1.21.2 ~ Latest Release | Maintained | - |
 
-## Docs
+## Docs(The rules and commands marked with `🐛Beta` are test features and can only be downloaded and used in GitHub Action builds!!)
 
 ### Rules
 
 [All rules](Rules_en.md)
-
-**The rules marked with "Bata" are test rules and can only be downloaded and used in Github Action builds!!**
 
 ### Commands
 
@@ -35,5 +33,5 @@
 ## Download
 
 - [Modrinth](https://modrinth.com/mod/carpet-igny-addition)
-- [Github](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/releases/latest)
-- [Github Action](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions)
+- [GitHub](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/releases/latest)
+- [GitHub Action](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions)
