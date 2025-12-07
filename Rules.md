@@ -258,7 +258,7 @@ cantrade：当载具上没有村民或者流浪商人时移除载具，其他实
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `IGNY`, `COMMAND`, `FEATURE`
 
-### 假玩家无挖掘冷却 (fakePlayerNoBreakingCoolDown) `🐛Bata`
+### 假玩家无挖掘冷却 (fakePlayerNoBreakingCoolDown) `🐛Beta`
 
 假玩家长按破坏无挖掘冷却。
 
