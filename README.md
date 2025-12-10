@@ -34,4 +34,4 @@
 
 - [Modrinth](https://modrinth.com/mod/carpet-igny-addition)
 - [GitHub](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/releases/latest)
-- [GitHub Action](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions)
+- [GitHub Action](https://nightly.link/liuyuexiaoyu1/Carpet-Igny-Addition/actions/artifacts/4826215203.zip)

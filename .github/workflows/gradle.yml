@@ -10,7 +10,6 @@ on:
       - ".github/**"
   pull_request:
 
-
 jobs:
   build:
     uses: ./.github/workflows/build.yml
@@ -18,3 +17,52 @@ jobs:
 #    # [FEATURE] MIXIN_AUDITOR
 #    with:
 #      mixin_audit: true
+  update-readme-action-link:
+    runs-on: ubuntu-latest
+    needs: build
+    if: success() && github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev')
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get mod-jars artifact ID
+        id: get-artifact
+        run: |
+          ARTIFACTS=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts" \
+            | jq -r '.artifacts[] | select(.name == "mod-jars") | .id')
+          
+          if [ -z "$ARTIFACTS" ]; then
+            echo "Error: mod-jars artifact not found!"
+            exit 1
+          fi
+          
+          echo "artifact_id=$ARTIFACTS" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Construct nightly.link URL
+        id: link
+        run: |
+          URL="https://nightly.link/${{ github.repository_owner }}/${{ github.event.repository.name }}/actions/artifacts/${{ steps.get-artifact.outputs.artifact_id }}.zip"
+          echo "download_url=$URL" >> $GITHUB_OUTPUT
+
+      - name: Replace GitHub Action link in READMEs
+        run: |
+          URL="${{ steps.link.outputs.download_url }}"
+          ESCAPED_URL=$(echo "$URL" | sed 's/[\/&]/\\&/g')
+          REPO_ESCAPED=$(echo "${{ github.repository }}" | sed 's/[\/&]/\\&/g')
+
+          sed -i "s|\\[GitHub Action\\](https://github.com/$REPO_ESCAPED/actions)|[GitHub Action]($URL)|g" README.md
+          sed -i "s|\\[GitHub Action\\](https://github.com/$REPO_ESCAPED/actions)|[GitHub Action]($URL)|g" README_en.md
+
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md README_en.md
+          git diff --quiet HEAD -- README.md README_en.md || \
+            (git commit -m "chore: update GitHub Action link to latest mod-jars artifact (Run ${{ github.run_id }})" && git push)
