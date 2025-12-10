@@ -69,20 +69,22 @@ public class PressUseTask implements ITask {
     @Override
     public Component getStatusText() {
         if (paused) {
-            String base = totalCycles == -1 ? "§8[PAUSED] §7Infinite" : "§8[PAUSED] §7Cycle §f" + currentCycle + "/" + totalCycles;
-            return Component.literal(base + " §8| §7Press:§f" + pressDuration + "t §7Wait:§f" + intervalTicks + "t");
+            String base = totalCycles == -1 ?
+                    Component.translatable("igny.task.status.infinite").getString() :
+                    Component.translatable("igny.task.status.cycle", currentCycle, totalCycles).getString();
+            return Component.literal(Component.translatable("igny.task.status.paused").getString() + " §7" + base + " §8| §7Press:§f" + pressDuration + "t §7Wait:§f" + intervalTicks + "t");
         }
         String stateStr = switch (currentState) {
-            case PRESSING -> "Pressing (" + tickCounter + "/" + pressDuration + ")";
-            case WAITING -> "Waiting (" + tickCounter + "/" + intervalTicks + ")";
+            case PRESSING -> Component.translatable("igny.task.status.pressing", tickCounter, pressDuration).getString();
+            case WAITING -> Component.translatable("igny.task.status.waiting", tickCounter, intervalTicks).getString();
         };
 
-        if (totalCycles == -1) {
-            return Component.literal("§7Infinite §8| §7Press:§f" + pressDuration + "t §7Wait:§f" + intervalTicks + "t §8| §e" + stateStr);
-        } else {
-            return Component.literal("§7Cycle §f" + currentCycle + "/" + totalCycles +
-                    " §8| §7Press:§f" + pressDuration + "t §7Wait:§f" + intervalTicks + "t §8| §e" + stateStr);
-        }
+        String cycleInfo = totalCycles == -1 ?
+                Component.translatable("igny.task.status.infinite").getString() :
+                Component.translatable("igny.task.status.cycle", currentCycle, totalCycles).getString();
+
+        return Component.literal("§7" + cycleInfo +
+                " §8| §7Press:§f" + pressDuration + "t §7Wait:§f" + intervalTicks + "t §8| " + stateStr);
     }
 
     @Override
@@ -134,12 +136,12 @@ public class PressUseTask implements ITask {
 
         ServerPlayer player = server.getPlayerList().getPlayerByName(playerName);
         if (player == null) {
-            sendMessage("§c[PlayerOperate] §6PressUse§c: 玩家 §f" + playerName + " §c不在线", null);
+            sendMessage(Component.translatable("igny.command.playerOperate.pressuse_fail_offline", playerName), null);
             return;
         }
 
         if (!(player instanceof EntityPlayerMPFake)) {
-            sendMessage("§c[PlayerOperate] §6PressUse§c: 玩家 §f" + playerName + " §c不是假人", null);
+            sendMessage(Component.translatable("igny.command.playerOperate.pressuse_fail_not_fake", playerName), null);
             return;
         }
 
@@ -152,10 +154,12 @@ public class PressUseTask implements ITask {
         startPressing();
         TaskManager.register(this);
 
-        String cycleInfo = (totalCycles == -1) ? " (Infinite)" : " (×" + totalCycles + ")";
-        sendMessage("§7[PlayerOperate] §6PressUse§7: 启动 §f" + playerName +
-                        " §7(Press=" + pressDuration + "t, Wait=" + intervalTicks + "t)" + cycleInfo,
-                "[PlayerOperate] PressUse: 启动 " + playerName +
+        String cyclesInfo = (totalCycles == -1) ?
+                Component.translatable("igny.task.status.infinite").getString() :
+                "×" + totalCycles;
+        sendMessage(Component.translatable("igny.command.playerOperate.pressuse_started",
+                        playerName, pressDuration, intervalTicks, cyclesInfo),
+                "[PlayerOperate] PressUse: Started " + playerName +
                         " (Press=" + pressDuration + "t, Wait=" + intervalTicks + "t, Cycles=" + (totalCycles == -1 ? "∞" : totalCycles) + ")");
     }
 
@@ -219,9 +223,9 @@ public class PressUseTask implements ITask {
         }
     }
 
-    private void sendMessage(String message, @Nullable String consoleMessage) {
+    private void sendMessage(Component message, @Nullable String consoleMessage) {
         if (operator != null && operator.isAlive()) {
-            this.operator.sendSystemMessage(Component.literal(message));
+            this.operator.sendSystemMessage(message);
         }
         if (consoleMessage != null) {
             IGNYServer.LOGGER.info(consoleMessage);

@@ -97,7 +97,7 @@ public class PlayerOperateCommand {
         List<ITask> tasks = TaskManager.getAllActiveTasks();
 
         if (tasks.isEmpty()) {
-            source.sendFailure(Component.literal("§c没有正在运行的任务"));
+            source.sendFailure(Component.translatable("igny.command.playerOperate.no_tasks"));
             return 0;
         }
 
@@ -110,14 +110,14 @@ public class PlayerOperateCommand {
             }
         }
 
-        String message;
+        Component message;
         if (stoppedCount > 0) {
-            message = "§7[PlayerOperate] §c已停止 §f" + stoppedCount + " §c个任务";
+            message = Component.translatable("igny.command.playerOperate.task_stopped", stoppedCount);
         } else {
-            message = "§7[PlayerOperate] §c没有可以停止的任务";
+            message = Component.translatable("igny.command.playerOperate.task_stopped_none");
         }
 
-        source.sendSuccess(() -> Component.literal(message), false);
+        source.sendSuccess(() -> message, false);
         return stoppedCount;
     }
 
@@ -126,7 +126,7 @@ public class PlayerOperateCommand {
         List<ITask> tasks = TaskManager.getAllActiveTasks();
 
         if (tasks.isEmpty()) {
-            source.sendFailure(Component.literal("§c没有正在运行的任务"));
+            source.sendFailure(Component.translatable("igny.command.playerOperate.no_running_tasks"));
             return 0;
         }
 
@@ -142,16 +142,16 @@ public class PlayerOperateCommand {
             }
         }
 
-        String message;
+        Component message;
         if (pausedCount > 0 && alreadyPaused > 0) {
-            message = "§7[PlayerOperate] §e已暂停 §f" + pausedCount + " §e个任务, §f" + alreadyPaused + " §e个任务已是暂停状态";
+            message = Component.translatable("igny.command.playerOperate.task_paused_partial", pausedCount, alreadyPaused);
         } else if (pausedCount > 0) {
-            message = "§7[PlayerOperate] §e已暂停 §f" + pausedCount + " §e个任务";
+            message = Component.translatable("igny.command.playerOperate.task_paused", pausedCount);
         } else {
-            message = "§7[PlayerOperate] §e所有任务已是暂停状态";
+            message = Component.translatable("igny.command.playerOperate.task_paused_none");
         }
 
-        source.sendSuccess(() -> Component.literal(message), false);
+        source.sendSuccess(() -> message, false);
         return pausedCount;
     }
 
@@ -160,7 +160,7 @@ public class PlayerOperateCommand {
         List<ITask> tasks = TaskManager.getAllActiveTasks();
 
         if (tasks.isEmpty()) {
-            source.sendFailure(Component.literal("§c没有正在运行的任务"));
+            source.sendFailure(Component.translatable("igny.command.playerOperate.no_running_tasks"));
             return 0;
         }
 
@@ -176,16 +176,16 @@ public class PlayerOperateCommand {
             }
         }
 
-        String message;
+        Component message;
         if (resumedCount > 0 && alreadyRunning > 0) {
-            message = "§7[PlayerOperate] §a已继续 §f" + resumedCount + " §a个任务, §f" + alreadyRunning + " §a个任务已在运行中";
+            message = Component.translatable("igny.command.playerOperate.task_resumed_partial", resumedCount, alreadyRunning);
         } else if (resumedCount > 0) {
-            message = "§7[PlayerOperate] §a已继续 §f" + resumedCount + " §a个任务";
+            message = Component.translatable("igny.command.playerOperate.task_resumed", resumedCount);
         } else {
-            message = "§7[PlayerOperate] §a所有任务已在运行中";
+            message = Component.translatable("igny.command.playerOperate.task_resumed_none");
         }
 
-        source.sendSuccess(() -> Component.literal(message), false);
+        source.sendSuccess(() -> message, false);
         return resumedCount;
     }
 
@@ -196,16 +196,16 @@ public class PlayerOperateCommand {
         boolean paused = TaskManager.pauseTask(playerName);
         if (paused) {
             source.sendSuccess(() ->
-                            Component.literal("§7[PlayerOperate] §e已暂停 §f" + playerName + " §e的任务"),
+                            Component.translatable("igny.command.playerOperate.task_paused_success", playerName),
                     false
             );
             return 1;
         } else {
             ITask task = TaskManager.getTask(playerName);
             if (task == null || task.isStopped()) {
-                source.sendFailure(Component.literal("§c[PlayerOperate] §f" + playerName + " §c没有正在运行的任务"));
+                source.sendFailure(Component.translatable("igny.command.playerOperate.task_paused_fail_no_task", playerName));
             } else if (task.isPaused()) {
-                source.sendFailure(Component.literal("§c[PlayerOperate] §f" + playerName + " §c的任务已是暂停状态"));
+                source.sendFailure(Component.translatable("igny.command.playerOperate.task_paused_fail_already", playerName));
             }
             return 0;
         }
@@ -218,16 +218,16 @@ public class PlayerOperateCommand {
         boolean resumed = TaskManager.resumeTask(playerName);
         if (resumed) {
             source.sendSuccess(() ->
-                            Component.literal("§7[PlayerOperate] §a已继续 §f" + playerName + " §a的任务"),
+                            Component.translatable("igny.command.playerOperate.task_resumed_success", playerName),
                     false
             );
             return 1;
         } else {
             ITask task = TaskManager.getTask(playerName);
             if (task == null || task.isStopped()) {
-                source.sendFailure(Component.literal("§c[PlayerOperate] §f" + playerName + " §c没有正在运行的任务"));
+                source.sendFailure(Component.translatable("igny.command.playerOperate.task_resumed_fail_no_task", playerName));
             } else if (!task.isPaused()) {
-                source.sendFailure(Component.literal("§c[PlayerOperate] §f" + playerName + " §c的任务已在运行中"));
+                source.sendFailure(Component.translatable("igny.command.playerOperate.task_resumed_fail_running", playerName));
             }
             return 0;
         }
@@ -241,18 +241,27 @@ public class PlayerOperateCommand {
 
         ServerPlayer player = source.getServer().getPlayerList().getPlayerByName(playerName);
         if (player == null) {
-            source.sendFailure(Component.literal("§c玩家 §f" + playerName + " §c不在线"));
+            source.sendFailure(Component.translatable("igny.command.playerOperate.player_offline", playerName));
             return 0;
         }
 
         if (!(player instanceof EntityPlayerMPFake)) {
-            source.sendFailure(Component.literal("§c玩家 §f" + playerName + " §c不是假人"));
+            source.sendFailure(Component.translatable("igny.command.playerOperate.not_fake_player", playerName));
             return 0;
         }
 
         PressUseTask task = PressUseTask.getOrCreate(source, playerName, interval, duration, cycles);
         task.start();
 
+        String cyclesStr = cycles == -1 ?
+                Component.translatable("igny.task.status.infinite").getString() :
+                String.valueOf(cycles);
+
+        source.sendSuccess(() ->
+                        Component.translatable("igny.command.playerOperate.pressuse_started",
+                                playerName, duration, interval, cyclesStr),
+                false
+        );
         return 1;
     }
 
@@ -279,18 +288,22 @@ public class PlayerOperateCommand {
 
         ServerPlayer player = source.getServer().getPlayerList().getPlayerByName(playerName);
         if (player == null) {
-            source.sendFailure(Component.literal("§c玩家 §f" + playerName + " §c不在线"));
+            source.sendFailure(Component.translatable("igny.command.playerOperate.player_offline", playerName));
             return 0;
         }
 
         if (!(player instanceof EntityPlayerMPFake)) {
-            source.sendFailure(Component.literal("§c玩家 §f" + playerName + " §c不是假人"));
+            source.sendFailure(Component.translatable("igny.command.playerOperate.not_fake_player", playerName));
             return 0;
         }
 
         VaultTask task = VaultTask.getOrCreate(source, playerName, maxCycles);
         task.start();
 
+        source.sendSuccess(() ->
+                        Component.translatable("igny.command.playerOperate.vault_started", playerName, maxCycles),
+                false
+        );
         return 1;
     }
 
@@ -301,12 +314,12 @@ public class PlayerOperateCommand {
         boolean stopped = TaskManager.stopTask(playerName);
         if (stopped) {
             source.sendSuccess(() ->
-                            Component.literal("§7[PlayerOperate] §c已停止 §f" + playerName + " §c的任务"),
+                            Component.translatable("igny.command.playerOperate.task_stopped_success", playerName),
                     false
             );
             return 1;
         } else {
-            source.sendFailure(Component.literal("§c[PlayerOperate] §f" + playerName + " §c没有正在运行的任务"));
+            source.sendFailure(Component.translatable("igny.command.playerOperate.task_stopped_fail", playerName));
             return 0;
         }
     }
@@ -316,23 +329,34 @@ public class PlayerOperateCommand {
         List<ITask> tasks = TaskManager.getAllActiveTasks();
 
         if (tasks.isEmpty()) {
-            source.sendSuccess(() -> Component.literal("§7没有正在运行的玩家任务"), false);
+            source.sendSuccess(() ->
+                            Component.translatable("igny.command.playerOperate.list_no_tasks"),
+                    false
+            );
             return 1;
         }
 
         int runningCount = TaskManager.getRunningCount();
         int pausedCount = TaskManager.getPausedCount();
 
-        Component header = Component.literal("§e正在运行的玩家任务 §7(共 " + tasks.size() + " 个, ")
-                .append(Component.literal("§a§l" + runningCount + "§7 运行中, "))
-                .append(Component.literal("§e§l" + pausedCount + "§7 暂停)")
-                        .append(Component.literal("\n"))
-                        .append(createGlobalControlButton("§6[暂停所有]", "/playerOperate pauseAll", "暂停所有任务"))
-                        .append(Component.literal(" "))
-                        .append(createGlobalControlButton("§a[继续所有]", "/playerOperate resumeAll", "继续所有任务"))
-                        .append(Component.literal(" "))
-                        .append(createGlobalControlButton("§c[停止所有]","/playerOperate stopAll","停止所有任务"))
-                        .append(Component.literal("\n")));
+        Component header = Component.translatable("igny.command.playerOperate.list_header",
+                        tasks.size(), runningCount, pausedCount)
+                .append(Component.literal("\n"))
+                .append(createGlobalControlButton(
+                        Component.translatable("igny.command.playerOperate.button_pause_all"),
+                        "/playerOperate pauseAll",
+                        Component.translatable("igny.command.playerOperate.hover_pause_all")))
+                .append(Component.literal(" "))
+                .append(createGlobalControlButton(
+                        Component.translatable("igny.command.playerOperate.button_resume_all"),
+                        "/playerOperate resumeAll",
+                        Component.translatable("igny.command.playerOperate.hover_resume_all")))
+                .append(Component.literal(" "))
+                .append(createGlobalControlButton(
+                        Component.translatable("igny.command.playerOperate.button_stop_all"),
+                        "/playerOperate stopAll",
+                        Component.translatable("igny.command.playerOperate.hover_stop_all")))
+                .append(Component.literal("\n"));
 
         source.sendSuccess(() -> header, false);
 
@@ -340,9 +364,23 @@ public class PlayerOperateCommand {
             String baseName = task.getPlayerName();
             String taskType = task.getTaskType();
             boolean isPaused = task.isPaused();
-            Component pauseButton = createTaskButton("§6[暂停]", "/playerOperate " + baseName + " pause", "暂停此任务", isPaused);
-            Component resumeButton = createTaskButton("§a[继续]", "/playerOperate " + baseName + " resume", "继续此任务", !isPaused);
-            Component stopButton = createTaskButton("§c[停止]", "/playerOperate " + baseName + " stop", "停止此任务", false);
+
+            Component pauseButton = createTaskButton(
+                    Component.translatable("igny.command.playerOperate.button_pause"),
+                    "/playerOperate " + baseName + " pause",
+                    Component.translatable("igny.command.playerOperate.hover_pause"),
+                    isPaused);
+            Component resumeButton = createTaskButton(
+                    Component.translatable("igny.command.playerOperate.button_resume"),
+                    "/playerOperate " + baseName + " resume",
+                    Component.translatable("igny.command.playerOperate.hover_resume"),
+                    !isPaused);
+            Component stopButton = createTaskButton(
+                    Component.translatable("igny.command.playerOperate.button_stop"),
+                    "/playerOperate " + baseName + " stop",
+                    Component.translatable("igny.command.playerOperate.hover_stop"),
+                    false);
+
             String statusIcon = isPaused ? "§8⏸" : "§a▶";
             Component taskInfo = Component.literal(statusIcon + " §f" + baseName)
                     .append(Component.literal(" §6[" + taskType + "] "))
@@ -358,41 +396,49 @@ public class PlayerOperateCommand {
         return 1;
     }
 
-    private static Component createTaskButton(String text, String command, String hoverText, boolean disabled) {
+    private static Component createTaskButton(Component text, String command, Component hoverText, boolean disabled) {
         if (disabled) {
-            return Component.literal(text.replaceAll("§[0-9a-f]", "§8"))
+            return Component.literal("§8" + text.getString().replaceAll("§[0-9a-f]", ""))
                     .withStyle(style -> style
-                            //#if MC>=12105
-                            //$$ .withItalic(true)
-                            //$$ .withHoverEvent(new HoverEvent.ShowText(Component.literal("§7" + hoverText + " (不可用)")))
-                            //#else
-                            .withItalic(true)
-                            .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("§7" + hoverText + " (不可用)")))
+                                    //#if MC>=12105
+                                    //$$ .withItalic(true)
+                                    //$$ .withHoverEvent(new HoverEvent.ShowText(
+                                    //$$     hoverText.copy()
+                                    //$$         .append(Component.literal(" "))
+                                    //$$         .append(Component.translatable("igny.command.playerOperate.hover_disabled"))
+                                    //$$ ))
+                                    //#else
+                                    .withItalic(true)
+                                    .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                            hoverText.copy()
+                                                    .append(Component.literal(" "))
+                                                    .append(Component.translatable("igny.command.playerOperate.hover_disabled"))
+                                    ))
                             //#endif
                     );
         } else {
-            return Component.literal(text)
+            return text.copy()
                     .withStyle(style -> style
-                            //#if MC>=12105
-                            //$$ .withClickEvent(new ClickEvent.RunCommand(command))
-                            //$$ .withHoverEvent(new HoverEvent.ShowText(Component.literal("§7点击" + hoverText)))
-                            //#else
-                            .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command))
-                            .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("§7点击" + hoverText)))
+                                    //#if MC>=12105
+                                    //$$ .withClickEvent(new ClickEvent.RunCommand(command))
+                                    //$$ .withHoverEvent(new HoverEvent.ShowText(hoverText))
+                                    //#else
+                                    .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command))
+                                    .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverText))
                             //#endif
                     );
         }
     }
 
-    private static Component createGlobalControlButton(String text, String command, String hoverText) {
-        return Component.literal(text)
+    private static Component createGlobalControlButton(Component text, String command, Component hoverText) {
+        return text.copy()
                 .withStyle(style -> style
-                        //#if MC>=12105
-                        //$$ .withClickEvent(new ClickEvent.RunCommand(command))
-                        //$$ .withHoverEvent(new HoverEvent.ShowText(Component.literal("§7点击" + hoverText)))
-                        //#else
-                        .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command))
-                        .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("§7点击" + hoverText)))
+                                //#if MC>=12105
+                                //$$ .withClickEvent(new ClickEvent.RunCommand(command))
+                                //$$ .withHoverEvent(new HoverEvent.ShowText(hoverText))
+                                //#else
+                                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command))
+                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverText))
                         //#endif
                 );
     }

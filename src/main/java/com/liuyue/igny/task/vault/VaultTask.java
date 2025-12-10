@@ -74,15 +74,19 @@ public class VaultTask implements ITask {
     @Override
     public Component getStatusText() {
         if (paused) {
-            return Component.literal("§8[PAUSED] §7Cycle §f" + currentCycle + "/" + maxCycles);
+            return Component.translatable("igny.task.status.paused")
+                    .append(Component.literal(" §7"))
+                    .append(Component.translatable("igny.task.status.cycle", currentCycle, maxCycles));
         }
         String status = switch (currentStage) {
-            case SPAWNING -> "Spawning" + (pendingFakeName != null ? " (" + pendingFakeName + ")" : "");
-            case RIGHT_CLICKING -> "Right-clicking";
-            case WAITING -> "Waiting";
-            case LOGGING_OUT -> "Logging out";
+            case SPAWNING -> Component.translatable("igny.task.vault.spawning",
+                    pendingFakeName != null ? " (" + pendingFakeName + ")" : "").getString();
+            case RIGHT_CLICKING -> Component.translatable("igny.task.vault.right_clicking").getString();
+            case WAITING -> Component.translatable("igny.task.vault.waiting").getString();
+            case LOGGING_OUT -> Component.translatable("igny.task.vault.logging_out").getString();
         };
-        return Component.literal("§7Cycle §f" + currentCycle + "/" + maxCycles + " §8| §e" + status);
+        return Component.translatable("igny.task.status.cycle", currentCycle, maxCycles)
+                .append(Component.literal(" §8| " + status));
     }
 
     @Override
@@ -111,12 +115,12 @@ public class VaultTask implements ITask {
 
         ServerPlayer originalPlayer = server.getPlayerList().getPlayerByName(playerName);
         if (originalPlayer == null) {
-            sendMessage("§c[PlayerOperate] §6Vault§c: 玩家 §f" + playerName + " §c不在线", null);
+            sendMessage(Component.translatable("igny.command.playerOperate.vault_fail_offline", playerName), null);
             return;
         }
 
         if (!(originalPlayer instanceof EntityPlayerMPFake)) {
-            sendMessage("§c[PlayerOperate] §6Vault§c: 玩家 §f" + playerName + " §c不是假人", null);
+            sendMessage(Component.translatable("igny.command.playerOperate.vault_fail_not_fake", playerName), null);
             return;
         }
 
@@ -135,9 +139,6 @@ public class VaultTask implements ITask {
         pendingFakeName = null;
 
         TaskManager.register(this);
-
-        sendMessage("§7[PlayerOperate] §6Vault§7: 已启动任务 §f" + playerName + " §7(maxCycles=" + maxCycles + ")",
-                "[PlayerOperate] Vault: 已启动任务 " + playerName + " (maxCycles=" + maxCycles + ")");
     }
 
     @Override
@@ -260,7 +261,7 @@ public class VaultTask implements ITask {
             int SPAWN_TIMEOUT_SECONDS = 20;
             if (stageTickCounter >= TPS * SPAWN_TIMEOUT_SECONDS) {
                 stop();
-                sendMessage("§c[PlayerOperate] §6Vault§c: 玩家 §f" + playerName + " §c无法在 §f" + SPAWN_TIMEOUT_SECONDS + " §c秒内生成假人，停止任务",
+                sendMessage(Component.translatable("igny.command.playerOperate.vault_spawn_timeout", playerName, SPAWN_TIMEOUT_SECONDS),
                         "[PlayerOperate] Vault: 玩家 " + playerName + " 无法在 " + SPAWN_TIMEOUT_SECONDS + " 秒内生成假人，停止任务");
             }
         }
@@ -311,7 +312,7 @@ public class VaultTask implements ITask {
                     //$$ .name();
                     //#else
                     .getName();
-                    //#endif
+            //#endif
 
             if (currentFakePlayer instanceof carpet.fakes.ServerPlayerInterface spi) {
                 spi.getActionPack().start(EntityPlayerActionPack.ActionType.USE, null);
@@ -334,9 +335,9 @@ public class VaultTask implements ITask {
         }
     }
 
-    private void sendMessage(String message, @Nullable String consoleMessage) {
+    private void sendMessage(Component message, @Nullable String consoleMessage) {
         if (operator != null && operator.isAlive()) {
-            this.operator.sendSystemMessage(Component.literal(message));
+            this.operator.sendSystemMessage(message);
         }
         if (consoleMessage != null) {
             IGNYServer.LOGGER.info(consoleMessage);
