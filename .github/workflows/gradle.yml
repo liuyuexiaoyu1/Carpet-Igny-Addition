@@ -56,8 +56,8 @@ jobs:
           ESCAPED_URL=$(echo "$URL" | sed 's/[\/&]/\\&/g')
           REPO_ESCAPED=$(echo "${{ github.repository }}" | sed 's/[\/&]/\\&/g')
 
-          sed -i "s|\\[GitHub Action\\](https://github.com/$REPO_ESCAPED/actions)|[GitHub Action]($URL)|g" README.md
-          sed -i "s|\\[GitHub Action\\](https://github.com/$REPO_ESCAPED/actions)|[GitHub Action]($URL)|g" README_en.md
+          sed -i "s|\[GitHub Action\]([^)]*)|[GitHub Action]($URL)|g" README.md
+          sed -i "s|\[GitHub Action\]([^)]*)|[GitHub Action]($URL)|g" README_en.md
 
       - name: Commit and push if changed
         run: |
