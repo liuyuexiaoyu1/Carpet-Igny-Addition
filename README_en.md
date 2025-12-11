@@ -20,7 +20,7 @@
 | 1.21(.1) (Main) | Maintained | - |
 | 1.21.2 ~ Latest Release | Maintained | - |
 
-## Docs(The rules and commands marked with `🐛Beta` are test features and can only be downloaded and used in GitHub Action builds!!)
+## Docs(The rules and commands marked with `🐛Beta` are test features and can only be downloaded and used in the latest build of GitHub Action and from the download link below!!!)
 
 ### Rules
 
@@ -34,4 +34,5 @@
 
 - [Modrinth](https://modrinth.com/mod/carpet-igny-addition)
 - [GitHub](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/releases/latest)
+## Latest Beta version download↓ ##
 - [GitHub Action](https://nightly.link/liuyuexiaoyu1/Carpet-Igny-Addition/actions/artifacts/4837811017.zip)
