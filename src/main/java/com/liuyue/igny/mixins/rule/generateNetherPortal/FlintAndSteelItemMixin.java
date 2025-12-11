@@ -48,7 +48,7 @@ public class FlintAndSteelItemMixin {
                             level.setBlock(targetPos, portalState, 2);
                             level.playSound(player, targetPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
                             context.getItemInHand().hurtAndBreak(1, player,
-                                    //#if MC >= 12110
+                                    //#if MC >= 12109
                                     //$$ context.getHand().asEquipmentSlot()
                                     //#else
                                     LivingEntity.getSlotForHand(context.getHand())
