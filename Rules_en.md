@@ -146,6 +146,7 @@ Fake players will not correct yaw when riding boats. [#2100](https://github.com/
 ### killFakePlayerRemoveVehicle
 
 When removing a fake player, remove the vehicle they are riding in.
+
 cantrade: Remove the vehicle when there are no villagers or wandering merchants on it, and other entities remain the default.
 
 - Type: `boolean`
@@ -373,7 +374,9 @@ Maximum number of blocks a fake player can place per game tick. Set to 0 to disa
 ### generateNetherPortal `🐛Beta`
 
 Using flint and steel or fire charges, you can directly place a 1x1-sized Nether portal on obsidian.
+
 creative: In Creative mode, based on the survival option, Nether portals can also be generated in the End dimension.
+
 survival: In Survival mode, in the Overworld and the Nether dimensions, crouch and aim at obsidian or Nether portal blocks with flint and steel or fire charges to place a Nether portal perpendicular to the right-clicked block face.
 
 - Type: `string`
