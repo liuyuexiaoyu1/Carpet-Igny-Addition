@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.IceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,7 +20,13 @@ public class IceBlockMixin {
     private void spawnWater(Level level, Player player, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, ItemStack itemStack, CallbackInfo ci) {
         if (IGNYSettings.floatingIceWater) {
             if (!(level.dimension() == Level.NETHER)) {
-                    level.setBlockAndUpdate(blockPos, IceBlock.meltsInto());
+                level.setBlockAndUpdate(blockPos,
+                        //#if MC <= 11904
+                        Blocks.WATER.defaultBlockState()
+                        //#else
+                        //$$ IceBlock.meltsInto()
+                        //#endif
+                );
             }
         }
     }

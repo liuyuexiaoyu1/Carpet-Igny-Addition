@@ -119,7 +119,11 @@ public class PlayerOperateCommand {
             message = Component.translatable("igny.command.playerOperate.task_stopped_none");
         }
 
-        source.sendSuccess(() -> message, false);
+        source.sendSuccess(
+                //#if MC > 11904
+                () ->
+                //#endif
+                message, false);
         return stoppedCount;
     }
 
@@ -153,7 +157,11 @@ public class PlayerOperateCommand {
             message = Component.translatable("igny.command.playerOperate.task_paused_none");
         }
 
-        source.sendSuccess(() -> message, false);
+        source.sendSuccess(
+                //#if MC > 11904
+                () ->
+                //#endif
+                message, false);
         return pausedCount;
     }
 
@@ -187,7 +195,11 @@ public class PlayerOperateCommand {
             message = Component.translatable("igny.command.playerOperate.task_resumed_none");
         }
 
-        source.sendSuccess(() -> message, false);
+        source.sendSuccess(
+                //#if MC > 11904
+                () ->
+                //#endif
+                message, false);
         return resumedCount;
     }
 
@@ -197,7 +209,10 @@ public class PlayerOperateCommand {
 
         boolean paused = TaskManager.pauseTask(playerName);
         if (paused) {
-            source.sendSuccess(() ->
+            source.sendSuccess(
+                    //#if MC > 11904
+                    () ->
+                    //#endif
                             Component.translatable("igny.command.playerOperate.task_paused_success", playerName),
                     false
             );
@@ -219,7 +234,10 @@ public class PlayerOperateCommand {
 
         boolean resumed = TaskManager.resumeTask(playerName);
         if (resumed) {
-            source.sendSuccess(() ->
+            source.sendSuccess(
+                    //#if MC > 11904
+                    () ->
+                    //#endif
                             Component.translatable("igny.command.playerOperate.task_resumed_success", playerName),
                     false
             );
@@ -259,7 +277,10 @@ public class PlayerOperateCommand {
                 Component.translatable("igny.task.status.infinite").getString() :
                 String.valueOf(cycles);
 
-        source.sendSuccess(() ->
+        source.sendSuccess(
+                //#if MC > 11904
+                () ->
+                //#endif
                         Component.translatable("igny.command.playerOperate.pressuse_started",
                                 playerName, duration, interval, cyclesStr),
                 false
@@ -302,7 +323,10 @@ public class PlayerOperateCommand {
         VaultTask task = VaultTask.getOrCreate(source, playerName, maxCycles);
         task.start();
 
-        source.sendSuccess(() ->
+        source.sendSuccess(
+                //#if MC > 11904
+                () ->
+                //#endif
                         Component.translatable("igny.command.playerOperate.vault_started", playerName, maxCycles),
                 false
         );
@@ -316,7 +340,10 @@ public class PlayerOperateCommand {
 
         boolean stopped = TaskManager.stopTask(playerName);
         if (stopped) {
-            source.sendSuccess(() ->
+            source.sendSuccess(
+                    //#if MC > 11904
+                    () ->
+                    //#endif
                             Component.translatable("igny.command.playerOperate.task_stopped_success", playerName),
                     false
             );
@@ -332,7 +359,10 @@ public class PlayerOperateCommand {
         List<ITask> tasks = TaskManager.getAllActiveTasks();
 
         if (tasks.isEmpty()) {
-            source.sendSuccess(() ->
+            source.sendSuccess(
+                    //#if MC > 11904
+                    () ->
+                    //#endif
                             Component.translatable("igny.command.playerOperate.list_no_tasks"),
                     false
             );
@@ -361,7 +391,11 @@ public class PlayerOperateCommand {
                         Component.translatable("igny.command.playerOperate.hover_stop_all")))
                 .append(Component.literal("\n"));
 
-        source.sendSuccess(() -> header, false);
+        source.sendSuccess(
+                //#if MC > 11904
+                () ->
+                //#endif
+                header, false);
 
         for (ITask task : tasks) {
             String baseName = task.getPlayerName();
@@ -393,7 +427,11 @@ public class PlayerOperateCommand {
                     .append(Component.literal(" "))
                     .append(stopButton);
 
-            source.sendSuccess(() -> taskInfo, false);
+            source.sendSuccess(
+                    //#if MC > 11904
+                    () ->
+                    //#endif
+                    taskInfo, false);
         }
 
         return 1;

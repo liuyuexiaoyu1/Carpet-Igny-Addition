@@ -17,6 +17,7 @@
 
 | Game Version            | Development Status | Last Supported Version |
 |-------------------------|--------------------|------------------------|
+| 1.19.x                  | Maintained         | -                      |
 | 1.20.x                  | Maintained         | -                      |
 | 1.21(.1) (Main)         | Maintained         | -                      |
 | 1.21.2 ~ Latest Release | Maintained         | -                      |
