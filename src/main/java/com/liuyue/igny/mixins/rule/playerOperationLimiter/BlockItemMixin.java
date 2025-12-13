@@ -1,7 +1,6 @@
 package com.liuyue.igny.mixins.rule.playerOperationLimiter;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.utils.rule.playerOperationLimiter.PlayerOperationLimiterUtil;
 import com.liuyue.igny.utils.rule.playerOperationLimiter.SafeServerPlayerEntity;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
@@ -34,16 +33,15 @@ public abstract class BlockItemMixin extends Item {
             cancellable = true
     )
     private void checkPlaceOperationLimit(BlockPlaceContext context, CallbackInfoReturnable<InteractionResult> cir) {
-        if (!IGNYSettings.playerOperationLimiter || context.getLevel().isClientSide()) {
+        if (!IGNYSettings.playerOperationLimiter) {
             return;
         }
-
         if (context.canPlace() && context.getPlayer() instanceof ServerPlayer serverPlayer) {
             BlockPlaceContext updated = this.updatePlacementContext(context);
             if (updated != null && this.getPlacementState(updated) != null) {
                 SafeServerPlayerEntity safe = (SafeServerPlayerEntity) serverPlayer;
                 safe.igny$addPlaceCountPerTick();
-                if (!PlayerOperationLimiterUtil.canPlaceMore(serverPlayer, safe)) {
+                if (!safe.igny$canPlace(serverPlayer)) {
                     cir.setReturnValue(InteractionResult.FAIL);
                 }
             }

@@ -40,21 +40,97 @@ public class RuleChangeDataManager {
         connect();
 
         File jsonFile = getJsonFile();
-        boolean shouldMigrate = useDatabase && jsonFile.exists() && jsonFile.length() > 0;
+        boolean jsonFileExists = jsonFile.exists() && jsonFile.length() > 0;
 
-        if (shouldMigrate) {
-            String worldName = server.getWorldData().getLevelName();
-            if (migrateJsonToDatabase(jsonFile)) {
+        if (useDatabase && jsonFileExists) {
+            if (mergeJsonToDatabase(jsonFile)) {
                 if (!jsonFile.delete()) {
-                    IGNYServer.LOGGER.warn("Migration succeeded but failed to delete rule_changes.json for world '{}'", worldName);
+                    String worldName = server.getWorldData().getLevelName();
+                    IGNYServer.LOGGER.warn("Merged data from JSON to database but failed to delete rule_changes.json for world '{}'", worldName);
                 }
             } else {
-                IGNYServer.LOGGER.error("Failed to migrate rule_changes.json to database for world '{}'", worldName);
+                String worldName = server.getWorldData().getLevelName();
+                IGNYServer.LOGGER.error("Failed to merge rule_changes.json with database for world '{}'", worldName);
             }
-        }
-
-        if (!useDatabase) {
+        } else if (!useDatabase && jsonFileExists) {
             loadFromJson();
+        } else if (useDatabase) {
+            IGNYServer.LOGGER.debug("Database connected successfully, no JSON file found for migration");
+        }
+    }
+
+    private static boolean mergeJsonToDatabase(File jsonFile) {
+        try (FileReader reader = new FileReader(jsonFile)) {
+            Type mapType = new TypeToken<Map<String, RuleChangeRecord>>() {}.getType();
+            Map<String, RuleChangeRecord> jsonRecords = GSON.fromJson(reader, mapType);
+
+            if (jsonRecords == null || jsonRecords.isEmpty()) {
+                return true;
+            }
+
+            Map<String, RuleChangeRecord> dbRecords = getAllFromDatabase();
+
+            connection.setAutoCommit(false);
+
+            try {
+                for (Map.Entry<String, RuleChangeRecord> entry : jsonRecords.entrySet()) {
+                    String ruleName = entry.getKey();
+                    RuleChangeRecord jsonRecord = entry.getValue();
+
+                    if (jsonRecord == null || !jsonRecord.isValid()) {
+                        IGNYServer.LOGGER.warn("Skipping invalid JSON record for rule: {}", ruleName);
+                        continue;
+                    }
+
+                    if (dbRecords.containsKey(ruleName)) {
+                        updateDatabaseRecord(ruleName, jsonRecord);
+                        IGNYServer.LOGGER.debug("Updated database record for rule '{}' from JSON", ruleName);
+                    } else {
+                        insertDatabaseRecord(jsonRecord);
+                        IGNYServer.LOGGER.debug("Inserted new record for rule '{}' from JSON", ruleName);
+                    }
+                }
+
+                connection.commit();
+                return true;
+
+            } catch (SQLException e) {
+                IGNYServer.LOGGER.error("Failed to merge data, rolling back transaction", e);
+                connection.rollback();
+                return false;
+            } finally {
+                connection.setAutoCommit(true);
+            }
+
+        } catch (Exception e) {
+            IGNYServer.LOGGER.error("Error during JSON-to-database merge", e);
+            return false;
+        }
+    }
+
+    private static void updateDatabaseRecord(String ruleName, RuleChangeRecord record) throws SQLException {
+        try (PreparedStatement stmt = connection.prepareStatement(
+                "UPDATE " + TABLE_NAME + " SET raw_value = ?, current_value = ?, source_name = ?, timestamp = ?, formatted_time = ? WHERE rule_name = ?")) {
+            stmt.setString(1, serialize(record.rawValue));
+            stmt.setString(2, serialize(record.currentValue));
+            stmt.setString(3, record.sourceName);
+            stmt.setLong(4, record.timestamp);
+            stmt.setString(5, record.formattedTime);
+            stmt.setString(6, ruleName);
+            stmt.executeUpdate();
+        }
+    }
+
+    private static void insertDatabaseRecord(RuleChangeRecord record) throws SQLException {
+        try (PreparedStatement stmt = connection.prepareStatement(
+                "INSERT INTO " + TABLE_NAME + " (rule_name, raw_value, current_value, source_name, timestamp, formatted_time) VALUES (?, ?, ?, ?, ?, ?)")) {
+            stmt.setString(1, record.ruleName);
+            stmt.setString(2, serialize(record.rawValue));
+            stmt.setString(3, serialize(record.currentValue));
+            stmt.setString(4, record.sourceName);
+            stmt.setLong(5, record.timestamp);
+            stmt.setString(6, record.formattedTime);
+            stmt.executeUpdate();
         }
     }
 
@@ -297,35 +373,6 @@ public class RuleChangeDataManager {
             saveToJson();
         } finally {
             cacheLock.writeLock().unlock();
-        }
-    }
-
-    private static boolean migrateJsonToDatabase(File jsonFile) {
-        try (FileReader reader = new FileReader(jsonFile)) {
-            Type mapType = new TypeToken<Map<String, RuleChangeRecord>>(){}.getType();
-            Map<String, RuleChangeRecord> records = GSON.fromJson(reader, mapType);
-            if (records == null || records.isEmpty()) {
-                return true;
-            }
-
-            connection.setAutoCommit(false);
-            for (RuleChangeRecord record : records.values()) {
-                recordToDatabase(record.ruleName, record.rawValue, record.currentValue, record.sourceName, record.timestamp);
-            }
-            connection.commit();
-            connection.setAutoCommit(true);
-            return true;
-        } catch (Exception e) {
-            IGNYServer.LOGGER.error("Error during JSON-to-database migration", e);
-            try {
-                if (connection != null && !connection.isClosed()) {
-                    connection.rollback();
-                    connection.setAutoCommit(true);
-                }
-            } catch (SQLException ex) {
-                IGNYServer.LOGGER.error("Failed to rollback transaction", ex);
-            }
-            return false;
         }
     }
 

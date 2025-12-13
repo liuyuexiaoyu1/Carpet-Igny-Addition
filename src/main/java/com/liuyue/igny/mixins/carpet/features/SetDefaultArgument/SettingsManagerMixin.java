@@ -8,6 +8,7 @@ import carpet.utils.CommandHelper;
 import carpet.utils.TranslationKeys;
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.utils.CommandPermissions;
+import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -92,17 +93,8 @@ public abstract class SettingsManagerMixin {
     @Shadow
     protected abstract int setRule(CommandSourceStack source, CarpetRule<?> rule, String newValue);
 
-    @Inject(method = "registerCommand", at = @At("HEAD"), cancellable = true)
-    private void onRegisterCommand(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandBuildContext, CallbackInfo ci) {
-        if (dispatcher.getRoot().getChildren().stream().anyMatch(node -> node.getName().equalsIgnoreCase(this.identifier)))
-        {
-            CarpetSettings.LOG.error("Failed to add settings command for {}. It is masking previous command.", this.identifier);
-            return;
-        }
-
-        LiteralArgumentBuilder<CommandSourceStack> literalargumentbuilder = literal(identifier).requires((player) ->
-                CommandHelper.canUseCommand(player, CarpetSettings.carpetCommandPermissionLevel) && !locked());
-
+    @Inject(method = "registerCommand", at = @At(value = "INVOKE", target = "Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;executes(Lcom/mojang/brigadier/Command;)Lcom/mojang/brigadier/builder/ArgumentBuilder;"), cancellable = true)
+    private void onRegisterCommand(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandBuildContext, CallbackInfo ci, @Local(name = "literalargumentbuilder") LiteralArgumentBuilder<CommandSourceStack> literalargumentbuilder) {
         literalargumentbuilder.executes((context)-> this.listAllSettings(context.getSource())).
                 then(literal("list").
                         executes( (c) -> this.listSettings(c.getSource(), String.format(tr(TranslationKeys.ALL_MOD_SETTINGS), this.fancyName),

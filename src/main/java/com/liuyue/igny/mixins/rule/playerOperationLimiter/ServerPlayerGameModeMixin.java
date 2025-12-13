@@ -1,7 +1,6 @@
 package com.liuyue.igny.mixins.rule.playerOperationLimiter;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.utils.rule.playerOperationLimiter.PlayerOperationLimiterUtil;
 import com.liuyue.igny.utils.rule.playerOperationLimiter.SafeServerPlayerEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -42,7 +41,7 @@ public abstract class ServerPlayerGameModeMixin {
         SafeServerPlayerEntity safe = (SafeServerPlayerEntity) this.player;
         safe.igny$addBreakCountPerTick();
 
-        if (!PlayerOperationLimiterUtil.canBreakMore(this.player, safe)) {
+        if (!safe.igny$canBreak(player)) {
             this.player.connection.send(new ClientboundBlockUpdatePacket(pos, this.level.getBlockState(pos)));
             ci.cancel();
         }
