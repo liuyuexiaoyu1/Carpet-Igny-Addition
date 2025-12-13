@@ -1,8 +1,8 @@
-## Rules
+# Rules
 
 Tip: You can use `Ctrl+F` to find rule(s)
 
-### wardenNeverDig
+## wardenNeverDig
 
 Wardens will not burrow underground unless they hear sounds.
 
@@ -11,7 +11,7 @@ Wardens will not burrow underground unless they hear sounds.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### playerLevitationFreeShulkerBullet
+## playerLevitationFreeShulkerBullet
 
 Players will not receive levitation effect when hit by shulker bullets.
 
@@ -20,7 +20,7 @@ Players will not receive levitation effect when hit by shulker bullets.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### playerMiningFatigueFreeGuardian
+## playerMiningFatigueFreeGuardian
 
 When a player is locked on by a Guardian or Elder Guardian, they will not suffer from mining effect.
 
@@ -29,7 +29,7 @@ When a player is locked on by a Guardian or Elder Guardian, they will not suffer
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### showRuleChangeHistory
+## showRuleChangeHistory
 
 Records and displays rule change history including operator, timestamp, and original value when rules are modified.
 
@@ -38,7 +38,7 @@ Records and displays rule change history including operator, timestamp, and orig
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `COMMAND`, `FEATURE`
 
-### fakePlayerCanPush
+## fakePlayerCanPush
 
 Fake players can be pushed by other players' collisions.
 
@@ -47,7 +47,7 @@ Fake players can be pushed by other players' collisions.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### wetSpongeCanAbsorbLava
+## wetSpongeCanAbsorbLava
 
 Wet sponges can absorb lava and turn into regular sponges when touching lava.
 
@@ -56,7 +56,7 @@ Wet sponges can absorb lava and turn into regular sponges when touching lava.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### commandPlayerEnderChestDrop
+## commandPlayerEnderChestDrop
 
 Controls permission level for players to drop ender chest items.  
 Usage: `/player <player> drop all` - drops inventory + ender chest items (if permitted);  
@@ -71,7 +71,7 @@ Fake players: follows above permission settings.
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`, `COMMAND`, `FEATURE`
 
-### noWardenDarkness
+## noWardenDarkness
 
 Players near wardens will not receive darkness effect.
 
@@ -80,7 +80,7 @@ Players near wardens will not receive darkness effect.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### floatingIceWater
+## floatingIceWater
 
 When ice is broken without silk touch and there are no blocks beneath it, water will be generated (even if the ice is floating).
 
@@ -89,7 +89,7 @@ When ice is broken without silk touch and there are no blocks beneath it, water 
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### noZombifiedPiglinNetherPortalSpawn
+## noZombifiedPiglinNetherPortalSpawn
 
 When the Nether portal in the Overworld receives a random tick, zombified piglin will not naturally spawn in the Nether portal in the Overworld
 
@@ -98,7 +98,7 @@ When the Nether portal in the Overworld receives a random tick, zombified piglin
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### projectileDuplicationReintroduced `MC>=1.21.2`
+## projectileDuplicationReintroduced `MC>=1.21.2`
 
 Reintroduces the projectile residual tick duplication behavior from versions below 1.21.2 (can be considered as restoring duplication behaviors for potions, eggs, snowballs, etc.).
 
@@ -107,7 +107,7 @@ Reintroduces the projectile residual tick duplication behavior from versions bel
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-### skeletonsPickupSwordsReintroduced `MC>=1.21.4`
+## skeletonsPickupSwordsReintroduced `MC>=1.21.4`
 
 Reintroducing the skeleton pickup swords behavior from Minecraft versions below 1.21.4
 
@@ -116,7 +116,7 @@ Reintroducing the skeleton pickup swords behavior from Minecraft versions below 
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-### minecartMotionFix `MC>=1.21.2`
+## minecartMotionFix `MC>=1.21.2`
 
 Ports the feature from versions 1.21-1.21.1 where minecarts carrying passengers transfer their momentum to passengers during the teleport tick when crossing dimensions to version 1.21.2 and above.
 
@@ -125,7 +125,7 @@ Ports the feature from versions 1.21-1.21.1 where minecarts carrying passengers 
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-### tntMinecartEmptyDamageSourceFix `MC<1.21.9`
+## tntMinecartEmptyDamageSourceFix `MC<1.21.9`
 
 Fixed the source of empty damage in TNT minecarts.
 
@@ -134,7 +134,7 @@ Fixed the source of empty damage in TNT minecarts.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-### fakePlayerBoatYawFix `MC>=1.20.11`
+## fakePlayerBoatYawFix `MC>=1.20.11`
 
 Fake players will not correct yaw when riding boats. [#2100](https://github.com/gnembon/fabric-carpet/issues/2100)
 
@@ -143,7 +143,7 @@ Fake players will not correct yaw when riding boats. [#2100](https://github.com/
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`, `BUGFIX`
 
-### killFakePlayerRemoveVehicle
+## killFakePlayerRemoveVehicle
 
 When removing a fake player, remove the vehicle they are riding in.
 
@@ -154,7 +154,7 @@ cantrade: Remove the vehicle when there are no villagers or wandering merchants 
 - Suggested Options: `false`, `cantrade`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-### candlePlaceOnIncompleteBlock
+## candlePlaceOnIncompleteBlock
 
 Candle can place on incomplete block.
 
@@ -163,7 +163,7 @@ Candle can place on incomplete block.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-### commandfixnotepitch
+## commandfixnotepitch
 
 `/fixnotepitch` permission.
 
@@ -172,7 +172,7 @@ Candle can place on incomplete block.
 - Suggested Options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`, `COMMAND`, `CREATIVE`, `FEATURE`
 
-### fixnotepitchUpdateBlock
+## fixnotepitchUpdateBlock
 
 Control `commandFixnotepitech` to sending block update.
 
@@ -181,7 +181,7 @@ Control `commandFixnotepitech` to sending block update.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `COMMAND`, `CREATIVE`, `FEATURE`
 
-### happyGhastNoClip `MC>1.21.6`
+## happyGhastNoClip `MC>1.21.6`
 
 Happy Ghast has players who ride while ignoring block collisions and can pass through blocks.
 
@@ -190,7 +190,7 @@ Happy Ghast has players who ride while ignoring block collisions and can pass th
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `CLIENT`, `FEATURE`
 
-### onlyPlayerCreateNetherPortal `MC>=1.20.0`
+## onlyPlayerCreateNetherPortal `MC>=1.20.0`
 
 Only players can create nether portal.
 
@@ -199,7 +199,7 @@ Only players can create nether portal.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-### noWitherEffect
+## noWitherEffect
 
 Wither, Wither Skeleton, and Wither Rose cannot grant players the Wither effect.
 
@@ -208,7 +208,7 @@ Wither, Wither Skeleton, and Wither Rose cannot grant players the Wither effect.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-### setDefaultArgument
+## setDefaultArgument
 
 In command`/carpet <rule> <value> <setDefault>`, the command permission for the `<setDefault>` argument is controlled, allowing the rule to be directly set as the default.
 
@@ -217,7 +217,7 @@ In command`/carpet <rule> <value> <setDefault>`, the command permission for the 
 - Suggested Options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`, `COMMAND`, `FEATURE`
 
-### zombifiedPiglinDropLootIfAngryReintroduced `MC>=1.21.5`
+## zombifiedPiglinDropLootIfAngryReintroduced `MC>=1.21.5`
 
 When enabled, zombified piglins that die within 100 game ticks of becoming angry or targeting a player will drop loot and xp orbs as if killed by a player
 
@@ -230,7 +230,7 @@ This feature comes from Carpet Tis Addition, which backports the zombifiedPiglin
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-### locatorBarNoFakePlayer `MC>=1.21.6`
+## locatorBarNoFakePlayer `MC>=1.21.6`
 
 The locator bar does not show fake players.
 
@@ -239,7 +239,7 @@ The locator bar does not show fake players.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-### fakePlayerLoginLogoutNoChatInfo
+## fakePlayerLoginLogoutNoChatInfo
 
 When a fake player logs in and logs out, the prompt of login and logout will not be displayed in the chat historys
 
@@ -248,7 +248,7 @@ When a fake player logs in and logs out, the prompt of login and logout will not
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `COMMAND`, `FEATURE`
 
-### commandPlayerOperate
+## commandPlayerOperate
 
 Use the /playerOperate command to manage player actions.
 
@@ -257,7 +257,7 @@ Use the /playerOperate command to manage player actions.
 - Suggested Options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`, `COMMAND`, `FEATURE`
 
-### commandClearLightQueue
+## commandClearLightQueue
 
 Clears the light queue of the world.
 
@@ -266,7 +266,7 @@ Clears the light queue of the world.
 - Suggested Options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`, `COMMAND`, `FEATURE`
 
-### fakePlayerNoBreakingCoolDown
+## fakePlayerNoBreakingCoolDown
 
 Fake players keep breaking without a cooldown for breaking.
 
@@ -275,7 +275,7 @@ Fake players keep breaking without a cooldown for breaking.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-### creativeDestroyWaterloggedBlockNoWater
+## creativeDestroyWaterloggedBlockNoWater
 
 Creative players can destroy waterlogged blocks without generating water.
 
@@ -284,7 +284,7 @@ Creative players can destroy waterlogged blocks without generating water.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-### trialSpawnerCoolDown `MC>=1.20.5`
+## trialSpawnerCoolDown `MC>=1.20.5`
 
 Customize the monster spawning cooldown after the trial spawner generates rewards.
 
@@ -292,7 +292,7 @@ Customize the monster spawning cooldown after the trial spawner generates reward
 - Default Value: `36000`
 - Categories: `IGNY`, `FEATURE`
 
-### optimizedPiglin
+## optimizedPiglin
 
 Optimize the cramming of piglin entities.
 
@@ -303,7 +303,7 @@ From [ROF-Carpet-Addition](https://github.com/Melationin/ROF-Carpet-Addition)
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `OPTIMIZATION`, `FEATURE`
 
-### optimizedPiglinLimit
+## optimizedPiglinLimit
 
 Enable optimization when the number of cramming piglins reaches the rule value. Requires `optimizedPiglin` to be enabled.
 
@@ -311,7 +311,7 @@ Enable optimization when the number of cramming piglins reaches the rule value. 
 - Default Value: `100`
 - Categories: `IGNY`, `OPTIMIZATION`, `FEATURE`
 
-### optimizedWarden
+## optimizedWarden
 
 Optimize the cramming of warden entities.
 
@@ -320,7 +320,7 @@ Optimize the cramming of warden entities.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `OPTIMIZATION`, `FEATURE`
 
-### optimizedWardenLimit
+## optimizedWardenLimit
 
 Enable optimization when the number of cramming wardens reaches the rule value. Requires `optimizedWarden` to be enabled.
 
@@ -328,7 +328,7 @@ Enable optimization when the number of cramming wardens reaches the rule value. 
 - Default Value: `100`
 - Categories: `IGNY`, `OPTIMIZATION`, `FEATURE`
 
-### playerOperationLimiter
+## playerOperationLimiter
 
 Enables per-tick operation rate limiting for both real and fake players. This master switch controls whether the following four limit rules take effect.
 
@@ -339,7 +339,7 @@ From [Plusls Carpet Addition](https://github.com/Nyan-Work/plusls-carpet-additio
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### realPlayerBreakLimitPerTick
+## realPlayerBreakLimitPerTick
 
 Maximum number of blocks a real player can break per game tick. Set to 0 to disable. Requires `playerOperationLimiter` to be enabled.
 
@@ -347,7 +347,7 @@ Maximum number of blocks a real player can break per game tick. Set to 0 to disa
 - Default value: `0`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### realPlayerPlaceLimitPerTick
+## realPlayerPlaceLimitPerTick
 
 Maximum number of blocks a real player can place per game tick. Set to 0 to disable. Requires `playerOperationLimiter` to be enabled.
 
@@ -355,7 +355,7 @@ Maximum number of blocks a real player can place per game tick. Set to 0 to disa
 - Default value: `0`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### fakePlayerBreakLimitPerTick
+## fakePlayerBreakLimitPerTick
 
 Maximum number of blocks a fake player can break per game tick. Set to 0 to disable. Requires `playerOperationLimiter` to be enabled.
 
@@ -363,7 +363,7 @@ Maximum number of blocks a fake player can break per game tick. Set to 0 to disa
 - Default value: `0`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### fakePlayerPlaceLimitPerTick
+## fakePlayerPlaceLimitPerTick
 
 Maximum number of blocks a fake player can place per game tick. Set to 0 to disable. Requires `playerOperationLimiter` to be enabled.
 
@@ -371,7 +371,7 @@ Maximum number of blocks a fake player can place per game tick. Set to 0 to disa
 - Default value: `0`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-### generateNetherPortal
+## generateNetherPortal
 
 In the Overworld and Nether dimensions, using flint and steel or fire charges on obsidian and nether portal blocks allows you to place a nether portal perpendicular to the clicked block face.
 
@@ -388,7 +388,7 @@ If the player is in creative mode, this rule can also be used in the End dimensi
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-### placeComposterCompost `🐛Beta`
+## placeComposterCompost `🐛Beta`
 
 hen placing the composter, the compost level should be set to a value within the specified range, with a minimum of 0 and a maximum of 8.
 
