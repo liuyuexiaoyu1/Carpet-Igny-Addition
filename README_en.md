@@ -17,7 +17,7 @@
 
 | Game Version            | Development Status | Last Supported Version |
 |-------------------------|--------------------|------------------------|
-| 1.19.x                  | Maintained         | -                      |
+| 1.19.4                  | Maintained         | -                      |
 | 1.20.x                  | Maintained         | -                      |
 | 1.21(.1) (Main)         | Maintained         | -                      |
 | 1.21.2 ~ Latest Release | Maintained         | -                      |
@@ -37,4 +37,4 @@
 - [Modrinth](https://modrinth.com/mod/carpet-igny-addition)
 - [GitHub](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/releases/latest)
 ## Latest Beta version download↓ ##
-- [GitHub Action](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/runs/20188643455/artifacts/4858474767)
+- [GitHub Action](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/runs/20189327902/artifacts/4858643091)

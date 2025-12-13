@@ -17,7 +17,7 @@
 
 | 游戏版本           | 开发状态 | 最后支持版本 |  
 |----------------|------|--------|
-| 1.19.x         | 维护中  | -      |
+| 1.19.4         | 维护中  | -      |
 | 1.20.x         | 维护中  | -      |
 | 1.21(.1)（主版本）  | 维护中  | -      |
 | 1.21.2 ~ 最新正式版 | 维护中  | -      |
@@ -37,4 +37,4 @@
 - [Modrinth](https://modrinth.com/mod/carpet-igny-addition)
 - [GitHub](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/releases/latest)
 ## 最新Beta版下载↓ ##
-- [GitHub Action](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/runs/20188643455/artifacts/4858474767)
+- [GitHub Action](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/runs/20189327902/artifacts/4858643091)
