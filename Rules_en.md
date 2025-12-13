@@ -396,3 +396,49 @@ hen placing the composter, the compost level should be set to a value within the
 - Type: `int`
 - Default value: `0`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## enderDragonDeathRiseLimit `🐛Beta`
+
+Limits the maximum Y-coordinate the Ender Dragon can rise to after death. Set to -1145 to disable the limit.
+
+- Type: `int`
+- Default value: `-1145`
+- Categories: `IGNY`, `FEATURE`
+
+## enderDragonDeathDropExp `🐛Beta`
+
+Sets the amount of experience dropped when the Ender Dragon dies. Set to -1 to use vanilla behavior.  
+
+The first dragon kill grants 12,000 experience (set rule value to 12000).
+
+Subsequent dragon kills grant 500 experience (set rule value to 500).
+
+- Type: `int`
+- Default value: `-1`
+- Categories: `IGNY`, `FEATURE`
+
+## instantSpawnEnderDragon `🐛Beta`
+
+Skips the respawn animation and instantly spawns the Ender Dragon when end crystals are placed to revive it.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## maxEndPortalSize `🐛Beta`
+
+Sets the maximum size of the End portal (minimum is 3). Set to -1 to use vanilla behavior.
+
+- Type: `int`
+- Default value: `-1`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## allowRectangularEndPortal `🐛Beta`
+
+Allows rectangular End portals (each side must be at least 3 blocks long). Only effective when maxEndPortalSize is not -1.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`

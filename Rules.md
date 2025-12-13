@@ -389,3 +389,49 @@ cantrade：当载具上没有村民或者流浪商人时移除载具，其他实
 - 类型: `int`
 - 默认值: `0`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 末影龙死亡上升限制 (enderDragonDeathRiseLimit)
+
+限制末影龙死亡后上升到的最大y坐标，设置为-1145表示不限制。
+
+- 类型: `int`
+- 默认值: `-1145`
+- 分类: `IGNY`, `FEATURE`
+
+## 末影龙死亡掉落经验 (enderDragonDeathDropExp)
+
+末影龙死亡掉落的经验值，设置为-1表示遵循原版逻辑。  
+
+首次击杀龙掉落的经验为12000（填写规则值12000）。  
+
+重复击杀击杀龙掉落的经验为500（填写规则值500）。
+
+- 类型: `int`
+- 默认值: `-1`
+- 分类: `IGNY`, `FEATURE`
+
+## 瞬时生成末影龙 (instantSpawnEnderDragon)
+
+放置末影水晶重生末影龙时跳过重生动画，直接召唤末影龙。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 最大末地传送门大小 (maxEndPortalSize)
+
+设置末地传送门的最大大小（3以上），设置为-1表示遵循原版逻辑。
+
+- 类型: `int`
+- 默认值: `-1`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 允许长方形末地传送门 (allowRectangularEndPortal)
+
+允许生成长方形的末地传送门（传送门边最小为3），maxEndPortalSize不为-1时有效。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`

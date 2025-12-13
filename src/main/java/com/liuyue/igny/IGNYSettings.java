@@ -275,4 +275,30 @@ public class IGNYSettings
             categories = {IGNY, CREATIVE, FEATURE}
     )
     public static Integer placeComposterCompost = 0;
+
+    @Rule(
+            categories = {IGNY, FEATURE}
+    )
+    public static Integer enderDragonDeathRiseLimit = -1145;
+
+    @Rule(
+            categories = {IGNY, FEATURE}
+    )
+    public static Integer enderDragonDeathDropExp = -1;
+
+    @Rule(
+            categories = {IGNY, CREATIVE, FEATURE}
+    )
+    public static Boolean instantSpawnEnderDragon = false;
+
+    @Rule(
+            categories = {IGNY, CREATIVE, FEATURE}
+    )
+    public static Integer maxEndPortalSize = -1;
+
+    @Rule(
+            categories = {IGNY, CREATIVE, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean allowRectangularEndPortal = false;
 }
