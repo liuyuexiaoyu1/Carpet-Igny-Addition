@@ -301,4 +301,10 @@ public class IGNYSettings
             options = {"false", "true"}
     )
     public static Boolean allowRectangularEndPortal = false;
+
+    @Rule(
+            categories = {IGNY, CREATIVE, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean instantVaultSpawnLoot = false;
 }

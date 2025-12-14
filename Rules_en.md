@@ -442,3 +442,12 @@ Allows rectangular End portals (each side must be at least 3 blocks long). Only 
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## instantVaultSpawnLoot `🐛Beta`
+
+When generating loot from the vault, skip the animation and directly generate all loot.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`

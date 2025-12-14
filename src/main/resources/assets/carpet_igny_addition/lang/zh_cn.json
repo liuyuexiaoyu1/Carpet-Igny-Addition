@@ -170,5 +170,7 @@
   "carpet.rule.maxEndPortalSize.name": "最大末地传送门大小",
   "carpet.rule.maxEndPortalSize.desc": "设置末地传送门的最大大小（3以上），设置为-1表示遵循原版逻辑",
   "carpet.rule.allowRectangularEndPortal.name": "允许长方形末地传送门",
-  "carpet.rule.allowRectangularEndPortal.desc": "允许生成长方形的末地传送门（传送门边最小为3），maxEndPortalSize不为-1时有效"
+  "carpet.rule.allowRectangularEndPortal.desc": "允许生成长方形的末地传送门（传送门边最小为3），maxEndPortalSize不为-1时有效",
+  "carpet.rule.instantVaultSpawnLoot.name": "瞬时宝库生成战利品",
+  "carpet.rule.instantVaultSpawnLoot.desc": "宝库生成战利品时跳过动画，直接生成所有战利品"
 }

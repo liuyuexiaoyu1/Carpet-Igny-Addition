@@ -9,6 +9,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.pattern.BlockInWorld;
+import net.minecraft.world.level.block.state.pattern.BlockPattern;
 import net.minecraft.world.level.dimension.end.DragonRespawnAnimation;
 import net.minecraft.world.level.dimension.end.EndDragonFight;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -27,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 import java.util.UUID;
 
-@Mixin(EndDragonFight.class)
+@Mixin(targets = "net/minecraft/world/level/dimension/end/EndDragonFight", priority = 1100)
 public abstract class EndDragonFightMixin {
 
     @Shadow
@@ -37,7 +40,7 @@ public abstract class EndDragonFightMixin {
     protected abstract EnderDragon createNewDragon();
 
     @Shadow
-    private java.util.List<net.minecraft.world.entity.boss.enderdragon.EndCrystal> respawnCrystals;
+    private List<EndCrystal> respawnCrystals;
 
     @Shadow
     @Nullable
@@ -57,24 +60,43 @@ public abstract class EndDragonFightMixin {
     @Shadow
     private int respawnTime;
 
+    @Shadow
+    @Nullable
+    protected abstract BlockPattern.BlockPatternMatch findExitPortal();
+
+    @Shadow
+    @Final
+    private BlockPattern exitPortalPattern;
+
     @Unique
-    private java.util.List<net.minecraft.world.entity.boss.enderdragon.EndCrystal> getRespawnCrystals() {
+    private List<EndCrystal> getRespawnCrystals() {
         return this.respawnCrystals;
     }
 
-    @Inject(method = "respawnDragon", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z",shift = At.Shift.AFTER), cancellable = true)
-    private void onTryRespawn(List<EndCrystal> list , CallbackInfo ci) {
+    @Inject(method = "respawnDragon", at = @At(value = "HEAD"), cancellable = true)
+    private void respawnDragon(List<EndCrystal> list , CallbackInfo ci) {
         if (IGNYSettings.instantSpawnEnderDragon) {
             EndDragonFight self = (EndDragonFight) (Object) this;
             if (!this.dragonKilled || this.respawnStage != null) {
                 return;
             }
+            for(BlockPattern.BlockPatternMatch blockPatternMatch = this.findExitPortal(); blockPatternMatch != null; blockPatternMatch = this.findExitPortal()) {
+                for(int i = 0; i < this.exitPortalPattern.getWidth(); ++i) {
+                    for(int j = 0; j < this.exitPortalPattern.getHeight(); ++j) {
+                        for(int k = 0; k < this.exitPortalPattern.getDepth(); ++k) {
+                            BlockInWorld blockInWorld = blockPatternMatch.getBlock(i, j, k);
+                            if (blockInWorld.getState().is(Blocks.BEDROCK) || blockInWorld.getState().is(Blocks.END_PORTAL)) {
+                                this.level.setBlockAndUpdate(blockInWorld.getPos(), Blocks.END_STONE.defaultBlockState());
+                            }
+                        }
+                    }
+                }
+            }
             this.respawnTime = 0;
             this.spawnExitPortal(false);
             this.respawnCrystals = list;
             ci.cancel();
-            this.spawnExitPortal(false);
-            java.util.List<net.minecraft.world.entity.boss.enderdragon.EndCrystal> crystals = getRespawnCrystals();
+            List<EndCrystal> crystals = getRespawnCrystals();
             if (crystals != null) {
                 for (var crystal : crystals) {
                     crystal.setBeamTarget(null);
@@ -135,7 +157,7 @@ public abstract class EndDragonFightMixin {
     @Unique
     private static String getCarpetAMSAdditionSetting() {
         if(IGNYServerMod.CARPET_ADDITION_MOD_IDS.contains("carpet-ams-addition")){
-            CarpetRule<?> carpetRule = CarpetServer.settingsManager.getCarpetRule("fakePlayerSpawnMemoryLeakFix");
+            CarpetRule<?> carpetRule = CarpetServer.settingsManager.getCarpetRule("preventEndSpikeRespawn");
             if (carpetRule == null) {
                 return "false";
             }

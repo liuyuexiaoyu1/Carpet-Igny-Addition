@@ -43,6 +43,7 @@ public class VaultTask implements ITask {
     private String pendingFakeName = null;
     private final ServerPlayer operator;
     private boolean paused = false;
+    private static final int INSTANT_WAIT_TICKS = 7;
 
     private enum Stage {
         SPAWNING,
@@ -280,7 +281,8 @@ public class VaultTask implements ITask {
                     EntityPlayerActionPack actionPack = spi.getActionPack();
                     actionPack.stopAll();
                     actionPack.start(EntityPlayerActionPack.ActionType.USE,
-                            EntityPlayerActionPack.Action.continuous());
+                          EntityPlayerActionPack.Action.continuous());
+
 
                     currentStage = Stage.RIGHT_CLICKING;
                     stageTickCounter = 0;
@@ -305,9 +307,16 @@ public class VaultTask implements ITask {
             return;
         }
 
-        if (stageTickCounter >= 100) {
-            currentStage = Stage.LOGGING_OUT;
-            stageTickCounter = 0;
+        if (IGNYSettings.instantVaultSpawnLoot) {
+            if (stageTickCounter >= INSTANT_WAIT_TICKS) {
+                currentStage = Stage.LOGGING_OUT;
+                stageTickCounter = 0;
+            }
+        } else {
+            if (stageTickCounter >= 100) {
+                currentStage = Stage.LOGGING_OUT;
+                stageTickCounter = 0;
+            }
         }
     }
 

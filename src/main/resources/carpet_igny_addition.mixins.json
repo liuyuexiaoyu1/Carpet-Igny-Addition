@@ -36,6 +36,8 @@
     "rule.happyGhastNoClip.ShulkerBoxBlockEntityMixin",
     "rule.happyGhastNoClip.StandingAndWallBlockItemMixin",
     "rule.instantSpawnEnderDragon.EndDragonFightMixin",
+    "rule.instantVaultSpawnLoot.VaultBlockEntityServerInvoker",
+    "rule.instantVaultSpawnLoot.VaultBlockEntityServerMixin",
     "rule.killFakePlayerRemoveVehicle.EntityPlayerMPFakeMixin",
     "rule.locatorBarNoFakePlayer.ServerWaypointManagerMixin",
     "rule.maxEndPortalSize.EnderEyeItemMixin",

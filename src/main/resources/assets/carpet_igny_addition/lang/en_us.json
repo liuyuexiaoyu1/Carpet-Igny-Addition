@@ -128,5 +128,6 @@
   "carpet.rule.maxEndPortalSize.name": "Maximum End Portal Size",
   "carpet.rule.maxEndPortalSize.desc": "Sets the maximum size of the End portal (minimum is 3). Set to -1 to use vanilla behavior.",
   "carpet.rule.allowRectangularEndPortal.name": "Allow Rectangular End Portals",
-  "carpet.rule.allowRectangularEndPortal.desc": "Allows rectangular End portals (each side must be at least 3 blocks long). Only effective when maxEndPortalSize is not -1."
+  "carpet.rule.allowRectangularEndPortal.desc": "Allows rectangular End portals (each side must be at least 3 blocks long). Only effective when maxEndPortalSize is not -1.",
+  "carpet.rule.instantVaultSpawnLoot.desc": "When generating loot from the vault, skip the animation and directly generate all loot"
 }

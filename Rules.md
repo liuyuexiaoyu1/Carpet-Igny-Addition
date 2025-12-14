@@ -435,3 +435,12 @@ cantrade：当载具上没有村民或者流浪商人时移除载具，其他实
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 瞬时宝库生成战利品 (instantVaultSpawnLoot) `🐛Beta`
+
+宝库生成战利品时跳过动画，直接生成所有战利品。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`
