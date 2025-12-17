@@ -306,18 +306,21 @@ public class VaultTask implements ITask {
             pendingFakeName = null;
             return;
         }
-
+        //#if MC >= 12005
         if (IGNYSettings.instantVaultSpawnLoot) {
             if (stageTickCounter >= INSTANT_WAIT_TICKS) {
                 currentStage = Stage.LOGGING_OUT;
                 stageTickCounter = 0;
             }
         } else {
+        //#endif
             if (stageTickCounter >= 100) {
                 currentStage = Stage.LOGGING_OUT;
                 stageTickCounter = 0;
             }
+        //#if MC >= 12005
         }
+        //#endif
     }
 
     private void handleLoggingOut() {
