@@ -469,3 +469,26 @@ cantrade：当载具上没有村民或者流浪商人时移除载具，其他实
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
+
+## 简易声音抑制器 (simpleSoundSuppression) `🐛Beta` `MC>=1.20.5`
+
+通过将校频幽匿感测体命名为指定名称来制作基于“IllegalArgumentException”的更新抑制器。
+
+规则值为false时，规则不生效。
+
+规则值为true时，命名为“声音抑制器”或“soundSuppression”的校频幽匿感测体可以用来制作声音抑制器。
+
+规则值为其它字符串时，命名为该字符串的校频幽匿感测体可以用来制作声音抑制器。
+
+- 类型: `string`
+- 默认值: `false`
+- 分类: `IGNY`, `FEATURE`
+
+## 安全声音抑制器 (safeSoundSuppression) `🐛Beta` `MC>=1.20`
+
+当声音抑制器没有红石信号输入时，没有任何效果。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`

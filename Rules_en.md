@@ -476,3 +476,26 @@ Skip the animation when the trial spawner generates loot, and directly spawn all
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
+
+## simpleSoundSuppression `🐛Beta` `MC>=1.20.5`
+
+Create an update suppressor based on 'IllegalArgumentException' by naming a Calibrated Sculk Sensor with a specified name.
+
+When the rule value is false, the rule is inactive.
+
+When the rule value is true, Calibrated Sculk Sensors named '声音抑制器' or 'soundSuppression' can be used to create sound suppressors.
+
+When the rule value is any other string, Calibrated Sculk Sensors named that string can be used to create sound suppressors.
+
+- Type: `string`
+- Default value: `false`
+- Categories: `IGNY`, `FEATURE`
+
+## safeSoundSuppression `🐛Beta` `MC>=1.20`
+
+When the sound suppressor has no redstone signal input, it has no effect.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`

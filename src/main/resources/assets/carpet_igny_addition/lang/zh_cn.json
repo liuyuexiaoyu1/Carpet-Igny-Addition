@@ -178,5 +178,12 @@
   "carpet.rule.trialSpawnerDropKeyProbability.name": "试炼刷怪笼掉落钥匙概率",
   "carpet.rule.trialSpawnerDropKeyProbability.desc": "试炼刷怪笼的战利品掉落试炼钥匙的概率，设置为-1表示遵循原版逻辑",
   "carpet.rule.instantTrialSpawnerSpawnLoot.name": "瞬时试炼刷怪笼生成战利品",
-  "carpet.rule.instantTrialSpawnerSpawnLoot.desc": "试炼刷怪笼生成奖励时跳过动画，直接生成所有战利品"
+  "carpet.rule.instantTrialSpawnerSpawnLoot.desc": "试炼刷怪笼生成奖励时跳过动画，直接生成所有战利品",
+  "carpet.rule.simpleSoundSuppression.name": "简易声音抑制器",
+  "carpet.rule.simpleSoundSuppression.desc": "通过将校频幽匿感测体命名为指定名称来制作基于“IllegalArgumentException”的更新抑制器",
+  "carpet.rule.simpleSoundSuppression.extra.0": "规则值为false时，规则不生效",
+  "carpet.rule.simpleSoundSuppression.extra.1": "规则值为true时，命名为“声音抑制器”或“soundSuppression”的校频幽匿感测体可以用来制作声音抑制器",
+  "carpet.rule.simpleSoundSuppression.extra.2": "规则值为其它字符串时，命名为该字符串的校频幽匿感测体可以用来制作声音抑制器",
+  "carpet.rule.safeSoundSuppression.name": "安全声音抑制器",
+  "carpet.rule.safeSoundSuppression.desc": "当声音抑制器没有红石信号输入时，没有任何效果"
 }

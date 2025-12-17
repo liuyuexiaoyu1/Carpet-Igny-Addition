@@ -302,6 +302,7 @@ public class IGNYSettings
     )
     public static Boolean allowRectangularEndPortal = false;
 
+    //#if MC >= 12005
     @Rule(
             categories = {IGNY, CREATIVE, FEATURE},
             options = {"false", "true"}
@@ -323,4 +324,18 @@ public class IGNYSettings
             options = {"false", "true"}
     )
     public static Boolean instantTrialSpawnerSpawnLoot = false;
+
+    @Rule(
+            categories = {IGNY, CREATIVE, FEATURE},
+            options = {"false", "true"},
+            strict = false
+    )
+    public static String simpleSoundSuppression = "false";
+    //#endif
+
+    @Rule(
+            categories = {IGNY, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean safeSoundSuppression = false;
 }

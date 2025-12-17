@@ -127,5 +127,10 @@
   "carpet.rule.instantVaultSpawnLoot.desc": "When generating loot from the vault, skip the animation and directly generate all loot",
   "carpet.rule.trialSpawnerLootMultiplier.desc": "The loot multiplier after the trial spawner generates rewards",
   "carpet.rule.trialSpawnerDropKeyProbability.desc": "The probability of a Trial Key dropping as a loot from a Trial Spawner, Set to -1 to use vanilla behavior",
-  "carpet.rule.instantTrialSpawnerSpawnLoot.desc": "Skip the animation when the trial spawner generates loot, and directly spawn all the spoils"
+  "carpet.rule.instantTrialSpawnerSpawnLoot.desc": "Skip the animation when the trial spawner generates loot, and directly spawn all the spoils",
+  "carpet.rule.simpleSoundSuppression.desc": "Create an update suppressor based on 'IllegalArgumentException' by naming a Calibrated Sculk Sensor with a specified name.",
+  "carpet.rule.simpleSoundSuppression.extra.0": "When the rule value is false, the rule is inactive.",
+  "carpet.rule.simpleSoundSuppression.extra.1": "When the rule value is true, Calibrated Sculk Sensors named '声音抑制器' or 'soundSuppression' can be used to create sound suppressors.",
+  "carpet.rule.simpleSoundSuppression.extra.2": "When the rule value is any other string, Calibrated Sculk Sensors named that string can be used to create sound suppressors.",
+  "carpet.rule.safeSoundSuppression.desc": "When the sound suppressor has no redstone signal input, it has no effect."
 }
