@@ -15,7 +15,7 @@ body:
       label: 功能存在性验证
       description: 请确认你已完成以下检查
       options:
-        - label: 我已从 [GitHub Actions 最新构建](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions) 下载并测试了最新版本，确认没有此功能
+        - label: 我已从 [GitHub Actions](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions) 下载并测试了最新版本，确认没有此功能
           required: true
 
   - type: textarea
