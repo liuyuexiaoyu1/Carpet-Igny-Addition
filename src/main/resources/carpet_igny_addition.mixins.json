@@ -50,7 +50,6 @@
     "rule.noWitherEffect.WitherSkeletonMixin",
     "rule.noWitherEffect.WitherSkullMixin",
     "rule.noZombifiedPiglinNetherPortalSpawn.ZombifiedPiglinMixin",
-    "rule.onlyPlayerCreateNetherPortal.NetherPortalBlockMixin",
     "rule.optimizations.BrainMixin",
     "rule.optimizations.LivingEntityMixin",
     "rule.optimizations.PiglinAiMixin",

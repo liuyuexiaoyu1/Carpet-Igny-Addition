@@ -140,14 +140,6 @@ public class IGNYSettings
     //$$ public static Boolean happyGhastNoClip = false;
     //#endif
 
-    //#if MC >= 12100
-    @Rule(
-            categories = {IGNY, FEATURE},
-            options = {"false", "true"}
-    )
-    public static Boolean onlyPlayerCreateNetherPortal = false;
-    //#endif
-
     @Rule(
             categories = {IGNY, FEATURE},
             options = {"false", "true"}
