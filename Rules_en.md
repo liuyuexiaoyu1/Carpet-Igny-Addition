@@ -134,7 +134,7 @@ Fixed the source of empty damage in TNT minecarts.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## fakePlayerBoatYawFix `MC>=1.20.11`
+## fakePlayerBoatYawFix `MC<1.21.11`
 
 Fake players will not correct yaw when riding boats. [#2100](https://github.com/gnembon/fabric-carpet/issues/2100)
 
@@ -366,7 +366,7 @@ If the player is in creative mode, this rule can also be used in the End dimensi
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## placeComposterCompost `🐛Beta`
+## placeComposterCompost
 
 hen placing the composter, the compost level should be set to a value within the specified range, with a minimum of 0 and a maximum of 8,Triggered when the sneak button is pressed.
 
@@ -374,7 +374,7 @@ hen placing the composter, the compost level should be set to a value within the
 - Default value: `0`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## enderDragonDeathRiseLimit `🐛Beta`
+## enderDragonDeathRiseLimit
 
 Limits the maximum Y-coordinate the Ender Dragon can rise to after death. Set to -1145 to disable the limit.
 
@@ -382,7 +382,7 @@ Limits the maximum Y-coordinate the Ender Dragon can rise to after death. Set to
 - Default value: `-1145`
 - Categories: `IGNY`, `FEATURE`
 
-## enderDragonDeathDropExp `🐛Beta`
+## enderDragonDeathDropExp
 
 Sets the amount of experience dropped when the Ender Dragon dies. Set to -1 to use vanilla behavior.  
 
@@ -394,7 +394,7 @@ Subsequent dragon kills grant 500 experience (set rule value to 500).
 - Default value: `-1`
 - Categories: `IGNY`, `FEATURE`
 
-## instantSpawnEnderDragon `🐛Beta`
+## instantSpawnEnderDragon
 
 Skips the respawn animation and instantly spawns the Ender Dragon when end crystals are placed to revive it.
 
@@ -403,7 +403,7 @@ Skips the respawn animation and instantly spawns the Ender Dragon when end cryst
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## maxEndPortalSize `🐛Beta`
+## maxEndPortalSize
 
 Sets the maximum size of the End portal (minimum is 3). Set to -1 to use vanilla behavior.
 
@@ -411,7 +411,7 @@ Sets the maximum size of the End portal (minimum is 3). Set to -1 to use vanilla
 - Default value: `-1`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## allowRectangularEndPortal `🐛Beta`
+## allowRectangularEndPortal
 
 Allows rectangular End portals (each side must be at least 3 blocks long). Only effective when maxEndPortalSize is not -1.
 
@@ -420,7 +420,7 @@ Allows rectangular End portals (each side must be at least 3 blocks long). Only 
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## instantVaultSpawnLoot `🐛Beta` `MC>=1.20.5`
+## instantVaultSpawnLoot `MC>=1.20.5`
 
 When generating loot from the vault, skip the animation and directly generate all loot.
 
@@ -429,7 +429,7 @@ When generating loot from the vault, skip the animation and directly generate al
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## trialSpawnerLootMultiplier `🐛Beta` `MC>=1.20.5`
+## trialSpawnerLootMultiplier `MC>=1.20.5`
 
 The loot multiplier after the trial spawner generates rewards.
 
@@ -437,7 +437,7 @@ The loot multiplier after the trial spawner generates rewards.
 - Default value: `1`
 - Categories: `IGNY`, `FEATURE`
 
-## trialSpawnerDropKeyProbability `🐛Beta` `MC>=1.20.5`
+## trialSpawnerDropKeyProbability `MC>=1.20.5`
 
 The probability of a Trial Key dropping as a loot from a Trial Spawner, Set to -1 to use vanilla behavior.
 
@@ -445,7 +445,7 @@ The probability of a Trial Key dropping as a loot from a Trial Spawner, Set to -
 - Default value: `-1`
 - Categories: `IGNY`, `FEATURE`
 
-## instantTrialSpawnerSpawnLoot `🐛Beta` `MC>=1.20.5`
+## instantTrialSpawnerSpawnLoot `MC>=1.20.5`
 
 Skip the animation when the trial spawner generates loot, and directly spawn all the spoils.
 
@@ -454,7 +454,7 @@ Skip the animation when the trial spawner generates loot, and directly spawn all
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## simpleSoundSuppression `🐛Beta` `MC>=1.20.5`
+## simpleSoundSuppression `MC>=1.20.5`
 
 Create an update suppressor based on 'IllegalArgumentException' by naming a Calibrated Sculk Sensor with a specified name.
 
@@ -468,7 +468,7 @@ When the rule value is any other string, Calibrated Sculk Sensors named that str
 - Default value: `false`
 - Categories: `IGNY`, `FEATURE`
 
-## safeSoundSuppression `🐛Beta` `MC>=1.20`
+## safeSoundSuppression `MC>=1.20`
 
 When the sound suppressor has no redstone signal input, it has no effect.
 
