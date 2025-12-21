@@ -311,11 +311,13 @@ public class IGNYSettings
     public static String simpleSoundSuppression = "false";
     //#endif
 
+    //#if MC >= 12000
     @Rule(
             categories = {IGNY, FEATURE},
             options = {"false", "true"}
     )
     public static Boolean safeSoundSuppression = false;
+    //#endif
 
     @Rule(
             categories = {IGNY, COMMAND, FEATURE},
