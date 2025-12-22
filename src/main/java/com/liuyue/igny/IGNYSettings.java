@@ -20,7 +20,6 @@ import static com.liuyue.igny.utils.IGNYRuleCategory.*;
 
 public class IGNYSettings
 {
-
     public static Set<String> CRAMMING_ENTITIES = new HashSet<>();
 
     //假玩家生成内存泄露修复
