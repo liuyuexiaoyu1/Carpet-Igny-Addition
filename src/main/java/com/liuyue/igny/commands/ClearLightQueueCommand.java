@@ -1,7 +1,7 @@
 package com.liuyue.igny.commands;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.mixins.commands.clearLightQueue.ThreadedLevelLightEngineAccessor;
+import com.liuyue.igny.mixins.features.commands.clearLightQueue.ThreadedLevelLightEngineAccessor;
 import com.liuyue.igny.utils.CommandPermissions;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
