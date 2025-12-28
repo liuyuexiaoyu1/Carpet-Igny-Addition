@@ -4,7 +4,10 @@
   "package": "com.liuyue.igny.mixins",
   "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
   "mixins": [
-    "features.rule.MinecraftServerMixin",
+    "compat.accessor.fapi.AbstractChanneledNetworkAddonAccessor",
+    "compat.fapi.AbstractNetworkAddonMixin",
+    "debug.ParsedRuleMixin",
+    "exceptions.PacketUtilsMixin",
     "features.carpet.EntityPlayerMPFakeMixin",
     "features.carpet.SettingsManagerMixin",
     "features.carpet.accessors.EntityPlayerActionPackAccessor",
@@ -14,10 +17,13 @@
     "features.carpet.features.twoChangedRuleValueSetDefault.SettingsManagerMixin",
     "features.carpet.fix.FakePlayerBoatYawFix.EntityMixin",
     "features.commands.clearLightQueue.ThreadedLevelLightEngineAccessor",
-    "compat.accessor.fapi.AbstractChanneledNetworkAddonAccessor",
-    "compat.fapi.AbstractNetworkAddonMixin",
-    "debug.ParsedRuleMixin",
-    "exceptions.PacketUtilsMixin",
+    "features.optimizations.BrainMixin",
+    "features.optimizations.EntityMixin",
+    "features.optimizations.LivingEntityMixin",
+    "features.optimizations.PiglinAiMixin",
+    "features.optimizations.SetEntityLookTargetMixin",
+    "features.optimizations.SetLookAndInteractMixin",
+    "features.rule.MinecraftServerMixin",
     "features.rule.candlePlaceOnIncompleteBlock.CandleBlockMixin",
     "features.rule.creativeDestroyWaterloggedBlockNoWater.ServerPlayerGameModeMixin",
     "features.rule.enderDragonDeathDropExp.EnderDragonMixin",
@@ -26,6 +32,7 @@
     "features.rule.fakePlayerLoginLogoutNoChatInfo.PlayerListMixin",
     "features.rule.fakePlayerLoginLogoutNoChatInfo.ServerGamePacketListenerImplMixin",
     "features.rule.floatingIceWater.IceBlockMixin",
+    "features.rule.furnaceHasIncombustibleHighlight.AbstractFurnaceBlockEntityMixin",
     "features.rule.generateNetherPortal.BaseFireBlockInvoker",
     "features.rule.generateNetherPortal.FireChargeItemMixin",
     "features.rule.generateNetherPortal.FlintAndSteelItemMixin",
@@ -50,12 +57,7 @@
     "features.rule.noWitherEffect.WitherSkeletonMixin",
     "features.rule.noWitherEffect.WitherSkullMixin",
     "features.rule.noZombifiedPiglinNetherPortalSpawn.ZombifiedPiglinMixin",
-    "features.optimizations.BrainMixin",
-    "features.optimizations.EntityMixin",
-    "features.optimizations.LivingEntityMixin",
-    "features.optimizations.PiglinAiMixin",
-    "features.optimizations.SetEntityLookTargetMixin",
-    "features.optimizations.SetLookAndInteractMixin",
+    "features.rule.optimizedTNTErrorScopeFix.ExplosionMixin",
     "features.rule.placeComposterCompost.BlockItemMixin",
     "features.rule.playerLevitationFreeShulkerBullet.ShulkerBulletMixin",
     "features.rule.playerMiningFatigueFreeGuardian.GuardianAttackGoalMixin",
@@ -75,10 +77,12 @@
     "features.rule.trialSpawnerCoolDown.TrialSpawnerMixin",
     "features.rule.trialSpawnerLoot.TrialSpawnerMixin",
     "features.rule.wardenNeverDig.WardenMixin",
-    "features.rule.wetSpongeCanAbsorbLava.BlockBehaviourNeighborChangedMixin"
+    "features.rule.wetSpongeCanAbsorbLava.BlockBehaviourNeighborChangedMixin",
+    "render.RenderTypeInvoker"
   ],
   "client": [
-    "features.rule.happyGhastNoClip.LevelRendererMixin"
+    "features.rule.happyGhastNoClip.LevelRendererMixin",
+    "render.substitute.LevelRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

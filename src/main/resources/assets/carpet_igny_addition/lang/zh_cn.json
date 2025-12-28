@@ -176,5 +176,10 @@
   "carpet.rule.safeSoundSuppression.name": "安全声音抑制器",
   "carpet.rule.safeSoundSuppression.desc": "当声音抑制器没有红石信号输入时，没有任何效果",
   "carpet.rule.twoChangedRuleValueSetDefault.name": "两次更改规则值设置默认",
-  "carpet.rule.twoChangedRuleValueSetDefault.desc": "当使用/carpet指令更改规则值时，与更改前的值相同就设为默认"
+  "carpet.rule.twoChangedRuleValueSetDefault.desc": "当使用/carpet指令更改规则值时，与更改前的值相同就设为默认",
+  "carpet.rule.optimizedTNTErrorScopeFix.name": "optimizedTNT错误作用域修复",
+  "carpet.rule.optimizedTNTErrorScopeFix.desc": "修复optimizedTNT规则启用时，错误优化风弹等实体爆炸的问题",
+  "carpet.rule.furnaceHasIncombustibleHighlight.name": "熔炉含不可燃烧物高亮",
+  "carpet.rule.furnaceHasIncombustibleHighlight.desc": "当熔炉的原料槽中含有不可燃烧的物品时，自身颜色变为淡红色，可透过方块显示",
+  "carpet.rule.furnaceHasIncombustibleHighlight.extra.0": "需要客户端同时安装有此MOD"
 }

@@ -1,5 +1,6 @@
 package com.liuyue.igny;
 
+import com.liuyue.igny.network.packet.PacketRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -26,9 +27,13 @@ public class IGNYServerMod implements ModInitializer {
         }
         CARPET_ADDITION_MOD_IDS = mods;
     }
+
     @Override
     public void onInitialize() {
         version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
+        //#if MC >= 12005
+        PacketRegistry.s2c();
+        //#endif
         IGNYServer.init();
     }
 

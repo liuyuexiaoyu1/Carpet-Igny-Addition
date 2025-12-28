@@ -5,6 +5,7 @@ import carpet.api.settings.CarpetRule;
 import carpet.api.settings.Rule;
 import carpet.api.settings.Validator;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -348,19 +349,19 @@ public class IGNYSettings
                             .peek(name -> {
                                 if (!isValidEntityName(registry, name)) {
                                     source.sendFailure(Component.translatable("igny.settings.failure.unknown_entity", name));
-                                    throw new IllegalArgumentException(Component.translatable("igny.settings.failure.unknown_entity", newValue).getString());
+                                    throw new IllegalArgumentException("Unknown entity " + name);
                                 }
                             })
                             .collect(Collectors.toSet());
                     return newValue;
                 }
-            } catch (IllegalArgumentException e){
+                return "#none";
+            }catch (IllegalArgumentException e){
                 return "#none";
             }
-            return "#none";
         }
 
-        private boolean isValidEntityName(net.minecraft.core.Registry<EntityType<?>> registry, String name) {
+        private boolean isValidEntityName(Registry<EntityType<?>> registry, String name) {
             try {
                 ResourceLocation id = ResourceLocation.tryParse(name);
                 return id != null && registry.containsKey(id);
@@ -369,5 +370,19 @@ public class IGNYSettings
             }
         }
     }
+
+    //#if MC < 12102
+    @Rule(
+            categories = {IGNY, BUGFIX},
+            options = {"false", "true"}
+    )
+    public static Boolean optimizedTNTErrorScopeFix = false;
+    //#endif
+
+    @Rule(
+            categories = {IGNY, CLIENT, SURVIVAL, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean furnaceHasIncombustibleHighlight = false;
 
 }

@@ -127,5 +127,8 @@
   "carpet.rule.simpleSoundSuppression.extra.1": "When the rule value is true, Calibrated Sculk Sensors named '声音抑制器' or 'soundSuppression' can be used to create sound suppressors.",
   "carpet.rule.simpleSoundSuppression.extra.2": "When the rule value is any other string, Calibrated Sculk Sensors named that string can be used to create sound suppressors.",
   "carpet.rule.safeSoundSuppression.desc": "When the sound suppressor has no redstone signal input, it has no effect.",
-  "carpet.rule.twoChangedRuleValueSetDefault.desc": "When changing a rule value with the /carpet command, if the new value is the same as the previous one, reset it to the default."
+  "carpet.rule.twoChangedRuleValueSetDefault.desc": "When changing a rule value with the /carpet command, if the new value is the same as the previous one, reset it to the default.",
+  "carpet.rule.optimizedTNTErrorScopeFix.desc": "Fixes an issue where entities like Wind Charges have their explosions incorrectly optimized when optimizedTNT Rule is enabled.",
+  "carpet.rule.furnaceHasIncombustibleHighlight.desc": "When the input slot of a furnace contains non-smeltable items, the furnace itself turns light red and becomes visible through blocks (X-ray highlight).",
+  "carpet.rule.furnaceHasIncombustibleHighlight.extra.0": "Requires this mod to be installed on the client side as well."
 }

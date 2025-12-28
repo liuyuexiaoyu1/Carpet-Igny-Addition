@@ -485,7 +485,7 @@ cantrade：当载具上没有村民或者流浪商人时移除载具，其他实
 
 ## 实体优化列表 (optimizedEntityList) `🐛Beta`
 
-优化堆叠的生物实体，每个实体以','分割，设为'#none'则不启用。
+优化堆叠的生物实体，每个实体以`,`（英文逗号）分割，设为'#none'则不启用。
 
 它关闭了生物实体大部分移动和挤压的计算，使其性能更好。
 
@@ -501,3 +501,23 @@ cantrade：当载具上没有村民或者流浪商人时移除载具，其他实
 - 类型: `int`
 - 默认值: `100`
 - 分类: `IGNY`, `OPTIMIZATION`, `FEATURE`
+
+## optimizedTNT错误作用域修复 (optimizedTNTErrorScopeFix)
+
+修复optimizedTNT规则启用时，错误优化风弹等实体爆炸的问题。 [#1928](https://github.com/gnembon/fabric-carpet/issues/1928)。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `BUGFIX`
+
+## 熔炉含不可燃烧物高亮 (furnaceHasIncombustibleHighlight)
+
+当熔炉的原料槽中含有不可燃烧的物品时，自身颜色变为淡红色，可透过方块显示。
+
+需要客户端同时安装有此MOD。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`

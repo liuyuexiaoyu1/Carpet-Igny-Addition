@@ -10,6 +10,7 @@ import com.liuyue.igny.utils.CountRulesUtil;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +27,9 @@ public class IGNYServer implements CarpetExtension {
     private static MinecraftServer minecraftServer;
     public static SettingsManager settingsManager;
     private static final IGNYServer INSTANCE = new IGNYServer();
-
+    //#if MC < 12005
+    //$$ public static final ResourceLocation HIGHLIGHT_PACKET_ID = new ResourceLocation(MOD_ID, "highlight_block");
+    //#endif
     public static IGNYServer getInstance() {
         return INSTANCE;
     }

@@ -24,8 +24,8 @@ public class RuleUtils {
     }
     //#endif
 
-    public static Object getCarpetRulesValue(String modName, String ruleName) {
-        if(IGNYServerMod.CARPET_ADDITION_MOD_IDS.contains(modName)){
+    public static Object getCarpetRulesValue(String modId, String ruleName) {
+        if(IGNYServerMod.CARPET_ADDITION_MOD_IDS.contains(modId)){
             CarpetRule<?> carpetRule = CarpetServer.settingsManager.getCarpetRule(ruleName);
             if (carpetRule == null) {
                 return false;

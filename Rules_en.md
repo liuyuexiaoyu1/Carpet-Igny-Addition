@@ -488,7 +488,7 @@ When changing a rule value with the /carpet command, if the new value is the sam
 
 ## optimizedEntityList `🐛Beta`
 
-Optimizes stacked living entities; separate each entity with a comma ',', set it to '#none' to disable it.
+Optimizes stacked living entities; separate each entity with a comma `,`, set it to '#none' to disable it.
 
 It disables most movement and squeezing calculations for these entities, improving performance.
 
@@ -504,3 +504,23 @@ Enables optimization when the number of stacked entities reaches the value set b
 - Type: `int`
 - Default value: `100`
 - Categories: `IGNY`, `OPTIMIZATION`, `FEATURE`
+
+## optimizedTNTErrorScopeFix
+
+Fixes an issue where entities like Wind Charges have their explosions incorrectly optimized when optimizedTNT Rule is enabled. [#1928](https://github.com/gnembon/fabric-carpet/issues/1928)。
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `BUGFIX`
+
+## furnaceHasIncombustibleHighlight
+
+When the input slot of a furnace contains non-smeltable items, the furnace itself turns light red and becomes visible through blocks (X-ray highlight).
+
+Requires this mod to be installed on the client side as well.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
