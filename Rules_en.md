@@ -505,7 +505,7 @@ Enables optimization when the number of stacked entities reaches the value set b
 - Default value: `100`
 - Categories: `IGNY`, `OPTIMIZATION`, `FEATURE`
 
-## optimizedTNTErrorScopeFix
+## optimizedTNTErrorScopeFix `🐛Beta`
 
 Fixes an issue where entities like Wind Charges have their explosions incorrectly optimized when optimizedTNT Rule is enabled. [#1928](https://github.com/gnembon/fabric-carpet/issues/1928)。
 
@@ -514,7 +514,7 @@ Fixes an issue where entities like Wind Charges have their explosions incorrectl
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `BUGFIX`
 
-## furnaceHasIncombustibleHighlight
+## furnaceHasIncombustibleHighlight `🐛Beta`
 
 When the input slot of a furnace contains non-smeltable items, the furnace itself turns light red and becomes visible through blocks (X-ray highlight).
 
