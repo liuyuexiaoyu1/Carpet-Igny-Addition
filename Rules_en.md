@@ -494,7 +494,7 @@ It disables most movement and squeezing calculations for these entities, improvi
 
 - Type: `string`
 - Default value: `#none`
-- Suggested options: `#none`, `minecraft:warden`, `minecraft:piglin`, `minecraft:warden`, `minecraft:piglin`
+- Suggested options: `#none`, `minecraft:warden`, `minecraft:piglin`, `minecraft:warden,minecraft:piglin`
 - Categories: `IGNY`, `OPTIMIZATION`, `FEATURE`
 
 ## optimizedEntityLimit `🐛Beta`

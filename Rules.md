@@ -491,7 +491,7 @@ cantrade：当载具上没有村民或者流浪商人时移除载具，其他实
 
 - 类型: `string`
 - 默认值: `#none`
-- 参考选项: `#none`, `minecraft:warden`, `minecraft:piglin`, `minecraft:warden`, `minecraft:piglin`
+- 参考选项: `#none`, `minecraft:warden`, `minecraft:piglin`, `minecraft:warden,minecraft:piglin`
 - 分类: `IGNY`, `OPTIMIZATION`, `FEATURE`
 
 ## 实体优化限制 (optimizedEntityLimit) `🐛Beta`
