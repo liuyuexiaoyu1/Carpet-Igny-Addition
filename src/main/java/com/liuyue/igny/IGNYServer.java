@@ -29,6 +29,7 @@ public class IGNYServer implements CarpetExtension {
     private static final IGNYServer INSTANCE = new IGNYServer();
     //#if MC < 12005
     //$$ public static final ResourceLocation HIGHLIGHT_PACKET_ID = new ResourceLocation(MOD_ID, "highlight_block");
+    //$$ public static final ResourceLocation REMOVE_HIGHLIGHT_PACKET_ID = new ResourceLocation(MOD_ID, "remove_highlight_block");
     //#endif
     public static IGNYServer getInstance() {
         return INSTANCE;

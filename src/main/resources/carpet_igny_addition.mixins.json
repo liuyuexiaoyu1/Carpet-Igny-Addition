@@ -33,6 +33,7 @@
     "features.rule.fakePlayerLoginLogoutNoChatInfo.ServerGamePacketListenerImplMixin",
     "features.rule.floatingIceWater.IceBlockMixin",
     "features.rule.furnaceHasIncombustibleHighlight.AbstractFurnaceBlockEntityMixin",
+    "features.rule.furnaceHasIncombustibleHighlight.LevelMixin",
     "features.rule.generateNetherPortal.BaseFireBlockInvoker",
     "features.rule.generateNetherPortal.FireChargeItemMixin",
     "features.rule.generateNetherPortal.FlintAndSteelItemMixin",

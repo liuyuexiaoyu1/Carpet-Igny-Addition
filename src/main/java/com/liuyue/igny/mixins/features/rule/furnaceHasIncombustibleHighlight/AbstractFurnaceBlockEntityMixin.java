@@ -4,17 +4,22 @@ package com.liuyue.igny.mixins.features.rule.furnaceHasIncombustibleHighlight;
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.network.packet.block.HighlightPayload;
 
+import com.liuyue.igny.network.packet.block.RemoveHighlightPayload;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 
+import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkSource;
+import net.minecraft.world.level.chunk.LevelChunk;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -43,7 +48,6 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 
 @Mixin(AbstractFurnaceBlockEntity.class)
 public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
-
     @Shadow
     @Final
     //#if MC <= 12006
@@ -55,8 +59,50 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
     @Unique
     private int highlightColor = 0x32FF0000;
 
+
+    @Unique private static int counter = 0;
+    @Unique private int id = 0;
+
     public AbstractFurnaceBlockEntityMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
+    }
+
+    @Inject(method = "<init>", at = @At("TAIL"))
+    private void onInit(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState, RecipeType<?> recipeType, CallbackInfo ci) {
+        this.id = counter++;
+    }
+
+
+    @Inject(method = "setItem", at = @At("HEAD"))
+    private void onSetItem(int slot, ItemStack itemStack, CallbackInfo ci) {
+        if (IGNYSettings.furnaceHasIncombustibleHighlight && slot == 0 && this.level != null && !this.level.isClientSide()) {
+            //#if MC <= 12006
+            //$$ AbstractFurnaceBlockEntity abstractFurnaceBlockEntity = (AbstractFurnaceBlockEntity) (Object) this;
+            //#endif
+                if (!itemStack.isEmpty() && this.quickCheck.getRecipeFor(
+                        //#if MC <= 12006
+                        //$$ abstractFurnaceBlockEntity
+                        //#else
+                        new SingleRecipeInput(itemStack)
+                        //#endif
+                        ,
+                        //#if MC >= 12102
+                        //$$ (ServerLevel)
+                        //#endif
+                        this.level).isEmpty()) {
+                    this.sendHighlightToClient(
+                            //#if MC >= 12102
+                            //$$ (ServerLevel)
+                            //#endif
+                            this.level, this.worldPosition, this.highlightColor, true);
+                }else {
+                    this.removeHighlightToClient(
+                            //#if MC >= 12102
+                            //$$ (ServerLevel)
+                            //#endif
+                            this.level, this.worldPosition);
+                }
+        }
     }
 
     @Inject(method = "serverTick", at = @At("HEAD"))
@@ -68,8 +114,9 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
             //#endif
             BlockPos blockPos, BlockState blockState, AbstractFurnaceBlockEntity blockEntity, CallbackInfo ci) {
         if (IGNYSettings.furnaceHasIncombustibleHighlight) {
+            if (blockEntity == null) return;
             AbstractFurnaceBlockEntityMixin self = (AbstractFurnaceBlockEntityMixin) (Object) blockEntity;
-            if (level != null && !level.isClientSide() && level.getGameTime() % 5 == 0) {
+            if (level != null && !level.isClientSide() && (level.getGameTime() + self.id) % 60 == 0) {
                 ItemStack itemStack = blockEntity.getItem(0);
                 if (!itemStack.isEmpty() && self.quickCheck.getRecipeFor(
                         //#if MC <= 12006
@@ -78,48 +125,93 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
                         new SingleRecipeInput(itemStack)
                         //#endif
                         , level).isEmpty()) {
-                    self.syncHighlightToClient(level, blockPos, self.highlightColor);
+                    self.sendHighlightToClient(level, blockPos, self.highlightColor, false);
                 }
             }
         }
     }
+
+
     @Unique
-    private void syncHighlightToClient(
+    private void sendHighlightToClient(
             //#if MC >= 12102
             //$$ ServerLevel world,
             //#else
             Level level,
             //#endif
-            BlockPos pos, int color) {
+            BlockPos pos, int color, boolean permanent) {
         if (!level.isClientSide()) {
             //#if MC < 12005
             //$$ FriendlyByteBuf buf = PacketByteBufs.create();
             //$$ buf.writeBlockPos(pos);
             //$$ buf.writeInt(color);
-            //$$ buf.writeInt(10);
+            //$$ buf.writeInt(70);
+            //$$ buf.writeBoolean(true);
+            //$$ buf.writeBoolean(permanent);
             //#endif
-            level.players().stream()
-                    .filter(player -> player instanceof ServerPlayer)
-                    .forEach(player -> {
-                        if (ServerPlayNetworking.canSend((ServerPlayer) player,
-                                //#if MC >= 12005
-                                HighlightPayload.TYPE
-                                //#else
-                                //$$ IGNYServer.HIGHLIGHT_PACKET_ID
-                                //#endif
-
-                        )) {
-                            ServerPlayNetworking.send(
-                                    (ServerPlayer) player,
+            LevelChunk chunk = level.getChunkAt(pos);
+            ChunkSource chunkSource = level.getChunkSource();
+            if (chunkSource instanceof ServerChunkCache serverChunkCache) {
+                serverChunkCache.chunkMap.getPlayers(chunk.getPos(), false)
+                        .forEach(player -> {
+                            if (ServerPlayNetworking.canSend(player,
                                     //#if MC >= 12005
-                                    new HighlightPayload(pos, color, 10)
+                                    HighlightPayload.TYPE
                                     //#else
-                                    //$$ IGNYServer.HIGHLIGHT_PACKET_ID,
-                                    //$$ buf
+                                    //$$ IGNYServer.HIGHLIGHT_PACKET_ID
                                     //#endif
-                            );
-                        }
-                    });
+
+                            )) {
+                                ServerPlayNetworking.send(
+                                        player,
+                                        //#if MC >= 12005
+                                        new HighlightPayload(pos, color, 70, true, permanent)
+                                        //#else
+                                        //$$ IGNYServer.HIGHLIGHT_PACKET_ID,
+                                        //$$ buf
+                                        //#endif
+                                );
+                            }
+                        });
+            }
+        }
+    }
+
+    @Unique
+    private void removeHighlightToClient(
+            //#if MC >= 12102
+            //$$ ServerLevel world,
+            //#else
+            Level level,
+            //#endif
+            BlockPos pos) {
+        if (!level.isClientSide()) {
+            //#if MC < 12005
+            //$$ FriendlyByteBuf buf = PacketByteBufs.create();
+            //$$ buf.writeBlockPos(pos);
+            //#endif
+                level.players().stream()
+                        .filter(player -> player instanceof ServerPlayer)
+                        .forEach(player -> {
+                            if (ServerPlayNetworking.canSend((ServerPlayer) player,
+                                    //#if MC >= 12005
+                                    RemoveHighlightPayload.TYPE
+                                    //#else
+                                    //$$ IGNYServer.REMOVE_HIGHLIGHT_PACKET_ID
+                                    //#endif
+
+                            )) {
+                                ServerPlayNetworking.send(
+                                        (ServerPlayer) player,
+                                        //#if MC >= 12005
+                                        new RemoveHighlightPayload(pos)
+                                        //#else
+                                        //$$ IGNYServer.REMOVE_HIGHLIGHT_PACKET_ID,
+                                        //$$ buf
+                                        //#endif
+                                );
+                            }
+                        });
         }
     }
 }

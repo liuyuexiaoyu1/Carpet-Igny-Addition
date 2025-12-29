@@ -59,12 +59,16 @@ public class HighlightBlocksRenderer {
         WorldRenderEvents.AFTER_TRANSLUCENT.register(HighlightBlocksRenderer::onWorldRender);
     }
 
-    public static void addHighlight(BlockPos pos, int argbColor, int durationTicks) {
+    public static void addHighlight(BlockPos pos, int argbColor, int durationTicks, boolean seeThrough, boolean permanent) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null) return;
-
         long expireTime = mc.level.getGameTime() + durationTicks;
-        HIGHLIGHTS.put(pos.immutable(), new HighlightEntry(argbColor, expireTime));
+        if (permanent) expireTime = Long.MAX_VALUE;
+        HIGHLIGHTS.put(pos.immutable(), new HighlightEntry(argbColor, expireTime, seeThrough));
+    }
+
+    public static void removeHighlight(BlockPos pos){
+        HIGHLIGHTS.remove(pos.immutable());
     }
 
     private static void onWorldRender(WorldRenderContext context) {
@@ -194,5 +198,5 @@ public class HighlightBlocksRenderer {
         vc.addVertex(m, x4, y4, z4).setColor(r, g, b, a);
     }
 
-    private record HighlightEntry(int color, long expireTime) {}
+    private record HighlightEntry(int color, long expireTime, boolean seeThrough) {}
 }
