@@ -22,20 +22,21 @@ public abstract class RebindableTickingBlockEntityWrapperMixin {
 
     @Shadow
     private TickingBlockEntity ticker;
-    @Unique
-    private static TickingBlockEntity tickingBlockEntity;
 
-    @Inject(method = "<init>", at = @At("TAIL"))
-    private static void onInit(
-            //#if MC < 12110
-            //$$ LevelChunk levelChunk1,
+    @Unique
+    private TickingBlockEntity igny$originalTicker;
+
+    @Inject(method = "<init>", at = @At("RETURN"))
+    private void onInit(
+            //#if MC < 12104
+            LevelChunk this$0,
             //#endif
-                               TickingBlockEntity tickingBlockEntity1, CallbackInfo ci) {
-        tickingBlockEntity = tickingBlockEntity1;
+                        TickingBlockEntity tickingBlockEntity1, CallbackInfo ci) {
+        this.igny$originalTicker = tickingBlockEntity1;
     }
 
     @Inject(method = "rebind", at = @At("HEAD"), cancellable = true)
-    private void onRebind(TickingBlockEntity newTicker, CallbackInfo ci) {
+    private void onRebind(final TickingBlockEntity newTicker, CallbackInfo ci) {
         if (IGNYSettings.furnaceHasIncombustibleHighlight && newTicker.getType().equals("<lithium_sleeping>")) {
             ci.cancel();
         }
@@ -44,7 +45,7 @@ public abstract class RebindableTickingBlockEntityWrapperMixin {
     @Inject(method = "getPos", at = @At("HEAD"))
     private void onReloadChunk(CallbackInfoReturnable<BlockPos> cir) {
         if (IGNYSettings.furnaceHasIncombustibleHighlight && this.ticker.getType().equals("<lithium_sleeping>")) {
-            this.rebind(tickingBlockEntity);
+            this.rebind(this.igny$originalTicker);
         }
     }
 }
