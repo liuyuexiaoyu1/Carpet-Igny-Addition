@@ -98,38 +98,29 @@ public class HighlightBlocksRenderer {
         Vec3 cameraPos = context.camera().getPosition();
 
         if (poseStack != null) {
-            poseStack.pushPose();
-            poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
-
-            //#if MC > 12100
             BufferBuilder vc = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS,DefaultVertexFormat.POSITION_COLOR);
-            //#else
-            //$$ BufferBuilder vc = Tesselator.getInstance().getBuilder();
-            //$$ vc.begin(VertexFormat.Mode.QUADS,DefaultVertexFormat.POSITION_COLOR);
-            //#endif
 
             for (var entry : HIGHLIGHTS.entrySet()) {
                 BlockPos pos = entry.getKey();
                 HighlightEntry data = entry.getValue();
-                Vec3 offset = Vec3.atCenterOf(pos).subtract(cameraPos);
-                int renderDistance = mc.options.renderDistance().get() * 16;
-                Vec3 correction = new Vec3(offset.x(), 0, offset.z());
-                if (correction.length() > renderDistance) continue;
+
+                double blockX = pos.getX() + 0.5;
+                double blockY = pos.getY() + 0.5;
+                double blockZ = pos.getZ() + 0.5;
+
+                double dx = blockX - cameraPos.x;
+                double dy = blockY - cameraPos.y;
+                double dz = blockZ - cameraPos.z;
+
+                if (Math.sqrt(dx * dx + dz * dz) > mc.options.renderDistance().get() * 16) continue;
 
                 float a = ((data.color >> 24) & 0xFF) / 255.0f;
                 float r = ((data.color >> 16) & 0xFF) / 255.0f;
                 float g = ((data.color >> 8) & 0xFF) / 255.0f;
                 float b = (data.color & 0xFF) / 255.0f;
 
-                poseStack.pushPose();
-                poseStack.translate(pos.getX(), pos.getY(), pos.getZ());
-
-                Matrix4f mat = poseStack.last().pose();
-                renderFilledCube(vc, mat, r, g, b, a);
-
-                poseStack.popPose();
+                renderFilledCube(vc, poseStack.last().pose(), (float)dx, (float)dy, (float)dz, r, g, b, a);
             }
-            poseStack.popPose();
             try {
                 //#if MC <= 12101
                 RenderSystem.setShader(GameRenderer::getPositionColorShader);
@@ -161,56 +152,57 @@ public class HighlightBlocksRenderer {
     private static void renderFilledCube(
             VertexConsumer vc,
             Matrix4f m,
+            float centerX, float centerY, float centerZ,
             float r, float g, float b, float a
     ) {
-        float min = 0.0f;
-        float max = 1.0f;
+        float min = -0.5f;
+        float max = 0.5f;
 
         quad(vc, m,
-                min, max, min,
-                max, max, min,
-                max, max, max,
-                min, max, max,
+                centerX + min, centerY + max, centerZ + min,
+                centerX + max, centerY + max, centerZ + min,
+                centerX + max, centerY + max, centerZ + max,
+                centerX + min, centerY + max, centerZ + max,
                 r, g, b, a
         );
 
         quad(vc, m,
-                min, min, max,
-                max, min, max,
-                max, min, min,
-                min, min, min,
+                centerX + min, centerY + min, centerZ + max,
+                centerX + max, centerY + min, centerZ + max,
+                centerX + max, centerY + min, centerZ + min,
+                centerX + min, centerY + min, centerZ + min,
                 r, g, b, a
         );
 
         quad(vc, m,
-                max, min, min,
-                max, min, max,
-                max, max, max,
-                max, max, min,
+                centerX + max, centerY + min, centerZ + min,
+                centerX + max, centerY + min, centerZ + max,
+                centerX + max, centerY + max, centerZ + max,
+                centerX + max, centerY + max, centerZ + min,
                 r, g, b, a
         );
 
         quad(vc, m,
-                min, min, max,
-                min, min, min,
-                min, max, min,
-                min, max, max,
+                centerX + min, centerY + min, centerZ + max,
+                centerX + min, centerY + min, centerZ + min,
+                centerX + min, centerY + max, centerZ + min,
+                centerX + min, centerY + max, centerZ + max,
                 r, g, b, a
         );
 
         quad(vc, m,
-                min, min, max,
-                max, min, max,
-                max, max, max,
-                min, max, max,
+                centerX + min, centerY + min, centerZ + max,
+                centerX + max, centerY + min, centerZ + max,
+                centerX + max, centerY + max, centerZ + max,
+                centerX + min, centerY + max, centerZ + max,
                 r, g, b, a
         );
 
         quad(vc, m,
-                max, min, min,
-                min, min, min,
-                min, max, min,
-                max, max, min,
+                centerX + max, centerY + min, centerZ + min,
+                centerX + min, centerY + min, centerZ + min,
+                centerX + min, centerY + max, centerZ + min,
+                centerX + max, centerY + max, centerZ + min,
                 r, g, b, a
         );
     }

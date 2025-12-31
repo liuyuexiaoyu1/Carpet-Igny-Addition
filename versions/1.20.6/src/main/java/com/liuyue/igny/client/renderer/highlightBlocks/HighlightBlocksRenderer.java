@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 import com.mojang.blaze3d.vertex.*;
+import org.joml.Matrix4f;
 
 //#if MC < 12005
 //$$ import org.joml.Matrix4f;
@@ -54,38 +55,40 @@ public class HighlightBlocksRenderer {
 
         Vec3 cameraPos = context.camera().getPosition();
         PoseStack poseStack = context.matrixStack();
-        Tesselator tesselator = Tesselator.getInstance();
-        BufferBuilder bufferBuilder = tesselator.getBuilder();
         BufferBuilder vc = Tesselator.getInstance().getBuilder();
         vc.begin(VertexFormat.Mode.QUADS,DefaultVertexFormat.POSITION_COLOR);
 
         if (poseStack != null) {
-            poseStack.pushPose();
-            poseStack.translate(-cameraPos.x(), -cameraPos.y(), -cameraPos.z());
             for (var entry : HIGHLIGHTS.entrySet()) {
                 BlockPos pos = entry.getKey();
                 HighlightEntry data = entry.getValue();
-                Vec3 offset = Vec3.atCenterOf(pos).subtract(cameraPos);
-                int renderDistance = mc.options.renderDistance().get() * 16;
-                Vec3 correction = new Vec3(offset.x(), 0, offset.z());
-                if (correction.length() > renderDistance) continue;
+
+                double blockX = pos.getX() + 0.5;
+                double blockY = pos.getY() + 0.5;
+                double blockZ = pos.getZ() + 0.5;
+
+                double dx = blockX - cameraPos.x;
+                double dy = blockY - cameraPos.y;
+                double dz = blockZ - cameraPos.z;
+
+                if (Math.sqrt(dx * dx + dz * dz) > mc.options.renderDistance().get() * 16) continue;
 
                 float a = ((data.color >> 24) & 0xFF) / 255.0f;
                 float r = ((data.color >> 16) & 0xFF) / 255.0f;
                 float g = ((data.color >> 8) & 0xFF) / 255.0f;
                 float b = (data.color & 0xFF) / 255.0f;
 
-                poseStack.pushPose();
-                poseStack.translate(pos.getX(), pos.getY(), pos.getZ());
                 //#if MC < 12005
-                //$$ Matrix4f mat = poseStack.last().pose();
-                //$$ renderFilledCube(mat, bufferBuilder, r, g, b, a);
+                //$$ Matrix4f viewProj = poseStack.last().pose();
+                //$$ Matrix4f model = new Matrix4f();
+                //$$ model.translation((float) dx, (float) dy, (float) dz);
+                //$$ Matrix4f finalMat = new Matrix4f(viewProj);
+                //$$ finalMat.mul(model);
+                //$$ renderFilledCube(finalMat, vc, r, g, b, a);
                 //#else
-                renderFilledCube(bufferBuilder, pos.getX() - cameraPos.x(), pos.getY() - cameraPos.y(), pos.getZ() - cameraPos.z(), r, g, b, a);
+                renderFilledCube(vc, dx, dy, dz, r, g, b, a);
                 //#endif
-                poseStack.popPose();
             }
-            poseStack.popPose();
             try {
                 RenderSystem.setShader(GameRenderer::getPositionColorShader);
                 GlStateManager._disableDepthTest();
@@ -104,7 +107,7 @@ public class HighlightBlocksRenderer {
 
     //#if MC < 12005
     //$$ private static void renderFilledCube(Matrix4f matrix, BufferBuilder bufferBuilder, float r, float g, float b, float a) {
-    //$$     float min = 0.0f; float max = 1.0f;
+    //$$     float min = -0.5f; float max = 0.5f;
     //$$     quad(matrix, bufferBuilder, min, max, min, max, max, min, max, max, max, min, max, max, r, g, b, a);
     //$$     quad(matrix, bufferBuilder, min, min, max, max, min, max, max, min, min, min, min, min, r, g, b, a);
     //$$     quad(matrix, bufferBuilder, max, min, min, max, min, max, max, max, max, max, max, min, r, g, b, a);
@@ -120,7 +123,7 @@ public class HighlightBlocksRenderer {
     //$$ }
     //#else
     private static void renderFilledCube(BufferBuilder bufferBuilder, double x, double y, double z, float r, float g, float b, float a) {
-        float min = 0.0f; float max = 1.0f;
+        float min = -0.5f; float max = 0.5f;
         quad(bufferBuilder, x, y, z, min, max, min, max, max, min, max, max, max, min, max, max, r, g, b, a);
         quad(bufferBuilder, x, y, z, min, min, max, max, min, max, max, min, min, min, min, min, r, g, b, a);
         quad(bufferBuilder, x, y, z, max, min, min, max, min, max, max, max, max, max, max, min, r, g, b, a);

@@ -26,7 +26,11 @@ public abstract class RebindableTickingBlockEntityWrapperMixin {
     private static TickingBlockEntity tickingBlockEntity;
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    private static void onInit(LevelChunk levelChunk1, TickingBlockEntity tickingBlockEntity1, CallbackInfo ci) {
+    private static void onInit(
+            //#if MC < 12110
+            //$$ LevelChunk levelChunk1,
+            //#endif
+                               TickingBlockEntity tickingBlockEntity1, CallbackInfo ci) {
         tickingBlockEntity = tickingBlockEntity1;
     }
 

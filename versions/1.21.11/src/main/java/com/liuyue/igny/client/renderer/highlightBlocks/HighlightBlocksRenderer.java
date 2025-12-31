@@ -93,33 +93,31 @@ public class HighlightBlocksRenderer {
         Vec3 cameraPos = context.camera().position();
 
         if (poseStack != null) {
-            poseStack.pushPose();
-            poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
-
             BufferBuilder vc = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS,DefaultVertexFormat.POSITION_COLOR);
 
             for (var entry : HIGHLIGHTS.entrySet()) {
                 BlockPos pos = entry.getKey();
                 HighlightEntry data = entry.getValue();
-                Vec3 offset = Vec3.atCenterOf(pos).subtract(cameraPos);
-                int renderDistance = mc.options.renderDistance().get() * 16;
-                Vec3 correction = new Vec3(offset.x(), 0, offset.z());
-                if (correction.length() > renderDistance) continue;
+
+                double blockX = pos.getX() + 0.5;
+                double blockY = pos.getY() + 0.5;
+                double blockZ = pos.getZ() + 0.5;
+
+                double dx = blockX - cameraPos.x;
+                double dy = blockY - cameraPos.y;
+                double dz = blockZ - cameraPos.z;
+
+                if (Math.sqrt(dx * dx + dz * dz) > mc.options.renderDistance().get() * 16) continue;
 
                 float a = ((data.color >> 24) & 0xFF) / 255.0f;
                 float r = ((data.color >> 16) & 0xFF) / 255.0f;
                 float g = ((data.color >> 8) & 0xFF) / 255.0f;
                 float b = (data.color & 0xFF) / 255.0f;
 
-                poseStack.pushPose();
-                poseStack.translate(pos.getX(), pos.getY(), pos.getZ());
-
-                Matrix4f mat = poseStack.last().pose();
-                renderFilledCube(vc, mat, r, g, b, a);
-
-                poseStack.popPose();
+                Matrix4f localMatrix = new Matrix4f();
+                localMatrix.translation((float) dx, (float) dy, (float) dz);
+                renderFilledCube(vc, localMatrix, r, g, b, a);
             }
-            poseStack.popPose();
             try{
                 GlStateManager._disableDepthTest();
                 GlStateManager._enableBlend();
@@ -138,8 +136,8 @@ public class HighlightBlocksRenderer {
             Matrix4f m,
             float r, float g, float b, float a
     ) {
-        float min = 0.0f;
-        float max = 1.0f;
+        float min = -0.5f;
+        float max = 0.5f;
 
         quad(vc, m,
                 min, max, min,
