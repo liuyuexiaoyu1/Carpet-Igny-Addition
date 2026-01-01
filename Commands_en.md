@@ -71,6 +71,6 @@
             - `whitelist`: Whitelist mode; the player can only pick up items in the list.
             - `blacklist`: Blacklist mode; the player cannot pick up items in the list.
         - `...items` Manage the filtered item list.
-            - `add <item>` Add an item to the list (uses the native Minecraft item selector with auto-completion).
+            - `add <item>` Add an item to the list.
             - `remove <item>` Remove an item from the list.
             - `clear` Clear all filtered items for the current player.
