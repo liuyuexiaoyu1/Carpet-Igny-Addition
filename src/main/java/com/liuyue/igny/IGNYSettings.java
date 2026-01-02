@@ -396,5 +396,5 @@ public class IGNYSettings
             categories = {IGNY, COMMAND, CREATIVE, FEATURE},
             options = {"false", "true", "ops", "0", "1", "2", "3", "4"}
     )
-    public static String commandCustomItemMaxStackSizeCommand = "false";
+    public static String commandCustomItemMaxStackSize = "false";
 }

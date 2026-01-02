@@ -23,7 +23,7 @@ import java.util.Map;
 public class CustomItemMaxStackSizeCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandBuildContext) {
         dispatcher.register(Commands.literal("customItemMaxStackSize")
-                .requires(source -> CommandPermissions.canUseCommand(source, IGNYSettings.commandCustomItemMaxStackSizeCommand))
+                .requires(source -> CommandPermissions.canUseCommand(source, IGNYSettings.commandCustomItemMaxStackSize))
                 .then(Commands.literal("set")
                         .then(Commands.argument("item", ItemArgument.item(commandBuildContext))
                                 .then(Commands.argument("count", IntegerArgumentType.integer(1, 99))
