@@ -37,4 +37,4 @@
 - [Modrinth](https://modrinth.com/mod/carpet-igny-addition)
 - [GitHub](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/releases/latest)
 ## Latest Beta version download↓ ##
-- [GitHub Action](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/runs/20654927685/artifacts/5007019427)
+- [GitHub Action](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/runs/20661846343/artifacts/5009223476)
