@@ -63,7 +63,7 @@
             - `clear`
 
 ### Effects
-- `/customPlayerPickupItem <target>` Configures custom item pickup filtering rules.
+- `/customPlayerPickupItem` Configures custom item pickup filtering rules.
     - `...<player>` The target player.
         - `...get` View the target player's current pickup configuration.
         - `...mode` Set the pickup filtering mode.
