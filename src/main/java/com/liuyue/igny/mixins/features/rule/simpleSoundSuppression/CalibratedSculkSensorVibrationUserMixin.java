@@ -33,7 +33,7 @@ public class CalibratedSculkSensorVibrationUserMixin {
         if (component != null) {
             if (RuleUtils.canSoundSuppression(component.getString()) && cir.getReturnValueZ()) {
                 if (serverLevel.isClientSide()) return;
-                throw new IAEUpdateSuppressException(blockPos, "Sound Suppression Update Suppress triggered on " + serverLevel.dimension().location() + "[" + blockPos.getX() + "," + blockPos.getY() + "," + blockPos.getZ() + "]");
+                throw new IAEUpdateSuppressException("Sound Suppression Update Suppress triggered on " + serverLevel.dimension().location() + "[" + blockPos.getX() + "," + blockPos.getY() + "," + blockPos.getZ() + "]");
             }
         }
     }

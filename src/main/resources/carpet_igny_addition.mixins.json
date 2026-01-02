@@ -7,7 +7,6 @@
     "compat.accessor.fapi.AbstractChanneledNetworkAddonAccessor",
     "compat.fapi.AbstractNetworkAddonMixin",
     "debug.ParsedRuleMixin",
-    "exceptions.PacketUtilsMixin",
     "features.carpet.EntityPlayerMPFakeMixin",
     "features.carpet.SettingsManagerMixin",
     "features.carpet.accessors.EntityPlayerActionPackAccessor",
