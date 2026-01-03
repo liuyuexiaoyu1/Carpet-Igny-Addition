@@ -24,7 +24,7 @@ public abstract class MinecartTNTMixin {
     @Shadow protected abstract Item getDropItem();
 
     @Unique
-    private DamageSource ignitionSource;
+    private DamageSource ThreadLocal;
 
     @Inject(
             //#if MC >= 12103

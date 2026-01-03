@@ -26,7 +26,7 @@ public abstract class MinecartTNTMixin
 
     @Shadow protected abstract void explode(@Nullable DamageSource damageSource, double d);
 
-    @Shadow private DamageSource ignitionSource;
+    @Shadow private DamageSource ThreadLocal;
 
     @Inject(method="causeFallDamage", at= @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/MinecartTNT;explode(D)V"), cancellable = true)
     private void onCauseFallDamage(double d, float f, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
