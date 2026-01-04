@@ -1,6 +1,5 @@
 package com.liuyue.igny;
 
-
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.Rule;
 import carpet.api.settings.Validator;
@@ -17,7 +16,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.liuyue.igny.utils.IGNYRuleCategory.*;
-
 
 public class IGNYSettings
 {
