@@ -134,7 +134,7 @@
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`, `BUGFIX`
 
-## 移除假玩家时移除载具 (killFakePlayerRemoveVehicle) `🐛Beta更改`
+## 移除假玩家时移除载具 (killFakePlayerRemoveVehicle)
 
 移除假玩家时移除其乘坐的载具。
 
@@ -181,31 +181,9 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `CLIENT`, `FEATURE`
 
-## 只有玩家实体创建下界传送门 (onlyPlayerCreateNetherPortal) `MC>=1.21.0`
-
-只有玩家实体可以创建下界传送门。
-
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `false`, `true`
-- 分类: `IGNY`, `FEATURE`
-
 ## 没有凋零效果 (noWitherEffect)
 
 凋零、凋零骷髅、凋零玫瑰不能给予玩家凋零效果。
-
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `false`, `true`
-- 分类: `IGNY`, `FEATURE`
-
-## 重新引入僵尸猪灵在愤怒时掉落战利品 (zombifiedPiglinDropLootIfAngryReintroduced) `MC>=1.21.5`
-
-开启后，僵尸猪灵在愤怒、设置玩家为攻击目标的100gt内死亡，将可掉落如被玩家击杀一样的掉落物和经验球。
-
-它将相关表现还原回了 MC < 25w02a（1.21.5 的快照）的表现，撤销了 MC-56653 的修复。
-
-此功能来自Carpet Tis Addition，将游戏版本1.21.9+的zombifiedPiglinDropLootIfAngryReintroduced规则向下移植到游戏版本1.21.5+。
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -273,43 +251,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 类型: `int`
 - 默认值: `36000`
 - 分类: `IGNY`, `FEATURE`
-
-## 优化猪灵 (optimizedPiglin) `🐛Beta删除`
-
-优化堆叠的猪灵实体，它关闭了大部分移动和挤压的计算，使其性能更好。
-
-移植自[ROF-Carpet-Addition](https://github.com/Melationin/ROF-Carpet-Addition)
-
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `false`, `true`
-- 分类: `IGNY`, `OPTIMIZATION`, `FEATURE`
-
-## 优化猪灵限制 (optimizedPiglinLimit) `🐛Beta删除`
-
-当堆叠的猪灵个数达到规则设置的值时启用优化，需开启optimizedPiglin规则。
-
-- 类型: `int`
-- 默认值: `100`
-- 分类: `IGNY`, `OPTIMIZATION`, `FEATURE`
-
-## 优化监守者 (optimizedWarden) `🐛Beta删除`
-
-优化堆叠的监守者实体，它关闭了大部分移动和挤压的计算，使其性能更好。
-
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `false`, `true`
-- 分类: `IGNY`, `OPTIMIZATION`, `FEATURE`
-
-## 优化监守者限制 (optimizedWardenLimit) `🐛Beta删除`
-
-当堆叠的监守者个数达到规则设置的值时启用优化，需开启`optimizedWarden`规则。
-
-- 类型: `int`
-- 默认值: `100`
-- 分类: `IGNY`, `OPTIMIZATION`, `FEATURE`
-
+- 
 ## 玩家操作限制器 (playerOperationLimiter)
 
 为真实玩家和假玩家启用每游戏刻（tick）的操作频率限制功能。此开关控制以下四项限制规则是否生效。
@@ -490,7 +432,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `COMMAND`, `FEATURE`
 
-## 实体优化列表 (optimizedEntityList) `🐛Beta`
+## 实体优化列表 (optimizedEntityList) 
 
 优化堆叠的生物实体，每个实体以`,`（英文逗号）分割，设为'#none'则不启用。
 
@@ -501,7 +443,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `#none`, `minecraft:warden`, `minecraft:piglin`, `minecraft:warden,minecraft:piglin`
 - 分类: `IGNY`, `OPTIMIZATION`, `FEATURE`
 
-## 实体优化限制 (optimizedEntityLimit) `🐛Beta`
+## 实体优化限制 (optimizedEntityLimit) 
 
 当堆叠的实体个数达到规则设置的值时启用优化，optimizedEntityList规则需包含这个实体。
 
@@ -509,7 +451,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 默认值: `100`
 - 分类: `IGNY`, `OPTIMIZATION`, `FEATURE`
 
-## optimizedTNT错误作用域修复 (optimizedTNTErrorScopeFix) `🐛Beta` `MC<1.21.2`
+## optimizedTNT错误作用域修复 (optimizedTNTErrorScopeFix)  `MC<1.21.2`
 
 修复optimizedTNT规则启用时，错误优化风弹等实体爆炸的问题。 [#1928](https://github.com/gnembon/fabric-carpet/issues/1928)。
 
@@ -518,7 +460,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `BUGFIX`
 
-## 熔炉含不可燃烧物高亮 (furnaceHasIncombustibleHighlight) `🐛Beta`
+## 熔炉含不可燃烧物高亮 (furnaceHasIncombustibleHighlight) 
 
 当熔炉的原料槽中含有不可燃烧的物品时，自身颜色变为淡红色，可透过方块显示。
 
@@ -531,7 +473,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
 
-## 自定义玩家拾取物品指令权限 (commandCustomPlayerPickupItem) `🐛Beta`
+## 自定义玩家拾取物品指令权限 (commandCustomPlayerPickupItem) 
 
 使用/customPlayerPickupItem来自定义玩家能拾取的物品。
 
@@ -540,7 +482,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `IGNY`, `COMMAND`, `CREATIVE`, `FEATURE`
   
-## 自定义物品最大堆叠数量指令权限 (commandCustomItemMaxStackSize) `🐛Beta`
+## 自定义物品最大堆叠数量指令权限 (commandCustomItemMaxStackSize) 
 
 使用/customItemMaxStackSize来自定义物品的最大堆叠数量。
 

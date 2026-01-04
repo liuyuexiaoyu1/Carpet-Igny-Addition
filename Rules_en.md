@@ -89,15 +89,6 @@ When ice is broken without silk touch and there are no blocks beneath it, water 
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## noZombifiedPiglinNetherPortalSpawn
-
-When the Nether portal in the Overworld receives a random tick, zombified piglin will not naturally spawn in the Nether portal in the Overworld
-
-- Type: `boolean`
-- Default value: `false`
-- Suggested options: `false`, `true`
-- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
-
 ## projectileDuplicationReintroduced `MC>=1.21.2`
 
 Reintroduces the projectile residual tick duplication behavior from versions below 1.21.2 (can be considered as restoring duplication behaviors for potions, eggs, snowballs, etc.).
@@ -143,7 +134,7 @@ Fake players will not correct yaw when riding boats. [#2100](https://github.com/
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`, `BUGFIX`
 
-## killFakePlayerRemoveVehicle `🐛Beta Modify`
+## killFakePlayerRemoveVehicle
 
 When removing a fake player, remove the vehicle they are riding in.
 
@@ -189,15 +180,6 @@ Happy Ghast has players who ride while ignoring block collisions and can pass th
 - Default Value: `false`
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `CLIENT`, `FEATURE`
-
-## onlyPlayerCreateNetherPortal `MC>=1.20.0`
-
-Only players can create nether portal.
-
-- Type: `boolean`
-- Default Value: `false`
-- Suggested Options: `false`, `true`
-- Categories: `IGNY`, `FEATURE`
 
 ## noWitherEffect
 
@@ -269,42 +251,6 @@ Customize the monster spawning cooldown after the trial spawner generates reward
 - Type: `int`
 - Default Value: `36000`
 - Categories: `IGNY`, `FEATURE`
-
-## optimizedPiglin `🐛Beta Delete`
-
-Optimize the cramming of piglin entities.
-
-From [ROF-Carpet-Addition](https://github.com/Melationin/ROF-Carpet-Addition)
-
-- Type: `boolean`
-- Default Value: `false`
-- Suggested Options: `false`, `true`
-- Categories: `IGNY`, `OPTIMIZATION`, `FEATURE`
-
-## optimizedPiglinLimit `🐛Beta Delete`
-
-Enable optimization when the number of cramming piglins reaches the rule value. Requires `optimizedPiglin` to be enabled.
-
-- Type: `int`
-- Default Value: `100`
-- Categories: `IGNY`, `OPTIMIZATION`, `FEATURE`
-
-## optimizedWarden `🐛Beta Delete`
-
-Optimize the cramming of warden entities.
-
-- Type: `boolean`
-- Default Value: `false`
-- Suggested Options: `false`, `true`
-- Categories: `IGNY`, `OPTIMIZATION`, `FEATURE`
-
-## optimizedWardenLimit `🐛Beta Delete`
-
-Enable optimization when the number of cramming wardens reaches the rule value. Requires `optimizedWarden` to be enabled.
-
-- Type: `int`
-- Default Value: `100`
-- Categories: `IGNY`, `OPTIMIZATION`, `FEATURE`
 
 ## playerOperationLimiter
 
@@ -486,7 +432,7 @@ When changing a rule value with the /carpet command, if the new value is the sam
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `COMMAND`, `FEATURE`
 
-## optimizedEntityList `🐛Beta`
+## optimizedEntityList
 
 Optimizes stacked living entities; separate each entity with a comma `,`, set it to '#none' to disable it.
 
@@ -497,7 +443,7 @@ It disables most movement and squeezing calculations for these entities, improvi
 - Suggested options: `#none`, `minecraft:warden`, `minecraft:piglin`, `minecraft:warden,minecraft:piglin`
 - Categories: `IGNY`, `OPTIMIZATION`, `FEATURE`
 
-## optimizedEntityLimit `🐛Beta`
+## optimizedEntityLimit
 
 Enables optimization when the number of stacked entities reaches the value set by this rule. The entity must be included in the optimizedEntityList rule.
 
@@ -505,7 +451,7 @@ Enables optimization when the number of stacked entities reaches the value set b
 - Default value: `100`
 - Categories: `IGNY`, `OPTIMIZATION`, `FEATURE`
 
-## optimizedTNTErrorScopeFix `🐛Beta` `MC<1.21.2`
+## optimizedTNTErrorScopeFix `MC<1.21.2`
 
 Fixes an issue where entities like Wind Charges have their explosions incorrectly optimized when optimizedTNT Rule is enabled. [#1928](https://github.com/gnembon/fabric-carpet/issues/1928)。
 
@@ -514,7 +460,7 @@ Fixes an issue where entities like Wind Charges have their explosions incorrectl
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `BUGFIX`
 
-## furnaceHasIncombustibleHighlight `🐛Beta`
+## furnaceHasIncombustibleHighlight
 
 When the input slot of a furnace contains non-smeltable items, the furnace itself turns light red and becomes visible through blocks (X-ray highlight).
 
@@ -527,7 +473,7 @@ Requires this mod to be installed on the client side as well.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
 
-## commandCustomPlayerPickupItem `🐛Beta`
+## commandCustomPlayerPickupItem
 
 Use /customPlayerPickupItem to control player custom pickup items.
 
@@ -536,7 +482,7 @@ Use /customPlayerPickupItem to control player custom pickup items.
 - Suggested Options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`, `COMMAND`, `CREATIVE`, `FEATURE`
 
-## commandCustomItemMaxStackSize `🐛Beta`
+## commandCustomItemMaxStackSize
 
 Use /customItemMaxStackSize to control the maximum stack size of the item.
 

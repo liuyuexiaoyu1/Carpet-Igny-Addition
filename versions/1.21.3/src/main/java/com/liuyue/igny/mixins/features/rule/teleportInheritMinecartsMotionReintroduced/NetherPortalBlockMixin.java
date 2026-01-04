@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.features.rule.minecartMotionFix;
+package com.liuyue.igny.mixins.features.rule.teleportInheritMinecartsMotionReintroduced;
 
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.world.level.block.state.BlockState;
