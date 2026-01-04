@@ -40,11 +40,19 @@ public abstract class ExplosionMixin
     boolean original;
 
     @Inject(
+            //#if MC < 12102
             method = "explode",
+            //#else
+            //$$ method = "calculateExplodedPositions",
+            //#endif
             at = @At("HEAD")
     )
     private void onExplosionAHighPriority(
+            //#if MC < 12102
             CallbackInfo ci
+            //#else
+            //$$ CallbackInfoReturnable<List<BlockPos>> cir
+            //#endif
     )
     {
         this.original = CarpetSettings.optimizedTNT;
@@ -54,11 +62,19 @@ public abstract class ExplosionMixin
     }
 
     @Inject(
+            //#if MC < 12102
             method = "explode",
+            //#else
+            //$$ method = "calculateExplodedPositions",
+            //#endif
             at = @At("TAIL")
     )
     private void onExplosionAHighPriorityB(
+            //#if MC < 12102
             CallbackInfo ci
+            //#else
+            //$$ CallbackInfoReturnable<List<BlockPos>> cir
+            //#endif
     )
     {
         if (IGNYSettings.optimizedTNTErrorScopeFix) {
@@ -66,7 +82,7 @@ public abstract class ExplosionMixin
         }
     }
 
-
+    //#if MC < 12102
     @Inject(
             method = "finalizeExplosion",
             at = @At("HEAD")
@@ -89,4 +105,5 @@ public abstract class ExplosionMixin
             CarpetSettings.optimizedTNT = this.original;
         }
     }
+    //#endif
 }
