@@ -370,13 +370,11 @@ public class IGNYSettings
         }
     }
 
-    //#if MC < 12102
     @Rule(
             categories = {IGNY, BUGFIX},
             options = {"false", "true"}
     )
     public static Boolean optimizedTNTErrorScopeFix = false;
-    //#endif
 
     @Rule(
             categories = {IGNY, CLIENT, SURVIVAL, FEATURE},
