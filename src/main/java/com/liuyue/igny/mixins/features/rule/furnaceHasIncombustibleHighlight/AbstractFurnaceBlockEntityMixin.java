@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 
 import net.minecraft.server.level.ServerChunkCache;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
@@ -82,6 +83,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
             //#if MC <= 12006
             //$$ AbstractFurnaceBlockEntity abstractFurnaceBlockEntity = (AbstractFurnaceBlockEntity) (Object) this;
             //#endif
+            if (this.level instanceof ServerLevel serverLevel) {
                 if (!itemStack.isEmpty() && this.quickCheck.getRecipeFor(
                         //#if MC <= 12006
                         //$$ abstractFurnaceBlockEntity
@@ -89,22 +91,14 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
                         new SingleRecipeInput(itemStack)
                         //#endif
                         ,
-                        //#if MC >= 12102
-                        //$$ (ServerLevel)
-                        //#endif
-                        this.level).isEmpty()) {
+                        serverLevel).isEmpty()) {
                     this.sendHighlightToClient(
-                            //#if MC >= 12102
-                            //$$ (ServerLevel)
-                            //#endif
-                            this.level, this.worldPosition, this.highlightColor, true);
-                }else {
+                            serverLevel, this.worldPosition, this.highlightColor, true);
+                } else {
                     this.removeHighlightToClient(
-                            //#if MC >= 12102
-                            //$$ (ServerLevel)
-                            //#endif
-                            this.level, this.worldPosition);
+                            serverLevel, this.worldPosition);
                 }
+            }
         }
     }
 
@@ -118,17 +112,19 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
             BlockPos blockPos, BlockState blockState, AbstractFurnaceBlockEntity blockEntity, CallbackInfo ci) {
         if (IGNYSettings.furnaceHasIncombustibleHighlight) {
             if (blockEntity == null) return;
-            AbstractFurnaceBlockEntityMixin self = (AbstractFurnaceBlockEntityMixin) (Object) blockEntity;
-            if (level != null && !level.isClientSide() && (level.getGameTime() + self.id) % 60 == 0) {
-                ItemStack itemStack = blockEntity.getItem(0);
-                if (!itemStack.isEmpty() && self.quickCheck.getRecipeFor(
-                        //#if MC <= 12006
-                        //$$ blockEntity
-                        //#else
-                        new SingleRecipeInput(itemStack)
-                        //#endif
-                        , level).isEmpty()) {
-                    self.sendHighlightToClient(level, blockPos, self.highlightColor, false);
+            if (level instanceof ServerLevel) {
+                AbstractFurnaceBlockEntityMixin self = (AbstractFurnaceBlockEntityMixin) (Object) blockEntity;
+                if (level != null && !level.isClientSide() && (level.getGameTime() + self.id) % 60 == 0) {
+                    ItemStack itemStack = blockEntity.getItem(0);
+                    if (!itemStack.isEmpty() && self.quickCheck.getRecipeFor(
+                            //#if MC <= 12006
+                            //$$ blockEntity
+                            //#else
+                            new SingleRecipeInput(itemStack)
+                            //#endif
+                            , level).isEmpty()) {
+                        self.sendHighlightToClient(level, blockPos, self.highlightColor, false);
+                    }
                 }
             }
         }
