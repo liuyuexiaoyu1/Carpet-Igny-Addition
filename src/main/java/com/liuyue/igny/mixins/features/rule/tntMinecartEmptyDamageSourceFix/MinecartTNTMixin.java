@@ -24,7 +24,7 @@ public abstract class MinecartTNTMixin {
     @Shadow protected abstract Item getDropItem();
 
     @Unique
-    private ThreadLocal<DamageSource> ignitionSource;
+    private DamageSource ignitionSource;
 
     @Inject(
             //#if MC >= 12103
@@ -41,7 +41,7 @@ public abstract class MinecartTNTMixin {
         if (IGNYSettings.tntMinecartEmptyDamageSourceFix) {
             var direct = source.getDirectEntity();
             if (direct instanceof AbstractArrow arrow && arrow.isOnFire()) {
-                MinecartTNT minecartTNT = (MinecartTNT) (Object) this;      this.ignitionSource.set(minecartTNT.damageSources().explosion(minecartTNT, source.getEntity()));
+                MinecartTNT minecartTNT = (MinecartTNT) (Object) this;      this.ignitionSource = minecartTNT.damageSources().explosion(minecartTNT, source.getEntity());
                 explodeWithCorrectSource(arrow.getDeltaMovement().lengthSqr(), cir);
                 cir.setReturnValue(true);
             }
@@ -72,7 +72,7 @@ public abstract class MinecartTNTMixin {
                 return;
             }
             if (self.getFuse() < 0) {
-                this.ignitionSource.set(source);
+                this.ignitionSource = source;
                 self.primeFuse();
             }
             ci.cancel();
@@ -87,7 +87,7 @@ public abstract class MinecartTNTMixin {
                 double e = Math.min(Math.sqrt(d), 5.0);
                 self.level().explode(
                         self,
-                        this.ignitionSource.get(),
+                        this.ignitionSource,
                         null,
                         self.getX(), self.getY(), self.getZ(),
                         (float) (4.0F + ((EntityInvoker) self).getRandom().nextDouble() * 1.5F * e),
