@@ -15,10 +15,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#if MC >= 12102
-//$$ import net.minecraft.server.level.ServerLevel;
-//#endif
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC < 12005
 //$$ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -36,21 +33,15 @@ public abstract class LevelMixin {
     private void removeBlockEntity(BlockPos blockPos, CallbackInfo ci) {
         if (IGNYSettings.furnaceHasIncombustibleHighlight && this.getBlockEntity(blockPos) instanceof AbstractFurnaceBlockEntity) {
             Level level = (Level) (Object) this;
-            if (level instanceof ServerLevel) {
+            if (level instanceof ServerLevel serverLevel) {
                 this.removeHighlightToClient(
-                        level, blockPos);
+                        serverLevel, blockPos);
             }
         }
     }
     
     @Unique
-    private void removeHighlightToClient(
-            //#if MC >= 12102
-            //$$ ServerLevel level,
-            //#else
-            Level level,
-            //#endif
-            BlockPos pos) {
+    private void removeHighlightToClient(ServerLevel level, BlockPos pos) {
         if (!level.isClientSide()) {
             //#if MC < 12005
             //$$ FriendlyByteBuf buf = PacketByteBufs.create();
