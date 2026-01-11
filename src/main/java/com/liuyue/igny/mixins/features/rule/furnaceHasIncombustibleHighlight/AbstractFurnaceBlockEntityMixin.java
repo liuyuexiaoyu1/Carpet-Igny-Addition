@@ -149,7 +149,13 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
     }
 
     @Inject(method = "serverTick", at = @At("RETURN"))
-    private static void onTick2(Level level, BlockPos blockPos, BlockState blockState, AbstractFurnaceBlockEntity abstractFurnaceBlockEntity, CallbackInfo ci){
+    private static void onTick2(
+            //#if MC >= 12102
+            //$$ ServerLevel level,
+            //#else
+            Level level,
+            //#endif
+            BlockPos blockPos, BlockState blockState, AbstractFurnaceBlockEntity blockEntity, CallbackInfo ci){
         if (IGNYServerMod.LITHIUM) {
             hookedIsLit.set(true);
         }
