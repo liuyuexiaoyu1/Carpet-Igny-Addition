@@ -1,6 +1,7 @@
 package com.liuyue.igny.mixins.features.commands.customItemMaxStackSize;
 
 import carpet.CarpetSettings;
+import carpet.helpers.HopperCounter;
 import carpet.utils.WoolTool;
 import com.liuyue.igny.IGNYServer;
 import com.liuyue.igny.IGNYServerMod;
@@ -377,6 +378,7 @@ public abstract class HopperBlockEntityMixin extends BlockEntity {
 
     @Unique
     private static boolean tryInsert(Level world, BlockPos pos, BlockState blockState, Container container) {
+        if (hopperCounters(world, pos)) return true;
         Container inventory = getAttachedContainer(world, pos, blockState);
         if (inventory == null) {
             return false;
@@ -399,6 +401,37 @@ public abstract class HopperBlockEntityMixin extends BlockEntity {
                 if (prevCount == 1) {
                     container.setItem(i, itemStack);
                 }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 漏斗计数器相关逻辑
+     *
+     * @see <a href="https://github.com/gnembon/fabric-carpet/blob/master/src/main/java/carpet/mixins/HopperBlockEntity_counterMixin.java">漏斗计数器</a>
+     */
+    @Unique
+    private static boolean hopperCounters(Level world, BlockPos blockPos) {
+        if (CarpetSettings.hopperCounters) {
+            Direction hopperFacing = world.getBlockState(blockPos).getValue(HopperBlock.FACING);
+            DyeColor woolColor = WoolTool.getWoolColorAtPosition(
+                    world,
+                    blockPos.relative(hopperFacing));
+            if (woolColor != null)
+            {
+                Container inventory = HopperBlockEntity.getContainerAt(world, blockPos);
+                if (inventory == null) return false;
+                for (int i = 0; i < inventory.getContainerSize(); ++i)
+                {
+                    if (!inventory.getItem(i).isEmpty())
+                    {
+                        ItemStack itemstack = inventory.getItem(i);//.copy();
+                        HopperCounter.getCounter(woolColor).add(world.getServer(), itemstack);
+                        inventory.setItem(i, ItemStack.EMPTY);
+                    }
+                }
+                return true;
             }
         }
         return false;
