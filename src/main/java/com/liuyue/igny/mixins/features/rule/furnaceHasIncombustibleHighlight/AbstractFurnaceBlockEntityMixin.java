@@ -55,7 +55,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
     RecipeManager.CachedCheck<SingleRecipeInput, ? extends AbstractCookingRecipe> quickCheck;
     //#endif
 
-    //#if MC >= 12110
+    //#if MC >= 12104
     //$$ @Shadow int cookingTimer;
     //#else
     @Shadow int cookingProgress;
@@ -140,7 +140,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
     @Unique
     private boolean igny$shouldSleep(BlockState state) {
         return this.level != null && !this.isLit() &&
-                //#if MC >= 12110
+                //#if MC >= 12104
                 //$$ this.cookingTimer == 0
                 //#else
                 this.cookingProgress == 0
