@@ -28,7 +28,7 @@ public abstract class MinecraftServerMixin {
         }
     }
 
-    @Inject(method = "tickServer", at = @At("RETURN"))
+    @Inject(method = "tickServer", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;tickChildren(Ljava/util/function/BooleanSupplier;)V"))
     private void tickServer(CallbackInfo ci){
         for (ITask task : TaskManager.getAllActiveTasks()) {
             task.tick();

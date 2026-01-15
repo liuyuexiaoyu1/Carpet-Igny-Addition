@@ -5,9 +5,11 @@ import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.task.ITask;
 import com.liuyue.igny.task.TaskManager;
 import com.liuyue.igny.task.pressuse.PressUseTask;
+import com.liuyue.igny.task.rotation.RotationTask;
 import com.liuyue.igny.task.vault.VaultTask;
 import com.liuyue.igny.utils.CommandPermissions;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -70,6 +72,16 @@ public class PlayerOperateCommand {
                                                                                                                     return startPressUseTask(ctx, cycles);
                                                                                                                 })
                                                                                                 )
+                                                                                )
+                                                                )
+                                                )
+                                                .then(
+                                                        Commands.literal("rotation")
+                                                                .then(
+                                                                        Commands.argument("interval", IntegerArgumentType.integer(1))
+                                                                                .then(
+                                                                                        Commands.argument("angle", FloatArgumentType.floatArg())
+                                                                                                .executes(PlayerOperateCommand::startRotationTask)
                                                                                 )
                                                                 )
                                                 )
@@ -283,6 +295,36 @@ public class PlayerOperateCommand {
                 //#endif
                         Component.translatable("igny.command.playerOperate.pressuse_started",
                                 playerName, duration, interval, cyclesStr),
+                false
+        );
+        return 1;
+    }
+
+    private static int startRotationTask(CommandContext<CommandSourceStack> context) {
+        String playerName = StringArgumentType.getString(context, "player");
+        int interval = IntegerArgumentType.getInteger(context, "interval");
+        float rotationAngle = FloatArgumentType.getFloat(context, "angle");
+        CommandSourceStack source = context.getSource();
+
+        ServerPlayer player = source.getServer().getPlayerList().getPlayerByName(playerName);
+        if (player == null) {
+            source.sendFailure(Component.translatable("igny.command.playerOperate.player_offline", playerName));
+            return 0;
+        }
+
+        if (!(player instanceof EntityPlayerMPFake)) {
+            source.sendFailure(Component.translatable("igny.command.playerOperate.not_fake_player", playerName));
+            return 0;
+        }
+
+        RotationTask task = RotationTask.getOrCreate(source, playerName, interval, rotationAngle);
+        task.start();
+        source.sendSuccess(
+                //#if MC > 11904
+                () ->
+                        //#endif
+                        Component.translatable("igny.command.playerOperate.rotation_started",
+                                playerName, interval, rotationAngle),
                 false
         );
         return 1;
