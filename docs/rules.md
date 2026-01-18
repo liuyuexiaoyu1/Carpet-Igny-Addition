@@ -475,7 +475,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
 
-## 自定义玩家拾取物品指令权限 (commandCustomPlayerPickupItem) 
+## 自定义玩家拾取物品指令权限 (commandCustomPlayerPickupItem)
 
 使用/customPlayerPickupItem来自定义玩家能拾取的物品。
 
@@ -484,7 +484,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `IGNY`, `COMMAND`, `CREATIVE`, `FEATURE`
   
-## 自定义物品最大堆叠数量指令权限 (commandCustomItemMaxStackSize) 
+## 自定义物品最大堆叠数量指令权限 (commandCustomItemMaxStackSize) `MC>=1.20.5`
 
 使用/customItemMaxStackSize来自定义物品的最大堆叠数量。
 
@@ -493,7 +493,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `IGNY`, `COMMAND`, `CREATIVE`, `FEATURE`
 
-## 玩家饥饿值不减少 (playerHungryValueNoDecrease) `🐛Beta`
+## 玩家饥饿值不减少 (playerHungryValueNoDecrease)
 
 玩家饥饿值不会减少。
 
@@ -502,7 +502,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 玩家饥饿值低可疾跑 (playerLowHungryValueCanSprint) `🐛Beta`
+## 玩家饥饿值低可疾跑 (playerLowHungryValueCanSprint)
 
 当玩家饥饿值低于7点时，可以疾跑。
 
