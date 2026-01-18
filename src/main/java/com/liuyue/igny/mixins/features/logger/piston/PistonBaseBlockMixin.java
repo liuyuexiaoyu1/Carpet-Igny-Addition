@@ -104,17 +104,10 @@ public abstract class PistonBaseBlockMixin {
 
     @Unique
     private Component getPistonPartText(Level level, BlockPos pistonPos, Block block) {
-        Component dimensionName;
-        if (level instanceof ServerLevel serverLevel) {
-            var dimKey = serverLevel.dimension().location();
-            dimensionName = Component.translatable(
-                    "dimension." + dimKey.getNamespace() + "." + dimKey.getPath()
-            );
-        } else {
-            dimensionName = Component.literal("?");
-        }
+        String dimNameSpace = level.dimension().location().getNamespace();
+        String dimPath = level.dimension().location().getPath();
 
-        Component hoverText = Component.translatable("igny.logger.piston.hover.dimension_line", dimensionName)
+        Component hoverText = Component.translatable("igny.logger.piston.hover.dimension_line", dimNameSpace + dimPath)
                 .append("\n")
                 .append(Component.translatable("igny.logger.piston.hover.position", pistonPos.toShortString()));
 
@@ -245,7 +238,8 @@ public abstract class PistonBaseBlockMixin {
         if (reason != null) {
             switch (reason.type) {
                 case TOO_MANY_BLOCKS:
-                    hoverContent = Component.translatable("igny.logger.piston.failure.too_many_blocks", CarpetSettings.pushLimit);
+                    MutableComponent action = isExtend? Component.translatable("igny.logger.piston.push") : Component.translatable("igny.logger.piston.pull");
+                    hoverContent = Component.translatable("igny.logger.piston.failure.too_many_blocks", action, CarpetSettings.pushLimit);
                     break;
                 case UNPUSHABLE_BLOCK:
                     if (reason.blockPos != null) {
@@ -270,35 +264,6 @@ public abstract class PistonBaseBlockMixin {
 
         Block block = isExtend ? level.getBlockState(pos).getBlock() : Blocks.STICKY_PISTON;
 
-        Component dimensionNameFail;
-        if (level instanceof ServerLevel serverLevel) {
-            var dimKey = serverLevel.dimension().location();
-            dimensionNameFail = Component.translatable(
-                    "dimension." + dimKey.getNamespace() + "." + dimKey.getPath()
-            );
-        } else {
-            dimensionNameFail = Component.literal("?");
-        }
-        Component hoverTextFail = Component.translatable("igny.logger.piston.hover.dimension_line", dimensionNameFail)
-                .append("\n")
-                .append(Component.translatable("igny.logger.piston.hover.position", pos.toShortString()));
-
-        Component pistonPart = Component.literal("[")
-                .append(BlockUtils.getTranslatedName(block))
-                .append("] ")
-                .withStyle(s -> s
-                                //#if MC >= 12105
-                                //$$ .withHoverEvent(new HoverEvent.ShowText(hoverTextFail))
-                                //$$ .withClickEvent(new ClickEvent.RunCommand("/igny highlight " + pos.getX() + " " + pos.getY() + " " + pos.getZ()))
-                                //#else
-                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverTextFail))
-                                .withClickEvent(new ClickEvent(
-                                        ClickEvent.Action.RUN_COMMAND,
-                                        "/igny highlight " + pos.getX() + " " + pos.getY() + " " + pos.getZ()
-                                ))
-                        //#endif
-                );
-
         Component failPart = Component.translatable(isExtend ? "igny.logger.piston.push.failed" : "igny.logger.piston.pull.failed")
                 .withStyle(s -> s.withColor(ChatFormatting.RED)
                                 //#if MC >= 12105
@@ -308,7 +273,7 @@ public abstract class PistonBaseBlockMixin {
                         //#endif
                 );
 
-        Component full = Component.translatable("igny.logger.piston.action.failed", pistonPart, failPart);
+        Component full = Component.translatable("igny.logger.piston.action.failed", getPistonPartText(level, pos, block), failPart);
         logger.log(() -> new Component[]{full});
     }
 }

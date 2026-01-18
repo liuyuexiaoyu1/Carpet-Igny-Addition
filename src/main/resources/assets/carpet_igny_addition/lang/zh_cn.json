@@ -80,7 +80,7 @@
   "igny.task.vault.logging_out": "§e登出",
 
   "igny.logger.piston.hover.dimension_line": "维度：%s",
-  "igny.logger.piston.hover.position": "坐标：%s（点击可高亮该坐标）",
+  "igny.logger.piston.hover.position": "坐标：%s（点击高亮该坐标10秒）",
   "igny.logger.piston.action.performed": "%s 执行了 %s。",
   "igny.logger.piston.action.failed": "%s%s。",
   "igny.logger.piston.push": "推出",
@@ -91,7 +91,7 @@
   "igny.logger.piston.no.blocks.moved": "未移动任何方块",
   "igny.logger.piston.push.failed": "推出失败",
   "igny.logger.piston.pull.failed": "拉回失败",
-  "igny.logger.piston.failure.too_many_blocks": "❌ 超出活塞推出上限\n最大允许：%s",
+  "igny.logger.piston.failure.too_many_blocks": "❌ 超出活塞%s上限\n最大允许：%s",
   "igny.logger.piston.failure.unpushable_block": "❌ 无法移动方块",
   "igny.logger.piston.failure.unknown": "未知原因",
 

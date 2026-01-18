@@ -80,7 +80,7 @@
   "igny.task.vault.logging_out": "§eLogging out",
 
   "igny.logger.piston.hover.dimension_line": "Dimension: %s",
-  "igny.logger.piston.hover.position": "Position: %s (click to highlight)",
+  "igny.logger.piston.hover.position": "Position: %s (Click to highlight this block for 10 seconds)",
   "igny.logger.piston.action.performed": "%s  performed  %s.",
   "igny.logger.piston.action.failed": "%s %s.",
   "igny.logger.piston.push": "push",
@@ -91,7 +91,7 @@
   "igny.logger.piston.no.blocks.moved": "No blocks moved",
   "igny.logger.piston.push.failed": "push failed",
   "igny.logger.piston.pull.failed": "pull failed",
-  "igny.logger.piston.failure.too_many_blocks": "❌ Exceeds piston push limit\nMax allowed: %s",
+  "igny.logger.piston.failure.too_many_blocks": "❌ Exceeds piston %s limit\nMax allowed: %s",
   "igny.logger.piston.failure.unpushable_block": "❌ Cannot move block",
   "igny.logger.piston.failure.unknown": "Unknown reason",
 

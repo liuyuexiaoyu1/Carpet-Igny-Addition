@@ -11,7 +11,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.piston.PistonStructureResolver;
 import net.minecraft.world.level.block.state.BlockState;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,6 +24,9 @@ import java.util.List;
 @Mixin(PistonStructureResolver.class)
 public abstract class PistonStructureResolverMixin {
 
+    @Shadow
+    @Final
+    private List<BlockPos> toPush;
     @Unique
     private static final ThreadLocal<BlockPos> FIRST_FAILED = new ThreadLocal<>();
 
@@ -52,68 +57,20 @@ public abstract class PistonStructureResolverMixin {
         }
     }
 
-    @WrapOperation(
+    @Inject(
             method = "addBlockLine",
             at = @At(
-                    value = "INVOKE",
-                    target = "Ljava/util/List;size()I",
-                    ordinal = 0
+                    value = "RETURN"
             )
     )
-    private int wrapFirstSizeCheck(List<?> list, Operation<Integer> original) {
-        int size = original.call(list);
-        if (!IGNYLoggerRegistry.__piston ) return size;
-        if (PistonResolveContext.isRecording() && size > CarpetSettings.pushLimit) {
+    private void wrapFirstSizeCheck(BlockPos blockPos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
+        if (!IGNYLoggerRegistry.__piston ) return;
+        if (PistonResolveContext.isRecording() && !cir.getReturnValueZ() && this.toPush.size() >= CarpetSettings.pushLimit) {
             PistonResolveContext.setFailureReason(
                     new PistonResolveContext.FailureReason(
                             PistonResolveContext.FailureType.TOO_MANY_BLOCKS
                     )
             );
         }
-        return size;
     }
-
-    @WrapOperation(
-            method = "addBlockLine",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Ljava/util/List;size()I",
-                    ordinal = 1
-            )
-    )
-    private int wrapStickySizeCheck(List<BlockPos> list, Operation<Integer> original) {
-        int size = original.call(list);
-        if (!IGNYLoggerRegistry.__piston ) return size;
-        if (PistonResolveContext.isRecording() && size > CarpetSettings.pushLimit) {
-            PistonResolveContext.setFailureReason(
-                    new PistonResolveContext.FailureReason(
-                            PistonResolveContext.FailureType.TOO_MANY_BLOCKS
-                    )
-            );
-        }
-        return size;
-    }
-
-
-    @WrapOperation(
-            method = "addBlockLine",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Ljava/util/List;size()I",
-                    ordinal = 2
-            )
-    )
-    private int wrapMainLoopSizeCheck(List<BlockPos> list, Operation<Integer> original) {
-        int size = original.call(list);
-        if (!IGNYLoggerRegistry.__piston ) return size;
-        if (PistonResolveContext.isRecording() && size > CarpetSettings.pushLimit) {
-            PistonResolveContext.setFailureReason(
-                    new PistonResolveContext.FailureReason(
-                            PistonResolveContext.FailureType.TOO_MANY_BLOCKS
-                    )
-            );
-        }
-        return size;
-    }
-
 }

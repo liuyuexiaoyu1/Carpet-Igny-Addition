@@ -38,8 +38,8 @@ public class PistonResolveContext {
 
     public static class FailureReason {
         public final FailureType type;
-        public final int currentCount;   // for TOO_MANY_BLOCKS
-        public final BlockPos blockPos;  // ✅ 单个，for UNPUSHABLE_BLOCK
+        public final int currentCount;
+        public final BlockPos blockPos;
 
         public FailureReason(FailureType type) {
             this.type = type;
