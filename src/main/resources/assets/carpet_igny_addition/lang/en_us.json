@@ -5,6 +5,7 @@
   "igny.settings.command.version": "Version",
   "igny.settings.command.total_rules": "total rules",
   "igny.settings.failure.unknown_entity": "Unknown Entity ID : %s",
+
   "igny.command.enderchest.no_permission": "You don't have permission to drop ender chest items",
   "igny.command.enderchest.real_player_op_only": "Only operators can drop ender chest items of real players",
   "igny.command.fixnotepitch.success": "Successfully changed %s note blocks to pitch %s",
@@ -67,6 +68,7 @@
   "igny.command.CustomItemMaxStackSize.list_empty": "No custom stack sizes set.",
   "igny.command.CustomItemMaxStackSize.list_header": "--- Custom Stack Sizes ---",
   "igny.command.CustomItemMaxStackSize.click_to_remove": "Click to remove this setting",
+
   "igny.task.status.infinite": "§7Infinite",
   "igny.task.status.cycle": "§7Cycle §f%s§7/§f%s",
   "igny.task.status.paused": "§8[PAUSED]",
@@ -76,6 +78,22 @@
   "igny.task.vault.right_clicking": "§eRight-clicking",
   "igny.task.vault.waiting": "§eWaiting",
   "igny.task.vault.logging_out": "§eLogging out",
+
+  "igny.logger.piston.hover.dimension_line": "Dimension: %s",
+  "igny.logger.piston.hover.position": "Position: %s (click to highlight)",
+  "igny.logger.piston.action.performed": "%s  performed  %s.",
+  "igny.logger.piston.action.failed": "%s %s.",
+  "igny.logger.piston.push": "push",
+  "igny.logger.piston.pull": "pull",
+  "igny.logger.piston.retract": "retract",
+  "igny.logger.piston.pushed.blocks": "Pushed blocks (total %s):",
+  "igny.logger.piston.pulled.blocks": "Pulled blocks (total %s):",
+  "igny.logger.piston.no.blocks.moved": "No blocks moved",
+  "igny.logger.piston.push.failed": "push failed",
+  "igny.logger.piston.pull.failed": "pull failed",
+  "igny.logger.piston.failure.too_many_blocks": "❌ Exceeds piston push limit\nMax allowed: %s",
+  "igny.logger.piston.failure.unpushable_block": "❌ Cannot move block",
+  "igny.logger.piston.failure.unknown": "Unknown reason",
 
   "carpet.rule.wardenNeverDig.desc":"Warden Never Dig",
   "carpet.rule.playerLevitationFreeShulkerBullet.desc":"Player Immune to Shulker Levitation",

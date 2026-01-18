@@ -5,6 +5,7 @@
   "igny.settings.command.version": "版本",
   "igny.settings.command.total_rules": "总规则数",
   "igny.settings.failure.unknown_entity": "未知实体ID：%s",
+
   "igny.command.enderchest.no_permission": "你没有权限丢弃末影箱物品",
   "igny.command.enderchest.real_player_op_only": "只有OP可以丢弃真实玩家的末影箱物品",
   "igny.command.fixnotepitch.success": "成功将 %s 个音符盒的音高修改为 %s",
@@ -67,6 +68,7 @@
   "igny.command.CustomItemMaxStackSize.list_empty": "当前没有设置任何自定义堆叠上限",
   "igny.command.CustomItemMaxStackSize.list_header": "--- 自定义堆叠上限列表 ---",
   "igny.command.CustomItemMaxStackSize.click_to_remove": "点击移除此物品",
+
   "igny.task.status.infinite": "§7无限次",
   "igny.task.status.cycle": "§7第 §f%s§7/§f%s §7轮",
   "igny.task.status.paused": "§8[已暂停]",
@@ -76,6 +78,22 @@
   "igny.task.vault.right_clicking": "§e右键点击",
   "igny.task.vault.waiting": "§e等待",
   "igny.task.vault.logging_out": "§e登出",
+
+  "igny.logger.piston.hover.dimension_line": "维度：%s",
+  "igny.logger.piston.hover.position": "坐标：%s（点击可高亮该坐标）",
+  "igny.logger.piston.action.performed": "%s 执行了 %s。",
+  "igny.logger.piston.action.failed": "%s%s。",
+  "igny.logger.piston.push": "推出",
+  "igny.logger.piston.pull": "拉回",
+  "igny.logger.piston.retract": "收回",
+  "igny.logger.piston.pushed.blocks": "推出的方块（共 %s 个）：",
+  "igny.logger.piston.pulled.blocks": "拉回的方块（共 %s 个）：",
+  "igny.logger.piston.no.blocks.moved": "未移动任何方块",
+  "igny.logger.piston.push.failed": "推出失败",
+  "igny.logger.piston.pull.failed": "拉回失败",
+  "igny.logger.piston.failure.too_many_blocks": "❌ 超出活塞推出上限\n最大允许：%s",
+  "igny.logger.piston.failure.unpushable_block": "❌ 无法移动方块",
+  "igny.logger.piston.failure.unknown": "未知原因",
 
   "carpet.rule.wardenNeverDig.name": "监守者永不钻地",
   "carpet.rule.wardenNeverDig.desc": "让监守者永远不会钻地",

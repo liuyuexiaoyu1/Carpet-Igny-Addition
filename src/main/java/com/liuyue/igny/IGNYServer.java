@@ -4,6 +4,7 @@ import carpet.CarpetExtension;
 import carpet.CarpetServer;
 import carpet.api.settings.SettingsManager;
 import com.liuyue.igny.commands.*;
+import com.liuyue.igny.logging.IGNYLoggerRegistry;
 import com.liuyue.igny.network.packet.PacketUtil;
 import com.liuyue.igny.utils.ComponentTranslate;
 import com.liuyue.igny.utils.CountRulesUtil;
@@ -54,6 +55,11 @@ public class IGNYServer implements CarpetExtension {
     }
 
     @Override
+    public void registerLoggers() {
+        IGNYLoggerRegistry.registerLoggers();
+    }
+
+    @Override
     public void registerCommands(
             CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandBuildContext
     ) {
@@ -62,6 +68,7 @@ public class IGNYServer implements CarpetExtension {
         ClearLightQueueCommand.register(dispatcher);
         CustomPlayerPickupItemCommand.register(dispatcher, commandBuildContext);
         CustomItemMaxStackSizeCommand.register(dispatcher, commandBuildContext);
+        IGNYCommand.register(dispatcher);
     }
 
     @Override

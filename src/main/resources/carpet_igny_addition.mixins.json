@@ -25,6 +25,8 @@
     "features.commands.customItemMaxStackSize.ItemStackMixin",
     "features.commands.customItemMaxStackSize.MinecartHopperMixin",
     "features.commands.customPlayerPickupItem.ItemEntityMixin",
+    "features.logger.piston.PistonBaseBlockMixin",
+    "features.logger.piston.PistonStructureResolverMixin",
     "features.optimizations.BrainMixin",
     "features.optimizations.EntityMixin",
     "features.optimizations.LivingEntityMixin",
