@@ -80,7 +80,7 @@
   "igny.task.vault.logging_out": "§e登出",
 
   "igny.logger.piston.hover.dimension_line": "维度：%s",
-  "igny.logger.piston.hover.position": "坐标：%s（点击可高亮该坐标）",
+  "igny.logger.piston.hover.position": "坐标：%s（点击高亮该坐标10秒）",
   "igny.logger.piston.action.performed": "%s 执行了 %s。",
   "igny.logger.piston.action.failed": "%s%s。",
   "igny.logger.piston.push": "推出",

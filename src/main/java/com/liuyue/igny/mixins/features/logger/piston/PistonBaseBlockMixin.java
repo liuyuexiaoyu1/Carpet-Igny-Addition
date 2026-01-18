@@ -104,17 +104,10 @@ public abstract class PistonBaseBlockMixin {
 
     @Unique
     private Component getPistonPartText(Level level, BlockPos pistonPos, Block block) {
-        Component dimensionName;
-        if (level instanceof ServerLevel serverLevel) {
-            var dimKey = serverLevel.dimension().location();
-            dimensionName = Component.translatable(
-                    "dimension." + dimKey.getNamespace() + "." + dimKey.getPath()
-            );
-        } else {
-            dimensionName = Component.literal("?");
-        }
+        String dimNameSpace = level.dimension().location().getNamespace();
+        String dimPath = level.dimension().location().getPath();
 
-        Component hoverText = Component.translatable("igny.logger.piston.hover.dimension_line", dimensionName)
+        Component hoverText = Component.translatable("igny.logger.piston.hover.dimension_line", dimNameSpace + dimPath)
                 .append("\n")
                 .append(Component.translatable("igny.logger.piston.hover.position", pistonPos.toShortString()));
 

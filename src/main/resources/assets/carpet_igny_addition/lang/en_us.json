@@ -80,7 +80,7 @@
   "igny.task.vault.logging_out": "§eLogging out",
 
   "igny.logger.piston.hover.dimension_line": "Dimension: %s",
-  "igny.logger.piston.hover.position": "Position: %s (click to highlight)",
+  "igny.logger.piston.hover.position": "Position: %s (Click to highlight this block for 10 seconds)",
   "igny.logger.piston.action.performed": "%s  performed  %s.",
   "igny.logger.piston.action.failed": "%s %s.",
   "igny.logger.piston.push": "push",
