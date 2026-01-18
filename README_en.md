@@ -21,15 +21,11 @@
 | 1.21(.1) (Main)         | Maintained         | -                      |
 | 1.21.2 ~ Latest Release | Maintained         | -                      |
 
-## Docs(The rules and commands marked with `🐛Beta` are test features and can only be downloaded and used in the latest build of GitHub Action and from the download link below!!!)
+## Docs(Docs marked with `🐛Beta` are test features and can only be downloaded and used in the latest build of GitHub Action and from the download link below!!!)
 
-### Rules
-
-[All rules](Rules_en.md)
-
-### Commands
-
-[All commands](Commands_en.md)
+- [Rules](docs/rules_en.md)
+- [Commands](docs/commands_en.md)
+- [Loggers](docs/loggers.md)
 
 ## Download
 
