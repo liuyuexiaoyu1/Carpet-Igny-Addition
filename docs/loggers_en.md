@@ -17,4 +17,4 @@ Attributes:
 - Default option: N/A
 - Suggested options: N/A
 
-![log_piston](./log_piston.png "log_piston")
+![logger_piston](./img/loggers/logger_piston.png "logger_piston")

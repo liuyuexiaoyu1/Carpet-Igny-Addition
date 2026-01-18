@@ -17,4 +17,4 @@
 - 默认选项: N/A
 - 参考选项: N/A
 
-![log_piston](./log_piston.png "log_piston")
+![logger_piston](./img/loggers/logger_piston.png "logger_piston")

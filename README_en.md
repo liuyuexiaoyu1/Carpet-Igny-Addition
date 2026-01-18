@@ -1,6 +1,9 @@
 # Carpet-Igny-Addition
 
 [![License](https://img.shields.io/github/license/liuyuexiaoyu1/Carpet-Igny-Addition)](https://choosealicense.com/licenses/mit/)
+[![Modrinth](https://img.shields.io/modrinth/dt/carpet-igny-addition?color=00AF5C&label=Modrinth%20downloads&logo=modrinth)](https://modrinth.com/mod/carpet-igny-addition)
+[![Github](https://img.shields.io/github/downloads/liuyuexiaoyu1/Carpet-Igny-Addition/total?color=161616&label=Github%20downloads&logo=github)](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/releases)
+[![QQGroup](https://img.shields.io/badge/Chat-QQGroup-12B7F5?style=flat&logo=qq&logoColor=white)](https://qm.qq.com/cgi-bin/qm/qr?k=YhMAATwf3KkDwdE3xRnP6vQ0A7NdS1Pt&jump_from=webapi&authKey=90ykz2A/ExWM+yBm3/53+Vo1tZMjW+vHxSrW2OWzVee6bNov+lCBK9q2SXhMTTnt)
 
 [中文](README.md) | **English**
 
