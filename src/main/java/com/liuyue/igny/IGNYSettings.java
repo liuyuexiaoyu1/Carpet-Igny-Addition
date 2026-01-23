@@ -407,4 +407,10 @@ public class IGNYSettings
             options = {"false", "true"}
     )
     public static Boolean playerLowHungryValueCanSprint = false;
+
+    @Rule(
+            categories = {IGNY, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean instantFrogEat = false;
 }

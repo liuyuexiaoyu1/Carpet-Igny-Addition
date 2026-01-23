@@ -227,5 +227,7 @@
   "carpet.rule.playerHungryValueNoDecrease.name": "玩家饥饿值不减少",
   "carpet.rule.playerHungryValueNoDecrease.desc": "玩家饥饿值不会减少",
   "carpet.rule.playerLowHungryValueCanSprint.name": "玩家饥饿值低可疾跑",
-  "carpet.rule.playerLowHungryValueCanSprint.desc": "当玩家饥饿值低于7点时，可以疾跑"
+  "carpet.rule.playerLowHungryValueCanSprint.desc": "当玩家饥饿值低于7点时，可以疾跑",
+  "carpet.rule.instantFrogEat.name": "瞬时青蛙捕食",
+  "carpet.rule.instantFrogEat.desc": "使青蛙能够每游戏刻扫描并瞬间捕食周围的可食用的实体"
 }

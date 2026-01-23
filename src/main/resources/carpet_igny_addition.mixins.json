@@ -55,6 +55,7 @@
     "rule.happyGhastNoClip.PlayerMixin",
     "rule.happyGhastNoClip.ShulkerBoxBlockEntityMixin",
     "rule.happyGhastNoClip.StandingAndWallBlockItemMixin",
+    "rule.instantFrogEat.FrogMixin",
     "rule.instantSpawnEnderDragon.EndDragonFightMixin",
     "rule.instantTrialSpawnerSpawnLoot.TrialSpawnerStateMixin",
     "rule.instantVaultSpawnLoot.VaultBlockEntityServerInvoker",

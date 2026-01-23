@@ -173,5 +173,6 @@
   "carpet.rule.commandCustomPlayerPickupItem.desc": "Use /customPlayerPickupItem to control player custom pickup items",
   "carpet.rule.commandCustomItemMaxStackSize.desc": "Use /customItemMaxStackSize to control the maximum stack size of the item",
   "carpet.rule.playerHungryValueNoDecrease.desc": "The player's hunger value will not decrease",
-  "carpet.rule.playerLowHungryValueCanSprint.desc": "When the player's hunger level is below 7 points, they can sprint"
+  "carpet.rule.playerLowHungryValueCanSprint.desc": "When the player's hunger level is below 7 points, they can sprint",
+  "carpet.rule.instantFrogEat.desc": "Allows frogs to scan and instantly consume nearby edible entities every game tick"
 }

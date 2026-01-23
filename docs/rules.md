@@ -455,7 +455,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 
 修复optimizedTNT规则启用时，错误优化风弹等实体爆炸的问题。 [#1928](https://github.com/gnembon/fabric-carpet/issues/1928)
 
-### 可能会与一些多线程优化模组冲突！！
+### 警告：可能会与一些多线程优化模组冲突！！
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -510,3 +510,12 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `CLIENT`, `FEATURE`
+
+## 瞬时青蛙捕食 (instantFrogEat) `🐛Beta`
+
+使青蛙能够每游戏刻扫描并瞬间捕食周围的可食用的实体。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`
