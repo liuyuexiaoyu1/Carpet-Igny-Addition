@@ -24,7 +24,7 @@ public class VaultBlockEntityServerMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private static void injectUnlock(
+    private static void unlock(
             ServerLevel serverLevel,
             BlockState blockState,
             BlockPos blockPos,
@@ -35,10 +35,8 @@ public class VaultBlockEntityServerMixin {
             CallbackInfo ci
     ) {
         if (IGNYSettings.instantVaultSpawnLoot) {
-            ci.cancel();
             RandomSource random = serverLevel.getRandom();
             Vec3 dropPos = Vec3.atCenterOf(blockPos).add(0.0, 0.5, 0.0);
-
             for (ItemStack stack : list) {
                 if (!stack.isEmpty()) {
                     ItemEntity itemEntity = new ItemEntity(
@@ -62,6 +60,8 @@ public class VaultBlockEntityServerMixin {
                     serverLevel, blockPos, blockState, newState,
                     vaultConfig, vaultSharedData
             );
+            newState.updateNeighbourShapes(serverLevel, blockPos, 6);
+            ci.cancel();
         }
     }
 }
