@@ -35,6 +35,8 @@
     "optimizations.SetEntityLookTargetMixin",
     "optimizations.SetLookAndInteractMixin",
     "render.RenderTypeInvoker",
+    "rule.allowInvalidMotion.EntityMixin",
+    "rule.allowInvalidMotion.Vec3Mixin",
     "rule.candlePlaceOnIncompleteBlock.CandleBlockMixin",
     "rule.creativeDestroyWaterloggedBlockNoWater.ServerPlayerGameModeMixin",
     "rule.enderDragonDeathDropExp.EnderDragonMixin",

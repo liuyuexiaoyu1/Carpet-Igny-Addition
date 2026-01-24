@@ -117,7 +117,8 @@
   "carpet.rule.noZombifiedPiglinNetherPortalSpawn.desc": "When the Nether portal in the Overworld receives a random tick, zombified piglin will not naturally spawn in the Nether portal in the Overworld",
   "carpet.rule.projectileDuplicationReintroduced.desc": "Reintroducing the projectile residual tick replication behavior from Minecraft versions below 1.21.2",
   "carpet.rule.skeletonsPickupSwordsReintroduced.desc": "Reintroducing the skeleton pickup swords behavior from Minecraft versions below 1.21.4",
-  "carpet.rule.teleportInheritMinecartsMotionReintroduced.desc": "Ports the feature from versions 1.21-1.21.1 where minecars carrying passengers transfer their momentum to passengers during the teleport tick when crossing dimensions to version 1.21.2 and above",
+  "carpet.rule.teleportInheritMinecartsMotionReintroduced.desc": "Ports the feature from versions Minecraft 1.21-1.21.1 where minecars carrying passengers transfer their momentum to passengers during the teleport tick when crossing dimensions to version Minecraft 1.21.2 and above",
+  "carpet.rule.teleportInheritMinecartsMotionReintroduced.extra.0": "Minecart entities with Infinity (Double.MAX_VALUE) momentum (Motion attribute) no longer work in Minecraft 1.21.11 and above; the allowInvalidMotion rule must be enabled for these versions",
   "carpet.rule.tntMinecartEmptyDamageSourceFix.desc": "Fixed the source of empty damage in TNT minecarts",
   "carpet.rule.fakePlayerBoatYawFix.desc": "Fake players will not correct yaw when riding boats.",
   "carpet.rule.killFakePlayerRemoveVehicle.desc": "When removing a fake player, remove the vehicle they are riding in.",
@@ -174,5 +175,6 @@
   "carpet.rule.commandCustomItemMaxStackSize.desc": "Use /customItemMaxStackSize to control the maximum stack size of the item",
   "carpet.rule.playerHungryValueNoDecrease.desc": "The player's hunger value will not decrease",
   "carpet.rule.playerLowHungryValueCanSprint.desc": "When the player's hunger level is below 7 points, they can sprint",
-  "carpet.rule.instantFrogEat.desc": "Allows frogs to scan and instantly consume nearby edible entities every game tick"
+  "carpet.rule.instantFrogEat.desc": "Allows frogs to scan and instantly consume nearby edible entities every game tick",
+  "carpet.rule.allowInvalidMotion.desc": "Allows entity motion (Motion attribute) to be Infinity (Double.MAX_VALUE), reverting the changes made in Minecraft 25w45a"
 }

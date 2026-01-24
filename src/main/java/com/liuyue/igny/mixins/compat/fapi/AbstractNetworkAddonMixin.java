@@ -25,8 +25,8 @@ package com.liuyue.igny.mixins.compat.fapi;
 import carpet.patches.FakeClientConnection;
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.mixins.compat.accessor.fapi.AbstractChanneledNetworkAddonAccessor;
-import com.liuyue.igny.utils.RuleUtils;
-import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.fabricmc.fabric.impl.networking.AbstractChanneledNetworkAddon;
 import net.fabricmc.fabric.impl.networking.AbstractNetworkAddon;
 import net.fabricmc.fabric.impl.networking.GlobalReceiverRegistry;
@@ -35,19 +35,18 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @SuppressWarnings("UnstableApiUsage")
-@Mixin(value = AbstractNetworkAddon.class, priority = 990, remap = false)
+@Mixin(value = AbstractNetworkAddon.class, priority = 980, remap = false)
 public abstract class AbstractNetworkAddonMixin {
     //#if MC <= 12002
-    @SuppressWarnings("RedundantIfStatement")
-    @WrapWithCondition(method = "lateInit", at = @At(value = "INVOKE", target = "Lnet/fabricmc/fabric/impl/networking/GlobalReceiverRegistry;startSession(Lnet/fabricmc/fabric/impl/networking/AbstractNetworkAddon;)V"))
-    private boolean notStartSession_ifFakeClientConnection(GlobalReceiverRegistry<?> instance, AbstractNetworkAddon<?> addon) {
-        if ((Boolean.TRUE.equals(RuleUtils.getCarpetRulesValue("carpet-org-addition", "fakePlayerSpawnMemoryLeakFix")) || IGNYSettings.fakePlayerSpawnMemoryLeakFix.get()) && addon instanceof AbstractChanneledNetworkAddon<?>) {
+    @WrapOperation(method = "lateInit", at = @At(value = "INVOKE", target = "Lnet/fabricmc/fabric/impl/networking/GlobalReceiverRegistry;startSession(Lnet/fabricmc/fabric/impl/networking/AbstractNetworkAddon;)V"))
+    private void notStartSession_ifFakeClientConnection(GlobalReceiverRegistry<?> instance, AbstractNetworkAddon<?> addon, Operation<Void> original) {
+        if (IGNYSettings.fakePlayerSpawnMemoryLeakFix.get() && addon instanceof AbstractChanneledNetworkAddon<?>) {
             Connection connection = ((AbstractChanneledNetworkAddonAccessor) addon).getConnection();
             if (connection instanceof FakeClientConnection) {
-                return false;
+                return;
             }
         }
-        return true;
+        original.call(instance, addon);
     }
     //#endif
 }

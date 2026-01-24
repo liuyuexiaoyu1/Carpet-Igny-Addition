@@ -413,4 +413,12 @@ public class IGNYSettings
             options = {"false", "true"}
     )
     public static Boolean instantFrogEat = false;
+
+    //#if MC >= 12111
+    //$$ @Rule(
+    //$$        categories = {IGNY, FEATURE},
+    //$$        options = {"false", "true"}
+    //$$ )
+    //$$ public static Boolean allowInvalidMotion = false;
+    //#endif
 }

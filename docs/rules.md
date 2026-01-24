@@ -109,7 +109,9 @@
 
 ## 重新引入矿车传送动量继承 (teleportInheritMinecartsMotionReintroduced) `MC>=1.21.2`
 
-重新引入1.21-1.21.1版本中矿车携带乘客跨纬度会在传送tick给予乘客矿车的动量到1.21.2以上版本。
+重新引入Minecraft 1.21-1.21.1版本中矿车携带乘客跨纬度会在传送tick给予乘客矿车的动量到Minecraft 1.21.2以上版本。
+
+`Infinity` (`Double类型的最大值`) 动量 (`Motion属性`) 的矿车实体在Minecraft `1.21.11`及以上版本失效，需在Minecraft `1.21.11`及以上版本启用`allowInvalidMotion`规则 `🐛Beta`
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -434,7 +436,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 
 ## 实体优化列表 (optimizedEntityList) 
 
-优化堆叠的生物实体，每个实体以`,`（英文逗号）分割，设为'#none'则不启用。
+优化堆叠的生物实体，每个实体以`,`（英文逗号）分割，设为`#none`则不启用。
 
 它关闭了生物实体大部分移动和挤压的计算，使其性能更好。
 
@@ -445,7 +447,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 
 ## 实体优化限制 (optimizedEntityLimit) 
 
-当堆叠的实体个数达到规则设置的值时启用优化，optimizedEntityList规则需包含这个实体。
+当堆叠的实体个数达到规则设置的值时启用优化，`optimizedEntityList`规则需包含这个实体。
 
 - 类型: `int`
 - 默认值: `100`
@@ -453,7 +455,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 
 ## optimizedTNT错误作用域修复 (optimizedTNTErrorScopeFix)
 
-修复optimizedTNT规则启用时，错误优化风弹等实体爆炸的问题。 [#1928](https://github.com/gnembon/fabric-carpet/issues/1928)
+修复`optimizedTNT`规则启用时，错误优化风弹等实体爆炸的问题。 [#1928](https://github.com/gnembon/fabric-carpet/issues/1928)
 
 ### 警告：可能会与一些多线程优化模组冲突！！
 
@@ -514,6 +516,15 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 ## 瞬时青蛙捕食 (instantFrogEat) `🐛Beta`
 
 使青蛙能够每游戏刻扫描并瞬间捕食周围的可食用的实体。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`
+
+## 允许非法动量 (allowInvalidMotion) `🐛Beta` `MC>=1.21.11`
+
+允许实体的动量 (`Motion属性`) 可以为`Infinity` (`Double类型的最大值`), 回退了Minecraft `25w45a`的更改。
 
 - 类型: `boolean`
 - 默认值: `false`

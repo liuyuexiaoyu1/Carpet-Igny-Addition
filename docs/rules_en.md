@@ -109,7 +109,9 @@ Reintroducing the skeleton pickup swords behavior from Minecraft versions below 
 
 ## teleportInheritMinecartsMotionReintroduced `MC>=1.21.2`
 
-Ports the feature from versions 1.21-1.21.1 where minecarts carrying passengers transfer their motion to passengers during the teleport tick when crossing dimensions to version 1.21.2 and above.
+Ports the feature from versions Minecraft 1.21-1.21.1 where minecarts carrying passengers transfer their motion to passengers during the teleport tick when crossing dimensions to version Minecraft 1.21.2 and above.
+
+Minecart entities with `Infinity` (`Double.MAX_VALUE`) motion (Motion attribute) no longer work in Minecraft `1.21.11` and above; the `allowInvalidMotion` rule must be enabled for these versions. `🐛Beta`
 
 - Type: `boolean`
 - Default Value: `false`
@@ -514,6 +516,15 @@ When the player's hunger level is below 7 points, they can sprint.
 ## instantFrogEat `🐛Beta`
 
 Allows frogs to scan and instantly consume nearby edible entities every game tick.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`
+
+## allowInvalidMotion `🐛Beta`
+
+Allows entity motion (`Motion attribute`) to be `Infinity` (`Double.MAX_VALUE`), reverting the changes made in Minecraft `25w45a`.
 
 - Type: `boolean`
 - Default value: `false`

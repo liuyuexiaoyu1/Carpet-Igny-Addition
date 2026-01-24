@@ -129,7 +129,8 @@
   "carpet.rule.skeletonsPickupSwordsReintroduced.name": "重新引入骷髅捡剑",
   "carpet.rule.skeletonsPickupSwordsReintroduced.desc": "重新引入1.21.4以下的骷髅捡剑行为",
   "carpet.rule.teleportInheritMinecartsMotionReintroduced.name": "重新引入矿车传送动量继承",
-  "carpet.rule.teleportInheritMinecartsMotionReintroduced.desc": "重新引入1.21-1.21.1版本中矿车携带乘客跨纬度会在传送tick给予乘客矿车的动量到1.21.2以上版本",
+  "carpet.rule.teleportInheritMinecartsMotionReintroduced.desc": "重新引入Minecraft 1.21-1.21.1版本中矿车携带乘客跨纬度会在传送tick给予乘客矿车的动量到重新引入Minecraft 1.21.2以上版本",
+  "carpet.rule.teleportInheritMinecartsMotionReintroduced.extra.0": "Infinity (Double类型的最大值) 动量 (Motion属性) 的矿车实体在Minecraft 1.21.11及以上版本失效，需在Minecraft 1.21.11及以上版本启用allowInvalidMotion规则",
   "carpet.rule.tntMinecartEmptyDamageSourceFix.name": "TNT矿车空伤害来源修复",
   "carpet.rule.tntMinecartEmptyDamageSourceFix.desc": "修复TNT矿车引爆时传入的伤害来源为null，导致TNT矿车无法继承伤害来源的属性（可视作重新引入TNT矿车掠夺）",
   "carpet.rule.fakePlayerBoatYawFix.name": "假玩家乘船不纠正偏航角修复",
@@ -229,5 +230,7 @@
   "carpet.rule.playerLowHungryValueCanSprint.name": "玩家饥饿值低可疾跑",
   "carpet.rule.playerLowHungryValueCanSprint.desc": "当玩家饥饿值低于7点时，可以疾跑",
   "carpet.rule.instantFrogEat.name": "瞬时青蛙捕食",
-  "carpet.rule.instantFrogEat.desc": "使青蛙能够每游戏刻扫描并瞬间捕食周围的可食用的实体"
+  "carpet.rule.instantFrogEat.desc": "使青蛙能够每游戏刻扫描并瞬间捕食周围的可食用的实体",
+  "carpet.rule.allowInvalidMotion.name": "允许非法动量",
+  "carpet.rule.allowInvalidMotion.desc": "允许实体的动量 (Motion属性) 可以为Infinity (Double类型的最大值), 回退了Minecraft 25w45a的更改"
 }
