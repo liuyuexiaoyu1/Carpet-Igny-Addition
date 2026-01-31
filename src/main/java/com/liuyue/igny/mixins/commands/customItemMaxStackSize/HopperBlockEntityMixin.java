@@ -217,7 +217,7 @@ import java.util.function.BooleanSupplier;
  */
 
 @SuppressWarnings("JavadocLinkAsPlainText")
-@Mixin(value = HopperBlockEntity.class, priority = 900)
+@Mixin(value = HopperBlockEntity.class, priority = 990)
 public abstract class HopperBlockEntityMixin extends BlockEntity {
     @Shadow
     private Direction facing;
@@ -285,13 +285,11 @@ public abstract class HopperBlockEntityMixin extends BlockEntity {
 
     @WrapOperation(method = "pushItemsTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/HopperBlockEntity;tryMoveItems(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/entity/HopperBlockEntity;Ljava/util/function/BooleanSupplier;)Z"))
     private static boolean pushItemsTick(Level world, BlockPos pos, BlockState state, HopperBlockEntity blockEntity, BooleanSupplier booleanSupplier, Operation<Boolean> original) {
-
         return RuleUtils.itemStackableWrap(() -> original.call(world, pos, state, blockEntity, booleanSupplier));
     }
 
     @WrapOperation(method = "entityInside", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/HopperBlockEntity;tryMoveItems(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/entity/HopperBlockEntity;Ljava/util/function/BooleanSupplier;)Z"))
     private static boolean entityInside(Level world, BlockPos pos, BlockState state, HopperBlockEntity blockEntity, BooleanSupplier booleanSupplier, Operation<Boolean> original) {
-
         return RuleUtils.itemStackableWrap(() -> original.call(world, pos, state, blockEntity, booleanSupplier));
     }
 
