@@ -1,7 +1,6 @@
 package com.liuyue.igny.mixins.commands.customItemMaxStackSize;
 
 import carpet.CarpetSettings;
-import carpet.helpers.HopperCounter;
 import carpet.utils.WoolTool;
 import com.liuyue.igny.IGNYServer;
 import com.liuyue.igny.IGNYServerMod;
