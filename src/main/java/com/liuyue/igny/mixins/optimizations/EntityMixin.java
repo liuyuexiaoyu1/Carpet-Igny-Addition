@@ -26,6 +26,7 @@ import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.utils.interfaces.optimizations.IEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.level.Level;
@@ -37,6 +38,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin implements IEntity {
@@ -50,6 +53,9 @@ public abstract class EntityMixin implements IEntity {
     @Shadow private Level level;
 
     @Shadow public abstract int getId();
+
+    @Shadow
+    public abstract boolean onGround();
 
     @Unique
     private int carpet_Igny_Addition$crammingCount = 0;
@@ -74,13 +80,34 @@ public abstract class EntityMixin implements IEntity {
             return;
         }
         if ((this.tickCount + this.getId()) % 100 == 0) {
-            this.carpet_Igny_Addition$setCrammingCount(this.level.getEntities(this.getType(), this.getBoundingBox(), entity -> true).size());
+            AABB myBox = this.getBoundingBox();
+            double myVolume = (myBox.maxX - myBox.minX) * (myBox.maxY - myBox.minY) * (myBox.maxZ - myBox.minZ);
+
+            List<Entity> candidates = this.level.getEntities((Entity) (Object) this, myBox, EntitySelector.pushableBy((Entity) (Object) this));
+
+            int tightCrammingCount = 0;
+            for (Entity other : candidates) {
+                AABB otherBox = other.getBoundingBox();
+                double intersectMinX = Math.max(myBox.minX, otherBox.minX);
+                double intersectMinY = Math.max(myBox.minY, otherBox.minY);
+                double intersectMinZ = Math.max(myBox.minZ, otherBox.minZ);
+                double intersectMaxX = Math.min(myBox.maxX, otherBox.maxX);
+                double intersectMaxY = Math.min(myBox.maxY, otherBox.maxY);
+                double intersectMaxZ = Math.min(myBox.maxZ, otherBox.maxZ);
+                if (intersectMaxX > intersectMinX && intersectMaxY > intersectMinY && intersectMaxZ > intersectMinZ) {
+                    double intersectVolume = (intersectMaxX - intersectMinX) * (intersectMaxY - intersectMinY) * (intersectMaxZ - intersectMinZ);
+                    if (intersectVolume / myVolume > 0.7) {
+                        tightCrammingCount++;
+                    }
+                }
+            }
+            this.carpet_Igny_Addition$setCrammingCount(tightCrammingCount);
         }
     }
 
     @Inject(method = "move", at = @At(value = "HEAD"), cancellable = true)
     private void move(MoverType moverType, Vec3 vec3, CallbackInfo ci){
-        if (this.carpet_Igny_Addition$crammingCount >= IGNYSettings.optimizedEntityLimit){
+        if (this.carpet_Igny_Addition$crammingCount >= IGNYSettings.optimizedEntityLimit && moverType.equals(MoverType.SELF) && this.onGround()){
             ci.cancel();
         }
     }

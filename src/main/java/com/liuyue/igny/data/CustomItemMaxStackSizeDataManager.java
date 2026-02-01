@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import com.liuyue.igny.IGNYServer;
 import com.liuyue.igny.network.packet.PacketUtil;
 import com.mojang.brigadier.StringReader;
+import net.minecraft.client.Minecraft;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.arguments.item.ItemPredicateArgument;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -130,7 +131,7 @@ public class CustomItemMaxStackSizeDataManager {
 
     public static void clientUpdateData(Map<String, Integer> newData) {
         customStacks = new HashMap<>(newData);
-        var minecraft = net.minecraft.client.Minecraft.getInstance();
+        var minecraft = Minecraft.getInstance();
         if (minecraft.level != null && minecraft.getConnection() != null) {
             CommandBuildContext context = CommandBuildContext.simple(
                     minecraft.getConnection().registryAccess(),
