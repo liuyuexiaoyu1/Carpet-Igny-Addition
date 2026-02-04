@@ -102,7 +102,7 @@ public class IGNYClientRegister {
                 //$$     int color = buf.readInt();
                 //$$     int duration = buf.readInt();
                 //$$     boolean permanent = buf.readBoolean();
-                //$$     boolean deathTest = buf.readBoolean();
+                //$$     boolean depthTest = buf.readBoolean();
                 //$$     double minX = buf.readDouble();
                 //$$     double minY = buf.readDouble();
                 //$$     double minZ = buf.readDouble();
@@ -110,9 +110,9 @@ public class IGNYClientRegister {
                 //$$     double maxY = buf.readDouble();
                 //$$     double maxZ = buf.readDouble();
                 //$$     boolean withLine = buf.readBoolean();
-                //$$     boolean lineDeathTest = buf.readBoolean();
+                //$$     boolean lineDepthTest = buf.readBoolean();
                 //$$     boolean smooth = buf.readBoolean();
-                //$$     client.execute(() -> BoxRenderer.addBox(pos, color, duration, permanent, deathTest, minX, minY, minZ, maxX, maxY, maxZ, withLine, lineDeathTest, smooth));
+                //$$     client.execute(() -> BoxRenderer.addBox(pos, color, duration, permanent, depthTest, minX, minY, minZ, maxX, maxY, maxZ, withLine, lineDepthTest, smooth));
                 //$$ }
                 //#else
                 (payload, context) -> {
@@ -120,7 +120,7 @@ public class IGNYClientRegister {
                     int color = payload.color();
                     int duration = payload.durationTicks();
                     boolean permanent = payload.permanent();
-                    boolean deathTest = payload.deathTest();
+                    boolean depthTest = payload.depthTest();
                     AABB box = payload.box();
                     double minX = box.minX;
                     double minY = box.minY;
@@ -129,11 +129,10 @@ public class IGNYClientRegister {
                     double maxY = box.maxY;
                     double maxZ = box.maxZ;
                     boolean withLine = payload.withLine();
-                    boolean lineDeathTest = payload.lineDeathTest();
+                    boolean lineDepthTest = payload.lineDepthTest();
                     boolean smooth = payload.smooth();
-
                     context.client().execute(() ->
-                            BoxRenderer.addBox(pos, color, duration, permanent, deathTest, minX, minY, minZ, maxX, maxY, maxZ, withLine, lineDeathTest, smooth)
+                            BoxRenderer.addBox(pos, color, duration, permanent, depthTest, minX, minY, minZ, maxX, maxY, maxZ, withLine, lineDepthTest, smooth)
                     );
                 }
                 //#endif

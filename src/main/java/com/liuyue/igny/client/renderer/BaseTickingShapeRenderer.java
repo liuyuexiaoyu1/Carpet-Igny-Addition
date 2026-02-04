@@ -26,18 +26,18 @@ public abstract class BaseTickingShapeRenderer {
         public float currentSize;
         public final BlockPos pos;
         public final int color;
-        public final boolean deathTest;
+        public final boolean depthTest;
         public final boolean smooth;
         public double minX, minY, minZ, maxX, maxY, maxZ;
         public double curMinX, curMinY, curMinZ, curMaxX, curMaxY, curMaxZ;
         public boolean isRemoving = false;
 
-        public ShapeData(BlockPos pos, int color, long remaining, boolean deathTest, boolean smooth,
+        public ShapeData(BlockPos pos, int color, long remaining, boolean depthTest, boolean smooth,
                          double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
             this.pos = pos;
             this.color = color;
             this.remaining = remaining;
-            this.deathTest = deathTest;
+            this.depthTest = depthTest;
             this.smooth = smooth;
             this.currentSize = smooth ? 0f : 1f;
             this.minX = minX; this.minY = minY; this.minZ = minZ;

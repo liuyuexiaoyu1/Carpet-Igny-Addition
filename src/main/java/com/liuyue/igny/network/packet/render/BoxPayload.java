@@ -15,10 +15,10 @@ public record BoxPayload(
         int color,
         int durationTicks,
         boolean permanent,
-        boolean deathTest,
+        boolean depthTest,
         AABB box,
         boolean withLine,
-        boolean lineDeathTest,
+        boolean lineDepthTest,
         boolean smooth
 )
         //#if MC >= 12005
@@ -27,7 +27,6 @@ public record BoxPayload(
 {
     //#if MC >= 12005
     public static final Type<BoxPayload> TYPE = PacketUtil.createId("render_box");
-    public static final AABB ZERO = new AABB(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
     @Override
     public @NotNull Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -50,7 +49,7 @@ public record BoxPayload(
                     buf.writeInt(v.color);
                     buf.writeInt(v.durationTicks);
                     buf.writeBoolean(v.permanent);
-                    buf.writeBoolean(v.deathTest);
+                    buf.writeBoolean(v.depthTest);
                     AABB box = v.box();
                     buf.writeDouble(box.minX);
                     buf.writeDouble(box.minY);
@@ -59,7 +58,7 @@ public record BoxPayload(
                     buf.writeDouble(box.maxY);
                     buf.writeDouble(box.maxZ);
                     buf.writeBoolean(v.withLine);
-                    buf.writeBoolean(v.lineDeathTest);
+                    buf.writeBoolean(v.lineDepthTest);
                     buf.writeBoolean(v.smooth);
                 }
             };

@@ -98,12 +98,12 @@ public abstract class BeaconBlockEntityMixin {
             //$$ stopBuf.writeBlockPos(pos);
             //$$ stopBuf.writeInt(0); stopBuf.writeInt(0);
             //$$ stopBuf.writeBoolean(false); stopBuf.writeBoolean(true);
-            //$$ stopBuf.writeDouble(0); stopBuf.writeDouble(0); stopBuf.writeDouble(0);
-            //$$ stopBuf.writeDouble(0); stopBuf.writeDouble(0); stopBuf.writeDouble(0);
+            //$$ stopBuf.writeDouble(beacon.getBlockPos().getX()); stopBuf.writeDouble(beacon.getBlockPos().getY()); stopBuf.writeDouble(beacon.getBlockPos().getZ());
+            //$$ stopBuf.writeDouble(beacon.getBlockPos().getX()); stopBuf.writeDouble(beacon.getBlockPos().getY()); stopBuf.writeDouble(beacon.getBlockPos().getZ());
             //$$ stopBuf.writeBoolean(true); stopBuf.writeBoolean(false); stopBuf.writeBoolean(true);
             //#else
             BoxPayload stopPayload = new BoxPayload(
-                    beacon.getBlockPos(), 0, 0, false, true, BoxPayload.ZERO,
+                    beacon.getBlockPos(), 0, 0, false, true, new AABB(beacon.getBlockPos()),
                     true, false, true
             );
             //#endif

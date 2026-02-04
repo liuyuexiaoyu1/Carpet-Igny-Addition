@@ -15,12 +15,12 @@ public class BoxRenderer extends BaseTickingShapeRenderer {
     public static final BoxRenderer INSTANCE = new BoxRenderer();
     private BoxRenderer() { super("box"); }
 
-    public static void addBox(BlockPos pos, int color, int durationTicks, boolean permanent, boolean deathTest,
+    public static void addBox(BlockPos pos, int color, int durationTicks, boolean permanent, boolean depthTest,
                               double minX, double minY, double minZ, double maxX, double maxY, double maxZ,
-                              boolean withLine, boolean lineDeathTest, boolean smooth) {
+                              boolean withLine, boolean lineDepthTest, boolean smooth) {
 
         ResourceLocation id = INSTANCE.getId(pos);
-        INSTANCE.processUpdate(id, pos, color, durationTicks, permanent, deathTest, smooth, minX, minY, minZ, maxX, maxY, maxZ);
+        INSTANCE.processUpdate(id, pos, color, durationTicks, permanent, depthTest, smooth, minX, minY, minZ, maxX, maxY, maxZ);
 
         if (withLine) {
             //#if MC <= 12006
@@ -28,12 +28,12 @@ public class BoxRenderer extends BaseTickingShapeRenderer {
             //#else
             ResourceLocation lineId = ResourceLocation.parse(id.toString() + "_line");
             //#endif
-            INSTANCE.processUpdate(lineId, pos, 0xFFFFFFFF, durationTicks, permanent, lineDeathTest, smooth, minX, minY, minZ, maxX, maxY, maxZ);
+            INSTANCE.processUpdate(lineId, pos, 0xFFFFFFFF, durationTicks, permanent, lineDepthTest, smooth, minX, minY, minZ, maxX, maxY, maxZ);
         }
     }
 
     private void processUpdate(ResourceLocation id, BlockPos pos, int color, int ticks, boolean permanent,
-                               boolean dt, boolean smooth, double minX, double minY, double minZ,
+                               boolean depthTest, boolean smooth, double minX, double minY, double minZ,
                                double maxX, double maxY, double maxZ) {
         long remaining = permanent ? Long.MAX_VALUE : (long) ticks;
 
@@ -48,7 +48,7 @@ public class BoxRenderer extends BaseTickingShapeRenderer {
             data.maxY = maxY;
             data.maxZ = maxZ;
         } else {
-            ShapeData data = new ShapeData(pos, color, remaining, dt, smooth, minX, minY, minZ, maxX, maxY, maxZ);
+            ShapeData data = new ShapeData(pos, color, remaining, depthTest, smooth, minX, minY, minZ, maxX, maxY, maxZ);
             TICKING_SHAPES.put(id, data);
             updateShape(id, data);
         }
@@ -61,7 +61,7 @@ public class BoxRenderer extends BaseTickingShapeRenderer {
         double p = data.currentSize;
 
         if (!data.smooth){
-            renderBox(id, color, data.deathTest, data.minX, data.minY, data.minZ, data.maxX, data.maxY, data.maxZ);
+            renderBox(id, color, data.depthTest, data.minX, data.minY, data.minZ, data.maxX, data.maxY, data.maxZ);
             data.curMinX = data.minX;
             data.curMinY = data.minY;
             data.curMinZ = data.minZ;
@@ -80,7 +80,7 @@ public class BoxRenderer extends BaseTickingShapeRenderer {
                         Math.abs(data.curMaxZ - data.maxZ) < 0.001;
 
         if (!data.isRemoving && allCoordsReached) {
-            renderBox(id, color, data.deathTest, data.minX, data.minY, data.minZ, data.maxX, data.maxY, data.maxZ);
+            renderBox(id, color, data.depthTest, data.minX, data.minY, data.minZ, data.maxX, data.maxY, data.maxZ);
         } else {
             double rMinX = Mth.lerp(p, center.x, data.curMinX);
             double rMinY = Mth.lerp(p, center.y, data.curMinY);
@@ -88,7 +88,7 @@ public class BoxRenderer extends BaseTickingShapeRenderer {
             double rMaxX = Mth.lerp(p, center.x, data.curMaxX);
             double rMaxY = Mth.lerp(p, center.y, data.curMaxY);
             double rMaxZ = Mth.lerp(p, center.z, data.curMaxZ);
-            renderBox(id, color, data.deathTest, rMinX, rMinY, rMinZ, rMaxX, rMaxY, rMaxZ);
+            renderBox(id, color, data.depthTest, rMinX, rMinY, rMinZ, rMaxX, rMaxY, rMaxZ);
         }
     }
 
