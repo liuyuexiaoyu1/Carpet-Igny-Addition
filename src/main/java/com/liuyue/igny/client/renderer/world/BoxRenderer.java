@@ -95,8 +95,9 @@ public class BoxRenderer extends BaseTickingShapeRenderer {
     private void renderBox(ResourceLocation id, Color color, boolean dt, double x1, double y1, double z1, double x2, double y2, double z2) {
         Vec3 min = new Vec3(x1, y1, z1);
         Vec3 max = new Vec3(x2, y2, z2);
+        ShapeManagers.removeShape(id);
         Shape shape = id.getPath().endsWith("_line")
-                ? ShapeGenerator.generateBoxWireframe().seeThrough(!dt).aabb(min, max).color(color).build(Shape.RenderingType.BATCH)
+                ? ShapeGenerator.generateBoxWireframe().seeThrough(!dt).aabb(min, max).edgeWidth(0.5f).color(color).build(Shape.RenderingType.BATCH)
                 : ShapeGenerator.generateBoxFace().seeThrough(!dt).aabb(min, max).color(color).build(Shape.RenderingType.BATCH);
         ShapeManagers.addShape(id, shape);
     }

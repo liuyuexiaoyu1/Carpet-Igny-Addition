@@ -55,7 +55,7 @@ public abstract class BeaconBlockEntityMixin {
             //$$ buf.writeBoolean(true); buf.writeBoolean(false); buf.writeBoolean(true);
             //#else
             BoxPayload payload = new BoxPayload(
-                    pos, 0x4400FFFF, 90, false, true, aabb,
+                    pos, 0x2000FFFF, 90, false, true, aabb,
                     true, false, true
             );
             //#endif
