@@ -11,16 +11,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(DefaultTransformer.class)
+@Pseudo
 public class DefaultTransformerMixin {
     @Shadow
     @Final
     public TransformLayer world;
 
-    @WrapOperation(method = "applyLayer", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V"))
+    @WrapOperation(method = "applyLayer", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V"), require = 0)
     private void translate(PoseStack instance, double d, double e, double f, Operation<Void> original, @Local(argsOnly = true) TransformLayer layer){
         if (layer.equals(this.world)) {
             Minecraft mc = Minecraft.getInstance();
