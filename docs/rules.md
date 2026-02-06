@@ -111,7 +111,7 @@
 
 重新引入Minecraft 1.21-1.21.1版本中矿车携带乘客跨纬度会在传送tick给予乘客矿车的动量到Minecraft 1.21.2以上版本。
 
-`Infinity` (`Double类型的最大值`) 动量 (`Motion属性`) 的矿车实体在Minecraft `1.21.11`及以上版本失效，需在Minecraft `1.21.11`及以上版本启用`allowInvalidMotion`规则 `🐛Beta`
+`Infinity` (`Double类型的最大值`) 动量 (`Motion属性`) 的矿车实体在Minecraft `1.21.11`及以上版本失效，需在Minecraft `1.21.11`及以上版本启用`allowInvalidMotion`规则
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -462,7 +462,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `BUGFIX`
 
-## 熔炉含不可燃烧物高亮 (furnaceHasIncombustibleHighlight) `🐛Beta[迁移]`
+## 熔炉含不可燃烧物高亮 (furnaceHasIncombustibleHighlight) `[迁移]`
 
 当熔炉的原料槽中含有不可燃烧的物品时，自身颜色变为淡红色，可透过方块显示。
 
@@ -509,7 +509,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `CLIENT`, `FEATURE`
 
-## 瞬时青蛙捕食 (instantFrogEat) `🐛Beta`
+## 瞬时青蛙捕食 (instantFrogEat)
 
 使青蛙能够每游戏刻扫描并瞬间捕食周围的可食用的实体。
 
@@ -518,7 +518,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 允许非法动量 (allowInvalidMotion) `🐛Beta` `MC>=1.21.11`
+## 允许非法动量 (allowInvalidMotion) `MC>=1.21.11`
 
 允许实体的动量 (`Motion属性`) 可以为`Infinity` (`Double类型的最大值`), 回退了Minecraft `25w45a`的更改。
 
@@ -527,7 +527,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 喂食加速幼年村民生长 (accelerateBabyVillagerGrowth) `🐛Beta`
+## 喂食加速幼年村民生长 (accelerateBabyVillagerGrowth)
 
 玩家手持面包、胡萝卜、马铃薯、小麦、小麦种子、甜菜根、甜菜种子、火把花种子和瓶子草荚果对幼年村民使用，以加速幼年村民的生长.
 
@@ -540,7 +540,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 无火闪电束 (lightningBoltNoFire) `🐛Beta`
+## 无火闪电束 (lightningBoltNoFire)
 
 闪电束不会生成火方块与点燃实体。
 
@@ -549,7 +549,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 发射器交易 (dispenserTrade) `🐛Beta`
+## 发射器交易 (dispenserTrade)
 
 发射器可以与村民进行交易。
 
@@ -562,7 +562,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 发射器交易失败不喷出物品 (dispenserTrade) `🐛Beta`
+## 发射器交易失败不喷出物品 (dispenserTrade)
 
 发射器交易失败时(交易选项缺货等)，不喷出货币，而是使发射器喷出失败。
 

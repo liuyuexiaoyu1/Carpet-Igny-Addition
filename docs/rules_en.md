@@ -111,7 +111,7 @@ Reintroducing the skeleton pickup swords behavior from Minecraft versions below 
 
 Ports the feature from versions Minecraft 1.21-1.21.1 where minecarts carrying passengers transfer their motion to passengers during the teleport tick when crossing dimensions to version Minecraft 1.21.2 and above.
 
-Minecart entities with `Infinity` (`Double.MAX_VALUE`) motion (Motion attribute) no longer work in Minecraft `1.21.11` and above; the `allowInvalidMotion` rule must be enabled for these versions. `🐛Beta`
+Minecart entities with `Infinity` (`Double.MAX_VALUE`) motion (Motion attribute) no longer work in Minecraft `1.21.11` and above; the `allowInvalidMotion` rule must be enabled for these versions.
 
 - Type: `boolean`
 - Default Value: `false`
@@ -462,7 +462,7 @@ Fixes an issue where entities like Wind Charges have their explosions incorrectl
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `BUGFIX`
 
-## furnaceHasIncombustibleHighlight `🐛Beta[Migrated]`
+## furnaceHasIncombustibleHighlight `[Migrated]`
 
 When the input slot of a furnace contains non-smeltable items, the furnace itself turns light red and becomes visible through blocks (X-ray highlight).
 
@@ -509,7 +509,7 @@ When the player's hunger level is below 7 points, they can sprint.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `CLIENT`, `FEATURE`
 
-## instantFrogEat `🐛Beta`
+## instantFrogEat
 
 Allows frogs to scan and instantly consume nearby edible entities every game tick.
 
@@ -518,7 +518,7 @@ Allows frogs to scan and instantly consume nearby edible entities every game tic
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## allowInvalidMotion `🐛Beta`
+## allowInvalidMotion
 
 Allows entity motion (`Motion attribute`) to be `Infinity` (`Double.MAX_VALUE`), reverting the changes made in Minecraft `25w45a`.
 
@@ -527,7 +527,7 @@ Allows entity motion (`Motion attribute`) to be `Infinity` (`Double.MAX_VALUE`),
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## accelerateBabyVillagerGrowth `🐛Beta`
+## accelerateBabyVillagerGrowth
 
 Players can feed baby villagers bread, carrots, potatoes, wheat, wheat seeds, beetroots, beetroot seeds, torchflower seeds, or pitcher pods to accelerate their growth.
 
@@ -540,7 +540,7 @@ Particles are displayed upon successful feeding.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## lightningBoltNoFire `🐛Beta`
+## lightningBoltNoFire
 
 Lightning Bolt will not generate fire blocks or ignite entities.
 
@@ -549,7 +549,7 @@ Lightning Bolt will not generate fire blocks or ignite entities.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## dispenserTrade `🐛Beta`
+## dispenserTrade
 
 Dispensers can trade with villagers.
 
@@ -562,7 +562,7 @@ Any single slot or combination of slots in the dispenser that fulfills the trade
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## dispenserTradeFailDisperseItem `🐛Beta`
+## dispenserTradeFailDisperseItem
 
 When a dispenser trade fails, do not eject the currency items; instead, cause the dispenser to fail its ejection attempt.
 

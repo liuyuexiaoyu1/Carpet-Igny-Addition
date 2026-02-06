@@ -3,9 +3,7 @@ package com.liuyue.igny.mixins.rule.dispenserTrade;
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.utils.RuleUtils;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Position;
+import net.minecraft.core.*;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -32,7 +30,11 @@ import java.util.List;
 @Mixin(DispenserBlock.class)
 public abstract class DispenserBlockMixin {
     @Inject(method = "dispenseFrom", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/DispenserBlockEntity;getRandomSlot(Lnet/minecraft/util/RandomSource;)I"), cancellable = true)
-    private void dispenseFrom(ServerLevel serverLevel, BlockState blockState, BlockPos blockPos, CallbackInfo ci, @Local DispenserBlockEntity blockEntity) {
+    private void dispenseFrom(ServerLevel serverLevel,
+                              //#if MC > 12002
+                              BlockState blockState,
+                              //#endif
+                              BlockPos blockPos, CallbackInfo ci, @Local DispenserBlockEntity blockEntity) {
         if (!IGNYSettings.dispenserTrade) return;
         Component component = blockEntity.getName();
         String name = component.getString();
@@ -43,6 +45,9 @@ public abstract class DispenserBlockMixin {
         } catch (NumberFormatException e) {
             return;
         }
+        //#if MC <= 12002
+        //$$ BlockState blockState = serverLevel.getBlockState(blockPos);
+        //#endif
         Direction facing = blockState.getValue(DispenserBlock.FACING);
         List<Villager> villagers = serverLevel.getEntities(EntityType.VILLAGER, new AABB(blockPos.relative(facing)), e -> true);
         if (!villagers.isEmpty()) {
@@ -54,7 +59,11 @@ public abstract class DispenserBlockMixin {
                 if (!IGNYSettings.dispenserTradeFailDisperseItem){
                     ci.cancel();
                     serverLevel.levelEvent(1001, blockPos, facing.get3DDataValue());
+                    //#if MC > 12004
                     villager.makeSound(SoundEvents.VILLAGER_NO);
+                    //#else
+                    //$$ villager.playSound(SoundEvents.VILLAGER_NO);
+                    //#endif
                     return;
                 }
                 return;
@@ -65,14 +74,24 @@ public abstract class DispenserBlockMixin {
                 if (!IGNYSettings.dispenserTradeFailDisperseItem){
                     ci.cancel();
                     serverLevel.levelEvent(1001, blockPos, facing.get3DDataValue());
+                    //#if MC > 12004
                     villager.makeSound(SoundEvents.VILLAGER_NO);
+                    //#else
+                    //$$ villager.playSound(SoundEvents.VILLAGER_NO);
+                    //#endif
                     return;
                 }
                 return;
             }
             villager.notifyTrade(offer);
             ItemStack result = offer.getResult().copy();
-            Position position = DispenserBlock.getDispensePosition(new BlockSource(serverLevel, blockPos, blockState, blockEntity));
+            Position position = DispenserBlock.getDispensePosition(
+                    //#if MC > 12001
+                    new BlockSource(serverLevel, blockPos, blockState, blockEntity)
+                    //#else
+                    //$$ new BlockSourceImpl(serverLevel, blockPos)
+                    //#endif
+            );
             double spawnX = position.x();
             double spawnY = position.y();
             double spawnZ = position.z();
@@ -93,7 +112,11 @@ public abstract class DispenserBlockMixin {
             serverLevel.addFreshEntity(itemEntity);
             serverLevel.levelEvent(1000, blockPos, facing.get3DDataValue());
             serverLevel.broadcastEntityEvent(villager, (byte)14);
+            //#if MC > 12004
             villager.makeSound(SoundEvents.VILLAGER_YES);
+            //#else
+            //$$ villager.playSound(SoundEvents.VILLAGER_YES);
+            //#endif
             ci.cancel();
         }
     }

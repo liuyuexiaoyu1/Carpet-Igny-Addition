@@ -19,7 +19,7 @@ Attributes:
 
 ![logger_piston](./img/loggers/logger_piston.png "logger_piston")
 
-## allFurnace `🐛Beta[Migrated]` `From furnaceHasIncombustibleHighlight rule`
+## allFurnace `[Migrated]` `From furnaceHasIncombustibleHighlight rule`
 
 `/log allFurnace`
 
@@ -32,7 +32,7 @@ Properties:
 - Default options: N/A
 - Reference options: N/A
 
-## beacon `🐛Beta`
+## beacon
 
 `/log beacon`
 

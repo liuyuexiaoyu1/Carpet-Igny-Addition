@@ -91,7 +91,7 @@
 ### 效果
 - `/customItemMaxStackSize` 修改指定物品在游戏中的最大堆叠数量。
     - `...set` 设置指定物品的最大堆叠上限。
-        - `<itemStack`: 目标物品。 `🐛Beta更改`
+        - `<itemStack`: 目标物品。
         - `<count>`: 设置的堆叠值，取值范围为 1~99。
     - `...remove` 移除指定物品的自定义堆叠设置。
         - `<itemStack>`: 目标物品。

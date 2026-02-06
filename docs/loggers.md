@@ -19,7 +19,7 @@
 
 ![logger_piston](./img/loggers/logger_piston.png "logger_piston")
 
-## 熔炉 (allFurnace) `🐛Beta[迁移]` `来自furnaceHasIncombustibleHighlight规则`
+## 熔炉 (allFurnace) `[迁移]` `来自furnaceHasIncombustibleHighlight规则`
 
 `/log allFurnace`
 
@@ -31,7 +31,7 @@
 - 默认选项: N/A
 - 参考选项: N/A
 
-## 信标 (beacon) `🐛Beta`
+## 信标 (beacon)
 
 `/log beacon`
 
