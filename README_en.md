@@ -35,4 +35,4 @@
 - [Modrinth](https://modrinth.com/mod/carpet-igny-addition)
 - [GitHub](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/releases/latest)
 ## Latest Beta version download↓ ##
-- [GitHub Action](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/runs/21745985401/artifacts/5403805593) `Login to GitHub required`
+- [GitHub Action](https://github.com/jasonxue1/Carpet-Igny-Addition/actions/runs/21751409904/artifacts/5406054864) `Login to GitHub required`
