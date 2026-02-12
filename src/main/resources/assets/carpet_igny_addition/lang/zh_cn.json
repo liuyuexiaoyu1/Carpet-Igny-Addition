@@ -243,5 +243,7 @@
   "carpet.rule.dispenserTrade.extra.0": "将发射器命名为希望交易的村民目标交易选项(数字1-10)，然后放置发射器面向村民",
   "carpet.rule.dispenserTrade.extra.1": "发射器任意槽位或多个槽位满足交易货币需求即可交易",
   "carpet.rule.dispenserTradeFailDisperseItem.name": "发射器交易失败不喷出物品",
-  "carpet.rule.dispenserTradeFailDisperseItem.desc": "发射器交易失败时(交易选项缺货等)，不喷出货币，而是使发射器喷出失败"
+  "carpet.rule.dispenserTradeFailDisperseItem.desc": "发射器交易失败时(交易选项缺货等)，不喷出货币，而是使发射器喷出失败",
+  "carpet.rule.renewableCalcite.name": "可再生方解石",
+  "carpet.rule.renewableCalcite.desc": "使用滴水石锥接受随机刻转化石英块为方解石"
 }

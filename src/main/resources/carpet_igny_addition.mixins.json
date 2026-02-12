@@ -89,6 +89,7 @@
     "rule.projectileDuplicationReintroduced.EntityInvoker",
     "rule.projectileDuplicationReintroduced.ProjectileInvoker",
     "rule.projectileDuplicationReintroduced.ThrowableProjectileMixin",
+    "rule.renewableCalcite.PointedDripstoneBlockMixin",
     "rule.safeSoundSuppression.CalibratedSculkSensorVibrationUserMixin",
     "rule.simpleSoundSuppression.CalibratedSculkSensorVibrationUserMixin",
     "rule.skeletonsPickupSwordsReintroduced.MobInvoker",

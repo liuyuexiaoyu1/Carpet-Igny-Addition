@@ -571,5 +571,14 @@ When a dispenser trade fails, do not eject the currency items; instead, cause th
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
+## renewableCalcite `🐛Beta`
+
+Using pointed dripstone to convert quartz blocks into calcite via random ticks.
+
+- Type: `boolean`
+- Default value: `true`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
 
 

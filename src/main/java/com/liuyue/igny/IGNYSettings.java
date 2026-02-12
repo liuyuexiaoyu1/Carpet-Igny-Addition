@@ -437,4 +437,10 @@ public class IGNYSettings
             options = {"false", "true"}
     )
     public static Boolean dispenserTradeFailDisperseItem = true;
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean renewableCalcite = false;
 }

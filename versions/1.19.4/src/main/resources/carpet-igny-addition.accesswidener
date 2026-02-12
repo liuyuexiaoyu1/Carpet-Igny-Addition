@@ -1,2 +1,3 @@
 accessWidener v2 named
 accessible class net/minecraft/client/renderer/RenderType$CompositeState
+accessible class net/minecraft/world/level/block/PointedDripstoneBlock$FluidInfo
