@@ -59,6 +59,7 @@
     "rule.happyGhastNoClip.BlockItemMixin",
     "rule.happyGhastNoClip.EntityMixin",
     "rule.happyGhastNoClip.HappyGhastInvoker",
+    "rule.happyGhastNoClip.LivingEntityMixin",
     "rule.happyGhastNoClip.PistonMovingBlockEntityMixin",
     "rule.happyGhastNoClip.PlayerMixin",
     "rule.happyGhastNoClip.ShulkerBoxBlockEntityMixin",

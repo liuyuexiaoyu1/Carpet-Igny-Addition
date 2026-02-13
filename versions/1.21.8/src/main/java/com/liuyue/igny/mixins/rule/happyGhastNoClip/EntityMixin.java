@@ -16,8 +16,8 @@ public abstract class EntityMixin{
 
     @Inject(method = "getBoundingBox", at = @At("HEAD"), cancellable = true)
     private void HappyGhastNoBoundingBox(CallbackInfoReturnable<AABB> cir) {
-       Entity self = (Entity)(Object)this;
-       if(self instanceof HappyGhast&&self.isVehicle()&&IGNYSettings.happyGhastNoClip){
+       Entity self = (Entity) (Object) this;
+       if(self instanceof HappyGhast && self.isVehicle() && IGNYSettings.happyGhastNoClip){
            cir.setReturnValue(new AABB(0, 0, 0, 0, 0, 0));
        }
 
@@ -27,17 +27,17 @@ public abstract class EntityMixin{
    private void setNoPhysics(CallbackInfo ci) {
        Entity self = (Entity)(Object)this;
        if(self instanceof HappyGhast){
-               self.noPhysics = self.isVehicle()&&IGNYSettings.happyGhastNoClip;
+               self.noPhysics = self.isVehicle() && IGNYSettings.happyGhastNoClip;
        }
    }
 
    @Inject(method = "isInWall", at = @At("HEAD"), cancellable = true)
    private void onIsInWall(CallbackInfoReturnable<Boolean> cir) {
         Entity self = (Entity)(Object)this;
-        if (self instanceof HappyGhast && self.isVehicle()&&IGNYSettings.happyGhastNoClip||(self instanceof Player && self.getRootVehicle() instanceof HappyGhast&&IGNYSettings.happyGhastNoClip)) {
+        if (self instanceof HappyGhast && self.isVehicle() && IGNYSettings.happyGhastNoClip || (self instanceof Player && self.getRootVehicle() instanceof HappyGhast && IGNYSettings.happyGhastNoClip)) {
             cir.setReturnValue(false);
         }
-        if (self instanceof HappyGhast&& IGNYSettings.happyGhastNoClip) {
+        if (self instanceof HappyGhast && IGNYSettings.happyGhastNoClip) {
             if(((HappyGhastInvoker)self).invokeScanPlayerAboveGhast()){
                 cir.setReturnValue(false);
             }
