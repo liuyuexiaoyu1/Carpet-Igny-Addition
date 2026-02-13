@@ -11,9 +11,13 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value = LevelRenderer.class, priority = 1100)
 public class LevelRendererMixin {
+    //#if MC >= 26.1
+    //$$ @WrapOperation(method = "update",at= @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isSpectator()Z"))
+    //$$  private boolean isSpectatorWrap(LocalPlayer instance, Operation<Boolean> original) {
+    //#else
     @WrapOperation(method = "renderLevel",at= @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isSpectator()Z"))
     private boolean isSpectatorWrap(LocalPlayer instance, Operation<Boolean> original) {
-        return original.call(instance) || instance.getVehicle() instanceof HappyGhast&& IGNYSettings.happyGhastNoClip;
+        //#endif
+        return original.call(instance) || instance.getVehicle() instanceof HappyGhast && IGNYSettings.happyGhastNoClip;
     }
-
 }

@@ -22,8 +22,13 @@ import java.util.Optional;
 
 @Mixin(PointedDripstoneBlock.class)
 public class PointedDripstoneBlockMixin {
+    //#if MC >= 26.1
+    //$$  @Inject(method = "maybeTransferFluid", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z"))
+    //$$  private static void maybeTransferFluid(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, float f, CallbackInfo ci, @Local(name = "fluidInfo") Optional<PointedDripstoneBlock.FluidInfo> optional, @Local(name = "fluid") Fluid fluid, @Local(name = "stalactiteTipPos") BlockPos blockPos2){
+    //#else
     @Inject(method = "maybeTransferFluid", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
     private static void maybeTransferFluid(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, float f, CallbackInfo ci, @Local Optional<PointedDripstoneBlock.FluidInfo> optional, @Local Fluid fluid, @Local(ordinal = 1) BlockPos blockPos2){
+        //#endif
         if (!IGNYSettings.renewableCalcite || optional.isEmpty()) return;
         if (optional.get().sourceState().is(Blocks.QUARTZ_BLOCK) && fluid == Fluids.WATER) {
             BlockState blockState2 = Blocks.CALCITE.defaultBlockState();
@@ -34,8 +39,13 @@ public class PointedDripstoneBlockMixin {
         }
     }
 
+    //#if MC >= 26.1
+    //$$  @WrapOperation(method = "lambda$getFluidAboveStalactite$0", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z"))
+    //$$  private static boolean is(BlockState instance, Object block, Operation<Boolean> original) {
+    //#else
     @WrapOperation(method = "method_33279", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
     private static boolean is(BlockState instance, Block block, Operation<Boolean> original) {
+        //#endif
         if (IGNYSettings.renewableCalcite) {
             return original.call(instance, block) || instance.is(Blocks.QUARTZ_BLOCK);
         }
