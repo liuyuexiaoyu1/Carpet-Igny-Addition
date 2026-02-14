@@ -245,5 +245,7 @@
   "carpet.rule.dispenserTradeFailDisperseItem.name": "发射器交易失败不喷出物品",
   "carpet.rule.dispenserTradeFailDisperseItem.desc": "发射器交易失败时(交易选项缺货等)，不喷出货币，而是使发射器喷出失败",
   "carpet.rule.renewableCalcite.name": "可再生方解石",
-  "carpet.rule.renewableCalcite.desc": "使用滴水石锥接受随机刻转化石英块为方解石"
+  "carpet.rule.renewableCalcite.desc": "使用滴水石锥接受随机刻转化石英块为方解石",
+  "carpet.rule.pureShulkerBoxDispense.name": "纯净潜影盒发射",
+  "carpet.rule.pureShulkerBoxDispense.desc": "发射器放置染色或者命名过的潜影盒会使其变回普通的未命名的潜影盒，同时保留其内容物"
 }

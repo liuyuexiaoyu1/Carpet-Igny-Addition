@@ -579,3 +579,12 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 默认值: `true`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 纯净潜影盒发射 (pureShulkerBoxDispense) `🐛Beta`
+
+发射器放置染色或者命名过的潜影盒会使其变回普通的未命名的潜影盒，同时保留其内容物。
+
+- 类型: `boolean`
+- 默认值: `true`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

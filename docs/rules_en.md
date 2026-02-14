@@ -580,5 +580,14 @@ Using pointed dripstone to convert quartz blocks into calcite via random ticks.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
+## pureShulkerBoxDispense `🐛Beta`
+
+When a dispenser places a dyed or renamed shulker box, it will be reverted to a regular, unnamed shulker box while preserving its contents.
+
+- Type: `boolean`
+- Default value: `true`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
 
 

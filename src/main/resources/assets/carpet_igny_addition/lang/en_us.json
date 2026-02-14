@@ -185,5 +185,6 @@
   "carpet.rule.dispenserTrade.extra.0": "Name the dispenser after the target villager's trade slot (number 1-10), then place it facing the villager.",
   "carpet.rule.dispenserTrade.extra.1": "Any single slot or combination of slots in the dispenser that fulfills the trade's currency requirement will trigger the trade.",
   "carpet.rule.dispenserTradeFailDisperseItem.desc": "When a dispenser trade fails, do not eject the currency items; instead, cause the dispenser to fail its ejection attempt.",
-  "carpet.rule.renewableCalcite.desc": "Using pointed dripstone to convert quartz blocks into calcite via random ticks"
+  "carpet.rule.renewableCalcite.desc": "Using pointed dripstone to convert quartz blocks into calcite via random ticks",
+  "carpet.rule.pureShulkerBoxDispense.desc": "When a dispenser places a dyed or renamed shulker box, it will be reverted to a regular, unnamed shulker box while preserving its contents"
 }

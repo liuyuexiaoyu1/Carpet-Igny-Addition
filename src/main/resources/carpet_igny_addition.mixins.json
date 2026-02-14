@@ -90,6 +90,7 @@
     "rule.projectileDuplicationReintroduced.EntityInvoker",
     "rule.projectileDuplicationReintroduced.ProjectileInvoker",
     "rule.projectileDuplicationReintroduced.ThrowableProjectileMixin",
+    "rule.pureShulkerBoxDispense.ShulkerBoxDispenseBehaviorMixin",
     "rule.renewableCalcite.PointedDripstoneBlockMixin",
     "rule.safeSoundSuppression.CalibratedSculkSensorVibrationUserMixin",
     "rule.simpleSoundSuppression.CalibratedSculkSensorVibrationUserMixin",
