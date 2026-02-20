@@ -247,5 +247,7 @@
   "carpet.rule.renewableCalcite.name": "可再生方解石",
   "carpet.rule.renewableCalcite.desc": "使用滴水石锥接受随机刻转化石英块为方解石",
   "carpet.rule.pureShulkerBoxDispense.name": "纯净潜影盒发射",
-  "carpet.rule.pureShulkerBoxDispense.desc": "发射器放置染色或者命名过的潜影盒会使其变回普通的未命名的潜影盒，同时保留其内容物"
+  "carpet.rule.pureShulkerBoxDispense.desc": "发射器放置染色或者命名过的潜影盒会使其变回普通的未命名的潜影盒，同时保留其内容物",
+  "carpet.rule.structureBlockNoBlockUpdate.name": "结构方块无方块更新",
+  "carpet.rule.structureBlockNoBlockUpdate.desc": "使用结构方块加载结构时，结构中放置的方块不会产生方块更新"
 }

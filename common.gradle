@@ -15,6 +15,14 @@ repositories {
 	maven {
 		url = 'https://jitpack.io'
 	}
+	maven {
+		url = 'https://maven.fallenbreath.me/jitpack'
+		content { includeGroupAndSubgroups('com.github') }
+	}
+	maven {
+		url = 'https://www.cursemaven.com'
+		content { includeGroup('curse.maven') }
+	}
 	flatDir {
 		dirs '../../libs'
 	}
@@ -54,6 +62,10 @@ dependencies {
 	} else {
 		include(implementation(name: 'ryansrenderingkit', version: '1.0.5+26.1'))
 	}
+//	//Lithium
+//	if (mcVersion >= 12006) {
+//		autoImplementation(project.lithium_dependency)
+//	}
 
     // Carpet
     autoImplementation "carpet:fabric-carpet:${project.carpet_core_version}"

@@ -588,3 +588,12 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 默认值: `true`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 结构方块无方块更新 (structureBlockNoBlockUpdate) `🐛Beta`
+
+使用结构方块加载结构时，结构中放置的方块不会产生方块更新。
+
+- 类型: `boolean`
+- 默认值: `true`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`

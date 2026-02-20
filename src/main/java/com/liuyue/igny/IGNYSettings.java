@@ -449,4 +449,10 @@ public class IGNYSettings
             options = {"false", "true"}
     )
     public static Boolean pureShulkerBoxDispense = false;
+
+    @Rule(
+            categories = {IGNY, CREATIVE, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean structureBlockNoBlockUpdate = false;
 }

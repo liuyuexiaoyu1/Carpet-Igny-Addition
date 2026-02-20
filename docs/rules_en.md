@@ -589,5 +589,14 @@ When a dispenser places a dyed or renamed shulker box, it will be reverted to a 
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
+## structureBlockNoBlockUpdate `🐛Beta`
+
+When loading a structure with structure blocks, the placed blocks do not trigger block updates.
+
+- Type: `boolean`
+- Default value: `true`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
 
 
