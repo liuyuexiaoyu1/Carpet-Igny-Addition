@@ -6,7 +6,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-//#if MC >= 12105
+//#if MC >= 12005
 import net.minecraft.core.component.DataComponents;
 //#endif
 import net.minecraft.core.dispenser.ShulkerBoxDispenseBehavior;
