@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.ShulkerBoxBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(ShulkerBoxDispenseBehavior.class)
+@Mixin(value = ShulkerBoxDispenseBehavior.class, priority = 999)
 public abstract class ShulkerBoxDispenseBehaviorMixin {
     @WrapOperation(
             method = "execute",
@@ -29,7 +29,7 @@ public abstract class ShulkerBoxDispenseBehaviorMixin {
                     target = "Lnet/minecraft/world/item/BlockItem;place(Lnet/minecraft/world/item/context/BlockPlaceContext;)Lnet/minecraft/world/InteractionResult;"
             )
     )
-    private InteractionResult dispenseFrom(BlockItem instance, BlockPlaceContext blockPlaceContext, Operation<InteractionResult> original, @Local(argsOnly = true) ItemStack itemStack, @Local(ordinal = 0) Direction direction, @Local BlockPos blockPos, @Local(ordinal = 1) Direction direction2) {
+    private InteractionResult BlockItem(BlockItem instance, BlockPlaceContext blockPlaceContext, Operation<InteractionResult> original, @Local(argsOnly = true) ItemStack itemStack, @Local(ordinal = 0) Direction direction, @Local BlockPos blockPos, @Local(ordinal = 1) Direction direction2) {
         if (IGNYSettings.pureShulkerBoxDispense) {
             ItemStack originalStack = blockPlaceContext.getItemInHand();
             //#if MC >= 12005
@@ -39,8 +39,7 @@ public abstract class ShulkerBoxDispenseBehaviorMixin {
             //#endif
             if (((BlockItem) itemStack.getItem()).getBlock() instanceof ShulkerBoxBlock && !itemStack.is(Items.SHULKER_BOX)) {
                 ItemStack cleanStack = new ItemStack(Items.SHULKER_BOX);
-                cleanStack.setCount(64);
-                int originalCount = cleanStack.getCount();
+                cleanStack.setCount(originalStack.getCount());
                 instance = (BlockItem) cleanStack.getItem();
                 //#if MC >= 12005
                 cleanStack.applyComponents(originalStack.getComponents());
@@ -56,7 +55,7 @@ public abstract class ShulkerBoxDispenseBehaviorMixin {
                 );
                 InteractionResult result = original.call(instance, newContext);
                 if (result.consumesAction()) {
-                    originalStack.shrink(cleanStack.getCount() - originalCount);
+                    originalStack.shrink(originalStack.getCount() - cleanStack.getCount());
                 }
                 return result;
             }
