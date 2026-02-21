@@ -600,7 +600,7 @@ When loading a structure with structure blocks, the placed blocks do not trigger
 
 ## spawnMaxCountIgnoresChunkOverlap `🐛Beta`
 
-Count overlapping spawnable chunks between players towards the spawn cap, i.e. calculate the spawn cap based on player count.
+Count overlapping spawnable chunks between players towards the spawn cap, i.e. calculate the spawn cap based on online player count.
 
 - Type: `boolean`
 - Default value: `true`

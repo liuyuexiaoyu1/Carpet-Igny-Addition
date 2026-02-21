@@ -4,6 +4,7 @@ import carpet.api.settings.CarpetRule;
 import carpet.api.settings.Rule;
 import carpet.api.settings.Validator;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -18,6 +19,8 @@ import static com.liuyue.igny.utils.IGNYRuleCategory.*;
 public class IGNYSettings
 {
     public static Set<String> CRAMMING_ENTITIES = new HashSet<>();
+
+    public static List<BlockPos> noUpdatePos = new ArrayList<>();
 
     //假玩家生成内存泄露修复
     public static ThreadLocal<Boolean> fakePlayerSpawnMemoryLeakFix = ThreadLocal.withInitial(() -> false);
