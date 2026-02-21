@@ -16,8 +16,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.DirectionalPlaceContext;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ShulkerBoxDispenseBehavior.class)
@@ -37,7 +37,7 @@ public abstract class ShulkerBoxDispenseBehaviorMixin {
             //#else
             //$$ originalStack.resetHoverName();
             //#endif
-            if (isColoredShulkerBox(itemStack)) {
+            if (((BlockItem) itemStack.getItem()).getBlock() instanceof ShulkerBoxBlock && !itemStack.is(Items.SHULKER_BOX)) {
                 ItemStack cleanStack = new ItemStack(Items.SHULKER_BOX);
                 cleanStack.setCount(64);
                 int originalCount = cleanStack.getCount();
@@ -62,25 +62,5 @@ public abstract class ShulkerBoxDispenseBehaviorMixin {
             }
         }
         return original.call(instance, blockPlaceContext);
-    }
-
-    @Unique
-    private static boolean isColoredShulkerBox(ItemStack itemStack) {
-        return itemStack.is(Items.WHITE_SHULKER_BOX) ||
-                itemStack.is(Items.ORANGE_SHULKER_BOX) ||
-                itemStack.is(Items.MAGENTA_SHULKER_BOX) ||
-                itemStack.is(Items.LIGHT_BLUE_SHULKER_BOX) ||
-                itemStack.is(Items.YELLOW_SHULKER_BOX) ||
-                itemStack.is(Items.LIME_SHULKER_BOX) ||
-                itemStack.is(Items.PINK_SHULKER_BOX) ||
-                itemStack.is(Items.GRAY_SHULKER_BOX) ||
-                itemStack.is(Items.LIGHT_GRAY_SHULKER_BOX) ||
-                itemStack.is(Items.CYAN_SHULKER_BOX) ||
-                itemStack.is(Items.PURPLE_SHULKER_BOX) ||
-                itemStack.is(Items.BLUE_SHULKER_BOX) ||
-                itemStack.is(Items.BROWN_SHULKER_BOX) ||
-                itemStack.is(Items.GREEN_SHULKER_BOX) ||
-                itemStack.is(Items.RED_SHULKER_BOX) ||
-                itemStack.is(Items.BLACK_SHULKER_BOX);
     }
 }

@@ -24,8 +24,6 @@ package com.liuyue.igny.mixins.commands.customItemMaxStackSize;
 
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.data.CustomItemMaxStackSizeDataManager;
-import com.liuyue.igny.utils.InventoryUtils;
-import com.liuyue.igny.utils.RuleUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -35,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = ItemStack.class, priority = 900)
+@Mixin(value = ItemStack.class, priority = 999)
 public class ItemStackMixin {
     @Unique
     private final ItemStack thisStack = (ItemStack) (Object) this;
@@ -43,7 +41,7 @@ public class ItemStackMixin {
     @Inject(method = "limitSize", at = @At("HEAD"), cancellable = true)
     private void limitSize(int maxCount, CallbackInfo ci) {
         int customMax = CustomItemMaxStackSizeDataManager.getCustomStackSize(thisStack);
-        if ((customMax != -1 || ShulkerBoxStackableRuleEnabled()) && !IGNYSettings.itemStackCountChanged.get()) {
+        if (customMax != -1 && !IGNYSettings.itemStackCountChanged.get()) {
             ci.cancel();
         }
     }
@@ -56,17 +54,8 @@ public class ItemStackMixin {
             int customMax = CustomItemMaxStackSizeDataManager.getCustomStackSize(thisStack);
             if (IGNYSettings.itemStackCountChanged.get() && customMax != -1) {
                 cir.setReturnValue(customMax);
-            } else if (ShulkerBoxStackableRuleEnabled()) {
-                cir.setReturnValue(item.getDefaultMaxStackSize());
             }
         }
     }
     //#endif
-
-    @Unique
-    private boolean ShulkerBoxStackableRuleEnabled() {
-        return Boolean.TRUE.equals(RuleUtils.getCarpetRulesValue("carpet-org-addition", "shulkerBoxStackable"))
-                && InventoryUtils.isShulkerBoxItem(thisStack)
-                && InventoryUtils.isEmptyShulkerBox(thisStack);
-    }
 }

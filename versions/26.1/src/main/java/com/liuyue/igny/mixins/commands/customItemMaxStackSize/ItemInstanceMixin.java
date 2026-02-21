@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ItemInstance.class)
+@Mixin(value = ItemInstance.class, priority = 999)
 public interface ItemInstanceMixin {
     @Inject(method = "getMaxStackSize", at = @At(value = "RETURN"), cancellable = true)
     private void getMaxStackSize(CallbackInfoReturnable<Integer> cir) {
@@ -24,17 +24,8 @@ public interface ItemInstanceMixin {
                 int customMax = CustomItemMaxStackSizeDataManager.getCustomStackSize(itemStack);
                 if (IGNYSettings.itemStackCountChanged.get() && customMax != -1) {
                     cir.setReturnValue(customMax);
-                } else if (ShulkerBoxStackableRuleEnabled(itemStack)) {
-                    cir.setReturnValue(item.getDefaultMaxStackSize());
                 }
             }
         }
-    }
-
-    @Unique
-    private boolean ShulkerBoxStackableRuleEnabled(ItemStack itemStack) {
-        return Boolean.TRUE.equals(RuleUtils.getCarpetRulesValue("carpet-org-addition", "shulkerBoxStackable"))
-                && InventoryUtils.isShulkerBoxItem(itemStack)
-                && InventoryUtils.isEmptyShulkerBox(itemStack);
     }
 }

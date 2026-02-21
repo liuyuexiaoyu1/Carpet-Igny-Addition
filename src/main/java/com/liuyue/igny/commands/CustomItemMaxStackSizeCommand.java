@@ -91,7 +91,7 @@ public class CustomItemMaxStackSizeCommand {
                                                 //$$ .withClickEvent(new ClickEvent.RunCommand("/customItemMaxStackSize remove " + pattern))
                                                 //$$ .withHoverEvent(new HoverEvent.ShowText(Component.translatable("igny.command.CustomItemMaxStackSize.click_to_remove"))));
                                                 //#else
-                                                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/customItemMaxStackSize remove " + pattern))
+                                                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/customItemMaxStackSize remove " + "\"" + pattern + "\""))
                                                 .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("igny.command.CustomItemMaxStackSize.click_to_remove"))));
                                                 //#endif
                                 ChatFormatting color = pattern.startsWith("#") || pattern.startsWith("*") ? ChatFormatting.YELLOW : ChatFormatting.AQUA;

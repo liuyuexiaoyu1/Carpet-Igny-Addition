@@ -20,6 +20,8 @@
     "commands.customItemMaxStackSize.ItemInstanceMixin",
     "commands.customItemMaxStackSize.ItemStackMixin",
     "commands.customItemMaxStackSize.MinecartHopperMixin",
+    "commands.customItemMaxStackSize.compat.lithium.LithiumStackListMixin",
+    "commands.customItemMaxStackSize.compat.lithium.OldVersionLithiumStackListMixin",
     "commands.customPlayerPickupItem.ItemEntityMixin",
     "compat.accessor.fapi.AbstractChanneledNetworkAddonAccessor",
     "compat.fapi.AbstractNetworkAddonMixin",

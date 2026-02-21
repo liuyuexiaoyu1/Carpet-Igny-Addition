@@ -62,10 +62,10 @@ dependencies {
 	} else {
 		include(implementation(name: 'ryansrenderingkit', version: '1.0.5+26.1'))
 	}
-//	//Lithium
-//	if (mcVersion >= 12006) {
-//		autoImplementation(project.lithium_dependency)
-//	}
+	//Lithium
+	if (mcVersion >= 12006) {
+		autoImplementation(project.lithium_dependency)
+	}
 
     // Carpet
     autoImplementation "carpet:fabric-carpet:${project.carpet_core_version}"
