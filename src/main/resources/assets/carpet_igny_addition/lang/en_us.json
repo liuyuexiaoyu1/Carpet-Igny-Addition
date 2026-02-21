@@ -35,7 +35,7 @@
   "igny.command.playerOperate.list_header": "§ePlayer Tasks §7(Total: %d, Running: §a%d§7, Paused: §e%d§7)",
   "igny.command.playerOperate.list_no_tasks": "§7No running player tasks",
   "igny.command.playerOperate.pressuse_started": "§7[PlayerOperate] §6PressUse§7: Started §f%s §7(press=§f%dt§7, wait=§f%dtick§7, cycles=§f%s§7)",
-  "igny.command.playerOperate.vault_started": "§7[PlayerOperate] §6Vault§7: Started §f%s §7(maxCycles=§f%d§7)",
+  "igny.command.playerOperate.vault_started": "§7[PlayerOperate] §6Vault§7: Started §f%s §7(maxCycles=§f%d§7,onlineDuration=§f%d§7,waitDuration=§f%d§7)",
   "igny.command.playerOperate.rotation_started": "§7[PlayerOperate] §6Rotation§7: Started §f%s §7(interval=§f%dt§7, angle=§f%d§7)",
   "igny.command.playerOperate.vault_spawn_timeout": "§7[PlayerOperate] §6Vault§c: Player §f%s §ccannot spawn fake player within §f%d §cseconds, stopping task",
   "igny.command.playerOperate.pressuse_fail_offline": "§7[PlayerOperate] §6PressUse§c: Player §f%s §cis offline",
@@ -81,6 +81,8 @@
   "igny.task.vault.right_clicking": "§eRight-clicking",
   "igny.task.vault.waiting": "§eWaiting",
   "igny.task.vault.logging_out": "§eLogging out",
+  "igny.task.vault.online_duration": "§7Online Duration: §f%s§7tick",
+  "igny.task.vault.waiting_duration": "§7Waiting Duration: §f%s§7tick",
 
 
   "igny.logger.piston.hover.dimension_line": "Dimension: %s",

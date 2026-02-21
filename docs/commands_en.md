@@ -14,8 +14,9 @@
 - `/playerOperate ..`
     - `...<player>`
         - `...task`
-            - `...vault [<maxCycles>]`  `MC>=1.20.3`
+            - `...vault [<maxCycles>] [<onlineDuration>] [<waitingDuration>]` `MC>=1.20.3` `🐛Beta Modify`
             - `...pressUse <interval> <duration> [<cycles>]`
+            - `...rotation <interval> <angle>`
         - `...stop`
         - `...pause`
         - `...resume`
@@ -29,8 +30,10 @@
     - `...<player>`: Fake player.
         - `...task`
             - `...vault [<maxCycles>]`: Makes the fake player perform a vault-opening task.
-                - The `<player>` holds right-click for 100 game ticks, then disconnects. After 21 game ticks, a new fake player named `<player>_1` is spawned at the same position and orientation, continuing to hold right-click for another 100 ticks before disconnecting. This cycle repeats, spawning `<player>_2`, `<player>_3`, etc., up to `<player>_[<maxCycles>]`. The default value of `[<maxCycles>]` is 130.
+                - Makes `<player>` hold right-click for `<onlineDuration>` game ticks then log out, and spawns a `<player>_1` fake player after `<waitingDuration>` game ticks with the same position and rotation. `<player>_1` continues holding right-click for `<onlineDuration>` ticks then logs out, spawns `<player>_2` after `<waitingDuration>` ticks, looping until `<player>_[<maxCycles>]`.
+                - `[<maxCycles>]` defaults to 130, `[<onlineDuration>]` defaults to 100, `[<waitingDuration>]` defaults to 21.
             - `...pressUse <interval> <duration> [<cycles>]`: Makes the fake player repeatedly hold right-click for `<duration>` ticks every `<interval>` ticks, repeating for `[<cycles>]` times. If `[<cycles>]` is omitted, it defaults to infinite repetition. When `[<cycles>]` is 1, the `<interval>` value is ignored.
+            - `...rotation <interval> <angle>` Makes the fake player rotate `<angle>` degrees every `<interval>` ticks, rotating clockwise.
         - `...stop`: Stops all tasks for this player.
         - `...pause`: Pauses the player's current task.
         - `...resume`: Resumes the player's paused task.

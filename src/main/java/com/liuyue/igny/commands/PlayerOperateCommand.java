@@ -18,6 +18,7 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.commands.arguments.TimeArgument;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
@@ -51,10 +52,18 @@ public class PlayerOperateCommand {
                                                 //#if MC >= 12003
                                                 .then(
                                                         Commands.literal("vault")
-                                                                .executes(ctx -> startVaultTask(ctx, 130))
+                                                                .executes(ctx -> startVaultTask(ctx, 130, 100 , 21))
                                                                 .then(
                                                                         Commands.argument("maxCycles", IntegerArgumentType.integer())
                                                                                 .executes(PlayerOperateCommand::startVaultTaskWithArg)
+                                                                                .then(
+                                                                                        Commands.argument("onlineDuration", TimeArgument.time())
+                                                                                                .executes(PlayerOperateCommand::startVaultTaskWithArg)
+                                                                                                .then(
+                                                                                                        Commands.argument("waitingDuration", TimeArgument.time())
+                                                                                                                .executes(PlayerOperateCommand::startVaultTaskWithArg)
+                                                                                                )
+                                                                                )
                                                                 )
                                                 )
                                                 //#endif
@@ -344,10 +353,12 @@ public class PlayerOperateCommand {
     //#if MC >= 12003
     private static int startVaultTaskWithArg(CommandContext<CommandSourceStack> context) {
         int maxCycles = IntegerArgumentType.getInteger(context, "maxCycles");
-        return startVaultTask(context, maxCycles);
+        int onlineDuration = IntegerArgumentType.getInteger(context, "onlineDuration");
+        int waitingDuration = IntegerArgumentType.getInteger(context, "waitingDuration");
+        return startVaultTask(context, maxCycles, onlineDuration, waitingDuration);
     }
 
-    private static int startVaultTask(CommandContext<CommandSourceStack> context, int maxCycles) {
+    private static int startVaultTask(CommandContext<CommandSourceStack> context, int maxCycles, int onlineDuration, int waitingDuration) {
         String playerName = StringArgumentType.getString(context, "player");
         CommandSourceStack source = context.getSource();
 
@@ -362,14 +373,14 @@ public class PlayerOperateCommand {
             return 0;
         }
 
-        VaultTask task = VaultTask.getOrCreate(source, playerName, maxCycles);
+        VaultTask task = VaultTask.getOrCreate(source, playerName, maxCycles, onlineDuration, waitingDuration);
         task.start();
 
         source.sendSuccess(
                 //#if MC > 11904
                 () ->
                 //#endif
-                        Component.translatable("igny.command.playerOperate.vault_started", playerName, maxCycles),
+                        Component.translatable("igny.command.playerOperate.vault_started", playerName, maxCycles, onlineDuration, waitingDuration),
                 false
         );
         return 1;

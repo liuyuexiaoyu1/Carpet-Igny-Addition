@@ -99,7 +99,7 @@
     "rule.simpleSoundSuppression.CalibratedSculkSensorVibrationUserMixin",
     "rule.skeletonsPickupSwordsReintroduced.MobInvoker",
     "rule.skeletonsPickupSwordsReintroduced.MobMixin",
-    "rule.spawnMaxCountIgnoresOverlap.DistanceManagerMixin",
+    "rule.spawnMaxCountIgnoresChunkOverlap.DistanceManagerMixin",
     "rule.structureBlockNoBlockUpdate.NeighborUpdaterMixin",
     "rule.structureBlockNoBlockUpdate.StructureBlockEntityMixin",
     "rule.structureBlockNoBlockUpdate.StructureTemplateMixin",

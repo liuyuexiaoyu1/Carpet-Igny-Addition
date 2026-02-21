@@ -15,8 +15,9 @@
 - `/playerOperate ..`
     - `...<player>`
         - `...task`
-            - `...vault` `MC>=1.20.3`
-            - `...pressUse`
+            - `...vault [<maxCycles>] [<onlineDuration>] [<waitingDuration>]` `MC>=1.20.3` `🐛Beta更改`
+            - `...pressUse <interval> <duration> [<cycles>]`
+            - `...rotation <interval> <angle>`
         - `...stop`
         - `..pause`
         - `...resume`
@@ -29,9 +30,11 @@
 - `/playerOperate ..`
     - `...<player>` 假玩家。
         - `...task`
-            - `...vault [<maxCycles>]` 使假玩家执行开宝库的任务 `MC>=1.20.3`
-                 - 使`<player>`长按右键100游戏刻后下线，并在游戏刻21刻后召唤一个`<player>_1`假人，视角和坐标不变，`<player>_1`假人继续长按右键100刻后下线，21刻后召唤`<player>_2`，一直循环到`<player>_[<maxCycles>]`，`[<maxCycles>]`默认为130。
+            - `...vault [<maxCycles>] [<onlineDuration>] [<waitingDuration>]` 使假玩家执行开宝库的任务 `MC>=1.20.3`
+                - 使`<player>`长按右键`<onlineDuration>`游戏刻后下线，并在`<waitingDuration>`游戏刻后召唤一个`<player>_1`假人，视角和坐标不变，`<player>_1`假人继续长按右键`<onlineDuration>`刻后下线，`<waitingDuration>`刻后召唤`<player>_2`，一直循环到`<player>_[<maxCycles>]`。
+                - `[<maxCycles>]`默认为130，`[<onlineDuration>]`默认为100，`[<waitingDuration>]`默认为21。
             - `...pressUse <interval> <duration> [<cycles>]` 使假玩家间隔`<interval>`tick长按右键`<duration>`tick，重复`[<cycles>]`次，`[<cycles>]`默认为Infinite，当`[<cycles>]`为1时，`<interval>`值无用。
+            - `...rotation <interval> <angle>` 使假玩家每隔`<interval>`tick旋转`<angle>`度。
         - `...stop` 停止该玩家的任务。
         - `...pause` 暂停该玩家的任务
         - `...resume` 继续该玩家的任务（已暂停）

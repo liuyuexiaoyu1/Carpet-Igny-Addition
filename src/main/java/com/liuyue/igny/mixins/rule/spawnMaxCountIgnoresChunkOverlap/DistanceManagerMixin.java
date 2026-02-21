@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.spawnMaxCountIgnoresOverlap;
+package com.liuyue.igny.mixins.rule.spawnMaxCountIgnoresChunkOverlap;
 
 import com.liuyue.igny.IGNYSettings;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;

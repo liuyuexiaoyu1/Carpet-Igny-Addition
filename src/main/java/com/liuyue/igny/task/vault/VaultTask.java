@@ -30,6 +30,8 @@ public class VaultTask implements ITask {
     private final MinecraftServer server;
     private final String playerName;
     private final int maxCycles;
+    private final int onlineDuration;
+    private final int waitingDuration;
 
     private int currentCycle = 0;
     private int stageTickCounter = 0;
@@ -55,15 +57,17 @@ public class VaultTask implements ITask {
     }
     private Stage currentStage = Stage.SPAWNING;
 
-    private VaultTask(CommandSourceStack source, String playerName, int maxCycles) {
+    private VaultTask(CommandSourceStack source, String playerName, int maxCycles, int onlineDuration, int waitingDuration) {
         this.server = source.getServer();
         this.operator = source.getPlayer();
         this.playerName = playerName;
         this.maxCycles = Math.max(1, maxCycles);
+        this.onlineDuration = onlineDuration;
+        this.waitingDuration = waitingDuration;
     }
 
-    public static VaultTask getOrCreate(CommandSourceStack source, String playerName, int maxCycles) {
-        return INSTANCE_CACHE.computeIfAbsent(playerName, name -> new VaultTask(source, name, maxCycles));
+    public static VaultTask getOrCreate(CommandSourceStack source, String playerName, int maxCycles, int onlineDuration, int waitingDuration) {
+        return INSTANCE_CACHE.computeIfAbsent(playerName, name -> new VaultTask(source, name, maxCycles, onlineDuration, waitingDuration));
     }
 
     @Override
@@ -81,7 +85,12 @@ public class VaultTask implements ITask {
         if (paused) {
             return Component.translatable("igny.task.status.paused")
                     .append(Component.literal(" §7"))
-                    .append(Component.translatable("igny.task.status.cycle", currentCycle, maxCycles));
+                    .append(Component.translatable("igny.task.status.cycle", currentCycle, maxCycles))
+                    .append(Component.literal(" §8["))
+                    .append(Component.translatable("igny.task.vault.online_duration", onlineDuration))
+                    .append(Component.literal(" | "))
+                    .append(Component.translatable("igny.task.vault.waiting_duration", waitingDuration))
+                    .append(Component.literal("§8]"));
         }
         String status = switch (currentStage) {
             case SPAWNING -> Component.translatable("igny.task.vault.spawning",
@@ -91,7 +100,13 @@ public class VaultTask implements ITask {
             case LOGGING_OUT -> Component.translatable("igny.task.vault.logging_out").getString();
         };
         return Component.translatable("igny.task.status.cycle", currentCycle, maxCycles)
+                .append(Component.literal(" §8["))
+                .append(Component.translatable("igny.task.vault.online_duration", onlineDuration))
+                .append(Component.literal(" | "))
+                .append(Component.translatable("igny.task.vault.waiting_duration", waitingDuration))
+                .append(Component.literal("§8]"))
                 .append(Component.literal(" §8| " + status));
+
     }
 
     @Override
@@ -316,7 +331,7 @@ public class VaultTask implements ITask {
             }
         } else {
         //#endif
-            if (stageTickCounter >= 100) {
+            if (stageTickCounter >= onlineDuration) {
                 currentStage = Stage.LOGGING_OUT;
                 stageTickCounter = 0;
             }
@@ -352,7 +367,7 @@ public class VaultTask implements ITask {
     }
 
     private void handleWaiting() {
-        if (stageTickCounter >= 21) {
+        if (stageTickCounter >= waitingDuration) {
             currentStage = Stage.SPAWNING;
             stageTickCounter = 0;
             pendingFakeName = null;
