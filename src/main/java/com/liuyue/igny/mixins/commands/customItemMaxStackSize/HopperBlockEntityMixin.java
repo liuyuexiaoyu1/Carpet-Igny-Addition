@@ -73,6 +73,9 @@ public abstract class HopperBlockEntityMixin extends BlockEntity {
 
     @WrapOperation(method = "addItem(Lnet/minecraft/world/Container;Lnet/minecraft/world/entity/item/ItemEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/HopperBlockEntity;addItem(Lnet/minecraft/world/Container;Lnet/minecraft/world/Container;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/core/Direction;)Lnet/minecraft/world/item/ItemStack;"))
     private static ItemStack extract(Container from, Container to, ItemStack stack, Direction side, Operation<ItemStack> original, @Local LocalBooleanRef bl) {
+        if (IGNYSettings.itemStackCountChanged.get()) {
+            return original.call(from, to, stack, side);
+        }
         int customMax = CustomItemMaxStackSizeDataManager.getCustomStackSize(stack);
         if (customMax != -1) {
             ItemStack split = stack.split(stack.getMaxStackSize());
