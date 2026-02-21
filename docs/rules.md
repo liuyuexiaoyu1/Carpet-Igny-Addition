@@ -597,3 +597,12 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 默认值: `true`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 生成上限无视区块重叠 (spawnMaxCountIgnoresChunkOverlap) `🐛Beta`
+
+将玩家之间的重叠的可生成区块计入生成上限，即按人数计算生成上限。
+
+- 类型: `boolean`
+- 默认值: `true`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`

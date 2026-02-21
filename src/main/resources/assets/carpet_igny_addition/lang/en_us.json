@@ -187,5 +187,6 @@
   "carpet.rule.dispenserTradeFailDisperseItem.desc": "When a dispenser trade fails, do not eject the currency items; instead, cause the dispenser to fail its ejection attempt.",
   "carpet.rule.renewableCalcite.desc": "Using pointed dripstone to convert quartz blocks into calcite via random ticks",
   "carpet.rule.pureShulkerBoxDispense.desc": "When a dispenser places a dyed or renamed shulker box, it will be reverted to a regular, unnamed shulker box while preserving its contents",
-  "carpet.rule.structureBlockNoBlockUpdate.desc": "When loading a structure with structure blocks, the placed blocks do not trigger block updates"
+  "carpet.rule.structureBlockNoBlockUpdate.desc": "When loading a structure with structure blocks, the placed blocks do not trigger block updates",
+  "carpet.rule.spawnMaxCountIgnoresChunkOverlap.desc": "Count overlapping spawnable chunks between players towards the spawn cap, i.e. calculate the spawn cap based on player count"
 }

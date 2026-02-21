@@ -598,5 +598,14 @@ When loading a structure with structure blocks, the placed blocks do not trigger
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
+## spawnMaxCountIgnoresChunkOverlap `🐛Beta`
+
+Count overlapping spawnable chunks between players towards the spawn cap, i.e. calculate the spawn cap based on player count.
+
+- Type: `boolean`
+- Default value: `true`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`
+
 
 

@@ -99,6 +99,7 @@
     "rule.simpleSoundSuppression.CalibratedSculkSensorVibrationUserMixin",
     "rule.skeletonsPickupSwordsReintroduced.MobInvoker",
     "rule.skeletonsPickupSwordsReintroduced.MobMixin",
+    "rule.spawnMaxCountIgnoresOverlap.DistanceManagerMixin",
     "rule.structureBlockNoBlockUpdate.StructureBlockEntityMixin",
     "rule.teleportInheritMinecartsMotionReintroduced.EntityMixin",
     "rule.teleportInheritMinecartsMotionReintroduced.NetherPortalBlockMixin",

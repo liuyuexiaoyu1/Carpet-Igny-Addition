@@ -455,4 +455,10 @@ public class IGNYSettings
             options = {"false", "true"}
     )
     public static Boolean structureBlockNoBlockUpdate = false;
+
+    @Rule(
+            categories = {IGNY, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean spawnMaxCountIgnoresChunkOverlap = false;
 }
