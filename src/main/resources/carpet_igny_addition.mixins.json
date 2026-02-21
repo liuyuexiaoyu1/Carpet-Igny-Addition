@@ -20,6 +20,7 @@
     "commands.customItemMaxStackSize.ItemInstanceMixin",
     "commands.customItemMaxStackSize.ItemStackMixin",
     "commands.customItemMaxStackSize.MinecartHopperMixin",
+    "commands.customItemMaxStackSize.compat.gca.FakePlayerAutoReplenishmentMixin",
     "commands.customItemMaxStackSize.compat.lithium.LithiumStackListMixin",
     "commands.customItemMaxStackSize.compat.lithium.OldVersionLithiumStackListMixin",
     "commands.customPlayerPickupItem.ItemEntityMixin",

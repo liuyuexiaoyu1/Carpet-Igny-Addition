@@ -69,6 +69,11 @@ dependencies {
 
     // Carpet
     autoImplementation "carpet:fabric-carpet:${project.carpet_core_version}"
+
+	//GCA
+	if (mcVersion >= 12006 && !unobfuscated) {
+		autoImplementation "${project.gca_version}"
+	}
 }
 
 String MIXIN_CONFIG_PATH = 'carpet_igny_addition.mixins.json'
