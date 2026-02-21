@@ -25,10 +25,7 @@ package com.liuyue.igny.mixins.optimizations;
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.utils.interfaces.optimizations.IEntity;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySelector;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -95,7 +92,7 @@ public abstract class EntityMixin implements IEntity {
                 double intersectMaxZ = Math.min(myBox.maxZ, otherBox.maxZ);
                 if (intersectMaxX > intersectMinX && intersectMaxY > intersectMinY && intersectMaxZ > intersectMinZ) {
                     double intersectVolume = (intersectMaxX - intersectMinX) * (intersectMaxY - intersectMinY) * (intersectMaxZ - intersectMinZ);
-                    if (intersectVolume / myVolume > 0.7) {
+                    if (intersectVolume / myVolume > 0.85) {
                         tightCrammingCount++;
                     }
                 }
@@ -105,8 +102,8 @@ public abstract class EntityMixin implements IEntity {
     }
 
     @Inject(method = "move", at = @At(value = "HEAD"), cancellable = true)
-    private void move(MoverType moverType, Vec3 vec3, CallbackInfo ci){
-        if (this.carpet_Igny_Addition$crammingCount >= IGNYSettings.optimizedEntityLimit && moverType.equals(MoverType.SELF) && this.onGround()){
+    private void move(MoverType moverType, Vec3 vec3, CallbackInfo ci) {
+        if (this.carpet_Igny_Addition$crammingCount >= IGNYSettings.optimizedEntityLimit && moverType.equals(MoverType.SELF)) {
             ci.cancel();
         }
     }
