@@ -34,17 +34,13 @@ public interface NeighborUpdaterMixin {
     //$$ private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, Orientation orientation, boolean bl, CallbackInfo ci) {
     //#else
     private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, BlockPos blockPos2, boolean bl, CallbackInfo ci) {
-        //#endif
-        //#if MC >= 12102
-        //$$ for (Direction direction : orientation.getDirections()) {
-        //$$          BlockPos blockPos2 = blockPos.relative(direction);
-        //#endif
-        if (IGNYSettings.structureBlockNoBlockUpdate && (IGNYSettings.noUpdatePos.contains(blockPos) || IGNYSettings.noUpdatePos.contains(blockPos2))) {
+        if (IGNYSettings.structureBlockNoBlockUpdate && (IGNYSettings.noUpdatePos.contains(blockPos)
+                //#if MC < 12102
+                || IGNYSettings.noUpdatePos.contains(blockPos2))
+                //#endif
+        ) {
             ci.cancel();
             return;
         }
-        //#if MC >= 12102
-        //$$ }
-        //#endif
     }
 }
