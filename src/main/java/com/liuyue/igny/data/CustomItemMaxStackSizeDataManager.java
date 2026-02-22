@@ -41,6 +41,11 @@ public class CustomItemMaxStackSizeDataManager {
         rebuildRuntimeRules(CommandBuildContext.simple(server.registryAccess(), server.getWorldData().enabledFeatures()));
     }
 
+    public static void setClient(Minecraft client) {
+        customStacks.clear();
+        if (client.getConnection() != null) rebuildRuntimeRules(CommandBuildContext.simple(client.getConnection().registryAccess(), client.getConnection().enabledFeatures()));
+    }
+
     public static int getCustomStackSize(ItemStack stack) {
         for (StackRule rule : runtimeRules) {
             if (rule.predicate.test(stack)) {
@@ -114,6 +119,11 @@ public class CustomItemMaxStackSizeDataManager {
     }
 
     public static void load() {
+        if (currentServer == null) {
+            IGNYServer.LOGGER.info("Client mode: Skipping local file load, waiting for server data.");
+            return;
+        }
+        assert getJsonPath() != null;
         File file = getJsonPath().toFile();
         if (!file.exists()) return;
         try (Reader reader = new FileReader(file)) {
@@ -125,6 +135,11 @@ public class CustomItemMaxStackSizeDataManager {
     }
 
     public static void save() {
+        if (currentServer == null) {
+            IGNYServer.LOGGER.info("Client mode: Skipping local file load, waiting for server data.");
+            return;
+        }
+        assert getJsonPath() != null;
         File file = getJsonPath().toFile();
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
         try (Writer writer = new FileWriter(file)) {
@@ -140,7 +155,7 @@ public class CustomItemMaxStackSizeDataManager {
         if (minecraft.level != null && minecraft.getConnection() != null) {
             CommandBuildContext context = CommandBuildContext.simple(
                     minecraft.getConnection().registryAccess(),
-                    minecraft.level.enabledFeatures()
+                    minecraft.getConnection().enabledFeatures()
             );
             rebuildRuntimeRules(context);
         }
@@ -151,7 +166,7 @@ public class CustomItemMaxStackSizeDataManager {
     }
 
     private static Path getJsonPath() {
-        if (currentServer == null) throw new IllegalStateException("Server not bound yet!");
+        if (currentServer == null) return null;
         return currentServer.getWorldPath(LevelResource.ROOT).resolve(IGNYServer.MOD_ID).resolve(JSON_FILE_NAME);
     }
     //#endif

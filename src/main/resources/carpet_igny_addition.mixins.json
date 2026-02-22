@@ -100,6 +100,7 @@
     "rule.skeletonsPickupSwordsReintroduced.MobInvoker",
     "rule.skeletonsPickupSwordsReintroduced.MobMixin",
     "rule.spawnMaxCountIgnoresChunkOverlap.DistanceManagerMixin",
+    "rule.structureBlockNoBlockUpdate.DiodeBlockMixin",
     "rule.structureBlockNoBlockUpdate.NeighborUpdaterMixin",
     "rule.structureBlockNoBlockUpdate.StructureBlockEntityMixin",
     "rule.structureBlockNoBlockUpdate.StructureTemplateMixin",
