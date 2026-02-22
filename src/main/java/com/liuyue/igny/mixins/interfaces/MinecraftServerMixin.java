@@ -2,6 +2,7 @@
 package com.liuyue.igny.mixins.interfaces;
 
 import com.liuyue.igny.IGNYServer;
+import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.data.CustomPickupDataManager;
 import com.liuyue.igny.data.CustomItemMaxStackSizeDataManager;
 import com.liuyue.igny.task.ITask;
@@ -20,6 +21,7 @@ public abstract class MinecraftServerMixin {
     private void afterServerLoadWorld(CallbackInfo ci){
         MinecraftServer server = IGNYServer.getInstance().getMinecraftServer();
         if (server != null && server.isRunning()) {
+            IGNYSettings.cachedServer = server;
             RuleChangeTracker.init(server);
             CustomPickupDataManager.setServer(server);
             //#if MC >= 12006

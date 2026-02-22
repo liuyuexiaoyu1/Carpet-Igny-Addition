@@ -607,5 +607,20 @@ Count overlapping spawnable chunks between players towards the spawn cap, i.e. c
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
+## prioritizeFlyingUseItem `🐛Beta`
 
+Prioritize using items over interacting with blocks while flying or riptiding.
 
+- Type: `boolean`
+- Default value: `true`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## optimizedSpawning `🐛Beta`
+
+Optimizes spawning performance by skipping chunk spawn cycles when mobcaps are reached.
+
+- Type: `boolean`
+- Default value: `true`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `OPTIMIZATION`

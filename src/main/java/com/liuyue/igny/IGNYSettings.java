@@ -9,6 +9,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.EntityType;
 
 import java.util.*;
@@ -18,6 +19,8 @@ import static com.liuyue.igny.utils.IGNYRuleCategory.*;
 
 public class IGNYSettings
 {
+    public static MinecraftServer cachedServer = null;
+
     public static Set<String> CRAMMING_ENTITIES = new HashSet<>();
 
     public static List<BlockPos> noUpdatePos = new ArrayList<>();
@@ -464,4 +467,16 @@ public class IGNYSettings
             options = {"false", "true"}
     )
     public static Boolean spawnMaxCountIgnoresChunkOverlap = false;
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean prioritizeFlyingUseItem = false;
+
+    @Rule(
+            categories = {IGNY, OPTIMIZATION},
+            options = {"false", "true"}
+    )
+    public static Boolean optimizedSpawning = false;
 }

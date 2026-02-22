@@ -606,3 +606,21 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 默认值: `true`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
+
+## 优先飞行使用物品 (prioritizeFlyingUseItem) `🐛Beta`
+
+鞘翅飞行或激流冲锋时，优先使用物品而非与方块交互。
+
+- 类型: `boolean`
+- 默认值: `true`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 优化生成 (optimizedSpawning) `🐛Beta`
+
+优化刷怪性能，当维度怪量达到上限时停止区块刷怪计算。
+
+- 类型: `boolean`
+- 默认值: `true`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `OPTIMIZATION`

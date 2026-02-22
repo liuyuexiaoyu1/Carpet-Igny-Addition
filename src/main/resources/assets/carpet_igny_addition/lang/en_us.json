@@ -190,5 +190,7 @@
   "carpet.rule.renewableCalcite.desc": "Using pointed dripstone to convert quartz blocks into calcite via random ticks",
   "carpet.rule.pureShulkerBoxDispense.desc": "When a dispenser places a dyed or renamed shulker box, it will be reverted to a regular, unnamed shulker box while preserving its contents",
   "carpet.rule.structureBlockNoBlockUpdate.desc": "When loading a structure with structure blocks, the placed blocks do not trigger block updates",
-  "carpet.rule.spawnMaxCountIgnoresChunkOverlap.desc": "Count overlapping spawnable chunks between players towards the spawn cap, i.e. calculate the spawn cap based on online player count"
+  "carpet.rule.spawnMaxCountIgnoresChunkOverlap.desc": "Count overlapping spawnable chunks between players towards the spawn cap, i.e. calculate the spawn cap based on online player count",
+  "carpet.rule.prioritizeFlyingUseItem.desc": "Prioritize using items over interacting with blocks while flying or riptiding",
+  "carpet.rule.optimizedSpawning.desc": "Optimizes spawning performance by skipping chunk spawn cycles when mobcaps are reached"
 }

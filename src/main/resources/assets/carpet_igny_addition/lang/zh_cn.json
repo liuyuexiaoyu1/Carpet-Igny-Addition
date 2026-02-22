@@ -253,5 +253,9 @@
   "carpet.rule.structureBlockNoBlockUpdate.name": "结构方块无方块更新",
   "carpet.rule.structureBlockNoBlockUpdate.desc": "使用结构方块加载结构时，结构中放置的方块不会产生方块更新",
   "carpet.rule.spawnMaxCountIgnoresChunkOverlap.name": "生成上限无视区块重叠",
-  "carpet.rule.spawnMaxCountIgnoresChunkOverlap.desc": "将玩家之间的重叠的可生成区块计入生成上限，即按在线玩家数计算生成上限"
+  "carpet.rule.spawnMaxCountIgnoresChunkOverlap.desc": "将玩家之间的重叠的可生成区块计入生成上限，即按在线玩家数计算生成上限",
+  "carpet.rule.prioritizeFlyingUseItem.name": "优先飞行使用物品",
+  "carpet.rule.prioritizeFlyingUseItem.desc": "鞘翅飞行或激流冲锋时，优先使用物品而非与方块交互",
+  "carpet.rule.optimizedSpawning.name": "优化生成",
+  "carpet.rule.optimizedSpawning.desc": "优化刷怪性能，当维度怪量达到上限时停止区块刷怪计算"
 }
