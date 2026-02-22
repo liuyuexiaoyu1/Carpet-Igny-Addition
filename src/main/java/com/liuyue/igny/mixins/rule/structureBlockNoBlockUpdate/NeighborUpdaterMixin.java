@@ -34,6 +34,7 @@ public interface NeighborUpdaterMixin {
     //$$ private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, Orientation orientation, boolean bl, CallbackInfo ci) {
     //#else
     private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, BlockPos blockPos2, boolean bl, CallbackInfo ci) {
+        //#endif
         if (IGNYSettings.structureBlockNoBlockUpdate && (IGNYSettings.noUpdatePos.contains(blockPos)
                 //#if MC < 12102
                 || IGNYSettings.noUpdatePos.contains(blockPos2))
