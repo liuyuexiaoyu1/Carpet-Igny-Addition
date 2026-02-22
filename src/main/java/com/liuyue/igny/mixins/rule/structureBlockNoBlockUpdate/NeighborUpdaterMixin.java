@@ -12,6 +12,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#if MC >= 12102
+//$$ import net.minecraft.world.level.redstone.Orientation;
+//#endif
+
 
 @Mixin(NeighborUpdater.class)
 public interface NeighborUpdaterMixin {
