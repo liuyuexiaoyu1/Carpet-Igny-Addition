@@ -618,7 +618,7 @@ Prioritize using items over interacting with blocks while flying or riptiding.
 
 ## optimizedSpawning `🐛Beta`
 
-Optimizes spawning performance by skipping chunk spawn cycles when mobcaps are reached.
+Optimizes performance by canceling spawn cycles for any category that has reached its mobcap.
 
 - Type: `boolean`
 - Default value: `true`

@@ -257,5 +257,5 @@
   "carpet.rule.prioritizeFlyingUseItem.name": "优先飞行使用物品",
   "carpet.rule.prioritizeFlyingUseItem.desc": "鞘翅飞行或激流冲锋时，优先使用物品而非与方块交互",
   "carpet.rule.optimizedSpawning.name": "优化生成",
-  "carpet.rule.optimizedSpawning.desc": "优化刷怪性能，当维度怪量达到上限时停止区块刷怪计算"
+  "carpet.rule.optimizedSpawning.desc": "优化刷怪性能，当维度任意生成类型达到上限时停止该类型的生成计算"
 }

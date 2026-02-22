@@ -192,5 +192,5 @@
   "carpet.rule.structureBlockNoBlockUpdate.desc": "When loading a structure with structure blocks, the placed blocks do not trigger block updates",
   "carpet.rule.spawnMaxCountIgnoresChunkOverlap.desc": "Count overlapping spawnable chunks between players towards the spawn cap, i.e. calculate the spawn cap based on online player count",
   "carpet.rule.prioritizeFlyingUseItem.desc": "Prioritize using items over interacting with blocks while flying or riptiding",
-  "carpet.rule.optimizedSpawning.desc": "Optimizes spawning performance by skipping chunk spawn cycles when mobcaps are reached"
+  "carpet.rule.optimizedSpawning.desc": "Optimizes performance by canceling spawn cycles for any category that has reached its mobcap."
 }
