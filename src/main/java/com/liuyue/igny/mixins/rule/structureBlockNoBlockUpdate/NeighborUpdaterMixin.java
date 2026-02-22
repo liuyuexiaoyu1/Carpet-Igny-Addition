@@ -37,9 +37,9 @@ public interface NeighborUpdaterMixin {
         //#endif
         if (IGNYSettings.structureBlockNoBlockUpdate && (IGNYSettings.noUpdatePos.contains(blockPos)
                 //#if MC < 12102
-                || IGNYSettings.noUpdatePos.contains(blockPos2))
+                || IGNYSettings.noUpdatePos.contains(blockPos2)
                 //#endif
-        ) {
+        )) {
             ci.cancel();
             return;
         }
