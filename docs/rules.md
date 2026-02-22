@@ -576,7 +576,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 使用滴水石锥接受随机刻转化石英块为方解石。
 
 - 类型: `boolean`
-- 默认值: `true`
+- 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
@@ -585,7 +585,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 发射器放置染色或者命名过的潜影盒会使其变回普通的未命名的潜影盒，同时保留其内容物。
 
 - 类型: `boolean`
-- 默认值: `true`
+- 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
@@ -594,7 +594,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 使用结构方块加载结构时，结构中放置的方块不会产生方块更新。
 
 - 类型: `boolean`
-- 默认值: `true`
+- 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
@@ -603,7 +603,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 将玩家之间的重叠的可生成区块计入生成上限，即按在线玩家数计算生成上限。
 
 - 类型: `boolean`
-- 默认值: `true`
+- 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
@@ -612,7 +612,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 鞘翅飞行或激流冲锋时，优先使用物品而非与方块交互。
 
 - 类型: `boolean`
-- 默认值: `true`
+- 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
@@ -621,6 +621,6 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 优化刷怪性能，当维度任意生成类型达到上限时停止该类型的生成计算。
 
 - 类型: `boolean`
-- 默认值: `true`
+- 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `OPTIMIZATION`

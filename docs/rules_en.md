@@ -576,7 +576,7 @@ When a dispenser trade fails, do not eject the currency items; instead, cause th
 Using pointed dripstone to convert quartz blocks into calcite via random ticks.
 
 - Type: `boolean`
-- Default value: `true`
+- Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
@@ -585,7 +585,7 @@ Using pointed dripstone to convert quartz blocks into calcite via random ticks.
 When a dispenser places a dyed or renamed shulker box, it will be reverted to a regular, unnamed shulker box while preserving its contents.
 
 - Type: `boolean`
-- Default value: `true`
+- Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
@@ -594,7 +594,7 @@ When a dispenser places a dyed or renamed shulker box, it will be reverted to a 
 When loading a structure with structure blocks, the placed blocks do not trigger block updates.
 
 - Type: `boolean`
-- Default value: `true`
+- Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
@@ -603,7 +603,7 @@ When loading a structure with structure blocks, the placed blocks do not trigger
 Count overlapping spawnable chunks between players towards the spawn cap, i.e. calculate the spawn cap based on online player count.
 
 - Type: `boolean`
-- Default value: `true`
+- Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
@@ -612,7 +612,7 @@ Count overlapping spawnable chunks between players towards the spawn cap, i.e. c
 Prioritize using items over interacting with blocks while flying or riptiding.
 
 - Type: `boolean`
-- Default value: `true`
+- Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
@@ -621,6 +621,6 @@ Prioritize using items over interacting with blocks while flying or riptiding.
 Optimizes performance by canceling spawn cycles for any category that has reached its mobcap.
 
 - Type: `boolean`
-- Default value: `true`
+- Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `OPTIMIZATION`
