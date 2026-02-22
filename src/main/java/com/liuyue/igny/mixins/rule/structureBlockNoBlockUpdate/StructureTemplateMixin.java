@@ -36,7 +36,7 @@ public abstract class StructureTemplateMixin {
         }
     }
 
-    @Inject(method = "placeInWorld", at = @At(value = "RETURN"))
+    @Inject(method = "placeInWorld", at = @At(value = "TAIL"))
     private static void clearBlockList(ServerLevelAccessor serverLevelAccessor, BlockPos blockPos, BlockPos blockPos2, StructurePlaceSettings structurePlaceSettings, RandomSource randomSource, int i, CallbackInfoReturnable<Boolean> cir) {
         IGNYSettings.noUpdatePos.clear();
     }
