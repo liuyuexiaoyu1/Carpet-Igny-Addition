@@ -27,7 +27,11 @@ public abstract class StructureTemplateMixin {
         List<StructureTemplate.StructureBlockInfo> list1 = processBlockInfos(serverLevelAccessor, blockPos, blockPos2, structurePlaceSettings, list);
         if (IGNYSettings.structureBlockNoBlockUpdate && list1 != null) {
             for (StructureTemplate.StructureBlockInfo structureBlockInfo : list1) {
+                //#if MC <= 11904
+                //$$ IGNYSettings.noUpdatePos.add(structureBlockInfo.pos);
+                //#else
                 IGNYSettings.noUpdatePos.add(structureBlockInfo.pos());
+                //#endif
             }
         }
     }
