@@ -35,4 +35,4 @@
 - [Modrinth](https://modrinth.com/mod/carpet-igny-addition)
 - [GitHub](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/releases/latest)
 ## Latest Beta version download↓ ##
-- [GitHub Action](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/runs/22272813182/artifacts/5605794750) `Login to GitHub required`
+- [GitHub Action](https://nightly.link/liuyuexiaoyu1/Carpet-Igny-Addition/workflows/build.yml/master/mod-jars.zip) `No need to login to GitHub`
