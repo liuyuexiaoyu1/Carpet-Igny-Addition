@@ -71,11 +71,11 @@ dependencies {
     autoImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	if (!unobfuscated) {
 		if (mcVersion < 12003) {
-			autoImplementation "com.github.End-Tech:syncmatica:${project.syncmatica_version}"{
+			autoImplementation ("com.github.End-Tech:syncmatica:${project.syncmatica_version}") {
 				exclude group: "net.fabricmc.fabric-api"
 			}
 		} else {
-			autoImplementation "com.github.sakura-ryoko:syncmatica:${project.syncmatica_version}"{
+			autoImplementation ("com.github.sakura-ryoko:syncmatica:${project.syncmatica_version}") {
 				exclude group: "net.fabricmc.fabric-api"
 			}
 		}
