@@ -624,3 +624,38 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `OPTIMIZATION`
+
+## 染色青蛙 (dyedFrog) `🐛Beta`
+
+使用染料喂食蝌蚪，当蝌蚪成年后根据喂食的对应染料变为对应种类的青蛙，喂食粘液球使用原版逻辑。
+
+绿色染料 -> 寒带青蛙
+
+橙色染料 -> 温带青蛙
+
+淡灰色染料 -> 热带青蛙
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 更好的忠诚三叉戟 (betterLoyaltyTrident) `🐛Beta`
+
+附魔忠诚的三叉戟会在超过玩家的模拟距离和超过世界最低最高建筑高度时触发忠诚。
+
+玩家超过世界最低最高建筑高度时，三叉戟超过世界最低最高建筑高度不会触发忠诚。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 删除共享原理图权限 (removeSyncmaticaPermission) `🐛Beta`
+
+在Syncmatica中删除原理图时，需要当前规则值设置的权限。
+
+- 类型: `boolean`
+- 默认值: `true`
+- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- 分类: `IGNY`

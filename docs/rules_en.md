@@ -624,3 +624,38 @@ Optimizes performance by canceling spawn cycles for any category that has reache
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `OPTIMIZATION`
+
+## dyedFrog `🐛Beta`
+
+Feed tadpoles with dye to determine their frog variant upon maturing. Feeding slimeballs will result in vanilla behavior.
+
+Green Dye -> Cold Frog (Green)
+
+Orange Dye -> Temperate Frog (Brown)
+
+Light Gray Dye -> Warm Frog (White)
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## betterLoyaltyTrident `🐛Beta`
+
+Tridents with the Loyalty enchantment will trigger their return if they exceed the player's simulation distance or go beyond the world's minimum/maximum build height.
+
+Loyalty will not trigger if both the player and the trident are outside the world's build height limits.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## removeSyncmaticaPermission `🐛Beta`
+
+Sets the permission level required to remove schematics in Syncmatica.
+
+- Type: `boolean`
+- Default value: `true`
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `IGNY`

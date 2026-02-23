@@ -26,7 +26,7 @@ public class CustomItemMaxStackSizeCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandBuildContext) {
         //#if MC >= 12006
         dispatcher.register(Commands.literal("customItemMaxStackSize")
-                .requires(source -> CommandUtils.canUseCommand(source, IGNYSettings.commandCustomItemMaxStackSize))
+                .requires(source -> CommandUtils.canUseCommand(source.getPlayer(), IGNYSettings.commandCustomItemMaxStackSize))
                 .then(Commands.literal("set")
                         .then(Commands.argument("predicate", ItemPredicateArgument.itemPredicate(commandBuildContext))
                                 .then(Commands.argument("count", IntegerArgumentType.integer(1, 99))

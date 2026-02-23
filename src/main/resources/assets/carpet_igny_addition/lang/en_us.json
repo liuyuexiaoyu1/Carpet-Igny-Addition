@@ -102,6 +102,8 @@
   "igny.logger.piston.failure.unknown": "Unknown reason",
   "igny.logger.piston.action.performed_text": "performed",
   "igny.logger.piston.action.punctuation": ".",
+  "igny.syncmatica_not_found": "The Syncmatica mod is not installed",
+  "igny.syncmatica_not_permission": "No Permission",
 
   "carpet.rule.wardenNeverDig.desc":"Warden Never Dig",
   "carpet.rule.playerLevitationFreeShulkerBullet.desc":"Player Immune to Shulker Levitation",
@@ -192,5 +194,13 @@
   "carpet.rule.structureBlockNoBlockUpdate.desc": "When loading a structure with structure blocks, the placed blocks do not trigger block updates",
   "carpet.rule.spawnMaxCountIgnoresChunkOverlap.desc": "Count overlapping spawnable chunks between players towards the spawn cap, i.e. calculate the spawn cap based on online player count",
   "carpet.rule.prioritizeFlyingUseItem.desc": "Prioritize using items over interacting with blocks while flying or riptiding",
-  "carpet.rule.optimizedSpawning.desc": "Optimizes performance by canceling spawn cycles for any category that has reached its mobcap."
+  "carpet.rule.optimizedSpawning.desc": "Optimizes performance by canceling spawn cycles for any category that has reached its mobcap",
+  "carpet.rule.dyedFrog.desc": "Feed tadpoles with dye to determine their frog variant upon maturing. Feeding slimeballs will result in vanilla behavior",
+  "carpet.rule.dyedFrog.extra.0": "Green Dye -> Cold Frog (Green)",
+  "carpet.rule.dyedFrog.extra.1": "Orange Dye -> Temperate Frog (Brown)",
+  "carpet.rule.dyedFrog.extra.2": "Light Gray Dye -> Warm Frog (White)",
+  "carpet.rule.betterLoyaltyTrident.name": "Better Loyalty Trident",
+  "carpet.rule.betterLoyaltyTrident.desc": "Tridents with the Loyalty enchantment will trigger their return if they exceed the player's simulation distance or go beyond the world's minimum/maximum build height",
+  "carpet.rule.betterLoyaltyTrident.extra.0": "Loyalty will not trigger if both the player and the trident are outside the world's build height limits",
+  "carpet.rule.removeSyncmaticaPermission.desc": "Sets the permission level required to remove schematics in Syncmatica"
 }

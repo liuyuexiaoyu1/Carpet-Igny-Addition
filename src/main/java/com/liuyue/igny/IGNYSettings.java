@@ -3,6 +3,8 @@ package com.liuyue.igny;
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.Rule;
 import carpet.api.settings.Validator;
+import carpet.utils.Translations;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -10,6 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 
 import java.util.*;
@@ -352,11 +355,10 @@ public class IGNYSettings
                             .peek(name -> {
                                 if (!isValidEntityName(registry, name)) {
                                     source.sendFailure(Component.translatable("igny.settings.failure.unknown_entity", name));
-                                    throw new IllegalArgumentException("Unknown entity " + name);
                                 }
                             })
                             .collect(Collectors.toSet());
-                    return newValue;
+                    return null;
                 }
                 return "#none";
             }catch (IllegalArgumentException e){
@@ -479,4 +481,36 @@ public class IGNYSettings
             options = {"false", "true"}
     )
     public static Boolean optimizedSpawning = false;
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean dyedFrog = false;
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean betterLoyaltyTrident = false;
+
+    @Rule(
+            categories = {IGNY},
+            options = {"false", "true", "ops", "0", "1", "2", "3", "4"},
+            validators = SyncmaticaValidator.class
+    )
+    public static String removeSyncmaticaPermission = "true";
+
+    public static class SyncmaticaValidator extends Validator<String> {
+        @Override
+        public String validate(CommandSourceStack source, CarpetRule<String> rule, String newValue, String string) {
+            if (source != null && source.getEntity() instanceof ServerPlayer) {
+                if (!FabricLoader.getInstance().isModLoaded("syncmatica")) {
+                    source.sendFailure(Component.literal(Translations.tr("igny.syncmatica_not_found")));
+                    return null;
+                }
+            }
+            return newValue;
+        }
+    }
 }

@@ -39,7 +39,7 @@ public class CustomPlayerPickupItemCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext context) {
         dispatcher.register(
                 Commands.literal("customPlayerPickupItem")
-                        .requires(source -> CommandUtils.canUseCommand(source, IGNYSettings.commandCustomPlayerPickupItem))
+                        .requires(source -> CommandUtils.canUseCommand(source.getPlayer(), IGNYSettings.commandCustomPlayerPickupItem))
                         .then(Commands.argument("target", StringArgumentType.string())
                                 .suggests(CustomPlayerPickupItemCommand::suggestPlayers)
                                 .then(Commands.literal("get")

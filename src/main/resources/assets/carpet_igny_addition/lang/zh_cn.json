@@ -101,6 +101,8 @@
   "igny.logger.piston.failure.unknown": "未知原因",
   "igny.logger.piston.action.performed_text": "执行了",
   "igny.logger.piston.action.punctuation": "。",
+  "igny.syncmatica_not_found": "未安装Syncmatica模组",
+  "igny.syncmatica_not_permission": "权限不足",
 
   "carpet.rule.wardenNeverDig.name": "监守者永不钻地",
   "carpet.rule.wardenNeverDig.desc": "让监守者永远不会钻地",
@@ -257,5 +259,15 @@
   "carpet.rule.prioritizeFlyingUseItem.name": "优先飞行使用物品",
   "carpet.rule.prioritizeFlyingUseItem.desc": "鞘翅飞行或激流冲锋时，优先使用物品而非与方块交互",
   "carpet.rule.optimizedSpawning.name": "优化生成",
-  "carpet.rule.optimizedSpawning.desc": "优化刷怪性能，当维度任意生成类型达到上限时停止该类型的生成计算"
+  "carpet.rule.optimizedSpawning.desc": "优化刷怪性能，当维度任意生成类型达到上限时停止该类型的生成计算",
+  "carpet.rule.dyedFrog.name": "染色青蛙",
+  "carpet.rule.dyedFrog.desc": "使用染料喂食蝌蚪，当蝌蚪成年后根据喂食的对应染料变为对应种类的青蛙，喂食粘液球使用原版逻辑",
+  "carpet.rule.dyedFrog.extra.0": "绿色染料 -> 寒带青蛙",
+  "carpet.rule.dyedFrog.extra.1": "橙色染料 -> 温带青蛙",
+  "carpet.rule.dyedFrog.extra.2": "淡灰色染料 -> 热带青蛙",
+  "carpet.rule.betterLoyaltyTrident.name": "更好的忠诚三叉戟",
+  "carpet.rule.betterLoyaltyTrident.desc": "附魔忠诚的三叉戟会在超过玩家的模拟距离和超过世界最低最高建筑高度时触发忠诚",
+  "carpet.rule.betterLoyaltyTrident.extra.0": "玩家超过世界最低最高建筑高度时，三叉戟超过世界最低最高建筑高度不会触发忠诚",
+  "carpet.rule.removeSyncmaticaPermission.name": "删除共享原理图权限",
+  "carpet.rule.removeSyncmaticaPermission.desc": "在Syncmatica中删除原理图时，需要当前规则值设置的权限"
 }

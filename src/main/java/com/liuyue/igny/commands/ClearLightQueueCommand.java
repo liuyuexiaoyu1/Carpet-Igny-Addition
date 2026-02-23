@@ -15,7 +15,7 @@ public class ClearLightQueueCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
                 Commands.literal("clearlightqueue")
-                        .requires(source -> CommandUtils.canUseCommand(source, IGNYSettings.commandClearLightQueue))
+                        .requires(source -> CommandUtils.canUseCommand(source.getPlayer(), IGNYSettings.commandClearLightQueue))
                         .executes(ClearLightQueueCommand::executeCommand)
         );
     }

@@ -45,7 +45,7 @@ public class CommandUtils {
             //#endif
         };
     }
-    public static boolean canUseCommand(CommandSourceStack source, Object commandLevel) {
+    public static boolean canUseCommand(ServerPlayer source, Object commandLevel) {
         if (commandLevel instanceof Boolean) {
             return (Boolean) commandLevel;
         }
@@ -70,7 +70,7 @@ public class CommandUtils {
         return false;
     }
 
-    public static boolean hasPermissionLevel(CommandSourceStack source, int level) {
+    public static boolean hasPermissionLevel(ServerPlayer source, int level) {
         //#if MC >= 12111
         //$$ return switch (level) {
         //$$     case 0 -> Commands.LEVEL_ALL.check(source.permissions());
@@ -81,7 +81,7 @@ public class CommandUtils {
         //$$     default -> false;
         //$$  };
         //#else
-        return source.hasPermission(level);
+        return source.hasPermissions(level);
         //#endif
     }
 

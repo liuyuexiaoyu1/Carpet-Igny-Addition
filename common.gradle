@@ -23,6 +23,17 @@ repositories {
 		url = 'https://www.cursemaven.com'
 		content { includeGroup('curse.maven') }
 	}
+	maven {url = 'https://maven.fallenbreath.me/releases'
+		content {includeGroupAndSubgroups("me.fallenbreath")}
+	}
+	maven {url = 'https://maven.terraformersmc.com/releases/'
+		content { includeGroupAndSubgroups("com.terraformersmc")}
+	}
+	maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+	maven { url = 'https://maven.nucleoid.xyz/' }
+	maven {url = "https://masa.dy.fi/maven/sakura-ryoko"
+		content {includeGroupAndSubgroups("fi.dy.masa")}
+	}
 	flatDir {
 		dirs '../../libs'
 	}
@@ -55,8 +66,20 @@ dependencies {
     }
     // Mixin Extras
     include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.2")))
+
     autoImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     autoImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	if (!unobfuscated) {
+		if (mcVersion < 12003) {
+			autoImplementation "com.github.End-Tech:syncmatica:${project.syncmatica_version}"{
+				exclude group: "net.fabricmc.fabric-api"
+			}
+		} else {
+			autoImplementation "com.github.sakura-ryoko:syncmatica:${project.syncmatica_version}"{
+				exclude group: "net.fabricmc.fabric-api"
+			}
+		}
+	}
 	if (!unobfuscated) {
 		include(autoImplementation("io.github.hotpad100c:ryansrenderingkit:${project.ryansrenderingkit_version}"))
 	} else {
