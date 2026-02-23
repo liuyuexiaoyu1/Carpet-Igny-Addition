@@ -35,4 +35,4 @@
 - [Modrinth](https://modrinth.com/mod/carpet-igny-addition)
 - [GitHub](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/releases/latest)
 ## 最新Beta版下载↓ ##
-- [GitHub Action](https://nightly.link/liuyuexiaoyu1/Carpet-Igny-Addition/workflows/build.yml/master/mod-jars.zip) `无需登录GitHub`
+- [GitHub Action](https://nightly.link/liuyuexiaoyu1/Carpet-Igny-Addition/workflows/gradle.yml/master/mod-jars.zip) `无需登录GitHub`
