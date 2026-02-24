@@ -625,7 +625,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `OPTIMIZATION`
 
-## 染色青蛙 (dyedFrog) `🐛Beta`
+## 染色青蛙 (dyedFrog) `🐛Beta` `MC<1.21.1`
 
 使用染料喂食蝌蚪，当蝌蚪成年后根据喂食的对应染料变为对应种类的青蛙，喂食粘液球使用原版逻辑。
 
@@ -651,7 +651,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 删除共享原理图权限 (removeSyncmaticaPermission) `🐛Beta`
+## 删除共享原理图权限 (removeSyncmaticaPermission) `🐛Beta` `MC<26.1`
 
 在Syncmatica中删除原理图时，需要当前规则值设置的权限。
 
