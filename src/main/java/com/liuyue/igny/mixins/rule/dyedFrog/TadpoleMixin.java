@@ -3,13 +3,15 @@ package com.liuyue.igny.mixins.rule.dyedFrog;
 import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.minecraft.world.entity.animal.FrogVariant;
+//#if MC > 12004
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
+//#endif
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.animal.FrogVariant;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.frog.Tadpole;
 import net.minecraft.world.entity.player.Player;
@@ -30,6 +32,7 @@ import java.util.Map;
 
 @Mixin(Tadpole.class)
 public class TadpoleMixin {
+    //#if MC < 12103
     @Unique private int greenDyeCount = 0;
     @Unique private int grayDyeCount = 0;
     @Unique private int orangeDyeCount = 0;
@@ -62,15 +65,26 @@ public class TadpoleMixin {
     )
     private SpawnGroupData finalizeSpawn(Frog instance, ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, SpawnGroupData spawnGroupData, Operation<SpawnGroupData> original) {
         SpawnGroupData result = original.call(instance, serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData);
+//#if MC <= 12004
+//$$ List<Map.Entry<FrogVariant, Integer>> stats = new ArrayList<>();
+//$$ stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.COLD, greenDyeCount));
+//$$ stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.WARM, grayDyeCount));
+//$$ stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.TEMPERATE, orangeDyeCount));
+//#else
         List<Map.Entry<ResourceKey<FrogVariant>, Integer>> stats = new ArrayList<>();
         stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.COLD, greenDyeCount));
         stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.WARM, grayDyeCount));
         stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.TEMPERATE, orangeDyeCount));
+//#endif
         stats.add(new AbstractMap.SimpleEntry<>(null, slimeBallCount));
         stats.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
-        Map.Entry<ResourceKey<FrogVariant>, Integer> winner = stats.getFirst();
+        Map.Entry<?, Integer> winner = stats.getFirst();
         if (winner.getValue() > 0 && winner.getKey() != null) {
-            instance.setVariant(BuiltInRegistries.FROG_VARIANT.getHolderOrThrow(winner.getKey()));
+//#if MC <= 12004
+//$$ instance.setVariant((FrogVariant) winner.getKey());
+//#else
+            instance.setVariant(BuiltInRegistries.FROG_VARIANT.getHolderOrThrow((ResourceKey<FrogVariant>) winner.getKey()));
+//#endif
         }
         return result;
     }
@@ -90,4 +104,5 @@ public class TadpoleMixin {
         this.orangeDyeCount = nbt.getInt("OrangeDyeCount");
         this.slimeBallCount = nbt.getInt("SlimeBallCount");
     }
+    //#endif
 }
