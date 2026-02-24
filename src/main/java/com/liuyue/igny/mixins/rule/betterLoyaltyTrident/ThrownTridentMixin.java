@@ -21,7 +21,7 @@ public class ThrownTridentMixin {
     private void tick(CallbackInfo ci, @Local Entity owner, @Local int i) {
         if (IGNYSettings.betterLoyaltyTrident) {
             ThrownTrident trident = (ThrownTrident) (Object) this;
-            MinecraftServer server = trident.getServer();
+            MinecraftServer server = trident.level().getServer();
             if (owner != null && i > 0 && server != null) {
                 double dx = trident.getX() - owner.getX();
                 double dz = trident.getZ() - owner.getZ();
