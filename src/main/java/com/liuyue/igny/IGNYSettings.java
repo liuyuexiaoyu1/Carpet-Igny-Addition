@@ -481,25 +481,27 @@ public class IGNYSettings
             options = {"false", "true"}
     )
     public static Boolean optimizedSpawning = false;
-
+    //#if MC <= 12101
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE},
             options = {"false", "true"}
     )
     public static Boolean dyedFrog = false;
+    //#endif
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE},
             options = {"false", "true"}
     )
     public static Boolean betterLoyaltyTrident = false;
-
+    //#if MC < 26.1
     @Rule(
             categories = {IGNY},
             options = {"false", "true", "ops", "0", "1", "2", "3", "4"},
             validators = SyncmaticaValidator.class
     )
     public static String removeSyncmaticaPermission = "true";
+//#endif
 
     public static class SyncmaticaValidator extends Validator<String> {
         @Override
