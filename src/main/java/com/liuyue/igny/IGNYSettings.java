@@ -355,14 +355,13 @@ public class IGNYSettings
                             .peek(name -> {
                                 if (!isValidEntityName(registry, name)) {
                                     source.sendFailure(Component.translatable("igny.settings.failure.unknown_entity", name));
+return null;
                                 }
                             })
                             .collect(Collectors.toSet());
-                    return null;
+                    return newValue;
                 }
-                return "#none";
-            }catch (IllegalArgumentException e){
-                return "#none";
+                return null;
             }
         }
 
