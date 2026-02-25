@@ -340,7 +340,6 @@ public class IGNYSettings
     public static class CrammingEntityValidator extends Validator<String> {
         @Override
         public String validate(CommandSourceStack source, CarpetRule<String> rule, String newValue, String string) {
-            try {
                 if (newValue == null || newValue.equals("#none")) {
                     CRAMMING_ENTITIES.clear();
                     return "#none";
@@ -362,7 +361,7 @@ return null;
                     return newValue;
                 }
                 return null;
-            }
+            
         }
 
         private boolean isValidEntityName(Registry<EntityType<?>> registry, String name) {
