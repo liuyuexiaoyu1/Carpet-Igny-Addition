@@ -17,7 +17,7 @@ public abstract class OldVersionLithiumStackListMixin {
             "changedALot",
             "lithium$notifyCount(Lnet/minecraft/world/item/ItemStack;II)V",
             "set(ILnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/ItemStack;"
-    }, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getMaxStackSize()I"))
+    }, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getMaxStackSize()I"), require = 0)
     private int getMaxStackSize(ItemStack instance, Operation<Integer> original) {
         boolean changed = IGNYSettings.itemStackCountChanged.get();
         try {
