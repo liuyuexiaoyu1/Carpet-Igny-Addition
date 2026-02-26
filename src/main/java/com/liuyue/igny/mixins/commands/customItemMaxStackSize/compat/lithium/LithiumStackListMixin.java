@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import net.minecraft.server.level.DistanceManager;
 
-@Mixin(targets = {"net.caffeinemc.mods.lithium.common.hopper.LithiumStackList"})
+@Mixin(targets = "net.caffeinemc.mods.lithium.common.hopper.LithiumStackList")
 @Pseudo
 public abstract class LithiumStackListMixin {
     //#if MC >= 12006

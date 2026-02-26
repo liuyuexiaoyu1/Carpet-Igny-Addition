@@ -28,6 +28,10 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#if MC >= 12106
+//$$ import net.minecraft.world.level.storage.ValueInput;
+//$$ import net.minecraft.world.level.storage.ValueOutput;
+//#endif
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
