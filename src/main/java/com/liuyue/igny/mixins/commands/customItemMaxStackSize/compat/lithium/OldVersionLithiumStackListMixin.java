@@ -12,30 +12,13 @@ import org.spongepowered.asm.mixin.injection.At;
 @Pseudo
 public abstract class OldVersionLithiumStackListMixin {
     //#if MC >= 12006
-    @WrapOperation(method = "<init>(Lnet/minecraft/core/NonNullList;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getMaxStackSize()I"))
+    @WrapOperation(method = {
+            "<init>(Lnet/minecraft/core/NonNullList;I)V",
+            "changedALot",
+            "lithium$notifyCount(Lnet/minecraft/world/item/ItemStack;II)V",
+            "set(ILnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/ItemStack;"
+    }, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getMaxStackSize()I"))
     private int getMaxStackSize(ItemStack instance, Operation<Integer> original) {
-        boolean changed = IGNYSettings.itemStackCountChanged.get();
-        try {
-            IGNYSettings.itemStackCountChanged.set(false);
-            return original.call(instance);
-        } finally {
-            IGNYSettings.itemStackCountChanged.set(changed);
-        }
-    }
-
-    @WrapOperation(method = "changedALot", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getMaxStackSize()I"))
-    private int getMaxStackSize2(ItemStack instance, Operation<Integer> original) {
-        boolean changed = IGNYSettings.itemStackCountChanged.get();
-        try {
-            IGNYSettings.itemStackCountChanged.set(false);
-            return original.call(instance);
-        } finally {
-            IGNYSettings.itemStackCountChanged.set(changed);
-        }
-    }
-
-    @WrapOperation(method = "lithium$notifyBeforeCountChange", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getMaxStackSize()I"))
-    private int getMaxStackSize3(ItemStack instance, Operation<Integer> original) {
         boolean changed = IGNYSettings.itemStackCountChanged.get();
         try {
             IGNYSettings.itemStackCountChanged.set(false);
