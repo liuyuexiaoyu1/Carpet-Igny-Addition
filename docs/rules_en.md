@@ -625,7 +625,7 @@ Optimizes performance by canceling spawn cycles for any category that has reache
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `OPTIMIZATION`
 
-## dyedFrog `🐛Beta` `MC<1.21.1`
+## dyedFrog `🐛Beta`
 
 Feed tadpoles with dye to determine their frog variant upon maturing. Feeding slimeballs will result in vanilla behavior.
 
@@ -651,7 +651,7 @@ Loyalty will not trigger if both the player and the trident are outside the worl
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## removeSyncmaticaPermission `🐛Beta` `MC<26.1`
+## removeSyncmaticaPermission `🐛Beta`
 
 Sets the permission level required to remove schematics in Syncmatica.
 

@@ -51,6 +51,7 @@
     "rule.candlePlaceOnIncompleteBlock.CandleBlockMixin",
     "rule.creativeDestroyWaterloggedBlockNoWater.ServerPlayerGameModeMixin",
     "rule.dispenserTrade.DispenserBlockMixin",
+    "rule.dyedFrog.FrogAccessor",
     "rule.dyedFrog.TadpoleMixin",
     "rule.enderDragonDeathDropExp.EnderDragonMixin",
     "rule.enderDragonDeathRiseLimit.EnderDragonMixin",

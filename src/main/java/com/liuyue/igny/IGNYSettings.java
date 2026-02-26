@@ -340,28 +340,26 @@ public class IGNYSettings
     public static class CrammingEntityValidator extends Validator<String> {
         @Override
         public String validate(CommandSourceStack source, CarpetRule<String> rule, String newValue, String string) {
-                if (newValue == null || newValue.equals("#none")) {
-                    CRAMMING_ENTITIES.clear();
-                    return "#none";
+            if (newValue == null || newValue.equals("#none")) {
+                CRAMMING_ENTITIES.clear();
+                return "#none";
+            }
+            if (source != null) {
+                var registry = source.getServer().registryAccess().registryOrThrow(Registries.ENTITY_TYPE);
+                List<String> names = Arrays.stream(newValue.split(","))
+                        .map(String::trim)
+                        .filter(s -> !s.isEmpty())
+                        .toList();
+                for (String name : names) {
+                    if (!isValidEntityName(registry, name)) {
+                        source.sendFailure(Component.translatable("igny.settings.failure.unknown_entity", name));
+                        return null;
+                    }
                 }
-
-                if (source != null) {
-                    var registry = source.getServer().registryAccess().registryOrThrow(Registries.ENTITY_TYPE);
-
-                    CRAMMING_ENTITIES = Arrays.stream(newValue.split(","))
-                            .map(String::trim)
-                            .filter(s -> !s.isEmpty())
-                            .peek(name -> {
-                                if (!isValidEntityName(registry, name)) {
-                                    source.sendFailure(Component.translatable("igny.settings.failure.unknown_entity", name));
-return null;
-                                }
-                            })
-                            .collect(Collectors.toSet());
-                    return newValue;
-                }
-                return null;
-            
+                CRAMMING_ENTITIES = new HashSet<>(names);
+                return newValue;
+            }
+            return null;
         }
 
         private boolean isValidEntityName(Registry<EntityType<?>> registry, String name) {
@@ -479,13 +477,12 @@ return null;
             options = {"false", "true"}
     )
     public static Boolean optimizedSpawning = false;
-    //#if MC <= 12101
+
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE},
             options = {"false", "true"}
     )
     public static Boolean dyedFrog = false;
-    //#endif
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE},
@@ -499,7 +496,7 @@ return null;
             validators = SyncmaticaValidator.class
     )
     public static String removeSyncmaticaPermission = "true";
-//#endif
+    //#endif
 
     public static class SyncmaticaValidator extends Validator<String> {
         @Override

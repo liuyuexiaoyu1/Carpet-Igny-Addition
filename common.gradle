@@ -44,7 +44,6 @@ configurations {
 	modRuntimeOnly.exclude group: 'net.fabricmc', module: 'fabric-loader'
 }
 
-def isNewStyleVersion = !project.minecraft_version.startsWith("1")
 dependencies {
     def processDependency = { dep ->
         // https://github.com/FabricMC/fabric-loader/issues/783
@@ -71,11 +70,11 @@ dependencies {
     autoImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	if (!unobfuscated) {
 		if (mcVersion < 12003) {
-			autoImplementation ("com.github.End-Tech:syncmatica:${project.syncmatica_version}") {
+			compileOnly ("com.github.End-Tech:syncmatica:${project.syncmatica_version}") {
 				exclude group: "net.fabricmc.fabric-api"
 			}
 		} else {
-			autoImplementation ("com.github.sakura-ryoko:syncmatica:${project.syncmatica_version}") {
+			compileOnly ("com.github.sakura-ryoko:syncmatica:${project.syncmatica_version}") {
 				exclude group: "net.fabricmc.fabric-api"
 			}
 		}
@@ -87,7 +86,7 @@ dependencies {
 	}
 	//Lithium
 	if (mcVersion >= 12006) {
-		autoImplementation(project.lithium_dependency)
+		compileOnly(project.lithium_dependency)
 	}
 
     // Carpet
@@ -95,18 +94,14 @@ dependencies {
 
 	//GCA
 	if (mcVersion >= 12006 && !unobfuscated) {
-		autoImplementation "${project.gca_version}"
+		compileOnly "${project.gca_version}"
 	}
 }
 
 String MIXIN_CONFIG_PATH = 'carpet_igny_addition.mixins.json'
 String LANG_DIR = 'assets/carpet_igny_addition/lang'
 JavaVersion JAVA_COMPATIBILITY
-if (isNewStyleVersion){
-    JAVA_COMPATIBILITY = JavaVersion.VERSION_25
-} else{
-	JAVA_COMPATIBILITY = JavaVersion.VERSION_21
-}
+JAVA_COMPATIBILITY = JavaVersion.VERSION_25
 
 JavaVersion MIXIN_COMPATIBILITY_LEVEL = JAVA_COMPATIBILITY
 
