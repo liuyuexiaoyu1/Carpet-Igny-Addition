@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import net.minecraft.server.level.DistanceManager;
 
-@Mixin(targets = "net.caffeinemc.mods.lithium.common.hopper.LithiumStackList")
+@Mixin(targets = {"net.caffeinemc.mods.lithium.common.hopper.LithiumStackList"})
 @Pseudo
 public abstract class LithiumStackListMixin {
     //#if MC >= 12006
@@ -24,8 +24,19 @@ public abstract class LithiumStackListMixin {
         }
     }
 
+    @WrapOperation(method = "changedALot", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getMaxStackSize()I"))
+    private int getMaxStackSize2(ItemStack instance, Operation<Integer> original) {
+        boolean changed = IGNYSettings.itemStackCountChanged.get();
+        try {
+            IGNYSettings.itemStackCountChanged.set(false);
+            return original.call(instance);
+        } finally {
+            IGNYSettings.itemStackCountChanged.set(changed);
+        }
+    }
+
     @WrapOperation(method = "lithium$notifyCount(Lnet/minecraft/world/item/ItemStack;II)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getMaxStackSize()I"))
-    private int getMaxStackSizeNotify(ItemStack instance, Operation<Integer> original) {
+    private int getMaxStackSize3(ItemStack instance, Operation<Integer> original) {
         boolean changed = IGNYSettings.itemStackCountChanged.get();
         try {
             IGNYSettings.itemStackCountChanged.set(false);

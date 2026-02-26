@@ -100,8 +100,8 @@ dependencies {
 
 String MIXIN_CONFIG_PATH = 'carpet_igny_addition.mixins.json'
 String LANG_DIR = 'assets/carpet_igny_addition/lang'
-JavaVersion JAVA_COMPATIBILITY
-JAVA_COMPATIBILITY = JavaVersion.VERSION_25
+JavaVersion JAVA_COMPATIBILITY = JavaVersion.VERSION_21
+if (unobfuscated) JAVA_COMPATIBILITY = JavaVersion.VERSION_25
 
 JavaVersion MIXIN_COMPATIBILITY_LEVEL = JAVA_COMPATIBILITY
 

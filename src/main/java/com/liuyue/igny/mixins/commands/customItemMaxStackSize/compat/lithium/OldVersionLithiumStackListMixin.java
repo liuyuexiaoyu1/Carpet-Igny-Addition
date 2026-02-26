@@ -23,8 +23,19 @@ public abstract class OldVersionLithiumStackListMixin {
         }
     }
 
+    @WrapOperation(method = "changedALot", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getMaxStackSize()I"))
+    private int getMaxStackSize2(ItemStack instance, Operation<Integer> original) {
+        boolean changed = IGNYSettings.itemStackCountChanged.get();
+        try {
+            IGNYSettings.itemStackCountChanged.set(false);
+            return original.call(instance);
+        } finally {
+            IGNYSettings.itemStackCountChanged.set(changed);
+        }
+    }
+
     @WrapOperation(method = "lithium$notifyBeforeCountChange", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getMaxStackSize()I"))
-    private int getMaxStackSizeNotify(ItemStack instance, Operation<Integer> original) {
+    private int getMaxStackSize3(ItemStack instance, Operation<Integer> original) {
         boolean changed = IGNYSettings.itemStackCountChanged.get();
         try {
             IGNYSettings.itemStackCountChanged.set(false);
