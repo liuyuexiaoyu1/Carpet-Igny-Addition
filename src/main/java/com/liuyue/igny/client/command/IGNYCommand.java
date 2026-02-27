@@ -35,7 +35,7 @@ public class IGNYCommand {
                                         //#else
                                         ClientCommandManager
                                                 //#endif
-                                        .argument("pos", BlockPosArgument.blockPos())
+                                        .argument("blockPos", BlockPosArgument.blockPos())
                                         .executes(IGNYCommand::executeHighlight)
                                 )
                         )
