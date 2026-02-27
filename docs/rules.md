@@ -649,7 +649,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `IGNY`
 
-## 禁用看门狗 (disableWatchDog)
+## 禁用看门狗 (disableWatchDog) `🐛Beta`
 
 禁用Minecraft看门狗，防止服务器因卡顿而停止运行。
 

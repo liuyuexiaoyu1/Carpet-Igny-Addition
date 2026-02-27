@@ -649,7 +649,7 @@ Sets the permission level required to remove schematics in [Syncmatica](https://
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`
 
-## disableWatchDog
+## disableWatchDog `🐛Beta`
 
 Disables the Minecraft watchdog, preventing the server from stopping due to lag.
 
