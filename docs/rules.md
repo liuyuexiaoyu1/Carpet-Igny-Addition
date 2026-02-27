@@ -462,17 +462,6 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `BUGFIX`
 
-## 熔炉含不可燃烧物高亮 (furnaceHasIncombustibleHighlight) `[迁移]`
-
-当熔炉的原料槽中含有不可燃烧的物品时，自身颜色变为淡红色，可透过方块显示。
-
-需要客户端同时安装有此MOD。
-
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `false`, `true`
-- 分类: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
-
 ## 自定义玩家拾取物品指令权限 (commandCustomPlayerPickupItem)
 
 使用/customPlayerPickupItem来自定义玩家能拾取的物品。
@@ -571,7 +560,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 可再生方解石 (renewableCalcite) `🐛Beta`
+## 可再生方解石 (renewableCalcite)
 
 使用滴水石锥接受随机刻转化石英块为方解石。
 
@@ -580,7 +569,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 纯净潜影盒发射 (pureShulkerBoxDispense) `🐛Beta`
+## 纯净潜影盒发射 (pureShulkerBoxDispense)
 
 发射器放置染色或者命名过的潜影盒会使其变回普通的未命名的潜影盒，同时保留其内容物。
 
@@ -589,7 +578,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 结构方块无方块更新 (structureBlockNoBlockUpdate) `🐛Beta`
+## 结构方块无方块更新 (structureBlockNoBlockUpdate)
 
 使用结构方块加载结构时，结构中放置的方块不会产生方块更新。
 
@@ -598,7 +587,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
-## 生成上限无视区块重叠 (spawnMaxCountIgnoresChunkOverlap) `🐛Beta`
+## 生成上限无视区块重叠 (spawnMaxCountIgnoresChunkOverlap)
 
 将玩家之间的重叠的可生成区块计入生成上限，即按在线玩家数计算生成上限。
 
@@ -607,7 +596,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 优先飞行使用物品 (prioritizeFlyingUseItem) `🐛Beta`
+## 优先飞行使用物品 (prioritizeFlyingUseItem)
 
 鞘翅飞行或激流冲锋时，优先使用物品而非与方块交互。
 
@@ -616,7 +605,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 优化生成 (optimizedSpawning) `🐛Beta`
+## 优化生成 (optimizedSpawning)
 
 优化刷怪性能，当维度任意生成类型达到上限时停止该类型的生成计算。
 
@@ -625,7 +614,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `OPTIMIZATION`
 
-## 染色青蛙 (dyedFrog) `🐛Beta`
+## 染色青蛙 (dyedFrog)
 
 使用染料喂食蝌蚪，当蝌蚪成年后根据喂食的对应染料变为对应种类的青蛙，喂食粘液球使用原版逻辑。
 
@@ -640,7 +629,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 更好的忠诚三叉戟 (betterLoyaltyTrident) `🐛Beta`
+## 更好的忠诚三叉戟 (betterLoyaltyTrident)
 
 附魔忠诚的三叉戟会在超过玩家的模拟距离和超过世界最低最高建筑高度时触发忠诚。
 
@@ -651,7 +640,7 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 删除共享原理图权限 (removeSyncmaticaPermission) `🐛Beta`
+## 删除共享原理图权限 (removeSyncmaticaPermission)
 
 在Syncmatica中删除原理图时，需要当前规则值设置的权限。
 

@@ -462,17 +462,6 @@ Fixes an issue where entities like Wind Charges have their explosions incorrectl
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `BUGFIX`
 
-## furnaceHasIncombustibleHighlight `[Migrated]`
-
-When the input slot of a furnace contains non-smeltable items, the furnace itself turns light red and becomes visible through blocks (X-ray highlight).
-
-Requires this mod to be installed on the client side as well.
-
-- Type: `boolean`
-- Default value: `false`
-- Suggested options: `false`, `true`
-- Categories: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
-
 ## commandCustomPlayerPickupItem
 
 Use /customPlayerPickupItem to control player custom pickup items.
@@ -571,7 +560,7 @@ When a dispenser trade fails, do not eject the currency items; instead, cause th
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## renewableCalcite `🐛Beta`
+## renewableCalcite
 
 Using pointed dripstone to convert quartz blocks into calcite via random ticks.
 
@@ -580,7 +569,7 @@ Using pointed dripstone to convert quartz blocks into calcite via random ticks.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## pureShulkerBoxDispense `🐛Beta`
+## pureShulkerBoxDispense
 
 When a dispenser places a dyed or renamed shulker box, it will be reverted to a regular, unnamed shulker box while preserving its contents.
 
@@ -589,7 +578,7 @@ When a dispenser places a dyed or renamed shulker box, it will be reverted to a 
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## structureBlockNoBlockUpdate `🐛Beta`
+## structureBlockNoBlockUpdate
 
 When loading a structure with structure blocks, the placed blocks do not trigger block updates.
 
@@ -598,7 +587,7 @@ When loading a structure with structure blocks, the placed blocks do not trigger
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## spawnMaxCountIgnoresChunkOverlap `🐛Beta`
+## spawnMaxCountIgnoresChunkOverlap
 
 Count overlapping spawnable chunks between players towards the spawn cap, i.e. calculate the spawn cap based on online player count.
 
@@ -607,7 +596,7 @@ Count overlapping spawnable chunks between players towards the spawn cap, i.e. c
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## prioritizeFlyingUseItem `🐛Beta`
+## prioritizeFlyingUseItem
 
 Prioritize using items over interacting with blocks while flying or riptiding.
 
@@ -616,7 +605,7 @@ Prioritize using items over interacting with blocks while flying or riptiding.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## optimizedSpawning `🐛Beta`
+## optimizedSpawning
 
 Optimizes performance by canceling spawn cycles for any category that has reached its mobcap.
 
@@ -625,7 +614,7 @@ Optimizes performance by canceling spawn cycles for any category that has reache
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `OPTIMIZATION`
 
-## dyedFrog `🐛Beta`
+## dyedFrog
 
 Feed tadpoles with dye to determine their frog variant upon maturing. Feeding slimeballs will result in vanilla behavior.
 
@@ -640,7 +629,7 @@ Light Gray Dye -> Warm Frog (White)
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## betterLoyaltyTrident `🐛Beta`
+## betterLoyaltyTrident
 
 Tridents with the Loyalty enchantment will trigger their return if they exceed the player's simulation distance or go beyond the world's minimum/maximum build height.
 
@@ -651,7 +640,7 @@ Loyalty will not trigger if both the player and the trident are outside the worl
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## removeSyncmaticaPermission `🐛Beta`
+## removeSyncmaticaPermission
 
 Sets the permission level required to remove schematics in Syncmatica.
 

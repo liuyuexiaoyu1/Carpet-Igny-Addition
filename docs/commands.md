@@ -15,7 +15,7 @@
 - `/playerOperate ..`
     - `...<player>`
         - `...task`
-            - `...vault [<maxCycles>] [<onlineDuration>] [<waitingDuration>]` `MC>=1.20.3` `🐛Beta更改`
+            - `...vault [<maxCycles>] [<onlineDuration>] [<waitingDuration>]` `MC>=1.20.3`
             - `...pressUse <interval> <duration> [<cycles>]`
             - `...rotation <interval> <angle>`
         - `...stop`
