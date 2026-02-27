@@ -55,7 +55,7 @@ dependencies {
         return dep
     }
     def autoImplementation = { Object... args -> processDependency(unobfuscated ? implementation(*args) : modImplementation(*args)) }
-
+	def autoCompileOnly = { Object... args -> processDependency(unobfuscated ? compileOnly(*args) : modCompileOnly(*args)) }
     // Minecraft
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     if (!unobfuscated) {
@@ -70,11 +70,11 @@ dependencies {
     autoImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	if (!unobfuscated) {
 		if (mcVersion < 12003) {
-			compileOnly ("com.github.End-Tech:syncmatica:${project.syncmatica_version}") {
+			autoCompileOnly ("com.github.End-Tech:syncmatica:${project.syncmatica_version}") {
 				exclude group: "net.fabricmc.fabric-api"
 			}
 		} else {
-			compileOnly ("com.github.sakura-ryoko:syncmatica:${project.syncmatica_version}") {
+			autoCompileOnly ("com.github.sakura-ryoko:syncmatica:${project.syncmatica_version}") {
 				exclude group: "net.fabricmc.fabric-api"
 			}
 		}
@@ -86,7 +86,7 @@ dependencies {
 	}
 	//Lithium
 	if (mcVersion >= 12006) {
-		compileOnly(project.lithium_dependency)
+		autoCompileOnly(project.lithium_dependency)
 	}
 
     // Carpet
@@ -94,7 +94,7 @@ dependencies {
 
 	//GCA
 	if (mcVersion >= 12006 && !unobfuscated) {
-		compileOnly "${project.gca_version}"
+		autoCompileOnly "${project.gca_version}"
 	}
 }
 
