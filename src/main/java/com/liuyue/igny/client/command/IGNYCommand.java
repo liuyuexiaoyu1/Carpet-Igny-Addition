@@ -10,7 +10,6 @@ import com.mojang.brigadier.context.CommandContext;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 //#endif
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
-import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.core.BlockPos;
 
 public class IGNYCommand {
@@ -35,7 +34,7 @@ public class IGNYCommand {
                                         //#else
                                         ClientCommandManager
                                                 //#endif
-                                        .argument("blockPos", BlockPosArgument.blockPos())
+                                        .argument("blockPos", ClientBlockPosArgumentType.blockPos())
                                         .executes(IGNYCommand::executeHighlight)
                                 )
                         )
