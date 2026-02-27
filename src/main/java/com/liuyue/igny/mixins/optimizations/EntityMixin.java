@@ -92,7 +92,7 @@ public abstract class EntityMixin implements IEntity {
                 double intersectMaxZ = Math.min(myBox.maxZ, otherBox.maxZ);
                 if (intersectMaxX > intersectMinX && intersectMaxY > intersectMinY && intersectMaxZ > intersectMinZ) {
                     double intersectVolume = (intersectMaxX - intersectMinX) * (intersectMaxY - intersectMinY) * (intersectMaxZ - intersectMinZ);
-                    if (intersectVolume / myVolume > 0.85) {
+                    if (intersectVolume / myVolume > 0.7) {
                         tightCrammingCount++;
                     }
                 }
