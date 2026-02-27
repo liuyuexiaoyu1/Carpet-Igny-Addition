@@ -25,7 +25,6 @@ public class EntityMixin {
         if (IGNYSettings.fakePlayerBoatYawFix && cir.getReturnValueZ()) {
             Entity self = (Entity) (Object) this;
             if (self instanceof EntityPlayerMPFake && entity instanceof Boat) {
-                self.yRotO = entity.getYRot();
                 self.setYRot(entity.getYRot());
                 self.setYHeadRot(entity.getYRot());
             }

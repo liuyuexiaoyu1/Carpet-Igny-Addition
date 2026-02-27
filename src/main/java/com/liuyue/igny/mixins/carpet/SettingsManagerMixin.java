@@ -25,18 +25,6 @@ import carpet.utils.Translations;
 public abstract class SettingsManagerMixin {
 
     @Unique
-    private static final ThreadLocal<carpet.api.settings.CarpetRule<?>> CURRENT_RULE = new ThreadLocal<>();
-
-    @Inject(method = "displayRuleMenu", at = @At("HEAD"))
-    private void captureCurrentRule(CommandSourceStack source, CarpetRule<?> rule, CallbackInfoReturnable<Integer> cir) {
-        CURRENT_RULE.set(rule);
-    }
-
-    @Inject(method = "displayRuleMenu", at = @At("RETURN"))
-    private void clearCurrentRule(CommandSourceStack source, CarpetRule<?> rule, CallbackInfoReturnable<Integer> cir) {
-        CURRENT_RULE.remove();
-    }
-    @Unique
     private static final String RECORD_OPERATOR = "igny.settings.record.operator";
 
     @Unique
@@ -59,11 +47,8 @@ public abstract class SettingsManagerMixin {
             return;
         }
 
-        carpet.api.settings.CarpetRule<?> currentRule = CURRENT_RULE.get();
-        if (currentRule != null) {
-            Optional<RuleChangeDataManager.RuleChangeRecord> lastChange =
-                    RuleChangeDataManager.getLastChange(currentRule.name());
-
+        if (rule != null) {
+            Optional<RuleChangeDataManager.RuleChangeRecord> lastChange = RuleChangeDataManager.getLastChange(rule.name());
             if (lastChange.isPresent()) {
                 RuleChangeDataManager.RuleChangeRecord record = lastChange.get();
 
@@ -86,15 +71,8 @@ public abstract class SettingsManagerMixin {
         return obj.toString();
     }
 
-    @Inject(method = "setRule",at= @At(value = "INVOKE", target = "Lcarpet/api/settings/CarpetRule;set(Lnet/minecraft/commands/CommandSourceStack;Ljava/lang/String;)V"))
+    @Inject(method = {"setRule", "setDefault"},at= @At(value = "INVOKE", target = "Lcarpet/api/settings/CarpetRule;set(Lnet/minecraft/commands/CommandSourceStack;Ljava/lang/String;)V"))
     private void onSetRuleValue(CommandSourceStack source, CarpetRule<?> rule, String stringValue, CallbackInfoReturnable<Integer> cir){
-        if(IGNYSettings.showRuleChangeHistory) {
-            RuleChangeTracker.ruleChanged(source, rule, stringValue);
-        }
-    }
-
-    @Inject(method="setDefault",at= @At(value = "INVOKE", target = "Lcarpet/api/settings/CarpetRule;set(Lnet/minecraft/commands/CommandSourceStack;Ljava/lang/String;)V"))
-    private void onSetRuleDefaultValue(CommandSourceStack source, CarpetRule<?> rule, String stringValue, CallbackInfoReturnable<Integer> cir){
         if(IGNYSettings.showRuleChangeHistory) {
             RuleChangeTracker.ruleChanged(source, rule, stringValue);
         }
