@@ -269,5 +269,7 @@
   "carpet.rule.betterLoyaltyTrident.desc": "附魔忠诚的三叉戟会在超过玩家的模拟距离和超过世界最低最高建筑高度时触发忠诚",
   "carpet.rule.betterLoyaltyTrident.extra.0": "玩家超过世界最低最高建筑高度时，三叉戟超过世界最低最高建筑高度不会触发忠诚",
   "carpet.rule.removeSyncmaticaPermission.name": "删除共享原理图权限",
-  "carpet.rule.removeSyncmaticaPermission.desc": "在Syncmatica中删除原理图时，需要当前规则值设置的权限"
+  "carpet.rule.removeSyncmaticaPermission.desc": "在Syncmatica中删除原理图时，需要当前规则值设置的权限",
+  "carpet.rule.disableWatchDog.name": "禁用看门狗",
+  "carpet.rule.disableWatchDog.desc": "禁用Minecraft看门狗，防止服务器因卡顿而停止运行"
 }

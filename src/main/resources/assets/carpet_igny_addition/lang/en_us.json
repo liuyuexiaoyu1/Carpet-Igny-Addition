@@ -202,5 +202,6 @@
   "carpet.rule.betterLoyaltyTrident.name": "Better Loyalty Trident",
   "carpet.rule.betterLoyaltyTrident.desc": "Tridents with the Loyalty enchantment will trigger their return if they exceed the player's simulation distance or go beyond the world's minimum/maximum build height",
   "carpet.rule.betterLoyaltyTrident.extra.0": "Loyalty will not trigger if both the player and the trident are outside the world's build height limits",
-  "carpet.rule.removeSyncmaticaPermission.desc": "Sets the permission level required to remove schematics in Syncmatica"
+  "carpet.rule.removeSyncmaticaPermission.desc": "Sets the permission level required to remove schematics in Syncmatica",
+  "carpet.rule.disableWatchDog.desc": "Disables the Minecraft watchdog, preventing the server from stopping due to lag"
 }

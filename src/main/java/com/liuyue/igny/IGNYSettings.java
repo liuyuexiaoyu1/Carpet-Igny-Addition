@@ -509,4 +509,10 @@ public class IGNYSettings
             return newValue;
         }
     }
+
+    @Rule(
+            categories = {IGNY},
+            options = {"false", "true"}
+    )
+    public static Boolean disableWatchDog = false;
 }

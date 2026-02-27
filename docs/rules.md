@@ -642,9 +642,18 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 
 ## 删除共享原理图权限 (removeSyncmaticaPermission)
 
-在Syncmatica中删除原理图时，需要当前规则值设置的权限。
+在[Syncmatica](https://github.com/sakura-ryoko/syncmatica)中删除原理图时，需要当前规则值设置的权限。
 
 - 类型: `boolean`
 - 默认值: `true`
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- 分类: `IGNY`
+
+## 禁用看门狗 (disableWatchDog)
+
+禁用Minecraft看门狗，防止服务器因卡顿而停止运行。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
 - 分类: `IGNY`

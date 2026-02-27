@@ -642,7 +642,16 @@ Loyalty will not trigger if both the player and the trident are outside the worl
 
 ## removeSyncmaticaPermission
 
-Sets the permission level required to remove schematics in Syncmatica.
+Sets the permission level required to remove schematics in [Syncmatica](https://github.com/sakura-ryoko/syncmatica).
+
+- Type: `boolean`
+- Default value: `true`
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `IGNY`
+
+## disableWatchDog
+
+Disables the Minecraft watchdog, preventing the server from stopping due to lag.
 
 - Type: `boolean`
 - Default value: `true`
