@@ -7,7 +7,7 @@ import net.minecraft.world.entity.MobCategory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(targets = "net.minecraft.world.level.LocalMobCapCalculator$MobCounts")
+@Mixin(targets = "net.minecraft.world.level.LocalMobCapCalculator$MobCounts", priority = 1100)
 public class MobCountsMixin {
     @WrapOperation(method = "canSpawn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/MobCategory;getMaxInstancesPerChunk()I"))
     private int canSpawn(MobCategory instance, Operation<Integer> original) {
