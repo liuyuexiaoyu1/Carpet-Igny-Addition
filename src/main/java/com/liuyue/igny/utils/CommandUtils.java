@@ -13,9 +13,7 @@ import java.util.Locale;
 
 public class CommandUtils {
     public static boolean canDropEnderChest(CommandSourceStack source, ServerPlayer targetPlayer) {
-        if (source == null) {
-            return true;
-        }
+        if (source == null) return false;
 
         if (!(targetPlayer instanceof EntityPlayerMPFake)) {
             //#if MC >= 12111
@@ -46,6 +44,7 @@ public class CommandUtils {
         };
     }
     public static boolean canUseCommand(ServerPlayer source, Object commandLevel) {
+        if (source == null) return false;
         if (commandLevel instanceof Boolean) {
             return (Boolean) commandLevel;
         }
@@ -86,10 +85,11 @@ public class CommandUtils {
     }
 
     public static boolean canDropEnderChest(CommandSourceStack source) {
+        if (source == null) return false;
         //#if MC >= 12111
-        //$$ return source == null || Commands.LEVEL_GAMEMASTERS.check(source.permissions());
+        //$$ return Commands.LEVEL_GAMEMASTERS.check(source.permissions());
         //#else
-        return source == null || source.hasPermission(2);
+        return source.hasPermission(2);
         //#endif
     }
 
