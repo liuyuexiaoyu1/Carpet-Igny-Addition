@@ -51,9 +51,6 @@ public abstract class EntityMixin implements IEntity {
 
     @Shadow public abstract int getId();
 
-    @Shadow
-    public abstract boolean onGround();
-
     @Unique
     private int carpet_Igny_Addition$crammingCount = 0;
 
@@ -76,29 +73,56 @@ public abstract class EntityMixin implements IEntity {
             this.carpet_Igny_Addition$setCrammingCount(0);
             return;
         }
+
         if ((this.tickCount + this.getId()) % 100 == 0) {
             AABB myBox = this.getBoundingBox();
-            double myVolume = (myBox.maxX - myBox.minX) * (myBox.maxY - myBox.minY) * (myBox.maxZ - myBox.minZ);
             Entity self = (Entity) (Object) this;
-            List<Entity> candidates = this.level.getEntities(self, myBox, EntitySelector.pushableBy(self));
-            int tightCrammingCount = 0;
+            List<Entity> candidates = this.level.getEntities(self, myBox, entity -> true);
+            int myId = this.getId();
+            boolean isLeader = true;
             for (Entity other : candidates) {
-                AABB otherBox = other.getBoundingBox();
-                double intersectMinX = Math.max(myBox.minX, otherBox.minX);
-                double intersectMinY = Math.max(myBox.minY, otherBox.minY);
-                double intersectMinZ = Math.max(myBox.minZ, otherBox.minZ);
-                double intersectMaxX = Math.min(myBox.maxX, otherBox.maxX);
-                double intersectMaxY = Math.min(myBox.maxY, otherBox.maxY);
-                double intersectMaxZ = Math.min(myBox.maxZ, otherBox.maxZ);
-                if (intersectMaxX > intersectMinX && intersectMaxY > intersectMinY && intersectMaxZ > intersectMinZ) {
-                    double intersectVolume = (intersectMaxX - intersectMinX) * (intersectMaxY - intersectMinY) * (intersectMaxZ - intersectMinZ);
-                    if (intersectVolume / myVolume > 0.7) {
-                        tightCrammingCount++;
+                if (other.getId() < myId) {
+                    isLeader = false;
+                    break;
+                }
+            }
+
+            if (isLeader) {
+                double myVolume = (myBox.maxX - myBox.minX) * (myBox.maxY - myBox.minY) * (myBox.maxZ - myBox.minZ);
+                int myCrammingCount = calculateTightCrammingCount(myBox, myVolume, candidates);
+                this.carpet_Igny_Addition$setCrammingCount(myCrammingCount);
+
+                for (Entity other : candidates) {
+                    if (other instanceof IEntity otherI) {
+                        AABB otherBox = other.getBoundingBox();
+                        double otherVolume = (otherBox.maxX - otherBox.minX) * (otherBox.maxY - otherBox.minY) * (otherBox.maxZ - otherBox.minZ);
+                        otherI.carpet_Igny_Addition$setCrammingCount(calculateTightCrammingCount(otherBox, otherVolume, candidates));
                     }
                 }
             }
-            this.carpet_Igny_Addition$setCrammingCount(tightCrammingCount);
         }
+    }
+
+    @Unique
+    private int calculateTightCrammingCount(AABB box, double volume, List<Entity> candidates) {
+        int count = 0;
+        for (Entity other : candidates) {
+            AABB otherBox = other.getBoundingBox();
+            double intersectMinX = Math.max(box.minX, otherBox.minX);
+            double intersectMinY = Math.max(box.minY, otherBox.minY);
+            double intersectMinZ = Math.max(box.minZ, otherBox.minZ);
+            double intersectMaxX = Math.min(box.maxX, otherBox.maxX);
+            double intersectMaxY = Math.min(box.maxY, otherBox.maxY);
+            double intersectMaxZ = Math.min(box.maxZ, otherBox.maxZ);
+
+            if (intersectMaxX > intersectMinX && intersectMaxY > intersectMinY && intersectMaxZ > intersectMinZ) {
+                double intersectVolume = (intersectMaxX - intersectMinX) * (intersectMaxY - intersectMinY) * (intersectMaxZ - intersectMinZ);
+                if (intersectVolume / volume > 0.7) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     @Inject(method = "move", at = @At(value = "HEAD"), cancellable = true)
