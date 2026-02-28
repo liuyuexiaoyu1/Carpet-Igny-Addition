@@ -657,3 +657,12 @@ canBoatTrade：当载具上有村民或者流浪商人时移除载具，其他�
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`
+
+## 灰化土扩散 (podzolSpread) `🐛Beta`
+
+灰化土会像草方块与菌丝体一样向四周的泥土扩散。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

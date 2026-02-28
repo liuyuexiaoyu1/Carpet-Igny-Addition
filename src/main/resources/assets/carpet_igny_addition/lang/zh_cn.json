@@ -271,5 +271,7 @@
   "carpet.rule.removeSyncmaticaPermission.name": "删除共享原理图权限",
   "carpet.rule.removeSyncmaticaPermission.desc": "在Syncmatica中删除原理图时，需要当前规则值设置的权限",
   "carpet.rule.disableWatchDog.name": "禁用看门狗",
-  "carpet.rule.disableWatchDog.desc": "禁用Minecraft看门狗，防止服务器因卡顿而停止运行"
+  "carpet.rule.disableWatchDog.desc": "禁用Minecraft看门狗，防止服务器因卡顿而停止运行",
+  "carpet.rule.podzolSpread.name": "灰化土扩散",
+  "carpet.rule.podzolSpread.desc": "灰化土会像草方块与菌丝体一样向四周的泥土扩散"
 }

@@ -657,3 +657,12 @@ Disables the Minecraft watchdog, preventing the server from stopping due to lag.
 - Default value: `true`
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`
+
+## podzolSpread `🐛Beta`
+
+Podzol will spread like grass and mycelium to nearby dirt blocks.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

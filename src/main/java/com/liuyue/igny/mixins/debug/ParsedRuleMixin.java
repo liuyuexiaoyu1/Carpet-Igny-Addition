@@ -1,6 +1,7 @@
 package com.liuyue.igny.mixins.debug;
 
 import carpet.utils.Translations;
+import com.liuyue.igny.IGNYServer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,6 +15,7 @@ public class ParsedRuleMixin {
     private static void trOrNull(String key, CallbackInfoReturnable<String> cir) {
         if (cir.getReturnValue() == null && FabricLoader.getInstance().isDevelopmentEnvironment()) {
             cir.setReturnValue("IGNY debug");
+            IGNYServer.LOGGER.warn("{} is null", key);
         }
     }
 }

@@ -25,7 +25,9 @@ package com.liuyue.igny.mixins.optimizations;
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.utils.interfaces.optimizations.IEntity;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -35,8 +37,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.List;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin implements IEntity {
@@ -73,61 +73,14 @@ public abstract class EntityMixin implements IEntity {
             this.carpet_Igny_Addition$setCrammingCount(0);
             return;
         }
-
         if ((this.tickCount + this.getId()) % 100 == 0) {
-            AABB myBox = this.getBoundingBox();
-            Entity self = (Entity) (Object) this;
-            List<Entity> candidates = this.level.getEntities(self, myBox, entity -> true);
-            int myId = this.getId();
-            boolean isLeader = true;
-            for (Entity other : candidates) {
-                if (other.getId() < myId) {
-                    isLeader = false;
-                    break;
-                }
-            }
-
-            if (isLeader) {
-                double myVolume = (myBox.maxX - myBox.minX) * (myBox.maxY - myBox.minY) * (myBox.maxZ - myBox.minZ);
-                int myCrammingCount = calculateTightCrammingCount(myBox, myVolume, candidates);
-                this.carpet_Igny_Addition$setCrammingCount(myCrammingCount);
-
-                for (Entity other : candidates) {
-                    if (other instanceof IEntity otherI) {
-                        AABB otherBox = other.getBoundingBox();
-                        double otherVolume = (otherBox.maxX - otherBox.minX) * (otherBox.maxY - otherBox.minY) * (otherBox.maxZ - otherBox.minZ);
-                        otherI.carpet_Igny_Addition$setCrammingCount(calculateTightCrammingCount(otherBox, otherVolume, candidates));
-                    }
-                }
-            }
+            this.carpet_Igny_Addition$setCrammingCount(this.level.getEntities(this.getType(), this.getBoundingBox(), entity -> true).size());
         }
-    }
-
-    @Unique
-    private int calculateTightCrammingCount(AABB box, double volume, List<Entity> candidates) {
-        int count = 0;
-        for (Entity other : candidates) {
-            AABB otherBox = other.getBoundingBox();
-            double intersectMinX = Math.max(box.minX, otherBox.minX);
-            double intersectMinY = Math.max(box.minY, otherBox.minY);
-            double intersectMinZ = Math.max(box.minZ, otherBox.minZ);
-            double intersectMaxX = Math.min(box.maxX, otherBox.maxX);
-            double intersectMaxY = Math.min(box.maxY, otherBox.maxY);
-            double intersectMaxZ = Math.min(box.maxZ, otherBox.maxZ);
-
-            if (intersectMaxX > intersectMinX && intersectMaxY > intersectMinY && intersectMaxZ > intersectMinZ) {
-                double intersectVolume = (intersectMaxX - intersectMinX) * (intersectMaxY - intersectMinY) * (intersectMaxZ - intersectMinZ);
-                if (intersectVolume / volume > 0.7) {
-                    count++;
-                }
-            }
-        }
-        return count;
     }
 
     @Inject(method = "move", at = @At(value = "HEAD"), cancellable = true)
-    private void move(MoverType moverType, Vec3 vec3, CallbackInfo ci) {
-        if (this.carpet_Igny_Addition$crammingCount >= IGNYSettings.optimizedEntityLimit && moverType.equals(MoverType.SELF)) {
+    private void move(MoverType moverType, Vec3 vec3, CallbackInfo ci){
+        if (this.carpet_Igny_Addition$crammingCount >= IGNYSettings.optimizedEntityLimit){
             ci.cancel();
         }
     }
