@@ -43,13 +43,37 @@ public abstract class WetSpongeBlockMixin extends Block{
     //#if MC <= 12005
     //$$ @SuppressWarnings("deprecation")
     //#endif
+    //#if MC <= 12004
+    //$$ public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+    //#else
+    protected void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        //#endif
+        if (!blockState2.is(blockState.getBlock())) {
+            this.tryAbsorbWater(level, blockPos);
+        }
+    }
+
+    @Override
+    //#if MC <= 12005
+    //$$ @SuppressWarnings("deprecation")
+    //#endif
     public void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block,
                                 //#if MC >= 12102
-                                //$$ Orientation wireOrientation
+                                //$$ Orientation orientation,
                                 //#else
-                                BlockPos blockPos2
+                                BlockPos blockPos2,
                                 //#endif
-            , boolean bl) {
+            boolean bl) {
+        this.tryAbsorbWater(level, blockPos);
+        //#if MC >= 12102
+        //$$ super.neighborChanged(blockState, level, blockPos, block, orientation, bl);
+        //#else
+        super.neighborChanged(blockState, level, blockPos, block, blockPos2, bl);
+        //#endif
+    }
+
+    @Unique
+    private void tryAbsorbWater(Level level, BlockPos blockPos) {
         if (removeFluidBreadthFirstSearch(level, blockPos)) {
             level.setBlock(blockPos, Blocks.SPONGE.defaultBlockState(), 2);
             //#if MC > 12001
@@ -128,53 +152,48 @@ public abstract class WetSpongeBlockMixin extends Block{
                 }
         ) > 1;
         //#else
-//$$        Queue<Tuple<BlockPos, Integer>> queue = Lists.newLinkedList();
-//$$        queue.add(new Tuple<>(blockPos, 0));
-//$$        int i = 0;
-//$$
-//$$        while (!queue.isEmpty()) {
-//$$            Tuple<BlockPos, Integer> tuple = queue.poll();
-//$$            BlockPos blockPos2 = tuple.getA();
-//$$            int j = tuple.getB();
-//$$
-//$$            for (Direction direction : Direction.values()) {
-//$$                BlockPos blockPos3 = blockPos2.relative(direction);
-//$$                BlockState blockState = level.getBlockState(blockPos3);
-//$$                FluidState fluidState = level.getFluidState(blockPos3);
-//$$                Material material = blockState.getMaterial();
-//$$                if (!shouldAbsorb(fluidState)) {
-//$$                    if (blockState.getBlock() instanceof BucketPickup && !((BucketPickup)blockState.getBlock()).pickupBlock(level, blockPos3, blockState).isEmpty()) {
-//$$                        i++;
-//$$                        if (j < 6) {
-//$$                            queue.add(new Tuple<>(blockPos3, j + 1));
-//$$                        }
-//$$                    } else if (blockState.getBlock() instanceof LiquidBlock) {
-//$$                        level.setBlock(blockPos3, Blocks.AIR.defaultBlockState(), 3);
-//$$                        i++;
-//$$                        if (j < 6) {
-//$$                            queue.add(new Tuple<>(blockPos3, j + 1));
-//$$                        }
-//$$                    } else if (material == Material.WATER_PLANT || material == Material.REPLACEABLE_WATER_PLANT) {
-//$$                        BlockEntity blockEntity = blockState.hasBlockEntity() ? level.getBlockEntity(blockPos3) : null;
-//$$                        dropResources(blockState, level, blockPos3, blockEntity);
-//$$                        level.setBlock(blockPos3, Blocks.AIR.defaultBlockState(), 3);
-//$$                        i++;
-//$$                        if (j < 6) {
-//$$                            queue.add(new Tuple<>(blockPos3, j + 1));
-//$$                        }
-//$$                    }
-//$$                }
-//$$            }
-//$$
-//$$            if (i > 64) {
-//$$                break;
-//$$            }
-//$$        }
-//$$
-//$$        return i > 0;
+        //$$ Queue<Tuple<BlockPos, Integer>> queue = Lists.newLinkedList();
+        //$$ queue.add(new Tuple<>(blockPos, 0));
+        //$$ int i = 0;
+        //$$ while (!queue.isEmpty()) {
+        //$$     Tuple<BlockPos, Integer> tuple = queue.poll();
+        //$$     BlockPos blockPos2 = tuple.getA();
+        //$$     int j = tuple.getB();
+        //$$     for (Direction direction : Direction.values()) {
+        //$$         BlockPos blockPos3 = blockPos2.relative(direction);
+        //$$         BlockState blockState = level.getBlockState(blockPos3);
+        //$$         FluidState fluidState = level.getFluidState(blockPos3);
+        //$$         Material material = blockState.getMaterial();
+        //$$         if (!shouldAbsorb(fluidState)) {
+        //$$             if (blockState.getBlock() instanceof BucketPickup && !((BucketPickup)blockState.getBlock()).pickupBlock(level, blockPos3, blockState).isEmpty()) {
+        //$$                 i++;
+        //$$                 if (j < 6) {
+        //$$                     queue.add(new Tuple<>(blockPos3, j + 1));
+        //$$                 }
+        //$$             } else if (blockState.getBlock() instanceof LiquidBlock) {
+        //$$                 level.setBlock(blockPos3, Blocks.AIR.defaultBlockState(), 3);
+        //$$                 i++;
+        //$$                 if (j < 6) {
+        //$$                     queue.add(new Tuple<>(blockPos3, j + 1));
+        //$$                 }
+        //$$             } else if (material == Material.WATER_PLANT || material == Material.REPLACEABLE_WATER_PLANT) {
+        //$$                 BlockEntity blockEntity = blockState.hasBlockEntity() ? level.getBlockEntity(blockPos3) : null;
+        //$$                 dropResources(blockState, level, blockPos3, blockEntity);
+        //$$                 level.setBlock(blockPos3, Blocks.AIR.defaultBlockState(), 3);
+        //$$                 i++;
+        //$$                 if (j < 6) {
+        //$$                     queue.add(new Tuple<>(blockPos3, j + 1));
+        //$$                 }
+        //$$             }
+        //$$         }
+        //$$     }
+        //$$     if (i > 64) {
+        //$$         break;
+        //$$     }
+        //$$ }
+        //$$ return i > 0;
         //#endif
     }
-
 
     @Unique
     private boolean shouldAbsorb(FluidState fluidState) {
