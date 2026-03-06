@@ -2,6 +2,7 @@ package com.liuyue.igny.mixins.logger.beacon;
 
 import carpet.logging.Logger;
 import carpet.logging.LoggerRegistry;
+import com.liuyue.igny.logging.IGNYLoggerRegistry;
 import com.liuyue.igny.mixins.logger.LoggerAccessor;
 import com.liuyue.igny.network.packet.render.BoxPayload;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -41,6 +42,7 @@ public abstract class BeaconBlockEntityMixin {
     )
     private static List<?> wrapApplyEffectsAABB(Level instance, Class<?> aClass, AABB aabb, Operation<List<?>> original, @Local(argsOnly = true) BlockPos pos) {
         Logger logger = LoggerRegistry.getLogger("beacon");
+        if (logger == null || !IGNYLoggerRegistry.__beacon || !logger.hasOnlineSubscribers()) return original.call(instance, aClass, aabb);
         if (instance.isClientSide()) return original.call(instance, aClass, aabb);
         if (logger.hasOnlineSubscribers() && !instance.isClientSide() && instance instanceof ServerLevel serverLevel) {
             //#if MC < 12005
@@ -79,7 +81,6 @@ public abstract class BeaconBlockEntityMixin {
                         //#endif
                     });
         }
-
         return original.call(instance, aClass, aabb);
     }
 
@@ -91,11 +92,13 @@ public abstract class BeaconBlockEntityMixin {
         BlockPos pos = beacon.getBlockPos();
         Level level = beacon.getLevel();
         Logger logger = LoggerRegistry.getLogger("beacon");
-        if (level == null) return original.call(list);
-        if (level.isClientSide()) return original.call(list);
+        if (level == null ||
+                level.isClientSide() ||
+                logger == null ||
+                !IGNYLoggerRegistry.__beacon ||
+                !logger.hasOnlineSubscribers()) return original.call(list);
 
         if (logger.hasOnlineSubscribers() && level instanceof ServerLevel serverLevel && (list.isEmpty() || updateBase(level, pos.getX(), pos.getY(), pos.getZ()) == 0)) {
-
             //#if MC < 12005
             //$$ FriendlyByteBuf stopBuf = PacketByteBufs.create();
             //$$ stopBuf.writeBlockPos(pos);
