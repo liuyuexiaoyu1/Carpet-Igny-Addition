@@ -81,6 +81,7 @@
     "rule.lightningBoltNoFire.LightningBoltMixin",
     "rule.locatorBarNoFakePlayer.ServerWaypointManagerMixin",
     "rule.maxEndPortalSize.EnderEyeItemMixin",
+    "rule.noOwnerTntLootingIII.EnchantedCountIncreaseFunctionMixin",
     "rule.noWardenDarkness.WardenMixin",
     "rule.noWitherEffect.WitherRoseBlockMixin",
     "rule.noWitherEffect.WitherSkeletonMixin",

@@ -666,3 +666,12 @@ Podzol will spread like grass and mycelium to nearby dirt blocks.
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## noOwnerTntLootingIII `🐛Beta`
+
+If a TNT explosion has a null damage source, entities killed by the blast will be treated as having Looting III applied.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`

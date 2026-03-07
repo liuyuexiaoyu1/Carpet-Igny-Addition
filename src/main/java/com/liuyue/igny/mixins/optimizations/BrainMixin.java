@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = Brain.class,priority = 1500)
+@Mixin(value = Brain.class, priority = 1500)
 public class BrainMixin {
     @Inject(method = "tickSensors",at = @At(value = "HEAD"),cancellable = true)
     private void tickSensors(ServerLevel serverLevel, LivingEntity livingEntity, CallbackInfo ci){

@@ -521,4 +521,10 @@ public class IGNYSettings
             options = {"false", "true"}
     )
     public static Boolean podzolSpread = false;
+
+    @Rule(
+            categories = {IGNY, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean noOwnerTntLootingIII = false;
 }

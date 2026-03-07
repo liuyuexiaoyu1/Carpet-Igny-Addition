@@ -80,7 +80,7 @@ public abstract class EntityMixin implements IEntity {
 
     @Inject(method = "move", at = @At(value = "HEAD"), cancellable = true)
     private void move(MoverType moverType, Vec3 vec3, CallbackInfo ci){
-        if (this.carpet_Igny_Addition$crammingCount >= IGNYSettings.optimizedEntityLimit){
+        if (this.carpet_Igny_Addition$crammingCount >= IGNYSettings.optimizedEntityLimit && moverType == MoverType.SELF){
             ci.cancel();
         }
     }
