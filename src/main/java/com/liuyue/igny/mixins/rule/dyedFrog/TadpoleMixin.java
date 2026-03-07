@@ -66,7 +66,7 @@ public class TadpoleMixin {
     @WrapOperation(
             //#if MC >= 26.1
             //$$ method = "lambda$ageUp$0",
-            //#elseif MC >= 12105
+            //#elseif MC >= 12103
             //$$ method = "method_63651",
             //#else
             method = "ageUp()V",

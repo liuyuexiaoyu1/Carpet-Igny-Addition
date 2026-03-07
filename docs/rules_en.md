@@ -675,3 +675,12 @@ If a TNT explosion has a null damage source, entities killed by the blast will b
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
+
+## globalDaylightDetector `🐛Beta`
+
+Daylight detectors are no longer restricted by dimensions. In the absence of skylight, they will calculate brightness based on the Overworld time.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

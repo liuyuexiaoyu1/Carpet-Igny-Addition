@@ -276,5 +276,7 @@
   "carpet.rule.podzolSpread.name": "灰化土扩散",
   "carpet.rule.podzolSpread.desc": "灰化土会像草方块与菌丝体一样向四周的泥土扩散",
   "carpet.rule.noOwnerTntLootingIII.name": "无主TNT抢夺三",
-  "carpet.rule.noOwnerTntLootingIII.desc": "当TNT爆炸时，如果伤害来源实体为空，那么因为爆炸死亡的实体则应用抢夺附魔等级3的效果"
+  "carpet.rule.noOwnerTntLootingIII.desc": "当TNT爆炸时，如果伤害来源实体为空，那么因为爆炸死亡的实体则应用抢夺附魔等级3的效果",
+  "carpet.rule.globalDaylightDetector.name": "全局阳光探测器",
+  "carpet.rule.globalDaylightDetector.desc": "阳光探测器不受维度限制，如果没有天空光照，阳光探测器会以主世界的时间计算亮度"
 }

@@ -63,6 +63,7 @@
     "rule.generateNetherPortal.BaseFireBlockInvoker",
     "rule.generateNetherPortal.FireChargeItemMixin",
     "rule.generateNetherPortal.FlintAndSteelItemMixin",
+    "rule.globalDaylightDetector.DaylightDetectorBlockMixin",
     "rule.happyGhastNoClip.BlockItemMixin",
     "rule.happyGhastNoClip.EntityMixin",
     "rule.happyGhastNoClip.HappyGhastInvoker",

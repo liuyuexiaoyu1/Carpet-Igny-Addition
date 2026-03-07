@@ -527,4 +527,10 @@ public class IGNYSettings
             options = {"false", "true"}
     )
     public static Boolean noOwnerTntLootingIII = false;
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean globalDaylightDetector = false;
 }

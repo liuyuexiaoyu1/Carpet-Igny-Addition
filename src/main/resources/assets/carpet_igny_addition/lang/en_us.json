@@ -206,5 +206,6 @@
   "carpet.rule.removeSyncmaticaPermission.desc": "Sets the permission level required to remove schematics in Syncmatica",
   "carpet.rule.disableWatchDog.desc": "Disables the Minecraft watchdog, preventing the server from stopping due to lag",
   "carpet.rule.podzolSpread.desc": "Podzol will spread like grass and mycelium to nearby dirt blocks",
-  "carpet.rule.noOwnerTntLootingIII.desc": "If a TNT explosion has a null damage source, entities killed by the blast will be treated as having Looting III applied"
+  "carpet.rule.noOwnerTntLootingIII.desc": "If a TNT explosion has a null damage source, entities killed by the blast will be treated as having Looting III applied",
+  "carpet.rule.globalDaylightDetector.desc": "Daylight detectors are no longer restricted by dimensions. In the absence of skylight, they will calculate brightness based on the Overworld time"
 }
