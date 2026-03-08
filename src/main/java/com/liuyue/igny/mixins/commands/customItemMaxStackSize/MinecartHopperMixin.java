@@ -25,9 +25,12 @@ package com.liuyue.igny.mixins.commands.customItemMaxStackSize;
 import com.liuyue.igny.utils.RuleUtils;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.entity.vehicle.MinecartHopper;
 import org.spongepowered.asm.mixin.Mixin;
 
+@Restriction(require = @Condition(value = "minecraft", versionPredicates = ">= 1.20.6"))
 @Mixin(value = MinecartHopper.class, priority = 900)
 public class MinecartHopperMixin {
     @WrapMethod(method = "tick")

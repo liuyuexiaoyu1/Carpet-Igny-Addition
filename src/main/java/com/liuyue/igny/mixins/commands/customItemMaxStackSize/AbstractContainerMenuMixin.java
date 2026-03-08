@@ -25,10 +25,13 @@ package com.liuyue.igny.mixins.commands.customItemMaxStackSize;
 import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import org.spongepowered.asm.mixin.Mixin;
 
+@Restriction(require = @Condition(value = "minecraft", versionPredicates = ">= 1.20.6"))
 @Mixin(value = AbstractContainerMenu.class, priority = 900)
 public abstract class AbstractContainerMenuMixin {
     @WrapMethod(method = "getRedstoneSignalFromContainer(Lnet/minecraft/world/Container;)I")
