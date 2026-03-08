@@ -13,9 +13,6 @@ repositories {
 		url = 'https://masa.dy.fi/maven'
 	}
 	maven {
-		url = 'https://jitpack.io'
-	}
-	maven {
 		url = 'https://maven.fallenbreath.me/jitpack'
 		content { includeGroupAndSubgroups('com.github') }
 	}
@@ -33,6 +30,9 @@ repositories {
 	maven { url = 'https://maven.nucleoid.xyz/' }
 	maven {url = "https://masa.dy.fi/maven/sakura-ryoko"
 		content {includeGroupAndSubgroups("fi.dy.masa")}
+	}
+	maven {
+		url = 'https://jitpack.io'
 	}
 	flatDir {
 		dirs '../../libs'
