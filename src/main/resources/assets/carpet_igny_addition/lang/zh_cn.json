@@ -282,5 +282,7 @@
   "carpet.rule.looseEnderPearlChunkLoading.name": "宽松的末影珍珠加载",
   "carpet.rule.looseEnderPearlChunkLoading.desc": "让末影珍珠不再等到加载票完全耗尽后再添加加载票，而是距离超时时间还有5个游戏刻的时候添加加载票",
   "carpet.rule.noteBlockSelfCheck.name": "音符盒自检",
-  "carpet.rule.noteBlockSelfCheck.desc": "音符盒在放置时，会更正一次自己的方块状态"
+  "carpet.rule.noteBlockSelfCheck.desc": "音符盒在放置时，会像活塞一样检查一次自己的方块状态",
+  "carpet.rule.noCreativeDestroyAttachmentDrops.name": "创造破坏附着方块无掉落物品",
+  "carpet.rule.noCreativeDestroyAttachmentDrops.desc": "创造玩家破坏方块时，附着在上面的方块不会因为破坏而掉落物品"
 }

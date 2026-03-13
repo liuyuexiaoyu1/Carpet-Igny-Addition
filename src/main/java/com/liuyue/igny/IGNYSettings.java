@@ -16,7 +16,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.liuyue.igny.utils.IGNYRuleCategory.*;
 
@@ -24,12 +23,14 @@ public class IGNYSettings
 {
     public static MinecraftServer cachedServer = null;
 
+    public static final ThreadLocal<Boolean> CREATIVE_BREAKING = ThreadLocal.withInitial(() -> false);
+
     public static Set<String> CRAMMING_ENTITIES = new HashSet<>();
 
     public static List<BlockPos> noUpdatePos = new ArrayList<>();
 
     //假玩家生成内存泄露修复
-    public static ThreadLocal<Boolean> fakePlayerSpawnMemoryLeakFix = ThreadLocal.withInitial(() -> false);
+    public static final ThreadLocal<Boolean> fakePlayerSpawnMemoryLeakFix = ThreadLocal.withInitial(() -> false);
 
     public static final ThreadLocal<Boolean> itemStackCountChanged = ThreadLocal.withInitial(() -> true);
     @Rule(
@@ -543,8 +544,14 @@ public class IGNYSettings
     //#endif
 
     @Rule(
-            categories = {IGNY, CREATIVE},
+            categories = {IGNY, CREATIVE, FEATURE},
             options = {"false", "true"}
     )
     public static Boolean noteBlockSelfCheck = false;
+
+    @Rule(
+            categories = {IGNY, CREATIVE, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean noCreativeDestroyAttachmentDrops = false;
 }

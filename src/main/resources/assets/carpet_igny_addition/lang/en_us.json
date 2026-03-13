@@ -209,5 +209,6 @@
   "carpet.rule.noOwnerTntLootingIII.desc": "If a TNT explosion has a null damage source, entities killed by the blast will be treated as having Looting III applied",
   "carpet.rule.globalDaylightDetector.desc": "Daylight detectors are no longer restricted by dimensions. In the absence of skylight, they will calculate brightness based on the Overworld time",
   "carpet.rule.looseEnderPearlChunkLoading.desc": "Prevents Ender Pearl loading tickets from expiring completely before being renewed. Instead, it refreshes the ticket when there are 5 game ticks remaining before timeout",
-  "carpet.rule.noteBlockSelfCheck.desc": "Note blocks will correct their block state upon placement"
+  "carpet.rule.noteBlockSelfCheck.desc": "When placed, a note block checks its block state once, just like a piston",
+  "carpet.rule.noCreativeDestroyAttachmentDrops.desc": "When a player in Creative Mode breaks a block, any blocks attached to it (support-dependent blocks) will not drop as items when they are destroyed"
 }

@@ -696,9 +696,18 @@ Prevents Ender Pearl loading tickets from expiring completely before being renew
 
 ## noteBlockSelfCheck `🐛Beta`
 
-Note blocks will correct their block state upon placement.
+When placed, a note block checks its block state once, just like a piston.
 
 - Type: `boolean`
 - Default value: `false`
 - Suggested options: `false`, `true`
-- Categories: `IGNY`, `CREATIVE`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## noCreativeDestroyAttachmentDrops `🐛Beta`
+
+When a player in Creative Mode breaks a block, any blocks attached to it (support-dependent blocks) will not drop as items when they are destroyed.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`

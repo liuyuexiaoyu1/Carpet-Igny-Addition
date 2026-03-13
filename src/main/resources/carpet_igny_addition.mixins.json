@@ -51,6 +51,8 @@
     "rule.betterLoyaltyTrident.ThrownTridentMixin",
     "rule.candlePlaceOnIncompleteBlock.CandleBlockMixin",
     "rule.creativeDestroyWaterloggedBlockNoWater.ServerPlayerGameModeMixin",
+    "rule.noCreativeDestroyAttachmentDrops.BlockMixin",
+    "rule.noCreativeDestroyAttachmentDrops.ServerPlayerGameModeMixin",
     "rule.disableWatchDog.ServerWatchdogMixin",
     "rule.dispenserTrade.DispenserBlockMixin",
     "rule.dyedFrog.FrogAccessor",
