@@ -3,6 +3,7 @@ package com.liuyue.igny.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.liuyue.igny.IGNYServer;
 import com.liuyue.igny.IGNYServerMod;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.storage.LevelResource;
@@ -108,7 +109,7 @@ public class RuleChangeDataManager {
                 inMemoryCache.putAll(loaded);
             }
         } catch (Exception e) {
-            System.err.println("Failed to load rule changes from JSON: " + e.getMessage());
+            IGNYServer.LOGGER.error("Failed to load rule changes from JSON: {}", e.getMessage());
         }
     }
 
@@ -126,7 +127,7 @@ public class RuleChangeDataManager {
                 GSON.toJson(inMemoryCache, writer);
             }
         } catch (Exception e) {
-            System.err.println("Failed to save rule changes to JSON: " + e.getMessage());
+            IGNYServer.LOGGER.error("Failed to save rule changes to JSON: {}", e.getMessage());
         }
     }
 
