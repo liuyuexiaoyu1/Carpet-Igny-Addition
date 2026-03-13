@@ -658,7 +658,7 @@ Disables the Minecraft watchdog, preventing the server from stopping due to lag.
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`
 
-## podzolSpread `🐛Beta`
+## podzolSpread
 
 Podzol will spread like grass and mycelium to nearby dirt blocks.
 
@@ -667,7 +667,7 @@ Podzol will spread like grass and mycelium to nearby dirt blocks.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## noOwnerTntLootingIII `🐛Beta`
+## noOwnerTntLootingIII
 
 If the owner of the primed TNT entity is null when it explodes, then any entities killed by the explosion should apply the Looting III effect.
 
@@ -676,7 +676,7 @@ If the owner of the primed TNT entity is null when it explodes, then any entitie
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## globalDaylightDetector `🐛Beta`
+## globalDaylightDetector
 
 Daylight detectors are no longer restricted by dimensions. In the absence of skylight, they will calculate brightness based on the Overworld time.
 
@@ -685,7 +685,7 @@ Daylight detectors are no longer restricted by dimensions. In the absence of sky
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## noteBlockSelfCheck `🐛Beta`
+## noteBlockSelfCheck
 
 When placed, a note block checks its block state once, just like a piston.
 
@@ -694,7 +694,7 @@ When placed, a note block checks its block state once, just like a piston.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## noCreativeDestroyAttachmentDrops `🐛Beta`
+## noCreativeDestroyAttachmentDrops
 
 When a player in Creative Mode breaks a block, any blocks attached to it (support-dependent blocks) will not drop as items when they are destroyed.
 
