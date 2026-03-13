@@ -1,7 +1,8 @@
 package com.liuyue.igny.mixins.rule.noOwnerTntLootingIII;
 
 import com.liuyue.igny.IGNYSettings;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.EnchantedCountIncreaseFunction;
@@ -29,11 +30,14 @@ public abstract class EnchantedCountIncreaseFunctionMixin {
     @Inject(method = "run", at = @At(value = "HEAD"), cancellable = true)
     private void run(ItemStack itemStack, LootContext lootContext, CallbackInfoReturnable<ItemStack> cir) {
         //#if MC >= 12102
-        //$$ Entity entity = lootContext.getOptionalParameter(LootContextParams.ATTACKING_ENTITY);
+        //$$ DamageSource damageSource = lootContext.getOptionalParameter(LootContextParams.DAMAGE_SOURCE);
         //#else
-        Entity entity = lootContext.getParamOrNull(LootContextParams.ATTACKING_ENTITY);
+        DamageSource damageSource = lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE);
         //#endif
-        if (IGNYSettings.noOwnerTntLootingIII && entity == null) {
+        if (IGNYSettings.noOwnerTntLootingIII &&
+                damageSource != null &&
+                damageSource.getDirectEntity() instanceof PrimedTnt &&
+                ((PrimedTnt) damageSource.getDirectEntity()).getOwner() == null) {
             //#if MC >= 26.1
             //$$ float f = 3 * this.count.getFloat(lootContext);
             //#else

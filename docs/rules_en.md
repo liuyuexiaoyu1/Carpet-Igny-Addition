@@ -669,7 +669,7 @@ Podzol will spread like grass and mycelium to nearby dirt blocks.
 
 ## noOwnerTntLootingIII `🐛Beta`
 
-If a TNT explosion has a null damage source, entities killed by the blast will be treated as having Looting III applied.
+If the owner of the primed TNT entity is null when it explodes, then any entities killed by the explosion should apply the Looting III effect.
 
 - Type: `boolean`
 - Default value: `false`
