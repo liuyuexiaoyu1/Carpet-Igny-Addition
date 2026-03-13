@@ -1,5 +1,6 @@
 package com.liuyue.igny.utils;
 
+@SuppressWarnings("unused")
 public class IGNYRuleCategory {
 
     //==================================================================

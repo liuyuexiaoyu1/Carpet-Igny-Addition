@@ -5,6 +5,7 @@
   "igny.settings.record.operator":"操作者",
   "igny.settings.record.change_time": "变更时间",
   "igny.settings.record.raw_value": "原始值",
+  "igny.settings.record.new_value": "新的值",
   "igny.settings.command.version": "版本",
   "igny.settings.command.total_rules": "总规则数",
   "igny.settings.failure.unknown_entity": "未知实体ID：%s",

@@ -17,22 +17,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Optional;
+import java.util.List;
 
 import carpet.utils.Translations;
 
 @Mixin(SettingsManager.class)
 public abstract class SettingsManagerMixin {
-
-    @Unique
-    private static final String RECORD_OPERATOR = "igny.settings.record.operator";
-
-    @Unique
-    private static final String CHANGE_TIME = "igny.settings.record.change_time";
-
-    @Unique
-    private static final String RAW_VALUE = "igny.settings.record.raw_value";
-
     @Inject(
             method = "displayRuleMenu",
             at = @At(
@@ -43,26 +33,23 @@ public abstract class SettingsManagerMixin {
             )
     )
     private void addOperationInfoAfterCurrentValue(CommandSourceStack source, CarpetRule<?> rule, CallbackInfoReturnable<Integer> cir) {
-        if (!IGNYSettings.showRuleChangeHistory) {
-            return;
-        }
-
+        if (!IGNYSettings.showRuleChangeHistory) return;
         if (rule != null) {
-            Optional<RuleChangeDataManager.RuleChangeRecord> lastChange = RuleChangeDataManager.getLastChange(rule.name());
-            if (lastChange.isPresent()) {
-                RuleChangeDataManager.RuleChangeRecord record = lastChange.get();
-
-                if (record.isValid()) {
-                    carpet.utils.Messenger.m(source,
-                            "g  "+Translations.tr(RECORD_OPERATOR,"Operator")+": ", "w " + record.sourceName,
-                            "g  "+Translations.tr(CHANGE_TIME,"ChangeTime")+": ", "w " + record.formattedTime,
-                            "g  "+Translations.tr(RAW_VALUE,"RawValue")+": ", "w " + objectToString(record.rawValue)
-                    );
+            List<RuleChangeDataManager.RuleChangeRecord> history = RuleChangeDataManager.getLastChange(rule.name());
+            if (!history.isEmpty()) {
+                for (RuleChangeDataManager.RuleChangeRecord lastChange : history) {
+                    if (lastChange.isValid()) {
+                        carpet.utils.Messenger.m(source,
+                                "g  " + Translations.tr("igny.settings.record.operator", "Operator") + ": ", "w " + lastChange.sourceName,
+                                "g  " + Translations.tr("igny.settings.record.change_time", "ChangeTime") + ": ", "w " + lastChange.formattedTime,
+                                "g  " + Translations.tr("igny.settings.record.raw_value", "RawValue") + ": ", "w " + objectToString(lastChange.rawValue),
+                                "g  " + Translations.tr("igny.settings.record.new_value", "NewValue") + ": ", "w " + lastChange.userInput
+                        );
+                    }
                 }
             }
         }
     }
-
 
     @Unique
     private String objectToString(Object obj) {
@@ -71,18 +58,12 @@ public abstract class SettingsManagerMixin {
         return obj.toString();
     }
 
-    @Inject(method = {"setRule", "setDefault"},at= @At(value = "INVOKE", target = "Lcarpet/api/settings/CarpetRule;set(Lnet/minecraft/commands/CommandSourceStack;Ljava/lang/String;)V"))
+    @Inject(method = {"setRule", "setDefault"}, at= @At(value = "INVOKE", target = "Lcarpet/api/settings/CarpetRule;set(Lnet/minecraft/commands/CommandSourceStack;Ljava/lang/String;)V", shift = At.Shift.AFTER))
     private void onSetRuleValue(CommandSourceStack source, CarpetRule<?> rule, String stringValue, CallbackInfoReturnable<Integer> cir){
-        if(IGNYSettings.showRuleChangeHistory) {
+        if (IGNYSettings.showRuleChangeHistory) {
             RuleChangeTracker.ruleChanged(source, rule, stringValue);
         }
     }
-
-    @Unique
-    private static final String VERSION_TRANSLATION_KEY = "igny.settings.command.version";
-
-    @Unique
-    private static final String TOTAL_RULES_TRANSLATION_KEY = "igny.settings.command.total_rules";
 
     @Inject(
             method = "listAllSettings",
@@ -102,14 +83,14 @@ public abstract class SettingsManagerMixin {
     )
     private void printVersion(CommandSourceStack source, CallbackInfoReturnable<Integer> cir) {
         SettingsManager settingsManager = (SettingsManager) (Object) this;
-        if (settingsManager == CarpetServer.settingsManager) {
+        if (settingsManager.equals(CarpetServer.settingsManager)) {
             Messenger.m(
                     source,
                     Messenger.c(
                             String.format("g %s ", IGNYServer.fancyName),
-                            String.format("g %s: ", Translations.tr(VERSION_TRANSLATION_KEY, "Version")),
+                            String.format("g %s: ", Translations.tr("igny.settings.command.version", "Version")),
                             String.format("g %s ", IGNYServerMod.getVersion()),
-                            String.format("g (%s: %d)", Translations.tr(TOTAL_RULES_TRANSLATION_KEY, "total rules"), IGNYServer.ruleCount)
+                            String.format("g (%s: %d)", Translations.tr("igny.settings.command.total_rules", "total rules"), IGNYServer.ruleCount)
                     )
             );
         }

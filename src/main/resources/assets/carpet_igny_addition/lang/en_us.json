@@ -5,6 +5,7 @@
   "igny.settings.record.operator":"Operator",
   "igny.settings.record.change_time": "ChangeTime",
   "igny.settings.record.raw_value": "RawValue",
+  "igny.settings.record.new_value": "NewValue",
   "igny.settings.command.version": "Version",
   "igny.settings.command.total_rules": "total rules",
   "igny.settings.failure.unknown_entity": "Unknown Entity ID : %s",

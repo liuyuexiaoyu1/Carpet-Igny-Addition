@@ -18,7 +18,7 @@ public class RuleChangeDataManager {
     private static final String JSON_FILE_NAME = "rule_changes.json";
 
     private static MinecraftServer server;
-    private static final Map<String, RuleChangeRecord> inMemoryCache = new ConcurrentHashMap<>();
+    private static final Map<String, List<RuleChangeRecord>> inMemoryCache = new ConcurrentHashMap<>();
     private static final ReadWriteLock cacheLock = new ReentrantReadWriteLock();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
@@ -42,24 +42,28 @@ public class RuleChangeDataManager {
 
         cacheLock.writeLock().lock();
         try {
-            inMemoryCache.put(ruleName, record);
+            List<RuleChangeRecord> history = inMemoryCache.computeIfAbsent(ruleName, k -> new ArrayList<>());
+            history.addLast(record);
+            if (history.size() > 3) {
+                history.removeFirst();
+            }
             saveToJson();
         } finally {
             cacheLock.writeLock().unlock();
         }
     }
 
-    public static Optional<RuleChangeRecord> getLastChange(String ruleName) {
+    public static List<RuleChangeRecord> getLastChange(String ruleName) {
         cacheLock.readLock().lock();
         try {
-            return Optional.ofNullable(inMemoryCache.get(ruleName));
+            return new ArrayList<>(inMemoryCache.getOrDefault(ruleName, Collections.emptyList()));
         } finally {
             cacheLock.readLock().unlock();
         }
     }
 
     @SuppressWarnings("unused")
-    public static Map<String, RuleChangeRecord> getAllChanges() {
+    public static Map<String, List<RuleChangeRecord>> getAllChanges() {
         cacheLock.readLock().lock();
         try {
             return new HashMap<>(inMemoryCache);
@@ -98,8 +102,8 @@ public class RuleChangeDataManager {
         }
 
         try (FileReader reader = new FileReader(jsonFile)) {
-            Type mapType = new TypeToken<Map<String, RuleChangeRecord>>() {}.getType();
-            Map<String, RuleChangeRecord> loaded = GSON.fromJson(reader, mapType);
+            Type mapType = new TypeToken<Map<String, List<RuleChangeRecord>>>() {}.getType();
+            Map<String, List<RuleChangeRecord>> loaded = GSON.fromJson(reader, mapType);
             if (loaded != null) {
                 inMemoryCache.putAll(loaded);
             }
@@ -141,30 +145,30 @@ public class RuleChangeDataManager {
     public static class RuleChangeRecord {
         public final String ruleName;
         public final Object rawValue;
-        public final Object currentValue;
+        public final Object userInput;
         public final String sourceName;
         public final long timestamp;
         public final String formattedTime;
 
-        public RuleChangeRecord(String ruleName, Object rawValue, Object currentValue,
+        public RuleChangeRecord(String ruleName, Object rawValue, Object userInput,
                                 String sourceName, long timestamp) {
             this.ruleName = ruleName;
             this.rawValue = rawValue;
-            this.currentValue = currentValue;
+            this.userInput = userInput;
             this.sourceName = sourceName;
             this.timestamp = timestamp;
             this.formattedTime = formatTimestamp(timestamp);
         }
 
         public boolean isValid() {
-            return ruleName != null && !ruleName.isEmpty() && rawValue != null && currentValue != null && sourceName != null && !sourceName.isEmpty();
+            return ruleName != null && !ruleName.isEmpty() && rawValue != null && userInput != null && sourceName != null && !sourceName.isEmpty();
         }
 
         @SuppressWarnings("unused")
         private RuleChangeRecord() {
             this.ruleName = "";
             this.rawValue = null;
-            this.currentValue = null;
+            this.userInput = null;
             this.sourceName = "";
             this.timestamp = 0;
             this.formattedTime = "";
