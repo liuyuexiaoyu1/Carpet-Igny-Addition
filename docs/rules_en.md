@@ -31,7 +31,7 @@ When a player is locked on by a Guardian or Elder Guardian, they will not suffer
 
 ## showRuleChangeHistory
 
-Records and displays rule change history including operator, timestamp, and original value when rules are modified.
+Records and displays rule change history including operator, timestamp, newValue, and original value when rules are modified.
 
 - Type: `boolean`
 - Default value: `false`
