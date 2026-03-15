@@ -9,7 +9,7 @@ import com.liuyue.igny.IGNYServerMod;
 import com.liuyue.igny.data.RuleChangeDataManager;
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.tracker.RuleChangeTracker;
-import com.liuyue.igny.utils.RuleUtils;
+import com.liuyue.igny.utils.ClassUtil;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.commands.CommandSourceStack;
@@ -65,28 +65,10 @@ public abstract class SettingsManagerMixin {
 
     @Inject(method = "addCarpetRule", at = @At(value = "TAIL"))
     private void addCarpetRule(CarpetRule<?> rule, CallbackInfo ci) {
-        String modId = getModIdFromClass();
-        IGNYSettings.modRuleTree
+        ClassUtil.getModIdFromStack("addCarpetRule", modId ->
+                IGNYSettings.modRuleTree
                 .computeIfAbsent(modId, k -> new ArrayList<>())
-                .add(rule.name());
-    }
-
-    @Unique
-    private static String getModIdFromClass() {
-        StackTraceElement[] stack = Thread.currentThread().getStackTrace();
-        for (int i = 0; i < stack.length; i++) {
-            if ("addCarpetRule".equals(stack[i].getMethodName())) {
-                int callerIndex = i + 1;
-                if (callerIndex < stack.length) {
-                    String clazzName = stack[callerIndex].getClassName();
-                    try {
-                        return RuleUtils.getExtensionModIdFromClass(Class.forName(clazzName));
-                    } catch (ClassNotFoundException ignored) {}
-                }
-                break;
-            }
-        }
-        return "carpet";
+                .add(rule.name()));
     }
 
     @Unique

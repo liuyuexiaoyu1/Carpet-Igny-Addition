@@ -39,7 +39,7 @@ public class RuleChangeDataManager {
 
     public static void recordRuleChange(String ruleName, Object originalValue,
                                         String userInput, String sourceName, long timestamp) {
-        RuleChangeRecord record = new RuleChangeRecord(ruleName, originalValue, userInput, sourceName, timestamp);
+        RuleChangeRecord record = new RuleChangeRecord(originalValue, userInput, sourceName, timestamp);
 
         cacheLock.writeLock().lock();
         try {
@@ -144,16 +144,14 @@ public class RuleChangeDataManager {
     }
 
     public static class RuleChangeRecord {
-        public final String ruleName;
         public final Object rawValue;
         public final Object userInput;
         public final String sourceName;
         public final long timestamp;
         public final String formattedTime;
 
-        public RuleChangeRecord(String ruleName, Object rawValue, Object userInput,
+        public RuleChangeRecord(Object rawValue, Object userInput,
                                 String sourceName, long timestamp) {
-            this.ruleName = ruleName;
             this.rawValue = rawValue;
             this.userInput = userInput;
             this.sourceName = sourceName;
@@ -162,12 +160,11 @@ public class RuleChangeDataManager {
         }
 
         public boolean isValid() {
-            return ruleName != null && !ruleName.isEmpty() && rawValue != null && userInput != null && sourceName != null && !sourceName.isEmpty();
+            return rawValue != null && userInput != null && sourceName != null && !sourceName.isEmpty();
         }
 
         @SuppressWarnings("unused")
         private RuleChangeRecord() {
-            this.ruleName = "";
             this.rawValue = null;
             this.userInput = null;
             this.sourceName = "";
