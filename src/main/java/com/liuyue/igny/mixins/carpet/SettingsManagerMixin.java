@@ -112,6 +112,7 @@ public abstract class SettingsManagerMixin {
             Object rawValue = instance.value();
             original.call(instance, commandSourceStack, s);
             RuleChangeTracker.ruleChanged(commandSourceStack, instance, rawValue, s);
+            return;
         }
         original.call(instance, commandSourceStack, s);
     }
