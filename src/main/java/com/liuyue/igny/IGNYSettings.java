@@ -35,6 +35,7 @@ public class IGNYSettings
     public static final ThreadLocal<Boolean> fakePlayerSpawnMemoryLeakFix = ThreadLocal.withInitial(() -> false);
 
     public static final ThreadLocal<Boolean> itemStackCountChanged = ThreadLocal.withInitial(() -> true);
+
     @Rule(
             categories = {IGNY,SURVIVAL,FEATURE}
     )
