@@ -54,7 +54,7 @@ public abstract class SettingsManagerMixin {
                                     "g  " + Translations.tr("igny.settings.record.operator", "Operator") + ": ", "w " + lastChange.sourceName,
                                     "g  " + Translations.tr("igny.settings.record.change_time", "ChangeTime") + ": ", "w " + lastChange.formattedTime,
                                     "g  " + Translations.tr("igny.settings.record.raw_value", "RawValue") + ": ", "w " + objectToString(lastChange.rawValue),
-                                    "g  " + Translations.tr("igny.settings.record.new_value", "NewValue") + ": ", "w " + lastChange.userInput
+                                    "g  " + Translations.tr("igny.settings.record.new_value", "NewValue") + ": ", "w " + objectToString(lastChange.userInput)
                             );
                         }
                     }
