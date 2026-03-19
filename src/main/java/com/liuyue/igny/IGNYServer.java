@@ -16,7 +16,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 //#if MC >= 12003
 import net.minecraft.world.TickRateManager;
-//#else if MC > 11904
+//#elseif MC > 11904
 //$$ import carpet.helpers.TickRateManager;
 //$$ import carpet.fakes.MinecraftServerInterface;
 //#else
@@ -117,7 +117,7 @@ public class IGNYServer implements CarpetExtension {
         if (minecraftServer != null) {
             //#if MC >= 12003
             TickRateManager manager = minecraftServer.tickRateManager();
-            //#else if MC > 11904
+            //#elseif MC > 11904
             //$$ TickRateManager manager = ((MinecraftServerInterface)minecraftServer).getTickRateManager();
             //#endif
             if (IGNYSettings.betterSprintGameTick) {
