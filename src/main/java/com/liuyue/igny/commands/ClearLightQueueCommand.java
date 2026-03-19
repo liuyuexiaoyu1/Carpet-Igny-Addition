@@ -2,7 +2,7 @@ package com.liuyue.igny.commands;
 
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.mixins.commands.clearLightQueue.ThreadedLevelLightEngineAccessor;
-import com.liuyue.igny.utils.CommandUtils;
+import com.liuyue.igny.utils.CommandUtil;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -15,7 +15,7 @@ public class ClearLightQueueCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
                 Commands.literal("clearlightqueue")
-                        .requires(source -> CommandUtils.canUseCommand(source.getPlayer(), IGNYSettings.commandClearLightQueue))
+                        .requires(source -> CommandUtil.canUseCommand(source.getPlayer(), IGNYSettings.commandClearLightQueue))
                         .executes(ClearLightQueueCommand::executeCommand)
         );
     }

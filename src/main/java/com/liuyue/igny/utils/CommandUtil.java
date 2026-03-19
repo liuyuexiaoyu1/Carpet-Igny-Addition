@@ -11,7 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Locale;
 
-public class CommandUtils {
+public class CommandUtil {
     public static boolean canDropEnderChest(CommandSourceStack source, ServerPlayer targetPlayer) {
         if (source == null) return false;
 

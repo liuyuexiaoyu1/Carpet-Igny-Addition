@@ -296,5 +296,7 @@
   "carpet.rule.endGatewayPortalNoCooldown.name": "末地折跃门无冷却",
   "carpet.rule.endGatewayPortalNoCooldown.desc": "取消末地折跃门有实体进入后或是间隔2400gt触发的40gt冷却",
   "carpet.rule.liquidSourceCanDestroy.name": "流体源可挖掘",
-  "carpet.rule.liquidSourceCanDestroy.desc": "允许选中流体源并且破坏"
+  "carpet.rule.liquidSourceCanDestroy.desc": "允许选中流体源并且破坏",
+  "carpet.rule.betterSprintGameTick.name": "更好地加速游戏刻",
+  "carpet.rule.betterSprintGameTick.desc": "当服务器中存在真人玩家的时候，tick sprint(warp)会暂停，tick rate变为20"
 }

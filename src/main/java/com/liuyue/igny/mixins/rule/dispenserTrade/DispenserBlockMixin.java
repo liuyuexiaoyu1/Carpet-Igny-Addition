@@ -1,7 +1,7 @@
 package com.liuyue.igny.mixins.rule.dispenserTrade;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.utils.RuleUtils;
+import com.liuyue.igny.utils.RuleUtil;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.*;
 import net.minecraft.core.dispenser.BlockSource;
@@ -125,7 +125,7 @@ public abstract class DispenserBlockMixin {
     private static boolean hasAndConsumeItems(DispenserBlockEntity dispenser, ItemStack costA, ItemStack costB) {
         if (!hasStack(dispenser, costA)) return false;
         if (!costB.isEmpty() && !hasStack(dispenser, costB)) return false;
-        if (Boolean.TRUE.equals(RuleUtils.getCarpetRulesValue("carpet-tis-addition", "dispenserNoItemCost"))) return true;
+        if (Boolean.TRUE.equals(RuleUtil.getCarpetRulesValue("carpet-tis-addition", "dispenserNoItemCost"))) return true;
         consumeItem(dispenser, costA.getItem(), costA.getCount());
         consumeItem(dispenser, costB.getItem(), costB.getCount());
         return true;

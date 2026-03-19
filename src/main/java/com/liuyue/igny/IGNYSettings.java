@@ -27,6 +27,7 @@ public class IGNYSettings
     //假玩家生成内存泄露修复
     public static final ThreadLocal<Boolean> fakePlayerSpawnMemoryLeakFix = ThreadLocal.withInitial(() -> false);
     public static final ThreadLocal<Boolean> itemStackCountChanged = ThreadLocal.withInitial(() -> true);
+    public static float originalTPS = 20.0f;
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
@@ -570,4 +571,10 @@ public class IGNYSettings
             options = {"false", "true"}
     )
     public static Boolean liquidSourceCanDestroy = false;
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE},
+            options = {"false", "true"}
+    )
+    public static Boolean betterSprintGameTick = false;
 }

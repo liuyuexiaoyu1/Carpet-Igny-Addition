@@ -2,9 +2,8 @@
 package com.liuyue.igny.mixins.interfaces;
 
 import com.liuyue.igny.IGNYServer;
-import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.data.CustomPickupDataManager;
-import com.liuyue.igny.data.CustomItemMaxStackSizeDataManager;
+import com.liuyue.igny.manager.CustomPickupDataManager;
+import com.liuyue.igny.manager.CustomItemMaxStackSizeDataManager;
 import com.liuyue.igny.task.ITask;
 import com.liuyue.igny.task.TaskManager;
 import com.liuyue.igny.tracker.RuleChangeTracker;

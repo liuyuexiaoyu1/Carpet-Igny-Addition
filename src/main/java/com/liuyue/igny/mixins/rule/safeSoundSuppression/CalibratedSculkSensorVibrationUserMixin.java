@@ -1,7 +1,7 @@
 package com.liuyue.igny.mixins.rule.safeSoundSuppression;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.utils.RuleUtils;
+import com.liuyue.igny.utils.RuleUtil;
 import net.minecraft.core.BlockPos;
 //#if MC >= 12005
 import net.minecraft.core.component.DataComponents;
@@ -37,7 +37,7 @@ public class CalibratedSculkSensorVibrationUserMixin {
         //#endif
         if (!level.getBlockState(blockEntityPos).is(Blocks.CALIBRATED_SCULK_SENSOR)
                 //#if MC >= 12005
-                || (component != null && RuleUtils.canSoundSuppression(component.getString()))
+                || (component != null && RuleUtil.canSoundSuppression(component.getString()))
                 //#endif
         ) {
             if (cir.getReturnValue() == 0 && IGNYSettings.safeSoundSuppression) {

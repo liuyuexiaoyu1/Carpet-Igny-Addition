@@ -24,7 +24,7 @@
 package com.liuyue.igny.mixins.commands.customItemMaxStackSize;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.data.CustomItemMaxStackSizeDataManager;
+import com.liuyue.igny.manager.CustomItemMaxStackSizeDataManager;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;

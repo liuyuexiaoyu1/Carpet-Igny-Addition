@@ -1,4 +1,4 @@
-package com.liuyue.igny.data;
+package com.liuyue.igny.manager;
 
 import com.google.gson.*;
 import com.google.gson.annotations.SerializedName;

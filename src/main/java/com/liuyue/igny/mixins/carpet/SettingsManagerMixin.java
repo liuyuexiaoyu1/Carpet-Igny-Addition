@@ -6,7 +6,7 @@ import carpet.api.settings.SettingsManager;
 import carpet.utils.Messenger;
 import com.liuyue.igny.IGNYServer;
 import com.liuyue.igny.IGNYServerMod;
-import com.liuyue.igny.data.RuleChangeDataManager;
+import com.liuyue.igny.manager.RuleChangeDataManager;
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.tracker.RuleChangeTracker;
 import com.liuyue.igny.utils.ClassUtil;
@@ -53,7 +53,7 @@ public abstract class SettingsManagerMixin {
                             Messenger.m(source,
                                     "g  " + Translations.tr("igny.settings.record.operator", "Operator") + ": ", "w " + lastChange.sourceName,
                                     "g  " + Translations.tr("igny.settings.record.change_time", "ChangeTime") + ": ", "w " + lastChange.formattedTime,
-                                    "g  " + Translations.tr("igny.settings.record.raw_value", "RawValue") + ": ", "w " + objectToString(lastChange.rawValue),
+                                    "g  " + Translations.tr("igny.settings.record.raw_value", "RawValue") + ": ", "w " +  objectToString(lastChange.rawValue),
                                     "g  " + Translations.tr("igny.settings.record.new_value", "NewValue") + ": ", "w " + objectToString(lastChange.userInput)
                             );
                         }
@@ -74,7 +74,6 @@ public abstract class SettingsManagerMixin {
     @Unique
     private String objectToString(Object obj) {
         if (obj == null) return "null";
-        if (obj instanceof Boolean) return (Boolean) obj ? "true" : "false";
         return obj.toString();
     }
 
@@ -97,6 +96,11 @@ public abstract class SettingsManagerMixin {
             return;
         }
         original.call(instance, commandSourceStack, s);
+    }
+
+    @Inject(method = {"setRule", "setDefault"}, at= @At(value = "INVOKE", target = "Lcarpet/api/settings/CarpetRule;set(Lnet/minecraft/commands/CommandSourceStack;Ljava/lang/String;)V", shift = At.Shift.AFTER))
+    private void afterSetRuleValue(CommandSourceStack source, CarpetRule<?> rule, String newValue, CallbackInfoReturnable<Integer> cir){
+        IGNYServer.onRuleChanged(rule);
     }
 
     @Inject(

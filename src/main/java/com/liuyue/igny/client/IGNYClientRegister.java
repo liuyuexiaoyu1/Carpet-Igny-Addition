@@ -4,7 +4,7 @@ import com.liuyue.igny.client.command.IGNYCommand;
 import com.liuyue.igny.client.renderer.BaseTickingShapeRenderer;
 import com.liuyue.igny.client.renderer.world.BoxRenderer;
 import com.liuyue.igny.client.renderer.world.HighlightBlocksRenderer;
-import com.liuyue.igny.data.CustomItemMaxStackSizeDataManager;
+import com.liuyue.igny.manager.CustomItemMaxStackSizeDataManager;
 import com.liuyue.igny.network.packet.block.HighlightPayload;
 import com.liuyue.igny.network.packet.block.RemoveHighlightPayload;
 import com.liuyue.igny.network.packet.config.SyncCustomStackSizePayload;

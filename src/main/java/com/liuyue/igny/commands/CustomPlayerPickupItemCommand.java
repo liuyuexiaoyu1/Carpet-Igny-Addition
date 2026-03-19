@@ -2,8 +2,8 @@ package com.liuyue.igny.commands;
 
 import carpet.patches.EntityPlayerMPFake;
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.data.CustomPickupDataManager;
-import com.liuyue.igny.utils.CommandUtils;
+import com.liuyue.igny.manager.CustomPickupDataManager;
+import com.liuyue.igny.utils.CommandUtil;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -39,7 +39,7 @@ public class CustomPlayerPickupItemCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext context) {
         dispatcher.register(
                 Commands.literal("customPlayerPickupItem")
-                        .requires(source -> CommandUtils.canUseCommand(source.getPlayer(), IGNYSettings.commandCustomPlayerPickupItem))
+                        .requires(source -> CommandUtil.canUseCommand(source.getPlayer(), IGNYSettings.commandCustomPlayerPickupItem))
                         .then(Commands.argument("target", StringArgumentType.string())
                                 .suggests(CustomPlayerPickupItemCommand::suggestPlayers)
                                 .then(Commands.literal("get")

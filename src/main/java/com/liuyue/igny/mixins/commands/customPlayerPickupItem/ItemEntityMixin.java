@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.commands.customPlayerPickupItem;
 
-import com.liuyue.igny.data.CustomPickupDataManager;
+import com.liuyue.igny.manager.CustomPickupDataManager;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;

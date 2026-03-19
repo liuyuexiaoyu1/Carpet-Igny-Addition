@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.interfaces;
 
-import com.liuyue.igny.data.CustomItemMaxStackSizeDataManager;
+import com.liuyue.igny.manager.CustomItemMaxStackSizeDataManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.protocol.game.ClientboundLoginPacket;

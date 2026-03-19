@@ -1,7 +1,7 @@
 package com.liuyue.igny.mixins.rule.simpleSoundSuppression;
 
 import com.liuyue.igny.exception.IAEUpdateSuppressException;
-import com.liuyue.igny.utils.RuleUtils;
+import com.liuyue.igny.utils.RuleUtil;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -44,7 +44,7 @@ public abstract class CalibratedSculkSensorVibrationUserMixin {
         if (this.igny$blockEntity == null) return;
         Component component = this.igny$blockEntity.components().get(DataComponents.CUSTOM_NAME);
         if (component != null) {
-            if (RuleUtils.canSoundSuppression(component.getString()) && cir.getReturnValueZ() && !serverLevel.isClientSide()) {
+            if (RuleUtil.canSoundSuppression(component.getString()) && cir.getReturnValueZ() && !serverLevel.isClientSide()) {
                 shouldThrow.set(true);
                 this.getBackSignal(serverLevel, this.igny$blockEntity.getBlockPos(), this.igny$blockEntity.getBlockState());
             }

@@ -1,7 +1,7 @@
 package com.liuyue.igny.mixins.rule.instantSpawnEnderDragon;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.utils.RuleUtils;
+import com.liuyue.igny.utils.RuleUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -121,13 +121,13 @@ public abstract class EndDragonFightMixin {
                     crystal.discard();
                 }
             }
-            if (!RuleUtils.getCarpetRulesValue("carpet-ams-addition", "preventEndSpikeRespawn").equals("true")) {
+            if (!RuleUtil.getCarpetRulesValue("carpet-ams-addition", "preventEndSpikeRespawn").equals("true")) {
                 //#if MC >= 26.1
                 //$$ List<EndSpikeFeature.EndSpike> spikes = EndSpikeFeature.getSpikesForLevel(this.level);
                 //#else
                 List<SpikeFeature.EndSpike> spikes = SpikeFeature.getSpikesForLevel(this.level);
                 //#endif
-                if (RuleUtils.getCarpetRulesValue("carpet-ams-addition", "preventEndSpikeRespawn").equals("keepEndCrystal")) {
+                if (RuleUtil.getCarpetRulesValue("carpet-ams-addition", "preventEndSpikeRespawn").equals("keepEndCrystal")) {
                     //#if MC >= 26.1
                     //$$ for (EndSpikeFeature.EndSpike spike : spikes) {
                     //#else
@@ -136,7 +136,7 @@ public abstract class EndDragonFightMixin {
                         EndCrystal crystal = getEndCrystal(spike);
                         this.level.addFreshEntity(crystal);
                     }
-                } else if (RuleUtils.getCarpetRulesValue("carpet-ams-addition", "preventEndSpikeRespawn").equals("false")) {
+                } else if (RuleUtil.getCarpetRulesValue("carpet-ams-addition", "preventEndSpikeRespawn").equals("false")) {
                     RandomSource random = RandomSource.create();
                     //#if MC >= 26.1
                     //$$ for (EndSpikeFeature.EndSpike spike : spikes) {

@@ -747,3 +747,12 @@ Allows fluid sources to be targeted and destroyed.
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
+
+## betterSprintGameTick `🐛Beta`
+
+When real players are present in the server, tick sprint (warp) will be paused and the tick rate will be set to 20.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 //#endif
 import net.minecraft.server.level.ServerPlayer;
 import com.liuyue.igny.IGNYServer;
-import com.liuyue.igny.data.CustomItemMaxStackSizeDataManager;
+import com.liuyue.igny.manager.CustomItemMaxStackSizeDataManager;
 import com.liuyue.igny.network.packet.config.SyncCustomStackSizePayload;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 //#if MC < 12005

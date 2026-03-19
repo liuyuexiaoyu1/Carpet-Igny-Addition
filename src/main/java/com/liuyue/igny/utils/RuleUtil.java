@@ -6,7 +6,7 @@ import com.liuyue.igny.IGNYServerMod;
 import com.liuyue.igny.IGNYSettings;
 import java.util.Objects;
 
-public class RuleUtils {
+public class RuleUtil {
     //#if MC >= 12005
     public static Boolean canSoundSuppression(String name) {
         if ("false".equalsIgnoreCase(IGNYSettings.simpleSoundSuppression)) {

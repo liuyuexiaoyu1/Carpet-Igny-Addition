@@ -15,7 +15,7 @@ import ch.endte.syncmatica.network.PacketType;
 //#endif
 //#endif
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.utils.CommandUtils;
+import com.liuyue.igny.utils.CommandUtil;
 import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
@@ -65,7 +65,7 @@ public abstract class ServerCommunicationManagerMixin {
     private void handlePacket(ExchangeTarget source, PacketType type, FriendlyByteBuf packetBuf, CallbackInfo ci, @Local(name = "placement") ServerPlacement placement) {
         //#endif
         ServerPlayer player = this.playerMap.get(source);
-        if (!CommandUtils.canUseCommand(player, IGNYSettings.removeSyncmaticaPermission) && placement.getOwner().uuid != player.getUUID()) {
+        if (!CommandUtil.canUseCommand(player, IGNYSettings.removeSyncmaticaPermission) && placement.getOwner().uuid != player.getUUID()) {
             if (source != null) {
                 this.sendMessage(source, MessageType.ERROR, Translations.tr("igny.syncmatica_not_permission"));
             }

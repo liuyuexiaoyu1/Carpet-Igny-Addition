@@ -1,7 +1,7 @@
 package com.liuyue.igny.mixins.commands.customItemMaxStackSize;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.data.CustomItemMaxStackSizeDataManager;
+import com.liuyue.igny.manager.CustomItemMaxStackSizeDataManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;

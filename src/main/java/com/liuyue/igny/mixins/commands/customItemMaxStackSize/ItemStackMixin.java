@@ -23,7 +23,7 @@
 package com.liuyue.igny.mixins.commands.customItemMaxStackSize;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.data.CustomItemMaxStackSizeDataManager;
+import com.liuyue.igny.manager.CustomItemMaxStackSizeDataManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;

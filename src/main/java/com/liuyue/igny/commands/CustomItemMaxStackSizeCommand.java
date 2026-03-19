@@ -1,8 +1,8 @@
 package com.liuyue.igny.commands;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.data.CustomItemMaxStackSizeDataManager;
-import com.liuyue.igny.utils.CommandUtils;
+import com.liuyue.igny.manager.CustomItemMaxStackSizeDataManager;
+import com.liuyue.igny.utils.CommandUtil;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -26,7 +26,7 @@ public class CustomItemMaxStackSizeCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandBuildContext) {
         //#if MC >= 12006
         dispatcher.register(Commands.literal("customItemMaxStackSize")
-                .requires(source -> CommandUtils.canUseCommand(source.getPlayer(), IGNYSettings.commandCustomItemMaxStackSize))
+                .requires(source -> CommandUtil.canUseCommand(source.getPlayer(), IGNYSettings.commandCustomItemMaxStackSize))
                 .then(Commands.literal("set")
                         .then(Commands.argument("predicate", ItemPredicateArgument.itemPredicate(commandBuildContext))
                                 .then(Commands.argument("count", IntegerArgumentType.integer(1, 99))
