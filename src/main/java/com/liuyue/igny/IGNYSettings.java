@@ -28,6 +28,7 @@ public class IGNYSettings
     public static final ThreadLocal<Boolean> fakePlayerSpawnMemoryLeakFix = ThreadLocal.withInitial(() -> false);
     public static final ThreadLocal<Boolean> itemStackCountChanged = ThreadLocal.withInitial(() -> true);
     public static float originalTPS = 20.0f;
+    public static final Set<UUID> sprintWhitelistPlayers = new HashSet<>();
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
@@ -574,7 +575,7 @@ public class IGNYSettings
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE},
-            options = {"false", "true"}
+            options = {"false", "true", "playerJoin"}
     )
-    public static Boolean betterSprintGameTick = false;
+    public static String betterSprintGameTick = "false";
 }

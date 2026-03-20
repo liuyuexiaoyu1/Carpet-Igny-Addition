@@ -298,5 +298,7 @@
   "carpet.rule.liquidSourceCanDestroy.name": "流体源可挖掘",
   "carpet.rule.liquidSourceCanDestroy.desc": "允许选中流体源并且破坏",
   "carpet.rule.betterSprintGameTick.name": "更好地加速游戏刻",
-  "carpet.rule.betterSprintGameTick.desc": "当服务器中存在真人玩家的时候，tick sprint(warp)会暂停，tick rate变为20"
+  "carpet.rule.betterSprintGameTick.desc": "当不满足条件的时候，tick sprint(warp)会暂停，tick rate变为20",
+  "carpet.rule.betterSprintGameTick.extra.0": "true: 条件：服务器存在真人玩家时",
+  "carpet.rule.betterSprintGameTick.extra.1": "playerJoin: 条件：服务器加入新的真人玩家时，直到他退出服务器"
 }

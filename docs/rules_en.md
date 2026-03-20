@@ -750,9 +750,13 @@ Allows fluid sources to be targeted and destroyed.
 
 ## betterSprintGameTick `🐛Beta`
 
-When real players are present in the server, tick sprint (warp) will be paused and the tick rate will be set to 20.
+When conditions are not met, tick sprint (warp) will pause and the tick rate will revert to 20.
 
-- Type: `boolean`
+`true`: Pauses when any real player is present on the server.
+
+`playerJoin`: Pauses when a new real player joins, until they log out.
+
+- Type: `string`
 - Default value: `false`
-- Suggested options: `false`, `true`
+- Suggested options: `false`, `true`, `playerJoin`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`

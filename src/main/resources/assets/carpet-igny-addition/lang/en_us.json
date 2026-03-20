@@ -218,5 +218,7 @@
   "carpet.rule.renewableEndGatewayPortal.desc": "Allows players to create an End Gateway portal by surrounding an air block with Dragon Eggs at the same height and lighting a fire in the center",
   "carpet.rule.endGatewayPortalNoCooldown.desc": "Removes the 40gt cooldown for End Gateways, whether triggered by an entity entry or the periodic 2400gt cooldown",
   "carpet.rule.liquidSourceCanDestroy.desc": "Allows fluid sources to be targeted and destroyed",
-  "carpet.rule.betterSprintGameTick.desc": "When real players are present in the server, tick sprint (warp) will be paused and the tick rate will be set to 20"
+  "carpet.rule.betterSprintGameTick.desc": "When conditions are not met, tick sprint (warp) will pause and the tick rate will revert to 20",
+  "carpet.rule.betterSprintGameTick.extra.0": "true: Pauses when any real player is present on the server",
+  "carpet.rule.betterSprintGameTick.extra.1": "playerJoin: Pauses when a new real player joins, until they log out"
 }

@@ -7,14 +7,25 @@ import net.minecraft.server.level.ServerPlayer;
 
 public class TickUtil {
     public static boolean shouldSprint(MinecraftServer server) {
-        if (!IGNYSettings.betterSprintGameTick) return true;
-        boolean bl = true;
-        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-            if (!(player instanceof EntityPlayerMPFake)) {
-                bl = false;
-                break;
+        switch (IGNYSettings.betterSprintGameTick) {
+            case "false" -> {
+                return true;
+            }
+            case "playerJoin" -> {
+                for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+                    if (!(player instanceof EntityPlayerMPFake) && !IGNYSettings.sprintWhitelistPlayers.contains(player.getUUID())) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            case "true" -> {
+                for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+                    if (!(player instanceof EntityPlayerMPFake)) return false;
+                }
+                return true;
             }
         }
-        return bl;
+        return true;
     }
 }

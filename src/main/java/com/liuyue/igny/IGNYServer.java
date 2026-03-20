@@ -39,6 +39,7 @@ public class IGNYServer implements CarpetExtension {
     public static final Logger LOGGER = LogManager.getLogger(fancyName);
     private static MinecraftServer minecraftServer;
     private static final IGNYServer INSTANCE = new IGNYServer();
+
     //#if MC < 12005
     //$$ public static final ResourceLocation HIGHLIGHT_PACKET_ID = new ResourceLocation(MOD_ID, "highlight_block");
     //$$ public static final ResourceLocation REMOVE_HIGHLIGHT_PACKET_ID = new ResourceLocation(MOD_ID, "remove_highlight_block");
@@ -106,11 +107,20 @@ public class IGNYServer implements CarpetExtension {
 
     @Override
     public void onPlayerLoggedOut(ServerPlayer player) {
+        IGNYSettings.sprintWhitelistPlayers.remove(player.getUUID());
         checkTickRate();
     }
 
     public static void onRuleChanged(CarpetRule<?> rule) {
-        if (rule.name().equals("betterSprintGameTick")) checkTickRate();
+        if (rule.name().equals("betterSprintGameTick")) {
+            IGNYSettings.sprintWhitelistPlayers.clear();
+            if (IGNYSettings.betterSprintGameTick.equals("playerJoin") && minecraftServer != null) {
+                for (ServerPlayer player : minecraftServer.getPlayerList().getPlayers()) {
+                    IGNYSettings.sprintWhitelistPlayers.add(player.getUUID());
+                }
+            }
+            checkTickRate();
+        }
     }
 
     private static void checkTickRate() {
@@ -120,7 +130,7 @@ public class IGNYServer implements CarpetExtension {
             //#elseif MC > 11904
             //$$ TickRateManager manager = ((MinecraftServerInterface)minecraftServer).getTickRateManager();
             //#endif
-            if (IGNYSettings.betterSprintGameTick) {
+            if (!IGNYSettings.betterSprintGameTick.equals("false")) {
                 if (!TickUtil.shouldSprint(minecraftServer)) {
                     //#if MC <= 11904
                     //$$ TickSpeed.tickrate(20);
