@@ -19,6 +19,9 @@ import org.spongepowered.asm.mixin.Unique;
 //#if MC > 12001
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#endif
 
 //#if MC <= 11904
@@ -39,13 +42,10 @@ public abstract class WetSpongeBlockMixin extends Block{
     private static final Direction[] ALL_DIRECTIONS = Direction.values();
     //#endif
 
-    @Override
-    //#if MC <= 12005
-    //$$ @SuppressWarnings("deprecation")
-    //#endif
-    public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
-        if (!blockState2.is(blockState.getBlock())) {
-            this.tryAbsorbWater(level, blockPos);
+    @Inject(method = "onPlace", at = @At(value = "HEAD"))
+    private void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston, CallbackInfo ci) {
+        if (!oldState.is(state.getBlock())) {
+            this.tryAbsorbWater(level, pos);
         }
     }
 
