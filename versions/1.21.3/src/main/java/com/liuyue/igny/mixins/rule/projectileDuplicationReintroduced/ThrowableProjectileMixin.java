@@ -34,22 +34,22 @@ public abstract class ThrowableProjectileMixin extends Projectile {
             if (!(self instanceof ThrownEnderpearl)) {
                 this.handleFirstTickBubbleColumn();
                 super.tick();
-                HitResult hitResult = ProjectileUtil.getHitResultOnMoveVector(self, ((ProjectileInvoker) self)::invokeCanHitEntity);
+                HitResult hitResult = ProjectileUtil.getHitResultOnMoveVector(self, this::canHitEntity);
                 if (hitResult.getType() != HitResult.Type.MISS) {
-                    ((ProjectileInvoker) self).invokeHitTargetOrDeflectSelf(hitResult);
+                    this.hitTargetOrDeflectSelf(hitResult);
                 }
-                Vec3 vec = self.getDeltaMovement();
-                double nx = self.getX() + vec.x;
-                double ny = self.getY() + vec.y;
-                double nz = self.getZ() + vec.z;
-                ((ProjectileInvoker) self).invokeUpdateRotation();
+                Vec3 vec = this.getDeltaMovement();
+                double nx = this.getX() + vec.x;
+                double ny = this.getY() + vec.y;
+                double nz = this.getZ() + vec.z;
+                this.updateRotation();
                 this.applyInertia();
-                ((EntityInvoker) self).invokeApplyGravity();
-                self.setPos(nx, ny, nz);
+                this.applyGravity();
+                this.setPos(nx, ny, nz);
                 //#if MC>=12105
                 //$$ ((EntityInvoker) self).invokeApplyEffectsFromBlocks();
                 //#else
-                self.applyEffectsFromBlocks();
+                this.applyEffectsFromBlocks();
                 //#endif
                 ci.cancel();
             }

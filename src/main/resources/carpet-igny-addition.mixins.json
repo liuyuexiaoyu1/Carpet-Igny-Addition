@@ -112,7 +112,6 @@
     "rule.podzolSpread.BlockMixin",
     "rule.prioritizeFlyingUseItem.ServerPlayerGameModeMixin",
     "rule.projectileDuplicationReintroduced.EntityInvoker",
-    "rule.projectileDuplicationReintroduced.ProjectileInvoker",
     "rule.projectileDuplicationReintroduced.ThrowableProjectileMixin",
     "rule.pureShulkerBoxDispense.ShulkerBoxDispenseBehaviorMixin",
     "rule.removeSyncmaticaPermission.ServerCommunicationManagerMixin",

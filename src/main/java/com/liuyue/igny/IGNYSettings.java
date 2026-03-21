@@ -270,6 +270,19 @@ public class IGNYSettings
     )
     public static Integer maxEndPortalSize = -1;
 
+    public static class EndPortalSizeValidator extends Validator<Integer> {
+        @Override
+        public Integer validate(CommandSourceStack source, CarpetRule<Integer> rule, Integer newValue, String string) {
+            if (source != null && source.getEntity() instanceof ServerPlayer) {
+                if (!FabricLoader.getInstance().isModLoaded("syncmatica")) {
+                    source.sendFailure(Component.literal(Translations.tr("igny.syncmatica_not_found")));
+                    return null;
+                }
+            }
+            return newValue;
+        }
+    }
+
     @Rule(
             categories = {IGNY, CREATIVE, FEATURE},
             options = {"false", "true"}
