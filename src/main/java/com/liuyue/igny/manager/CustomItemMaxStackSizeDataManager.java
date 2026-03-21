@@ -18,9 +18,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Predicate;
 //#endif
 
-public class CustomItemMaxStackSizeDataManager
+//#if MC >= 12006
+public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<String, Integer>> {
+    //#else
+    //$$ public class CustomItemMaxStackSizeDataManager {
+    //#endif
     //#if MC >= 12006
-        extends BaseDataManager<Map<String, Integer>> {
     public static final CustomItemMaxStackSizeDataManager INSTANCE = new CustomItemMaxStackSizeDataManager();
 
     private Map<String, Integer> customStacks = new HashMap<>();
