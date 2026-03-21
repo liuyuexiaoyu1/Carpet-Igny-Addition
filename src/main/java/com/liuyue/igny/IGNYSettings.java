@@ -266,7 +266,8 @@ public class IGNYSettings
     public static Boolean instantSpawnEnderDragon = false;
 
     @Rule(
-            categories = {IGNY, CREATIVE, FEATURE}
+            categories = {IGNY, CREATIVE, FEATURE},
+            validators = EndPortalSizeValidator.class
     )
     public static Integer maxEndPortalSize = -1;
 
@@ -274,8 +275,8 @@ public class IGNYSettings
         @Override
         public Integer validate(CommandSourceStack source, CarpetRule<Integer> rule, Integer newValue, String string) {
             if (source != null && source.getEntity() instanceof ServerPlayer) {
-                if (!FabricLoader.getInstance().isModLoaded("syncmatica")) {
-                    source.sendFailure(Component.literal(Translations.tr("igny.syncmatica_not_found")));
+                if (newValue > 516) {
+                    source.sendFailure(Component.literal(Translations.tr("carpet.rule.maxEndPortalSize.failure")));
                     return null;
                 }
             }

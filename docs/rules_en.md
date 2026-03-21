@@ -752,7 +752,7 @@ Allows fluid sources to be targeted and destroyed.
 
 When conditions are not met, tick sprint (warp) will pause and the tick rate will revert to 20.
 
-`true`: Pauses when any real player is present on the server.
+`true`: Pauses when no real player is present on the server.
 
 `playerJoin`: Pauses when a new real player joins, until they log out.
 

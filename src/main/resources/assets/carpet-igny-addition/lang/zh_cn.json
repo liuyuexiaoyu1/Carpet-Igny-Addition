@@ -206,6 +206,7 @@
   "carpet.rule.instantSpawnEnderDragon.desc": "放置末影水晶重生末影龙时跳过重生动画，直接召唤末影龙",
   "carpet.rule.maxEndPortalSize.name": "最大末地传送门大小",
   "carpet.rule.maxEndPortalSize.desc": "设置末地传送门的最大大小（3以上），设置为-1表示遵循原版逻辑",
+  "carpet.rule.maxEndPortalSize.failure": "不得设置规则的值超过516以上",
   "carpet.rule.allowRectangularEndPortal.name": "允许长方形末地传送门",
   "carpet.rule.allowRectangularEndPortal.desc": "允许生成长方形的末地传送门（传送门边最小为3），maxEndPortalSize不为-1时有效",
   "carpet.rule.instantVaultSpawnLoot.name": "瞬时宝库生成战利品",
@@ -299,7 +300,7 @@
   "carpet.rule.liquidSourceCanDestroy.desc": "允许选中流体源并且破坏",
   "carpet.rule.betterSprintGameTick.name": "更好地加速游戏刻",
   "carpet.rule.betterSprintGameTick.desc": "当不满足条件的时候，tick sprint(warp)会暂停，tick rate变为20",
-  "carpet.rule.betterSprintGameTick.extra.0": "true: 条件：服务器存在真人玩家时",
+  "carpet.rule.betterSprintGameTick.extra.0": "true: 条件：服务器不存在真人玩家时",
   "carpet.rule.betterSprintGameTick.extra.1": "playerJoin: 条件：服务器加入新的真人玩家时，直到他退出服务器",
   "carpet.rule.tripwireHookDupeReintroduced.name": "重新引入绊线钩复制",
   "carpet.rule.tripwireHookDupeReintroduced.desc": "重新引入绊线钩被破坏时，不检查方块状态而触发的绊线钩复制，回退了26.1-pre-2的更改"

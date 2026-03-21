@@ -166,6 +166,7 @@
   "carpet.rule.enderDragonDeathDropExp.extra.1": "Subsequent dragon kills grant 500 experience (set rule value to 500).",
   "carpet.rule.instantSpawnEnderDragon.desc": "Skips the respawn animation and instantly spawns the Ender Dragon when end crystals are placed to revive it.",
   "carpet.rule.maxEndPortalSize.desc": "Sets the maximum size of the End portal (minimum is 3). Set to -1 to use vanilla behavior.",
+  "carpet.rule.maxEndPortalSize.failure": "The rule value must not be set above 516",
   "carpet.rule.allowRectangularEndPortal.desc": "Allows rectangular End portals (each side must be at least 3 blocks long). Only effective when maxEndPortalSize is not -1.",
   "carpet.rule.instantVaultSpawnLoot.desc": "When generating loot from the vault, skip the animation and directly generate all loot",
   "carpet.rule.trialSpawnerLootMultiplier.desc": "The loot multiplier after the trial spawner generates rewards",
@@ -219,7 +220,7 @@
   "carpet.rule.endGatewayPortalNoCooldown.desc": "Removes the 40gt cooldown for End Gateways, whether triggered by an entity entry or the periodic 2400gt cooldown",
   "carpet.rule.liquidSourceCanDestroy.desc": "Allows fluid sources to be targeted and destroyed",
   "carpet.rule.betterSprintGameTick.desc": "When conditions are not met, tick sprint (warp) will pause and the tick rate will revert to 20",
-  "carpet.rule.betterSprintGameTick.extra.0": "true: Pauses when any real player is present on the server",
+  "carpet.rule.betterSprintGameTick.extra.0": "true: Pauses when no real player is present on the server",
   "carpet.rule.betterSprintGameTick.extra.1": "playerJoin: Pauses when a new real player joins, until they log out",
   "carpet.rule.tripwireHookDupeReintroduced.desc": "Reintroduces tripwire hook duplication by skipping block state checks upon destruction, reverting changes made in 26.1-pre-2"
 }
