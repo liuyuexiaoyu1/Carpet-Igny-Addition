@@ -33,6 +33,13 @@ public class ServerTickRateManagerMixin {
         }
     }
 
+    @Inject(method = "setTickRate", at = @At(value = "HEAD"), cancellable = true)
+    private void setTickRate(float tickRate, CallbackInfo ci) {
+        if (!TickUtil.shouldSprint(this.server)) {
+            ci.cancel();
+        }
+    }
+
     @Inject(method = "requestGameToSprint", at = @At(value = "RETURN"))
     private void requestGameToSprint(int sprintTime, CallbackInfoReturnable<Boolean> cir) {
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {

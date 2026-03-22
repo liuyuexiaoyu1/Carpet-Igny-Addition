@@ -118,6 +118,8 @@
     "rule.renewableCalcite.PointedDripstoneBlockMixin",
     "rule.renewableEndGatewayPortal.BaseFireBlockMixin",
     "rule.safeSoundSuppression.CalibratedSculkSensorVibrationUserMixin",
+    "rule.showClassMixinList.CrashReportMixin",
+    "rule.showClassMixinList.CrashReportSectionMixin",
     "rule.simpleSoundSuppression.CalibratedSculkSensorVibrationUserMixin",
     "rule.skeletonsPickupSwordsReintroduced.MobInvoker",
     "rule.skeletonsPickupSwordsReintroduced.MobMixin",

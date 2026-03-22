@@ -8,6 +8,7 @@ import com.liuyue.igny.IGNYServer;
 import com.liuyue.igny.IGNYServerMod;
 import com.liuyue.igny.manager.RuleChangeDataManager;
 import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.rule.RuleObserver;
 import com.liuyue.igny.tracker.RuleChangeTracker;
 import com.liuyue.igny.utils.ClassUtil;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -88,19 +89,13 @@ public abstract class SettingsManagerMixin {
     }
 
     @WrapOperation(method = {"setRule", "setDefault"}, at= @At(value = "INVOKE", target = "Lcarpet/api/settings/CarpetRule;set(Lnet/minecraft/commands/CommandSourceStack;Ljava/lang/String;)V"))
-    private void onSetRuleValue(CarpetRule<?> instance, CommandSourceStack commandSourceStack, String s, Operation<Void> original){
-        if (IGNYSettings.showRuleChangeHistory) {
-            Object rawValue = instance.value();
-            original.call(instance, commandSourceStack, s);
-            RuleChangeTracker.ruleChanged(commandSourceStack, instance, rawValue, s);
-            return;
-        }
+    private <T> void onSetRuleValue(CarpetRule<T> instance, CommandSourceStack commandSourceStack, String s, Operation<Void> original){
+        T rawValue = instance.value();
         original.call(instance, commandSourceStack, s);
-    }
-
-    @Inject(method = {"setRule", "setDefault"}, at= @At(value = "INVOKE", target = "Lcarpet/api/settings/CarpetRule;set(Lnet/minecraft/commands/CommandSourceStack;Ljava/lang/String;)V", shift = At.Shift.AFTER))
-    private void afterSetRuleValue(CommandSourceStack source, CarpetRule<?> rule, String newValue, CallbackInfoReturnable<Integer> cir){
-        IGNYServer.onRuleChanged(rule);
+        RuleObserver.handleChange(instance, rawValue, s);
+        if (IGNYSettings.showRuleChangeHistory) {
+            RuleChangeTracker.ruleChanged(commandSourceStack, instance, rawValue, s);
+        }
     }
 
     @Inject(

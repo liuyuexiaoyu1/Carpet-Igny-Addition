@@ -2,10 +2,10 @@ package com.liuyue.igny;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
-import carpet.api.settings.CarpetRule;
 import com.liuyue.igny.commands.*;
 import com.liuyue.igny.logging.IGNYLoggerRegistry;
 import com.liuyue.igny.network.packet.PacketUtil;
+import com.liuyue.igny.rule.RuleObserver;
 import com.liuyue.igny.utils.ComponentTranslate;
 import com.liuyue.igny.utils.CountRulesUtil;
 import com.liuyue.igny.utils.TickUtil;
@@ -14,14 +14,6 @@ import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-//#if MC >= 12003
-import net.minecraft.world.TickRateManager;
-//#elseif MC > 11904
-//$$ import carpet.helpers.TickRateManager;
-//$$ import carpet.fakes.MinecraftServerInterface;
-//#else
-//$$ import carpet.helpers.TickSpeed;
-//#endif
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 //#if MC < 12005
@@ -61,6 +53,9 @@ public class IGNYServer implements CarpetExtension {
     @Override
     public void onGameStarted() {
         CarpetServer.settingsManager.parseSettingsClass(IGNYSettings.class);
+        try {
+            RuleObserver.init(IGNYSettings.class);
+        } catch (Exception ignored) {}
     }
 
     @Override
@@ -102,48 +97,11 @@ public class IGNYServer implements CarpetExtension {
         //#if MC >= 12006
         PacketUtil.sendCustomStackSizeToClient(player);
         //#endif
-        checkTickRate();
+        TickUtil.checkTickRate(minecraftServer);
     }
 
     @Override
     public void onPlayerLoggedOut(ServerPlayer player) {
-        checkTickRate();
-    }
-
-    public static void onRuleChanged(CarpetRule<?> rule) {
-        if (rule.name().equals("betterSprintGameTick")) {
-            checkTickRate();
-        }
-    }
-
-    private static void checkTickRate() {
-        if (minecraftServer != null) {
-            //#if MC >= 12003
-            TickRateManager manager = minecraftServer.tickRateManager();
-            //#elseif MC > 11904
-            //$$ TickRateManager manager = ((MinecraftServerInterface)minecraftServer).getTickRateManager();
-            //#endif
-            if (!IGNYSettings.betterSprintGameTick.equals("false")) {
-                if (!TickUtil.shouldSprint(minecraftServer)) {
-                    //#if MC <= 11904
-                    //$$ TickSpeed.tickrate(20);
-                    //#else
-                    manager.setTickRate(20);
-                    //#endif
-                }
-                return;
-            }
-            //#if MC <= 11904
-            //$$ if (TickUtil.shouldSprint(minecraftServer) && TickSpeed.tickrate != IGNYSettings.originalTPS) {
-            //#else
-            if (TickUtil.shouldSprint(minecraftServer) && manager.tickrate() != IGNYSettings.originalTPS) {
-                //#endif
-                //#if MC <= 11904
-                //$$ TickSpeed.tickrate(IGNYSettings.originalTPS);
-                //#else
-                manager.setTickRate(IGNYSettings.originalTPS);
-                //#endif
-            }
-        }
+       TickUtil.checkTickRate(minecraftServer);
     }
 }

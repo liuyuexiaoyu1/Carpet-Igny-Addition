@@ -20,13 +20,11 @@ public class RotationTask implements ITask {
 
     private final int intervalTicks; // 每 x 刻
     private final float rotationAngle; // 转动 y 度
-    private final int totalCycles = -1;
 
     private ServerPlayer targetPlayer = null;
     private boolean isRunning = false;
     private boolean paused = false;
     private int tickCounter = 0;
-    private int currentCycle = 0;
 
     private RotationTask(CommandSourceStack source, String playerName, int intervalTicks, float rotationAngle) {
         this.server = source.getServer();
@@ -58,7 +56,7 @@ public class RotationTask implements ITask {
 
     @Override
     public Component getStatusText() {
-        String cycleInfo = totalCycles == -1 ? "Infinite" : currentCycle + "/" + totalCycles;
+        String cycleInfo = "Infinite";
         if (paused) {
             return Component.literal("§7Rotation §8| §cPaused §8| §f" + cycleInfo + " §7Next: §f" + (intervalTicks - tickCounter) + "t");
         }
@@ -77,7 +75,6 @@ public class RotationTask implements ITask {
         this.targetPlayer = player;
         this.isRunning = true;
         this.tickCounter = 0;
-        this.currentCycle = 0;
         TaskManager.register(this);
     }
 
@@ -95,13 +92,7 @@ public class RotationTask implements ITask {
         if (tickCounter >= intervalTicks) {
             float newYaw = targetPlayer.getYRot() + rotationAngle;
             targetPlayer.setYRot(newYaw);
-
             tickCounter = 0;
-            currentCycle++;
-
-            if (totalCycles != -1 && currentCycle >= totalCycles) {
-                stop();
-            }
         }
     }
 

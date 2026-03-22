@@ -769,3 +769,12 @@ Reintroduces tripwire hook duplication by skipping block state checks upon destr
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
+
+## showClassMixinList `🐛Beta`
+
+Displays the Mixin classes of all injected classes in the stack trace of a crash report.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`

@@ -14,7 +14,6 @@ import net.minecraft.world.item.ItemStack;
 
 import java.lang.reflect.Type;
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Predicate;
 //#endif
 
@@ -27,7 +26,7 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
     public static final CustomItemMaxStackSizeDataManager INSTANCE = new CustomItemMaxStackSizeDataManager();
 
     private Map<String, Integer> customStacks = new HashMap<>();
-    private final List<StackRule> runtimeRules = new CopyOnWriteArrayList<>();
+    private final List<StackRule> runtimeRules = new ArrayList<>();
 
     @Override protected String getFileName() { return "custom_item_max_stack_size.json"; }
     @Override protected Type getDataType() { return new TypeToken<Map<String, Integer>>(){}.getType(); }

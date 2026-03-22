@@ -291,7 +291,7 @@ public class PlayerOperateCommand {
             return 0;
         }
 
-        PressUseTask task = PressUseTask.getOrCreate(source, playerName, interval, duration, cycles);
+        ITask task = PressUseTask.getOrCreate(source, playerName, interval, duration, cycles);
         task.start();
 
         String cyclesStr = cycles == -1 ?
@@ -326,7 +326,7 @@ public class PlayerOperateCommand {
             return 0;
         }
 
-        RotationTask task = RotationTask.getOrCreate(source, playerName, interval, rotationAngle);
+        ITask task = RotationTask.getOrCreate(source, playerName, interval, rotationAngle);
         task.start();
         source.sendSuccess(
                 //#if MC > 11904
@@ -373,7 +373,7 @@ public class PlayerOperateCommand {
             return 0;
         }
 
-        VaultTask task = VaultTask.getOrCreate(source, playerName, maxCycles, onlineDuration, waitingDuration);
+        ITask task = VaultTask.getOrCreate(source, playerName, maxCycles, onlineDuration, waitingDuration);
         task.start();
 
         source.sendSuccess(

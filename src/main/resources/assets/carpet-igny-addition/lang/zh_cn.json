@@ -303,5 +303,7 @@
   "carpet.rule.betterSprintGameTick.extra.0": "true: 条件：服务器不存在真人玩家时",
   "carpet.rule.betterSprintGameTick.extra.1": "playerJoin: 条件：服务器加入新的真人玩家时，直到他退出服务器",
   "carpet.rule.tripwireHookDupeReintroduced.name": "重新引入绊线钩复制",
-  "carpet.rule.tripwireHookDupeReintroduced.desc": "重新引入绊线钩被破坏时，不检查方块状态而触发的绊线钩复制，回退了26.1-pre-2的更改"
+  "carpet.rule.tripwireHookDupeReintroduced.desc": "重新引入绊线钩被破坏时，不检查方块状态而触发的绊线钩复制，回退了26.1-pre-2的更改",
+  "carpet.rule.showClassMixinList.name": "显示类Mixin列表",
+  "carpet.rule.showClassMixinList.desc": "在崩溃报告的堆栈跟踪中显示堆栈中所有被注入的类的Mixin类"
 }

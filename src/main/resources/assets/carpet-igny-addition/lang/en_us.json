@@ -222,5 +222,6 @@
   "carpet.rule.betterSprintGameTick.desc": "When conditions are not met, tick sprint (warp) will pause and the tick rate will revert to 20",
   "carpet.rule.betterSprintGameTick.extra.0": "true: Pauses when no real player is present on the server",
   "carpet.rule.betterSprintGameTick.extra.1": "playerJoin: Pauses when a new real player joins, until they log out",
-  "carpet.rule.tripwireHookDupeReintroduced.desc": "Reintroduces tripwire hook duplication by skipping block state checks upon destruction, reverting changes made in 26.1-pre-2"
+  "carpet.rule.tripwireHookDupeReintroduced.desc": "Reintroduces tripwire hook duplication by skipping block state checks upon destruction, reverting changes made in 26.1-pre-2",
+  "carpet.rule.showClassMixinList.desc": "Displays the Mixin classes of all injected classes in the stack trace of a crash report"
 }

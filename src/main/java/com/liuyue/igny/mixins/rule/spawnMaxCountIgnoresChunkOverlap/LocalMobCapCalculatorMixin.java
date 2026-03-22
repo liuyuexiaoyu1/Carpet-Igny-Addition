@@ -38,7 +38,7 @@ public class LocalMobCapCalculatorMixin {
 
     @Mixin(targets = "net.minecraft.world.level.LocalMobCapCalculator$MobCounts")
     static class MobCountsMixin {
-        @WrapOperation(method = "canSpawn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/MobCategory;getMaxInstancesPerChunk()I"))
+        @WrapOperation(method = "canSpawn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/MobCategory;getMaxInstancesPerChunk()I"), require = 0)
         private int canSpawn(MobCategory instance, Operation<Integer> original) {
             if (IGNYSettings.spawnMaxCountIgnoresChunkOverlap && LocalMobCapCalculatorMixin.server != null) {
                 return (original.call(instance) * LocalMobCapCalculatorMixin.server.getPlayerCount());

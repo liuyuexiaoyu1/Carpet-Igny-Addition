@@ -32,6 +32,13 @@ public class ServerTickRateManagerMixin {
         }
     }
 
+    @Inject(method = "setTickRate(FZ)V", at = @At(value = "HEAD"), cancellable = true)
+    private void setTickRate(float rate, boolean update, CallbackInfo ci) {
+        if (!TickUtil.shouldSprint(this.server)) {
+            ci.cancel();
+        }
+    }
+
     @Inject(method = "requestGameToWarpSpeed", at = @At(value = "RETURN"))
     private void requestGameToWarpSpeed(ServerPlayer player, int advance, String callback, CommandSourceStack source, CallbackInfoReturnable<Component> cir) {
         for (ServerPlayer player2 : this.server.getPlayerList().getPlayers()) {

@@ -37,6 +37,16 @@ public class ServerTickRateManagerMixin {
         }
     }
 
+    @Inject(method = "tickrate(FZ)V", at = @At(value = "HEAD"), cancellable = true)
+    private static void setTickRate(float rate, boolean update, CallbackInfo ci) {
+        if (TickSpeed.tick_warp_sender != null) {
+            MinecraftServer server = TickSpeed.tick_warp_sender.getServer();
+            if (!TickUtil.shouldSprint(server)) {
+                ci.cancel();
+            }
+        }
+    }
+
     @Inject(method = "tickrate_advance", at = @At(value = "RETURN"))
     private static void tickrate_advance(ServerPlayer player, int advance, String callback, CommandSourceStack source, CallbackInfoReturnable<Component> cir) {
         if (TickSpeed.tick_warp_sender != null) {
