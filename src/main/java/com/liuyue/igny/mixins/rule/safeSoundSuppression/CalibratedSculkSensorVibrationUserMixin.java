@@ -30,18 +30,20 @@ public class CalibratedSculkSensorVibrationUserMixin {
 
     @Inject(method = "getBackSignal",at = @At("RETURN"), cancellable = true)
     private void getBackSignal(Level level, BlockPos blockPos, BlockState blockState, CallbackInfoReturnable<Integer> cir) {
-        if (this.igny$blockEntity == null) return;
-        BlockPos blockEntityPos = igny$blockEntity.getBlockPos();
-        //#if MC >= 12005
-        Component component = this.igny$blockEntity.components().get(DataComponents.CUSTOM_NAME);
-        //#endif
-        if (!level.getBlockState(blockEntityPos).is(Blocks.CALIBRATED_SCULK_SENSOR)
-                //#if MC >= 12005
-                || (component != null && RuleUtil.canSoundSuppression(component.getString()))
+        if (IGNYSettings.safeSoundSuppression) {
+            if (this.igny$blockEntity == null) return;
+            BlockPos blockEntityPos = igny$blockEntity.getBlockPos();
+            //#if MC >= 12005
+            Component component = this.igny$blockEntity.components().get(DataComponents.CUSTOM_NAME);
+            //#endif
+            if (!level.getBlockState(blockEntityPos).is(Blocks.CALIBRATED_SCULK_SENSOR)
+                    //#if MC >= 12005
+                    || (component != null && RuleUtil.canSoundSuppression(component.getString()))
                 //#endif
-        ) {
-            if (cir.getReturnValue() == 0 && IGNYSettings.safeSoundSuppression) {
-                cir.setReturnValue(16);
+            ) {
+                if (cir.getReturnValue() == 0) {
+                    cir.setReturnValue(16);
+                }
             }
         }
     }

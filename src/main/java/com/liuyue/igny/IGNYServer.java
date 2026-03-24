@@ -38,6 +38,7 @@ public class IGNYServer implements CarpetExtension {
     //$$ public static final ResourceLocation SYNC_STACK_SIZE_PACKET_ID = new ResourceLocation(MOD_ID, "sync_custom_stack_size");
     //$$ public static final ResourceLocation RENDER_BOX_PACKET_ID = new ResourceLocation(MOD_ID, "render_box");
     //#endif
+
     public static IGNYServer getInstance() {
         return INSTANCE;
     }

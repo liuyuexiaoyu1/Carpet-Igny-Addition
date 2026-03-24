@@ -34,7 +34,6 @@ import net.minecraft.network.Connection;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@SuppressWarnings("UnstableApiUsage")
 @Mixin(value = AbstractNetworkAddon.class, priority = 980, remap = false)
 public abstract class AbstractNetworkAddonMixin {
     //#if MC <= 12002

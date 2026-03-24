@@ -92,7 +92,7 @@ public abstract class SettingsManagerMixin {
     private <T> void onSetRuleValue(CarpetRule<T> instance, CommandSourceStack commandSourceStack, String s, Operation<Void> original){
         T rawValue = instance.value();
         original.call(instance, commandSourceStack, s);
-        RuleObserver.handleChange(instance, rawValue, s);
+        RuleObserver.handleChange(commandSourceStack, instance, rawValue, s);
         if (IGNYSettings.showRuleChangeHistory) {
             RuleChangeTracker.ruleChanged(commandSourceStack, instance, rawValue, s);
         }

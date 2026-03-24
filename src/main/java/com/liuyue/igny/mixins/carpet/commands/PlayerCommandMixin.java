@@ -28,7 +28,6 @@ import static net.minecraft.commands.Commands.literal;
 @Mixin(PlayerCommand.class)
 public abstract class PlayerCommandMixin {
 
-
     @Shadow
     private static ServerPlayer getPlayer(CommandContext<CommandSourceStack> context) {
         String playerName = StringArgumentType.getString(context, "player");
@@ -38,7 +37,7 @@ public abstract class PlayerCommandMixin {
 
     @Shadow
     private static Command<CommandSourceStack> manipulation(Consumer<EntityPlayerActionPack> action) {
-        return null;
+        throw new RuntimeException("Crash is impossible!!!");
     }
 
     @Shadow
@@ -46,7 +45,7 @@ public abstract class PlayerCommandMixin {
         return 0;
     }
 
-    @Inject(method = "makeDropCommand", at = @At("HEAD"), cancellable = true,remap = false)
+    @Inject(method = "makeDropCommand", at = @At("HEAD"), cancellable = true, remap = false)
     private static void onMakeDropCommand(String actionName, boolean dropAll, CallbackInfoReturnable<LiteralArgumentBuilder<CommandSourceStack>> cir) {
         LiteralArgumentBuilder<CommandSourceStack> command = literal(actionName);
 
@@ -62,7 +61,6 @@ public abstract class PlayerCommandMixin {
                         Component.translatable("igny.command.enderchest.real_player_op_only"));
                 return 0;
             }
-
             return manipulation(ap -> ap.drop(slot, dropAll)).run(context);
 
         }));

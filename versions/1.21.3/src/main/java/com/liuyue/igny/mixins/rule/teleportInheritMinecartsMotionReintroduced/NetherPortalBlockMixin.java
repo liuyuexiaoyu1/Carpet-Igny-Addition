@@ -21,7 +21,7 @@ public class NetherPortalBlockMixin {
     private static TeleportTransition createDimensionTransition(ServerLevel serverLevel, Vec3 vec3, Vec3 vec32, float f, float g, Set<?> set, TeleportTransition.PostTeleportTransition postTeleportTransition, Operation<TeleportTransition> original, @Local(argsOnly = true) Direction.Axis axis, @Local(ordinal = 1) Direction.Axis axis2, @Local(argsOnly = true) Entity entity) {
         if (IGNYSettings.teleportInheritMinecartsMotionReintroduced) {
             Vec3 vec3d3 = axis == axis2 ? entity.getDeltaMovement() : new Vec3(entity.getDeltaMovement().z, entity.getDeltaMovement().y, -entity.getDeltaMovement().x);
-            return original.call(serverLevel, vec3, vec3d3, f, g, set, postTeleportTransition);
+            return original.call(serverLevel, vec3, vec3d3, 0f, g, set, postTeleportTransition);
         }
         return original.call(serverLevel, vec3, vec32, f, g, set, postTeleportTransition);
     }

@@ -8,6 +8,7 @@ import com.liuyue.igny.rule.validators.CrammingEntityValidator;
 import com.liuyue.igny.rule.validators.EndPortalSizeValidator;
 import com.liuyue.igny.rule.validators.SyncmaticaValidator;
 import com.liuyue.igny.utils.TickUtil;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 
 import java.util.*;
@@ -480,7 +481,7 @@ public class IGNYSettings {
 
     static class GameTickCallback implements RuleCallback<String> {
         @Override
-        public void onChange(CarpetRule<String> rule, String oldValue, String newValue) {
+        public void onChange(CommandSourceStack source, CarpetRule<String> rule, String oldValue, String newValue) {
             TickUtil.checkTickRate(IGNYServer.getInstance().getMinecraftServer());
         }
     }

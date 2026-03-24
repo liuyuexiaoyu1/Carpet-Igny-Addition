@@ -22,7 +22,7 @@ public class EntityPlayerActionPackMixin {
     private ServerPlayer player;
 
     @Unique
-    private void carpet$dropItemFromSlot(int slot, boolean dropAll) {
+    private void dropItemFromSlot(int slot, boolean dropAll) {
         Inventory inv = player.getInventory();
         if (!inv.getItem(slot).isEmpty()) {
             player.drop(inv.removeItem(slot, dropAll ? inv.getItem(slot).getCount() : 1), false, true);
@@ -30,7 +30,7 @@ public class EntityPlayerActionPackMixin {
     }
 
     @Unique
-    private void carpet$dropEnderChestItemFromSlot(int slot, boolean dropAll) {
+    private void dropEnderChestItemFromSlot(int slot, boolean dropAll) {
         int enderChestSlot = slot - 200;
         ItemStack enderChestItem = player.getEnderChestInventory().getItem(enderChestSlot);
 
@@ -61,19 +61,18 @@ public class EntityPlayerActionPackMixin {
             Inventory inv = player.getInventory();
             if (selectedSlot == -2 || selectedSlot == -3) {
                 for (int i = inv.getContainerSize() - 1; i >= 0; i--) {
-                    carpet$dropItemFromSlot(i, dropAll);
+                    dropItemFromSlot(i, dropAll);
                 }
             }
             if (selectedSlot == -2 || selectedSlot == -4) {
                 for (int i = 0; i < 27; i++) {
-                    carpet$dropEnderChestItemFromSlot(200 + i, dropAll);
+                    dropEnderChestItemFromSlot(200 + i, dropAll);
                 }
             }
 
             ci.cancel();
-        }
-        else if (selectedSlot >= 200 && selectedSlot <= 226) {
-            carpet$dropEnderChestItemFromSlot(selectedSlot, dropAll);
+        } else if (selectedSlot >= 200 && selectedSlot <= 226) {
+            dropEnderChestItemFromSlot(selectedSlot, dropAll);
             ci.cancel();
         }
     }

@@ -2,6 +2,7 @@ package com.liuyue.igny.rule;
 
 import carpet.api.settings.CarpetRule;
 import com.liuyue.igny.rule.annotation.ObservedRule;
+import net.minecraft.commands.CommandSourceStack;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -23,10 +24,10 @@ public class RuleObserver {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> void handleChange(CarpetRule<T> rule, T oldVal, String newVal) {
+    public static <T> void handleChange(CommandSourceStack source, CarpetRule<T> rule, T oldVal, String newVal) {
         RuleCallback<T> callback = (RuleCallback<T>) callbacks.get(rule.name());
         if (callback != null) {
-            callback.onChange(rule, oldVal, newVal);
+            callback.onChange(source, rule, oldVal, newVal);
         }
     }
 }
