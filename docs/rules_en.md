@@ -787,3 +787,12 @@ Piglins remain neutral towards players unless they are attacked first.
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## fakePlayerMemoryLeakFix `🐛Beta `MC<26.1`
+
+Fix memory leak caused by fake player packet caching and queue accumulation during server runtime. [#2169](https://github.com/gnembon/fabric-carpet/issues/2169)
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `BUGFIX`

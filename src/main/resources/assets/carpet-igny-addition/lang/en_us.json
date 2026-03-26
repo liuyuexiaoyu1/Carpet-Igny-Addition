@@ -224,5 +224,6 @@
   "carpet.rule.betterSprintGameTick.extra.1": "playerJoin: Pauses when a new real player joins, until they log out",
   "carpet.rule.tripwireHookDupeReintroduced.desc": "Reintroduces tripwire hook duplication by skipping block state checks upon destruction, reverting changes made in 26.1-pre-2",
   "carpet.rule.showClassMixinList.desc": "Displays the Mixin classes of all injected classes in the stack trace of a crash report",
-  "carpet.rule.piglinNeutralBehavior.desc": "Piglins remain neutral towards players unless they are attacked first"
+  "carpet.rule.piglinNeutralBehavior.desc": "Piglins remain neutral towards players unless they are attacked first",
+  "carpet.rule.fakePlayerMemoryLeakFix.desc": "Fix memory leak caused by fake player packet caching and queue accumulation during server runtime"
 }

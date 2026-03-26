@@ -502,4 +502,9 @@ public class IGNYSettings {
             categories = {IGNY, SURVIVAL, FEATURE}
     )
     public static Boolean piglinNeutralBehavior = false;
+
+    @Rule(
+            categories = {IGNY, BUGFIX}
+    )
+    public static Boolean fakePlayerMemoryLeakFix = false;
 }

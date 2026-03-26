@@ -61,6 +61,8 @@
     "rule.fakePlayerCanPush.EntityMixin",
     "rule.fakePlayerLoginLogoutNoChatInfo.PlayerListMixin",
     "rule.fakePlayerLoginLogoutNoChatInfo.ServerGamePacketListenerImplMixin",
+    "rule.fakePlayerMemoryLeakFix.FakeClientConnectionMixin",
+    "rule.fakePlayerMemoryLeakFix.NetHandlerPlayServerFakeMixin",
     "rule.floatingIceWater.IceBlockMixin",
     "rule.generateNetherPortal.BaseFireBlockInvoker",
     "rule.generateNetherPortal.FireChargeItemMixin",
