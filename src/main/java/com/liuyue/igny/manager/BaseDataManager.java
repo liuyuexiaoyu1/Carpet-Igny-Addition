@@ -11,17 +11,9 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public abstract class BaseDataManager<T> {
     protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private final ExecutorService ioExecutor = Executors.newSingleThreadExecutor(r -> {
-        Thread thread = new Thread(r, "IGNY-IO-" + getFileName());
-        thread.setDaemon(true);
-        return thread;
-    });
     protected MinecraftServer server;
 
     protected abstract String getFileName();
@@ -51,44 +43,34 @@ public abstract class BaseDataManager<T> {
     }
 
     public void load() {
-        CompletableFuture.runAsync(() -> {
-            Path path = getJsonPath();
-            if (path == null || !Files.exists(path)) {
-                applyData(getDefaultData());
-                return;
-            }
+        Path path = getJsonPath();
+        if (path == null || !Files.exists(path)) {
+            applyData(getDefaultData());
+            return;
+        }
 
-            try (Reader reader = Files.newBufferedReader(path)) {
-                T data = GSON.fromJson(reader, getDataType());
-                applyData(data != null ? data : getDefaultData());
-            } catch (Exception e) {
-                IGNYServer.LOGGER.error("Failed to load config: {}", getFileName(), e);
-                applyData(getDefaultData());
-            }
-        }, ioExecutor);
+        try (Reader reader = Files.newBufferedReader(path)) {
+            T data = GSON.fromJson(reader, getDataType());
+            applyData(data != null ? data : getDefaultData());
+        } catch (Exception e) {
+            IGNYServer.LOGGER.error("Failed to load config: {}", getFileName(), e);
+            applyData(getDefaultData());
+        }
     }
 
     public void save() {
-        T dataToSave = getCurrentData();
         Path path = getJsonPath();
-        if (path == null || dataToSave == null) {
-            CompletableFuture.completedFuture(null);
-            return;
-        }
-        CompletableFuture.runAsync(() -> {
-            try {
-                if (!Files.exists(path.getParent())) {
-                    Files.createDirectories(path.getParent());
-                }
-                Path tempPath = path.resolveSibling(getFileName() + ".tmp");
-                try (Writer writer = Files.newBufferedWriter(tempPath)) {
-                    GSON.toJson(dataToSave, writer);
-                }
-                Files.deleteIfExists(path);
-                Files.move(tempPath, path);
-            } catch (IOException e) {
-                IGNYServer.LOGGER.error("Failed to save config: {}", getFileName(), e);
+        if (path == null) return;
+
+        try {
+            if (!Files.exists(path.getParent())) {
+                Files.createDirectories(path.getParent());
             }
-        }, ioExecutor);
+            try (Writer writer = Files.newBufferedWriter(path)) {
+                GSON.toJson(getCurrentData(), writer);
+            }
+        } catch (IOException e) {
+            IGNYServer.LOGGER.error("Failed to save config: {}", getFileName(), e);
+        }
     }
 }
