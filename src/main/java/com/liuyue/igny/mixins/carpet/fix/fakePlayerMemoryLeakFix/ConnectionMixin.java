@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.carpet.fix.fakePlayerMemoryLeakFix;
 
-//#if MC < 12111
+//#if MC < 26.1
 import carpet.patches.FakeClientConnection;
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.network.Connection;
