@@ -39,7 +39,7 @@ public abstract class AbstractNetworkAddonMixin {
     //#if MC <= 12002
     @WrapOperation(method = "lateInit", at = @At(value = "INVOKE", target = "Lnet/fabricmc/fabric/impl/networking/GlobalReceiverRegistry;startSession(Lnet/fabricmc/fabric/impl/networking/AbstractNetworkAddon;)V"))
     private void notStartSession_ifFakeClientConnection(GlobalReceiverRegistry<?> instance, AbstractNetworkAddon<?> addon, Operation<Void> original) {
-        if (IGNYSettings.fakePlayerSpawnMemoryLeakFix.get() && addon instanceof AbstractChanneledNetworkAddon<?>) {
+        if ((IGNYSettings.fakePlayerSpawnMemoryLeakFix.get() || IGNYSettings.fakePlayerMemoryLeakFix) && addon instanceof AbstractChanneledNetworkAddon<?>) {
             Connection connection = ((AbstractChanneledNetworkAddonAccessor) addon).getConnection();
             if (connection instanceof FakeClientConnection) {
                 return;

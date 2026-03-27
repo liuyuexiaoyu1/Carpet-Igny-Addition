@@ -29,6 +29,7 @@ public class ConnectionMixin {
     @Inject(method = "send(Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/network/PacketSendListener;Z)V", at = @At("HEAD"), cancellable = true)
     //#else
     //$$ @Inject(method = "send(Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/network/PacketSendListener;)V", at = @At("HEAD"), cancellable = true)
+    //#endif
     //#if MC >= 12106
     //$$ private void sendPacket(Packet<?> packet, ChannelFutureListener sendListener, boolean flush, CallbackInfo ci)
     //#elseif MC >= 12002
