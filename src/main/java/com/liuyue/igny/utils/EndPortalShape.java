@@ -7,11 +7,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EndPortalFrameBlock;
 import net.minecraft.world.level.block.state.BlockState;
-
 import java.util.Optional;
 
 public class EndPortalShape {
-
     private final Level level;
     private final BlockPos innerOrigin;
     private final int width;
@@ -24,115 +22,78 @@ public class EndPortalShape {
         this.height = height;
     }
 
-    public static Optional<EndPortalShape> findFromFrame(Level level, BlockPos eyeFramePos) {
-        int max = IGNYSettings.maxEndPortalSize;
-        if (max < 3) return Optional.empty();
+    public static Optional<EndPortalShape> findFromFrame(Level level, BlockPos eyePosition) {
+        BlockState state = level.getBlockState(eyePosition);
+        if (!(state.getBlock() instanceof EndPortalFrameBlock)) {
+            return Optional.empty();
+        }
+        int maxEndPortalSize = IGNYSettings.maxEndPortalSize;
+        Direction facing = state.getValue(EndPortalFrameBlock.FACING);
+        Direction leftFacing = facing.getAxis() == Direction.Axis.Z ? Direction.EAST : Direction.SOUTH;
+        int minOffset = 0;
+        while (minOffset > -maxEndPortalSize && isValidFrame(level, eyePosition.relative(leftFacing, minOffset - 1), facing)) {
+            minOffset--;
+        }
 
-        if (IGNYSettings.allowRectangularEndPortal) {
-            for (int w = 3; w <= max; w++) {
-                for (int h = 3; h <= max; h++) {
-                    Optional<BlockPos> origin = tryFindRectangle(level, eyeFramePos, w, h);
-                    if (origin.isPresent()) {
-                        level.globalLevelEvent(1038, eyeFramePos.offset(1, 0, 1), 0);
-                        return Optional.of(new EndPortalShape(level, origin.get(), w, h));
-                    }
-                }
+        int maxOffset = 0;
+        while (maxOffset < maxEndPortalSize && isValidFrame(level, eyePosition.relative(leftFacing, maxOffset + 1), facing)) {
+            maxOffset++;
+        }
+
+        int currentSideLength = maxOffset - minOffset + 1;
+
+        if (currentSideLength < 3) {
+            return Optional.empty();
+        }
+        for (int depth = 3; depth <= maxEndPortalSize; depth++) {
+            if (!IGNYSettings.allowRectangularEndPortal && depth != currentSideLength) {
+                continue;
             }
-        } else {
-            for (int size = 3; size <= max; size++) {
-                Optional<BlockPos> origin = tryFindRectangle(level, eyeFramePos, size, size);
-                if (origin.isPresent()) {
-                    level.globalLevelEvent(1038, eyeFramePos.offset(1, 0, 1), 0);
-                    return Optional.of(new EndPortalShape(level, origin.get(), size, size));
+            BlockPos oppositeStart = eyePosition.relative(leftFacing, minOffset).relative(facing, depth + 1);
+            Direction oppositeFacing = facing.getOpposite();
+            if (validateSide(level, oppositeStart, leftFacing, currentSideLength, oppositeFacing)) {
+                Direction rightFacing = leftFacing.getOpposite();
+                BlockPos leftSideStart = eyePosition.relative(leftFacing, minOffset - 1).relative(facing, 1);
+                BlockPos rightSideStart = eyePosition.relative(leftFacing, maxOffset + 1).relative(facing, 1);
+                if (validateSide(level, leftSideStart, facing, depth, leftFacing) &&
+                        validateSide(level, rightSideStart, facing, depth, rightFacing)) {
+                    BlockPos point1 = eyePosition.relative(leftFacing, minOffset).relative(facing, 1);
+                    BlockPos point2 = eyePosition.relative(leftFacing, maxOffset).relative(facing, depth);
+                    int minX = Math.min(point1.getX(), point2.getX());
+                    int minZ = Math.min(point1.getZ(), point2.getZ());
+                    BlockPos correctedOrigin = new BlockPos(minX, eyePosition.getY(), minZ);
+                    int finalWidth = leftFacing.getAxis() == Direction.Axis.X ? currentSideLength : depth;
+                    int finalHeight = leftFacing.getAxis() == Direction.Axis.X ? depth : currentSideLength;
+                    level.globalLevelEvent(1038, eyePosition.offset(1, 0, 1), 0);
+                    return Optional.of(new EndPortalShape(level, correctedOrigin, finalWidth, finalHeight));
                 }
             }
         }
-
         return Optional.empty();
     }
 
-    private static Optional<BlockPos> tryFindRectangle(Level level, BlockPos eye, int innerWidth, int innerHeight) {
-        int frameWidth = innerWidth + 2;
-        int frameHeight = innerHeight + 2;
-        int y = eye.getY();
-        for (int minX = eye.getX() - frameWidth + 2; minX <= eye.getX() - 1; minX++) {
-            int minZ = eye.getZ();
-            int maxX = minX + frameWidth - 1;
-            int maxZ = minZ + frameHeight - 1;
-            if (eye.getX() <= minX || eye.getX() >= maxX) continue;
-            BlockPos frameStart = new BlockPos(minX, y, minZ);
-            if (validateFrame(level, frameStart, frameWidth, frameHeight)) {
-                return Optional.of(frameStart.offset(1, 0, 1));
+    private static boolean validateSide(Level level, BlockPos start, Direction direction, int length, Direction expectedFacing) {
+        for (int i = 0; i < length; i++) {
+            BlockPos currentPosition = start.relative(direction, i);
+            if (!isValidFrame(level, currentPosition, expectedFacing)) {
+                return false;
             }
         }
-        for (int minX = eye.getX() - frameWidth + 2; minX <= eye.getX() - 1; minX++) {
-            int maxZ = eye.getZ();
-            int minZ = maxZ - frameHeight + 1;
-            int maxX = minX + frameWidth - 1;
-            if (eye.getX() <= minX || eye.getX() >= maxX) continue;
-            BlockPos frameStart = new BlockPos(minX, y, minZ);
-            if (validateFrame(level, frameStart, frameWidth, frameHeight)) {
-                return Optional.of(frameStart.offset(1, 0, 1));
-            }
-        }
-        for (int minZ = eye.getZ() - frameHeight + 2; minZ <= eye.getZ() - 1; minZ++) {
-            int minX = eye.getX();
-            int maxX = minX + frameWidth - 1;
-            int maxZ = minZ + frameHeight - 1;
-            if (eye.getZ() <= minZ || eye.getZ() >= maxZ) continue;
-            BlockPos frameStart = new BlockPos(minX, y, minZ);
-            if (validateFrame(level, frameStart, frameWidth, frameHeight)) {
-                return Optional.of(frameStart.offset(1, 0, 1));
-            }
-        }
-        for (int minZ = eye.getZ() - frameHeight + 2; minZ <= eye.getZ() - 1; minZ++) {
-            int maxX = eye.getX();
-            int minX = maxX - frameWidth + 1;
-            int maxZ = minZ + frameHeight - 1;
-            if (eye.getZ() <= minZ || eye.getZ() >= maxZ) continue;
-            BlockPos frameStart = new BlockPos(minX, y, minZ);
-            if (validateFrame(level, frameStart, frameWidth, frameHeight)) {
-                return Optional.of(frameStart.offset(1, 0, 1));
-            }
-        }
-
-        return Optional.empty();
-    }
-
-    private static boolean validateFrame(Level level, BlockPos start, int frameWidth, int frameHeight) {
-        int minX = start.getX();
-        int minZ = start.getZ();
-        int maxX = minX + frameWidth - 1;
-        int maxZ = minZ + frameHeight - 1;
-        for (int x = minX + 1; x < maxX; x++) {
-            if (!isValidEyeFrame(level, new BlockPos(x, start.getY(), minZ), Direction.SOUTH)) return false;
-        }
-        for (int x = minX + 1; x < maxX; x++) {
-            if (!isValidEyeFrame(level, new BlockPos(x, start.getY(), maxZ), Direction.NORTH)) return false;
-        }
-        for (int z = minZ + 1; z < maxZ; z++) {
-            if (!isValidEyeFrame(level, new BlockPos(minX, start.getY(), z), Direction.EAST)) return false;
-        }
-        for (int z = minZ + 1; z < maxZ; z++) {
-            if (!isValidEyeFrame(level, new BlockPos(maxX, start.getY(), z), Direction.WEST)) return false;
-        }
-
         return true;
     }
 
-    private static boolean isValidEyeFrame(Level level, BlockPos pos, Direction expectedFacing) {
-        BlockState state = level.getBlockState(pos);
-        if (!(state.getBlock() instanceof EndPortalFrameBlock)) return false;
-        if (!state.getValue(EndPortalFrameBlock.HAS_EYE)) return false;
-        Direction actual = state.getValue(EndPortalFrameBlock.FACING);
-        return actual == expectedFacing;
+    private static boolean isValidFrame(Level level, BlockPos position, Direction expectedFacing) {
+        BlockState state = level.getBlockState(position);
+        return state.is(Blocks.END_PORTAL_FRAME) &&
+                state.getValue(EndPortalFrameBlock.HAS_EYE) &&
+                state.getValue(EndPortalFrameBlock.FACING) == expectedFacing;
     }
 
     public void createPortal() {
+        BlockState portalState = Blocks.END_PORTAL.defaultBlockState();
         for (int x = 0; x < width; x++) {
             for (int z = 0; z < height; z++) {
-                BlockPos pos = innerOrigin.offset(x, 0, z);
-                level.setBlock(pos, Blocks.END_PORTAL.defaultBlockState(), 18);
+                level.setBlock(innerOrigin.offset(x, 0, z), portalState, 2);
             }
         }
     }

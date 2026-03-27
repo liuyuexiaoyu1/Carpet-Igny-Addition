@@ -3,9 +3,7 @@ package com.liuyue.igny;
 import carpet.api.settings.Rule;
 import com.liuyue.igny.rule.annotation.ObservedRule;
 import com.liuyue.igny.rule.callback.*;
-import com.liuyue.igny.rule.validators.CrammingEntityValidator;
-import com.liuyue.igny.rule.validators.EndPortalSizeValidator;
-import com.liuyue.igny.rule.validators.SyncmaticaValidator;
+import com.liuyue.igny.rule.validators.*;
 import net.minecraft.core.BlockPos;
 
 import java.util.*;
@@ -244,8 +242,7 @@ public class IGNYSettings {
     public static Boolean instantSpawnEnderDragon = false;
 
     @Rule(
-            categories = {IGNY, CREATIVE, FEATURE},
-            validators = EndPortalSizeValidator.class
+            categories = {IGNY, CREATIVE, FEATURE}
     )
     public static Integer maxEndPortalSize = -1;
 
