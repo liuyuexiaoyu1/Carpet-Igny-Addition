@@ -2,7 +2,7 @@ package com.liuyue.igny.mixins.logger.allFurnace;
 
 import carpet.logging.Logger;
 import carpet.logging.LoggerRegistry;
-import com.liuyue.igny.logging.IGNYLoggerRegistry;
+import com.liuyue.igny.logging.IGNYLoggers;
 import com.liuyue.igny.network.packet.block.RemoveHighlightPayload;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
@@ -35,7 +35,7 @@ public abstract class LevelMixin {
     @Inject(method = "removeBlockEntity", at = @At(value = "HEAD"))
     private void removeBlockEntity(BlockPos blockPos, CallbackInfo ci) {
         Logger logger = LoggerRegistry.getLogger("allFurnace");
-        if (IGNYLoggerRegistry.__allFurnace && logger.hasOnlineSubscribers() && this.getBlockEntity(blockPos) instanceof AbstractFurnaceBlockEntity) {
+        if (IGNYLoggers.allFurnace && logger.hasOnlineSubscribers() && this.getBlockEntity(blockPos) instanceof AbstractFurnaceBlockEntity) {
             Level level = (Level) (Object) this;
             if (level instanceof ServerLevel serverLevel) {
                 this.removeHighlightToClient(

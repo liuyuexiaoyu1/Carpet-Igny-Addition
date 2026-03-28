@@ -1,6 +1,4 @@
-package com.liuyue.igny.rule.annotation;
-
-import com.liuyue.igny.rule.callback.RuleCallback;
+package com.liuyue.igny.logging.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,6 +7,8 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface ObservedRule {
-    Class<? extends RuleCallback<?>> value();
+public @interface Logger {
+    String defaultValue();
+    String[] options();
+    boolean strictOptions();
 }

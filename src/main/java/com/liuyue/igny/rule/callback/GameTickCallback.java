@@ -2,7 +2,6 @@ package com.liuyue.igny.rule.callback;
 
 import carpet.api.settings.CarpetRule;
 import com.liuyue.igny.IGNYServer;
-import com.liuyue.igny.rule.RuleCallback;
 import com.liuyue.igny.utils.TickUtil;
 import net.minecraft.commands.CommandSourceStack;
 

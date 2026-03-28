@@ -1,4 +1,4 @@
-package com.liuyue.igny.rule;
+package com.liuyue.igny.rule.callback;
 
 import carpet.api.settings.CarpetRule;
 import net.minecraft.commands.CommandSourceStack;

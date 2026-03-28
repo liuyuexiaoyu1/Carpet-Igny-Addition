@@ -4,7 +4,7 @@ import carpet.CarpetSettings;
 import carpet.utils.Messenger;
 import carpet.utils.Translations;
 import com.liuyue.igny.helper.PistonResolveContext;
-import com.liuyue.igny.logging.IGNYLoggerRegistry;
+import com.liuyue.igny.logging.IGNYLoggers;
 import com.liuyue.igny.utils.BlockUtil;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -57,7 +57,7 @@ public abstract class PistonBaseBlockMixin {
 
     @Inject(method = "triggerEvent", at = @At("HEAD"))
     private void onTriggerEvent(BlockState state, Level level, BlockPos pos, int b0, int b1, CallbackInfoReturnable<Boolean> cir) {
-        if (!IGNYLoggerRegistry.__piston || level.isClientSide()) return;
+        if (!IGNYLoggers.piston || level.isClientSide()) return;
         carpet.logging.Logger logger = carpet.logging.LoggerRegistry.getLogger("piston");
         if (logger == null || !logger.hasOnlineSubscribers()) return;
         Direction dir = state.getValue(PistonBaseBlock.FACING);
@@ -68,7 +68,7 @@ public abstract class PistonBaseBlockMixin {
 
     @Inject(method = "triggerEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"))
     private void onTriggerEventRemoveBlock(BlockState state, Level level, BlockPos pos, int b0, int b1, CallbackInfoReturnable<Boolean> cir, @Local Direction direction) {
-        if (!IGNYLoggerRegistry.__piston || level.isClientSide()) return;
+        if (!IGNYLoggers.piston || level.isClientSide()) return;
         carpet.logging.Logger logger = carpet.logging.LoggerRegistry.getLogger("piston");
         if (logger == null || !logger.hasOnlineSubscribers()) return;
         if (this.isSticky) handleRetract(logger, level, pos, direction, true, null);
@@ -151,7 +151,7 @@ public abstract class PistonBaseBlockMixin {
 
     @Inject(method = "moveBlocks", at = @At(value = "INVOKE", target = "Ljava/util/List;size()I", ordinal = 0))
     private void pushBlocks(Level level, BlockPos blockPos, Direction direction, boolean extend, CallbackInfoReturnable<Boolean> cir, @Local(argsOnly = true) boolean isExtend, @Local PistonStructureResolver pistonStructureResolver) {
-        if (!IGNYLoggerRegistry.__piston || !(level instanceof ServerLevel)) return;
+        if (!IGNYLoggers.piston || !(level instanceof ServerLevel)) return;
         carpet.logging.Logger logger = carpet.logging.LoggerRegistry.getLogger("piston");
         if (logger == null || !logger.hasOnlineSubscribers()) return;
         List<BlockPos> list = pistonStructureResolver.getToPush();
@@ -207,7 +207,7 @@ public abstract class PistonBaseBlockMixin {
         PistonResolveContext.startRecording();
         try {
             boolean result = original.call(instance);
-            if (IGNYLoggerRegistry.__piston && !level.isClientSide() && !result) {
+            if (IGNYLoggers.piston && !level.isClientSide() && !result) {
                 carpet.logging.Logger logger = carpet.logging.LoggerRegistry.getLogger("piston");
                 if (logger != null && logger.hasOnlineSubscribers()) logPistonExtendFailure(logger, level, pos, true);
             }
@@ -219,7 +219,7 @@ public abstract class PistonBaseBlockMixin {
 
     @WrapOperation(method = "moveBlocks", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/piston/PistonStructureResolver;resolve()Z"))
     private boolean wrapPullResolve(PistonStructureResolver instance, Operation<Boolean> original, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos blockPos, @Local(argsOnly = true) boolean extend) {
-        if (extend || !IGNYLoggerRegistry.__piston || level.isClientSide()) return original.call(instance);
+        if (extend || !IGNYLoggers.piston || level.isClientSide()) return original.call(instance);
         PistonResolveContext.startRecording();
         try {
             boolean result = original.call(instance);

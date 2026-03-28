@@ -2,7 +2,7 @@ package com.liuyue.igny.mixins.logger.piston;
 
 import carpet.CarpetSettings;
 import com.liuyue.igny.helper.PistonResolveContext;
-import com.liuyue.igny.logging.IGNYLoggerRegistry;
+import com.liuyue.igny.logging.IGNYLoggers;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
@@ -36,7 +36,7 @@ public abstract class PistonStructureResolverMixin {
     )
     private boolean wrapIsPushable(BlockState state, Level level, BlockPos pos, Direction dir1, boolean allowDestroy, Direction dir2, Operation<Boolean> original) {
         boolean result = original.call(state, level, pos, dir1, allowDestroy, dir2);
-        if (!IGNYLoggerRegistry.__piston ) return result;
+        if (!IGNYLoggers.piston ) return result;
         if (PistonResolveContext.isRecording() && !result && FIRST_FAILED.get() == null) {
             FIRST_FAILED.set(pos);
         }
@@ -45,7 +45,7 @@ public abstract class PistonStructureResolverMixin {
 
     @Inject(method = "resolve", at = @At("RETURN"))
     private void onReturn(CallbackInfoReturnable<Boolean> cir) {
-        if (!IGNYLoggerRegistry.__piston ) return;
+        if (!IGNYLoggers.piston ) return;
         if (PistonResolveContext.isRecording()) {
             if (!cir.getReturnValueZ() && PistonResolveContext.getFailureReason() == null) {
                 BlockPos failed = FIRST_FAILED.get();
@@ -64,7 +64,7 @@ public abstract class PistonStructureResolverMixin {
             )
     )
     private void wrapFirstSizeCheck(BlockPos blockPos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        if (!IGNYLoggerRegistry.__piston ) return;
+        if (!IGNYLoggers.piston ) return;
         if (PistonResolveContext.isRecording() && !cir.getReturnValueZ() && this.toPush.size() >= CarpetSettings.pushLimit) {
             PistonResolveContext.setFailureReason(
                     new PistonResolveContext.FailureReason(

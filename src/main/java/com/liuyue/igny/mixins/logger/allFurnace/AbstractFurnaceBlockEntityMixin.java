@@ -3,7 +3,7 @@ package com.liuyue.igny.mixins.logger.allFurnace;
 import carpet.logging.Logger;
 import carpet.logging.LoggerRegistry;
 import com.liuyue.igny.IGNYServerMod;
-import com.liuyue.igny.logging.IGNYLoggerRegistry;
+import com.liuyue.igny.logging.IGNYLoggers;
 import com.liuyue.igny.mixins.logger.LoggerAccessor;
 import com.liuyue.igny.network.packet.block.HighlightPayload;
 
@@ -87,7 +87,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
 
     @Inject(method = "setItem", at = @At("HEAD"))
     private void onSetItem(int slot, ItemStack itemStack, CallbackInfo ci) {
-        if (IGNYLoggerRegistry.__allFurnace && this.logger.hasOnlineSubscribers() && slot == 0 && this.level != null && !this.level.isClientSide()) {
+        if (IGNYLoggers.allFurnace && this.logger.hasOnlineSubscribers() && slot == 0 && this.level != null && !this.level.isClientSide()) {
             //#if MC <= 12006
             //$$ AbstractFurnaceBlockEntity abstractFurnaceBlockEntity = (AbstractFurnaceBlockEntity) (Object) this;
             //#endif
@@ -127,7 +127,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
                 new SingleRecipeInput(itemStack)
                 //#endif
                 , level).isPresent();
-        if (IGNYLoggerRegistry.__allFurnace && self.logger.hasOnlineSubscribers()) {
+        if (IGNYLoggers.allFurnace && self.logger.hasOnlineSubscribers()) {
             if (level instanceof ServerLevel) {
                 if (level != null && !level.isClientSide() && (level.getGameTime() + self.id) % 60 == 0) {
                     if (!itemStack.isEmpty() && !hasRecipe) {

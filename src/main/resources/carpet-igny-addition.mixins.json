@@ -34,6 +34,7 @@
     "exceptions.PacketUtilsMixin",
     "interfaces.MinecraftServerMixin",
     "logger.LoggerAccessor",
+    "logger.LoggerMixin",
     "logger.allFurnace.AbstractFurnaceBlockEntityMixin",
     "logger.allFurnace.LevelMixin",
     "logger.beacon.BeaconBlockEntityMixin",

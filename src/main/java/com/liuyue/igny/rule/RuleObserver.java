@@ -2,6 +2,7 @@ package com.liuyue.igny.rule;
 
 import carpet.api.settings.CarpetRule;
 import com.liuyue.igny.rule.annotation.ObservedRule;
+import com.liuyue.igny.rule.callback.RuleCallback;
 import net.minecraft.commands.CommandSourceStack;
 
 import java.lang.reflect.Field;

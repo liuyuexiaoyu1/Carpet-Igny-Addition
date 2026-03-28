@@ -3,7 +3,7 @@ package com.liuyue.igny;
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
 import com.liuyue.igny.commands.*;
-import com.liuyue.igny.logging.IGNYLoggerRegistry;
+import com.liuyue.igny.logging.IGNYLoggers;
 import com.liuyue.igny.network.packet.PacketUtil;
 import com.liuyue.igny.rule.RuleObserver;
 import com.liuyue.igny.utils.ComponentTranslate;
@@ -61,7 +61,7 @@ public class IGNYServer implements CarpetExtension {
 
     @Override
     public void registerLoggers() {
-        IGNYLoggerRegistry.registerLoggers();
+        IGNYLoggers.registerLoggers();
     }
 
     @Override

@@ -34,12 +34,10 @@ public class EndPortalShape {
         while (minOffset > -maxEndPortalSize && isValidFrame(level, eyePosition.relative(leftFacing, minOffset - 1), facing)) {
             minOffset--;
         }
-
         int maxOffset = 0;
         while (maxOffset < maxEndPortalSize && isValidFrame(level, eyePosition.relative(leftFacing, maxOffset + 1), facing)) {
             maxOffset++;
         }
-
         int currentSideLength = maxOffset - minOffset + 1;
 
         if (currentSideLength < 3) {
