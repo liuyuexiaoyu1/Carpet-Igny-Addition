@@ -7,7 +7,7 @@ on:
       - "gradle.properties"
       - "src/**"
       - "versions/**"
-      - ".github/**"
+      - ".github/workflows"
   pull_request:
 
 jobs:
