@@ -199,6 +199,8 @@
   "carpet.rule.spawnMaxCountIgnoresChunkOverlap.desc": "Count overlapping spawnable chunks between players towards the spawn cap, i.e. calculate the spawn cap based on online player count",
   "carpet.rule.prioritizeFlyingUseItem.desc": "Prioritize using items over interacting with blocks while flying or riptiding",
   "carpet.rule.optimizedSpawning.desc": "Optimizes performance by canceling spawn cycles for any category that has reached its mobcap",
+  "carpet.rule.allFurnaceSleepOptimization.name": "All Furnace Sleep Optimization",
+  "carpet.rule.allFurnaceSleepOptimization.desc": "Skips idle furnace server ticks when no valid recipe is present (requires Lithium)",
   "carpet.rule.dyedFrog.desc": "Feed tadpoles with dye to determine their frog variant upon maturing. Feeding slimeballs will result in vanilla behavior",
   "carpet.rule.dyedFrog.extra.0": "Green Dye -> Cold Frog (Green)",
   "carpet.rule.dyedFrog.extra.1": "Orange Dye -> Temperate Frog (Brown)",

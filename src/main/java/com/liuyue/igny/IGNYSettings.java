@@ -396,6 +396,11 @@ public class IGNYSettings {
     public static boolean optimizedSpawning = false;
 
     @Rule(
+            categories = {IGNY, OPTIMIZATION, FEATURE}
+    )
+    public static boolean allFurnaceSleepOptimization = false;
+
+    @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
     public static boolean dyedFrog = false;

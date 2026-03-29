@@ -264,6 +264,8 @@
   "carpet.rule.prioritizeFlyingUseItem.desc": "鞘翅飞行或激流冲锋时，优先使用物品而非与方块交互",
   "carpet.rule.optimizedSpawning.name": "优化生成",
   "carpet.rule.optimizedSpawning.desc": "优化刷怪性能，当维度任意生成类型达到上限时停止该类型的生成计算",
+  "carpet.rule.allFurnaceSleepOptimization.name": "全熔炉休眠优化",
+  "carpet.rule.allFurnaceSleepOptimization.desc": "当输入槽物品无有效配方时，跳过空闲熔炉的服务端刻处理（需要 Lithium）",
   "carpet.rule.dyedFrog.name": "染色青蛙",
   "carpet.rule.dyedFrog.desc": "使用染料喂食蝌蚪，当蝌蚪成年后根据喂食的对应染料变为对应种类的青蛙，喂食粘液球使用原版逻辑",
   "carpet.rule.dyedFrog.extra.0": "绿色染料 -> 寒带青蛙",

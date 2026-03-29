@@ -3,6 +3,7 @@ package com.liuyue.igny.mixins.logger.allFurnace;
 import carpet.logging.Logger;
 import carpet.logging.LoggerRegistry;
 import com.liuyue.igny.IGNYServerMod;
+import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.logging.IGNYLoggers;
 import com.liuyue.igny.mixins.logger.LoggerAccessor;
 import com.liuyue.igny.network.packet.block.HighlightPayload;
@@ -136,7 +137,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
                 }
             }
         }
-        if (IGNYServerMod.LITHIUM) {
+        if (IGNYServerMod.LITHIUM && IGNYSettings.allFurnaceSleepOptimization) {
             if (!hasRecipe && self.igny$shouldSleep(blockState)) ci.cancel();
         }
     }
