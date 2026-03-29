@@ -63,8 +63,9 @@ public abstract class BaseDataManager<T> {
         if (path == null) return;
 
         try {
-            if (!Files.exists(path.getParent())) {
-                Files.createDirectories(path.getParent());
+            Path parent = path.getParent();
+            if (parent != null && !Files.exists(parent)) {
+                Files.createDirectories(parent);
             }
             try (Writer writer = Files.newBufferedWriter(path)) {
                 GSON.toJson(getCurrentData(), writer);

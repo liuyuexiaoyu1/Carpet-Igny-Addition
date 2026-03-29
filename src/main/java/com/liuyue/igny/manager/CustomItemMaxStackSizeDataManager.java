@@ -19,13 +19,9 @@ import java.util.function.Predicate;
 
 //#if MC >= 12006
 public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<String, Integer>> {
-    //#else
-    //$$ public class CustomItemMaxStackSizeDataManager {
-    //#endif
-    //#if MC >= 12006
     public static final CustomItemMaxStackSizeDataManager INSTANCE = new CustomItemMaxStackSizeDataManager();
 
-    private Map<String, Integer> customStacks = new HashMap<>();
+    private final Map<String, Integer> customStacks = new HashMap<>();
     private final List<StackRule> runtimeRules = new ArrayList<>();
 
     @Override protected String getFileName() { return "custom_item_max_stack_size.json"; }
@@ -34,15 +30,22 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
 
     @Override
     protected void applyData(Map<String, Integer> data) {
-        this.customStacks = new HashMap<>(data);
+        this.customStacks.clear();
+        this.customStacks.putAll(data);
         if (server != null) {
             rebuildRuntimeRules(CommandBuildContext.simple(server.registryAccess(), server.getWorldData().enabledFeatures()));
         }
     }
 
-    public void remove(String pattern, CommandBuildContext context) {
-        customStacks.remove(pattern);
+    public void set(String pattern, int count, CommandBuildContext context) {
+        customStacks.put(pattern, count);
         rebuildAndBroadcast(context);
+    }
+
+    public void remove(String pattern, CommandBuildContext context) {
+        if (customStacks.remove(pattern) != null) {
+            rebuildAndBroadcast(context);
+        }
     }
 
     public void clear() {
@@ -54,12 +57,16 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
     private void rebuildAndBroadcast(CommandBuildContext context) {
         rebuildRuntimeRules(context);
         save();
+        broadcastToClients();
+    }
+
+    private void broadcastToClients() {
         if (server != null) {
             server.getPlayerList().getPlayers().forEach(PacketUtil::sendCustomStackSizeToClient);
         }
     }
 
-    @Override public Map<String, Integer> getCurrentData() { return customStacks; }
+    @Override public Map<String, Integer> getCurrentData() { return new HashMap<>(customStacks); }
 
     public int getCustomStackSize(ItemStack stack) {
         for (StackRule rule : runtimeRules) {
@@ -69,23 +76,14 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
     }
 
     public void clientUpdateData(Map<String, Integer> newData) {
-        this.customStacks = new HashMap<>(newData);
-        Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.level != null && minecraft.getConnection() != null) {
-            CommandBuildContext context = CommandBuildContext.simple(
-                    minecraft.getConnection().registryAccess(),
-                    minecraft.getConnection().enabledFeatures()
-            );
-            rebuildRuntimeRules(context);
-        }
-    }
-
-    public void set(String pattern, int count, CommandBuildContext context) {
-        customStacks.put(pattern, count);
-        rebuildRuntimeRules(context);
-        save();
-        if (server != null) {
-            server.getPlayerList().getPlayers().forEach(PacketUtil::sendCustomStackSizeToClient);
+        this.customStacks.clear();
+        this.customStacks.putAll(newData);
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level != null && mc.getConnection() != null) {
+            rebuildRuntimeRules(CommandBuildContext.simple(
+                    mc.getConnection().registryAccess(),
+                    mc.getConnection().enabledFeatures()
+            ));
         }
     }
 
@@ -97,14 +95,11 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
                 newRules.add(new StackRule(pattern, result, count));
             } catch (Exception e) {
                 ResourceLocation rl = ResourceLocation.tryParse(pattern);
-                if (rl != null && BuiltInRegistries.ITEM.containsKey(rl)) {
-                    Item item = BuiltInRegistries.ITEM.
-                            //#if MC >= 12102
-                            //$$ getValue(rl);
-                            //#else
-                                    get(rl);
-                    //#endif
-                    newRules.add(new StackRule(pattern, stack -> stack.is(item), count));
+                if (rl != null) {
+                    Item item = BuiltInRegistries.ITEM.get(rl);
+                    if (item != BuiltInRegistries.ITEM.get(BuiltInRegistries.ITEM.getDefaultKey())) {
+                        newRules.add(new StackRule(pattern, stack -> stack.is(item), count));
+                    }
                 }
             }
         });
@@ -113,5 +108,7 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
     }
 
     private record StackRule(String pattern, Predicate<ItemStack> predicate, int size) {}
-    //#endif
 }
+//#else
+//$$ public class CustomItemMaxStackSizeDataManager { }
+//#endif

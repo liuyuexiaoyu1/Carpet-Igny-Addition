@@ -35,10 +35,13 @@ public abstract class FireChargeItemMixin {
         if (!clickedState.is(Blocks.OBSIDIAN) && !clickedState.is(Blocks.NETHER_PORTAL)) {
             return;
         }
-        if (!isInAllowedDimension(player, level)) {
+        if (player == null) {
             return;
         }
         if (player.isShiftKeyDown()){
+            return;
+        }
+        if (!BaseFireBlockInvoker.inPortalDimension(level) && !player.isCreative()) {
             return;
         }
         Direction face = context.getClickedFace();
@@ -93,16 +96,5 @@ public abstract class FireChargeItemMixin {
                     Direction.Axis.Z : Direction.Axis.X;
         }
         return Direction.Axis.X;
-    }
-
-    @Unique
-    private static boolean isInAllowedDimension(Player player, Level level) {
-        if (player == null) {
-            return false;
-        }
-        if (player.isCreative()) {
-            return true;
-        }
-        return level.dimension() == Level.OVERWORLD || level.dimension() == Level.NETHER;
     }
 }

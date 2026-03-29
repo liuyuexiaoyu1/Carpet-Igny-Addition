@@ -96,7 +96,7 @@ Reintroduces the projectile residual tick duplication behavior from versions bel
 - Type: `boolean`
 - Default Value: `false`
 - Suggested Options: `false`, `true`
-- Categories: `IGNY`, `FEATURE`
+- Categories: `IGNY`, `FEATURE`, `PORTING`
 
 ## skeletonsPickupSwordsReintroduced `MC>=1.21.4`
 
@@ -105,7 +105,7 @@ Reintroducing the skeleton pickup swords behavior from Minecraft versions below 
 - Type: `boolean`
 - Default Value: `false`
 - Suggested Options: `false`, `true`
-- Categories: `IGNY`, `FEATURE`
+- Categories: `IGNY`, `FEATURE`, `PORTING`
 
 ## teleportInheritMinecartsMotionReintroduced `MC>=1.21.2`
 
@@ -116,7 +116,7 @@ Minecart entities with `Infinity` (`Double.MAX_VALUE`) motion (Motion attribute)
 - Type: `boolean`
 - Default Value: `false`
 - Suggested Options: `false`, `true`
-- Categories: `IGNY`, `FEATURE`
+- Categories: `IGNY`, `FEATURE`, `PORTING`
 
 ## tntMinecartEmptyDamageSourceFix `MC<1.21.9`
 
@@ -768,7 +768,7 @@ Reintroduces tripwire hook duplication by skipping block state checks upon destr
 - Type: `boolean`
 - Default value: `false`
 - Suggested options: `false`, `true`
-- Categories: `IGNY`, `FEATURE`
+- Categories: `IGNY`, `FEATURE`, `PORTING`
 
 ## showClassMixinList
 
@@ -796,3 +796,12 @@ Resolve fake player memory leak by disabling packet sending and preventing queue
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `BUGFIX`
+
+## mobPathNavigationRealTimeTimerReintroduced `🐛Beta`
+
+Restore pathfinding timeout logic to use wall-clock time instead of game ticks, as seen in versions prior to 1.19.3 (22w43a).
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`, `PORTING`

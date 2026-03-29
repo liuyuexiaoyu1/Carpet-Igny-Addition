@@ -13,4 +13,8 @@ public interface BaseFireBlockInvoker {
     static boolean isPortal(Level level, BlockPos blockPos, Direction direction) {
         return false;
     }
+
+    @SuppressWarnings("all")
+    @Invoker("inPortalDimension")
+    static boolean inPortalDimension(Level level) {return false;}
 }

@@ -35,18 +35,21 @@ public class FlintAndSteelItemMixin {
         if (!clickedState.is(Blocks.OBSIDIAN) && !clickedState.is(Blocks.NETHER_PORTAL)) {
             return;
         }
-        if (!isInAllowedDimension(player, level)) {
+        if (!BaseFireBlockInvoker.inPortalDimension(level)) {
+            return;
+        }
+        if (player == null) {
             return;
         }
         if (player.isShiftKeyDown()){
             return;
         }
+        if (!BaseFireBlockInvoker.inPortalDimension(level) && !player.isCreative()) {
+            return;
+        }
         Direction face = context.getClickedFace();
         BlockPos targetPos = pos.relative(face);
         if (!level.isEmptyBlock(targetPos) && !level.getBlockState(targetPos).is(Blocks.FIRE)) {
-            return;
-        }
-        if (BaseFireBlockInvoker.isPortal(level,targetPos,face)) {
             return;
         }
         BlockState targetState = level.getBlockState(targetPos);
@@ -105,16 +108,5 @@ public class FlintAndSteelItemMixin {
                     Direction.Axis.Z : Direction.Axis.X;
         }
         return Direction.Axis.X;
-    }
-
-    @Unique
-    private static boolean isInAllowedDimension(Player player, Level level) {
-        if (player == null) {
-            return false;
-        }
-        if (player.isCreative()) {
-            return true;
-        }
-        return level.dimension() == Level.OVERWORLD || level.dimension() == Level.NETHER;
     }
 }

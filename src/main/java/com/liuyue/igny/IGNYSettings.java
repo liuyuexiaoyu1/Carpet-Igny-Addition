@@ -49,7 +49,7 @@ public class IGNYSettings {
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean wetSpongeCanAbsorbLava = false;
+    public static boolean wetSpongeCanAbsorbLava = false;
 
     @Rule(
             categories = {IGNY, COMMAND, FEATURE},
@@ -60,51 +60,51 @@ public class IGNYSettings {
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean noWardenDarkness = false;
+    public static boolean noWardenDarkness = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean floatingIceWater = false;
+    public static boolean floatingIceWater = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean noZombifiedPiglinNetherPortalSpawn = false;
+    public static boolean noZombifiedPiglinNetherPortalSpawn = false;
 
     //#if MC >= 12102
     //$$ @Rule(
-    //$$        categories = {IGNY,FEATURE}
+    //$$        categories = {IGNY, FEATURE, PORTING}
     //$$ )
-    //$$ public static Boolean projectileDuplicationReintroduced = false;
+    //$$ public static boolean projectileDuplicationReintroduced = false;
     //#endif
 
     //#if MC >= 12104
     //$$ @Rule(
-    //$$        categories = {IGNY,FEATURE}
+    //$$        categories = {IGNY, FEATURE, PORTING}
     //$$ )
-    //$$ public static Boolean skeletonsPickupSwordsReintroduced = false;
+    //$$ public static boolean skeletonsPickupSwordsReintroduced = false;
     //#endif
 
     //#if MC >= 12102
     //$$ @Rule(
-    //$$        categories = {IGNY,FEATURE}
+    //$$        categories = {IGNY, FEATURE, PORTING}
     //$$ )
-    //$$ public static Boolean teleportInheritMinecartsMotionReintroduced = false;
+    //$$ public static boolean teleportInheritMinecartsMotionReintroduced = false;
     //#endif
 
     //#if MC < 12109
     @Rule(
             categories = {IGNY,FEATURE}
     )
-    public static Boolean tntMinecartEmptyDamageSourceFix = false;
+    public static boolean tntMinecartEmptyDamageSourceFix = false;
     //#endif
 
     //#if MC < 12111
     @Rule(
             categories = {IGNY,FEATURE,BUGFIX}
     )
-    public static Boolean fakePlayerBoatYawFix = false;
+    public static boolean fakePlayerBoatYawFix = false;
     //#endif
 
     @Rule(
@@ -116,7 +116,7 @@ public class IGNYSettings {
     @Rule(
             categories = {IGNY,FEATURE}
     )
-    public static Boolean candlePlaceOnIncompleteBlock = false;
+    public static boolean candlePlaceOnIncompleteBlock = false;
 
     @Rule(
             categories = {IGNY, COMMAND, CREATIVE, FEATURE},
@@ -127,32 +127,32 @@ public class IGNYSettings {
     @Rule(
             categories = {IGNY, COMMAND, CREATIVE}
     )
-    public static Boolean fixnotepitchUpdateBlock = false;
+    public static boolean fixnotepitchUpdateBlock = false;
 
     //#if MC >= 12106
     //$$ @Rule(
     //$$        categories = {IGNY, SURVIVAL, CLIENT, FEATURE}
     //$$ )
-    //$$ public static Boolean happyGhastNoClip = false;
+    //$$ public static boolean happyGhastNoClip = false;
     //#endif
 
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean noWitherEffect = false;
+    public static boolean noWitherEffect = false;
 
     //#if MC>=12106
     //$$ @Rule(
     //$$        categories = {IGNY, FEATURE}
     //$$ )
     //$$ @ObservedRule(LocatorBarCallback.class)
-    //$$ public static Boolean locatorBarNoFakePlayer = false;
+    //$$ public static boolean locatorBarNoFakePlayer = false;
     //#endif
 
     @Rule(
             categories = {IGNY, COMMAND, FEATURE}
     )
-    public static Boolean fakePlayerLoginLogoutNoChatInfo = false;
+    public static boolean fakePlayerLoginLogoutNoChatInfo = false;
 
     @Rule(
             categories = {IGNY, COMMAND, FEATURE},
@@ -169,18 +169,18 @@ public class IGNYSettings {
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean fakePlayerNoBreakingCoolDown = false;
+    public static boolean fakePlayerNoBreakingCoolDown = false;
 
     @Rule(
             categories = {IGNY, CREATIVE, FEATURE}
     )
-    public static Boolean creativeDestroyWaterloggedBlockNoWater = false;
+    public static boolean creativeDestroyWaterloggedBlockNoWater = false;
 
     //#if MC >= 12005
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Integer trialSpawnerCoolDown = 36000;
+    public static int trialSpawnerCoolDown = 36000;
     //#endif
 
     @Rule(
@@ -188,74 +188,74 @@ public class IGNYSettings {
             options = {"0", "1", "2", "5", "10"},
             strict = false
     )
-    public static Integer realPlayerBreakLimitPerTick = 0;
+    public static int realPlayerBreakLimitPerTick = 0;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE},
             options = {"0", "1", "2", "5", "10"},
             strict = false
     )
-    public static Integer realPlayerPlaceLimitPerTick = 0;
+    public static int realPlayerPlaceLimitPerTick = 0;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE},
             options = {"0", "5", "10", "20", "50"},
             strict = false
     )
-    public static Integer fakePlayerBreakLimitPerTick = 0;
+    public static int fakePlayerBreakLimitPerTick = 0;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE},
             options = {"0", "5", "10", "20", "50"},
             strict = false
     )
-    public static Integer fakePlayerPlaceLimitPerTick = 0;
+    public static int fakePlayerPlaceLimitPerTick = 0;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean playerOperationLimiter = false;
+    public static boolean playerOperationLimiter = false;
 
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean generateNetherPortal = false;
+    public static boolean generateNetherPortal = false;
 
     @Rule(
             categories = {IGNY, CREATIVE, FEATURE}
     )
-    public static Integer placeComposterCompost = 0;
+    public static int placeComposterCompost = 0;
 
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Integer enderDragonDeathRiseLimit = -1145;
+    public static int enderDragonDeathRiseLimit = -1145;
 
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Integer enderDragonDeathDropExp = -1;
+    public static int enderDragonDeathDropExp = -1;
 
     @Rule(
             categories = {IGNY, CREATIVE, FEATURE}
     )
-    public static Boolean instantSpawnEnderDragon = false;
+    public static boolean instantSpawnEnderDragon = false;
 
     @Rule(
             categories = {IGNY, CREATIVE, FEATURE}
     )
-    public static Integer maxEndPortalSize = -1;
+    public static int maxEndPortalSize = -1;
 
     @Rule(
             categories = {IGNY, CREATIVE, FEATURE}
     )
-    public static Boolean allowRectangularEndPortal = false;
+    public static boolean allowRectangularEndPortal = false;
 
     //#if MC >= 12005
     @Rule(
             categories = {IGNY, CREATIVE, FEATURE}
     )
-    public static Boolean instantVaultSpawnLoot = false;
+    public static boolean instantVaultSpawnLoot = false;
 
     @Rule(
             categories = {IGNY, FEATURE}
@@ -270,7 +270,7 @@ public class IGNYSettings {
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean instantTrialSpawnerSpawnLoot = false;
+    public static boolean instantTrialSpawnerSpawnLoot = false;
 
     @Rule(
             categories = {IGNY, CREATIVE, FEATURE},
@@ -283,13 +283,13 @@ public class IGNYSettings {
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean safeSoundSuppression = false;
+    public static boolean safeSoundSuppression = false;
     //#endif
 
     @Rule(
             categories = {IGNY, COMMAND, FEATURE}
     )
-    public static Boolean twoChangedRuleValueSetDefault = false;
+    public static boolean twoChangedRuleValueSetDefault = false;
 
     @Rule(
             categories = {IGNY, OPTIMIZATION, FEATURE},
@@ -302,12 +302,12 @@ public class IGNYSettings {
     @Rule(
             categories = {IGNY,OPTIMIZATION,FEATURE}
     )
-    public static Integer optimizedEntityLimit = 100;
+    public static int optimizedEntityLimit = 100;
 
     @Rule(
             categories = {IGNY, BUGFIX}
     )
-    public static Boolean optimizedTNTErrorScopeFix = false;
+    public static boolean optimizedTNTErrorScopeFix = false;
 
     @Rule(
             categories = {IGNY, COMMAND, CREATIVE, FEATURE},
@@ -326,84 +326,84 @@ public class IGNYSettings {
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean playerHungryValueNoDecrease = false;
+    public static boolean playerHungryValueNoDecrease = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, CLIENT, FEATURE}
     )
-    public static Boolean playerLowHungryValueCanSprint = false;
+    public static boolean playerLowHungryValueCanSprint = false;
 
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean instantFrogEat = false;
+    public static boolean instantFrogEat = false;
 
     //#if MC >= 12111
     //$$ @Rule(
     //$$        categories = {IGNY, FEATURE}
     //$$ )
-    //$$ public static Boolean allowInvalidMotion = false;
+    //$$ public static boolean allowInvalidMotion = false;
     //#endif
 
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean accelerateBabyVillagerGrowth = false;
+    public static boolean accelerateBabyVillagerGrowth = false;
 
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean lightningBoltNoFire = false;
+    public static boolean lightningBoltNoFire = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean dispenserTrade = false;
+    public static boolean dispenserTrade = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean dispenserTradeFailDisperseItem = true;
+    public static boolean dispenserTradeFailDisperseItem = true;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean renewableCalcite = false;
+    public static boolean renewableCalcite = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean pureShulkerBoxDispense = false;
+    public static boolean pureShulkerBoxDispense = false;
 
     @Rule(
             categories = {IGNY, CREATIVE, FEATURE}
     )
-    public static Boolean structureBlockNoBlockUpdate = false;
+    public static boolean structureBlockNoBlockUpdate = false;
 
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean spawnMaxCountIgnoresChunkOverlap = false;
+    public static boolean spawnMaxCountIgnoresChunkOverlap = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean prioritizeFlyingUseItem = false;
+    public static boolean prioritizeFlyingUseItem = false;
 
     @Rule(
             categories = {IGNY, OPTIMIZATION}
     )
-    public static Boolean optimizedSpawning = false;
+    public static boolean optimizedSpawning = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean dyedFrog = false;
+    public static boolean dyedFrog = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean betterLoyaltyTrident = false;
+    public static boolean betterLoyaltyTrident = false;
 
     @Rule(
             categories = {IGNY},
@@ -415,57 +415,57 @@ public class IGNYSettings {
     @Rule(
             categories = {IGNY}
     )
-    public static Boolean disableWatchDog = false;
+    public static boolean disableWatchDog = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean podzolSpread = false;
+    public static boolean podzolSpread = false;
 
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean noOwnerTntLootingIII = false;
+    public static boolean noOwnerTntLootingIII = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean globalDaylightDetector = false;
+    public static boolean globalDaylightDetector = false;
 
     @Rule(
             categories = {IGNY, CREATIVE, FEATURE}
     )
-    public static Boolean noteBlockSelfCheck = false;
+    public static boolean noteBlockSelfCheck = false;
 
     @Rule(
             categories = {IGNY, CREATIVE, FEATURE}
     )
-    public static Boolean noCreativeDestroyAttachmentDrops = false;
+    public static boolean noCreativeDestroyAttachmentDrops = false;
 
     @Rule(
             categories = {IGNY}
     )
-    public static Boolean showRuleSource = false;
+    public static boolean showRuleSource = false;
 
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean theEndCanCreateNetherPortal = false;
+    public static boolean theEndCanCreateNetherPortal = false;
 
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean renewableEndGatewayPortal = false;
+    public static boolean renewableEndGatewayPortal = false;
 
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean endGatewayPortalNoCooldown = false;
+    public static boolean endGatewayPortalNoCooldown = false;
 
     @Rule(
             categories = {IGNY, FEATURE}
     )
-    public static Boolean liquidSourceCanDestroy = false;
+    public static boolean liquidSourceCanDestroy = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE},
@@ -476,23 +476,28 @@ public class IGNYSettings {
 
     //#if MC >= 26.1
     //$$ @Rule(
-    //$$         categories = {IGNY, FEATURE}
+    //$$         categories = {IGNY, FEATURE, PORTING}
     //$$ )
-    //$$ public static Boolean tripwireHookDupeReintroduced = false;
+    //$$ public static boolean tripwireHookDupeReintroduced = false;
     //#endif
 
     @Rule(
             categories = {IGNY}
     )
-    public static Boolean showClassMixinList = false;
+    public static boolean showClassMixinList = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static Boolean piglinNeutralBehavior = false;
+    public static boolean piglinNeutralBehavior = false;
 
     @Rule(
             categories = {IGNY, BUGFIX}
     )
-    public static Boolean fakePlayerMemoryLeakFix = false;
+    public static boolean fakePlayerMemoryLeakFix = false;
+
+    @Rule(
+            categories = {IGNY, FEATURE, PORTING}
+    )
+    public static boolean mobPathNavigationRealTimeTimerReintroduced = true;
 }

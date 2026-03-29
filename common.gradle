@@ -120,13 +120,6 @@ dependencies {
     autoImplementation ("carpet:fabric-carpet:${project.carpet_core_version}") {
 		exclude group: "net.fabricmc.fabric-api"
 	}
-
-	//GCA
-	if (mcVersion >= 12006 && !unobfuscated) {
-		autoCompileOnly ("${project.gca_version}") {
-			exclude group: "net.fabricmc.fabric-api"
-		}
-	}
 }
 
 String MIXIN_CONFIG_PATH = 'carpet-igny-addition.mixins.json'
