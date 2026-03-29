@@ -104,7 +104,7 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
                     //#endif
                     if (item != BuiltInRegistries.ITEM.
                             //#if MC >= 12102
-                            //$$ getValue(BuiltInRegistries.ITEM.getDefaultKey())
+                            //$$ getValue(BuiltInRegistries.ITEM.getDefaultKey()))
                             //#else
                             get(BuiltInRegistries.ITEM.getDefaultKey()))
                     //#endif
