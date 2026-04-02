@@ -235,7 +235,7 @@
   "carpet.rule.superEffectLevel.extra.0": "Takes effect after reloading the world/save if set to default",
   "carpet.rule.simpleEntityIDSuppression.desc": "Creates an update suppressor based on throwing an 'IllegalStateException' during entity creation by naming an Armor Stand to a specific name",
   "carpet.rule.simpleEntityIDSuppression.extra.0": "When the rule value is 'false', the rule is disabled",
-  "carpet.rule.simpleEntityIDSuppression.extra.1": "When the rule value is 'true', Armor Stand entities named 'Entity ID Suppressor' or 'entityIDSuppression' can be used to create sound suppressors",
+  "carpet.rule.simpleEntityIDSuppression.extra.1": "When the rule value is 'true', Armor Stand entities named 'Entity ID Suppressor' or 'entityIDSuppression' can be used to create Entity ID suppressors",
   "carpet.rule.simpleEntityIDSuppression.extra.2": "When the rule value is any other string, Armor Stand entities named with that string can be used to create Entity ID suppressors",
   "carpet.rule.simpleEntityIDSuppression.extra.3": "Armor Stand entities must remain within loaded/ticking chunks"
 }

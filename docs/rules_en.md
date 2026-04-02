@@ -836,7 +836,7 @@ Creates an update suppressor based on throwing an 'IllegalStateException' during
 
 When the rule value is 'false', the rule is disabled.
 
-When the rule value is 'true', Armor Stand entities named 'Entity ID Suppressor' or 'entityIDSuppression' can be used to create sound suppressors.
+When the rule value is 'true', Armor Stand entities named 'Entity ID Suppressor' or 'entityIDSuppression' can be used to create Entity ID suppressors.
 
 When the rule value is any other string, Armor Stand entities named with that string can be used to create Entity ID suppressors.
 
