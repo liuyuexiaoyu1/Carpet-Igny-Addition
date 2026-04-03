@@ -93,7 +93,6 @@
     "rule.liquidSourceCanDestroy.ServerPlayerGameModeMixin",
     "rule.locatorBarNoFakePlayer.ServerWaypointManagerMixin",
     "rule.maxEndPortalSize.EnderEyeItemMixin",
-    "rule.mobPathNavigationRealTimeTimerReintroduced.PathNavigationMixin",
     "rule.noCreativeDestroyAttachmentDrops.BlockMixin",
     "rule.noCreativeDestroyAttachmentDrops.ServerPlayerGameModeMixin",
     "rule.noOwnerTntLootingIII.EnchantedCountIncreaseFunctionMixin",

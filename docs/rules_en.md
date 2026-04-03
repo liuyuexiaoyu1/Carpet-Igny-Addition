@@ -797,15 +797,6 @@ Resolve fake player memory leak by disabling packet sending and preventing queue
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `BUGFIX`
 
-## mobPathNavigationRealTimeTimerReintroduced `🐛Beta`
-
-Restore pathfinding timeout logic to use wall-clock time instead of game ticks, as seen in versions prior to 1.19.3 (22w43a).
-
-- Type: `boolean`
-- Default value: `false`
-- Suggested options: `false`, `true`
-- Categories: `IGNY`, `FEATURE`, `PORTING`
-
 ## liquidNeverSpread `🐛Beta`
 
 Prevent the fluid from spreading horizontally or downwards.

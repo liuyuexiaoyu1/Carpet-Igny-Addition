@@ -311,8 +311,6 @@
   "carpet.rule.piglinNeutralBehavior.desc": "在玩家不攻击猪灵时，猪灵不会攻击玩家",
   "carpet.rule.fakePlayerMemoryLeakFix.name": "假玩家内存泄露修复",
   "carpet.rule.fakePlayerMemoryLeakFix.desc": "修复假玩家内存泄露问题，防止假玩家在服务器运行时发包并添加队列导致内存泄露",
-  "carpet.rule.mobPathNavigationRealTimeTimerReintroduced.name": "重新引入生物寻路现实时间计时器",
-  "carpet.rule.mobPathNavigationRealTimeTimerReintroduced.desc": "重新引入1.19.3(22w43a)以下的生物寻路使用系统时钟计时，而非游戏刻计时",
   "carpet.rule.liquidNeverSpread.name": "流体永不传播",
   "carpet.rule.liquidNeverSpread.desc": "使流体不会向四周和下方传播",
   "carpet.rule.liquidNeverSpread.extra.0": "liquid_source: 只有流体源不会传播",

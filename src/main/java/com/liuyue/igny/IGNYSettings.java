@@ -500,11 +500,6 @@ public class IGNYSettings {
     public static boolean fakePlayerMemoryLeakFix = false;
 
     @Rule(
-            categories = {IGNY, FEATURE, PORTING}
-    )
-    public static boolean mobPathNavigationRealTimeTimerReintroduced = true;
-
-    @Rule(
             categories = {IGNY, FEATURE},
             options = {"false", "true", "liquid_source"}
     )

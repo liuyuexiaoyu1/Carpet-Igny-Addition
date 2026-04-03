@@ -227,7 +227,6 @@
   "carpet.rule.showClassMixinList.desc": "Displays the Mixin classes of all injected classes in the stack trace of a crash report",
   "carpet.rule.piglinNeutralBehavior.desc": "Piglins remain neutral towards players unless they are attacked first",
   "carpet.rule.fakePlayerMemoryLeakFix.desc": "Resolve fake player memory leak by disabling packet sending and preventing queue buildup",
-  "carpet.rule.mobPathNavigationRealTimeTimerReintroduced.desc": "Restore pathfinding timeout logic to use wall-clock time instead of game ticks, as seen in versions prior to 1.19.3 (22w43a)",
   "carpet.rule.liquidNeverSpread.desc": "Prevent the fluid from spreading horizontally or downwards",
   "carpet.rule.liquidNeverSpread.extra.0": "liquid_source: Only liquid sources will not spread",
   "carpet.rule.liquidNeverSpread.extra.1": "true: Neither liquid sources nor flowing liquids will spread",
