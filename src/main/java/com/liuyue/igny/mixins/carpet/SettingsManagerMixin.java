@@ -3,6 +3,7 @@ package com.liuyue.igny.mixins.carpet;
 import carpet.CarpetServer;
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.SettingsManager;
+import carpet.settings.ParsedRule;
 import carpet.utils.Messenger;
 import com.liuyue.igny.IGNYServer;
 import com.liuyue.igny.IGNYServerMod;
@@ -88,13 +89,19 @@ public abstract class SettingsManagerMixin {
         return "unknown";
     }
 
+    @SuppressWarnings("removal")
     @WrapOperation(method = {"setRule", "setDefault"}, at= @At(value = "INVOKE", target = "Lcarpet/api/settings/CarpetRule;set(Lnet/minecraft/commands/CommandSourceStack;Ljava/lang/String;)V"))
     private <T> void onSetRuleValue(CarpetRule<T> instance, CommandSourceStack commandSourceStack, String s, Operation<Void> original){
-        T rawValue = instance.value();
+        T value = instance.value();
         original.call(instance, commandSourceStack, s);
-        RuleObserver.handleChange(commandSourceStack, instance, rawValue, s);
+        if (instance instanceof ParsedRule<T> parsedRule) {
+            for (carpet.api.settings.Validator<T> validator : parsedRule.realValidators) {
+                value = validator.validate(commandSourceStack, instance, value, s);
+            }
+        }
+        RuleObserver.handleChange(commandSourceStack, instance, instance.value(), value);
         if (IGNYSettings.showRuleChangeHistory) {
-            RuleChangeTracker.ruleChanged(commandSourceStack, instance, rawValue, s);
+            RuleChangeTracker.ruleChanged(commandSourceStack, instance, instance.value(), value);
         }
     }
 

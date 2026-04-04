@@ -21,7 +21,7 @@ public class RuleChangeDataManager extends BaseDataManager<Map<String, List<Rule
 
     @Override public Map<String, List<RuleChangeRecord>> getCurrentData() { return inMemoryCache; }
 
-    public void recordRuleChange(String ruleName, Object originalValue, String userInput, String sourceName, long timestamp) {
+    public void recordRuleChange(String ruleName, Object originalValue, Object userInput, String sourceName, long timestamp) {
         List<RuleChangeRecord> history = inMemoryCache.computeIfAbsent(ruleName, k -> new ArrayList<>());
         history.add(new RuleChangeRecord(originalValue, userInput, sourceName, timestamp));
 

@@ -21,6 +21,7 @@ public class IGNYSettings {
     public static float originalTPS = 20.0f;
     public static final Set<UUID> sprintWhitelistPlayers = new HashSet<>();
     public static Set<String> EIDWhitelist = new HashSet<>();
+    public static final ThreadLocal<Boolean> effectCommandRegistering = ThreadLocal.withInitial(() -> false);
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
@@ -507,6 +508,7 @@ public class IGNYSettings {
     @Rule(
             categories = {IGNY, FEATURE}
     )
+    @ObservedRule(EffectLevelCallback.class)
     public static boolean superEffectLevel = false;
 
     @Rule(
