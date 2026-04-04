@@ -321,7 +321,7 @@
   "carpet.rule.simpleEntityIDSuppression.name": "简易实体ID抑制器",
   "carpet.rule.simpleEntityIDSuppression.desc": "通过召唤一个指定名称的假玩家来制作基于创建实体时抛出“IllegalStateException”的更新抑制器",
   "carpet.rule.simpleEntityIDSuppression.extra.0": "规则值为false时，规则不生效",
-  "carpet.rule.simpleEntityIDSuppression.extra.1": "规则值为true时，召唤名为“实体ID抑制器”或“entityIDSuppression”的假玩家可以用来制作实体ID抑制器",
+  "carpet.rule.simpleEntityIDSuppression.extra.1": "规则值为true时，召唤名为“eIDSuppression”的假玩家可以用来制作实体ID抑制器",
   "carpet.rule.simpleEntityIDSuppression.extra.2": "规则值为其它字符串时，召唤名为为该字符串的假玩家可以用来制作实体ID抑制器",
   "carpet.rule.entityIDSuppressionWhitelist.name": "实体ID抑制器白名单",
   "carpet.rule.entityIDSuppressionWhitelist.desc": "不在列表内的实体创建不会触发实体ID抑制",

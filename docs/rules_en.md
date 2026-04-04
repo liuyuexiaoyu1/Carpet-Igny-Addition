@@ -827,7 +827,7 @@ Create an update suppressor based on an 'IllegalStateException' thrown during en
 
 When the rule value is 'false', the rule is disabled.
 
-When the rule value is 'true', spawning a fake player named '实体ID抑制器' or 'entityIDSuppression' can be used to create an Entity ID Suppressor.
+When the rule value is 'true', spawning a fake player named 'eIDSuppression' can be used to create an Entity ID Suppressor.
 
 When the rule value is any other string, spawning a fake player with that specific string as their name can be used to create an Entity ID Suppressor.
 

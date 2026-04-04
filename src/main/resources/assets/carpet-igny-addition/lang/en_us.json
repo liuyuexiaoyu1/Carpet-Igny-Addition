@@ -234,7 +234,7 @@
   "carpet.rule.superEffectLevel.extra.0": "Takes effect after reloading the world/save if set to default",
   "carpet.rule.simpleEntityIDSuppression.desc": "Create an update suppressor based on an 'IllegalStateException' thrown during entity creation by spawning a fake player with a specific name",
   "carpet.rule.simpleEntityIDSuppression.extra.0": "When the rule value is 'false', the rule is disabled",
-  "carpet.rule.simpleEntityIDSuppression.extra.1": "When the rule value is 'true', spawning a fake player named '实体ID抑制器' or 'entityIDSuppression' can be used to create an Entity ID Suppressor",
+  "carpet.rule.simpleEntityIDSuppression.extra.1": "When the rule value is 'true', spawning a fake player named 'eIDSuppression' can be used to create an Entity ID Suppressor",
   "carpet.rule.simpleEntityIDSuppression.extra.2": "When the rule value is any other string, spawning a fake player with that specific string as their name can be used to create an Entity ID Suppressor",
   "carpet.rule.entityIDSuppressionWhitelist.desc": "Creation of entities not in this list will not trigger Entity ID Suppression",
   "carpet.rule.entityIDSuppressionWhitelist.extra.0": "#all: Any entity",

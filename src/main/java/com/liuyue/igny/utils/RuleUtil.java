@@ -37,7 +37,7 @@ public class RuleUtil {
         String name = player.getGameProfile().getName();
         //#endif
         if ("true".equalsIgnoreCase(IGNYSettings.simpleEntityIDSuppression)) {
-            return "实体ID抑制器".equals(name) || "entityIDSuppression".equalsIgnoreCase(name);
+            return "eIDSuppression".equalsIgnoreCase(name);
         }
 
         return Objects.equals(IGNYSettings.simpleEntityIDSuppression.toLowerCase(), name.toLowerCase());
