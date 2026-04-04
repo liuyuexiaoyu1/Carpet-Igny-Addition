@@ -788,7 +788,7 @@ Piglins remain neutral towards players unless they are attacked first.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## fakePlayerMemoryLeakFix `🐛Beta `MC<26.1`
+## fakePlayerMemoryLeakFix `MC<26.1`
 
 Resolve fake player memory leak by disabling packet sending and preventing queue buildup. [#2169](https://github.com/gnembon/fabric-carpet/issues/2169)
 
@@ -797,7 +797,7 @@ Resolve fake player memory leak by disabling packet sending and preventing queue
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `BUGFIX`
 
-## liquidNeverSpread `🐛Beta`
+## liquidNeverSpread
 
 Prevent the fluid from spreading horizontally or downwards.
 
@@ -810,7 +810,7 @@ liquid_source: Only liquid sources will not spread.
 - Suggested options: `false`, `true`, `liquid_source`
 - Categories: `IGNY`, `FEATURE`
 
-## superEffectLevel `🐛Beta`
+## superEffectLevel
 
 Allows the maximum level of effects given via the /effect command to reach 2147483647.
 
@@ -821,7 +821,7 @@ Takes effect after reloading the world/save if set to default.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## simpleEntityIDSuppression `🐛Beta`
+## simpleEntityIDSuppression
 
 Create an update suppressor based on an 'IllegalStateException' thrown during entity creation by spawning a fake player with a specific name.
 
@@ -836,7 +836,7 @@ When the rule value is any other string, spawning a fake player with that specif
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## entityIDSuppressionWhitelist `🐛Beta`
+## entityIDSuppressionWhitelist
 
 Creation of entities not in this list will not trigger Entity ID Suppression.
 
