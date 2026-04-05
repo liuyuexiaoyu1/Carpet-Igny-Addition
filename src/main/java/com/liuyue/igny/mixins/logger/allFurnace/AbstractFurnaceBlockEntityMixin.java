@@ -193,7 +193,13 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
     }
 
     @Inject(method = "serverTick", at = @At(value = "RETURN"))
-    private static void onServerTick(Level level, BlockPos pos, BlockState state, AbstractFurnaceBlockEntity blockEntity, CallbackInfo ci) {
+    private static void onServerTick(
+            //#if MC >= 12102
+            //$$ ServerLevel level,
+            //#else
+            Level level,
+            //#endif
+            BlockPos pos, BlockState state, AbstractFurnaceBlockEntity blockEntity, CallbackInfo ci) {
         AbstractFurnaceBlockEntityMixin self = (AbstractFurnaceBlockEntityMixin) (Object) blockEntity;
         if (self != null) {
             //#if MC >= 12104
