@@ -74,7 +74,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
     protected abstract boolean isLit();
     //#endif
 
-    //#if MC >= 26.1
+    //#if MC >= 12104
     //$$ @Shadow private int litTimeRemaining;
     //#else
     @Shadow int litTime;
@@ -176,7 +176,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
             if (!hasRecipe && self.isSleeping) return;
         }
         original.call(level, blockPos, blockState, blockEntity);
-        //#if MC >= 26.1
+        //#if MC >= 12104
         //$$ if (IGNYServerMod.LITHIUM) {
         //$$     if (self.litTimeRemaining == 5201314) {
         //$$         self.litTimeRemaining = 0;
@@ -196,7 +196,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
     private static void onServerTick(Level level, BlockPos pos, BlockState state, AbstractFurnaceBlockEntity blockEntity, CallbackInfo ci) {
         AbstractFurnaceBlockEntityMixin self = (AbstractFurnaceBlockEntityMixin) (Object) blockEntity;
         if (self != null) {
-            //#if MC >= 26.1
+            //#if MC >= 12104
             //$$ if (IGNYServerMod.LITHIUM) {
             //$$     if (self.litTimeRemaining <= 0) {
             //$$         self.litTimeRemaining = 5201314;
