@@ -25,7 +25,7 @@ public class RuleObserver {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> void handleChange(CommandSourceStack source, CarpetRule<T> rule, T oldVal, T newVal) {
+    public static <T> void handleChange(CommandSourceStack source, CarpetRule<T> rule, T oldVal, String newVal) {
         RuleCallback<T> callback = (RuleCallback<T>) callbacks.get(rule.name());
         if (callback != null) {
             callback.onChange(source, rule, oldVal, newVal);

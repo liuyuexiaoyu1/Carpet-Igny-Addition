@@ -6,7 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 public class EffectLevelCallback implements RuleCallback<Boolean> {
     @Override
-    public void onChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
+    public void onChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, String newValue) {
         for (ServerPlayer player : source.getServer().getPlayerList().getPlayers()) {
             source.getServer().getCommands().sendCommands(player);
         }

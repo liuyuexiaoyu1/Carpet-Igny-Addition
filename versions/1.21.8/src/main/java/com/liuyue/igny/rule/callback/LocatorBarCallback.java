@@ -10,7 +10,7 @@ import net.minecraft.server.waypoints.ServerWaypointManager;
 
 public class LocatorBarCallback implements RuleCallback<Boolean> {
     @Override
-    public void onChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
+    public void onChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, String newValue) {
         MinecraftServer server = source.getServer();
         PlayerList list = server.getPlayerList();
         for (ServerPlayer player : list.getPlayers()) {
