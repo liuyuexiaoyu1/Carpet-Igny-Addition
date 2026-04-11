@@ -705,7 +705,7 @@ When a player in Creative Mode breaks a block, any blocks attached to it (suppor
 
 ## showRuleSource
 
-Display the ID of the Mod that registered the current rule in the rule details.
+Display the Name of the Mod that registered the current rule in the rule details.
 
 - Type: `boolean`
 - Default value: `false`
