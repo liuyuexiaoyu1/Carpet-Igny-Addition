@@ -11,15 +11,18 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Mixin(SettingsManager.class)
 public class SettingsManagerMixin {
     @Inject(method = "parseSettingsClass", at = @At(value = "INVOKE", target = "Ljava/util/Map;put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"))
     private static void parseSettingsClass(Class<?> settingsClass, CallbackInfo ci, @Local(name = "parsed") CarpetRule<?> rule) {
-        ClassUtil.getModIdFromClass(settingsClass, modId ->
-                IGNYSettings.modRuleTree
-                .computeIfAbsent(modId, k -> new ArrayList<>())
-                .add(rule.name())
+        ClassUtil.getModIdFromClass(settingsClass, modId -> {
+                    List<String> rules = IGNYSettings.MOD_RULE_TREE.computeIfAbsent(modId, k -> new ArrayList<>());
+                    synchronized (rules) {
+                        rules.add(rule.name());
+                    }
+                }
         );
     }
 }

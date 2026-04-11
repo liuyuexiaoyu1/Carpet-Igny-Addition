@@ -7,6 +7,7 @@ import com.liuyue.igny.rule.validators.*;
 import net.minecraft.core.BlockPos;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static com.liuyue.igny.utils.IGNYRuleCategory.*;
 
@@ -14,7 +15,7 @@ public class IGNYSettings {
     public static final ThreadLocal<Boolean> CREATIVE_BREAKING = ThreadLocal.withInitial(() -> false);
     public static Set<String> CRAMMING_ENTITIES = new HashSet<>();
     public static List<BlockPos> noUpdatePos = new ArrayList<>();
-    public static final Map<String, List<String>> modRuleTree = new HashMap<>();
+    public static final Map<String, List<String>> MOD_RULE_TREE = new ConcurrentHashMap<>();
     //假玩家生成内存泄露修复
     public static final ThreadLocal<Boolean> fakePlayerSpawnMemoryLeakFix = ThreadLocal.withInitial(() -> false);
     public static final ThreadLocal<Boolean> itemStackCountChanged = ThreadLocal.withInitial(() -> true);

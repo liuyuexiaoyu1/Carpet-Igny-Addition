@@ -215,7 +215,7 @@
   "carpet.rule.looseEnderPearlChunkLoading.desc": "Prevents Ender Pearl loading tickets from expiring completely before being renewed. Instead, it refreshes the ticket when there are 5 game ticks remaining before timeout",
   "carpet.rule.noteBlockSelfCheck.desc": "When placed, a note block checks its block state once, just like a piston",
   "carpet.rule.noCreativeDestroyAttachmentDrops.desc": "When a player in Creative Mode breaks a block, any blocks attached to it (support-dependent blocks) will not drop as items when they are destroyed",
-  "carpet.rule.showRuleSource.desc": "Display the ID of the Mod that registered the current rule in the rule details",
+  "carpet.rule.showRuleSource.desc": "Display the Name of the Mod that registered the current rule in the rule details",
   "carpet.rule.theEndCanCreateNetherPortal.desc": "Allows Nether portals to be created and activated in the End dimension",
   "carpet.rule.renewableEndGatewayPortal.desc": "Allows players to create an End Gateway portal by surrounding an air block with Dragon Eggs at the same height and lighting a fire in the center",
   "carpet.rule.endGatewayPortalNoCooldown.desc": "Removes the 40gt cooldown for End Gateways, whether triggered by an entity entry or the periodic 2400gt cooldown",

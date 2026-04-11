@@ -290,7 +290,7 @@
   "carpet.rule.noCreativeDestroyAttachmentDrops.name": "创造破坏附着方块无掉落物品",
   "carpet.rule.noCreativeDestroyAttachmentDrops.desc": "创造玩家破坏方块时，附着在上面的方块不会因为破坏而掉落物品",
   "carpet.rule.showRuleSource.name": "显示规则来源",
-  "carpet.rule.showRuleSource.desc": "在规则详情中显示注册当前规则的Mod的ID",
+  "carpet.rule.showRuleSource.desc": "在规则详情中显示注册当前规则的Mod的名称",
   "carpet.rule.theEndCanCreateNetherPortal.name": "末地可创建下界传送门",
   "carpet.rule.theEndCanCreateNetherPortal.desc": "允许在末地创建下界传送门",
   "carpet.rule.renewableEndGatewayPortal.name": "可再生末地折跃门",

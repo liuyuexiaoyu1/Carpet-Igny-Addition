@@ -13,6 +13,9 @@ import com.liuyue.igny.tracker.RuleChangeTracker;
 import com.liuyue.igny.utils.ClassUtil;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.commands.CommandSourceStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -25,6 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import carpet.utils.Translations;
 
@@ -42,8 +46,14 @@ public abstract class SettingsManagerMixin {
     private void addOperationInfoAfterCurrentValue(CommandSourceStack source, CarpetRule<?> rule, CallbackInfoReturnable<Integer> cir) {
         if (rule != null) {
             if (IGNYSettings.showRuleSource) {
+                String id = getModIdByRuleName(rule.name());
+                String name = FabricLoader.getInstance()
+                        .getModContainer(id)
+                        .map(ModContainer::getMetadata)
+                        .map(ModMetadata::getName)
+                        .orElse("Unknown");
                 Messenger.m(source,
-                        "g " + Translations.tr("igny.settings.source", "Source") + ": ", "w " + getModIdByRuleName(rule.name())
+                        "g " + Translations.tr("igny.settings.source", "Source") + ": ", "w " + name
                 );
             }
             if (IGNYSettings.showRuleChangeHistory) {
@@ -66,13 +76,20 @@ public abstract class SettingsManagerMixin {
 
     @Inject(method = "addCarpetRule", at = @At(value = "TAIL"))
     private void addCarpetRule(CarpetRule<?> rule, CallbackInfo ci) {
-        ClassUtil.getModIdFromStack("addCarpetRule", modId ->
-                IGNYSettings.modRuleTree
-                        .computeIfAbsent(modId, k -> new ArrayList<>())
-                        .add(rule.name()));
+        ClassUtil.getModIdFromStack("addCarpetRule", modId -> {
+            List<String> rules = IGNYSettings.MOD_RULE_TREE.computeIfAbsent(modId, k -> new ArrayList<>());
+            synchronized (rules) {
+                rules.add(rule.name());
+            }
+        });
     }
 
+    /**
+     * @deprecated 这个方法的实现是不必要的，应该直接调用{@link Objects#toString(Object)}或{@link String#valueOf(Object)}，
+     * 另外，在字符串拼接中，Java会自动将{@code null}引用替换为“null”字符串，无需显式转换
+     */
     @Unique
+    @Deprecated(forRemoval = true)
     private String objectToString(Object obj) {
         if (obj == null) return "null";
         return obj.toString();
@@ -80,9 +97,12 @@ public abstract class SettingsManagerMixin {
 
     @Unique
     public String getModIdByRuleName(String ruleName) {
-        for (Map.Entry<String, List<String>> entry : IGNYSettings.modRuleTree.entrySet()) {
-            if (entry.getValue().contains(ruleName)) {
-                return entry.getKey();
+        for (Map.Entry<String, List<String>> entry : IGNYSettings.MOD_RULE_TREE.entrySet()) {
+            List<String> rules = entry.getValue();
+            synchronized (rules) {
+                if (rules.contains(ruleName)) {
+                    return entry.getKey();
+                }
             }
         }
         return "unknown";
