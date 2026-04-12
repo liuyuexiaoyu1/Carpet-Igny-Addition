@@ -28,7 +28,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import carpet.utils.Translations;
 
@@ -64,8 +63,8 @@ public abstract class SettingsManagerMixin {
                             Messenger.m(source,
                                     "g  " + Translations.tr("igny.settings.record.operator", "Operator") + ": ", "w " + lastChange.sourceName(),
                                     "g  " + Translations.tr("igny.settings.record.change_time", "ChangeTime") + ": ", "w " + lastChange.getFormattedTime(),
-                                    "g  " + Translations.tr("igny.settings.record.raw_value", "RawValue") + ": ", "w " +  objectToString(lastChange.rawValue()),
-                                    "g  " + Translations.tr("igny.settings.record.new_value", "NewValue") + ": ", "w " + objectToString(lastChange.userInput())
+                                    "g  " + Translations.tr("igny.settings.record.raw_value", "RawValue") + ": ", "w " +  lastChange.rawValue().toString(),
+                                    "g  " + Translations.tr("igny.settings.record.new_value", "NewValue") + ": ", "w " + lastChange.userInput().toString()
                             );
                         }
                     }
@@ -82,17 +81,6 @@ public abstract class SettingsManagerMixin {
                 rules.add(rule.name());
             }
         });
-    }
-
-    /**
-     * @deprecated 这个方法的实现是不必要的，应该直接调用{@link Objects#toString(Object)}或{@link String#valueOf(Object)}，
-     * 另外，在字符串拼接中，Java会自动将{@code null}引用替换为“null”字符串，无需显式转换
-     */
-    @Unique
-    @Deprecated(forRemoval = true)
-    private String objectToString(Object obj) {
-        if (obj == null) return "null";
-        return obj.toString();
     }
 
     @Unique

@@ -30,6 +30,7 @@
     "compat.accessor.fapi.AbstractChanneledNetworkAddonAccessor",
     "compat.fapi.AbstractNetworkAddonMixin",
     "debug.ParsedRuleMixin",
+    "easterEgg.ServerGamePacketListenerImplMixin",
     "exceptions.PacketUtilsMixin",
     "interfaces.MinecraftServerMixin",
     "logger.LoggerAccessor",

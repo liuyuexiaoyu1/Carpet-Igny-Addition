@@ -331,5 +331,7 @@
   "carpet.rule.shulkerBoxInShulkerBox.name": "潜影盒中潜影盒",
   "carpet.rule.shulkerBoxInShulkerBox.desc": "使潜影盒中能塞入潜影盒",
   "carpet.rule.comparatorDupeReintroduced.name": "重新引入比较器复制",
-  "carpet.rule.comparatorDupeReintroduced.desc": "让比较器可以在改变模式的时候复制自身，回退了26.2-snapshot-2的更改"
+  "carpet.rule.comparatorDupeReintroduced.desc": "让比较器可以在改变模式的时候复制自身，回退了26.2-snapshot-2的更改",
+  "carpet.rule.festiveEasterEgg.name": "节日彩蛋",
+  "carpet.rule.festiveEasterEgg.desc": "在一些中国传统节日或者西方节日会触发一些彩蛋"
 }

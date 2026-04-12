@@ -75,7 +75,6 @@ dependencies {
     }
     // Mixin Extras
     include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.5.3")))
-	include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7-beta.1")))
 
 	if (!unobfuscated) {
 		include(autoImplementation("net.fabricmc:tiny-mappings-parser:0.3.0+build.17"))

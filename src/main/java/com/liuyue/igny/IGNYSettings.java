@@ -23,6 +23,7 @@ public class IGNYSettings {
     public static final Set<UUID> sprintWhitelistPlayers = new HashSet<>();
     public static Set<String> EIDWhitelist = new HashSet<>();
     public static final ThreadLocal<Boolean> effectCommandRegistering = ThreadLocal.withInitial(() -> false);
+    public static boolean replaceGameProfiles = true;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
@@ -538,4 +539,8 @@ public class IGNYSettings {
     //$$ )
     //$$ public static boolean comparatorDupeReintroduced = false;
     //#endif
+    @Rule(
+            categories = {IGNY, FEATURE}
+    )
+    public static boolean festiveEasterEgg = true;
 }

@@ -51,7 +51,7 @@ import net.minecraft.world.level.Level;
 //$$ import net.minecraft.world.level.storage.ValueInput;
 //#endif
 
-@Mixin(value = AbstractFurnaceBlockEntity.class, priority = 940)
+@Mixin(value = AbstractFurnaceBlockEntity.class, priority = 999)
 public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
     @Shadow
     @Final
@@ -176,46 +176,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
             if (!hasRecipe && self.isSleeping) return;
         }
         original.call(level, blockPos, blockState, blockEntity);
-        //#if MC >= 12104
-        //$$ if (IGNYServerMod.LITHIUM) {
-        //$$     if (self.litTimeRemaining == 5201314) {
-        //$$         self.litTimeRemaining = 0;
-        //$$     }
-        //$$ }
-        //#else
-        if (IGNYServerMod.LITHIUM) {
-            if (self.litTime == 5201314) {
-                self.litTime = 0;
-            }
-        }
-        //#endif
         self.igny$checkSleep(blockState);
-    }
-
-    @Inject(method = "serverTick", at = @At(value = "RETURN"))
-    private static void onServerTick(
-            //#if MC >= 12102
-            //$$ ServerLevel level,
-            //#else
-            Level level,
-            //#endif
-            BlockPos pos, BlockState state, AbstractFurnaceBlockEntity blockEntity, CallbackInfo ci) {
-        AbstractFurnaceBlockEntityMixin self = (AbstractFurnaceBlockEntityMixin) (Object) blockEntity;
-        if (self != null) {
-            //#if MC >= 12104
-            //$$ if (IGNYServerMod.LITHIUM) {
-            //$$     if (self.litTimeRemaining <= 0) {
-            //$$         self.litTimeRemaining = 5201314;
-            //$$     }
-            //$$ }
-            //#else
-            if (IGNYServerMod.LITHIUM) {
-                if (self.litTime <= 0) {
-                    self.litTime = 5201314;
-                }
-            }
-            //#endif
-        }
     }
 
     @Unique
