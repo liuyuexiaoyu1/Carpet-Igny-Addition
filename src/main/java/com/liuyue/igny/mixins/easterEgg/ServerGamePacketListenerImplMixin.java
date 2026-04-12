@@ -34,7 +34,7 @@ public class ServerGamePacketListenerImplMixin {
         LocalDate date = LocalDate.now();
         if (IGNYSettings.festiveEasterEgg && date.getMonthValue() == 4 && date.getDayOfMonth() == 1) {
             String originalText = message.signedContent();
-            if (!originalText.startsWith("/")) {
+            if (!originalText.startsWith("/") && !originalText.startsWith("!")) {
                 String reversed = reverse(originalText);
                 message = message.withUnsignedContent(Component.literal(reversed));
             }
