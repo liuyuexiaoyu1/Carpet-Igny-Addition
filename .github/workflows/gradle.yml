@@ -9,6 +9,7 @@ on:
       - "versions/**"
       - ".github/workflows"
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
