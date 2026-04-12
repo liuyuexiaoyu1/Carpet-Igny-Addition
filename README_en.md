@@ -17,7 +17,6 @@
 | MixinExtras       | Built-in | [MC百科](https://www.mcmod.cn/class/12750.html)                                                                                                                            |
 | Fabric API        | Required | [MC百科](https://www.mcmod.cn/class/3124.html) &#124; [Official](https://fabricmc.net/)                                                                                    |
 | RyansRenderingKit | Built-in | [GitHub Repo](https://github.com/hotpad100c/ryansrenderingkit) &#124; [Maven Repo](https://mvnrepository.com/artifact/io.github.hotpad100c/ryansrenderingkit)            |       |
-| MixinSquared      | Built-in | [MC百科](https://www.mcmod.cn/class/22717.html) &#124; [GitHub Repo](https://github.com/Bawnorton/MixinSquared)                                                            |       |
 
 ## Version Support
 

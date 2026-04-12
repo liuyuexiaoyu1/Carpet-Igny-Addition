@@ -17,7 +17,6 @@
 | MixinExtras       | 内置 | [MC百科](https://www.mcmod.cn/class/12750.html)                                                                                                                            |    |
 | Fabric API        | 必须 | [MC百科](https://www.mcmod.cn/class/3124.html) &#124; [官方](https://fabricmc.net/)                                                                                          |    |
 | RyansRenderingKit | 内置 | [GitHub仓库](https://github.com/hotpad100c/ryansrenderingkit) &#124; [Maven仓库](https://mvnrepository.com/artifact/io.github.hotpad100c/ryansrenderingkit)                  |    |
-| MixinSquared      | 内置 | [MC百科](https://www.mcmod.cn/class/22717.html) &#124; [GitHub仓库](https://github.com/Bawnorton/MixinSquared)                                                               |    |
 
 ## 版本支持
 
