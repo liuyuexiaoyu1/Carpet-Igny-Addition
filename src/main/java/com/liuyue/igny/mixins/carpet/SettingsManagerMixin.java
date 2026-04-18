@@ -28,6 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import carpet.utils.Translations;
 
@@ -101,7 +102,7 @@ public abstract class SettingsManagerMixin {
         T rawValue = instance.value();
         original.call(instance, commandSourceStack, s);
         RuleObserver.handleChange(commandSourceStack, instance, rawValue, s);
-        if (IGNYSettings.showRuleChangeHistory && rawValue != instance.value()) {
+        if (IGNYSettings.showRuleChangeHistory && !Objects.equals(rawValue, instance.value())) {
             RuleChangeTracker.ruleChanged(commandSourceStack, instance, rawValue, s);
         }
     }
