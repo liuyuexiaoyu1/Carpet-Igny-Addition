@@ -9,7 +9,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+//#if MC >= 26.2
+//$$ import net.minecraft.world.entity.EntityTypes;
+//#else
 import net.minecraft.world.entity.EntityType;
+//#endif
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
@@ -49,7 +53,11 @@ public abstract class DispenserBlockMixin {
         //$$ BlockState blockState = serverLevel.getBlockState(blockPos);
         //#endif
         Direction facing = blockState.getValue(DispenserBlock.FACING);
+        //#if MC >= 26.2
+        //$$ List<Villager> villagers = serverLevel.getEntities(EntityTypes.VILLAGER, new AABB(blockPos.relative(facing)), e -> true);
+        //#else
         List<Villager> villagers = serverLevel.getEntities(EntityType.VILLAGER, new AABB(blockPos.relative(facing)), e -> true);
+        //#endif
         if (!villagers.isEmpty()) {
             Villager villager = villagers.getFirst();
             MerchantOffers offers = villager.getOffers();

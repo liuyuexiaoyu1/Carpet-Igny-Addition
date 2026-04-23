@@ -3,7 +3,11 @@ package com.liuyue.igny.mixins.rule.renewableEndGatewayPortal;
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+//#if MC >= 26.2
+//$$ import net.minecraft.world.entity.EntityTypes;
+//#else
 import net.minecraft.world.entity.EntityType;
+//#endif
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
@@ -35,7 +39,11 @@ public class BaseFireBlockMixin {
             if (canPlacePortal) {
                 level.setBlock(pos, Blocks.END_GATEWAY.defaultBlockState(), 3);
                 //#if MC >= 12102
+                //#if MC >= 26.2
+                //$$ LightningBolt lightningBolt = EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
+                //#else
                 //$$ LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
+                //#endif
                 //#else
                 LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level);
                 //#endif
