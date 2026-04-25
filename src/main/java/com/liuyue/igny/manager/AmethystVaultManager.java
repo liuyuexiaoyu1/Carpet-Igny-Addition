@@ -52,18 +52,12 @@ public class AmethystVaultManager extends BaseDataManager<Map<Long, String>> {
         return SideRestraint.SERVER;
     }
 
-    /**
-     * 存储母岩信息
-     */
     public void storeBud(BlockPos pos, BlockState state) {
         String id = BuiltInRegistries.BLOCK.getKey(state.getBlock()).toString();
         vault.put(pos.asLong(), id);
-        this.save(); // 触发 BaseDataManager 的保存逻辑
+        this.save();
     }
 
-    /**
-     * 提取并移除母岩信息
-     */
     public BlockState getAndRemove(BlockPos pos) {
         String id = vault.remove(pos.asLong());
         if (id == null) return null;
@@ -72,13 +66,15 @@ public class AmethystVaultManager extends BaseDataManager<Map<Long, String>> {
         ResourceLocation rl = ResourceLocation.tryParse(id);
         if (rl == null) return null;
 
-        Block block = BuiltInRegistries.BLOCK.get(rl);
+        Block block = BuiltInRegistries.BLOCK.
+        //#if MC >= 12102
+        //$$ getValue(rl);
+        //#else
+        get(rl);
+        //#endif
         return (block != Blocks.AIR) ? block.defaultBlockState() : null;
     }
 
-    /**
-     * 检查该位置是否有存储的母岩
-     */
     public boolean has(BlockPos pos) {
         return vault.containsKey(pos.asLong());
     }

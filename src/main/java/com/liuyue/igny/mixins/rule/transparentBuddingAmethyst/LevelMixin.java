@@ -46,7 +46,7 @@ public class LevelMixin {
     private void setBlockHead(BlockPos pos, BlockState state, int flags, int recursionLeft, CallbackInfoReturnable<Boolean> cir) {
         if (IGNYSettings.transparentBuddingAmethyst) {
             Level level = (Level) (Object) this;
-            if (level.isClientSide) return;
+            if (level.isClientSide()) return;
 
             BlockState oldState = level.getBlockState(pos);
             if (oldState.is(Blocks.BUDDING_AMETHYST) && IGNYSettings.movingBlocks.get() && !state.is(Blocks.BUDDING_AMETHYST)) {
@@ -59,7 +59,7 @@ public class LevelMixin {
     private void setBlockReturn(BlockPos pos, BlockState newState, int flags, int recursion, CallbackInfoReturnable<Boolean> cir) {
         if (IGNYSettings.transparentBuddingAmethyst) {
             Level level = (Level) (Object) this;
-            if (level.isClientSide || !cir.getReturnValue()) return;
+            if (level.isClientSide() || !cir.getReturnValue()) return;
 
             if (newState.isAir()) {
                 if (AmethystVaultManager.INSTANCE.has(pos)) {
