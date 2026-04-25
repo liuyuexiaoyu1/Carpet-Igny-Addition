@@ -868,3 +868,12 @@ Allow comparators to clone themselves when changing modes; reverted changes from
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`, `PORTING`
+
+## drillAnvil `🐛Beta`
+
+When a falling anvil lands on an unbreakable block with an explosion resistance of 1200 or less, it will destroy the block and continue to fall.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

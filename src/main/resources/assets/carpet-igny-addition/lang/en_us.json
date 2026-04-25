@@ -242,5 +242,6 @@
   "carpet.rule.entityIDSuppressionWhitelist.extra.2": "Separate each entity with a ','",
   "carpet.rule.shulkerBoxInShulkerBox.desc": "Allows shulker boxes to be placed inside other shulker boxes",
   "carpet.rule.comparatorDupeReintroduced.desc": "Allow comparators to clone themselves when changing modes; reverted changes from 26.2-snapshot-2",
-  "carpet.rule.festiveEasterEgg.desc": "Easter eggs are triggered during certain traditional Chinese or Western festivals"
+  "carpet.rule.festiveEasterEgg.desc": "Easter eggs are triggered during certain traditional Chinese or Western festivals",
+  "carpet.rule.drillAnvil.desc": "When a falling anvil lands on an unbreakable block with an explosion resistance of 1200 or less, it will destroy the block and continue to fall"
 }

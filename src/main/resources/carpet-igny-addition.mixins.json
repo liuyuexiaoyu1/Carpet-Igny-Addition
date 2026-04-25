@@ -59,6 +59,7 @@
     "rule.creativeDestroyWaterloggedBlockNoWater.ServerPlayerGameModeMixin",
     "rule.disableWatchDog.ServerWatchdogMixin",
     "rule.dispenserTrade.DispenserBlockMixin",
+    "rule.drillAnvil.FallingBlockEntityMixin",
     "rule.dyedFrog.FrogAccessor",
     "rule.dyedFrog.TadpoleMixin",
     "rule.enderDragonDeathDropExp.EnderDragonMixin",

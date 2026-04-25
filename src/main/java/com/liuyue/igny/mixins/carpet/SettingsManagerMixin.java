@@ -76,7 +76,7 @@ public abstract class SettingsManagerMixin {
 
     @Inject(method = "addCarpetRule", at = @At(value = "TAIL"))
     private void addCarpetRule(CarpetRule<?> rule, CallbackInfo ci) {
-        ClassUtil.getModIdFromStack("addCarpetRule", modId -> {
+        ClassUtil.getModIdFromStack("addCarpetRule", false, modId -> {
             List<String> rules = IGNYSettings.MOD_RULE_TREE.computeIfAbsent(modId, k -> new ArrayList<>());
             synchronized (rules) {
                 rules.add(rule.name());

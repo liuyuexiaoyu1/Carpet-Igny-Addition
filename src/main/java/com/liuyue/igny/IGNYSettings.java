@@ -2,8 +2,10 @@ package com.liuyue.igny;
 
 import carpet.api.settings.Rule;
 import com.liuyue.igny.rule.annotation.ObservedRule;
-import com.liuyue.igny.rule.callback.*;
-import com.liuyue.igny.rule.validators.*;
+import com.liuyue.igny.rule.callback.EffectLevelCallback;
+import com.liuyue.igny.rule.callback.GameTickCallback;
+import com.liuyue.igny.rule.validators.EntityValidator;
+import com.liuyue.igny.rule.validators.SyncmaticaValidator;
 import net.minecraft.core.BlockPos;
 
 import java.util.*;
@@ -496,10 +498,12 @@ public class IGNYSettings {
     )
     public static boolean piglinNeutralBehavior = false;
 
-    @Rule(
-            categories = {IGNY, BUGFIX}
-    )
-    public static boolean fakePlayerMemoryLeakFix = false;
+    //#if MC >= 12111
+    //$$ @Rule(
+    //$$         categories = {IGNY, BUGFIX}
+    //$$ )
+    //$$ public static boolean fakePlayerMemoryLeakFix = false;
+    //#endif
 
     @Rule(
             categories = {IGNY, FEATURE},
@@ -543,4 +547,10 @@ public class IGNYSettings {
             categories = {IGNY, FEATURE}
     )
     public static boolean festiveEasterEgg = true;
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE},
+            options = {"false", "nonFluid", "true"}
+    )
+    public static String drillAnvil = "false";
 }

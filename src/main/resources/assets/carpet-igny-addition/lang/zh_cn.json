@@ -333,5 +333,7 @@
   "carpet.rule.comparatorDupeReintroduced.name": "重新引入比较器复制",
   "carpet.rule.comparatorDupeReintroduced.desc": "让比较器可以在改变模式的时候复制自身，回退了26.2-snapshot-2的更改",
   "carpet.rule.festiveEasterEgg.name": "节日彩蛋",
-  "carpet.rule.festiveEasterEgg.desc": "在一些中国传统节日或者西方节日会触发一些彩蛋"
+  "carpet.rule.festiveEasterEgg.desc": "在一些中国传统节日或者西方节日会触发一些彩蛋",
+  "carpet.rule.drillAnvil.name": "钻头铁砧",
+  "carpet.rule.drillAnvil.desc": "当下落的铁砧掉落在无法挖掘破坏且爆炸抗性 <= 1200的方块上时，会将其清除并继续下落"
 }

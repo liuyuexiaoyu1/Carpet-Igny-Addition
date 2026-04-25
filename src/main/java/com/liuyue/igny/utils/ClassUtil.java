@@ -2,6 +2,7 @@ package com.liuyue.igny.utils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.liuyue.igny.utils.deobfuscator.StackTraceDeobfuscator;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.ModOrigin;
@@ -16,8 +17,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class ClassUtil {
-    public static void getModIdFromStack(String targetMethodName, Consumer<String> callback) {
-        StackTraceElement[] stack = Thread.currentThread().getStackTrace();
+    public static void getModIdFromStack(String targetMethodName, boolean obfuscated, Consumer<String> callback) {
+        StackTraceElement[] stack = obfuscated ? StackTraceDeobfuscator.deobfuscateStackTrace(Thread.currentThread().getStackTrace()) : Thread.currentThread().getStackTrace();
         CompletableFuture.supplyAsync(() -> {
             try {
                 for (int i = 0; i < stack.length; i++) {
