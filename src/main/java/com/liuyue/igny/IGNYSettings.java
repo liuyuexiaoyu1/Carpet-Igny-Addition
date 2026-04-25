@@ -2,10 +2,8 @@ package com.liuyue.igny;
 
 import carpet.api.settings.Rule;
 import com.liuyue.igny.rule.annotation.ObservedRule;
-import com.liuyue.igny.rule.callback.EffectLevelCallback;
-import com.liuyue.igny.rule.callback.GameTickCallback;
-import com.liuyue.igny.rule.validators.EntityValidator;
-import com.liuyue.igny.rule.validators.SyncmaticaValidator;
+import com.liuyue.igny.rule.callback.*;
+import com.liuyue.igny.rule.validators.*;
 import net.minecraft.core.BlockPos;
 
 import java.util.*;
