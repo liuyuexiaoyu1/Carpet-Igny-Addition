@@ -244,5 +244,5 @@
   "carpet.rule.comparatorDupeReintroduced.desc": "Allow comparators to clone themselves when changing modes; reverted changes from 26.2-snapshot-2",
   "carpet.rule.festiveEasterEgg.desc": "Easter eggs are triggered during certain traditional Chinese or Western festivals",
   "carpet.rule.drillAnvil.desc": "When a falling anvil lands on an unbreakable block with an explosion resistance of 1200 or less, it will destroy the block and continue to fall",
-  "carpet.rule.transparentBuddingAmethyst.desc": "Make Budding Amethyst blocks act like 'ghost' blocks: they can be phased through by all entities, and blocks moved by pistons or other means can pass through them. They are immune to explosions and mining, and cannot be destroyed even by the retraction of a headless piston"
+  "carpet.rule.transparentBuddingAmethyst.desc": "Make Budding Amethyst blocks act like 'ghost' blocks: they can be phased through by non player entities, and blocks moved by pistons or other means can pass through them. They are immune to explosions and mining, and cannot be destroyed even by the retraction of a headless piston"
 }

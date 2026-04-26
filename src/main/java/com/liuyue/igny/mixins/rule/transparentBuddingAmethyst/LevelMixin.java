@@ -5,7 +5,7 @@ import com.liuyue.igny.manager.AmethystVaultManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -148,8 +148,10 @@ public class LevelMixin {
             if (IGNYSettings.transparentBuddingAmethyst) {
                 BlockBehaviour.BlockStateBase state = (BlockBehaviour.BlockStateBase) (Object) this;
                 if (state.is(Blocks.BUDDING_AMETHYST)) {
-                    if (context instanceof EntityCollisionContext) {
-                        cir.setReturnValue(Shapes.empty());
+                    if (context instanceof EntityCollisionContext collisionContext) {
+                        if (!(collisionContext.getEntity() instanceof Player)) {
+                            cir.setReturnValue(Shapes.empty());
+                        }
                     }
                 }
             }

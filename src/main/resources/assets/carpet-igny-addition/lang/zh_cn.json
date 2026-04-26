@@ -337,5 +337,5 @@
   "carpet.rule.drillAnvil.name": "钻头铁砧",
   "carpet.rule.drillAnvil.desc": "当下落的铁砧掉落在无法挖掘破坏且爆炸抗性 <= 1200的方块上时，会将其清除并继续下落",
   "carpet.rule.transparentBuddingAmethyst.name": "透明紫水晶母岩",
-  "carpet.rule.transparentBuddingAmethyst.desc": "让紫水晶母岩像小透明一样，能被所有实体穿过，且活塞等方式移动方块时能穿过紫水晶母岩，无法被炸毁和挖掘，无头活塞收回也无法将其破坏"
+  "carpet.rule.transparentBuddingAmethyst.desc": "让紫水晶母岩像小透明一样，能被非玩家实体穿过，且活塞等方式移动方块时能穿过紫水晶母岩，无法被炸毁和挖掘，无头活塞收回也无法将其破坏"
 }
