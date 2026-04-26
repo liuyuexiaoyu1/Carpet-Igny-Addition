@@ -1,6 +1,7 @@
 package com.liuyue.igny.mixins.rule.transparentNightmarishBlock;
 
 import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.utils.RuleUtil;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -32,7 +33,7 @@ public class PistonBaseBlockMixin {
     @WrapOperation(method = "triggerEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"))
     private boolean triggerEvent(Level instance, BlockPos pos, boolean isMoving, Operation<Boolean> original) {
         if (IGNYSettings.transparentNightmarishBlock) {
-            if (instance.getBlockState(pos).is(Blocks.BUDDING_AMETHYST)) {
+            if (RuleUtil.isNightmarishBlock(instance.getBlockState(pos).getBlock())) {
                 return false;
             }
             return original.call(instance, pos, isMoving);
@@ -43,7 +44,7 @@ public class PistonBaseBlockMixin {
     @Inject(method = "isPushable", at = @At(value = "RETURN"), cancellable = true)
     private static void isPushable(BlockState state, Level level, BlockPos pos, Direction movementDirection, boolean allowDestroy, Direction pistonFacing, CallbackInfoReturnable<Boolean> cir) {
         if (IGNYSettings.transparentNightmarishBlock) {
-            if (state.is(Blocks.BUDDING_AMETHYST)) {
+            if (RuleUtil.isNightmarishBlock(state.getBlock())) {
                 cir.setReturnValue(allowDestroy);
             }
         }
