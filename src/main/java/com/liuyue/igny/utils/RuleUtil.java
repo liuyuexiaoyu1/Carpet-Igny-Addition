@@ -5,8 +5,8 @@ import carpet.api.settings.CarpetRule;
 import com.liuyue.igny.IGNYServerMod;
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.WanderingTrader;
 
 import java.util.Objects;
 
@@ -52,5 +52,19 @@ public class RuleUtil {
             return carpetRule.value() == null ? false : carpetRule.value();
         }
         return false;
+    }
+
+    public static void removeVehicle(ServerPlayer serverPlayer) {
+        if (!Objects.equals(IGNYSettings.killFakePlayerRemoveVehicle, "true")) {
+            boolean shouldKeep = true;
+            if (Objects.equals(IGNYSettings.killFakePlayerRemoveVehicle, "canBoatTrade")) {
+                if (serverPlayer.getVehicle() != null) {
+                    shouldKeep = serverPlayer.getVehicle().getPassengers().stream().noneMatch(entity -> entity instanceof Villager || entity instanceof WanderingTrader);
+                }
+            }
+            if (shouldKeep) {
+                serverPlayer.stopRiding();
+            }
+        }
     }
 }
