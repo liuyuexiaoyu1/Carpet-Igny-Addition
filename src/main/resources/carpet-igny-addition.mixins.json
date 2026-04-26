@@ -88,7 +88,7 @@
     "rule.instantVaultSpawnLoot.VaultBlockEntityServerInvoker",
     "rule.instantVaultSpawnLoot.VaultBlockEntityServerMixin",
     "rule.killFakePlayerRemoveVehicle.EntityPlayerMPFakeMixin",
-    "rule.killFakePlayerRemoveVehicle.PlayerListMixin",
+    "rule.killFakePlayerRemoveVehicle.ServerPlayerMixin",
     "rule.lightningBoltNoFire.EntityMixin",
     "rule.lightningBoltNoFire.LightningBoltMixin",
     "rule.liquidNeverSpread.FlowingFluidMixin",
@@ -168,6 +168,7 @@
     "easterEgg.SplashManagerMixin",
     "easterEgg.TitleScreenMixin",
     "rule.happyGhastNoClip.LevelRendererMixin",
+    "rule.killFakePlayerRemoveVehicle.IntegratedServerMixin",
     "rule.playerLowHungryValueCanSprint.LocalPlayerMixin"
   ],
   "injectors": {
