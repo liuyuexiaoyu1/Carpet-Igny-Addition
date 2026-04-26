@@ -4,7 +4,6 @@ import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -31,13 +30,12 @@ public class PistonBaseBlockMixin {
     }
 
     @WrapOperation(method = "triggerEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"))
-    private boolean triggerEvent(Level instance, BlockPos pos, boolean isMoving, Operation<Boolean> original, @Local(argsOnly = true) BlockState state) {
+    private boolean triggerEvent(Level instance, BlockPos pos, boolean isMoving, Operation<Boolean> original) {
         if (IGNYSettings.transparentBuddingAmethyst) {
-            Direction direction = state.getValue(PistonBaseBlock.FACING);
-            if (!instance.getBlockState(pos.relative(direction)).is(Blocks.BUDDING_AMETHYST)) {
-                return original.call(instance, pos, isMoving);
+            if (instance.getBlockState(pos).is(Blocks.BUDDING_AMETHYST)) {
+                return false;
             }
-            return false;
+            return original.call(instance, pos, isMoving);
         }
         return original.call(instance, pos, isMoving);
     }

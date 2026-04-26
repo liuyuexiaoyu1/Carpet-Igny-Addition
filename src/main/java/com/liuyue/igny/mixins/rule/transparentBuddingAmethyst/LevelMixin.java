@@ -148,10 +148,8 @@ public class LevelMixin {
             if (IGNYSettings.transparentBuddingAmethyst) {
                 BlockBehaviour.BlockStateBase state = (BlockBehaviour.BlockStateBase) (Object) this;
                 if (state.is(Blocks.BUDDING_AMETHYST)) {
-                    if (context instanceof EntityCollisionContext entityContext) {
-                        if (entityContext.getEntity() instanceof LivingEntity) {
-                            cir.setReturnValue(Shapes.empty());
-                        }
+                    if (context instanceof EntityCollisionContext) {
+                        cir.setReturnValue(Shapes.empty());
                     }
                 }
             }
