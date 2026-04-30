@@ -887,7 +887,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 幽灵末影珍珠修复 (ghostEnderPearlFix) `🐛Beta`
+## 幽灵末影珍珠修复 (ghostEnderPearlFix) `🐛Beta` `MC>=1.21.2`
 
 修复了由于线程竟态导致的末影珍珠双重持久化。 [MC-306936](https://bugs.mojang.com/browse/MC-306936)
 
