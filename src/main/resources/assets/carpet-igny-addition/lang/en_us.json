@@ -245,5 +245,10 @@
   "carpet.rule.festiveEasterEgg.desc": "Easter eggs are triggered during certain traditional Chinese or Western festivals",
   "carpet.rule.drillAnvil.desc": "When a falling anvil lands on an unbreakable block with an explosion resistance of 1200 or less, it will destroy the block and continue to fall",
   "carpet.rule.transparentNightmarishBlock.desc": "Make Trial Spawner, Vault, and Budding Amethyst blocks act like 'ghost' blocks: they can be phased through by non player entities, and blocks moved by pistons or other means can pass through them. They are immune to explosions and mining, and cannot be destroyed even by the retraction of a headless piston",
-  "carpet.rule.ghostEnderPearlFix.desc": "Fixed double persistence of ender pearls caused by a thread race condition, resolving MC-306936"
+  "carpet.rule.ghostEnderPearlFix.desc": "Fixed double persistence of ender pearls caused by a thread race condition, resolving MC-306936",
+  "carpet.rule.stableTNTExplosion.desc": "Controls the TNT explosion ray strength mode used during block destruction calculation.",
+  "carpet.rule.stableTNTExplosion.extra.0": "false: Use vanilla random ray strength",
+  "carpet.rule.stableTNTExplosion.extra.1": "minimum: Force random factor to 0.0",
+  "carpet.rule.stableTNTExplosion.extra.2": "average: Force random factor to 0.5",
+  "carpet.rule.stableTNTExplosion.extra.3": "maximum: Force random factor to 1.0"
 }

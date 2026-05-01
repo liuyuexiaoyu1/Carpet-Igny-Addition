@@ -895,3 +895,17 @@ Fixed double persistence of ender pearls caused by a thread race condition. [MC-
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `BUGFIX`
+
+## stableTNTExplosion `🐛Beta`
+
+Controls the TNT explosion ray strength mode used during block destruction calculation.
+
+`false`: Use vanilla random value.  
+`minimum`: Force random factor to `0.0`.  
+`average`: Force random factor to `0.5`.  
+`maximum`: Force random factor to `1.0`.
+
+- Type: `string`
+- Default value: `false`
+- Suggested options: `false`, `minimum`, `average`, `maximum`
+- Categories: `IGNY`, `FEATURE`

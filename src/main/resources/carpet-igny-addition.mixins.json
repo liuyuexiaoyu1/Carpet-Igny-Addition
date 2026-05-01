@@ -149,6 +149,7 @@
     "rule.superEffectLevel.EffectCommandsMixin",
     "rule.superEffectLevel.IntegerArgumentTypeMixin",
     "rule.superEffectLevel.MobEffectInstanceMixin",
+    "rule.stableTNTExplosion.ExplosionMixin",
     "rule.teleportInheritMinecartsMotionReintroduced.EntityMixin",
     "rule.teleportInheritMinecartsMotionReintroduced.NetherPortalBlockMixin",
     "rule.theEndCanCreateNetherPortal.BaseFireBlockMixin",

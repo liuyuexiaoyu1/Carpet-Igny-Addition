@@ -895,3 +895,17 @@ true: 流体源和流体都不会传播。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `BUGFIX`
+
+## 稳定的TNT爆炸 (stableTNTExplosion) `🐛Beta`
+
+控制TNT爆炸在计算可破坏方块时使用的射线强度模式。
+
+`false`: 使用原版随机值。  
+`minimum`: 强制随机因子为 `0.0`。  
+`average`: 强制随机因子为 `0.5`。  
+`maximum`: 强制随机因子为 `1.0`。
+
+- 类型: `string`
+- 默认值: `false`
+- 参考选项: `false`, `minimum`, `average`, `maximum`
+- 分类: `IGNY`, `FEATURE`

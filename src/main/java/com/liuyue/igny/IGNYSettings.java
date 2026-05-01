@@ -561,4 +561,10 @@ public class IGNYSettings {
     //$$ )
     //$$ public static boolean ghostEnderPearlFix = false;
     //#endif
+
+    @Rule(
+            categories = {IGNY, FEATURE},
+            options = {"false", "minimum", "average", "maximum"}
+    )
+    public static String stableTNTExplosion = "false";
 }
