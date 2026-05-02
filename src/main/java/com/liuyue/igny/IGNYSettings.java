@@ -563,8 +563,28 @@ public class IGNYSettings {
     //#endif
 
     @Rule(
+            categories = {IGNY, FEATURE}
+    )
+    public static boolean betterFlippinCactus = false;
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE}
+    )
+    public static boolean unblockableAmethyst = false;
+
+    @Rule(
             categories = {IGNY, FEATURE},
             options = {"false", "minimum", "average", "maximum"}
     )
     public static String stableTNTExplosion = "false";
+
+    @Rule(
+            categories = {IGNY, CREATIVE, FEATURE}
+    )
+    public static boolean constantSpeedHopperMinecart = false;
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE}
+    )
+    public static boolean fastAnvilBreaking = false;
 }

@@ -909,3 +909,39 @@ Controls the TNT explosion ray strength mode used during block destruction calcu
 - Default value: `false`
 - Suggested options: `false`, `minimum`, `average`, `maximum`
 - Categories: `IGNY`, `FEATURE`
+
+## betterFlippinCactus `🐛Beta`
+
+Allows cacti to rotate any block with directional properties. Requires the 'flippinCactus' rule to be enabled.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`
+
+## unblockableAmethyst `🐛Beta`
+
+Prevents non-source water blocks from blocking the growth of small amethyst buds from budding amethyst.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## constantSpeedHopperMinecart `🐛Beta`
+
+Hopper minecarts will no longer slow down based on their contents, maintaining the same speed as an empty minecart.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## fastAnvilBreaking `🐛Beta`
+
+When a falling anvil entity is destroyed by a non-full block, it clears and drops all anvil entities and blocks from its Y-level up to the build height limit.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

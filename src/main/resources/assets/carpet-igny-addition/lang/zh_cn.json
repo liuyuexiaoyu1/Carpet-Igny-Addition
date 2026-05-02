@@ -345,5 +345,13 @@
   "carpet.rule.stableTNTExplosion.extra.0": "false：使用原版随机射线强度",
   "carpet.rule.stableTNTExplosion.extra.1": "minimum：强制随机因子为0.0",
   "carpet.rule.stableTNTExplosion.extra.2": "average：强制随机因子为0.5",
-  "carpet.rule.stableTNTExplosion.extra.3": "maximum：强制随机因子为1.0"
+  "carpet.rule.stableTNTExplosion.extra.3": "maximum：强制随机因子为1.0",
+  "carpet.rule.betterFlippinCactus.name": "更好的仙人掌扳手",
+  "carpet.rule.betterFlippinCactus.desc": "使仙人掌可以扳动任何带有方向的方块，需开启flippinCactus规则",
+  "carpet.rule.unblockableAmethyst.name": "不可阻挡的紫水晶",
+  "carpet.rule.unblockableAmethyst.desc": "紫水晶母岩生长出小型紫水晶芽时非水源的水方块不能被阻挡生成",
+  "carpet.rule.constantSpeedHopperMinecart.name": "恒速的漏斗矿车",
+  "carpet.rule.constantSpeedHopperMinecart.desc": "漏斗矿车不会因为其内容物而减速，始终为无内容物时的速度",
+  "carpet.rule.fastAnvilBreaking.name": "快速铁砧破坏",
+  "carpet.rule.fastAnvilBreaking.desc": "当铁砧落沙实体被非完整方块摧毁时，会把从它自身的y坐标到最高建造高度的铁砧落沙实体及铁砧方块清除并掉落"
 }

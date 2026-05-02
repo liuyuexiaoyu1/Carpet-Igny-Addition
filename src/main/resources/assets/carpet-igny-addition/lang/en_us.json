@@ -250,5 +250,9 @@
   "carpet.rule.stableTNTExplosion.extra.0": "false: Use vanilla random ray strength",
   "carpet.rule.stableTNTExplosion.extra.1": "minimum: Force random factor to 0.0",
   "carpet.rule.stableTNTExplosion.extra.2": "average: Force random factor to 0.5",
-  "carpet.rule.stableTNTExplosion.extra.3": "maximum: Force random factor to 1.0"
+  "carpet.rule.stableTNTExplosion.extra.3": "maximum: Force random factor to 1.0",
+  "carpet.rule.betterFlippinCactus.desc": "Allows cacti to rotate any block with directional properties. Requires the 'flippinCactus' rule to be enabled",
+  "carpet.rule.unblockableAmethyst.desc": "Prevents non-source water blocks from blocking the growth of small amethyst buds from budding amethyst",
+  "carpet.rule.constantSpeedHopperMinecart.desc": "Hopper minecarts will no longer slow down based on their contents, maintaining the same speed as an empty minecart",
+  "carpet.rule.fastAnvilBreaking.desc": "When a falling anvil entity is destroyed by a non-full block, it clears and drops all anvil entities and blocks from its Y-level up to the build height limit"
 }

@@ -909,3 +909,39 @@ true: 流体源和流体都不会传播。
 - 默认值: `false`
 - 参考选项: `false`, `minimum`, `average`, `maximum`
 - 分类: `IGNY`, `FEATURE`
+
+## 更好的仙人掌扳手 (betterFlippinCactus) `🐛Beta`
+
+使仙人掌可以扳动任何带有方向的方块，需开启flippinCactus规则。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`
+
+## 不可阻挡的紫水晶 (betterFlippinCactus) `🐛Beta`
+
+紫水晶母岩生长出小型紫水晶芽时非水源的水方块不能被阻挡生成。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 恒速的漏斗矿车 (constantSpeedHopperMinecart) `🐛Beta`
+
+漏斗矿车不会因为其内容物而减速，始终为无内容物时的速度。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 快速铁砧破坏 (betterFlippinCactus) `🐛Beta`
+
+当铁砧落沙实体被非完整方块摧毁时，会把从它自身的y坐标到最高建造高度的铁砧落沙实体及铁砧方块清除并掉落。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
