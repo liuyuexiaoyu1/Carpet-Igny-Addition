@@ -880,7 +880,7 @@ When a falling anvil lands on an unbreakable block with an explosion resistance 
 
 ## transparentNightmarishBlock `🐛Beta`
 
-Make Trial Spawner, Vault, and Budding Amethyst blocks act like 'ghost' blocks: they can be phased through by non player entities, and blocks moved by pistons or other means can pass through them. They are immune to explosions and mining, and cannot be destroyed even by the retraction of a headless piston.
+Make Trial Spawner, Vault, Budding Amethyst, Amethyst Buds, and Amethyst Clusters act like 'ghost' blocks: they can be phased through by non-player entities, and blocks moved by pistons can pass through them. These blocks are immune to explosions and mining, and are protected against destruction by headless piston retraction or other illegal block updates.
 
 - Type: `boolean`
 - Default value: `false`

@@ -244,7 +244,7 @@
   "carpet.rule.comparatorDupeReintroduced.desc": "Allow comparators to clone themselves when changing modes; reverted changes from 26.2-snapshot-2",
   "carpet.rule.festiveEasterEgg.desc": "Easter eggs are triggered during certain traditional Chinese or Western festivals",
   "carpet.rule.drillAnvil.desc": "When a falling anvil lands on an unbreakable block with an explosion resistance of 1200 or less, it will destroy the block and continue to fall",
-  "carpet.rule.transparentNightmarishBlock.desc": "Make Trial Spawner, Vault, and Budding Amethyst blocks act like 'ghost' blocks: they can be phased through by non player entities, and blocks moved by pistons or other means can pass through them. They are immune to explosions and mining, and cannot be destroyed even by the retraction of a headless piston",
+  "carpet.rule.transparentNightmarishBlock.desc": "Make Trial Spawner, Vault, Budding Amethyst, Amethyst Buds, and Amethyst Clusters act like 'ghost' blocks: they can be phased through by non-player entities, and blocks moved by pistons can pass through them. These blocks are immune to explosions and mining, and are protected against destruction by headless piston retraction or other illegal block updates",
   "carpet.rule.ghostEnderPearlFix.desc": "Fixed double persistence of ender pearls caused by a thread race condition, resolving MC-306936",
   "carpet.rule.stableTNTExplosion.desc": "Controls the TNT explosion ray strength mode used during block destruction calculation.",
   "carpet.rule.stableTNTExplosion.extra.0": "false: Use vanilla random ray strength",
