@@ -860,7 +860,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 重新引入比较器复制 (comparatorDupeReintroduced) `🐛Beta` `MC>=26.2`
+## 重新引入比较器复制 (comparatorDupeReintroduced) `MC>=26.2`
 
 让比较器可以在改变模式的时候复制自身，回退了26.2-snapshot-2的更改。
 
@@ -869,7 +869,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`, `PORTING`
 
-## 钻头铁砧 (drillAnvil) `🐛Beta`
+## 钻头铁砧 (drillAnvil)
 
 当下落的铁砧掉落在无法挖掘破坏且爆炸抗性 <= 1200的方块上时，会将其清除并继续下落。
 
@@ -878,7 +878,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 透明梦魇方块 (transparentNightmarishBlock) `🐛Beta`
+## 透明梦魇方块 (transparentNightmarishBlock)
 
 让试炼刷怪笼、宝库、紫水晶母岩和紫水晶芽及簇像幽灵方块一样，能被非玩家实体穿过，且活塞等方式移动方块时能穿过紫水晶母岩，无法被炸毁和挖掘，无头活塞收回也无法将其破坏。
 
@@ -887,7 +887,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 幽灵末影珍珠修复 (ghostEnderPearlFix) `🐛Beta` `MC>=1.21.2`
+## 幽灵末影珍珠修复 (ghostEnderPearlFix) `MC>=1.21.2`
 
 修复了由于线程竟态导致的末影珍珠双重持久化。 [MC-306936](https://bugs.mojang.com/browse/MC-306936)
 
@@ -896,7 +896,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `BUGFIX`
 
-## 稳定的TNT爆炸 (stableTNTExplosion) `🐛Beta`
+## 稳定的TNT爆炸 (stableTNTExplosion)
 
 控制TNT爆炸在计算可破坏方块时使用的射线强度模式。
 
@@ -910,7 +910,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `minimum`, `average`, `maximum`
 - 分类: `IGNY`, `FEATURE`
 
-## 更好的仙人掌扳手 (betterFlippinCactus) `🐛Beta`
+## 更好的仙人掌扳手 (betterFlippinCactus)
 
 使仙人掌可以扳动任何带有方向的方块，需开启flippinCactus规则。
 
@@ -919,7 +919,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 可阻挡的紫水晶 (blockableAmethyst) `🐛Beta`
+## 可阻挡的紫水晶 (blockableAmethyst)
 
 紫水晶母岩生长出小型紫水晶芽时非水源的水方块可以阻挡其生成。
 
@@ -928,7 +928,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 恒速的漏斗矿车 (constantSpeedHopperMinecart) `🐛Beta`
+## 恒速的漏斗矿车 (constantSpeedHopperMinecart)
 
 漏斗矿车不会因为其内容物而减速，始终为无内容物时的速度。
 
@@ -937,7 +937,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
-## 快速铁砧破坏 (fastAnvilBreaking) `🐛Beta`
+## 快速铁砧破坏 (fastAnvilBreaking)
 
 当铁砧落沙实体被非完整方块摧毁时，会把从它自身的y坐标到最高建造高度的铁砧落沙实体及铁砧方块清除并掉落。
 

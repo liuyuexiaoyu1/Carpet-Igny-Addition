@@ -860,7 +860,7 @@ Allows shulker boxes to be placed inside other shulker boxes.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## comparatorDupeReintroduced `🐛Beta` `MC>=26.2`
+## comparatorDupeReintroduced `MC>=26.2`
 
 Allow comparators to clone themselves when changing modes; reverted changes from 26.2-snapshot-2.
 
@@ -869,7 +869,7 @@ Allow comparators to clone themselves when changing modes; reverted changes from
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`, `PORTING`
 
-## drillAnvil `🐛Beta`
+## drillAnvil
 
 When a falling anvil lands on an unbreakable block with an explosion resistance of 1200 or less, it will destroy the block and continue to fall.
 
@@ -878,7 +878,7 @@ When a falling anvil lands on an unbreakable block with an explosion resistance 
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## transparentNightmarishBlock `🐛Beta`
+## transparentNightmarishBlock
 
 Make Trial Spawner, Vault, Budding Amethyst, Amethyst Buds, and Amethyst Clusters act like 'ghost' blocks: they can be phased through by non-player entities, and blocks moved by pistons can pass through them. These blocks are immune to explosions and mining, and are protected against destruction by headless piston retraction or other illegal block updates.
 
@@ -887,7 +887,7 @@ Make Trial Spawner, Vault, Budding Amethyst, Amethyst Buds, and Amethyst Cluster
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## ghostEnderPearlFix `🐛Beta` `MC>=1.21.2`
+## ghostEnderPearlFix `MC>=1.21.2`
 
 Fixed double persistence of ender pearls caused by a thread race condition. [MC-306936](https://bugs.mojang.com/browse/MC-306936)
 
@@ -896,7 +896,7 @@ Fixed double persistence of ender pearls caused by a thread race condition. [MC-
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `BUGFIX`
 
-## stableTNTExplosion `🐛Beta`
+## stableTNTExplosion
 
 Controls the TNT explosion ray strength mode used during block destruction calculation.
 
@@ -910,7 +910,7 @@ Controls the TNT explosion ray strength mode used during block destruction calcu
 - Suggested options: `false`, `minimum`, `average`, `maximum`
 - Categories: `IGNY`, `FEATURE`
 
-## betterFlippinCactus `🐛Beta`
+## betterFlippinCactus
 
 Allows cacti to rotate any block with directional properties. Requires the 'flippinCactus' rule to be enabled.
 
@@ -919,7 +919,7 @@ Allows cacti to rotate any block with directional properties. Requires the 'flip
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## blockableAmethyst `🐛Beta`
+## blockableAmethyst
 
 Non-source water blocks can prevent small amethyst buds from growing on budding amethyst.
 
@@ -928,7 +928,7 @@ Non-source water blocks can prevent small amethyst buds from growing on budding 
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## constantSpeedHopperMinecart `🐛Beta`
+## constantSpeedHopperMinecart
 
 Hopper minecarts will no longer slow down based on their contents, maintaining the same speed as an empty minecart.
 
@@ -937,7 +937,7 @@ Hopper minecarts will no longer slow down based on their contents, maintaining t
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## fastAnvilBreaking `🐛Beta`
+## fastAnvilBreaking
 
 When a falling anvil entity is destroyed by a non-full block, it clears and drops all anvil entities and blocks from its Y-level up to the build height limit.
 
