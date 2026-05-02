@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -35,7 +35,7 @@ public class BlockRotatorMixin {
 
     @Unique
     private static BlockState getNextRotationState(BlockState state) {
-        DirectionProperty property = null;
+        Property<Direction> property = null;
 
         if (state.hasProperty(BlockStateProperties.FACING)) {
             property = BlockStateProperties.FACING;
@@ -70,7 +70,7 @@ public class BlockRotatorMixin {
     }
 
     @Unique
-    private static Direction getNextDirection(Direction current, DirectionProperty property) {
+    private static Direction getNextDirection(Direction current, Property<Direction> property) {
         return switch (current) {
             case NORTH -> Direction.EAST;
             case EAST -> Direction.SOUTH;

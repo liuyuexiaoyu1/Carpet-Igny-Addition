@@ -570,7 +570,7 @@ public class IGNYSettings {
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static boolean unblockableAmethyst = false;
+    public static boolean blockableAmethyst = false;
 
     @Rule(
             categories = {IGNY, FEATURE},

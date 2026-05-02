@@ -54,7 +54,7 @@
     "rule.betterLoyaltyTrident.ThrownTridentMixin",
     "rule.betterSprintGameTick.ServerTickRateManagerMixin",
     "rule.betterSprintGameTick.TickCommandMixin",
-    "rule.unblockableAmethyst.BuddingAmethystBlockMixin",
+    "rule.blockableAmethyst.BuddingAmethystBlockMixin",
     "rule.candlePlaceOnIncompleteBlock.CandleBlockMixin",
     "rule.comparatorDupeReintroduced.ComparatorBlockMixin",
     "rule.comparatorDupeReintroduced.DiodeBlockMixin",

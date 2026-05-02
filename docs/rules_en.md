@@ -919,9 +919,9 @@ Allows cacti to rotate any block with directional properties. Requires the 'flip
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## unblockableAmethyst `🐛Beta`
+## blockableAmethyst `🐛Beta`
 
-Prevents non-source water blocks from blocking the growth of small amethyst buds from budding amethyst.
+Non-source water blocks can prevent small amethyst buds from growing on budding amethyst.
 
 - Type: `boolean`
 - Default value: `false`
