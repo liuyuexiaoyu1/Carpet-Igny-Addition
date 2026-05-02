@@ -2,10 +2,13 @@ package com.liuyue.igny.mixins.rule.fastAnvilBreaking;
 
 import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.sugar.Local;
+//#if MC >= 12102
+//$$ import net.minecraft.server.level.ServerLevel;
+//#endif
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -23,9 +26,11 @@ public class FallingBlockEntityMixin {
     private BlockState blockState;
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/FallingBlockEntity;discard()V", ordinal = 3))
-    private void tick(CallbackInfo ci, @Local BlockPos blockPos, @Local ServerLevel level) {
+    private void tick(CallbackInfo ci, @Local BlockPos blockPos) {
         FallingBlockEntity self = (FallingBlockEntity) (Object) this;
         if (IGNYSettings.fastAnvilBreaking && this.blockState.is(BlockTags.ANVIL)) {
+            Level level = self.level();
+            if (level.isClientSide()) return;
             BlockPos endPos = new BlockPos(blockPos.getX(), level.getMaxBuildHeight(), blockPos.getZ());
             List<FallingBlockEntity> fallingEntities = self.level().getEntitiesOfClass(
                     FallingBlockEntity.class,
@@ -34,7 +39,7 @@ public class FallingBlockEntityMixin {
             for (FallingBlockEntity entity : fallingEntities) {
                 if (entity.getBlockState().is(BlockTags.ANVIL)) {
                     //#if MC >= 12102
-                    //$$ entity.spawnAtLocation(level, entity.getBlockState().getBlock());
+                    //$$ entity.spawnAtLocation((ServerLevel) level, entity.getBlockState().getBlock());
                     //#else
                     entity.spawnAtLocation(entity.getBlockState().getBlock());
                     //#endif
