@@ -13,10 +13,12 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.CodeSource;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class ClassUtil {
+
     public static void getModIdFromStack(String targetMethodName, boolean obfuscated, Consumer<String> callback) {
         StackTraceElement[] stack = obfuscated ? StackTraceDeobfuscator.deobfuscateStackTrace(Thread.currentThread().getStackTrace()) : Thread.currentThread().getStackTrace();
         CompletableFuture.supplyAsync(() -> {
@@ -42,40 +44,57 @@ public class ClassUtil {
 
     private static String getModIdFromClass(Class<?> clazz) {
         try {
-            URL location = clazz.getProtectionDomain().getCodeSource().getLocation();
+            CodeSource codeSource = clazz.getProtectionDomain().getCodeSource();
+            if (codeSource == null) return "unknown";
+            URL location = codeSource.getLocation();
             if (location == null) return "unknown";
-
             Path classPath = Path.of(location.toURI());
+            String classPathStr = classPath.toString();
             for (ModContainer mod : FabricLoader.getInstance().getAllMods()) {
-                if (mod.getOrigin().getKind() != ModOrigin.Kind.PATH) continue;
-                String id = mod.getMetadata().getId();
-                for (Path path : mod.getOrigin().getPaths()) {
-                    String classFileName = classPath.getFileName().toString();
-                    String modFileName = path.getFileName().toString();
-                    if (modFileName.equals(classFileName) || id.equals(getModIdFromMetadata(classPath))) {
-                        return id;
+                ModOrigin origin = mod.getOrigin();
+                String modId = mod.getMetadata().getId();
+                if (origin.getKind() == ModOrigin.Kind.PATH) {
+                    for (Path path : origin.getPaths()) {
+                        if (classPathStr.contains(path.getFileName().toString())) {
+                            return modId;
+                        }
+                    }
+                } else if (origin.getKind() == ModOrigin.Kind.NESTED) {
+                    String subLocation = origin.getParentSubLocation();
+                    if (subLocation != null) {
+                        String subJarName = subLocation.substring(subLocation.lastIndexOf('/') + 1);
+                        if (classPathStr.contains(subJarName)) {
+                            return modId;
+                        }
                     }
                 }
             }
+            String idFromMeta = getModIdFromMetadata(classPath);
+            if (!"unknown".equals(idFromMeta)) {
+                return idFromMeta;
+            }
+
         } catch (Exception ignored) {}
         return "unknown";
     }
 
     public static String getModIdFromMetadata(Path jarPath) {
         try {
-            if (Files.isRegularFile(jarPath) && jarPath.toString().endsWith(".jar")) {
+            if (Files.isRegularFile(jarPath)) {
                 try (FileSystem jarFs = FileSystems.newFileSystem(jarPath, (ClassLoader) null)) {
-                    Path jsonPath = jarFs.getPath("fabric.mod.json");
-                    if (Files.exists(jsonPath)) {
-                        return extractIdFromJson(jsonPath);
-                    }
+                    return extractIdFromJson(jarFs.getPath("fabric.mod.json"));
                 }
+            }
+            else if (Files.isDirectory(jarPath)) {
+                Path jsonPath = jarPath.resolve("fabric.mod.json");
+                return extractIdFromJson(jsonPath);
             }
         } catch (Exception ignored) {}
         return "unknown";
     }
 
     private static String extractIdFromJson(Path jsonPath) {
+        if (!Files.exists(jsonPath)) return "unknown";
         try (var reader = new InputStreamReader(Files.newInputStream(jsonPath))) {
             JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
             if (json.has("id")) {

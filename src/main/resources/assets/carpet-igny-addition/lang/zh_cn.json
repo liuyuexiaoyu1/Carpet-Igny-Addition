@@ -339,7 +339,7 @@
   "carpet.rule.transparentNightmarishBlock.name": "透明梦魇方块",
   "carpet.rule.transparentNightmarishBlock.desc": "让试炼刷怪笼、宝库、紫水晶母岩和紫水晶芽及簇像幽灵方块一样，能被非玩家实体穿过，且活塞等方式移动方块时能穿过紫水晶母岩，无法被炸毁和挖掘，无头活塞收回也无法将其破坏",
   "carpet.rule.ghostEnderPearlFix.name": "幽灵末影珍珠修复",
-  "carpet.rule.ghostEnderPearlFix.desc": "修复了由于线程竟态导致的末影珍珠双重持久化，解决了MC-306936",
+  "carpet.rule.ghostEnderPearlFix.desc": "修复了线程竟态导致的末影珍珠双重持久化，解决了MC-306936",
   "carpet.rule.stableTNTExplosion.name": "稳定的TNT爆炸",
   "carpet.rule.stableTNTExplosion.desc": "控制TNT爆炸在计算可破坏方块时使用的射线强度模式",
   "carpet.rule.stableTNTExplosion.extra.0": "false：使用原版随机射线强度",
