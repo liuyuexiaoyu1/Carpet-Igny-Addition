@@ -935,6 +935,7 @@ true: 流体源和流体都不会传播。
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
+- 参考选项: `false`, `true`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
 ## 快速铁砧破坏 (fastAnvilBreaking)

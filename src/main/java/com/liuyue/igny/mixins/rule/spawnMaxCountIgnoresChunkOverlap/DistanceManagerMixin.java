@@ -1,5 +1,6 @@
 package com.liuyue.igny.mixins.rule.spawnMaxCountIgnoresChunkOverlap;
 
+import carpet.CarpetServer;
 import com.liuyue.igny.IGNYSettings;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
@@ -22,9 +23,8 @@ public class DistanceManagerMixin {
     @Inject(method = "getNaturalSpawnChunkCount", at = @At(value = "HEAD"), cancellable = true)
     private void getNaturalSpawnChunkCount(CallbackInfoReturnable<Integer> cir) {
         if (this.playersPerChunk.isEmpty()) return;
-        MinecraftServer server = this.playersPerChunk.values().iterator().next().iterator().next().level().getServer();
-        if (IGNYSettings.spawnMaxCountIgnoresChunkOverlap && server != null) {
-            cir.setReturnValue(server.getPlayerCount() * 289);
+        if (IGNYSettings.spawnMaxCountIgnoresChunkOverlap && CarpetServer.minecraft_server != null) {
+            cir.setReturnValue(CarpetServer.minecraft_server.getPlayerCount() * 289);
         }
     }
 }
