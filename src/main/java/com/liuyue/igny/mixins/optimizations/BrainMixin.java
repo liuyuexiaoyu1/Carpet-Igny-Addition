@@ -40,7 +40,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class BrainMixin {
     @Inject(method = "tickSensors",at = @At(value = "HEAD"),cancellable = true)
     private void tickSensors(ServerLevel serverLevel, LivingEntity livingEntity, CallbackInfo ci){
-        if (((IEntity)livingEntity).carpet_Igny_Addition$getCrammingCount() >= IGNYSettings.optimizedEntityLimit){
+        if (((IEntity) livingEntity).carpet_Igny_Addition$getCrammingCount() >= IGNYSettings.optimizedEntityLimit) {
             ci.cancel();
         }
     }

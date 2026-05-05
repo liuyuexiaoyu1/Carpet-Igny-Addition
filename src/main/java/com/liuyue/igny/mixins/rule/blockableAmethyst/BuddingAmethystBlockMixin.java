@@ -11,8 +11,14 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(BuddingAmethystBlock.class)
 public class BuddingAmethystBlockMixin {
+    //#if MC >= 26.1
+    //$$ @WrapOperation(method = "canClusterGrowAtState", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z"))
+    //$$ private static boolean is(BlockState instance, Object block, Operation<Boolean> original)
+    //#else
     @WrapOperation(method = "canClusterGrowAtState", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
-    private static boolean is(BlockState instance, Block block, Operation<Boolean> original) {
+    private static boolean is(BlockState instance, Block block, Operation<Boolean> original)
+    //#endif
+    {
         return !IGNYSettings.blockableAmethyst && original.call(instance, block);
     }
 }
