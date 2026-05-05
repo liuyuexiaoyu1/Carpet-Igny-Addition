@@ -945,3 +945,12 @@ true: 流体源和流体都不会传播。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 烟花拓展 (fireworksExtra)
+
+让烟花的最高等级变为8级，可通过1张纸和1-8个火药合成不同等级的烟花。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

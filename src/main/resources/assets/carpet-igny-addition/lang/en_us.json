@@ -254,5 +254,6 @@
   "carpet.rule.betterFlippinCactus.desc": "Allows cacti to rotate any block with directional properties. Requires the 'flippinCactus' rule to be enabled",
   "carpet.rule.blockableAmethyst.desc": "Non-source water blocks can prevent small amethyst buds from growing on budding amethyst",
   "carpet.rule.constantSpeedHopperMinecart.desc": "Hopper minecarts will no longer slow down based on their contents, maintaining the same speed as an empty minecart",
-  "carpet.rule.fastAnvilBreaking.desc": "When a falling anvil entity is destroyed by a non-full block, it clears and drops all anvil entities and blocks from its Y-level up to the build height limit"
+  "carpet.rule.fastAnvilBreaking.desc": "When a falling anvil entity is destroyed by a non-full block, it clears and drops all anvil entities and blocks from its Y-level up to the build height limit",
+  "carpet.rule.fireworksExtra.desc": "Set the maximum firework level to 8, allowing players to craft rockets of different levels using 1 piece of paper and 1 to 8 pieces of gunpowder"
 }

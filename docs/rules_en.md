@@ -945,3 +945,12 @@ When a falling anvil entity is destroyed by a non-full block, it clears and drop
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## fireworksExtra
+
+Set the maximum firework level to 8, allowing players to craft rockets of different levels using 1 piece of paper and 1 to 8 pieces of gunpowder.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

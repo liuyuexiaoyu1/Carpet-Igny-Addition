@@ -353,5 +353,7 @@
   "carpet.rule.constantSpeedHopperMinecart.name": "恒速的漏斗矿车",
   "carpet.rule.constantSpeedHopperMinecart.desc": "漏斗矿车不会因为其内容物而减速，始终为无内容物时的速度",
   "carpet.rule.fastAnvilBreaking.name": "快速铁砧破坏",
-  "carpet.rule.fastAnvilBreaking.desc": "当铁砧落沙实体被非完整方块摧毁时，会把从它自身的y坐标到最高建造高度的铁砧落沙实体及铁砧方块清除并掉落"
+  "carpet.rule.fastAnvilBreaking.desc": "当铁砧落沙实体被非完整方块摧毁时，会把从它自身的y坐标到最高建造高度的铁砧落沙实体及铁砧方块清除并掉落",
+  "carpet.rule.fireworksExtra.name": "烟花拓展",
+  "carpet.rule.fireworksExtra.desc": "让烟花的最高等级变为8级，可通过1张纸和1-8个火药合成不同等级的烟花"
 }

@@ -73,6 +73,7 @@
     "rule.fakePlayerLoginLogoutNoChatInfo.PlayerListMixin",
     "rule.fakePlayerLoginLogoutNoChatInfo.ServerGamePacketListenerImplMixin",
     "rule.fastAnvilBreaking.FallingBlockEntityMixin",
+    "rule.fireworksExtra.FireworkRocketRecipeMixin",
     "rule.floatingIceWater.IceBlockMixin",
     "rule.generateNetherPortal.BaseFireBlockInvoker",
     "rule.generateNetherPortal.FireChargeItemMixin",

@@ -587,4 +587,9 @@ public class IGNYSettings {
             categories = {IGNY, SURVIVAL, FEATURE}
     )
     public static boolean fastAnvilBreaking = false;
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE}
+    )
+    public static boolean fireworksExtra = false;
 }
