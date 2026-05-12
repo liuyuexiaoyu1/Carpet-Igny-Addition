@@ -20,6 +20,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import java.util.Collections;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 //#if MC >= 12003
 @Mixin(BaseTorchBlock.class)
 //#else

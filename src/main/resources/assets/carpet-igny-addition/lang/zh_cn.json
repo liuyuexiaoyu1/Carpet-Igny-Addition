@@ -355,5 +355,14 @@
   "carpet.rule.fastAnvilBreaking.name": "快速铁砧破坏",
   "carpet.rule.fastAnvilBreaking.desc": "当铁砧落沙实体被非完整方块摧毁时，会把从它自身的y坐标到最高建造高度的铁砧落沙实体及铁砧方块清除并掉落",
   "carpet.rule.fireworksExtra.name": "烟花拓展",
-  "carpet.rule.fireworksExtra.desc": "让烟花的最高等级变为8级，可通过1张纸和1-8个火药合成不同等级的烟花"
+  "carpet.rule.fireworksExtra.desc": "让烟花的最高等级变为8级，可通过1张纸和1-8个火药合成不同等级的烟花",
+  "carpet.rule.safePlayerDeathDrop.name": "安全的玩家死亡掉落",
+  "carpet.rule.safePlayerDeathDrop.desc": "当玩家死亡时掉落的物品不会向四处飞溅",
+  "carpet.rule.fireworksStacking.name": "烟花堆叠",
+  "carpet.rule.fireworksStacking.desc": "使飞行时可以叠加多个烟花的加速效果，使玩家拥有更快的飞行速度",
+  "carpet.rule.fireworksStacking.extra.0": "规则值为起作用的烟花数量上限，当等于-1时则无限制",
+  "carpet.rule.stickyResinBlock.name": "粘性树脂块",
+  "carpet.rule.stickyResinBlock.desc": "使树脂块像黏液块和蜂蜜块一样可粘连其他可推动方块，不与黏液块或蜂蜜块互相粘连",
+  "carpet.rule.renewablePowderSnow.name": "可再生细雪",
+  "carpet.rule.renewablePowderSnow.desc": "滴水石锥(钟乳石)可像滴落水或熔岩一样滴落细雪，可被炼药锅收集"
 }

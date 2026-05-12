@@ -592,4 +592,26 @@ public class IGNYSettings {
             categories = {IGNY, SURVIVAL, FEATURE}
     )
     public static boolean fireworksExtra = false;
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE}
+    )
+    public static boolean safePlayerDeathDrop = false;
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE}
+    )
+    public static int fireworksStacking = 1;
+
+    //#if MC >= 12104
+    //$$ @Rule(
+    //$$         categories = {IGNY, SURVIVAL, FEATURE}
+    //$$ )
+    //$$ public static boolean stickyResinBlock = false;
+    //#endif
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE}
+    )
+    public static boolean renewablePowderSnow = false;
 }

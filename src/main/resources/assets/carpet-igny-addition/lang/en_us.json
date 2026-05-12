@@ -255,5 +255,10 @@
   "carpet.rule.blockableAmethyst.desc": "Non-source water blocks can prevent small amethyst buds from growing on budding amethyst",
   "carpet.rule.constantSpeedHopperMinecart.desc": "Hopper minecarts will no longer slow down based on their contents, maintaining the same speed as an empty minecart",
   "carpet.rule.fastAnvilBreaking.desc": "When a falling anvil entity is destroyed by a non-full block, it clears and drops all anvil entities and blocks from its Y-level up to the build height limit",
-  "carpet.rule.fireworksExtra.desc": "Set the maximum firework level to 8, allowing players to craft rockets of different levels using 1 piece of paper and 1 to 8 pieces of gunpowder"
+  "carpet.rule.fireworksExtra.desc": "Set the maximum firework level to 8, allowing players to craft rockets of different levels using 1 piece of paper and 1 to 8 pieces of gunpowder",
+  "carpet.rule.safePlayerDeathDrop.desc": "Items dropped upon player death will not scatter in all directions",
+  "carpet.rule.fireworksStacking.desc": "Allows the acceleration effects of multiple fireworks to stack while flying, enabling players to reach higher flight speeds",
+  "carpet.rule.fireworksStacking.extra.0": "The rule value represents the maximum number of fireworks that can stack; -1 means no limit",
+  "carpet.rule.stickyResinBlock.desc": "Makes Resin Blocks stick to other movable blocks like Slime and Honey Blocks, but they will not stick to Slime or Honey Blocks themselves",
+  "carpet.rule.renewablePowderSnow.desc": "Pointed Dripstone (Stalactites) can drip Powder Snow similar to water or lava, which can be collected by cauldrons"
 }

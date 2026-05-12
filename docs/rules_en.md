@@ -138,8 +138,7 @@ Fake players will not correct yaw when riding boats. [#2100](https://github.com/
 
 ## killFakePlayerRemoveVehicle
 
-When removing a fake player, remove the vehicle they are riding in.
-
+When removing a fake player, remove the vehicle they are riding in.  
 canBoatTrade: Remove the vehicle when there are villagers or wandering merchants on it, other entities are not removed.
 
 - Type: `boolean`
@@ -299,14 +298,10 @@ Maximum number of blocks a fake player can place per game tick. Set to 0 to disa
 
 ## generateNetherPortal
 
-In the Overworld and Nether dimensions, using flint and steel or fire charges on obsidian and nether portal blocks allows you to place a nether portal perpendicular to the clicked block face.
-
-Use the vanilla logic when sneaking and clicking.
-
-If right-clicking the top or bottom face of an obsidian block, the generated nether portal will face the player's direction.
-
-If right-clicking a nether portal block, placement is only allowed on its four side faces.
-
+In the Overworld and Nether dimensions, using flint and steel or fire charges on obsidian and nether portal blocks allows you to place a nether portal perpendicular to the clicked block face.  
+Use the vanilla logic when sneaking and clicking.  
+If right-clicking the top or bottom face of an obsidian block, the generated nether portal will face the player's direction.  
+If right-clicking a nether portal block, placement is only allowed on its four side faces.  
 If the player is in creative mode, this rule can also be used in the End dimension.
 
 - Type: `boolean`
@@ -333,9 +328,7 @@ Limits the maximum Y-coordinate the Ender Dragon can rise to after death. Set to
 ## enderDragonDeathDropExp
 
 Sets the amount of experience dropped when the Ender Dragon dies. Set to -1 to use vanilla behavior.  
-
-The first dragon kill grants 12,000 experience (set rule value to 12000).
-
+The first dragon kill grants 12,000 experience (set rule value to 12000).  
 Subsequent dragon kills grant 500 experience (set rule value to 500).
 
 - Type: `int`
@@ -404,12 +397,9 @@ Skip the animation when the trial spawner generates loot, and directly spawn all
 
 ## simpleSoundSuppression `MC>=1.20.5`
 
-Create an update suppressor based on 'IllegalArgumentException' by naming a Calibrated Sculk Sensor with a specified name.
-
-When the rule value is false, the rule is inactive.
-
-When the rule value is true, Calibrated Sculk Sensors named '声音抑制器' or 'soundSuppression' can be used to create sound suppressors.
-
+Create an update suppressor based on 'IllegalArgumentException' by naming a Calibrated Sculk Sensor with a specified name.  
+When the rule value is false, the rule is inactive.  
+When the rule value is true, Calibrated Sculk Sensors named '声音抑制器' or 'soundSuppression' can be used to create sound suppressors.  
 When the rule value is any other string, Calibrated Sculk Sensors named that string can be used to create sound suppressors.
 
 - Type: `string`
@@ -436,8 +426,7 @@ When changing a rule value with the /carpet command, if the new value is the sam
 
 ## optimizedEntityList
 
-Optimizes stacked living entities; separate each entity with a comma `,`, set it to '#none' to disable it.
-
+Optimizes stacked living entities; separate each entity with a comma `,`, set it to '#none' to disable it.  
 It disables most movement and squeezing calculations for these entities, improving performance.
 
 - Type: `string`
@@ -518,10 +507,8 @@ Allows entity motion (`Motion attribute`) to be `Infinity` (`Double.MAX_VALUE`),
 
 ## accelerateBabyVillagerGrowth
 
-Players can feed baby villagers bread, carrots, potatoes, wheat, wheat seeds, beetroots, beetroot seeds, torchflower seeds, or pitcher pods to accelerate their growth.
-
-Each feeding reduces the remaining growth time by approximately 10%. A minimum of 100 ticks is reduced per feeding, and feeding has no effect once the remaining growth time reaches 200 ticks.
-
+Players can feed baby villagers bread, carrots, potatoes, wheat, wheat seeds, beetroots, beetroot seeds, torchflower seeds, or pitcher pods to accelerate their growth.  
+Each feeding reduces the remaining growth time by approximately 10%. A minimum of 100 ticks is reduced per feeding, and feeding has no effect once the remaining growth time reaches 200 ticks.  
 Particles are displayed upon successful feeding.
 
 - Type: `boolean`
@@ -540,10 +527,8 @@ Lightning Bolt will not generate fire blocks or ignite entities.
 
 ## dispenserTrade
 
-Dispensers can trade with villagers.
-
-Name the dispenser after the target villager's trade slot (number 1-10), then place it facing the villager.
-
+Dispensers can trade with villagers.  
+Name the dispenser after the target villager's trade slot (number 1-10), then place it facing the villager.  
 Any single slot or combination of slots in the dispenser that fulfills the trade's currency requirement will trigger the trade.
 
 - Type: `boolean`
@@ -616,12 +601,9 @@ Optimizes performance by canceling spawn cycles for any category that has reache
 
 ## dyedFrog
 
-Feed tadpoles with dye to determine their frog variant upon maturing. Feeding slimeballs will result in vanilla behavior.
-
-Green Dye -> Cold Frog (Green)
-
-Orange Dye -> Temperate Frog (Brown)
-
+Feed tadpoles with dye to determine their frog variant upon maturing. Feeding slimeballs will result in vanilla behavior.  
+Green Dye -> Cold Frog (Green)  
+Orange Dye -> Temperate Frog (Brown)  
 Light Gray Dye -> Warm Frog (White)
 
 - Type: `boolean`
@@ -631,8 +613,7 @@ Light Gray Dye -> Warm Frog (White)
 
 ## betterLoyaltyTrident
 
-Tridents with the Loyalty enchantment will trigger their return if they exceed the player's simulation distance or go beyond the world's minimum/maximum build height.
-
+Tridents with the Loyalty enchantment will trigger their return if they exceed the player's simulation distance or go beyond the world's minimum/maximum build height.  
 Loyalty will not trigger if both the player and the trident are outside the world's build height limits.
 
 - Type: `boolean`
@@ -750,10 +731,8 @@ Allows fluid sources to be targeted and destroyed.
 
 ## betterSprintGameTick
 
-When conditions are not met, tick sprint (warp) will pause and the tick rate will revert to 20.
-
-`true`: Pauses when no real player is present on the server.
-
+When conditions are not met, tick sprint (warp) will pause and the tick rate will revert to 20.  
+`true`: Pauses when no real player is present on the server.  
 `playerJoin`: Pauses when a new real player joins, until they log out.
 
 - Type: `string`
@@ -799,11 +778,9 @@ Resolve fake player memory leak by disabling packet sending and preventing queue
 
 ## liquidNeverSpread
 
-Prevent the fluid from spreading horizontally or downwards.
-
-liquid_source: Only liquid sources will not spread.
-
-"true: Neither liquid sources nor flowing liquids will spread.
+Prevent the fluid from spreading horizontally or downwards.  
+`liquid_source`: Only liquid sources will not spread.  
+`true`: Neither liquid sources nor flowing liquids will spread.
 
 - Type: `string`
 - Default value: `false`
@@ -823,12 +800,9 @@ Takes effect after reloading the world/save if set to default.
 
 ## simpleEntityIDSuppression
 
-Create an update suppressor based on an 'IllegalStateException' thrown during entity creation by spawning a fake player with a specific name.
-
-When the rule value is 'false', the rule is disabled.
-
-When the rule value is 'true', spawning a fake player named 'eIDSuppression' can be used to create an Entity ID Suppressor.
-
+Create an update suppressor based on an 'IllegalStateException' thrown during entity creation by spawning a fake player with a specific name. 
+When the rule value is `false`, the rule is disabled.  
+When the rule value is `true`, spawning a fake player named 'eIDSuppression' can be used to create an Entity ID Suppressor.  
 When the rule value is any other string, spawning a fake player with that specific string as their name can be used to create an Entity ID Suppressor.
 
 - Type: `boolean`
@@ -838,12 +812,9 @@ When the rule value is any other string, spawning a fake player with that specif
 
 ## entityIDSuppressionWhitelist
 
-Creation of entities not in this list will not trigger Entity ID Suppression.
-
-#all: Any entity
-
-#none: No entities
-
+Creation of entities not in this list will not trigger Entity ID Suppression.  
+#all: Any entity  
+#none: No entities  
 Separate each entity with a `,`
 
 - Type: `boolean`
@@ -949,6 +920,42 @@ When a falling anvil entity is destroyed by a non-full block, it clears and drop
 ## fireworksExtra
 
 Set the maximum firework level to 8, allowing players to craft rockets of different levels using 1 piece of paper and 1 to 8 pieces of gunpowder.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## safePlayerDeathDrop `🐛Beta`
+
+Items dropped upon player death will not scatter in all directions.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## fireworksStacking `🐛Beta`
+
+Allows the acceleration effects of multiple fireworks to stack while flying, enabling players to reach higher flight speeds.  
+The rule value represents the maximum number of fireworks that can stack; -1 means no limit
+
+- Type: `int`
+- Default value: `1`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## stickyResinBlock `🐛Beta` `MC>=1.21.4`
+
+Makes Resin Blocks stick to other movable blocks like Slime and Honey Blocks, but they will not stick to Slime or Honey Blocks themselves.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## renewablePowderSnow `🐛Beta`
+
+Pointed Dripstone (Stalactites) can drip Powder Snow similar to water or lava, which can be collected by cauldrons.
 
 - Type: `boolean`
 - Default value: `false`

@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import java.util.Collections;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 @Mixin(FaceAttachedHorizontalDirectionalBlock.class)
 public class FaceAttachedHorizontalDirectionalBlockMixin extends Block {
     public FaceAttachedHorizontalDirectionalBlockMixin(Properties properties) {
