@@ -17,6 +17,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#if MC < 12003
+//$$ import java.util.function.Predicate;
+//#endif
 
 @Mixin(LayeredCauldronBlock.class)
 public class LayeredCauldronBlockMixin {
