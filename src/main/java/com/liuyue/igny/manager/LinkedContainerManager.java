@@ -20,7 +20,7 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
     public static final LinkedContainerManager INSTANCE = new LinkedContainerManager();
     private final Map<String, LinkedContainer> containers = new HashMap<>();
 
-    @Override protected String getFileName() { return "linked_ender_chests.json"; }
+    @Override protected String getFileName() { return "linked_chests.json"; }
     @Override protected Type getDataType() { return new TypeToken<Map<String, String>>(){}.getType(); }
     @Override public Map<String, String> getDefaultData() { return new HashMap<>(); }
 
@@ -31,12 +31,12 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
         data.forEach((key, snbt) -> {
             LinkedContainer container = get(key);
             try {
-                //#if MC >= 12109
+                //#if MC >= 12105
                 //$$ CompoundTag nbt = TagParser.parseCompoundFully(snbt);
                 //#else
                 CompoundTag nbt = TagParser.parseTag(snbt);
                 //#endif
-                //#if MC >= 12109
+                //#if MC >= 12105
                 //$$ var input = net.minecraft.world.level.storage.TagValueInput.create(
                 //$$                      ProblemReporter.DISCARDING,
                 //$$                      provider,
@@ -70,7 +70,7 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
         HolderLookup.Provider provider = server.registryAccess();
         containers.forEach((key, container) -> {
             CompoundTag nbt = new CompoundTag();
-            //#if MC >= 12109
+            //#if MC >= 12105
             //$$ net.minecraft.nbt.NbtOps ops = net.minecraft.nbt.NbtOps.INSTANCE;
             //$$          java.util.List<net.minecraft.world.item.ItemStack> list = new java.util.ArrayList<>();
             //$$          for (int i = 0; i < container.getContainerSize(); i++) {
