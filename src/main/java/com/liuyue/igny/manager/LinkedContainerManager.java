@@ -11,9 +11,12 @@ import net.minecraft.nbt.TagParser;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-//#if MC >= 12109
+//#if MC >= 12106
 //$$ import net.minecraft.util.ProblemReporter;
 //$$ import com.liuyue.igny.IGNYServer;
+//#endif
+//#if MC >= 12105
+//$$ import java.util.Optional;
 //#endif
 
 public class LinkedContainerManager extends BaseDataManager<Map<String, String>> {
@@ -36,7 +39,7 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
                 //#else
                 CompoundTag nbt = TagParser.parseTag(snbt);
                 //#endif
-                //#if MC >= 12105
+                //#if MC >= 12106
                 //$$ var input = net.minecraft.world.level.storage.TagValueInput.create(
                 //$$                      ProblemReporter.DISCARDING,
                 //$$                      provider,
@@ -50,9 +53,17 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
                 //$$                  }
                 //$$              });
                 //#else
+                //#if MC >= 12105
+                //$$ Optional<ListTag> itemsTag = nbt.getList("Items");
+                //#else
                 ListTag itemsTag = nbt.getList("Items", Tag.TAG_COMPOUND);
+                //#endif
                 //#if MC >= 12005
+                //#if MC >= 12105
+                //$$ itemsTag.ifPresent(tags -> container.fromTag(tags, provider));
+                //#else
                 container.fromTag(itemsTag, provider);
+                //#endif
                 //#else
                 //$$ container.fromTag(itemsTag);
                 //#endif
@@ -70,7 +81,7 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
         HolderLookup.Provider provider = server.registryAccess();
         containers.forEach((key, container) -> {
             CompoundTag nbt = new CompoundTag();
-            //#if MC >= 12105
+            //#if MC >= 12106
             //$$ net.minecraft.nbt.NbtOps ops = net.minecraft.nbt.NbtOps.INSTANCE;
             //$$          java.util.List<net.minecraft.world.item.ItemStack> list = new java.util.ArrayList<>();
             //$$          for (int i = 0; i < container.getContainerSize(); i++) {
