@@ -260,5 +260,8 @@
   "carpet.rule.fireworksStacking.desc": "Allows the acceleration effects of multiple fireworks to stack while flying, enabling players to reach higher flight speeds",
   "carpet.rule.fireworksStacking.extra.0": "The rule value represents the maximum number of fireworks that can stack; -1 means no limit",
   "carpet.rule.stickyResinBlock.desc": "Makes Resin Blocks stick to other movable blocks like Slime and Honey Blocks, but they will not stick to Slime or Honey Blocks themselves",
-  "carpet.rule.renewablePowderSnow.desc": "Pointed Dripstone (Stalactites) can drip Powder Snow similar to water or lava, which can be collected by cauldrons"
+  "carpet.rule.renewablePowderSnow.desc": "Pointed Dripstone (Stalactites) can drip Powder Snow similar to water or lava, which can be collected by cauldrons",
+  "carpet.rule.linkableEnderChest.desc": "Ender chests with the same custom name share a common inventory (channel), regardless of which player opens them",
+  "carpet.rule.linkableEnderChest.extra.0": "Allows interaction with blocks such as comparators and hoppers",
+  "carpet.rule.linkableEnderChest.extra.1": "Ender chests without a custom name retain vanilla behavior, showing the player's personal ender chest inventory"
 }

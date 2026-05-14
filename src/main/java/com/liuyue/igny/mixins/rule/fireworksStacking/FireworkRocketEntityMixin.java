@@ -32,16 +32,15 @@ public abstract class FireworkRocketEntityMixin {
             }
             int maxStack = IGNYSettings.fireworksStacking;
             int totalCount = peers.size() + 1;
-            int effectiveStacks = (maxStack <= 0) ? totalCount : Math.min(totalCount, maxStack);
-            Vec3 lookAngle = player.getLookAngle();
-            Vec3 vec32 = player.getDeltaMovement();
-            double boostLimit = 1.5 + (effectiveStacks + 1);
-            Vec3 stackedVel = vec32.add(
-                    lookAngle.x * 0.1 + (lookAngle.x * boostLimit - vec32.x) * 0.5,
-                    lookAngle.y * 0.1 + (lookAngle.y * boostLimit - vec32.y) * 0.5,
-                    lookAngle.z * 0.1 + (lookAngle.z * boostLimit - vec32.z) * 0.5
-            );
-            original.call(instance, stackedVel);
+            int effectiveCount = (maxStack <= 0) ? totalCount : Math.min(totalCount, maxStack);
+            double dynamicLimit = 1.5 + (effectiveCount - 1) * 1.0;
+            double countWeight = 1.0 / totalCount;
+            Vec3 look = player.getLookAngle();
+            Vec3 currentVel = player.getDeltaMovement();
+            double deltaX = (look.x * 0.1 + (look.x * dynamicLimit - currentVel.x) * 0.5) * countWeight;
+            double deltaY = (look.y * 0.1 + (look.y * dynamicLimit - currentVel.y) * 0.5) * countWeight;
+            double deltaZ = (look.z * 0.1 + (look.z * dynamicLimit - currentVel.z) * 0.5) * countWeight;
+            original.call(instance, currentVel.add(deltaX, deltaY, deltaZ));
             return;
         }
         original.call(instance, vec3);

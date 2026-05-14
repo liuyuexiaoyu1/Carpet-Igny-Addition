@@ -364,5 +364,9 @@
   "carpet.rule.stickyResinBlock.name": "粘性树脂块",
   "carpet.rule.stickyResinBlock.desc": "使树脂块像黏液块和蜂蜜块一样可粘连其他可推动方块，不与黏液块或蜂蜜块互相粘连",
   "carpet.rule.renewablePowderSnow.name": "可再生细雪",
-  "carpet.rule.renewablePowderSnow.desc": "滴水石锥(钟乳石)可像滴落水或熔岩一样滴落细雪，可被炼药锅收集"
+  "carpet.rule.renewablePowderSnow.desc": "滴水石锥(钟乳石)可像滴落水或熔岩一样滴落细雪，可被炼药锅收集",
+  "carpet.rule.linkableEnderChest.name": "可链接的末影箱",
+  "carpet.rule.linkableEnderChest.desc": "拥有相同自定义名称的末影箱会共用一个存储空间(频道)，不再区分打开它的玩家是谁",
+  "carpet.rule.linkableEnderChest.extra.0": "可以被比较器和漏斗等方块交互",
+  "carpet.rule.linkableEnderChest.extra.1": "不带自定义名称的末影箱保持原版逻辑，玩家打开末影箱可以操作自己的末影箱物品"
 }

@@ -956,3 +956,14 @@ true: 流体源和流体都不会传播。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 可链接的末影箱 (linkableEnderChest) `🐛Beta`
+
+拥有相同自定义名称的末影箱会共用一个存储空间(频道)，不再区分打开它的玩家是谁。  
+可以被比较器和漏斗等方块交互。  
+不带自定义名称的末影箱保持原版逻辑，玩家打开末影箱可以操作自己的末影箱物品。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

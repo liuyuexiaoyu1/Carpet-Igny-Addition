@@ -5,6 +5,7 @@ import com.liuyue.igny.IGNYServer;
 import com.liuyue.igny.manager.BlockVaultManager;
 import com.liuyue.igny.manager.CustomPickupDataManager;
 import com.liuyue.igny.manager.CustomItemMaxStackSizeDataManager;
+import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.task.ITask;
 import com.liuyue.igny.task.TaskManager;
 import com.liuyue.igny.tracker.RuleChangeTracker;
@@ -28,6 +29,7 @@ public abstract class MinecraftServerMixin {
             CustomItemMaxStackSizeDataManager.INSTANCE.setServer(server);
             //#endif
             BlockVaultManager.INSTANCE.setServer(server);
+            LinkedContainerManager.INSTANCE.setServer(server);
         }
     }
 
