@@ -11,7 +11,7 @@ import net.minecraft.nbt.TagParser;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-//#if MC >= 12109
+//#if MC >= 12105
 //$$ import net.minecraft.util.ProblemReporter;
 //$$ import com.liuyue.igny.IGNYServer;
 //#endif
