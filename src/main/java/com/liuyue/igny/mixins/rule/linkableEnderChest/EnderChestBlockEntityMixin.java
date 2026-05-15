@@ -16,7 +16,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -196,24 +195,17 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     public void clearContent() {}
 
     @Override
-    public void setLevel(Level level) {
-        super.setLevel(level);
+    public void setChanged() {
+        super.setChanged();
         if (level != null && !level.isClientSide()) {
             //#if MC >= 12005
             Component customName = this.components().get(DataComponents.CUSTOM_NAME);
             //#else
             //$$ Component customName = Component.Serializer.fromJson(this.saveWithFullMetadata().getString("CustomName"));
             //#endif
-            if (customName != null) {
+            if (customName != null && !LinkedContainerManager.get(customName.getString()).isActiveChest((EnderChestBlockEntity) (Object) this)) {
                 this.registerToLinkedContainer(customName.getString());
             }
-        }
-    }
-
-    @Override
-    public void setChanged() {
-        super.setChanged();
-        if (this.level != null) {
             this.level.updateNeighborsAt(this.worldPosition, this.getBlockState().getBlock());
         }
     }
