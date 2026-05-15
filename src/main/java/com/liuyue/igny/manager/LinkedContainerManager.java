@@ -39,7 +39,7 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
                 //#else
                 CompoundTag nbt = TagParser.parseTag(snbt);
                 //#endif
-                //#if MC >= 12105
+                //#if MC >= 12106
                 //$$ var input = net.minecraft.world.level.storage.TagValueInput.create(
                 //$$                      ProblemReporter.DISCARDING,
                 //$$                      provider,
@@ -53,9 +53,17 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
                 //$$                  }
                 //$$              });
                 //#else
+                //#if MC >= 12105
+                //$$ Optional<ListTag> itemsTag = nbt.getList("Items");
+                //#else
                 ListTag itemsTag = nbt.getList("Items", Tag.TAG_COMPOUND);
+                //#endif
                 //#if MC >= 12005
+                //#if MC >= 12105
+                //$$ itemsTag.ifPresent(tag -> container.fromTag(tag, provider));
+                //#else
                 container.fromTag(itemsTag, provider);
+                //#endif
                 //#else
                 //$$ container.fromTag(itemsTag);
                 //#endif
