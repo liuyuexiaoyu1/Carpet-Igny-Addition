@@ -40,7 +40,11 @@ public class EnderChestBlockMixin extends Block {
     }
 
     @SuppressWarnings("all")
+    //#if MC >= 12005
     @WrapOperation(method = "useWithoutItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;openMenu(Lnet/minecraft/world/MenuProvider;)Ljava/util/OptionalInt;"))
+    //#else
+    //$$ @WrapOperation(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;openMenu(Lnet/minecraft/world/MenuProvider;)Ljava/util/OptionalInt;"))
+    //#endif
     private OptionalInt openMenu(Player instance, MenuProvider menu, Operation<OptionalInt> original, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos blockPos, @Local PlayerEnderChestContainer chestContainer) {
         BlockEntity be = level.getBlockEntity(blockPos);
         //#if MC < 12005

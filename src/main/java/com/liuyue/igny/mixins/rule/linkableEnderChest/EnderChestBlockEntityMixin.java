@@ -27,6 +27,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#if MC >= 12109
+//$$ import net.minecraft.world.entity.ContainerUser;
+//#endif
 
 @Mixin(EnderChestBlockEntity.class)
 public class EnderChestBlockEntityMixin extends BlockEntity implements Container, LinkedEnderChest {
@@ -64,14 +67,22 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
 
     @SuppressWarnings("all")
     @Inject(method = "startOpen", at = @At("HEAD"), cancellable = true)
-    private void forceStartOpen(Player player, CallbackInfo ci) {
+    //#if MC >= 12109
+    //$$ private void forceStartOpen(ContainerUser player, CallbackInfo ci)
+    //#else
+    private void forceStartOpen(Player player, CallbackInfo ci)
+    //#endif
+    {
+        //#if MC >= 12109
+        //$$ if (!(player instanceof Player)) return;
+        //#endif
         //#if MC >= 12005
         if (IGNYSettings.linkableEnderChest && this.components().has(DataComponents.CUSTOM_NAME))
         //#else
         //$$ if (IGNYSettings.linkableEnderChest && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         //#endif
         {
-            if (!this.remove && !player.isSpectator()) {
+            if (!this.remove && !((Player) player).isSpectator()) {
                 this.level.blockEvent(this.worldPosition, Blocks.ENDER_CHEST, 1, 1);
                 this.level.playSound(null, worldPosition, SoundEvents.ENDER_CHEST_OPEN, SoundSource.BLOCKS, 0.5F, level.getRandom().nextFloat() * 0.1F + 0.9F);
             }
@@ -81,14 +92,22 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
 
     @SuppressWarnings("all")
     @Inject(method = "stopOpen", at = @At("HEAD"), cancellable = true)
-    private void forceStopOpen(Player player, CallbackInfo ci) {
+    //#if MC >= 12109
+    //$$ private void forceStopOpen(ContainerUser player, CallbackInfo ci)
+    //#else
+    private void forceStopOpen(Player player, CallbackInfo ci)
+    //#endif
+    {
+        //#if MC >= 12109
+        //$$ if (!(player instanceof Player)) return;
+        //#endif
         //#if MC >= 12005
         if (IGNYSettings.linkableEnderChest && this.components().has(DataComponents.CUSTOM_NAME))
         //#else
         //$$ if (IGNYSettings.linkableEnderChest && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         //#endif
         {
-            if (!this.remove && !player.isSpectator()) {
+            if (!this.remove && !((Player) player).isSpectator()) {
                 this.level.blockEvent(this.worldPosition, Blocks.ENDER_CHEST, 1, 0);
                 this.level.playSound(null, worldPosition, SoundEvents.ENDER_CHEST_CLOSE, SoundSource.BLOCKS, 0.5F, level.getRandom().nextFloat() * 0.1F + 0.9F);
             }
