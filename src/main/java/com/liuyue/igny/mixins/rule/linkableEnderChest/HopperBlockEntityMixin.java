@@ -20,7 +20,9 @@ import java.util.List;
 @Mixin(value = HopperBlockEntity.class, priority = 1001)
 public class HopperBlockEntityMixin {
     @ModifyVariable(method = "suckInItems", at = @At(value = "STORE"))
-    private static Container getSourceContainer(Container value, @Local BlockState blockState, @Local BlockPos blockPos, @Local(argsOnly = true) Level level, @Local(argsOnly = true) Hopper hopper) {
+    private static Container getSourceContainer(Container value, @Local(argsOnly = true) Level level, @Local(argsOnly = true) Hopper hopper) {
+        BlockPos blockPos = BlockPos.containing(hopper.getLevelX(), hopper.getLevelY() + 1.0, hopper.getLevelZ());
+        BlockState blockState = level.getBlockState(blockPos);
         if (blockState.is(Blocks.ENDER_CHEST)) {
             if (!IGNYSettings.linkableEnderChest) {
                 return null;
