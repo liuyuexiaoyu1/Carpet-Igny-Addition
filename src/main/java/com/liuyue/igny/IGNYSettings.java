@@ -99,26 +99,26 @@ public class IGNYSettings {
 
     //#if MC < 12109
     @Rule(
-            categories = {IGNY,FEATURE}
+            categories = {IGNY, FEATURE}
     )
     public static boolean tntMinecartEmptyDamageSourceFix = false;
     //#endif
 
     //#if MC < 12111
     @Rule(
-            categories = {IGNY,FEATURE,BUGFIX}
+            categories = {IGNY, FEATURE, BUGFIX}
     )
     public static boolean fakePlayerBoatYawFix = false;
     //#endif
 
     @Rule(
-            categories = {IGNY,FEATURE},
+            categories = {IGNY, FEATURE},
             options = {"false", "canBoatTrade", "true"}
     )
     public static String killFakePlayerRemoveVehicle = "true";
 
     @Rule(
-            categories = {IGNY,FEATURE}
+            categories = {IGNY, FEATURE}
     )
     public static boolean candlePlaceOnIncompleteBlock = false;
 
@@ -305,7 +305,7 @@ public class IGNYSettings {
     public static String optimizedEntityList = "#none";
 
     @Rule(
-            categories = {IGNY,OPTIMIZATION,FEATURE}
+            categories = {IGNY, OPTIMIZATION, FEATURE}
     )
     public static int optimizedEntityLimit = 100;
 
@@ -616,7 +616,8 @@ public class IGNYSettings {
     public static boolean renewablePowderSnow = false;
 
     @Rule(
-            categories = {IGNY, SURVIVAL, FEATURE}
+            categories = {IGNY, SURVIVAL, FEATURE},
+            options = {"false", "onlyLink", "true"}
     )
-    public static boolean linkableEnderChest = false;
+    public static String linkableEnderChest = "false";
 }

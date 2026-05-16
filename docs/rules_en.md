@@ -964,11 +964,13 @@ Pointed Dripstone (Stalactites) can drip Powder Snow similar to water or lava, w
 
 ## linkableEnderChest `🐛Beta`
 
-Ender chests with the same custom name share a common inventory (channel), regardless of which player opens them.  
-Allows interaction with blocks such as comparators and hoppers.  
-Ender chests without a custom name retain vanilla behavior, showing the player's personal ender chest inventory/
+Controls whether custom-named ender chests with the same name share a common inventory (channel).  
+`false`: Keep vanilla behavior.  
+`onlyLink`: Named ender chests with the same custom name share inventory, regardless of which player opens them.  
+`true`: Includes `onlyLink` behavior and allows interaction with blocks such as comparators and hoppers.  
+Ender chests without a custom name retain vanilla behavior, showing the player's personal ender chest inventory.
 
-- Type: `boolean`
+- Type: `string`
 - Default value: `false`
-- Suggested options: `false`, `true`
+- Suggested options: `false`, `onlyLink`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
