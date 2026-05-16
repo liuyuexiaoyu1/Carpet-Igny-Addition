@@ -61,6 +61,7 @@ public class LinkedContainer extends PlayerEnderChestContainer {
                 chest.stopOpen(player);
                 ((ViewingChest) player).igny$setContextChest(null);
             }
+            ((ViewingChest) player).igny$setLinkedKey(null);
         }
     }
 

@@ -1,7 +1,6 @@
 package com.liuyue.igny;
 
 import com.liuyue.igny.network.packet.PacketRegistry;
-import com.liuyue.igny.rule.RuleObserver;
 import com.liuyue.igny.utils.deobfuscator.StackTraceDeobfuscator;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -37,8 +36,10 @@ public class IGNYServerMod implements ModInitializer {
         version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
         //#if MC >= 12005
         PacketRegistry.s2c();
+        PacketRegistry.c2s();
         //#endif
         IGNYServer.init();
+        IGNYServerRegister.register();
     }
 
     public static String getModId() {

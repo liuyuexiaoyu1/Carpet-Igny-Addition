@@ -192,6 +192,7 @@
     "easterEgg.TitleScreenMixin",
     "rule.happyGhastNoClip.LevelRendererMixin",
     "rule.killFakePlayerRemoveVehicle.IntegratedServerMixin",
+    "rule.linkableEnderChest.compat.quickshulker.AbstractContainerScreenMixin",
     "rule.playerLowHungryValueCanSprint.LocalPlayerMixin"
   ],
   "injectors": {
