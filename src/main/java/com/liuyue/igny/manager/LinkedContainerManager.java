@@ -45,12 +45,12 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
                 //$$                      provider,
                 //$$                      nbt
                 //$$              );
-                //$$              input.list("Items", net.minecraft.world.item.ItemStack.CODEC).ifPresent(typedList -> {
+                //$$              input.read("Items", net.minecraft.world.item.component.ItemContainerContents.CODEC).ifPresent(contents -> {
                 //$$                  container.clearContent();
-                //$$                  java.util.List<net.minecraft.world.item.ItemStack> stacks = typedList.stream().toList();
-                //$$                  for (int i = 0; i < Math.min(stacks.size(), container.getContainerSize()); i++) {
-                //$$                      container.setItem(i, stacks.get(i));
-                //$$                  }
+                //$$                  contents.copyInto(container.getItems());
+                //$$                  // for (int i = 0; i < container.getContainerSize(); i++) {
+                //$$                  //     container.setItem(i, contents.getStack(i));
+                //$$                  // }
                 //$$              });
                 //#else
                 //#if MC >= 12105
@@ -82,14 +82,16 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
         containers.forEach((key, container) -> {
             CompoundTag nbt = new CompoundTag();
             //#if MC >= 12105
-            //$$ net.minecraft.nbt.NbtOps ops = net.minecraft.nbt.NbtOps.INSTANCE;
-            //$$          java.util.List<net.minecraft.world.item.ItemStack> list = new java.util.ArrayList<>();
-            //$$          for (int i = 0; i < container.getContainerSize(); i++) {
-            //$$              list.add(container.getItem(i));
-            //$$          }
-            //$$          net.minecraft.world.item.ItemStack.CODEC.listOf().encodeStart(ops, list)
-            //$$                  .resultOrPartial(err -> IGNYServer.LOGGER.error("Encoding error: {}", err))
-            //$$                  .ifPresent(tag -> nbt.put("Items", tag));
+            //$$ com.mojang.serialization.DynamicOps<net.minecraft.nbt.Tag> ops = net.minecraft.resources.RegistryOps.create(net.minecraft.nbt.NbtOps.INSTANCE, provider);
+            //$$ java.util.List<net.minecraft.world.item.ItemStack> list = new java.util.ArrayList<>();
+            //$$ for (int i = 0; i < container.getContainerSize(); i++) {
+            //$$     list.add(container.getItem(i));
+            //$$ }
+            //$$ net.minecraft.world.item.component.ItemContainerContents contents = net.minecraft.world.item.component.ItemContainerContents.fromItems(list);
+            //$$
+            //$$ net.minecraft.world.item.component.ItemContainerContents.CODEC.encodeStart(ops, contents)
+            //$$         .resultOrPartial(err -> IGNYServer.LOGGER.error("Encoding error: {}", err))
+            //$$         .ifPresent(tag -> nbt.put("Items", tag));
             //#else
             //#if MC >= 12005
             nbt.put("Items", container.createTag(provider));

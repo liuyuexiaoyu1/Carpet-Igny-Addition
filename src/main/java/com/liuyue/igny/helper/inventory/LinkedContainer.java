@@ -78,6 +78,9 @@ public class LinkedContainer extends PlayerEnderChestContainer {
     }
 
     @Override
+    public void clearContent() {}
+
+    @Override
     public void setChanged() {
         super.setChanged();
         for (EnderChestBlockEntity chest : activeChests) {
