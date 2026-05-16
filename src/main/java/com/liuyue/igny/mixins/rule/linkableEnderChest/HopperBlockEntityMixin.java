@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.linkableEnderChest;
 
-import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.utils.interfaces.linkableEnderChest.LinkedEnderChest;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
@@ -24,7 +24,7 @@ public class HopperBlockEntityMixin {
         BlockPos blockPos = BlockPos.containing(hopper.getLevelX(), hopper.getLevelY() + 1.0, hopper.getLevelZ());
         BlockState blockState = level.getBlockState(blockPos);
         if (blockState.is(Blocks.ENDER_CHEST)) {
-            if (!IGNYSettings.linkableEnderChest) {
+            if (!LinkedContainerManager.isGreat()) {
                 return null;
             }
             if (level.getBlockEntity(blockPos) instanceof LinkedEnderChest enderChest) {

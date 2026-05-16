@@ -1,6 +1,7 @@
 package com.liuyue.igny.manager;
 
 import com.google.gson.reflect.TypeToken;
+import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.helper.inventory.LinkedContainer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -108,4 +109,23 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
 
     @Override protected StorageScope getScope() { return StorageScope.WORLD; }
     @Override protected SideRestraint getSideRestraint() { return SideRestraint.COMMON; }
+
+    private static LinkedContainerSetting getSetting() {
+        String value = IGNYSettings.linkableEnderChest;
+        if ("true".equalsIgnoreCase(value)) return LinkedContainerSetting.TRUE;
+        if ("onlyLink".equalsIgnoreCase(value)) return LinkedContainerSetting.ONLY_LINK;
+        return LinkedContainerSetting.FALSE;
+    }
+
+    public static boolean isEnabled() {
+        return getSetting() != LinkedContainerSetting.FALSE;
+    }
+
+    public static boolean isGreat() {
+        return getSetting() == LinkedContainerSetting.TRUE;
+    }
+
+    public enum LinkedContainerSetting {
+        FALSE, ONLY_LINK, TRUE
+    }
 }

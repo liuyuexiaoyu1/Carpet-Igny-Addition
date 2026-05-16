@@ -1,6 +1,5 @@
 package com.liuyue.igny.mixins.rule.linkableEnderChest;
 
-import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.helper.inventory.LinkedContainer;
 import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.utils.interfaces.linkableEnderChest.LinkedEnderChest;
@@ -39,6 +38,7 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
 
     @Override
     public Container carpet_Igny_Addition$getContainer() {
+        if (!LinkedContainerManager.isGreat()) return null;
         EnderChestBlockEntity self = (EnderChestBlockEntity)(Object)this;
         //#if MC >= 12005
         Component component = self.components().get(DataComponents.CUSTOM_NAME);
@@ -56,7 +56,7 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
 
     @Override
     public boolean carpet_Igny_Addition$isLinked() {
-        if (!IGNYSettings.linkableEnderChest) return false;
+        if (!LinkedContainerManager.isEnabled()) return false;
         EnderChestBlockEntity self = (EnderChestBlockEntity)(Object)this;
         //#if MC >= 12005
         return self.components().has(DataComponents.CUSTOM_NAME);
@@ -77,9 +77,9 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
         //$$ if (!(player instanceof Player)) return;
         //#endif
         //#if MC >= 12005
-        if (IGNYSettings.linkableEnderChest && this.components().has(DataComponents.CUSTOM_NAME))
+        if (LinkedContainerManager.isEnabled() && this.components().has(DataComponents.CUSTOM_NAME))
         //#else
-        //$$ if (IGNYSettings.linkableEnderChest && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
+        //$$ if (LinkedContainerManager.isEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         //#endif
         {
             if (!this.remove && !((Player) player).isSpectator()) {
@@ -102,9 +102,9 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
         //$$ if (!(player instanceof Player)) return;
         //#endif
         //#if MC >= 12005
-        if (IGNYSettings.linkableEnderChest && this.components().has(DataComponents.CUSTOM_NAME))
+        if (LinkedContainerManager.isEnabled() && this.components().has(DataComponents.CUSTOM_NAME))
         //#else
-        //$$ if (IGNYSettings.linkableEnderChest && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
+        //$$ if (LinkedContainerManager.isEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         //#endif
         {
             if (!this.remove && !((Player) player).isSpectator()) {
@@ -119,9 +119,9 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     @Unique
     private Container igny$getVirtualContainer() {
         //#if MC >= 12005
-        if (IGNYSettings.linkableEnderChest && this.components().has(DataComponents.CUSTOM_NAME))
+        if (LinkedContainerManager.isGreat() && this.components().has(DataComponents.CUSTOM_NAME))
         //#else
-        //$$ if (IGNYSettings.linkableEnderChest && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
+        //$$ if (LinkedContainerManager.isGreat() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         //#endif
         {
             //#if MC >= 12005
@@ -182,9 +182,9 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     @Override
     public boolean stillValid(Player player) {
         //#if MC >= 12005
-        if (IGNYSettings.linkableEnderChest && this.components().has(DataComponents.CUSTOM_NAME))
+        if (LinkedContainerManager.isEnabled() && this.components().has(DataComponents.CUSTOM_NAME))
         //#else
-        //$$ if (IGNYSettings.linkableEnderChest && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
+        //$$ if (LinkedContainerManager.isEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         //#endif
         {
             return Container.stillValidBlockEntity(this, player);

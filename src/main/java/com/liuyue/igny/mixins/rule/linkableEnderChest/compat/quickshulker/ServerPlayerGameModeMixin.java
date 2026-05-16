@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.linkableEnderChest.compat.quickshulker;
 
-import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.utils.interfaces.linkableEnderChest.ViewingChest;
 //#if MC >= 12005
 import net.minecraft.core.component.DataComponents;
@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public class ServerPlayerGameModeMixin {
     @WrapMethod(method = "useItem")
     private InteractionResult useItem(ServerPlayer player, Level level, ItemStack stack, InteractionHand hand, Operation<InteractionResult> original) {
-        if (IGNYSettings.linkableEnderChest) {
+        if (LinkedContainerManager.isEnabled()) {
             //#if MC >= 12005
             if (stack.is(Items.ENDER_CHEST) && stack.has(DataComponents.CUSTOM_NAME))
             //#else

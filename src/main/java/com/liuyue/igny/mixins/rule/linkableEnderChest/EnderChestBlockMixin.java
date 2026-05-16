@@ -1,6 +1,5 @@
 package com.liuyue.igny.mixins.rule.linkableEnderChest;
 
-import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.helper.inventory.LinkedContainer;
 import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.utils.interfaces.linkableEnderChest.ViewingChest;
@@ -62,7 +61,7 @@ public class EnderChestBlockMixin extends Block {
         String name = be.components().get(DataComponents.CUSTOM_NAME).getString();
         //#endif
         LinkedContainer container = LinkedContainerManager.get(name);
-        if (IGNYSettings.linkableEnderChest) {
+        if (LinkedContainerManager.isEnabled()) {
             return original.call(instance, new SimpleMenuProvider((i, inventory, playerx) ->
                     ChestMenu.threeRows(i, inventory, container), Component.literal(name))
             );
@@ -87,7 +86,7 @@ public class EnderChestBlockMixin extends Block {
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos)
     //#endif
     {
-        if (!IGNYSettings.linkableEnderChest) return 0;
+        if (!LinkedContainerManager.isGreat()) return 0;
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof Container container) {
             return AbstractContainerMenu.getRedstoneSignalFromContainer(container);

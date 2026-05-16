@@ -1,6 +1,5 @@
 package com.liuyue.igny.mixins.rule.linkableEnderChest;
 
-import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.utils.interfaces.linkableEnderChest.ViewingChest;
 import net.minecraft.world.entity.player.Player;
@@ -24,7 +23,7 @@ public class PlayerMixin implements ViewingChest {
 
     @Inject(method = "getEnderChestInventory", at = @At("HEAD"), cancellable = true)
     private void getEnderChestInventory(CallbackInfoReturnable<PlayerEnderChestContainer> cir) {
-        if (IGNYSettings.linkableEnderChest && this.igny$linkedKey != null) {
+        if (LinkedContainerManager.isEnabled() && this.igny$linkedKey != null) {
             cir.setReturnValue(LinkedContainerManager.get(this.igny$linkedKey));
         }
     }

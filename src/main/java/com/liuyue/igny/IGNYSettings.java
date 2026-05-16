@@ -616,7 +616,8 @@ public class IGNYSettings {
     public static boolean renewablePowderSnow = false;
 
     @Rule(
-            categories = {IGNY, SURVIVAL, FEATURE}
+            categories = {IGNY, SURVIVAL, FEATURE},
+            options = {"false", "onlyLink", "true"}
     )
-    public static boolean linkableEnderChest = false;
+    public static String linkableEnderChest = "false";
 }
