@@ -27,7 +27,12 @@ public abstract class BuddingAmethystBlockMixin implements BonemealableBlock {
     protected abstract void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random);
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+    //#if MC >= 12002
+    //$$ public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient)
+    //#else
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state)
+    //#endif
+    {
         if (!IGNYSettings.bonemealableAmethyst) {
             return false;
         }
