@@ -28,7 +28,7 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
     @Override protected Type getDataType() { return new TypeToken<Map<String, Integer>>(){}.getType(); }
     @Override public Map<String, Integer> getDefaultData() { return new HashMap<>(); }
     @Override protected StorageScope getScope() {return StorageScope.WORLD;}
-    @Override protected SideRestraint getSideRestraint() {return SideRestraint.COMMON;}
+    @Override protected SideRestraint getSideRestraint() {return SideRestraint.SERVER;}
 
     @Override
     protected void applyData(Map<String, Integer> data) {

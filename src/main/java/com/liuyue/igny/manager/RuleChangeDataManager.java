@@ -10,7 +10,7 @@ public class RuleChangeDataManager extends BaseDataManager<Map<String, List<Rule
     private final Map<String, List<RuleChangeRecord>> inMemoryCache = new HashMap<>();
     private static final int MAX_HISTORY = 3;
     @Override protected StorageScope getScope() {return StorageScope.WORLD;}
-    @Override protected SideRestraint getSideRestraint() {return SideRestraint.COMMON;}
+    @Override protected SideRestraint getSideRestraint() {return SideRestraint.SERVER;}
 
     @Override protected String getFileName() { return "rule_changes.json"; }
     @Override protected Type getDataType() { return new TypeToken<Map<String, List<RuleChangeRecord>>>(){}.getType(); }

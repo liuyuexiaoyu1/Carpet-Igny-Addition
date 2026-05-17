@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public class ServerPlayerGameModeMixin {
     @WrapMethod(method = "useItem")
     private InteractionResult useItem(ServerPlayer player, Level level, ItemStack stack, InteractionHand hand, Operation<InteractionResult> original) {
-        if (LinkedContainerManager.isEnabled()) {
+        if (LinkedContainerManager.isRuleEnabled()) {
             //#if MC >= 12005
             if (stack.is(Items.ENDER_CHEST) && stack.has(DataComponents.CUSTOM_NAME))
             //#else

@@ -21,9 +21,9 @@ public class IGNYServerRegister {
                 SyncLinkedEnderChestPayload.TYPE,
                 //#endif
                 //#if MC < 12005
-                //$$ (server, player, impl, buf, sender) -> server.execute(() -> {
+                //$$ (server, player, impl, buf, sender) -> {
                 //#else
-                (payload, context) -> context.server().execute(() -> {
+                (payload, context) -> {
                     //#endif
                     //#if MC < 12005
                     //$$ String chestName = buf.readUtf();
@@ -31,12 +31,18 @@ public class IGNYServerRegister {
                     String chestName = payload.key();
                     Player player = context.player();
                     //#endif
-                    if (chestName == null || chestName.isEmpty()) {
-                        ((ViewingChest) player).igny$setLinkedKey(null);
-                    } else {
-                        ((ViewingChest) player).igny$setLinkedKey(chestName);
-                    }
-                })
+                    //#if MC < 12005
+                    //$$ server.execute(() -> {
+                    //#else
+                    context.server().execute(() -> {
+                        //#endif
+                        if (chestName == null || chestName.isEmpty()) {
+                            ((ViewingChest) player).igny$setLinkedKey(null);
+                        } else {
+                            ((ViewingChest) player).igny$setLinkedKey(chestName);
+                        }
+                    });
+                }
         );
     }
 }

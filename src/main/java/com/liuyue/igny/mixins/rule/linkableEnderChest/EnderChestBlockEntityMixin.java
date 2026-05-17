@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 //#else
 //$$ import net.minecraft.nbt.Tag;
+//$$ import net.minecraft.nbt.CompoundTag;
 //#endif
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -38,7 +39,7 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
 
     @Override
     public Container carpet_Igny_Addition$getContainer() {
-        if (!LinkedContainerManager.isGreat()) return null;
+        if (!LinkedContainerManager.isRuleFully()) return null;
         EnderChestBlockEntity self = (EnderChestBlockEntity)(Object)this;
         //#if MC >= 12005
         Component component = self.components().get(DataComponents.CUSTOM_NAME);
@@ -56,7 +57,7 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
 
     @Override
     public boolean carpet_Igny_Addition$isLinked() {
-        if (!LinkedContainerManager.isEnabled()) return false;
+        if (!LinkedContainerManager.isRuleEnabled()) return false;
         EnderChestBlockEntity self = (EnderChestBlockEntity)(Object)this;
         //#if MC >= 12005
         return self.components().has(DataComponents.CUSTOM_NAME);
@@ -77,9 +78,9 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
         //$$ if (!(player instanceof Player)) return;
         //#endif
         //#if MC >= 12005
-        if (LinkedContainerManager.isEnabled() && this.components().has(DataComponents.CUSTOM_NAME))
+        if (LinkedContainerManager.isRuleEnabled() && this.components().has(DataComponents.CUSTOM_NAME))
         //#else
-        //$$ if (LinkedContainerManager.isEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
+        //$$ if (LinkedContainerManager.isRuleEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         //#endif
         {
             if (!this.remove && !((Player) player).isSpectator()) {
@@ -102,9 +103,9 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
         //$$ if (!(player instanceof Player)) return;
         //#endif
         //#if MC >= 12005
-        if (LinkedContainerManager.isEnabled() && this.components().has(DataComponents.CUSTOM_NAME))
+        if (LinkedContainerManager.isRuleEnabled() && this.components().has(DataComponents.CUSTOM_NAME))
         //#else
-        //$$ if (LinkedContainerManager.isEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
+        //$$ if (LinkedContainerManager.isRuleEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         //#endif
         {
             if (!this.remove && !((Player) player).isSpectator()) {
@@ -119,9 +120,9 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     @Unique
     private Container igny$getVirtualContainer() {
         //#if MC >= 12005
-        if (LinkedContainerManager.isGreat() && this.components().has(DataComponents.CUSTOM_NAME))
+        if (LinkedContainerManager.isRuleFully() && this.components().has(DataComponents.CUSTOM_NAME))
         //#else
-        //$$ if (LinkedContainerManager.isGreat() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
+        //$$ if (LinkedContainerManager.isRuleFully() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         //#endif
         {
             //#if MC >= 12005
@@ -182,9 +183,9 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     @Override
     public boolean stillValid(Player player) {
         //#if MC >= 12005
-        if (LinkedContainerManager.isEnabled() && this.components().has(DataComponents.CUSTOM_NAME))
+        if (LinkedContainerManager.isRuleEnabled() && this.components().has(DataComponents.CUSTOM_NAME))
         //#else
-        //$$ if (LinkedContainerManager.isEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
+        //$$ if (LinkedContainerManager.isRuleEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         //#endif
         {
             return Container.stillValidBlockEntity(this, player);
@@ -252,4 +253,23 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
             linked.removeActiveChest((EnderChestBlockEntity)(Object)this);
         }
     }
+    
+    //#if MC <= 11904
+    //$$  @Unique private Component customName;
+    //$$  
+    //$$  @Override
+    //$$  public void load(CompoundTag tag) {
+    //$$      super.load(tag);
+    //$$      if (tag.contains("CustomName")) {
+    //$$          this.customName = Component.Serializer.fromJson(tag.getString("CustomName"));
+    //$$      }
+    //$$  }
+    //$$  @Override
+    //$$  public void saveAdditional(CompoundTag tag) {
+    //$$      super.saveAdditional(tag);
+    //$$      if (this.customName != null) {
+    //$$          tag.putString("CustomName", Component.Serializer.toJson(this.customName));
+    //$$      }
+    //$$  }
+    //#endif
 }

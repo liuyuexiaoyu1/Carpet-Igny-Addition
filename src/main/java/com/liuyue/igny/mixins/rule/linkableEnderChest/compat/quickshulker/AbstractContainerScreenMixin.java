@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.linkableEnderChest.compat.quickshulker;
 
-import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.network.packet.config.SyncLinkedEnderChestPayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -37,7 +37,7 @@ public class AbstractContainerScreenMixin {
     private void keyPressed(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir)
     //#endif
     {
-        if (!IGNYSettings.linkableEnderChest) return;
+        if (!LinkedContainerManager.isRuleEnabled()) return;
         //#if MC < 12005
         //$$ if (!ClientPlayNetworking.canSend(IGNYServer.SYNC_LINKED_ENDER_CHEST_PACKET_ID)) return;
         //#else
@@ -63,17 +63,14 @@ public class AbstractContainerScreenMixin {
         }
     }
 
-    @Inject(
-            method = "mouseClicked",
-            at = @At(value = "HEAD")
-    )
+    @Inject(method = "mouseClicked", at = @At(value = "HEAD"))
     //#if MC >= 12109
     //$$ private void onBeforeMouseClicked(MouseButtonEvent event, boolean isDoubleClick, CallbackInfoReturnable<Boolean> cir)
     //#else
     private void onBeforeMouseClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir)
     //#endif
     {
-        if (!IGNYSettings.linkableEnderChest) return;
+        if (!LinkedContainerManager.isRuleEnabled()) return;
         //#if MC < 12005
         //$$ if (!ClientPlayNetworking.canSend(IGNYServer.SYNC_LINKED_ENDER_CHEST_PACKET_ID)) return;
         //#else

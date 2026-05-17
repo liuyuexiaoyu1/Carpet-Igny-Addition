@@ -23,7 +23,7 @@ public class PlayerMixin implements ViewingChest {
 
     @Inject(method = "getEnderChestInventory", at = @At("HEAD"), cancellable = true)
     private void getEnderChestInventory(CallbackInfoReturnable<PlayerEnderChestContainer> cir) {
-        if (LinkedContainerManager.isEnabled() && this.igny$linkedKey != null) {
+        if (LinkedContainerManager.isRuleEnabled() && this.igny$linkedKey != null) {
             cir.setReturnValue(LinkedContainerManager.get(this.igny$linkedKey));
         }
     }

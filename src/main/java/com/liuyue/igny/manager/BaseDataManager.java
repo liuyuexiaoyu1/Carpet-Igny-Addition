@@ -34,7 +34,7 @@ public abstract class BaseDataManager<T> {
         SideRestraint restraint = getSideRestraint();
 
         if (restraint == SideRestraint.CLIENT) return currentEnv == EnvType.CLIENT;
-        if (restraint == SideRestraint.SERVER) return currentEnv == EnvType.SERVER;
+        if (restraint == SideRestraint.SERVER) return true;
         return true;
     }
 
@@ -104,7 +104,6 @@ public abstract class BaseDataManager<T> {
     }
 
     protected enum SideRestraint {
-        COMMON,
         CLIENT,
         SERVER
     }

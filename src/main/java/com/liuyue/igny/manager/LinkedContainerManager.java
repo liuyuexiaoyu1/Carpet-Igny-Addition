@@ -110,21 +110,14 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
     }
 
     @Override protected StorageScope getScope() { return StorageScope.WORLD; }
-    @Override protected SideRestraint getSideRestraint() { return SideRestraint.COMMON; }
+    @Override protected SideRestraint getSideRestraint() { return SideRestraint.SERVER; }
 
-    private static LinkedContainerSetting getSetting() {
-        String value = IGNYSettings.linkableEnderChest;
-        if ("true".equalsIgnoreCase(value)) return LinkedContainerSetting.TRUE;
-        if ("onlyLink".equalsIgnoreCase(value)) return LinkedContainerSetting.ONLY_LINK;
-        return LinkedContainerSetting.FALSE;
+    public static boolean isRuleEnabled() {
+        return IGNYSettings.linkableEnderChest.equals(LinkedContainerSetting.FALSE);
     }
 
-    public static boolean isEnabled() {
-        return getSetting() != LinkedContainerSetting.FALSE;
-    }
-
-    public static boolean isGreat() {
-        return getSetting() == LinkedContainerSetting.TRUE;
+    public static boolean isRuleFully() {
+        return IGNYSettings.linkableEnderChest.equals(LinkedContainerSetting.TRUE);
     }
 
     public enum LinkedContainerSetting {

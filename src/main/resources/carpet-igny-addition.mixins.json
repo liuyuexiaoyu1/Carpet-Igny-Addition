@@ -100,6 +100,7 @@
     "rule.killFakePlayerRemoveVehicle.ServerPlayerMixin",
     "rule.lightningBoltNoFire.EntityMixin",
     "rule.lightningBoltNoFire.LightningBoltMixin",
+    "rule.linkableEnderChest.BlockItemMixin",
     "rule.linkableEnderChest.EnderChestBlockEntityMixin",
     "rule.linkableEnderChest.EnderChestBlockMixin",
     "rule.linkableEnderChest.HopperBlockEntityMixin",

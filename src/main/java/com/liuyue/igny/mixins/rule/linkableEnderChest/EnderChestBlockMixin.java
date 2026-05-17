@@ -61,7 +61,7 @@ public class EnderChestBlockMixin extends Block {
         String name = be.components().get(DataComponents.CUSTOM_NAME).getString();
         //#endif
         LinkedContainer container = LinkedContainerManager.get(name);
-        if (LinkedContainerManager.isEnabled()) {
+        if (LinkedContainerManager.isRuleEnabled()) {
             return original.call(instance, new SimpleMenuProvider((i, inventory, playerx) ->
                     ChestMenu.threeRows(i, inventory, container), Component.literal(name))
             );
@@ -86,7 +86,7 @@ public class EnderChestBlockMixin extends Block {
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos)
     //#endif
     {
-        if (!LinkedContainerManager.isGreat()) return 0;
+        if (!LinkedContainerManager.isRuleFully()) return 0;
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof Container container) {
             return AbstractContainerMenu.getRedstoneSignalFromContainer(container);

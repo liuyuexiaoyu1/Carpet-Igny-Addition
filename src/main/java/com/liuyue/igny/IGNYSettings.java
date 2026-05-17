@@ -1,6 +1,7 @@
 package com.liuyue.igny;
 
 import carpet.api.settings.Rule;
+import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.rule.annotation.ObservedRule;
 import com.liuyue.igny.rule.callback.*;
 import com.liuyue.igny.rule.validators.*;
@@ -616,8 +617,7 @@ public class IGNYSettings {
     public static boolean renewablePowderSnow = false;
 
     @Rule(
-            categories = {IGNY, SURVIVAL, FEATURE},
-            options = {"false", "onlyLink", "true"}
+            categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static String linkableEnderChest = "false";
+    public static LinkedContainerManager.LinkedContainerSetting linkableEnderChest = LinkedContainerManager.LinkedContainerSetting.FALSE;
 }

@@ -13,7 +13,7 @@ public class CustomPickupDataManager extends BaseDataManager<Map<String, CustomP
     @Override protected Type getDataType() { return new TypeToken<Map<String, PlayerSetting>>(){}.getType(); }
     @Override public Map<String, PlayerSetting> getDefaultData() { return new HashMap<>(); }
     @Override protected StorageScope getScope() {return StorageScope.WORLD;}
-    @Override protected SideRestraint getSideRestraint() {return SideRestraint.COMMON;}
+    @Override protected SideRestraint getSideRestraint() {return SideRestraint.SERVER;}
 
     @Override protected void applyData(Map<String, PlayerSetting> data) {
         settings.clear();

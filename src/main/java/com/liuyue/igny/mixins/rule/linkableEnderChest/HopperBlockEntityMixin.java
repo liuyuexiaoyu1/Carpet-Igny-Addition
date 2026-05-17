@@ -24,7 +24,7 @@ public class HopperBlockEntityMixin {
         BlockPos blockPos = BlockPos.containing(hopper.getLevelX(), hopper.getLevelY() + 1.0, hopper.getLevelZ());
         BlockState blockState = level.getBlockState(blockPos);
         if (blockState.is(Blocks.ENDER_CHEST)) {
-            if (!LinkedContainerManager.isGreat()) {
+            if (!LinkedContainerManager.isRuleFully()) {
                 return null;
             }
             if (level.getBlockEntity(blockPos) instanceof LinkedEnderChest enderChest) {
