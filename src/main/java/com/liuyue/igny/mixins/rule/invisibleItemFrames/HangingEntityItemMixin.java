@@ -1,7 +1,9 @@
 package com.liuyue.igny.mixins.rule.invisibleItemFrames;
 
 import com.llamalad7.mixinextras.sugar.Local;
+//#if MC >= 12005
 import net.minecraft.core.component.DataComponents;
+//#endif
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.decoration.HangingEntity;
 import net.minecraft.world.entity.decoration.ItemFrame;
