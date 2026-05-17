@@ -623,7 +623,8 @@ public class IGNYSettings {
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE},
-            options = {"false", "true"}
+            options = {"false", "true"},
+            strict = false
     )
     public static String invisibleItemFrames = "false";
 
