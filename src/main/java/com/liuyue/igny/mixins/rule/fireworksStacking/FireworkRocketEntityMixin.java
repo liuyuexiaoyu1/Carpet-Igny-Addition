@@ -31,7 +31,7 @@ public abstract class FireworkRocketEntityMixin {
                 return;
             }
             int maxStack = IGNYSettings.fireworksStacking;
-            int totalCount = peers.size() + 1;
+            int totalCount = peers.size();
             int effectiveCount = (maxStack <= 0) ? totalCount : Math.min(totalCount, maxStack);
             double dynamicLimit = 1.5 + (effectiveCount - 1) * 1.0;
             double countWeight = 1.0 / totalCount;
