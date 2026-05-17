@@ -953,9 +953,9 @@ Makes Resin Blocks stick to other movable blocks like Slime and Honey Blocks, bu
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## renewablePowderSnow `🐛Beta`
+## convenientRegeneratePowderSnow `🐛Beta`
 
-Pointed Dripstone (Stalactites) can drip Powder Snow similar to water or lava, which can be collected by cauldrons.
+Pointed dripstone (stalactites) can drip powder snow like water or lava, and the snow dripping from pointed dripstone can be collected by cauldrons.
 
 - Type: `boolean`
 - Default value: `false`
@@ -973,4 +973,25 @@ Ender chests without a custom name retain vanilla behavior, showing the player's
 - Type: `string`
 - Default value: `false`
 - Suggested options: `false`, `onlyLink`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## invisibleItemFrames `🐛Beta`
+
+Makes the item inside an item frame invisible when the frame has the specified name.  
+false: Rule is disabled.  
+true: Item frames named 'invisible' can become invisible.  
+Any other string: Item frames named with that string can become invisible
+
+- Type: `string`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## bonemealableAmethyst `🐛Beta`
+
+Using bonemeal on budding amethyst can grow amethyst buds in any direction.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`

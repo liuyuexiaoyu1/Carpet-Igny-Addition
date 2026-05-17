@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.renewablePowderSnow;
+package com.liuyue.igny.mixins.rule.convenientRegeneratePowderSnow;
 
 import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -32,7 +32,7 @@ public class LayeredCauldronBlockMixin {
 
     @ModifyVariable(method = "receiveStalactiteDrip", at = @At(value = "HEAD"), argsOnly = true)
     private BlockState isFull(BlockState value, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos pos) {
-        if (IGNYSettings.renewablePowderSnow && value.is(Blocks.POWDER_SNOW)) {
+        if (IGNYSettings.convenientRegeneratePowderSnow && value.is(Blocks.POWDER_SNOW)) {
             return level.getBlockState(pos);
         }
         return value;
@@ -40,7 +40,7 @@ public class LayeredCauldronBlockMixin {
 
     @Inject(method = "canReceiveStalactiteDrip", at = @At(value = "RETURN"), cancellable = true)
     private void canReceiveStalactiteDrip(Fluid fluid, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.renewablePowderSnow && !cir.getReturnValueZ()) {
+        if (IGNYSettings.convenientRegeneratePowderSnow && !cir.getReturnValueZ()) {
             //#if MC >= 12003
             cir.setReturnValue(fluid == Fluids.WATER && this.precipitationType == Biome.Precipitation.SNOW);
             //#else

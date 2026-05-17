@@ -363,12 +363,19 @@
   "carpet.rule.fireworksStacking.extra.0": "规则值为起作用的烟花数量上限，当等于-1时则无限制",
   "carpet.rule.stickyResinBlock.name": "粘性树脂块",
   "carpet.rule.stickyResinBlock.desc": "使树脂块像黏液块和蜂蜜块一样可粘连其他可推动方块，不与黏液块或蜂蜜块互相粘连",
-  "carpet.rule.renewablePowderSnow.name": "可再生细雪",
-  "carpet.rule.renewablePowderSnow.desc": "滴水石锥(钟乳石)可像滴落水或熔岩一样滴落细雪，可被炼药锅收集",
+  "carpet.rule.convenientRegeneratePowderSnow.name": "便捷地再生细雪",
+  "carpet.rule.convenientRegeneratePowderSnow.desc": "滴水石锥(钟乳石)可像滴落水或熔岩一样滴落细雪，并且滴水石锥(钟乳石)滴落的雪可被炼药锅收集",
   "carpet.rule.linkableEnderChest.name": "可链接的末影箱",
   "carpet.rule.linkableEnderChest.desc": "控制拥有相同自定义名称的末影箱是否共用一个存储空间(频道)",
   "carpet.rule.linkableEnderChest.extra.0": "false: 保持原版行为",
   "carpet.rule.linkableEnderChest.extra.1": "onlyLink: 拥有相同自定义名称的末影箱会共用一个存储空间，不再区分打开它的玩家是谁",
   "carpet.rule.linkableEnderChest.extra.2": "true: 包含onlyLink行为，并允许比较器和漏斗等方块交互",
-  "carpet.rule.linkableEnderChest.extra.3": "不带自定义名称的末影箱保持原版逻辑，玩家打开末影箱可以操作自己的末影箱物品"
+  "carpet.rule.linkableEnderChest.extra.3": "不带自定义名称的末影箱保持原版逻辑，玩家打开末影箱可以操作自己的末影箱物品",
+  "carpet.rule.invisibleItemFrames.name": "隐形物品展示框",
+  "carpet.rule.invisibleItemFrames.desc": "当物品展示框为指定名称时，物品展示框内含物品时将会隐形",
+  "carpet.rule.invisibleItemFrames.extra.0": "false: 规则不生效",
+  "carpet.rule.invisibleItemFrames.extra.1": "true: 物品展示框的名字为'invisible'时可以隐形",
+  "carpet.rule.invisibleItemFrames.extra.2": "规则值为其它字符串时，物品展示框的名字为该字符串时可以隐形",
+  "carpet.rule.bonemealableAmethyst.name": "可催熟的紫水晶",
+  "carpet.rule.bonemealableAmethyst.desc": "使用骨粉交互紫水晶母岩可以使任意方向的紫水晶生长"
 }

@@ -614,10 +614,21 @@ public class IGNYSettings {
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
-    public static boolean renewablePowderSnow = false;
+    public static boolean convenientRegeneratePowderSnow = false;
 
     @Rule(
             categories = {IGNY, SURVIVAL, FEATURE}
     )
     public static LinkedContainerManager.LinkedContainerSetting linkableEnderChest = LinkedContainerManager.LinkedContainerSetting.FALSE;
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE},
+            options = {"false", "true"}
+    )
+    public static String invisibleItemFrames = "false";
+
+    @Rule(
+            categories = {IGNY, SURVIVAL, FEATURE}
+    )
+    public static boolean bonemealableAmethyst = false;
 }

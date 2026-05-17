@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.renewablePowderSnow;
+package com.liuyue.igny.mixins.rule.convenientRegeneratePowderSnow;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -13,6 +13,6 @@ import java.util.Optional;
 public interface PointedDripstoneBlockAccessor {
     @Invoker("findRootBlock")
     static Optional<BlockPos> findRootBlock(Level level, BlockPos pos, BlockState state, int maxIterations) {
-        return null;
+        return Optional.empty();
     }
 }

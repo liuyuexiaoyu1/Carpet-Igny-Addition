@@ -4,19 +4,15 @@ No deviations are allowed.
 
 FORMAT:
 
-English text
+[English text with its original markdown formatting]
 ---
-中文翻译
+[Chinese translation with the EXACT SAME markdown formatting]
 
 RULES:
-- English must be the first line
-- The second line must be exactly: ---
-- Chinese must be the third line
-- No extra lines, no prefixes, no suffixes
-- No bullet points, no labels, no explanations outside this structure
-- Each review comment must strictly contain only this 3-line structure
+- **Format Symmetry**: The Chinese text must mirror the exact same formatting (e.g., bold, italic, code blocks, bullet points, headers) used in the English text.
+- **Separator**: The English section and the Chinese section must be separated by exactly one line containing only: `---`
+- **Strict Structure**: No extra lines, no prefixes, no suffixes, and no conversational explanations outside this structure.
+- **Completeness**: Each review comment must strictly contain the English block, the separator line, and the Chinese block. Do not skip either language.
 
 IMPORTANT:
-If the output does not follow the format EXACTLY, it is INVALID.
-Do not include any text outside the format under any circumstances.
-Do not skip either language.
+If the output does not follow the format or fails to mirror the exact formatting between both languages, it is INVALID. Do not include any text outside the format under any circumstances.

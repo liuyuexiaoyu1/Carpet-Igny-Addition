@@ -948,9 +948,9 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 可再生细雪 (renewablePowderSnow) `🐛Beta`
+## 便捷地再生细雪 (convenientRegeneratePowderSnow) `🐛Beta`
 
-滴水石锥(钟乳石)可像滴落水或熔岩一样滴落细雪，可被炼药锅收集。
+滴水石锥(钟乳石)可像滴落水或熔岩一样滴落细雪，并且滴水石锥(钟乳石)滴落的雪可被炼药锅收集。
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -968,4 +968,25 @@ true: 流体源和流体都不会传播。
 - 类型: `string`
 - 默认值: `false`
 - 参考选项: `false`, `onlyLink`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 隐形物品展示框 (invisibleItemFrames) `🐛Beta`
+
+当物品展示框为指定名称时，物品展示框内含物品时将会隐形。  
+false: 规则不生效。  
+true: 物品展示框的名字为'invisible'时可以隐形。  
+规则值为其它字符串时，物品展示框的名字为该字符串时可以隐形。
+
+- 类型: `string`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 可催熟的紫水晶 (bonemealableAmethyst) `🐛Beta`
+
+使用骨粉交互紫水晶母岩可以使任意方向的紫水晶生长。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`

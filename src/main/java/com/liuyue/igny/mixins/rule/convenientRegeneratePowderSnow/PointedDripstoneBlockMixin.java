@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.renewablePowderSnow;
+package com.liuyue.igny.mixins.rule.convenientRegeneratePowderSnow;
 
 import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -25,7 +25,7 @@ public class PointedDripstoneBlockMixin {
     @WrapOperation(method = "method_33279", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
     private static boolean is(BlockState instance, Block block, Operation<Boolean> original) {
         //#endif
-        if (IGNYSettings.renewablePowderSnow) {
+        if (IGNYSettings.convenientRegeneratePowderSnow) {
             return original.call(instance, block) || instance.is(Blocks.POWDER_SNOW);
         }
         return original.call(instance, block);
@@ -44,7 +44,7 @@ public class PointedDripstoneBlockMixin {
     private static void spawnDripParticle(Level level, BlockPos pos, BlockState state, Fluid fluid, Operation<Void> original, @Local(argsOnly = true) PointedDripstoneBlock.FluidInfo optional)
     //#endif
     {
-        if (IGNYSettings.renewablePowderSnow && optional.sourceState().is(Blocks.POWDER_SNOW)) {
+        if (IGNYSettings.convenientRegeneratePowderSnow && optional.sourceState().is(Blocks.POWDER_SNOW)) {
             //#if MC >= 12111
             //$$ original.call(level, pos, optional.sourceState(), fluid, pos2);
             //#else
@@ -65,7 +65,7 @@ public class PointedDripstoneBlockMixin {
     @WrapOperation(method = "spawnDripParticle(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/material/Fluid;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V"))
     //#endif
     private static void addParticle(Level instance, ParticleOptions particle, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, Operation<Void> original, @Local(argsOnly = true) BlockState blockState) {
-        if (IGNYSettings.renewablePowderSnow && blockState.is(Blocks.POWDER_SNOW)) {
+        if (IGNYSettings.convenientRegeneratePowderSnow && blockState.is(Blocks.POWDER_SNOW)) {
             original.call(instance, ParticleTypes.SNOWFLAKE, x, y, z, xSpeed, ySpeed, zSpeed);
             return;
         }
