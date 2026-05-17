@@ -28,9 +28,9 @@ public abstract class BuddingAmethystBlockMixin implements BonemealableBlock {
 
     @Override
     //#if MC >= 12002
-    //$$ public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient)
-    //#else
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state)
+    //#else
+    //$$ public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient)
     //#endif
     {
         if (!IGNYSettings.bonemealableAmethyst) {
