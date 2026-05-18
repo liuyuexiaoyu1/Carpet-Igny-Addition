@@ -113,7 +113,7 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
     @Override protected SideRestraint getSideRestraint() { return SideRestraint.SERVER; }
 
     public static boolean isRuleEnabled() {
-        return IGNYSettings.linkableEnderChest == LinkedContainerSetting.FALSE;
+        return IGNYSettings.linkableEnderChest != LinkedContainerSetting.FALSE;
     }
 
     public static boolean isRuleFully() {
