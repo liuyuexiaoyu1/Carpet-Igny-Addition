@@ -34,7 +34,7 @@ public class ItemFrameMixin implements ItemFrameRefreshable {
     {
         if (tag.contains("IgnyInvisibleItemFrame")) {
             //#if MC >= 12105
-            //$$ igny$modManagedInvisible = tag.getBoolean("IgnyInvisibleItemFrame").orElse(false);
+            //$$ igny$modManagedInvisible = tag.getBooleanOr("IgnyInvisibleItemFrame", false);
             //#else
             igny$modManagedInvisible = tag.getBoolean("IgnyInvisibleItemFrame");
             //#endif
