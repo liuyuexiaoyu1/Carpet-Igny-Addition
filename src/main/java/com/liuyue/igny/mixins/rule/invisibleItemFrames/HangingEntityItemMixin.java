@@ -1,5 +1,7 @@
 package com.liuyue.igny.mixins.rule.invisibleItemFrames;
 
+import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.utils.interfaces.invisibleItemFrames.ItemFrameRefreshable;
 import com.llamalad7.mixinextras.sugar.Local;
 //#if MC >= 12005
 import net.minecraft.core.component.DataComponents;
@@ -28,6 +30,7 @@ public class HangingEntityItemMixin {
         //#endif
         {
             entity.setCustomName(stack.getHoverName());
+            ((ItemFrameRefreshable) entity).igny$refreshInvisible(IGNYSettings.invisibleItemFrames);
         }
     }
 }

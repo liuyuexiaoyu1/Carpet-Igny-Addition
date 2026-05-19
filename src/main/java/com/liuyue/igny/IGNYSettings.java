@@ -626,6 +626,7 @@ public class IGNYSettings {
             options = {"false", "true"},
             strict = false
     )
+    @ObservedRule(InvisibleItemFramesCallback.class)
     public static String invisibleItemFrames = "false";
 
     @Rule(
