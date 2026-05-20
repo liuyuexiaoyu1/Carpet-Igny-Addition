@@ -106,7 +106,9 @@ dependencies {
 			exclude group: "net.fabricmc.fabric-api"
 		}
 	}
-	if (mcVersion >= 12110) {
+	if (unobfuscated) {
+		include(implementation(name: 'ryansrenderingkit', version: '1.2.0+26.2'))
+	} else if (mcVersion >= 12110) {
 		include(autoImplementation("io.github.hotpad100c:ryansrenderingkit:${project.ryansrenderingkit_version}"))
 	} else {
 		include(autoImplementation("io.github.hotpad100c:ryansrenderingkit:${project.ryansrenderingkit_version}")) {

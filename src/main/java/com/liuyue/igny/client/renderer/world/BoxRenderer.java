@@ -57,7 +57,11 @@ public class BoxRenderer extends BaseTickingShapeRenderer {
     @Override
     protected void updateShape(ResourceLocation id, ShapeData data) {
         Color color = parseColor(data.color);
+        //#if MC >= 26.2
+        //$$ Vec3 center = Vec3.atCenterOf(data.pos);
+        //#else
         Vec3 center = data.pos.getCenter();
+        //#endif
         double p = data.currentSize;
 
         if (!data.smooth){

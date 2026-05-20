@@ -13,6 +13,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+//#if MC >= 26.2
+//$$ import net.minecraft.world.phys.Vec3;
+//#endif
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -48,7 +51,11 @@ public class BaseFireBlockMixin {
                 LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level);
                 //#endif
                 if (lightningBolt != null) {
+                    //#if MC >= 26.2
+                    //$$ lightningBolt.snapTo(Vec3.atCenterOf(pos));
+                    //#else
                     lightningBolt.moveTo(pos.getCenter());
+                    //#endif
                     level.addFreshEntity(lightningBolt);
                 }
                 ci.cancel();

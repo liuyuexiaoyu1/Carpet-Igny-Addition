@@ -43,7 +43,11 @@ public abstract class BaseTickingShapeRenderer {
             this.minX = minX; this.minY = minY; this.minZ = minZ;
             this.maxX = maxX; this.maxY = maxY; this.maxZ = maxZ;
 
+            //#if MC >= 26.2
+            //$$ Vec3 center = Vec3.atCenterOf(pos);
+            //#else
             Vec3 center = pos.getCenter();
+            //#endif
             if (smooth) {
                 this.curMinX = center.x; this.curMinY = center.y; this.curMinZ = center.z;
                 this.curMaxX = center.x; this.curMaxY = center.y; this.curMaxZ = center.z;

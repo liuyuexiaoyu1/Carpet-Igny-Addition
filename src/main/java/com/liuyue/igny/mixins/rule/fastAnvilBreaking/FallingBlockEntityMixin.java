@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,7 +35,11 @@ public class FallingBlockEntityMixin {
             BlockPos endPos = new BlockPos(blockPos.getX(), level.getMaxBuildHeight(), blockPos.getZ());
             List<FallingBlockEntity> fallingEntities = self.level().getEntitiesOfClass(
                     FallingBlockEntity.class,
+                    //#if MC >= 26.2
+                    //$$ new AABB(Vec3.atCenterOf(blockPos), Vec3.atCenterOf(endPos))
+                    //#else
                     new AABB(blockPos.getCenter(), endPos.getCenter())
+                    //#endif
             );
             for (FallingBlockEntity entity : fallingEntities) {
                 if (entity.getBlockState().is(BlockTags.ANVIL)) {
