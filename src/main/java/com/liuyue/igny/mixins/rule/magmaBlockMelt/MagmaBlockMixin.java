@@ -3,7 +3,11 @@ package com.liuyue.igny.mixins.rule.magmaBlockMelt;
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
+//#if MC >= 12101
 import net.minecraft.tags.EnchantmentTags;
+//#else
+//$$ import net.minecraft.world.item.enchantment.Enchantments;
+//#endif
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -26,7 +30,11 @@ public class MagmaBlockMixin extends Block {
     public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
         player.awardStat(Stats.BLOCK_MINED.get(this));
         player.causeFoodExhaustion(0.005F);
-        if (IGNYSettings.MAGMA_BLOCK_MELT.value() && !EnchantmentHelper.hasTag(tool, EnchantmentTags.PREVENTS_ICE_MELTING)) {
+        //#if MC >= 12101
+        if (IGNYSettings.MAGMA_BLOCK_MELT.value() && !EnchantmentHelper.hasTag(tool, EnchantmentTags.PREVENTS_ICE_MELTING))
+        //#else
+        //$$ if (IGNYSettings.MAGMA_BLOCK_MELT.value() && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) == 0)
+        {
             level.setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
             dropResources(Blocks.AIR.defaultBlockState(), level, pos, blockEntity, player, tool);
         } else {
