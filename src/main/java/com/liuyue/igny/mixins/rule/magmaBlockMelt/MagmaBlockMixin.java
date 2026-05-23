@@ -34,6 +34,7 @@ public class MagmaBlockMixin extends Block {
         if (IGNYSettings.MAGMA_BLOCK_MELT.value() && !EnchantmentHelper.hasTag(tool, EnchantmentTags.PREVENTS_ICE_MELTING))
         //#else
         //$$ if (IGNYSettings.MAGMA_BLOCK_MELT.value() && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) == 0)
+        //#endif
         {
             level.setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
             dropResources(Blocks.AIR.defaultBlockState(), level, pos, blockEntity, player, tool);
