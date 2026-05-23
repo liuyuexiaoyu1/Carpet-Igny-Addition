@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class DiodeBlockMixin {
     @Inject(method = "checkTickOnNeighbor", at = @At("HEAD"), cancellable = true)
     private void checkTickOnNeighbor(Level level, BlockPos blockPos, BlockState blockState, CallbackInfo ci) {
-        if (IGNYSettings.structureBlockNoBlockUpdate && IGNYSettings.noUpdatePos.contains(blockPos)) {
+        if (IGNYSettings.STRUCTURE_BLOCK_NO_BLOCK_UPDATE.value() && IGNYSettings.noUpdatePos.contains(blockPos)) {
             ci.cancel();
         }
     }

@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public class InventoryMixin {
     @WrapOperation(method = "dropAll", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;"))
     private ItemEntity drop(Player instance, ItemStack itemStack, boolean a, boolean b, Operation<ItemEntity> original) {
-        if (IGNYSettings.safePlayerDeathDrop) {
+        if (IGNYSettings.SAFE_PLAYER_DEATH_DROP.value()) {
             if (itemStack.isEmpty()) {
                 return null;
             } else if (instance.level().isClientSide()) {

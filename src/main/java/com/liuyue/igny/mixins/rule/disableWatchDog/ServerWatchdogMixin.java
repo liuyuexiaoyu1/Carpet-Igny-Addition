@@ -20,7 +20,7 @@ public class ServerWatchdogMixin {
 
     @WrapOperation(method = "run", at = @At(value = "INVOKE", target = "Lnet/minecraft/Util;getNanos()J"), require = 0)
     private long getNanos(Operation<Long> original) {
-        if (IGNYSettings.disableWatchDog) return this.server.getNextTickTime();
+        if (IGNYSettings.DISABLE_WATCH_DOG.value()) return this.server.getNextTickTime();
         return original.call();
     }
 }

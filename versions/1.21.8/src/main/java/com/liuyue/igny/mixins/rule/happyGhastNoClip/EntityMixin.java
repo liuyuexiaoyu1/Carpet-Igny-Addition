@@ -12,36 +12,36 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin{
+public abstract class EntityMixin {
 
     @Inject(method = "getBoundingBox", at = @At("HEAD"), cancellable = true)
     private void HappyGhastNoBoundingBox(CallbackInfoReturnable<AABB> cir) {
-       Entity self = (Entity) (Object) this;
-       if(self instanceof HappyGhast && self.isVehicle() && IGNYSettings.happyGhastNoClip){
-           cir.setReturnValue(new AABB(0, 0, 0, 0, 0, 0));
-       }
+        Entity self = (Entity) (Object) this;
+        if (self instanceof HappyGhast && self.isVehicle() && IGNYSettings.HAPPY_GHAST_NO_CLIP.value()) {
+            cir.setReturnValue(new AABB(0, 0, 0, 0, 0, 0));
+        }
 
-   }
+    }
 
-   @Inject(method = "tick", at = @At("HEAD"))
-   private void setNoPhysics(CallbackInfo ci) {
-       Entity self = (Entity)(Object)this;
-       if(self instanceof HappyGhast){
-               self.noPhysics = self.isVehicle() && IGNYSettings.happyGhastNoClip;
-       }
-   }
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void setNoPhysics(CallbackInfo ci) {
+        Entity self = (Entity) (Object) this;
+        if (self instanceof HappyGhast) {
+            self.noPhysics = self.isVehicle() && IGNYSettings.HAPPY_GHAST_NO_CLIP.value();
+        }
+    }
 
-   @Inject(method = "isInWall", at = @At("HEAD"), cancellable = true)
-   private void onIsInWall(CallbackInfoReturnable<Boolean> cir) {
-        Entity self = (Entity)(Object)this;
-        if (self instanceof HappyGhast && self.isVehicle() && IGNYSettings.happyGhastNoClip || (self instanceof Player && self.getRootVehicle() instanceof HappyGhast && IGNYSettings.happyGhastNoClip)) {
+    @Inject(method = "isInWall", at = @At("HEAD"), cancellable = true)
+    private void onIsInWall(CallbackInfoReturnable<Boolean> cir) {
+        Entity self = (Entity) (Object) this;
+        if (self instanceof HappyGhast && self.isVehicle() && IGNYSettings.HAPPY_GHAST_NO_CLIP.value() || (self instanceof Player && self.getRootVehicle() instanceof HappyGhast && IGNYSettings.HAPPY_GHAST_NO_CLIP.value())) {
             cir.setReturnValue(false);
         }
-        if (self instanceof HappyGhast && IGNYSettings.happyGhastNoClip) {
-            if(((HappyGhastInvoker)self).invokeScanPlayerAboveGhast()){
+        if (self instanceof HappyGhast && IGNYSettings.HAPPY_GHAST_NO_CLIP.value()) {
+            if (((HappyGhastInvoker) self).invokeScanPlayerAboveGhast()) {
                 cir.setReturnValue(false);
             }
         }
-   }
+    }
 
 }

@@ -18,7 +18,7 @@ public class PlayerListMixin {
     @WrapOperation(method = "broadcastChatMessage(Lnet/minecraft/network/chat/PlayerChatMessage;Ljava/util/function/Predicate;Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/network/chat/ChatType$Bound;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;logChatMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/ChatType$Bound;Ljava/lang/String;)V"))
     private void logChatMessage(MinecraftServer instance, Component content, ChatType.Bound boundChatType, String header, Operation<Void> original) {
         LocalDate date = LocalDate.now();
-        if (IGNYSettings.festiveEasterEgg && date.getMonthValue() == 4 && date.getDayOfMonth() == 1) {
+        if (IGNYSettings.FESTIVE_EASTER_EGG.value() && date.getMonthValue() == 4 && date.getDayOfMonth() == 1) {
             original.call(instance, Component.literal(StringUtil.reverse(content.getString())), boundChatType, header);
             return;
         }

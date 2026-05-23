@@ -32,7 +32,7 @@ public class NetHandlerPlayServerFakeMixin extends ServerGamePacketListenerImpl 
 
     @Inject(method = "send", at = @At(value = "HEAD"))
     private void send(Packet<?> packetIn, CallbackInfo ci) {
-        if (IGNYSettings.fakePlayerMemoryLeakFix) {
+        if (IGNYSettings.FAKE_PLAYER_MEMORY_LEAK_FIX.value()) {
             super.send(packetIn);
         }
     }

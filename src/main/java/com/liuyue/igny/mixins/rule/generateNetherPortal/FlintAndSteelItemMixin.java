@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class FlintAndSteelItemMixin {
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void onUseOn(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
-        if (!IGNYSettings.generateNetherPortal) {
+        if (!IGNYSettings.GENERATE_NETHER_PORTAL.value()) {
             return;
         }
         Level level = context.getLevel();

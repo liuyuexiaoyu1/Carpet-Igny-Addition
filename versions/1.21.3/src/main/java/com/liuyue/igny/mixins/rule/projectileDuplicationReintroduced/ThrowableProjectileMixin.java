@@ -29,7 +29,7 @@ public abstract class ThrowableProjectileMixin extends Projectile {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void OldTick(CallbackInfo ci) {
-        if (IGNYSettings.projectileDuplicationReintroduced) {
+        if (IGNYSettings.PROJECTILE_DUPLICATION_REINTRODUCED.value()) {
             ThrowableProjectile self = (ThrowableProjectile) (Object) this;
             if (!(self instanceof ThrownEnderpearl)) {
                 this.handleFirstTickBubbleColumn();

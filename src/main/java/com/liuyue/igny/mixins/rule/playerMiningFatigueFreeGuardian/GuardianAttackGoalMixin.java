@@ -37,7 +37,7 @@ public class GuardianAttackGoalMixin {
             LivingEntity target, DamageSource originalSource, float amount, Operation<Boolean> original
             //#endif
     ) {
-        if (IGNYSettings.playerMiningFatigueFreeGuardian) {
+        if (IGNYSettings.PLAYER_MINING_FATIGUE_FREE_GUARDIAN.value()) {
             DamageSource newSource = target.damageSources().mobAttack(guardian);
             //#if MC >= 12103
             //$$ return original.call(target, level, newSource, amount);

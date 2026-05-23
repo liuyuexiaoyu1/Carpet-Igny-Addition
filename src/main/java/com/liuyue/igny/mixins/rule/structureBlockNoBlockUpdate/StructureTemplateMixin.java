@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class StructureTemplateMixin {
     @Inject(method = "placeInWorld", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/structure/BoundingBox;isInside(Lnet/minecraft/core/Vec3i;)Z"))
     private void setBlock(ServerLevelAccessor serverLevelAccessor, BlockPos blockPos, BlockPos blockPos2, StructurePlaceSettings structurePlaceSettings, RandomSource randomSource, int i, CallbackInfoReturnable<Boolean> cir, @Local StructureTemplate.StructureBlockInfo info) {
-        if (IGNYSettings.structureBlockNoBlockUpdate) {
+        if (IGNYSettings.STRUCTURE_BLOCK_NO_BLOCK_UPDATE.value()) {
             //#if MC <= 11904
             //$$ IGNYSettings.noUpdatePos.add(info.pos);
             //#else

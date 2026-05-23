@@ -20,7 +20,7 @@ public class BlockItemMixin {
     private BlockState getPlacementState(BlockState originalState, BlockPlaceContext ctx) {
         if (originalState != null && originalState.is(Blocks.COMPOSTER)) {
             if (ctx.getPlayer() != null && ctx.getPlayer().isShiftKeyDown()) {
-                int level = Math.min(8, Math.max(0, IGNYSettings.placeComposterCompost));
+                int level = Math.min(8, Math.max(0, IGNYSettings.PLACE_COMPOSTER_COMPOST.value()));
                 return originalState.setValue(ComposterBlock.LEVEL, level);
             }
         }

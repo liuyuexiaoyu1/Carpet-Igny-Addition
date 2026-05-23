@@ -13,7 +13,7 @@ public class MobEffectInstanceMixin {
     //#if MC >= 12005
     @WrapOperation(method = "<init>(Lnet/minecraft/core/Holder;IIZZZLnet/minecraft/world/effect/MobEffectInstance;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(III)I"))
     private int init(int value, int min, int max, Operation<Integer> original, @Local(ordinal = 1, argsOnly = true) int amplifier) {
-        if (IGNYSettings.superEffectLevel) {
+        if (IGNYSettings.SUPER_EFFECT_LEVEL.value()) {
             return amplifier;
         }
         return original.call(value, min, max);

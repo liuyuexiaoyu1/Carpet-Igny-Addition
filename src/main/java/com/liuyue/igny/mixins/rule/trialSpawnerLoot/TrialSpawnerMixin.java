@@ -37,10 +37,10 @@ public class TrialSpawnerMixin {
 
         RandomSource random = serverLevel.getRandom();
 
-        if (IGNYSettings.trialSpawnerLootMultiplier != 1) {
+        if (IGNYSettings.TRIAL_SPAWNER_LOOT_MULTIPLIER.value() != 1) {
             ObjectArrayList<ItemStack> newList = new ObjectArrayList<>();
             for (ItemStack stack : objectArrayList) {
-                int count = (int) (double) (stack.getCount() * IGNYSettings.trialSpawnerLootMultiplier);
+                int count = (int) (double) (stack.getCount() * IGNYSettings.TRIAL_SPAWNER_LOOT_MULTIPLIER.value());
                 if (count <= 0) continue;
                 ItemStack newStack = stack.copy();
                 newStack.setCount(Math.min(count, newStack.getMaxStackSize()));
@@ -58,8 +58,8 @@ public class TrialSpawnerMixin {
             objectArrayList.addAll(newList);
         }
 
-        if (IGNYSettings.trialSpawnerDropKeyProbability != -1) {
-            boolean shouldHaveKey = random.nextDouble() < IGNYSettings.trialSpawnerDropKeyProbability;
+        if (IGNYSettings.TRIAL_SPAWNER_DROP_KEY_PROBABILITY.value() != -1) {
+            boolean shouldHaveKey = random.nextDouble() < IGNYSettings.TRIAL_SPAWNER_DROP_KEY_PROBABILITY.value();
             if (shouldHaveKey) {
                 boolean hasKey = false;
                 for (ItemStack stack : objectArrayList) {
@@ -70,9 +70,9 @@ public class TrialSpawnerMixin {
                 }
                 if (!hasKey) {
                     if (this.isOminous) {
-                        objectArrayList.add(new ItemStack(Items.OMINOUS_TRIAL_KEY, IGNYSettings.trialSpawnerLootMultiplier));
+                        objectArrayList.add(new ItemStack(Items.OMINOUS_TRIAL_KEY, IGNYSettings.TRIAL_SPAWNER_LOOT_MULTIPLIER.value()));
                     }else {
-                        objectArrayList.add(new ItemStack(Items.TRIAL_KEY, IGNYSettings.trialSpawnerLootMultiplier));
+                        objectArrayList.add(new ItemStack(Items.TRIAL_KEY, IGNYSettings.TRIAL_SPAWNER_LOOT_MULTIPLIER.value()));
                     }
                 }
             }

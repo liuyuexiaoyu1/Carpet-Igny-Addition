@@ -40,14 +40,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class BrainMixin {
     @Inject(method = "tickSensors",at = @At(value = "HEAD"),cancellable = true)
     private void tickSensors(ServerLevel serverLevel, LivingEntity livingEntity, CallbackInfo ci){
-        if (((IEntity) livingEntity).carpet_Igny_Addition$getCrammingCount() >= IGNYSettings.optimizedEntityLimit) {
+        if (((IEntity) livingEntity).carpet_Igny_Addition$getCrammingCount() >= IGNYSettings.OPTIMIZED_ENTITY_LIMIT.value()) {
             ci.cancel();
         }
     }
 
     @WrapOperation(method = "startEachNonRunningBehavior", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/behavior/BehaviorControl;tryStart(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z"))
     private boolean startEachNonRunningBehavior(BehaviorControl<?> instance, ServerLevel level, LivingEntity entity, long l, Operation<Boolean> original){
-        if (!(instance instanceof OneShot<?>) && ((IEntity)entity).carpet_Igny_Addition$getCrammingCount() >= IGNYSettings.optimizedEntityLimit){
+        if (!(instance instanceof OneShot<?>) && ((IEntity)entity).carpet_Igny_Addition$getCrammingCount() >= IGNYSettings.OPTIMIZED_ENTITY_LIMIT.value()){
             return false;
         }
         return original.call(instance, level, entity, l);

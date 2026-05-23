@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public class EntityMixin {
     @WrapOperation(method = "push(DDD)V", at = @At(value = "INVOKE", target = "Ljava/lang/Double;isFinite(D)Z"))
     private static boolean allowInvalidMotion$wrapIsFinite(double d, Operation<Boolean> original) {
-        if (IGNYSettings.allowInvalidMotion) return true;
+        if (IGNYSettings.ALLOW_INVALID_MOTION.value()) return true;
         return original.call(d);
     }
 }

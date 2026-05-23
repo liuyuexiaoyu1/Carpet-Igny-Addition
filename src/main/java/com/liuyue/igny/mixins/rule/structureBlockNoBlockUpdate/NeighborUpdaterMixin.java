@@ -25,7 +25,7 @@ public interface NeighborUpdaterMixin {
     //#else
     private static void executeShapeUpdate(LevelAccessor levelAccessor, Direction direction, BlockState blockState, BlockPos blockPos, BlockPos blockPos2, int i, int j, CallbackInfo ci) {
         //#endif
-        if (IGNYSettings.structureBlockNoBlockUpdate && (IGNYSettings.noUpdatePos.contains(blockPos)|| IGNYSettings.noUpdatePos.contains(blockPos2))) ci.cancel();
+        if (IGNYSettings.STRUCTURE_BLOCK_NO_BLOCK_UPDATE.value() && (IGNYSettings.noUpdatePos.contains(blockPos)|| IGNYSettings.noUpdatePos.contains(blockPos2))) ci.cancel();
     }
 
     @SuppressWarnings("all")
@@ -35,7 +35,7 @@ public interface NeighborUpdaterMixin {
     //#else
     private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, BlockPos blockPos2, boolean bl, CallbackInfo ci) {
         //#endif
-        if (IGNYSettings.structureBlockNoBlockUpdate && (IGNYSettings.noUpdatePos.contains(blockPos)
+        if (IGNYSettings.STRUCTURE_BLOCK_NO_BLOCK_UPDATE.value() && (IGNYSettings.noUpdatePos.contains(blockPos)
                 //#if MC < 12102
                 || IGNYSettings.noUpdatePos.contains(blockPos2)
                 //#endif

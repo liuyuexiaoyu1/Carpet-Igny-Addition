@@ -21,7 +21,7 @@ public class ShulkerBulletMixin {
             )
     )
     private boolean onHitEntity(LivingEntity target, MobEffectInstance effect, Entity source, Operation<Boolean> original) {
-        if (IGNYSettings.playerLevitationFreeShulkerBullet && target instanceof Player){
+        if (IGNYSettings.PLAYER_LEVITATION_FREE_SHULKER_BULLET.value() && target instanceof Player){
             return false;
         }
         return original.call(target, effect, source);

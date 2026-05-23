@@ -8,7 +8,6 @@ import com.liuyue.igny.IGNYServer;
 import com.liuyue.igny.IGNYServerMod;
 import com.liuyue.igny.manager.RuleChangeDataManager;
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.rule.RuleObserver;
 import com.liuyue.igny.tracker.RuleChangeTracker;
 import com.liuyue.igny.utils.ClassUtil;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -45,7 +44,7 @@ public abstract class SettingsManagerMixin {
     )
     private void addOperationInfoAfterCurrentValue(CommandSourceStack source, CarpetRule<?> rule, CallbackInfoReturnable<Integer> cir) {
         if (rule != null) {
-            if (IGNYSettings.showRuleSource) {
+            if (IGNYSettings.SHOW_RULE_SOURCE.value()) {
                 String id = getModIdByRuleName(rule.name());
                 String name = FabricLoader.getInstance()
                         .getModContainer(id)
@@ -56,7 +55,7 @@ public abstract class SettingsManagerMixin {
                         "g " + Translations.tr("igny.settings.source", "Source") + ": ", "w " + name
                 );
             }
-            if (IGNYSettings.showRuleChangeHistory) {
+            if (IGNYSettings.SHOW_RULE_CHANGE_HISTORY.value()) {
                 List<RuleChangeDataManager.RuleChangeRecord> history = RuleChangeDataManager.INSTANCE.getLastChange(rule.name());
                 if (!history.isEmpty()) {
                     for (RuleChangeDataManager.RuleChangeRecord lastChange : history) {
@@ -101,8 +100,7 @@ public abstract class SettingsManagerMixin {
     private <T> void onSetRuleValue(CarpetRule<T> instance, CommandSourceStack commandSourceStack, String s, Operation<Void> original){
         T rawValue = instance.value();
         original.call(instance, commandSourceStack, s);
-        RuleObserver.handleChange(commandSourceStack, instance, rawValue, s);
-        if (IGNYSettings.showRuleChangeHistory && !Objects.equals(rawValue, instance.value())) {
+        if (IGNYSettings.SHOW_RULE_CHANGE_HISTORY.value() && !Objects.equals(rawValue, instance.value())) {
             RuleChangeTracker.ruleChanged(commandSourceStack, instance, rawValue, s);
         }
     }

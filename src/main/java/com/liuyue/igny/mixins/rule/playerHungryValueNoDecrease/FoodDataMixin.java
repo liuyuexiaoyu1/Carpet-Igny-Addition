@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class FoodDataMixin {
     @Inject(method = "addExhaustion", at = @At("HEAD"), cancellable = true)
     private void addExhaustion(float f, CallbackInfo ci) {
-        if (IGNYSettings.playerHungryValueNoDecrease) ci.cancel();
+        if (IGNYSettings.PLAYER_HUNGRY_VALUE_NO_DECREASE.value()) ci.cancel();
     }
 }

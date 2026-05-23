@@ -19,7 +19,7 @@ public class MobMixin {
 
     @Inject(method = "compareWeapons", at = @At("HEAD"), cancellable = true)
     private void pickupSwords(ItemStack itemStack, ItemStack itemStack2, EquipmentSlot equipmentSlot, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.skeletonsPickupSwordsReintroduced) {
+        if (IGNYSettings.SKELETONS_PICKUP_SWORDS_REINTRODUCED.value()) {
             Mob self = (Mob) (Object) this;
             if (self instanceof AbstractSkeleton) {
                 TagKey<Item> tagKey = ItemTags.SKELETON_PREFERRED_WEAPONS;

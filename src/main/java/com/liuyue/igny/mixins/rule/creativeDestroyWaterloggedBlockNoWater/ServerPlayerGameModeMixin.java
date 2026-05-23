@@ -27,7 +27,7 @@ public abstract class ServerPlayerGameModeMixin {
     @WrapOperation(method = "destroyBlock",at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"))
     private boolean wrapDestroyBlock(ServerLevel instance, BlockPos blockPos, boolean b, Operation<Boolean> original) {
         BlockState currentState = this.level.getBlockState(blockPos);
-        if (IGNYSettings.creativeDestroyWaterloggedBlockNoWater && this.player.isCreative() && currentState.hasProperty(BlockStateProperties.WATERLOGGED) && currentState.getValue(BlockStateProperties.WATERLOGGED)) {
+        if (IGNYSettings.CREATIVE_DESTROY_WATERLOGGED_BLOCK_NO_WATER.value() && this.player.isCreative() && currentState.hasProperty(BlockStateProperties.WATERLOGGED) && currentState.getValue(BlockStateProperties.WATERLOGGED)) {
             return level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 3);
         }
         return original.call(instance, blockPos, b);

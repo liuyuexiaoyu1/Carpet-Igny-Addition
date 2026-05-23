@@ -23,7 +23,7 @@ public class EnderEyeItemMixin {
             ),
             cancellable = true)
     private void onEyePlaced(UseOnContext ctx, CallbackInfoReturnable<InteractionResult> cir, @Local Level level, @Local BlockPos pos) {
-        if (IGNYSettings.maxEndPortalSize != -1) {
+        if (IGNYSettings.MAX_END_PORTAL_SIZE.value() != -1) {
             EndPortalShape.findFromFrame(level, pos).ifPresent(EndPortalShape::createPortal);
             cir.setReturnValue(InteractionResult.CONSUME);
         }

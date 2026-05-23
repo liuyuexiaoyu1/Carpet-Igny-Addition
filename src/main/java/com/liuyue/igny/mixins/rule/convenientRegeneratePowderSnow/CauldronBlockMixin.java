@@ -17,7 +17,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 public class CauldronBlockMixin {
     @Inject(method = "receiveStalactiteDrip", at = @At(value = "HEAD"), cancellable = true)
     private void receiveStalactiteDrip(BlockState state, Level level, BlockPos pos, Fluid fluid, CallbackInfo ci) {
-        if (IGNYSettings.convenientRegeneratePowderSnow && state.is(Blocks.POWDER_SNOW)) {
+        if (IGNYSettings.CONVENIENT_REGENERATE_POWDER_SNOW.value() && state.is(Blocks.POWDER_SNOW)) {
             BlockState powderSnowState = Blocks.POWDER_SNOW_CAULDRON.defaultBlockState();
             level.setBlockAndUpdate(pos, powderSnowState);
             level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(powderSnowState));

@@ -26,9 +26,9 @@ public class LevelRendererMixin {
     //#endif
     //$$  private boolean isSpectatorWrap(LocalPlayer instance, Operation<Boolean> original) {
     //#else
-    @WrapOperation(method = "renderLevel",at= @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isSpectator()Z"))
+    @WrapOperation(method = "renderLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isSpectator()Z"))
     private boolean isSpectatorWrap(LocalPlayer instance, Operation<Boolean> original) {
         //#endif
-        return original.call(instance) || instance.getVehicle() instanceof HappyGhast && IGNYSettings.happyGhastNoClip;
+        return original.call(instance) || instance.getVehicle() instanceof HappyGhast && IGNYSettings.HAPPY_GHAST_NO_CLIP.value();
     }
 }

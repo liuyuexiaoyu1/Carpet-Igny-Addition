@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class BlockMixin {
     @Inject(method = "getExplosionResistance", at = @At("HEAD"), cancellable = true)
     private void getExplosionResistance(CallbackInfoReturnable<Float> cir) {
-        if (IGNYSettings.transparentNightmarishBlock) {
+        if (IGNYSettings.TRANSPARENT_NIGHTMARISH_BLOCK.value()) {
             Block block = (Block) (Object) this;
             if (RuleUtil.isNightmarishBlock(block)) {
                 cir.setReturnValue(1200f);

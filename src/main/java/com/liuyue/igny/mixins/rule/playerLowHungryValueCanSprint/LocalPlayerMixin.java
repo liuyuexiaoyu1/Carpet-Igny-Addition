@@ -23,7 +23,7 @@ public class LocalPlayerMixin {
             //#endif
     )
     private boolean sprint(LocalPlayer instance, Operation<Boolean> original) {
-        if (IGNYSettings.playerLowHungryValueCanSprint) return true;
+        if (IGNYSettings.PLAYER_LOW_HUNGRY_VALUE_CAN_SPRINT.value()) return true;
         return original.call(instance);
     }
 }

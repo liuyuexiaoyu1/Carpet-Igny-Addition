@@ -33,7 +33,7 @@ public abstract class NoteBlockMixin extends Block {
     //#else
     public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
         //#endif
-        if (IGNYSettings.noteBlockSelfCheck) {
+        if (IGNYSettings.NOTE_BLOCK_SELF_CHECK.value()) {
             boolean bl2 = level.hasNeighborSignal(blockPos);
             if (bl2 != blockState.getValue(POWERED)) {
                 if (bl2) {

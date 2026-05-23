@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class BaseFireBlockMixin {
     @Inject(method = "inPortalDimension", at = @At(value = "HEAD"), cancellable = true)
     private static void inPortalDimension(Level level, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.theEndCanCreateNetherPortal) cir.setReturnValue(true);
+        if (IGNYSettings.THE_END_CAN_CREATE_NETHER_PORTAL.value()) cir.setReturnValue(true);
     }
 }

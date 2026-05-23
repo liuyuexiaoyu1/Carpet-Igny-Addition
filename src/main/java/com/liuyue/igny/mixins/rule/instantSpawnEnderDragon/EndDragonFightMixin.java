@@ -88,7 +88,7 @@ public abstract class EndDragonFightMixin {
 
     @Inject(method = "respawnDragon", at = @At(value = "HEAD"), cancellable = true)
     private void respawnDragon(List<EndCrystal> list , CallbackInfo ci) {
-        if (IGNYSettings.instantSpawnEnderDragon) {
+        if (IGNYSettings.INSTANT_SPAWN_ENDER_DRAGON.value()) {
             //#if MC >= 26.1
             //$$ EnderDragonFight self = (EnderDragonFight) (Object) this;
             //#else

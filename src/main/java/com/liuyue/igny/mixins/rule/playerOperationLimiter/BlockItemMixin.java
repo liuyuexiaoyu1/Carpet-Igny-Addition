@@ -33,7 +33,7 @@ public abstract class BlockItemMixin extends Item {
             cancellable = true
     )
     private void checkPlaceOperationLimit(BlockPlaceContext context, CallbackInfoReturnable<InteractionResult> cir) {
-        if (!IGNYSettings.playerOperationLimiter) {
+        if (!IGNYSettings.PLAYER_OPERATION_LIMITER.value()) {
             return;
         }
         if (context.canPlace() && context.getPlayer() instanceof ServerPlayer serverPlayer) {

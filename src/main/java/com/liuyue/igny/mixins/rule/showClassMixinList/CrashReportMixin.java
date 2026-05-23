@@ -39,7 +39,7 @@ public abstract class CrashReportMixin {
 
     @Inject(method = "getDetails(Ljava/lang/StringBuilder;)V", at = @At(value = "FIELD", target = "Lnet/minecraft/CrashReport;details:Ljava/util/List;", opcode = Opcodes.GETFIELD))
     private void getDetails(StringBuilder builder, CallbackInfo ci) {
-        if (IGNYSettings.showClassMixinList) {
+        if (IGNYSettings.SHOW_CLASS_MIXIN_LIST.value()) {
             int trailingNewlineCount = 0;
             if (builder.charAt(builder.length() - 1) == '\n') {
                 builder.deleteCharAt(builder.length() - 1);

@@ -1,6 +1,7 @@
 package com.liuyue.igny.utils;
 
 import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.rule.CommandPermissionLevel;
 import net.minecraft.commands.CommandSourceStack;
 import carpet.patches.EntityPlayerMPFake;
 import net.minecraft.server.level.ServerPlayer;
@@ -23,32 +24,17 @@ public class CommandUtil {
             //#endif
         }
 
-        String ruleValue = IGNYSettings.commandPlayerEnderChestDrop;
-
-        return switch (ruleValue.toLowerCase()) {
-            case "true" -> true;
-            case "false" -> false;
-            //#if MC >= 12111
-            //$$ case "0" -> Commands.LEVEL_ALL.check(source.permissions());
-            //$$ case "1" -> Commands.LEVEL_MODERATORS.check(source.permissions());
-            //$$ case "3" -> Commands.LEVEL_ADMINS.check(source.permissions());
-            //$$ case "4" -> Commands.LEVEL_OWNERS.check(source.permissions());
-            //$$ default -> Commands.LEVEL_GAMEMASTERS.check(source.permissions());
-            //#else
-            case "0" -> source.hasPermission(0);
-            case "1" -> source.hasPermission(1);
-            case "3" -> source.hasPermission(3);
-            case "4" -> source.hasPermission(4);
-            default -> source.hasPermission(2);
-            //#endif
-        };
+        return IGNYSettings.COMMAND_PLAYER_ENDER_CHEST_DROP.value().canExecute(source);
     }
+
     public static boolean canUseCommand(ServerPlayer source, Object commandLevel) {
         if (source == null) return false;
         if (commandLevel instanceof Boolean) {
             return (Boolean) commandLevel;
         }
-
+        if (commandLevel instanceof CommandPermissionLevel cpl) {
+            return cpl.canExecute(source);
+        }
         if (commandLevel instanceof String) {
             final String levelStr = ((String) commandLevel).toLowerCase(Locale.ENGLISH);
 
@@ -92,5 +78,4 @@ public class CommandUtil {
         return source.hasPermission(2);
         //#endif
     }
-
 }

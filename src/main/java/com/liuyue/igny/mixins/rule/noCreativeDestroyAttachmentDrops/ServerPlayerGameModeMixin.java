@@ -15,7 +15,7 @@ public abstract class ServerPlayerGameModeMixin {
     @WrapMethod(method = "destroyBlock")
     private boolean destroyBlock(BlockPos pos, Operation<Boolean> original) {
         try {
-            if (IGNYSettings.noCreativeDestroyAttachmentDrops && isCreative()) {
+            if (IGNYSettings.NO_CREATIVE_DESTROY_ATTACHMENT_DROPS.value() && isCreative()) {
                 IGNYSettings.CREATIVE_BREAKING.set(true);
             }
             return original.call(pos);

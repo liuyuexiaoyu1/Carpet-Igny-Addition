@@ -28,8 +28,8 @@ public class FlowingFluidMixin {
             //$$ BlockState blockState,
             //#endif
             FluidState state, CallbackInfo ci) {
-        if (!IGNYSettings.liquidNeverSpread.equals("false")) {
-            if (IGNYSettings.liquidNeverSpread.equals("true") || state.isSource()) {
+        if (!IGNYSettings.LIQUID_NEVER_SPREAD.value().equals("false")) {
+            if (IGNYSettings.LIQUID_NEVER_SPREAD.value().equals("true") || state.isSource()) {
                 ci.cancel();
             }
         }

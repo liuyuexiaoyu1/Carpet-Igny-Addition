@@ -34,7 +34,7 @@ public class VaultBlockEntityServerMixin {
             List<ItemStack> list,
             CallbackInfo ci
     ) {
-        if (IGNYSettings.instantVaultSpawnLoot) {
+        if (IGNYSettings.INSTANT_VAULT_SPAWN_LOOT.value()) {
             RandomSource random = serverLevel.getRandom();
             Vec3 dropPos = Vec3.atCenterOf(blockPos).add(0.0, 0.5, 0.0);
             for (ItemStack stack : list) {

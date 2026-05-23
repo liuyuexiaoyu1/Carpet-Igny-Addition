@@ -22,7 +22,7 @@ public abstract class EntityPlayerActionPackMixin {
 
     @Inject(method = "onUpdate", at = @At("HEAD"))
     private void disableMiningCooldown(CallbackInfo ci) {
-        if (this.player instanceof EntityPlayerMPFake && IGNYSettings.fakePlayerNoBreakingCoolDown) {
+        if (this.player instanceof EntityPlayerMPFake && IGNYSettings.FAKE_PLAYER_NO_BREAKING_COOL_DOWN.value()) {
             this.blockHitDelay = 0;
         }
     }

@@ -29,7 +29,7 @@ public class PointedDripstoneBlockMixin {
     @Inject(method = "maybeTransferFluid", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
     private static void maybeTransferFluid(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, float f, CallbackInfo ci, @Local Optional<PointedDripstoneBlock.FluidInfo> optional, @Local Fluid fluid, @Local(ordinal = 1) BlockPos blockPos2){
         //#endif
-        if (!IGNYSettings.renewableCalcite || optional.isEmpty()) return;
+        if (!IGNYSettings.RENEWABLE_CALCITE.value() || optional.isEmpty()) return;
         if (optional.get().sourceState().is(Blocks.QUARTZ_BLOCK) && fluid == Fluids.WATER) {
             BlockState blockState2 = Blocks.CALCITE.defaultBlockState();
             serverLevel.setBlockAndUpdate((optional.get()).pos(), blockState2);
@@ -46,7 +46,7 @@ public class PointedDripstoneBlockMixin {
     @WrapOperation(method = "method_33279", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
     private static boolean is(BlockState instance, Block block, Operation<Boolean> original) {
         //#endif
-        if (IGNYSettings.renewableCalcite) {
+        if (IGNYSettings.RENEWABLE_CALCITE.value()) {
             return original.call(instance, block) || instance.is(Blocks.QUARTZ_BLOCK);
         }
         return original.call(instance, block);

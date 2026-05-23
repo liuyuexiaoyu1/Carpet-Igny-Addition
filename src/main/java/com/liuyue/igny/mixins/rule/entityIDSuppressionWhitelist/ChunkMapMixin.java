@@ -18,10 +18,10 @@ public class ChunkMapMixin {
     private boolean containsKey(Int2ObjectMap<?> instance, int i, Operation<Boolean> original, @Local(argsOnly = true) Entity entity) {
         ResourceLocation resourceLocation = EntityType.getKey(entity.getType());
         String entityTypeName = resourceLocation.toString();
-        if (IGNYSettings.entityIDSuppressionWhitelist.equals("#all")) {
+        if (IGNYSettings.ENTITY_ID_SUPPRESSION_WHITELIST.value().equals("#all")) {
             return original.call(instance, i);
         }
-        if (IGNYSettings.entityIDSuppressionWhitelist.equals("#none") || !IGNYSettings.EIDWhitelist.contains(entityTypeName)) {
+        if (IGNYSettings.ENTITY_ID_SUPPRESSION_WHITELIST.value().equals("#none") || !IGNYSettings.EIDWhitelist.contains(entityTypeName)) {
             return false;
         }
         return original.call(instance, i);

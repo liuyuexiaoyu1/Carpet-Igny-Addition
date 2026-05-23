@@ -17,7 +17,7 @@ public abstract class SettingsManagerMixin {
 
     @Inject(method = "setRule", at = @At(value = "INVOKE", target = "Lcarpet/api/settings/CarpetRule;set(Lnet/minecraft/commands/CommandSourceStack;Ljava/lang/String;)V"), cancellable = true)
     private void onSetRule(CommandSourceStack source, CarpetRule<?> rule, String newValue, CallbackInfoReturnable<Integer> cir){
-        if (IGNYSettings.twoChangedRuleValueSetDefault && rule.value().toString().equals(newValue)){
+        if (IGNYSettings.TWO_CHANGED_RULE_VALUE_SET_DEFAULT.value() && rule.value().toString().equals(newValue)){
             setDefault(source, rule, rule.value().toString());
             cir.setReturnValue(1);
         }

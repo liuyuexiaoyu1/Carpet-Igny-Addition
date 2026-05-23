@@ -46,7 +46,7 @@ public class PiglinAiMixin {
             if (itemStack.getItem() == Items.GOLD_INGOT) {
                 return;
             }
-            if (((IEntity) piglin).carpet_Igny_Addition$getCrammingCount() >= IGNYSettings.optimizedEntityLimit) {
+            if (((IEntity) piglin).carpet_Igny_Addition$getCrammingCount() >= IGNYSettings.OPTIMIZED_ENTITY_LIMIT.value()) {
                 cir.setReturnValue(false);
             }
         }
@@ -54,7 +54,7 @@ public class PiglinAiMixin {
 
     @Inject(method = "isPlayerHoldingLovedItem",at=@At(value = "HEAD"),cancellable = true)
     private static void isPlayerHoldingLovedItem(LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir){
-        if (((IEntity)livingEntity).carpet_Igny_Addition$getCrammingCount() >= IGNYSettings.optimizedEntityLimit) {
+        if (((IEntity)livingEntity).carpet_Igny_Addition$getCrammingCount() >= IGNYSettings.OPTIMIZED_ENTITY_LIMIT.value()) {
             cir.setReturnValue(false);
         }
     }

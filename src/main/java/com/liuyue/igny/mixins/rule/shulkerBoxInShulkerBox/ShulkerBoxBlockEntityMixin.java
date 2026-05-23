@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ShulkerBoxBlockEntityMixin {
     @Inject(method = "canPlaceItemThroughFace", at = @At(value = "RETURN"), cancellable = true)
     private void canPlaceItemThroughFace(int index, ItemStack itemStack, Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.shulkerBoxInShulkerBox) {
+        if (IGNYSettings.SHULKER_BOX_IN_SHULKER_BOX.value()) {
             cir.setReturnValue(true);
         }
     }

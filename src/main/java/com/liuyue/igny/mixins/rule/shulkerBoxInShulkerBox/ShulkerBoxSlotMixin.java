@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ShulkerBoxSlotMixin {
     @Inject(method = "mayPlace", at = @At(value = "RETURN"), cancellable = true)
     private void mayPlace(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.shulkerBoxInShulkerBox) {
+        if (IGNYSettings.SHULKER_BOX_IN_SHULKER_BOX.value()) {
             cir.setReturnValue(true);
         }
     }

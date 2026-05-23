@@ -19,7 +19,7 @@ public class WitherSkeletonMixin {
             //$$ ServerLevel level,
             //#endif
             Entity entity, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.noWitherEffect) {
+        if (IGNYSettings.NO_WITHER_EFFECT.value()) {
             cir.setReturnValue(true);
         }
     }

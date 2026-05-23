@@ -47,7 +47,7 @@ public class TadpoleMixin {
 
     @WrapOperation(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/frog/Tadpole;isFood(Lnet/minecraft/world/item/ItemStack;)Z"))
     private boolean isFood(Tadpole instance, ItemStack itemStack, Operation<Boolean> original) {
-        if (IGNYSettings.dyedFrog) {
+        if (IGNYSettings.DYED_FROG.value()) {
             //#if MC >= 26.2
             //$$ return itemStack.is(Items.DYE.green()) || itemStack.is(Items.DYE.lightGray()) || itemStack.is(Items.DYE.orange()) || original.call(instance, itemStack);
             //#else

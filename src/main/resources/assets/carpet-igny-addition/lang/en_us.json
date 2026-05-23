@@ -8,7 +8,7 @@
   "igny.settings.record.new_value": "NewValue",
   "igny.settings.command.version": "Version",
   "igny.settings.command.total_rules": "total rules",
-  "igny.settings.failure.unknown_entity": "Unknown Entity ID : %s",
+  "igny.settings.failure.unknown_entity": "Unknown Entity ID",
   "igny.settings.source": "Source",
   "menu.igny.surrender": "I Surrender",
 

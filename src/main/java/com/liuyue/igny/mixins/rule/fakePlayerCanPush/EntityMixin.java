@@ -13,7 +13,7 @@ public class EntityMixin {
     @Inject(method = "push(Lnet/minecraft/world/entity/Entity;)V", at = @At("HEAD"), cancellable = true)
     private void onPush(Entity entity, CallbackInfo ci) {
         Entity self = (Entity)(Object)this;
-        if (!IGNYSettings.fakePlayerCanPush) {
+        if (!IGNYSettings.FAKE_PLAYER_CAN_PUSH.value()) {
             if (self instanceof EntityPlayerMPFake || entity instanceof EntityPlayerMPFake) {
                 ci.cancel();
             }

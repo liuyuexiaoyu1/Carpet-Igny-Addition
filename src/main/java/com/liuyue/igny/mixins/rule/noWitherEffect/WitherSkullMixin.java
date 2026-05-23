@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class WitherSkullMixin {
     @Inject(method="onHitEntity",at= @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z"), cancellable = true)
     private void onHitEntity(EntityHitResult entityHitResult, CallbackInfo ci) {
-        if (IGNYSettings.noWitherEffect) {
+        if (IGNYSettings.NO_WITHER_EFFECT.value()) {
             ci.cancel();
         }
     }

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class WardenMixin{
     @Inject(method="tick", at = @At("HEAD"))
     private void tick(CallbackInfo ci){
-        if(IGNYSettings.wardenNeverDig) {
+        if(IGNYSettings.WARDEN_NEVER_DIG.value()) {
             Warden warden = (Warden) (Object) this;
             warden.getBrain().setMemoryWithExpiry(MemoryModuleType.DIG_COOLDOWN, Unit.INSTANCE,1200L);
         }

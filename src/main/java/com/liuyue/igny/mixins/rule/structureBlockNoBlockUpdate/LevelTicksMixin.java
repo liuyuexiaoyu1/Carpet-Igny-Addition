@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class LevelTicksMixin {
     @Inject(method = "schedule", at = @At(value = "HEAD"), cancellable = true)
     private void schedule(ScheduledTick<?> scheduledTick, CallbackInfo ci) {
-        if (IGNYSettings.structureBlockNoBlockUpdate && IGNYSettings.noUpdatePos.contains(scheduledTick.pos())) ci.cancel();
+        if (IGNYSettings.STRUCTURE_BLOCK_NO_BLOCK_UPDATE.value() && IGNYSettings.noUpdatePos.contains(scheduledTick.pos())) ci.cancel();
     }
 }

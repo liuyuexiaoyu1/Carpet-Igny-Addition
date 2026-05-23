@@ -39,7 +39,7 @@ public abstract class DispenserBlockMixin {
                               BlockState blockState,
                               //#endif
                               BlockPos blockPos, CallbackInfo ci, @Local DispenserBlockEntity blockEntity) {
-        if (!IGNYSettings.dispenserTrade) return;
+        if (!IGNYSettings.DISPENSER_TRADE.value()) return;
         Component component = blockEntity.getName();
         String name = component.getString();
         int tradeIndex;
@@ -64,7 +64,7 @@ public abstract class DispenserBlockMixin {
             if (tradeIndex >= offers.size()) return;
             MerchantOffer offer = offers.get(tradeIndex);
             if (offer == null || offer.isOutOfStock()) {
-                if (!IGNYSettings.dispenserTradeFailDisperseItem){
+                if (!IGNYSettings.DISPENSER_TRADE_FAIL_DISPERSE_ITEM.value()){
                     ci.cancel();
                     serverLevel.levelEvent(1001, blockPos, facing.get3DDataValue());
                     //#if MC > 12004
@@ -79,7 +79,7 @@ public abstract class DispenserBlockMixin {
             ItemStack costA = offer.getCostA();
             ItemStack costB = offer.getCostB();
             if (!hasAndConsumeItems(blockEntity, costA, costB)) {
-                if (!IGNYSettings.dispenserTradeFailDisperseItem){
+                if (!IGNYSettings.DISPENSER_TRADE_FAIL_DISPERSE_ITEM.value()){
                     ci.cancel();
                     serverLevel.levelEvent(1001, blockPos, facing.get3DDataValue());
                     //#if MC > 12004

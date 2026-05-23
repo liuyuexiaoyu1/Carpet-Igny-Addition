@@ -69,7 +69,7 @@ public abstract class EntityMixin implements IEntity {
         if (this.level.isClientSide()) return;
         ResourceLocation resourceLocation = EntityType.getKey(this.getType());
         String entityTypeName = resourceLocation.toString();
-        if (IGNYSettings.optimizedEntityList.equals("#none") || !IGNYSettings.CRAMMING_ENTITIES.contains(entityTypeName)) {
+        if (IGNYSettings.OPTIMIZED_ENTITY_LIST.value().equals("#none") || !IGNYSettings.CRAMMING_ENTITIES.contains(entityTypeName)) {
             this.carpet_Igny_Addition$setCrammingCount(0);
             return;
         }
@@ -80,7 +80,7 @@ public abstract class EntityMixin implements IEntity {
 
     @Inject(method = "move", at = @At(value = "HEAD"), cancellable = true)
     private void move(MoverType moverType, Vec3 vec3, CallbackInfo ci){
-        if (this.carpet_Igny_Addition$crammingCount >= IGNYSettings.optimizedEntityLimit && moverType == MoverType.SELF){
+        if (this.carpet_Igny_Addition$crammingCount >= IGNYSettings.OPTIMIZED_ENTITY_LIMIT.value() && moverType == MoverType.SELF){
             ci.cancel();
         }
     }

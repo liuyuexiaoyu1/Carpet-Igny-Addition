@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class BlockMixin {
     @Inject(method = "randomTick", at = @At("HEAD"))
     private void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
-        if (IGNYSettings.podzolSpread && blockState.is(Blocks.PODZOL)) {
+        if (IGNYSettings.PODZOL_SPREAD.value() && blockState.is(Blocks.PODZOL)) {
             if (serverLevel.getMaxLocalRawBrightness(blockPos.above()) < 9) {
                 serverLevel.setBlockAndUpdate(blockPos, Blocks.DIRT.defaultBlockState());
                 return;

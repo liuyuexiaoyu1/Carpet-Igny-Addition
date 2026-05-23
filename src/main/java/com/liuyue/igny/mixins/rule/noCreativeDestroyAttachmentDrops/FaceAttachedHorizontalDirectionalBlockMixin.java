@@ -30,7 +30,7 @@ public class FaceAttachedHorizontalDirectionalBlockMixin extends Block {
     //$$ public @NotNull List<ItemStack> getDrops(BlockState state, LootContext.Builder builder)
     //#endif
     {
-        if (IGNYSettings.noCreativeDestroyAttachmentDrops && IGNYSettings.CREATIVE_BREAKING.get()) {
+        if (IGNYSettings.NO_CREATIVE_DESTROY_ATTACHMENT_DROPS.value() && IGNYSettings.CREATIVE_BREAKING.get()) {
             return Collections.emptyList();
         }
         return super.getDrops(state, builder);

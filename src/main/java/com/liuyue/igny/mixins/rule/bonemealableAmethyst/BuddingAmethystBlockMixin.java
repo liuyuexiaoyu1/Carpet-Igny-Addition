@@ -33,7 +33,7 @@ public abstract class BuddingAmethystBlockMixin implements BonemealableBlock {
     //$$ public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient)
     //#endif
     {
-        if (!IGNYSettings.bonemealableAmethyst) {
+        if (!IGNYSettings.BONEMEALABLE_AMETHYST.value()) {
             return false;
         }
         for (Direction direction : Direction.values()) {
@@ -60,12 +60,12 @@ public abstract class BuddingAmethystBlockMixin implements BonemealableBlock {
 
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
-        return IGNYSettings.bonemealableAmethyst;
+        return IGNYSettings.BONEMEALABLE_AMETHYST.value();
     }
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        if (IGNYSettings.bonemealableAmethyst) {
+        if (IGNYSettings.BONEMEALABLE_AMETHYST.value()) {
             try {
                 IS_BONEMEAL.set(true);
                 this.randomTick(state, level, pos, random);

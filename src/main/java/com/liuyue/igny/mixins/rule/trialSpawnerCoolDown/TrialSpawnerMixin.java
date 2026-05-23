@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class TrialSpawnerMixin {
     @Inject(method = "getTargetCooldownLength",at = @At("HEAD"), cancellable = true)
     private void getTargetCooldownLength(CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(IGNYSettings.trialSpawnerCoolDown);
+        cir.setReturnValue(IGNYSettings.TRIAL_SPAWNER_COOL_DOWN.value());
     }
 }

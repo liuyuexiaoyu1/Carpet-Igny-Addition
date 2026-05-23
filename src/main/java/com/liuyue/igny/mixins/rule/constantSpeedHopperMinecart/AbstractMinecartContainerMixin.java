@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.At;
 public class AbstractMinecartContainerMixin {
     @WrapOperation(method = "applyNaturalSlowdown", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/inventory/AbstractContainerMenu;getRedstoneSignalFromContainer(Lnet/minecraft/world/Container;)I"))
     private int getRedstoneSignalFromContainer(Container container, Operation<Integer> original) {
-        return IGNYSettings.constantSpeedHopperMinecart ? 15 : original.call(container);
+        return IGNYSettings.CONSTANT_SPEED_HOPPER_MINECART.value() ? 15 : original.call(container);
     }
 }

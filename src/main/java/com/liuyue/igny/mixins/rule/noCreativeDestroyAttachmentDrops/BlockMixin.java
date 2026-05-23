@@ -16,11 +16,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class BlockMixin {
     @Inject(method = "dropResources(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V", at = @At(value = "HEAD"), cancellable = true)
     private static void dropResources(BlockState state, Level level, BlockPos pos, CallbackInfo ci) {
-        if (IGNYSettings.noCreativeDestroyAttachmentDrops && IGNYSettings.CREATIVE_BREAKING.get()) ci.cancel();
+        if (IGNYSettings.NO_CREATIVE_DESTROY_ATTACHMENT_DROPS.value() && IGNYSettings.CREATIVE_BREAKING.get()) ci.cancel();
     }
 
     @Inject(method = "dropResources(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/BlockEntity;)V", at = @At(value = "HEAD"), cancellable = true)
     private static void dropResources(BlockState state, LevelAccessor level, BlockPos pos, BlockEntity blockEntity, CallbackInfo ci) {
-        if (IGNYSettings.noCreativeDestroyAttachmentDrops && IGNYSettings.CREATIVE_BREAKING.get()) ci.cancel();
+        if (IGNYSettings.NO_CREATIVE_DESTROY_ATTACHMENT_DROPS.value() && IGNYSettings.CREATIVE_BREAKING.get()) ci.cancel();
     }
 }

@@ -19,7 +19,7 @@ import java.util.Set;
 public class NetherPortalBlockMixin {
     @WrapOperation(method = "createDimensionTransition",at = @At(value = "NEW", target = "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;FFLjava/util/Set;Lnet/minecraft/world/level/portal/TeleportTransition$PostTeleportTransition;)Lnet/minecraft/world/level/portal/TeleportTransition;"))
     private static TeleportTransition createDimensionTransition(ServerLevel serverLevel, Vec3 vec3, Vec3 vec32, float f, float g, Set<?> set, TeleportTransition.PostTeleportTransition postTeleportTransition, Operation<TeleportTransition> original, @Local(argsOnly = true) Direction.Axis axis, @Local(ordinal = 1) Direction.Axis axis2, @Local(argsOnly = true) Entity entity) {
-        if (IGNYSettings.teleportInheritMinecartsMotionReintroduced) {
+        if (IGNYSettings.TELEPORT_INHERIT_MINECARTS_MOTION_REINTRODUCED.value()) {
             Vec3 vec3d3 = axis == axis2 ? entity.getDeltaMovement() : new Vec3(entity.getDeltaMovement().z, entity.getDeltaMovement().y, -entity.getDeltaMovement().x);
             return original.call(serverLevel, vec3, vec3d3, 0f, g, set, postTeleportTransition);
         }

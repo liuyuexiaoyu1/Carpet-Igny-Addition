@@ -14,7 +14,7 @@ public class EnderDragonMixin {
     @WrapOperation(method = "tickDeath",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/boss/enderdragon/EnderDragon;move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"))
     private void tickDeath(EnderDragon instance, MoverType moverType, Vec3 vec3, Operation<Void> original) {
         EnderDragon self = (EnderDragon) (Object) this;
-        if (self.getY() >= IGNYSettings.enderDragonDeathRiseLimit && IGNYSettings.enderDragonDeathRiseLimit != -1145) {
+        if (self.getY() >= IGNYSettings.ENDER_DRAGON_DEATH_RISE_LIMIT.value() && IGNYSettings.ENDER_DRAGON_DEATH_RISE_LIMIT.value() != -1145) {
             return;
         }
         original.call(instance, moverType, vec3);

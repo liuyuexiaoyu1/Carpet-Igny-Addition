@@ -15,22 +15,22 @@ import java.util.Objects;
 public class RuleUtil {
     //#if MC >= 12005
     public static Boolean canSoundSuppression(String name) {
-        if ("false".equalsIgnoreCase(IGNYSettings.simpleSoundSuppression)) {
+        if ("false".equalsIgnoreCase(IGNYSettings.SIMPLE_SOUND_SUPPRESSION.value())) {
             return false;
         }
         if (name == null) {
             return false;
         }
-        if ("true".equalsIgnoreCase(IGNYSettings.simpleSoundSuppression)) {
+        if ("true".equalsIgnoreCase(IGNYSettings.SIMPLE_SOUND_SUPPRESSION.value())) {
             return "声音抑制器".equals(name) || "soundSuppression".equalsIgnoreCase(name);
         }
 
-        return Objects.equals(IGNYSettings.simpleSoundSuppression.toLowerCase(), name.toLowerCase());
+        return Objects.equals(IGNYSettings.SIMPLE_SOUND_SUPPRESSION.value().toLowerCase(), name.toLowerCase());
     }
     //#endif
 
     public static Boolean canEntityIDSuppression(ServerPlayer player) {
-        if ("false".equalsIgnoreCase(IGNYSettings.simpleEntityIDSuppression)) {
+        if ("false".equalsIgnoreCase(IGNYSettings.SIMPLE_ENTITY_ID_SUPPRESSION.value())) {
             return false;
         }
         //#if MC >= 12110
@@ -38,11 +38,11 @@ public class RuleUtil {
         //#else
         String name = player.getGameProfile().getName();
         //#endif
-        if ("true".equalsIgnoreCase(IGNYSettings.simpleEntityIDSuppression)) {
+        if ("true".equalsIgnoreCase(IGNYSettings.SIMPLE_ENTITY_ID_SUPPRESSION.value())) {
             return "eIDSuppression".equalsIgnoreCase(name);
         }
 
-        return Objects.equals(IGNYSettings.simpleEntityIDSuppression.toLowerCase(), name.toLowerCase());
+        return Objects.equals(IGNYSettings.SIMPLE_ENTITY_ID_SUPPRESSION.value().toLowerCase(), name.toLowerCase());
     }
 
     public static Object getCarpetRulesValue(String modId, String ruleName) {
@@ -57,9 +57,9 @@ public class RuleUtil {
     }
 
     public static void removeVehicle(ServerPlayer serverPlayer) {
-        if (!Objects.equals(IGNYSettings.killFakePlayerRemoveVehicle, "true")) {
+        if (!Objects.equals(IGNYSettings.KILL_FAKE_PLAYER_REMOVE_VEHICLE.value(), "true")) {
             boolean shouldKeep = true;
-            if (Objects.equals(IGNYSettings.killFakePlayerRemoveVehicle, "canBoatTrade")) {
+            if (Objects.equals(IGNYSettings.KILL_FAKE_PLAYER_REMOVE_VEHICLE.value(), "canBoatTrade")) {
                 if (serverPlayer.getVehicle() != null) {
                     shouldKeep = serverPlayer.getVehicle().getPassengers().stream().noneMatch(entity -> entity instanceof Villager || entity instanceof WanderingTrader);
                 }

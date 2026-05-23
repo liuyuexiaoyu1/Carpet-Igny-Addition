@@ -7,9 +7,7 @@ import com.liuyue.igny.logger.IGNYLoggers;
 import com.liuyue.igny.manager.BlockVaultManager;
 import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.network.packet.PacketUtil;
-import com.liuyue.igny.rule.RuleObserver;
 import com.liuyue.igny.utils.ComponentTranslate;
-import com.liuyue.igny.utils.CountRulesUtil;
 import com.liuyue.igny.utils.TickUtil;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandBuildContext;
@@ -26,7 +24,7 @@ import java.util.Map;
 
 public class IGNYServer implements CarpetExtension {
     public static long serverStartTimeMillis;
-    public static final int ruleCount = CountRulesUtil.countRules();
+    public static int ruleCount = 0;
     public static final String fancyName = "Carpet IGNY Addition";
     public static final String MOD_ID = IGNYServerMod.getModId();
 //    public static final String compactName = MOD_ID.replace("-", "");
@@ -56,10 +54,8 @@ public class IGNYServer implements CarpetExtension {
 
     @Override
     public void onGameStarted() {
-        CarpetServer.settingsManager.parseSettingsClass(IGNYSettings.class);
-        try {
-            RuleObserver.init(IGNYSettings.class);
-        } catch (Exception ignored) {}
+        IGNYSettings.register();
+        ruleCount = IGNYSettings.listRules().size();
     }
 
     @Override

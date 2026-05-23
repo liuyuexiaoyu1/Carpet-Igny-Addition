@@ -31,6 +31,6 @@ public class ConnectionMixin {
     //#endif
     {
         Connection self = (Connection) (Object) this;
-        if (IGNYSettings.fakePlayerMemoryLeakFix && self instanceof FakeClientConnection) ci.cancel();
+        if (IGNYSettings.FAKE_PLAYER_MEMORY_LEAK_FIX.value() && self instanceof FakeClientConnection) ci.cancel();
     }
 }

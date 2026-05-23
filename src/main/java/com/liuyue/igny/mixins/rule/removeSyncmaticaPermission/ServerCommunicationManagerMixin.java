@@ -65,7 +65,7 @@ public abstract class ServerCommunicationManagerMixin {
     private void handlePacket(ExchangeTarget source, PacketType type, FriendlyByteBuf packetBuf, CallbackInfo ci, @Local(name = "placement") ServerPlacement placement) {
         //#endif
         ServerPlayer player = this.playerMap.get(source);
-        if (!CommandUtil.canUseCommand(player, IGNYSettings.removeSyncmaticaPermission) && placement.getOwner().uuid != player.getUUID()) {
+        if (!CommandUtil.canUseCommand(player, IGNYSettings.REMOVE_SYNCMATICA_PERMISSION.value()) && placement.getOwner().uuid != player.getUUID()) {
             if (source != null) {
                 this.sendMessage(source, MessageType.ERROR, Translations.tr("igny.syncmatica_not_permission"));
             }

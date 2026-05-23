@@ -27,7 +27,7 @@ public class EndPortalShape {
         if (!(state.getBlock() instanceof EndPortalFrameBlock)) {
             return Optional.empty();
         }
-        int maxEndPortalSize = IGNYSettings.maxEndPortalSize;
+        int maxEndPortalSize = IGNYSettings.MAX_END_PORTAL_SIZE.value();
         Direction facing = state.getValue(EndPortalFrameBlock.FACING);
         Direction leftFacing = facing.getAxis() == Direction.Axis.Z ? Direction.EAST : Direction.SOUTH;
         int minOffset = 0;
@@ -44,7 +44,7 @@ public class EndPortalShape {
             return Optional.empty();
         }
         for (int depth = 3; depth <= maxEndPortalSize; depth++) {
-            if (!IGNYSettings.allowRectangularEndPortal && depth != currentSideLength) {
+            if (!IGNYSettings.ALLOW_RECTANGULAR_END_PORTAL.value() && depth != currentSideLength) {
                 continue;
             }
             BlockPos oppositeStart = eyePosition.relative(leftFacing, minOffset).relative(facing, depth + 1);

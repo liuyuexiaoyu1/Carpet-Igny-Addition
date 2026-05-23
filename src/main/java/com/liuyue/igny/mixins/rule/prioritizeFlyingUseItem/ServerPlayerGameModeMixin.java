@@ -22,7 +22,7 @@ public abstract class ServerPlayerGameModeMixin {
 
     @Inject(method = "useItemOn", at = @At("HEAD"), cancellable = true)
     private void useItemOn(ServerPlayer player, Level level, ItemStack stack, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
-        if (IGNYSettings.prioritizeFlyingUseItem && level != null && !level.getBlockState(hitResult.getBlockPos()).isAir()) {
+        if (IGNYSettings.PRIORITIZE_FLYING_USE_ITEM.value() && level != null && !level.getBlockState(hitResult.getBlockPos()).isAir()) {
             if (player.isFallFlying() || player.isAutoSpinAttack()) {
                 ItemStack mainHandStack = player.getMainHandItem();
                 ItemStack offHandStack = player.getOffhandItem();

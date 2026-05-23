@@ -23,7 +23,7 @@ public class DistanceManagerMixin {
     @Inject(method = "getNaturalSpawnChunkCount", at = @At(value = "HEAD"), cancellable = true)
     private void getNaturalSpawnChunkCount(CallbackInfoReturnable<Integer> cir) {
         if (this.playersPerChunk.isEmpty()) return;
-        if (IGNYSettings.spawnMaxCountIgnoresChunkOverlap && CarpetServer.minecraft_server != null) {
+        if (IGNYSettings.SPAWN_MAX_COUNT_IGNORES_CHUNK_OVERLAP.value() && CarpetServer.minecraft_server != null) {
             cir.setReturnValue(CarpetServer.minecraft_server.getPlayerCount() * 289);
         }
     }

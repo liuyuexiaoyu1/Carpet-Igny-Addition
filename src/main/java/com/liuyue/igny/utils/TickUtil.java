@@ -15,7 +15,7 @@ import net.minecraft.world.TickRateManager;
 
 public class TickUtil {
     public static boolean shouldSprint(MinecraftServer server) {
-        switch (IGNYSettings.betterSprintGameTick) {
+        switch (IGNYSettings.BETTER_SPRINT_GAME_TICK.value()) {
             case "false" -> {
                 return true;
             }
@@ -44,7 +44,7 @@ public class TickUtil {
             //#elseif MC > 11904
             //$$ TickRateManager manager = ((MinecraftServerInterface)server).getTickRateManager();
             //#endif
-            if (!IGNYSettings.betterSprintGameTick.equals("false")) {
+            if (!IGNYSettings.BETTER_SPRINT_GAME_TICK.value().equals("false")) {
                 if (!TickUtil.shouldSprint(server)) {
                     //#if MC <= 11904
                     //$$ TickSpeed.tickrate(20);

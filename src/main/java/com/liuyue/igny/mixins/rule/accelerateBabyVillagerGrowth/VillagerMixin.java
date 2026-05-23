@@ -38,7 +38,7 @@ public abstract class VillagerMixin {
     )
     private void mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         Villager self = (Villager) (Object) this;
-        if (IGNYSettings.accelerateBabyVillagerGrowth && self.getAge() < -200) {
+        if (IGNYSettings.ACCELERATE_BABY_VILLAGER_GROWTH.value() && self.getAge() < -200) {
             Level level = self.level();
             ItemStack stack = player.getItemInHand(hand);
             if (level.isClientSide() || !self.isAlive() || self.isTrading() || self.isSleeping() || !self.isBaby()) return;

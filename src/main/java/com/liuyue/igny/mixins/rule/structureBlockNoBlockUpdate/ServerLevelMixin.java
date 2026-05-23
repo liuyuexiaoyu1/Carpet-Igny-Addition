@@ -13,6 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ServerLevelMixin {
     @Inject(method = "blockEvent", at = @At("HEAD"), cancellable = true)
     private void blockEvent(BlockPos blockPos, Block block, int i, int j, CallbackInfo ci) {
-        if (IGNYSettings.structureBlockNoBlockUpdate && IGNYSettings.noUpdatePos.contains(blockPos)) ci.cancel();
+        if (IGNYSettings.STRUCTURE_BLOCK_NO_BLOCK_UPDATE.value() && IGNYSettings.noUpdatePos.contains(blockPos)) ci.cancel();
     }
 }

@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class TheEndGatewayBlockEntityMixin {
     @Inject(method = "triggerCooldown", at = @At(value = "HEAD"), cancellable = true)
     private static void triggerCooldown(Level level, BlockPos pos, BlockState state, TheEndGatewayBlockEntity blockEntity, CallbackInfo ci) {
-        if (IGNYSettings.endGatewayPortalNoCooldown) {
+        if (IGNYSettings.END_GATEWAY_PORTAL_NO_COOLDOWN.value()) {
             ci.cancel();
         }
     }

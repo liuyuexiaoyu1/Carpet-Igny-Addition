@@ -58,7 +58,7 @@ public abstract class ExplosionMixin
     ) {
         synchronized (igny$lock) {
             boolean changed = CarpetSettings.optimizedTNT;
-            if (changed && IGNYSettings.optimizedTNTErrorScopeFix) {
+            if (changed && IGNYSettings.OPTIMIZED_TNT_ERROR_SCOPE_FIX.value()) {
                 CarpetSettings.optimizedTNT = this.source instanceof PrimedTnt;
             }
             try {
@@ -81,7 +81,7 @@ public abstract class ExplosionMixin
     private void onExplosionBHighPriority(boolean bl, Operation<Void> original) {
         synchronized (igny$lock) {
             boolean changed = CarpetSettings.optimizedTNT;
-            if (changed && IGNYSettings.optimizedTNTErrorScopeFix) {
+            if (changed && IGNYSettings.OPTIMIZED_TNT_ERROR_SCOPE_FIX.value()) {
                 CarpetSettings.optimizedTNT = this.source instanceof PrimedTnt;
             }
             try {

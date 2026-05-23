@@ -34,7 +34,7 @@ public abstract class EnchantedCountIncreaseFunctionMixin {
         //#else
         DamageSource damageSource = lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE);
         //#endif
-        if (IGNYSettings.noOwnerTntLootingIII &&
+        if (IGNYSettings.NO_OWNER_TNT_LOOTING_III.value() &&
                 damageSource != null &&
                 damageSource.getDirectEntity() instanceof PrimedTnt &&
                 ((PrimedTnt) damageSource.getDirectEntity()).getOwner() == null) {

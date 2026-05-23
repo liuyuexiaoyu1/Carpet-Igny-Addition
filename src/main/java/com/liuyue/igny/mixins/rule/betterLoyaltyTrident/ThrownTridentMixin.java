@@ -19,7 +19,7 @@ public class ThrownTridentMixin {
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/ThrownTrident;isNoPhysics()Z"))
     private void tick(CallbackInfo ci, @Local Entity owner, @Local int i) {
-        if (IGNYSettings.betterLoyaltyTrident) {
+        if (IGNYSettings.BETTER_LOYALTY_TRIDENT.value()) {
             ThrownTrident trident = (ThrownTrident) (Object) this;
             MinecraftServer server = trident.level().getServer();
             if (owner != null && i > 0 && server != null) {

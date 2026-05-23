@@ -32,7 +32,7 @@ public class LayeredCauldronBlockMixin {
 
     @ModifyVariable(method = "receiveStalactiteDrip", at = @At(value = "HEAD"), argsOnly = true)
     private BlockState isFull(BlockState value, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos pos) {
-        if (IGNYSettings.convenientRegeneratePowderSnow && value.is(Blocks.POWDER_SNOW)) {
+        if (IGNYSettings.CONVENIENT_REGENERATE_POWDER_SNOW.value() && value.is(Blocks.POWDER_SNOW)) {
             return level.getBlockState(pos);
         }
         return value;
@@ -40,7 +40,7 @@ public class LayeredCauldronBlockMixin {
 
     @Inject(method = "canReceiveStalactiteDrip", at = @At(value = "RETURN"), cancellable = true)
     private void canReceiveStalactiteDrip(Fluid fluid, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.convenientRegeneratePowderSnow && !cir.getReturnValueZ()) {
+        if (IGNYSettings.CONVENIENT_REGENERATE_POWDER_SNOW.value() && !cir.getReturnValueZ()) {
             //#if MC >= 12003
             cir.setReturnValue(fluid == Fluids.WATER && this.precipitationType == Biome.Precipitation.SNOW);
             //#else

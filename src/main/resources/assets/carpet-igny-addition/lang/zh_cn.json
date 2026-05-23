@@ -8,7 +8,7 @@
   "igny.settings.record.new_value": "新值",
   "igny.settings.command.version": "版本",
   "igny.settings.command.total_rules": "总规则数",
-  "igny.settings.failure.unknown_entity": "未知的实体ID：%s",
+  "igny.settings.failure.unknown_entity": "未知的实体ID",
   "igny.settings.source": "来源",
   "menu.igny.surrender": "我投降",
 

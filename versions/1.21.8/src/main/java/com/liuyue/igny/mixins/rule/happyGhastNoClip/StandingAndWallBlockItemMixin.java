@@ -17,18 +17,16 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(StandingAndWallBlockItem.class)
-public class StandingAndWallBlockItemMixin
-{
+public class StandingAndWallBlockItemMixin {
     @WrapOperation(method = "getPlacementState", at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/level/LevelReader;isUnobstructed(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Z"
     ))
     private boolean canPlayerPlace(
-            LevelReader instance, BlockState blockState, BlockPos blockPos, CollisionContext collisionContext, Operation<Boolean> original,@Local(argsOnly = true) BlockPlaceContext blockPlaceContext
-    )
-    {
+            LevelReader instance, BlockState blockState, BlockPos blockPos, CollisionContext collisionContext, Operation<Boolean> original, @Local(argsOnly = true) BlockPlaceContext blockPlaceContext
+    ) {
         Player player = blockPlaceContext.getPlayer();
-        if (player != null && player.getRootVehicle() instanceof HappyGhast && IGNYSettings.happyGhastNoClip) {
+        if (player != null && player.getRootVehicle() instanceof HappyGhast && IGNYSettings.HAPPY_GHAST_NO_CLIP.value()) {
             VoxelShape voxelShape = blockState.getCollisionShape(instance, blockPos, collisionContext);
             return voxelShape.isEmpty() || instance.isUnobstructed(player, voxelShape.move(blockPos.getX(), blockPos.getY(), blockPos.getZ()));
 

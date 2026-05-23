@@ -18,7 +18,7 @@ public abstract class EntityMixin {
 
     @Inject(method = "thunderHit", at = @At(value = "HEAD"), cancellable = true)
     private void onThunderHit(ServerLevel serverLevel, LightningBolt lightningBolt, CallbackInfo ci) {
-        if (IGNYSettings.lightningBoltNoFire) {
+        if (IGNYSettings.LIGHTNING_BOLT_NO_FIRE.value()) {
             //#if MC >= 12102
             //$$ ((Entity) (Object) this).hurtServer(serverLevel, this.damageSources().lightningBolt(), 5.0F);
             //#else

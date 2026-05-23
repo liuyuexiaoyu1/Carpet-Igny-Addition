@@ -46,7 +46,7 @@ public class SetLookAndInteractMixin {
             //#endif
             , at = @At(value = "HEAD"), cancellable = true)
     private static void create(BehaviorBuilder.Instance<?> instance, MemoryAccessor<?, ?> memoryAccessor, int i, EntityType<?> entityType, MemoryAccessor<?, ?> memoryAccessor2, MemoryAccessor<?, ?> memoryAccessor3, ServerLevel serverLevel, LivingEntity livingEntity, long l, CallbackInfoReturnable<Boolean> cir){
-        if (livingEntity instanceof Piglin && ((IEntity)livingEntity).carpet_Igny_Addition$getCrammingCount() >= IGNYSettings.optimizedEntityLimit){
+        if (livingEntity instanceof Piglin && ((IEntity)livingEntity).carpet_Igny_Addition$getCrammingCount() >= IGNYSettings.OPTIMIZED_ENTITY_LIMIT.value()){
             cir.setReturnValue(false);
         }
     }

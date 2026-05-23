@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class LiquidBlockMixin {
     @Inject(method = "shouldSpreadLiquid", at = @At(value = "HEAD"), cancellable = true)
     private void shouldSpreadLiquid(Level level, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        if (!IGNYSettings.liquidNeverSpread.equals("false")) {
-            if (IGNYSettings.liquidNeverSpread.equals("true") || state.getFluidState().isSource()) {
+        if (!IGNYSettings.LIQUID_NEVER_SPREAD.value().equals("false")) {
+            if (IGNYSettings.LIQUID_NEVER_SPREAD.value().equals("true") || state.getFluidState().isSource()) {
                 cir.setReturnValue(false);
             }
         }

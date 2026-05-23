@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public class DaylightDetectorBlockMixin {
     @WrapOperation(method = "getTicker", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/dimension/DimensionType;hasSkyLight()Z"))
     private static boolean hasSkyLight(DimensionType instance, Operation<Boolean> original) {
-        if (IGNYSettings.globalDaylightDetector) {
+        if (IGNYSettings.GLOBAL_DAYLIGHT_DETECTOR.value()) {
             return true;
         }
         return original.call(instance);
@@ -39,7 +39,7 @@ public class DaylightDetectorBlockMixin {
     private static int getBrightness(Level instance, LightLayer lightLayer, BlockPos pos, Operation<Integer> original) {
         //#endif
         MinecraftServer server = instance.getServer();
-        if (IGNYSettings.globalDaylightDetector && !instance.dimensionType().hasSkyLight() && server != null) {
+        if (IGNYSettings.GLOBAL_DAYLIGHT_DETECTOR.value() && !instance.dimensionType().hasSkyLight() && server != null) {
             BlockPos.MutableBlockPos mutableCheckPos = new BlockPos.MutableBlockPos();
             mutableCheckPos.set(pos.getX(), pos.getY() + 1, pos.getZ());
             boolean isExposed = true;
@@ -76,9 +76,9 @@ public class DaylightDetectorBlockMixin {
     //#if MC < 26.1
     @WrapOperation(method = "updateSignalStrength", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getSkyDarken()I"))
     private static int getSkyDarken(Level instance, Operation<Integer> original) {
-        if (IGNYSettings.globalDaylightDetector) {
+        if (IGNYSettings.GLOBAL_DAYLIGHT_DETECTOR.value()) {
             MinecraftServer server = instance.getServer();
-            if (IGNYSettings.globalDaylightDetector && server != null) {
+            if (IGNYSettings.GLOBAL_DAYLIGHT_DETECTOR.value() && server != null) {
                 instance = server.getLevel(Level.OVERWORLD);
             }
         }
@@ -93,9 +93,9 @@ public class DaylightDetectorBlockMixin {
     @WrapOperation(method = "updateSignalStrength", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getSunAngle(F)F"))
     private static float getSunAngle(Level instance, float f, Operation<Float> original) {
         //#endif
-        if (IGNYSettings.globalDaylightDetector) {
+        if (IGNYSettings.GLOBAL_DAYLIGHT_DETECTOR.value()) {
             MinecraftServer server = instance.getServer();
-            if (IGNYSettings.globalDaylightDetector && server != null) {
+            if (IGNYSettings.GLOBAL_DAYLIGHT_DETECTOR.value() && server != null) {
                 //#if MC >= 12111
                 //$$ Level level = server.getLevel(Level.OVERWORLD);
                 //$$ if (level != null) {

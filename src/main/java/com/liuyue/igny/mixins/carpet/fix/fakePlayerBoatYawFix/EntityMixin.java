@@ -22,7 +22,7 @@ public class EntityMixin {
     @Inject(method = "startRiding(Lnet/minecraft/world/entity/Entity;Z)Z",at= @At(value = "RETURN"))
     private void startRiding(Entity entity, boolean bl, CallbackInfoReturnable<Boolean> cir) {
     //#endif
-        if (IGNYSettings.fakePlayerBoatYawFix && cir.getReturnValueZ()) {
+        if (IGNYSettings.FAKE_PLAYER_BOAT_YAW_FIX.value() && cir.getReturnValueZ()) {
             Entity self = (Entity) (Object) this;
             if (self instanceof EntityPlayerMPFake && entity instanceof Boat) {
                 self.setYRot(entity.getYRot());

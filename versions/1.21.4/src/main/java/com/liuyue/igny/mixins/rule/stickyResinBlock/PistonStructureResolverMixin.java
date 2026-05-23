@@ -19,7 +19,7 @@ public abstract class PistonStructureResolverMixin {
 
     @Inject(method = "isSticky", at = @At(value = "HEAD"), cancellable = true)
     private static void isSticky(BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.stickyResinBlock) {
+        if (IGNYSettings.STICKY_RESIN_BLOCK.value()) {
             if (state.is(Blocks.RESIN_BLOCK)) {
                 cir.setReturnValue(true);
             }
@@ -28,7 +28,7 @@ public abstract class PistonStructureResolverMixin {
 
     @Inject(method = "canStickToEachOther", at = @At(value = "HEAD"), cancellable = true)
     private static void canStickToEachOther(BlockState state1, BlockState state2, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.stickyResinBlock) {
+        if (IGNYSettings.STICKY_RESIN_BLOCK.value()) {
             if (state1.is(Blocks.HONEY_BLOCK) && state2.is(Blocks.SLIME_BLOCK)) {
                 cir.setReturnValue(false);
                 return;

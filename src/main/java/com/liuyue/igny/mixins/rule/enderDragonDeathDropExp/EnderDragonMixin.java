@@ -10,8 +10,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class EnderDragonMixin {
     @ModifyVariable(method = "tickDeath", at = @At(value = "STORE"))
     private int dropExp(int original) {
-        if (IGNYSettings.enderDragonDeathDropExp != -1) {
-            return IGNYSettings.enderDragonDeathDropExp;
+        if (IGNYSettings.ENDER_DRAGON_DEATH_DROP_EXP.value() != -1) {
+            return IGNYSettings.ENDER_DRAGON_DEATH_DROP_EXP.value();
         }
         return original;
     }

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class ItemMixin {
     @ModifyVariable(method = "getPlayerPOVHitResult", at = @At(value = "RETURN"), argsOnly = true)
     private static ClipContext.Fluid getPlayerPOVHitResult(ClipContext.Fluid value) {
-        if (IGNYSettings.liquidSourceCanDestroy && value.equals(ClipContext.Fluid.NONE)) {
+        if (IGNYSettings.LIQUID_SOURCE_CAN_DESTROY.value() && value.equals(ClipContext.Fluid.NONE)) {
             return ClipContext.Fluid.SOURCE_ONLY;
         }
         return value;

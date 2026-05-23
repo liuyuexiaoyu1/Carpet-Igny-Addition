@@ -29,7 +29,7 @@ public class FallingBlockEntityMixin {
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/FallingBlockEntity;discard()V", ordinal = 3))
     private void tick(CallbackInfo ci, @Local BlockPos blockPos) {
         FallingBlockEntity self = (FallingBlockEntity) (Object) this;
-        if (IGNYSettings.fastAnvilBreaking && this.blockState.is(BlockTags.ANVIL)) {
+        if (IGNYSettings.FAST_ANVIL_BREAKING.value() && this.blockState.is(BlockTags.ANVIL)) {
             Level level = self.level();
             if (level.isClientSide()) return;
             BlockPos endPos = new BlockPos(blockPos.getX(), level.getMaxBuildHeight(), blockPos.getZ());

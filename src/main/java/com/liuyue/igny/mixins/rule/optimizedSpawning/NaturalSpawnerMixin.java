@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public class NaturalSpawnerMixin {
     @WrapOperation(method = "spawnForChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/NaturalSpawner;spawnCategoryForChunk(Lnet/minecraft/world/entity/MobCategory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/NaturalSpawner$SpawnPredicate;Lnet/minecraft/world/level/NaturalSpawner$AfterSpawnCallback;)V"))
     private static void spawnForChunk(MobCategory mobCategory, ServerLevel serverLevel, LevelChunk levelChunk, NaturalSpawner.SpawnPredicate spawnPredicate, NaturalSpawner.AfterSpawnCallback afterSpawnCallback, Operation<Void> original) {
-        if (IGNYSettings.optimizedSpawning) {
+        if (IGNYSettings.OPTIMIZED_SPAWNING.value()) {
             NaturalSpawner.SpawnState lastSpawner = serverLevel.getChunkSource().getLastSpawnState();
             if (lastSpawner != null) {
                 ResourceKey<Level> dim = serverLevel.dimension();

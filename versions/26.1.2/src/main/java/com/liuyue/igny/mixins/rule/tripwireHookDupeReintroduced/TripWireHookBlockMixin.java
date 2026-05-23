@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.At;
 public class TripWireHookBlockMixin {
     @WrapOperation(method = "calculateState", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z", ordinal = 2))
     private static boolean is(BlockState instance, Object o, Operation<Boolean> original) {
-        return IGNYSettings.tripwireHookDupeReintroduced || original.call(instance, o);
+        return IGNYSettings.TRIPWIRE_HOOK_DUPE_REINTRODUCED.value() || original.call(instance, o);
     }
 }

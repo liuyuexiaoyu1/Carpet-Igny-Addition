@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class IceBlockMixin {
     @Inject(method = "playerDestroy",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getBlockState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;"), cancellable = true)
     private void spawnWater(Level level, Player player, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, ItemStack itemStack, CallbackInfo ci) {
-        if (IGNYSettings.floatingIceWater) {
+        if (IGNYSettings.FLOATING_ICE_WATER.value()) {
             level.setBlockAndUpdate(blockPos, Blocks.WATER.defaultBlockState());
             ci.cancel();
         }

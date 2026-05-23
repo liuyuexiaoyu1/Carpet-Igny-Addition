@@ -30,7 +30,7 @@ public class CalibratedSculkSensorVibrationUserMixin {
 
     @Inject(method = "getBackSignal",at = @At("RETURN"), cancellable = true)
     private void getBackSignal(Level level, BlockPos blockPos, BlockState blockState, CallbackInfoReturnable<Integer> cir) {
-        if (IGNYSettings.safeSoundSuppression) {
+        if (IGNYSettings.SAFE_SOUND_SUPPRESSION.value()) {
             if (this.igny$blockEntity == null) return;
             BlockPos blockEntityPos = igny$blockEntity.getBlockPos();
             //#if MC >= 12005

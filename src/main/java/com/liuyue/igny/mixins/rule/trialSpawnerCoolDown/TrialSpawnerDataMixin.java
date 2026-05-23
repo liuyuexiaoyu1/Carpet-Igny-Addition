@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class TrialSpawnerDataMixin {
     @Inject(method = "isCooldownFinished", at = @At("HEAD"), cancellable = true)
     private void isCooldownFinished(ServerLevel serverLevel, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.trialSpawnerCoolDown == 0) {
+        if (IGNYSettings.TRIAL_SPAWNER_COOL_DOWN.value() == 0) {
             cir.setReturnValue(true);
         }
     }

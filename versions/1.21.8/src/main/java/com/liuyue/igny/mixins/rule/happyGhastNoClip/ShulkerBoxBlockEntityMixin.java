@@ -17,9 +17,8 @@ public class ShulkerBoxBlockEntityMixin {
             value = "INVOKE",
             target = "Lnet/minecraft/world/entity/Entity;getPistonPushReaction()Lnet/minecraft/world/level/material/PushReaction;"
     ))
-    private PushReaction getPistonBehaviourOfNoClipPlayers(Entity instance, Operation<PushReaction> original)
-    {
-        if (((instance instanceof Player && instance.getRootVehicle() instanceof HappyGhast)||(instance instanceof HappyGhast&&instance.isVehicle()))&&IGNYSettings.happyGhastNoClip)
+    private PushReaction getPistonBehaviourOfNoClipPlayers(Entity instance, Operation<PushReaction> original) {
+        if (((instance instanceof Player && instance.getRootVehicle() instanceof HappyGhast) || (instance instanceof HappyGhast && instance.isVehicle())) && IGNYSettings.HAPPY_GHAST_NO_CLIP.value())
             return PushReaction.IGNORE;
         return original.call(instance);
     }

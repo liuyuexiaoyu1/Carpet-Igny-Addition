@@ -14,12 +14,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ServerWaypointManagerMixin {
     @Inject(method = "isLocatorBarEnabledFor", at = @At("HEAD"), cancellable = true)
     private static void isLocatorBarEnabledFor(ServerPlayer player, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.locatorBarNoFakePlayer && player instanceof EntityPlayerMPFake) cir.setReturnValue(false);
+        if (IGNYSettings.LOCATOR_BAR_NO_FAKE_PLAYER.value() && player instanceof EntityPlayerMPFake) cir.setReturnValue(false);
     }
 
     @Inject(method = "addPlayer", at = @At(value = "HEAD"), cancellable = true)
     private void addPlayer(ServerPlayer player, CallbackInfo ci) {
-        if (IGNYSettings.locatorBarNoFakePlayer && player instanceof EntityPlayerMPFake) ci.cancel();
+        if (IGNYSettings.LOCATOR_BAR_NO_FAKE_PLAYER.value() && player instanceof EntityPlayerMPFake) ci.cancel();
     }
 }
 

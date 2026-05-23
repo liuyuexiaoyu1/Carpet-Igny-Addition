@@ -91,7 +91,7 @@ public abstract class LevelMixin {
 
     @Inject(method = "setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;II)Z", at = @At(value = "HEAD"))
     private void setBlockHead(BlockPos pos, BlockState state, int flags, int recursionLeft, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.transparentNightmarishBlock) {
+        if (IGNYSettings.TRANSPARENT_NIGHTMARISH_BLOCK.value()) {
             Level level = (Level) (Object) this;
             if (level.isClientSide()) return;
 
@@ -104,7 +104,7 @@ public abstract class LevelMixin {
 
     @Inject(method = "setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;II)Z", at = @At("RETURN"))
     private void setBlockReturn(BlockPos pos, BlockState newState, int flags, int recursion, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.transparentNightmarishBlock) {
+        if (IGNYSettings.TRANSPARENT_NIGHTMARISH_BLOCK.value()) {
             Level level = (Level) (Object) this;
             if (level.isClientSide() || !cir.getReturnValue()) return;
 
@@ -119,7 +119,7 @@ public abstract class LevelMixin {
     abstract static class BlockStateBaseMixin {
         @Inject(method = "getPistonPushReaction", at = @At("HEAD"), cancellable = true)
         private void getPistonPushReaction(CallbackInfoReturnable<PushReaction> cir) {
-            if (IGNYSettings.transparentNightmarishBlock) {
+            if (IGNYSettings.TRANSPARENT_NIGHTMARISH_BLOCK.value()) {
                 BlockBehaviour.BlockStateBase state = (BlockBehaviour.BlockStateBase) (Object) this;
                 if (state instanceof BlockState blockState) {
                     if (RuleUtil.isNightmarishBlock(blockState.getBlock())) {
@@ -131,7 +131,7 @@ public abstract class LevelMixin {
 
         @Inject(method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", at = @At("HEAD"), cancellable = true)
         private void getCollisionShape(net.minecraft.world.level.BlockGetter level, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
-            if (IGNYSettings.transparentNightmarishBlock) {
+            if (IGNYSettings.TRANSPARENT_NIGHTMARISH_BLOCK.value()) {
                 BlockBehaviour.BlockStateBase state = (BlockBehaviour.BlockStateBase) (Object) this;
                 if (state instanceof BlockState blockState) {
                     if (RuleUtil.isNightmarishBlock(blockState.getBlock()) || state.getBlock() instanceof AmethystClusterBlock){
@@ -145,7 +145,7 @@ public abstract class LevelMixin {
 
         @Inject(method = "getDestroySpeed", at = @At("HEAD"), cancellable = true)
         private void getDestroySpeed(net.minecraft.world.level.BlockGetter level, BlockPos pos, CallbackInfoReturnable<Float> cir) {
-            if (IGNYSettings.transparentNightmarishBlock) {
+            if (IGNYSettings.TRANSPARENT_NIGHTMARISH_BLOCK.value()) {
                 BlockBehaviour.BlockStateBase state = (BlockBehaviour.BlockStateBase) (Object) this;
                 if (state instanceof BlockState blockState) {
                     if (RuleUtil.isNightmarishBlock(blockState.getBlock())) {

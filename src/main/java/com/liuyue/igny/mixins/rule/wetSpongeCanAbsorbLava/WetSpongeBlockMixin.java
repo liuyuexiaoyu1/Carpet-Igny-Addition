@@ -193,6 +193,6 @@ public abstract class WetSpongeBlockMixin extends Block {
 
     @Unique
     private boolean shouldAbsorb(FluidState fluidState) {
-        return fluidState.is(FluidTags.LAVA) && IGNYSettings.wetSpongeCanAbsorbLava;
+        return fluidState.is(FluidTags.LAVA) && IGNYSettings.WET_SPONGE_CAN_ABSORB_LAVA.value();
     }
 }

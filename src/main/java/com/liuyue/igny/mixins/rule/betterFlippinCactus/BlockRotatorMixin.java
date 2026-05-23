@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class BlockRotatorMixin {
     @Inject(method = "flipBlock", at = @At(value = "RETURN"), cancellable = true)
     private static void onFlipBlock(BlockState state, Level world, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.betterFlippinCactus && !cir.getReturnValueZ()) {
+        if (IGNYSettings.BETTER_FLIPPIN_CACTUS.value() && !cir.getReturnValueZ()) {
             BlockState newState = getNextRotationState(state);
             if (newState != null && newState != state) {
                 BlockPos pos = hit.getBlockPos();

@@ -22,7 +22,7 @@ public class ItemFrameMixin implements ItemFrameRefreshable {
 
     @Inject(method = "setItem(Lnet/minecraft/world/item/ItemStack;Z)V", at = @At(value = "RETURN"))
     private void onSetItem(ItemStack stack, boolean updateNeighbours, CallbackInfo ci) {
-        igny$refreshInvisible(IGNYSettings.invisibleItemFrames);
+        igny$refreshInvisible(IGNYSettings.INVISIBLE_ITEM_FRAMES.value());
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("RETURN"))
@@ -39,7 +39,7 @@ public class ItemFrameMixin implements ItemFrameRefreshable {
             igny$modManagedInvisible = tag.getBoolean("IgnyInvisibleItemFrame");
             //#endif
         }
-        igny$refreshInvisible(IGNYSettings.invisibleItemFrames);
+        igny$refreshInvisible(IGNYSettings.INVISIBLE_ITEM_FRAMES.value());
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("RETURN"))

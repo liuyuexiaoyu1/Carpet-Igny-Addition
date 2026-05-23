@@ -19,7 +19,7 @@ public class MobCountsMixin {
 
     @Inject(method = "canSpawn", at = @At(value = "HEAD"), cancellable = true)
     private void canSpawn(MobCategory category, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.spawnMaxCountIgnoresChunkOverlap && CarpetServer.minecraft_server != null) {
+        if (IGNYSettings.SPAWN_MAX_COUNT_IGNORES_CHUNK_OVERLAP.value() && CarpetServer.minecraft_server != null) {
             cir.setReturnValue(this.counts.getOrDefault(category, 0) < category.getMaxInstancesPerChunk() * CarpetServer.minecraft_server.getPlayerCount());
         }
     }

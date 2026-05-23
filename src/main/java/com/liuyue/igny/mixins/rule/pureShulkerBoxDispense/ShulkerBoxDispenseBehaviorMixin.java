@@ -30,7 +30,7 @@ public abstract class ShulkerBoxDispenseBehaviorMixin {
             )
     )
     private InteractionResult BlockItem(BlockItem instance, BlockPlaceContext blockPlaceContext, Operation<InteractionResult> original, @Local(argsOnly = true) ItemStack itemStack, @Local(ordinal = 0) Direction direction, @Local BlockPos blockPos, @Local(ordinal = 1) Direction direction2) {
-        if (IGNYSettings.pureShulkerBoxDispense) {
+        if (IGNYSettings.PURE_SHULKER_BOX_DISPENSE.value()) {
             ItemStack originalStack = blockPlaceContext.getItemInHand();
             //#if MC >= 12005
             originalStack.remove(DataComponents.CUSTOM_NAME);

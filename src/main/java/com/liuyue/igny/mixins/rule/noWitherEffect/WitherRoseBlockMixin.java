@@ -26,7 +26,7 @@ public class WitherRoseBlockMixin {
             //$$ , boolean bl
             //#endif
             , CallbackInfo ci) {
-        if (IGNYSettings.noWitherEffect) {
+        if (IGNYSettings.NO_WITHER_EFFECT.value()) {
             ci.cancel();
         }
     }

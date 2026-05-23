@@ -30,7 +30,7 @@ public abstract class MinecartTNTMixin
 
     @Inject(method="causeFallDamage", at= @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/MinecartTNT;explode(D)V"), cancellable = true)
     private void onCauseFallDamage(double d, float f, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.tntMinecartEmptyDamageSourceFix) {
+        if (IGNYSettings.TNT_MINECART_EMPTY_DAMAGE_SOURCE_FIX.value()) {
             if (d >= 3.0) {
                 double e = d / 10.0;
                 this.explode(this.ignitionSource, e * e);

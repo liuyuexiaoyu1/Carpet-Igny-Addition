@@ -21,7 +21,7 @@ public class AbstractCauldronBlockMixin {
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/AbstractCauldronBlock;receiveStalactiteDrip(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/material/Fluid;)V"))
     private void receiveStalactiteDrip(AbstractCauldronBlock instance, BlockState state, Level level, BlockPos pos, Fluid fluid, Operation<Void> original) {
         BlockState blockState = getSourceBlockAtTop(level, pos);
-        if (IGNYSettings.convenientRegeneratePowderSnow && blockState.is(Blocks.POWDER_SNOW)) {
+        if (IGNYSettings.CONVENIENT_REGENERATE_POWDER_SNOW.value() && blockState.is(Blocks.POWDER_SNOW)) {
             original.call(instance, blockState, level, pos, fluid);
             return;
         }

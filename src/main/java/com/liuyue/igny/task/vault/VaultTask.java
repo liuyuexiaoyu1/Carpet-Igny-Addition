@@ -324,7 +324,7 @@ public class VaultTask implements ITask {
             return;
         }
         //#if MC >= 12005
-        if (IGNYSettings.instantVaultSpawnLoot) {
+        if (IGNYSettings.INSTANT_VAULT_SPAWN_LOOT.value()) {
             if (stageTickCounter >= INSTANT_WAIT_TICKS) {
                 currentStage = Stage.LOGGING_OUT;
                 stageTickCounter = 0;

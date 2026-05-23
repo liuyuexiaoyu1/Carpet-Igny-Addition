@@ -34,7 +34,7 @@ public class TrialSpawnerStateMixin {
 
     @WrapOperation(method = "tickAndGetNext", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/trialspawner/TrialSpawnerData;isReadyToEjectItems(Lnet/minecraft/server/level/ServerLevel;FI)Z"))
     private boolean dropItem(TrialSpawnerData instance, ServerLevel serverLevel, float f, int i, Operation<Boolean> original) {
-        if (IGNYSettings.instantTrialSpawnerSpawnLoot) {
+        if (IGNYSettings.INSTANT_TRIAL_SPAWNER_SPAWN_LOOT.value()) {
             return true;
         }
         return original.call(instance, serverLevel, f, i);

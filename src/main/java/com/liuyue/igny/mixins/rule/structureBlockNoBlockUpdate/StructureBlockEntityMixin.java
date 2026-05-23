@@ -20,7 +20,7 @@ public class StructureBlockEntityMixin {
     @WrapOperation(method = "placeStructure(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplate;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplate;placeInWorld(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/levelgen/structure/templatesystem/StructurePlaceSettings;Lnet/minecraft/util/RandomSource;I)Z"))
     //#endif
     private boolean placeStructure_noBlockUpdateFlag(StructureTemplate instance, ServerLevelAccessor serverLevelAccessor, BlockPos blockPos, BlockPos blockPos2, StructurePlaceSettings structurePlaceSettings, RandomSource randomSource, int i, Operation<Boolean> original) {
-        if (IGNYSettings.structureBlockNoBlockUpdate) {
+        if (IGNYSettings.STRUCTURE_BLOCK_NO_BLOCK_UPDATE.value()) {
             structurePlaceSettings.setKnownShape(true);
             return original.call(instance, serverLevelAccessor, blockPos, blockPos2, structurePlaceSettings, randomSource, 2 | 16);
         }

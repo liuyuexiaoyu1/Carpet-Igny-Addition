@@ -13,6 +13,6 @@ public class FireworkRocketRecipeMixin {
             constant = @Constant(intValue = 3)
     )
     private int extendMaxGunpowder(int original) {
-        return IGNYSettings.fireworksExtra ? 8 : original;
+        return IGNYSettings.FIREWORKS_EXTRA.value() ? 8 : original;
     }
 }

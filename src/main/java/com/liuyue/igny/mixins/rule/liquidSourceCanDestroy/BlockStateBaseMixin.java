@@ -17,7 +17,7 @@ public class BlockStateBaseMixin {
     @Inject(method = "getDestroyProgress", at = @At(value = "HEAD"), cancellable = true)
     private void getDestroyProgress(Player player, BlockGetter level, BlockPos pos, CallbackInfoReturnable<Float> cir) {
         BlockBehaviour.BlockStateBase state = (BlockBehaviour.BlockStateBase) (Object) this;
-        if (IGNYSettings.liquidSourceCanDestroy && state instanceof BlockState blockState && blockState.getBlock() instanceof LiquidBlock) {
+        if (IGNYSettings.LIQUID_SOURCE_CAN_DESTROY.value() && state instanceof BlockState blockState && blockState.getBlock() instanceof LiquidBlock) {
             cir.setReturnValue(player.getDestroySpeed(blockState) / 10.0F);
         }
     }

@@ -44,16 +44,16 @@ public class ServerPlayerMixin implements SafeServerPlayerEntity {
     @Override
     public boolean igny$canPlace(ServerPlayer player) {
         if (player instanceof EntityPlayerMPFake){
-            return this.igny$placeCountPerTick == 0 || this.igny$placeCountPerTick < IGNYSettings.fakePlayerPlaceLimitPerTick;
+            return this.igny$placeCountPerTick == 0 || this.igny$placeCountPerTick < IGNYSettings.FAKE_PLAYER_PLACE_LIMIT_PER_TICK.value();
         }
-        return this.igny$placeCountPerTick == 0 || this.igny$placeCountPerTick < IGNYSettings.realPlayerPlaceLimitPerTick;
+        return this.igny$placeCountPerTick == 0 || this.igny$placeCountPerTick < IGNYSettings.REAL_PLAYER_PLACE_LIMIT_PER_TICK.value();
     }
 
     @Override
     public boolean igny$canBreak(ServerPlayer player) {
         if (player instanceof EntityPlayerMPFake){
-            return this.igny$breakCountPerTick == 0 || this.igny$breakCountPerTick < IGNYSettings.fakePlayerBreakLimitPerTick;
+            return this.igny$breakCountPerTick == 0 || this.igny$breakCountPerTick < IGNYSettings.FAKE_PLAYER_BREAK_LIMIT_PER_TICK.value();
         }
-        return this.igny$breakCountPerTick == 0 || this.igny$breakCountPerTick < IGNYSettings.realPlayerBreakLimitPerTick;
+        return this.igny$breakCountPerTick == 0 || this.igny$breakCountPerTick < IGNYSettings.REAL_PLAYER_BREAK_LIMIT_PER_TICK.value();
     }
 }

@@ -18,14 +18,14 @@ public abstract class BlockItemMixin {
     @Shadow
     protected abstract boolean mustSurvive();
 
-    @Inject(method="canPlace", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "canPlace", at = @At("RETURN"), cancellable = true)
     private void canPlace(BlockPlaceContext blockPlaceContext, BlockState blockState, CallbackInfoReturnable<Boolean> cir) {
-       Player player = blockPlaceContext.getPlayer();
-       CollisionContext collisionContext = player == null ? CollisionContext.empty() : CollisionContext.of(player);
-        if (!this.mustSurvive() || blockState.canSurvive(blockPlaceContext.getLevel(), blockPlaceContext.getClickedPos()) && !blockPlaceContext.getLevel().isUnobstructed(blockState, blockPlaceContext.getClickedPos(), collisionContext)){
-            if (player != null && player.getRootVehicle() instanceof HappyGhast && IGNYSettings.happyGhastNoClip) {
+        Player player = blockPlaceContext.getPlayer();
+        CollisionContext collisionContext = player == null ? CollisionContext.empty() : CollisionContext.of(player);
+        if (!this.mustSurvive() || blockState.canSurvive(blockPlaceContext.getLevel(), blockPlaceContext.getClickedPos()) && !blockPlaceContext.getLevel().isUnobstructed(blockState, blockPlaceContext.getClickedPos(), collisionContext)) {
+            if (player != null && player.getRootVehicle() instanceof HappyGhast && IGNYSettings.HAPPY_GHAST_NO_CLIP.value()) {
                 cir.setReturnValue(true);
             }
         }
-   }
+    }
 }

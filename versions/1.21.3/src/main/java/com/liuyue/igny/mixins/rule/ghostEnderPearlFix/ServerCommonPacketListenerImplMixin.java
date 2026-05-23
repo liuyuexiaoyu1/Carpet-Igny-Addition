@@ -21,7 +21,7 @@ public class ServerCommonPacketListenerImplMixin {
 
     @WrapOperation(method = "disconnect(Lnet/minecraft/network/DisconnectionDetails;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;executeBlocking(Ljava/lang/Runnable;)V"))
     private void disconnect(MinecraftServer instance, Runnable runnable, Operation<Void> original) {
-        if (IGNYSettings.ghostEnderPearlFix) {
+        if (IGNYSettings.GHOST_ENDER_PEARL_FIX.value()) {
             if (!instance.isStopped() || ((ConnectionAccessor) this.connection).getChannel() == null) {
                 original.call(instance, runnable);
                 return;

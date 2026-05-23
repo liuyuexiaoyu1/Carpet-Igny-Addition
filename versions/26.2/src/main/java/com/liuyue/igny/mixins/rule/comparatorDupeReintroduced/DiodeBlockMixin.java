@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.At;
 public class DiodeBlockMixin {
     @WrapOperation(method = "neighborChanged", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z"))
     private boolean neighborChanged(BlockState instance, Object o, Operation<Boolean> original) {
-        return IGNYSettings.comparatorDupeReintroduced || original.call(instance, o);
+        return IGNYSettings.COMPARATOR_DUPE_REINTRODUCED.value() || original.call(instance, o);
     }
 }

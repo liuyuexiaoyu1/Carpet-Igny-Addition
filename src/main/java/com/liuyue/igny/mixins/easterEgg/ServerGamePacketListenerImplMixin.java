@@ -32,7 +32,7 @@ public class ServerGamePacketListenerImplMixin {
             Operation<Void> original
     ) {
         LocalDate date = LocalDate.now();
-        if (IGNYSettings.festiveEasterEgg && date.getMonthValue() == 4 && date.getDayOfMonth() == 1) {
+        if (IGNYSettings.FESTIVE_EASTER_EGG.value() && date.getMonthValue() == 4 && date.getDayOfMonth() == 1) {
             String originalText = message.signedContent();
             if (!originalText.startsWith("/")) {
                 String reversed = StringUtil.reverse(originalText);

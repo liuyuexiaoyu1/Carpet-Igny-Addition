@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class Vec3Mixin {
     @Inject(method = "isFinite", at = @At(value = "HEAD"), cancellable = true)
     private void isFinite(CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.allowInvalidMotion) cir.setReturnValue(true);
+        if (IGNYSettings.ALLOW_INVALID_MOTION.value()) cir.setReturnValue(true);
     }
 }

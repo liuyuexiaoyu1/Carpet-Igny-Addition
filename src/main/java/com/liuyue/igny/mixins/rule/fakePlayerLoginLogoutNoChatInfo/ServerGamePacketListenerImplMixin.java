@@ -54,7 +54,7 @@ public class ServerGamePacketListenerImplMixin {
                 //#if MC >= 12003
                     isVaultFake ||
                  //#endif
-            IGNYSettings.fakePlayerLoginLogoutNoChatInfo) {
+            IGNYSettings.FAKE_PLAYER_LOGIN_LOGOUT_NO_CHAT_INFO.value()) {
                 return;
             }
         }

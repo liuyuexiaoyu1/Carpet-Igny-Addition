@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class WardenMixin {
     @Inject(method = "applyDarknessAround", at = @At("HEAD"), cancellable = true)
     private static void onApplyDarknessAround(ServerLevel serverLevel, Vec3 vec3, Entity entity, int radius, CallbackInfo ci) {
-        if (IGNYSettings.noWardenDarkness) {
+        if (IGNYSettings.NO_WARDEN_DARKNESS.value()) {
             ci.cancel();
         }
     }

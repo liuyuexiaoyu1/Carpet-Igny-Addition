@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class LightningBoltMixin {
     @Inject(method = "spawnFire", at = @At("HEAD"), cancellable = true)
     private void spawnFire(int i, CallbackInfo ci) {
-        if (IGNYSettings.lightningBoltNoFire) ci.cancel();
+        if (IGNYSettings.LIGHTNING_BOLT_NO_FIRE.value()) ci.cancel();
     }
 }

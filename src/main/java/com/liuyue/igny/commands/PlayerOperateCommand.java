@@ -32,7 +32,7 @@ public class PlayerOperateCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
                 Commands.literal("playerOperate")
-                        .requires(source -> CommandUtil.canUseCommand(source.getPlayer(), IGNYSettings.commandPlayerOperate))
+                        .requires(source -> CommandUtil.canUseCommand(source.getPlayer(), IGNYSettings.COMMAND_PLAYER_OPERATE.value()))
                         .then(
                                 Commands.literal("pauseAll")
                                         .executes(PlayerOperateCommand::pauseAllTasks)

@@ -30,7 +30,7 @@ public class HangingEntityItemMixin {
         //#endif
         {
             entity.setCustomName(stack.getHoverName());
-            ((ItemFrameRefreshable) entity).igny$refreshInvisible(IGNYSettings.invisibleItemFrames);
+            ((ItemFrameRefreshable) entity).igny$refreshInvisible(IGNYSettings.INVISIBLE_ITEM_FRAMES.value());
         }
     }
 }

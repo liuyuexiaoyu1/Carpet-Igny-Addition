@@ -24,7 +24,7 @@ public class PiglinAiMixin {
     @Inject(method = "isWearingGold", at = @At(value = "HEAD"), cancellable = true)
     //#endif
     private static void isWearingGold(LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.piglinNeutralBehavior) cir.setReturnValue(true);
+        if (IGNYSettings.PIGLIN_NEUTRAL_BEHAVIOR.value()) cir.setReturnValue(true);
     }
 
     @Inject(method = "angerNearbyPiglins", at = @At(value = "HEAD"), cancellable = true)
@@ -33,7 +33,7 @@ public class PiglinAiMixin {
     //#else
     private static void angerNearbyPiglins(Player player, boolean angerOnlyIfCanSee, CallbackInfo ci) {
         //#endif
-        if (IGNYSettings.piglinNeutralBehavior) ci.cancel();
+        if (IGNYSettings.PIGLIN_NEUTRAL_BEHAVIOR.value()) ci.cancel();
     }
 
     @Inject(method = "findNearestValidAttackTarget", at = @At(value = "HEAD"), cancellable = true)
@@ -42,6 +42,6 @@ public class PiglinAiMixin {
     //#else
     private static void findNearestValidAttackTarget(Piglin piglin, CallbackInfoReturnable<Optional<? extends LivingEntity>> cir) {
         //#endif
-        if (IGNYSettings.piglinNeutralBehavior) cir.setReturnValue(Optional.empty());
+        if (IGNYSettings.PIGLIN_NEUTRAL_BEHAVIOR.value()) cir.setReturnValue(Optional.empty());
     }
 }

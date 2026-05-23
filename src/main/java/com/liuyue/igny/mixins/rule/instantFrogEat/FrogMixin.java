@@ -21,7 +21,7 @@ public class FrogMixin {
     private void instantEatTick(CallbackInfo ci) {
         Frog frog = (Frog) (Object) this;
         Level level = frog.level();
-        if (frog.level().isClientSide() || !IGNYSettings.instantFrogEat || !(level instanceof ServerLevel)) return;
+        if (frog.level().isClientSide() || !IGNYSettings.INSTANT_FROG_EAT.value() || !(level instanceof ServerLevel)) return;
         List<LivingEntity> targets = frog.level().getEntitiesOfClass(
                 LivingEntity.class,
                 frog.getBoundingBox().inflate(10.0D),

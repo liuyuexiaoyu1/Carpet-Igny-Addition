@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CandleBlockMixin {
     @Inject(method="canSurvive", at = @At("HEAD"), cancellable = true)
     private void canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir){
-        if (IGNYSettings.candlePlaceOnIncompleteBlock) {
+        if (IGNYSettings.CANDLE_PLACE_ON_INCOMPLETE_BLOCK.value()) {
             cir.setReturnValue(true);
         }
     }

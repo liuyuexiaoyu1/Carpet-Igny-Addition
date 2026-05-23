@@ -17,7 +17,7 @@ public class ServerPlayerGameModeMixin {
     @WrapOperation(method = "destroyBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"))
     private boolean canDestroyLiquidSource(ServerLevel instance, BlockPos pos, boolean b, Operation<Boolean> original) {
         BlockState state = instance.getBlockState(pos);
-        if (IGNYSettings.liquidSourceCanDestroy && state.getBlock() instanceof LiquidBlock) {
+        if (IGNYSettings.LIQUID_SOURCE_CAN_DESTROY.value() && state.getBlock() instanceof LiquidBlock) {
             return instance.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
         }
         return original.call(instance, pos, b);

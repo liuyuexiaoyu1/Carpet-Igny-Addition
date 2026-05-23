@@ -16,7 +16,7 @@ import java.util.List;
 public abstract class FireworkRocketEntityMixin {
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V", ordinal = 0))
     private void handleGroupMovement(LivingEntity instance, Vec3 vec3, Operation<Void> original) {
-        if (IGNYSettings.fireworksStacking != 1) {
+        if (IGNYSettings.FIREWORKS_STACKING.value() != 1) {
             if (!(instance instanceof Player player) || !player.isFallFlying()) {
                 original.call(instance, vec3);
                 return;
@@ -30,7 +30,7 @@ public abstract class FireworkRocketEntityMixin {
                 original.call(instance, vec3);
                 return;
             }
-            int maxStack = IGNYSettings.fireworksStacking;
+            int maxStack = IGNYSettings.FIREWORKS_STACKING.value();
             int totalCount = peers.size();
             int effectiveCount = (maxStack <= 0) ? totalCount : Math.min(totalCount, maxStack);
             double dynamicLimit = 1.5 + (effectiveCount - 1) * 1.0;

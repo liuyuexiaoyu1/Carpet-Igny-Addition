@@ -38,7 +38,7 @@ public abstract class CrashReportSectionMixin {
 
     @Inject(method = "getDetails", at = @At("TAIL"))
     private void addTrace(StringBuilder builder, CallbackInfo ci) {
-        if (IGNYSettings.showClassMixinList) {
+        if (IGNYSettings.SHOW_CLASS_MIXIN_LIST.value()) {
             TraceUtil.printTrace(stackTrace, builder);
         }
     }

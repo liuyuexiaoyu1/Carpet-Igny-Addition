@@ -30,7 +30,7 @@ import java.util.List;
 public class BaseFireBlockMixin {
     @Inject(method = "onPlace", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;canSurvive(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;)Z"), cancellable = true)
     private static void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston, CallbackInfo ci) {
-        if (IGNYSettings.renewableEndGatewayPortal) {
+        if (IGNYSettings.RENEWABLE_END_GATEWAY_PORTAL.value()) {
             List<Direction> directions = List.of(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST);
             boolean canPlacePortal = true;
             for (Direction direction : directions) {

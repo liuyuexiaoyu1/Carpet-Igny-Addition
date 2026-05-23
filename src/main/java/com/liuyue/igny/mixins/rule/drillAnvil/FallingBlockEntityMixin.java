@@ -20,7 +20,7 @@ public class FallingBlockEntityMixin {
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;canSurvive(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;)Z", shift = At.Shift.AFTER), cancellable = true)
     private void tick(CallbackInfo ci, @Local BlockPos blockPos, @Local(ordinal = 2) boolean bl3) {
-        if (!IGNYSettings.drillAnvil.equals("false") && this.blockState.is(BlockTags.ANVIL)) {
+        if (!IGNYSettings.DRILL_ANVIL.value().equals("false") && this.blockState.is(BlockTags.ANVIL)) {
             FallingBlockEntity entity = (FallingBlockEntity) (Object) this;
             BlockPos pos = bl3 ? blockPos.below() : blockPos;
             BlockState blockState = entity.level().getBlockState(pos);
@@ -28,7 +28,7 @@ public class FallingBlockEntityMixin {
                 float hardness = blockState.getDestroySpeed(entity.level(), pos);
                 float blastResistance = blockState.getBlock().getExplosionResistance();
                 if (hardness < 0 || blastResistance >= 1200) return;
-                if (blockState.getFluidState().isEmpty() || IGNYSettings.drillAnvil.equals("true")) {
+                if (blockState.getFluidState().isEmpty() || IGNYSettings.DRILL_ANVIL.value().equals("true")) {
                     entity.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
                     entity.setDeltaMovement(entity.getDeltaMovement().scale(0.98));
                     ci.cancel();

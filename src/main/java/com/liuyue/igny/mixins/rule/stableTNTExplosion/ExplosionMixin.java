@@ -39,7 +39,7 @@ public class ExplosionMixin {
             return original;
         }
 
-        return switch (IGNYSettings.stableTNTExplosion) {
+        return switch (IGNYSettings.STABLE_TNT_EXPLOSION.value()) {
             case "minimum" -> 0.0F;
             case "average" -> 0.5F;
             case "maximum" -> 1.0F;

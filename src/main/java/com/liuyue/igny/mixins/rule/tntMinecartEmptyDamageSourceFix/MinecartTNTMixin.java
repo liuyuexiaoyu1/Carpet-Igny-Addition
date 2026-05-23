@@ -38,7 +38,7 @@ public abstract class MinecartTNTMixin {
             //$$ ServerLevel serverLevel,
             //#endif
             DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.tntMinecartEmptyDamageSourceFix) {
+        if (IGNYSettings.TNT_MINECART_EMPTY_DAMAGE_SOURCE_FIX.value()) {
             var direct = source.getDirectEntity();
             if (direct instanceof AbstractArrow arrow && arrow.isOnFire()) {
                 MinecartTNT minecartTNT = (MinecartTNT) (Object) this;      this.ignitionSource = minecartTNT.damageSources().explosion(minecartTNT, source.getEntity());
@@ -54,7 +54,7 @@ public abstract class MinecartTNTMixin {
             //$$ ServerLevel serverLevel,
             //#endif
             DamageSource source, CallbackInfo ci) {
-        if (IGNYSettings.tntMinecartEmptyDamageSourceFix) {
+        if (IGNYSettings.TNT_MINECART_EMPTY_DAMAGE_SOURCE_FIX.value()) {
             MinecartTNT self = (MinecartTNT) (Object) this;
             double speed = self.getDeltaMovement().horizontalDistanceSqr();
             if (!newDamageSourceIgnitesTnt(source) && speed < 0.01D) {
@@ -81,7 +81,7 @@ public abstract class MinecartTNTMixin {
 
     @Inject(method = "explode(D)V", at = @At("HEAD"), cancellable = true)
     private void explodeWithCorrectSource(double d, CallbackInfo ci) {
-        if (IGNYSettings.tntMinecartEmptyDamageSourceFix) {
+        if (IGNYSettings.TNT_MINECART_EMPTY_DAMAGE_SOURCE_FIX.value()) {
             MinecartTNT self = (MinecartTNT) (Object) this;
             if (!self.level().isClientSide()) {
                 double e = Math.min(Math.sqrt(d), 5.0);

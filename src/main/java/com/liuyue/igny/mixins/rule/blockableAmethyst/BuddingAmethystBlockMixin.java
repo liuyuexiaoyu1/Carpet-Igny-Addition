@@ -19,6 +19,6 @@ public class BuddingAmethystBlockMixin {
     private static boolean is(BlockState instance, Block block, Operation<Boolean> original)
     //#endif
     {
-        return !IGNYSettings.blockableAmethyst && original.call(instance, block);
+        return !IGNYSettings.BLOCKABLE_AMETHYST.value() && original.call(instance, block);
     }
 }

@@ -39,7 +39,7 @@ public class IntegerArgumentTypeMixin implements IArgument {
 
     @WrapMethod(method = "parse(Lcom/mojang/brigadier/StringReader;)Ljava/lang/Integer;")
     private Integer parse(StringReader reader, Operation<Integer> original) {
-        if (IGNYSettings.superEffectLevel && this.carpet_Igny_Addition$useDynamicMax()) {
+        if (IGNYSettings.SUPER_EFFECT_LEVEL.value() && this.carpet_Igny_Addition$useDynamicMax()) {
             int max = this.maximum;
             try {
                 this.maximum = Integer.MAX_VALUE;
