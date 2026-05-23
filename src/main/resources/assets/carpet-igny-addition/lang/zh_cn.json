@@ -377,5 +377,7 @@
   "carpet.rule.invisibleItemFrames.extra.1": "true: 物品展示框的名字为'invisible'时可以隐形",
   "carpet.rule.invisibleItemFrames.extra.2": "规则值为其它字符串时，物品展示框的名字为该字符串时可以隐形",
   "carpet.rule.bonemealableAmethyst.name": "可催熟的紫水晶",
-  "carpet.rule.bonemealableAmethyst.desc": "使用骨粉交互紫水晶母岩可以使任意方向的紫水晶生长"
+  "carpet.rule.bonemealableAmethyst.desc": "使用骨粉交互紫水晶母岩可以使任意方向的紫水晶生长",
+  "carpet.rule.magmaBlockMelt.name": "岩浆块融化",
+  "carpet.rule.magmaBlockMelt.desc": "使岩浆块的行为与冰块类似，挖掘时根据工具是否附魔精准采集来生成岩浆源或掉落方块"
 }

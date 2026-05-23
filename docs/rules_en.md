@@ -995,3 +995,12 @@ Using bonemeal on budding amethyst can grow amethyst buds in any direction.
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## magmaBlockMelt `🐛Beta`
+
+Make the magma block behave similarly to ice: generate a lava source block when mined without Silk Touch, or drop the item when mined with Silk Touch.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

@@ -270,5 +270,6 @@
   "carpet.rule.invisibleItemFrames.extra.0": "false: Rule is disabled",
   "carpet.rule.invisibleItemFrames.extra.1": "true: Item frames named 'invisible' can become invisible",
   "carpet.rule.invisibleItemFrames.extra.2": "Any other string: Item frames named with that string can become invisible",
-  "carpet.rule.bonemealableAmethyst.desc": "Using bonemeal on budding amethyst can grow amethyst buds in any direction"
+  "carpet.rule.bonemealableAmethyst.desc": "Using bonemeal on budding amethyst can grow amethyst buds in any direction",
+  "carpet.rule.magmaBlockMelt.desc": "Make the magma block behave similarly to ice: generate a lava source block when mined without Silk Touch, or drop the item when mined with Silk Touch"
 }

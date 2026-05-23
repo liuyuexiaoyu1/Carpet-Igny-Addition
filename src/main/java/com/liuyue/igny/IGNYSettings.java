@@ -798,5 +798,9 @@ public class IGNYSettings {
                     .build()
     );
 
-
+    public static final RuleAccessor<Boolean> MAGMA_BLOCK_MELT = register(
+            RuleFactory.of("magmaBlockMelt", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
 }

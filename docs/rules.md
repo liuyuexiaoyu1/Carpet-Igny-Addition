@@ -990,3 +990,12 @@ true: 物品展示框的名字为'invisible'时可以隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 岩浆块融化 (magmaBlockMelt) `🐛Beta`
+
+使岩浆块的行为与冰块类似，挖掘时根据工具是否附魔精准采集来生成岩浆源或掉落方块。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
