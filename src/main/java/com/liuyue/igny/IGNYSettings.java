@@ -9,6 +9,7 @@ import com.liuyue.igny.rule.validators.EntityValidator;
 import com.liuyue.igny.rule.validators.SyncmaticaValidator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -27,6 +28,10 @@ public class IGNYSettings {
     public static Set<String> EIDWhitelist = new HashSet<>();
     public static final ThreadLocal<Boolean> effectCommandRegistering = ThreadLocal.withInitial(() -> false);
     public static ThreadLocal<Boolean> movingBlocks = ThreadLocal.withInitial(() -> false);
+    /**
+     * 物品展示框是否正在保存NBT数据
+     */
+    public static final ThreadLocal<@NotNull Boolean> ITEM_FRAME_SAVE_NBT = ThreadLocal.withInitial(() -> false);
 
     private static final Set<RuleContext<?>> RULES = new LinkedHashSet<>();
 
@@ -777,18 +782,6 @@ public class IGNYSettings {
                     .addCategories(SURVIVAL, FEATURE)
                     .addOptions("false", "true")
                     .setLenient()
-                    .addListener((source, value) -> {
-                        if (source != null) {
-                            for (var level : source.getServer().getAllLevels()) {
-                                for (var entity : level.getAllEntities()) {
-                                    if (entity instanceof net.minecraft.world.entity.decoration.ItemFrame) {
-                                        ((com.liuyue.igny.utils.interfaces.invisibleItemFrames.ItemFrameRefreshable) entity)
-                                                .igny$refreshInvisible(value);
-                                    }
-                                }
-                            }
-                        }
-                    })
                     .build()
     );
 
