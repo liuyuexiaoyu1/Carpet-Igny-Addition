@@ -220,7 +220,7 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
             //#else
             //$$ Component customName = Component.Serializer.fromJson(this.saveWithFullMetadata().getString("CustomName"));
             //#endif
-            if (customName != null && !LinkedContainerManager.get(customName.getString()).isActiveChest((EnderChestBlockEntity) (Object) this)) {
+            if (customName != null) {
                 this.registerToLinkedContainer(customName.getString());
             }
             this.level.updateNeighborsAt(this.worldPosition, this.getBlockState().getBlock());
@@ -251,6 +251,22 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
         if (customName != null) {
             LinkedContainer linked = LinkedContainerManager.get(customName.getString());
             linked.removeActiveChest((EnderChestBlockEntity)(Object)this);
+        }
+    }
+
+    @Inject(method = "lidAnimateTick", at = @At(value = "HEAD"), cancellable = true)
+    private static void lidAnimateTick(Level level, BlockPos pos, BlockState state, EnderChestBlockEntity blockEntity, CallbackInfo ci) {
+        if (!level.isClientSide()) {
+            //#if MC >= 12005
+            Component customName = blockEntity.components().get(DataComponents.CUSTOM_NAME);
+            //#else
+            //$$ Component customName = Component.Serializer.fromJson(this.saveWithFullMetadata().getString("CustomName"));
+            //#endif
+            if (customName != null) {
+                LinkedContainer linked = LinkedContainerManager.get(customName.getString());
+                linked.setActiveChest(blockEntity);
+            }
+            ci.cancel();
         }
     }
     

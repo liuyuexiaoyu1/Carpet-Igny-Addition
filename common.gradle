@@ -107,7 +107,11 @@ dependencies {
 		}
 	}
 	if (unobfuscated) {
-		include(implementation(name: 'ryansrenderingkit', version: '1.2.0+26.2'))
+		if (mcVersion == 260200) {
+			include(implementation(name: 'ryansrenderingkit', version: '1.2.0+26.2'))
+		} else {
+			include(implementation(name: 'ryansrenderingkit', version: '1.2.0+26.1.2'))
+		}
 	} else if (mcVersion >= 12110) {
 		include(autoImplementation("io.github.hotpad100c:ryansrenderingkit:${project.ryansrenderingkit_version}"))
 	} else {
