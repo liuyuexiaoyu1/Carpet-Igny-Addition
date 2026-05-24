@@ -175,7 +175,7 @@ jobs:
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
           github-tag: ${{ steps.release_info.outputs.tag_name }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ github.token }}
 
           files: ${{ steps.file_info.outputs.path }}
 
