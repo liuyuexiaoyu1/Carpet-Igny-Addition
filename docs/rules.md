@@ -999,3 +999,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 实体切换维度内存泄露修复 (entityDimensionChangeMemoryLeakFix) `🐛Beta`
+
+修复实体因切换维度而删除自身时不会清除残留的记忆而导致内存泄露的问题。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `BUGFIX`, `FEATURE`

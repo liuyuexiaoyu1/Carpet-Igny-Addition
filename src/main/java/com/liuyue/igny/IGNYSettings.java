@@ -796,4 +796,10 @@ public class IGNYSettings {
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );
+
+    public static final RuleAccessor<Boolean> ENTITY_DIMENSION_CHANGE_MEMORY_LEAK_FIX = register(
+            RuleFactory.of("entityDimensionChangeMemoryLeakFix", false)
+                    .addCategories(BUGFIX, FEATURE)
+                    .build()
+    );
 }

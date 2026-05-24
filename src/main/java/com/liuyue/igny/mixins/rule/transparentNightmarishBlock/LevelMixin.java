@@ -104,14 +104,11 @@ public abstract class LevelMixin {
 
     @Inject(method = "setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;II)Z", at = @At("RETURN"))
     private void setBlockReturn(BlockPos pos, BlockState newState, int flags, int recursion, CallbackInfoReturnable<Boolean> cir) {
-        if (IGNYSettings.TRANSPARENT_NIGHTMARISH_BLOCK.value()) {
-            Level level = (Level) (Object) this;
-            if (level.isClientSide() || !cir.getReturnValue()) return;
-
-            if (newState.isAir() && BlockVaultManager.INSTANCE.has(level, pos)) {
-                igny$restoreTimers.put(pos.immutable(), 20);
-                igny$neighborSnapshots.remove(pos);
-            }
+        Level level = (Level) (Object) this;
+        if (level.isClientSide() || !cir.getReturnValue()) return;
+        if (newState.isAir() && BlockVaultManager.INSTANCE.has(level, pos)) {
+            igny$restoreTimers.put(pos.immutable(), 20);
+            igny$neighborSnapshots.remove(pos);
         }
     }
 

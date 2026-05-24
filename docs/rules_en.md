@@ -1005,3 +1005,12 @@ Make the magma block behave similarly to ice: generate a lava source block when 
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## entityDimensionChangeMemoryLeakFix `🐛Beta`
+
+Fix entity memory leak from residual brain memories during dimension changes.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `BUGFIX`, `FEATURE`

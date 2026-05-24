@@ -271,5 +271,6 @@
   "carpet.rule.invisibleItemFrames.extra.1": "true: Item frames will become invisible when they contain an item",
   "carpet.rule.invisibleItemFrames.extra.2": "Any other string: Item frames will become invisible if their custom name matches the string",
   "carpet.rule.bonemealableAmethyst.desc": "Using bonemeal on budding amethyst can grow amethyst buds in any direction",
-  "carpet.rule.magmaBlockMelt.desc": "Make the magma block behave similarly to ice: generate a lava source block when mined without Silk Touch, or drop the item when mined with Silk Touch"
+  "carpet.rule.magmaBlockMelt.desc": "Make the magma block behave similarly to ice: generate a lava source block when mined without Silk Touch, or drop the item when mined with Silk Touch",
+  "carpet.rule.entityDimensionChangeMemoryLeakFix.desc": "Fix entity memory leak from residual brain memories during dimension changes"
 }
