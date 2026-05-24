@@ -260,7 +260,7 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
             //#if MC >= 12005
             Component customName = blockEntity.components().get(DataComponents.CUSTOM_NAME);
             //#else
-            //$$ Component customName = Component.Serializer.fromJson(this.saveWithFullMetadata().getString("CustomName"));
+            //$$ Component customName = Component.Serializer.fromJson(blockEntity.saveWithFullMetadata().getString("CustomName"));
             //#endif
             if (customName != null) {
                 LinkedContainer linked = LinkedContainerManager.get(customName.getString());
