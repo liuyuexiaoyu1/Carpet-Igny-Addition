@@ -266,10 +266,10 @@
   "carpet.rule.linkableEnderChest.extra.1": "onlyLink: Named ender chests with the same custom name share inventory, regardless of which player opens them",
   "carpet.rule.linkableEnderChest.extra.2": "true: Includes onlyLink behavior and allows interaction with blocks such as comparators and hoppers",
   "carpet.rule.linkableEnderChest.extra.3": "Ender chests without a custom name retain vanilla behavior, showing the player's personal ender chest inventory",
-  "carpet.rule.invisibleItemFrames.desc": "Makes the item inside an item frame invisible when the frame has the specified name",
+  "carpet.rule.invisibleItemFrames.desc": "Determines when item frames become invisible based on the rule value",
   "carpet.rule.invisibleItemFrames.extra.0": "false: Rule is disabled",
-  "carpet.rule.invisibleItemFrames.extra.1": "true: Item frames named 'invisible' can become invisible",
-  "carpet.rule.invisibleItemFrames.extra.2": "Any other string: Item frames named with that string can become invisible",
+  "carpet.rule.invisibleItemFrames.extra.1": "true: Item frames will become invisible when they contain an item",
+  "carpet.rule.invisibleItemFrames.extra.2": "Any other string: Item frames will become invisible if their custom name matches the string",
   "carpet.rule.bonemealableAmethyst.desc": "Using bonemeal on budding amethyst can grow amethyst buds in any direction",
   "carpet.rule.magmaBlockMelt.desc": "Make the magma block behave similarly to ice: generate a lava source block when mined without Silk Touch, or drop the item when mined with Silk Touch"
 }

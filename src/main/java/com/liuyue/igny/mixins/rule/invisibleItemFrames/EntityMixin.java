@@ -28,7 +28,6 @@ public class EntityMixin {
             if (IGNYSettings.ITEM_FRAME_SAVE_NBT.get()) {
                 return;
             }
-            // 空物品展示框总是显示
             ItemStack itemStack = itemFrame.getItem();
             if (itemStack.isEmpty()) {
                 return;
@@ -38,9 +37,6 @@ public class EntityMixin {
                 case "false" -> {
                     // 什么也不做
                 }
-                // 此处改为规则值为“true”时，所有物品展示框都会隐形。
-                // 根据规则描述，规则值为“true”时，物品展示框的名称为“invisible”时可以隐形。
-                // 这样做的意义是什么？既然规则值可以为任意字符串，那为什么不直接把规则值改为“invisible”以实现同样的效果？
                 case "true" -> cir.setReturnValue(true);
                 default -> Optional.ofNullable(
                         //#if MC > 12006

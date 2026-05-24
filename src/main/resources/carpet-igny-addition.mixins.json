@@ -103,6 +103,7 @@
     "rule.instantVaultSpawnLoot.VaultBlockEntityServerInvoker",
     "rule.instantVaultSpawnLoot.VaultBlockEntityServerMixin",
     "rule.invisibleItemFrames.EntityMixin",
+    "rule.invisibleItemFrames.HangingEntityItemMixin",
     "rule.invisibleItemFrames.ItemFrameMixin",
     "rule.killFakePlayerRemoveVehicle.EntityPlayerMPFakeMixin",
     "rule.killFakePlayerRemoveVehicle.ServerPlayerMixin",

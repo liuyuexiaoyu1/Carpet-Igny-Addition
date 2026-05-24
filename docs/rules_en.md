@@ -926,7 +926,7 @@ Set the maximum firework level to 8, allowing players to craft rockets of differ
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## safePlayerDeathDrop `🐛Beta`
+## safePlayerDeathDrop
 
 Items dropped upon player death will not scatter in all directions.
 
@@ -935,7 +935,7 @@ Items dropped upon player death will not scatter in all directions.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## fireworksStacking `🐛Beta`
+## fireworksStacking
 
 Allows the acceleration effects of multiple fireworks to stack while flying, enabling players to reach higher flight speeds.  
 The rule value represents the maximum number of fireworks that can stack; -1 means no limit
@@ -944,7 +944,7 @@ The rule value represents the maximum number of fireworks that can stack; -1 mea
 - Default value: `1`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## stickyResinBlock `🐛Beta` `MC>=1.21.4`
+## stickyResinBlock `MC>=1.21.4`
 
 Makes Resin Blocks stick to other movable blocks like Slime and Honey Blocks, but they will not stick to Slime or Honey Blocks themselves.
 
@@ -953,7 +953,7 @@ Makes Resin Blocks stick to other movable blocks like Slime and Honey Blocks, bu
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## convenientRegeneratePowderSnow `🐛Beta`
+## convenientRegeneratePowderSnow
 
 Pointed dripstone (stalactites) can drip powder snow like water or lava, and the snow dripping from pointed dripstone can be collected by cauldrons.
 
@@ -962,7 +962,7 @@ Pointed dripstone (stalactites) can drip powder snow like water or lava, and the
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## linkableEnderChest `🐛Beta`
+## linkableEnderChest
 
 Controls whether custom-named ender chests with the same name share a common inventory (channel).  
 `false`: Keep vanilla behavior.  
@@ -975,19 +975,20 @@ Ender chests without a custom name retain vanilla behavior, showing the player's
 - Suggested options: `false`, `onlyLink`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## invisibleItemFrames `🐛Beta`
+## invisibleItemFrames `🐛Beta Modify`
 
-Makes the item inside an item frame invisible when the frame has the specified name.  
+Determines when item frames become invisible based on the rule value.
+
 false: Rule is disabled.  
-true: Item frames named 'invisible' can become invisible.  
-Any other string: Item frames named with that string can become invisible
+true: Item frames will become invisible when they contain an item.  
+Any other string: Item frames will become invisible if their custom name matches the string.
 
 - Type: `string`
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## bonemealableAmethyst `🐛Beta`
+## bonemealableAmethyst
 
 Using bonemeal on budding amethyst can grow amethyst buds in any direction.
 
@@ -996,7 +997,7 @@ Using bonemeal on budding amethyst can grow amethyst buds in any direction.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## magmaBlockMelt `🐛Beta`
+## magmaBlockMelt
 
 Make the magma block behave similarly to ice: generate a lava source block when mined without Silk Touch, or drop the item when mined with Silk Touch.
 

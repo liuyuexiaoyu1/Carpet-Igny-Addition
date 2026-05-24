@@ -921,7 +921,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 安全的玩家死亡掉落 (safePlayerDeathDrop) `🐛Beta`
+## 安全的玩家死亡掉落 (safePlayerDeathDrop)
 
 当玩家死亡时掉落的物品不会向四处飞溅。
 
@@ -930,7 +930,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 烟花堆叠 (fireworksStacking) `🐛Beta`
+## 烟花堆叠 (fireworksStacking)
 
 使飞行时可以叠加多个烟花的加速效果，使玩家拥有更快的飞行速度。  
 规则值为起作用的烟花数量上限，当等于-1时则无限制。
@@ -939,7 +939,7 @@ true: 流体源和流体都不会传播。
 - 默认值: `1`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 粘性树脂块 (stickyResinBlock) `🐛Beta` `MC>=1.21.4`
+## 粘性树脂块 (stickyResinBlock) `MC>=1.21.4`
 
 使树脂块像黏液块和蜂蜜块一样可粘连其他可推动方块，不与黏液块或蜂蜜块互相粘连。
 
@@ -948,7 +948,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 便捷地再生细雪 (convenientRegeneratePowderSnow) `🐛Beta`
+## 便捷地再生细雪 (convenientRegeneratePowderSnow)
 
 滴水石锥(钟乳石)可像滴落水或熔岩一样滴落细雪，并且滴水石锥(钟乳石)滴落的雪可被炼药锅收集。
 
@@ -957,7 +957,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 可链接的末影箱 (linkableEnderChest) `🐛Beta`
+## 可链接的末影箱 (linkableEnderChest)
 
 控制拥有相同自定义名称的末影箱是否共用一个存储空间(频道)。  
 `false`: 保持原版行为。  
@@ -970,19 +970,19 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `onlyLink`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 隐形物品展示框 (invisibleItemFrames) `🐛Beta`
+## 隐形物品展示框 (invisibleItemFrames) `🐛Beta更改`
 
 当物品展示框为指定名称时，物品展示框内含物品时将会隐形。  
 false: 规则不生效。  
-true: 物品展示框的名字为'invisible'时可以隐形。  
-规则值为其它字符串时，物品展示框的名字为该字符串时可以隐形。
+true: 物品展示框内含物品时将会隐形。  
+规则值为其它字符串时，物品展示框的自定义名称为该字符串时可以隐形。
 
 - 类型: `string`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 可催熟的紫水晶 (bonemealableAmethyst) `🐛Beta`
+## 可催熟的紫水晶 (bonemealableAmethyst)
 
 使用骨粉交互紫水晶母岩可以使任意方向的紫水晶生长。
 
@@ -991,7 +991,7 @@ true: 物品展示框的名字为'invisible'时可以隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 岩浆块融化 (magmaBlockMelt) `🐛Beta`
+## 岩浆块融化 (magmaBlockMelt)
 
 使岩浆块的行为与冰块类似，挖掘时根据工具是否附魔精准采集来生成岩浆源或掉落方块。
 
