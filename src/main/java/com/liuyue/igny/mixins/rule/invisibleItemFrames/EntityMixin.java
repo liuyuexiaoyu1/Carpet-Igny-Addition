@@ -34,9 +34,7 @@ public class EntityMixin {
             }
             String ruleValue = IGNYSettings.INVISIBLE_ITEM_FRAMES.value();
             switch (ruleValue.toLowerCase(Locale.ROOT)) {
-                case "false" -> {
-                    // 什么也不做
-                }
+                case "false" -> {}
                 case "true" -> cir.setReturnValue(true);
                 default -> Optional.ofNullable(
                         //#if MC > 12006
