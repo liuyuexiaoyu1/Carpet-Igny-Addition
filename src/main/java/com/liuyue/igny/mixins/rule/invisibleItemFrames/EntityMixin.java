@@ -45,7 +45,6 @@ public class EntityMixin {
                         //$$ itemStack.getDisplayName()
                         //#endif
                         )
-                        .or(() -> Optional.ofNullable(itemFrame.getCustomName()))
                         .map(Component::getString)
                         .ifPresent(name -> {
                             if (name.equalsIgnoreCase(ruleValue)) {
