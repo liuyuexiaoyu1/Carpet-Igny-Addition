@@ -102,7 +102,7 @@
     "rule.instantTrialSpawnerSpawnLoot.TrialSpawnerStateMixin",
     "rule.instantVaultSpawnLoot.VaultBlockEntityServerInvoker",
     "rule.instantVaultSpawnLoot.VaultBlockEntityServerMixin",
-    "rule.invisibleItemFrames.HangingEntityItemMixin",
+    "rule.invisibleItemFrames.EntityMixin",
     "rule.invisibleItemFrames.ItemFrameMixin",
     "rule.killFakePlayerRemoveVehicle.EntityPlayerMPFakeMixin",
     "rule.killFakePlayerRemoveVehicle.ServerPlayerMixin",
