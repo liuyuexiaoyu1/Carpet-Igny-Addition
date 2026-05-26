@@ -802,4 +802,10 @@ public class IGNYSettings {
                     .addCategories(BUGFIX, FEATURE)
                     .build()
     );
+
+    public static final RuleAccessor<Boolean> DISABLE_SCULK_VEIN_GROWTH = register(
+            RuleFactory.of("disableSculkVeinGrowth", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
 }

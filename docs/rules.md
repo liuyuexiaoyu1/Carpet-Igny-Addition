@@ -1008,3 +1008,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `BUGFIX`, `FEATURE`
+
+## 禁止幽匿脉络生长 (disableSculkVeinGrowth) `🐛Beta`
+
+幽匿催发体只会吸收经验，不会生成幽匿脉络等方块。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

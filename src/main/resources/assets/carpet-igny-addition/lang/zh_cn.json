@@ -381,5 +381,7 @@
   "carpet.rule.magmaBlockMelt.name": "岩浆块融化",
   "carpet.rule.magmaBlockMelt.desc": "使岩浆块的行为与冰块类似，挖掘时根据工具是否附魔精准采集来生成岩浆源或掉落方块",
   "carpet.rule.entityDimensionChangeMemoryLeakFix.name": "实体切换维度内存泄露修复",
-  "carpet.rule.entityDimensionChangeMemoryLeakFix.desc": "修复实体因切换维度而删除自身时不会清除残留的记忆而导致内存泄露的问题"
+  "carpet.rule.entityDimensionChangeMemoryLeakFix.desc": "修复实体因切换维度而删除自身时不会清除残留的记忆而导致内存泄露的问题",
+  "carpet.rule.disableSculkVeinGrowth.name": "禁止幽匿脉络生长",
+  "carpet.rule.disableSculkVeinGrowth.desc": "幽匿催发体只会吸收经验，不会生成幽匿脉络等方块"
 }

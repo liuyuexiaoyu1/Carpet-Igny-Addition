@@ -66,6 +66,7 @@
     "rule.convenientRegeneratePowderSnow.PointedDripstoneBlockAccessor",
     "rule.convenientRegeneratePowderSnow.PointedDripstoneBlockMixin",
     "rule.creativeDestroyWaterloggedBlockNoWater.ServerPlayerGameModeMixin",
+    "rule.disableSculkVeinGrowth.SculkSpreaderMixin",
     "rule.disableWatchDog.ServerWatchdogMixin",
     "rule.dispenserTrade.DispenserBlockMixin",
     "rule.drillAnvil.FallingBlockEntityMixin",

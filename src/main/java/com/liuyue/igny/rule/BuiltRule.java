@@ -27,6 +27,9 @@ import carpet.api.settings.CarpetRule;
 import carpet.api.settings.InvalidRuleValueException;
 import carpet.api.settings.RuleHelper;
 import carpet.api.settings.SettingsManager;
+import carpet.utils.Messenger;
+import carpet.utils.TranslationKeys;
+import carpet.utils.Translations;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
@@ -117,7 +120,18 @@ public class BuiltRule<T> implements CarpetRule<T> {
 
     @Override
     public List<Component> extraInfo() {
-        return List.of();
+        return getTranslationArray(TranslationKeys.RULE_EXTRA_PREFIX_PATTERN.formatted(settingsManager().identifier(), name()))
+                .stream()
+                .map(str -> Messenger.c("g " + str))
+                .toList();
+    }
+
+    private List<String> getTranslationArray(String prefix) {
+        List<String> ret = new ArrayList<>();
+        for (int i = 0; Translations.hasTranslation(prefix + i); i++) {
+            ret.add(Translations.tr(prefix + i));
+        }
+        return ret;
     }
 
     @Override

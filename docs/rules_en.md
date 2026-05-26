@@ -1006,11 +1006,11 @@ Make the magma block behave similarly to ice: generate a lava source block when 
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## entityDimensionChangeMemoryLeakFix `🐛Beta`
+## disableSculkVeinGrowth `🐛Beta`
 
-Fix entity memory leak from residual brain memories during dimension changes.
+Sculk catalysts will only absorb experience, without generating sculk veins or other blocks.
 
 - Type: `boolean`
 - Default value: `false`
 - Suggested options: `false`, `true`
-- Categories: `IGNY`, `BUGFIX`, `FEATURE`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
