@@ -3,7 +3,11 @@ package com.liuyue.igny.mixins.rule.linkableEnderChest.compat.quickshulker;
 import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.network.packet.config.SyncLinkedEnderChestPayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+//#if MC >= 26.1
+//$$ import net.minecraft.client.gui.GuiGraphicsExtractor;
+//#else
 import net.minecraft.client.gui.GuiGraphics;
+//#endif
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -32,8 +36,14 @@ public abstract class AbstractContainerScreenMixin {
     @Nullable
     private Slot igny$lastHoveredSlot = null;
 
+    //#if MC >= 26.1
+    //$$ @Inject(method = "extractRenderState", at = @At(value = "RETURN"))
+    //$$ private void onRender(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a, CallbackInfo ci)
+    //#else
     @Inject(method = "render", at = @At(value = "RETURN"))
-    private void onRender(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
+    private void onRender(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci)
+    //#endif
+    {
         if (!LinkedContainerManager.isRuleEnabled()) return;
 
         if (this.hoveredSlot == this.igny$lastHoveredSlot) {
