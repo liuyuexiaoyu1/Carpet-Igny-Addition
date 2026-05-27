@@ -808,4 +808,28 @@ public class IGNYSettings {
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );
+
+    //#if MC >= 26.2
+    //$$ public static final RuleAccessor<Boolean> ALLOW_INVALID_BEACON_EFFECT = register(
+    //$$         RuleFactory.of("allowInvalidBeaconEffect", false)
+    //$$                 .addCategories(SURVIVAL, PORTING, FEATURE)
+    //$$                 .build()
+    //$$ );
+    //#endif
+
+    //#if MC >= 26.2
+    //$$ public static final RuleAccessor<Boolean>  ENTITY_ID_COLLISION_REINTRODUCE = register(
+    //$$         RuleFactory.of("entityIDCollisionReintroduce", false)
+    //$$                 .addCategories(PORTING, FEATURE)
+    //$$                 .build()
+    //$$ );
+    //#endif
+
+    //#if MC < 26.2
+    public static final RuleAccessor<Boolean>  ENTITY_ID_COLLISION_FIX = register(
+            RuleFactory.of("entityIDCollisionFix", false)
+                    .addCategories(BUGFIX, FEATURE)
+                    .build()
+    );
+    //#endif
 }

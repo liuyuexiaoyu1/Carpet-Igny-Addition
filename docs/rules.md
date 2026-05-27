@@ -1017,3 +1017,30 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 允许非法信标效果 (allowInvalidBeaconEffect) `🐛Beta` `MC>=26.2`
+
+重新引入应用信标效果时服务端不对客户端发送数据包进行验证导致的可设置双重信标效果，回退了26.2-pre-1的更改。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `PORTING`, `FEATURE`
+
+## 重新引入实体ID碰撞 (entityIDCollisionReintroduce) `🐛Beta` `MC>=26.2`
+
+重新引入创建实体时构建ID仅对实体计数器自增而未检查世界中是否存在相同ID的实体导致的实体ID碰撞，回退了26.2-pre-1的更改。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `PORTING`, `FEATURE`
+
+## 实体ID碰撞修复 (entityIDCollisionFix) `🐛Beta` `MC<26.2`
+
+修复了创建实体时构建ID仅对实体计数器自增而未检查世界中是否存在相同ID的实体导致的实体ID碰撞。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `BUGFIX`, `FEATURE`

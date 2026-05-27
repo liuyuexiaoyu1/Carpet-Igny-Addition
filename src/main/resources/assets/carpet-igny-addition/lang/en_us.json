@@ -273,5 +273,8 @@
   "carpet.rule.bonemealableAmethyst.desc": "Using bonemeal on budding amethyst can grow amethyst buds in any direction",
   "carpet.rule.magmaBlockMelt.desc": "Make the magma block behave similarly to ice: generate a lava source block when mined without Silk Touch, or drop the item when mined with Silk Touch",
   "carpet.rule.entityDimensionChangeMemoryLeakFix.desc": "Fix entity memory leak from residual brain memories during dimension changes",
-  "carpet.rule.disableSculkVeinGrowth.desc": "Sculk catalysts will only absorb experience, without generating sculk veins or other blocks"
+  "carpet.rule.disableSculkVeinGrowth.desc": "Sculk catalysts will only absorb experience, without generating sculk veins or other blocks",
+  "carpet.rule.allowInvalidBeaconEffect.desc": "Reintroduce the dual beacon effect exploit caused by the server's lack of packet validation when reapplying beacon effects, reverting the changes from 26.2-pre-1",
+  "carpet.rule.entityIDCollisionReintroduce.desc": "Reintroduce entity ID collision caused by creating an entity where the ID constructor only increments the entity counter without checking if an entity with the same ID already exists in the world, reverting the changes from 26.2-pre-1",
+  "carpet.rule.entityIDCollisionFix.desc": "Fixes entity ID collision caused by creating an entity where the ID constructor only increments the entity counter without checking if an entity with the same ID already exists in the world"
 }

@@ -383,5 +383,11 @@
   "carpet.rule.entityDimensionChangeMemoryLeakFix.name": "实体切换维度内存泄露修复",
   "carpet.rule.entityDimensionChangeMemoryLeakFix.desc": "修复实体因切换维度而删除自身时不会清除残留的记忆而导致内存泄露的问题",
   "carpet.rule.disableSculkVeinGrowth.name": "禁止幽匿脉络生长",
-  "carpet.rule.disableSculkVeinGrowth.desc": "幽匿催发体只会吸收经验，不会生成幽匿脉络等方块"
+  "carpet.rule.disableSculkVeinGrowth.desc": "幽匿催发体只会吸收经验，不会生成幽匿脉络等方块",
+  "carpet.rule.allowInvalidBeaconEffect.name": "允许非法信标效果",
+  "carpet.rule.allowInvalidBeaconEffect.desc": "重新引入应用信标效果时服务端不对客户端发送数据包进行验证导致的可设置双重信标效果，回退了26.2-pre-1的更改",
+  "carpet.rule.entityIDCollisionReintroduce.name": "重新引入实体ID碰撞",
+  "carpet.rule.entityIDCollisionReintroduce.desc": "重新引入创建实体时构建ID仅对实体计数器自增而未检查世界中是否存在相同ID的实体导致的实体ID碰撞，回退了26.2-pre-1的更改",
+  "carpet.rule.entityIDCollisionFix.name": "实体ID碰撞修复",
+  "carpet.rule.entityIDCollisionFix.desc": "修复了创建实体时构建ID仅对实体计数器自增而未检查世界中是否存在相同ID的实体导致的实体ID碰撞"
 }

@@ -1014,3 +1014,30 @@ Sculk catalysts will only absorb experience, without generating sculk veins or o
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## allowInvalidBeaconEffect `🐛Beta` `MC>=26.2`
+
+Reintroduce the dual beacon effect exploit caused by the server's lack of packet validation when reapplying beacon effects, reverting the changes from 26.2-pre-1.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `PORTING`, `FEATURE`
+
+## entityIDCollisionReintroduce `🐛Beta` `MC>=26.2`
+
+Reintroduce entity ID collision caused by creating an entity where the ID constructor only increments the entity counter without checking if an entity with the same ID already exists in the world, reverting the changes from 26.2-pre-1.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `PORTING`, `FEATURE`
+
+## entityIDCollisionFix `🐛Beta` `MC<26.2`
+
+Fixes entity ID collision caused by creating an entity where the ID constructor only increments the entity counter without checking if an entity with the same ID already exists in the world.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `BUGFIX`, `FEATURE`
