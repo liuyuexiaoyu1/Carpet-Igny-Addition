@@ -53,7 +53,7 @@ public abstract class AbstractContainerScreenMixin {
         //#endif
 
         ItemStack stack = this.hoveredSlot.getItem();
-        if (stack.is(Items.ENDER_CHEST) && stack.has(DataComponents.CUSTOM_NAME)) {
+        if (stack.is(Items.ENDER_CHEST)) {
             //#if MC >= 12005
             String customName = stack.has(DataComponents.CUSTOM_NAME) ? stack.getHoverName().getString() : null;
             //#else
