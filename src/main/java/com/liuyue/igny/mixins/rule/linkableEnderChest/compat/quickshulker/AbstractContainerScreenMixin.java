@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#if MC >= 12005
 import net.minecraft.core.component.DataComponents;
 //#else
-//$$ import net.network.FriendlyByteBuf;
+//$$ import net.minecraft.network.FriendlyByteBuf;
 //$$ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 //$$ import com.liuyue.igny.IGNYServer;
 //#endif
