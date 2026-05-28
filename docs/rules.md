@@ -1044,3 +1044,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `BUGFIX`, `FEATURE`
+
+## 可再生下界岩 (renewableNetherrack) `🐛Beta`
+
+使在空中生成的下界传送门像基岩版一样，在黑曜石底座两边各会有4个下界岩，使得底座共有12个方块。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

@@ -1041,3 +1041,12 @@ Fixes entity ID collision caused by creating an entity where the ID constructor 
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `BUGFIX`, `FEATURE`
+
+## renewableNetherrack `🐛Beta`
+
+Make nether portals generated in the air have 4 netherrack blocks on each side of the obsidian base, just like in Bedrock Edition, making the base 12 blocks total.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

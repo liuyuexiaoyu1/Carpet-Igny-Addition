@@ -161,6 +161,7 @@
     "rule.removeSyncmaticaPermission.ServerCommunicationManagerMixin",
     "rule.renewableCalcite.PointedDripstoneBlockMixin",
     "rule.renewableEndGatewayPortal.BaseFireBlockMixin",
+    "rule.renewableNetherrack.PortalForcerMixin",
     "rule.safePlayerDeathDrop.InventoryMixin",
     "rule.safeSoundSuppression.CalibratedSculkSensorVibrationUserMixin",
     "rule.showClassMixinList.CrashReportMixin",

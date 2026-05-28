@@ -832,4 +832,10 @@ public class IGNYSettings {
                     .build()
     );
     //#endif
+
+    public static final RuleAccessor<Boolean> RENEWABLE_NETHERRACK = register(
+            RuleFactory.of("renewableNetherrack", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
 }

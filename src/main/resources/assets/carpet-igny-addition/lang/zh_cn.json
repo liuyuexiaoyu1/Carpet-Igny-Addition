@@ -389,5 +389,7 @@
   "carpet.rule.entityIDCollisionReintroduce.name": "重新引入实体ID碰撞",
   "carpet.rule.entityIDCollisionReintroduce.desc": "重新引入创建实体时构建ID仅对实体计数器自增而未检查世界中是否存在相同ID的实体导致的实体ID碰撞，回退了26.2-pre-1的更改",
   "carpet.rule.entityIDCollisionFix.name": "实体ID碰撞修复",
-  "carpet.rule.entityIDCollisionFix.desc": "修复了创建实体时构建ID仅对实体计数器自增而未检查世界中是否存在相同ID的实体导致的实体ID碰撞"
+  "carpet.rule.entityIDCollisionFix.desc": "修复了创建实体时构建ID仅对实体计数器自增而未检查世界中是否存在相同ID的实体导致的实体ID碰撞",
+  "carpet.rule.renewableNetherrack.name": "可再生下界岩",
+  "carpet.rule.renewableNetherrack.desc": "使在空中生成的下界传送门像基岩版一样，在黑曜石底座两边各会有4个下界岩，使得底座共有12个方块"
 }
