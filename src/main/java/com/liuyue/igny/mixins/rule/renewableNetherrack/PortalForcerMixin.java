@@ -1,7 +1,6 @@
 package com.liuyue.igny.mixins.rule.renewableNetherrack;
 
 import com.liuyue.igny.IGNYSettings;
-import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,63 +26,40 @@ public class PortalForcerMixin {
 
     @Inject(
             method = "createPortal",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/level/ServerLevel;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z",
-                    ordinal = 0
-            )
+            at = @At("TAIL")
     )
-    private void injectNetherrackInLoop(
-            BlockPos pos,
-            Direction.Axis axis,
-            CallbackInfoReturnable<Optional<BlockUtil.FoundRectangle>> cir,
-            @Local(ordinal = 1) BlockPos blockPos,
-            @Local Direction direction,
-            @Local(ordinal = 2) int o,
-            @Local(ordinal = 3) int p
+    private void createPortal(
+            BlockPos pos, Direction.Axis axis, CallbackInfoReturnable<Optional<BlockUtil.FoundRectangle>> cir
     ) {
-        if (p != -1 || o != -1 || !IGNYSettings.RENEWABLE_NETHERRACK.value()) {
+        if (cir.getReturnValue().isEmpty() || !IGNYSettings.RENEWABLE_NETHERRACK.value()) {
             return;
         }
+
+        BlockUtil.FoundRectangle rectangle = cir.getReturnValue().get();
+        BlockPos blockPos = rectangle.minCorner;
+        Direction direction = Direction.get(Direction.AxisDirection.POSITIVE, axis);
         Direction right = direction.getClockWise();
-        blockPos = blockPos.relative(Direction.DOWN, 2);
-        placeNetherrackIfAir(
-                blockPos.relative(right.getOpposite())
-                        .relative(direction.getOpposite())
-        );
-        placeNetherrackIfAir(
-                blockPos.relative(right.getOpposite())
-                        .relative(direction, 2)
-        );
-        placeNetherrackIfAir(
-                blockPos.relative(right)
-                        .relative(direction.getOpposite())
-        );
-        placeNetherrackIfAir(
-                blockPos.relative(right)
-                        .relative(direction, 2)
-        );
-        placeNetherrackIfAir(
-                blockPos.relative(right.getOpposite(), 2)
-        );
-        placeNetherrackIfAir(
-                blockPos.relative(right.getOpposite(), 2)
-                        .relative(direction)
-        );
-        placeNetherrackIfAir(
-                blockPos.relative(right, 2)
-        );
-        placeNetherrackIfAir(
-                blockPos.relative(right, 2)
-                        .relative(direction)
-        );
+        Direction left = right.getOpposite();
+
+        int p = -1;
+        for (int o = -1; o < 3; o++) {
+            BlockPos mainPos = blockPos.offset(o * direction.getStepX(), p, o * direction.getStepZ());
+
+            if (o == -1 || o == 2) {
+                placeNetherrackForce(mainPos.relative(left, 1));
+                placeNetherrackForce(mainPos.relative(right, 1));
+            } else {
+                placeNetherrackForce(mainPos.relative(left, 2));
+                placeNetherrackForce(mainPos.relative(right, 2));
+            }
+        }
     }
 
     @Unique
-    private void placeNetherrackIfAir(BlockPos targetPos) {
+    private void placeNetherrackForce(BlockPos targetPos) {
         BlockState state = this.level.getBlockState(targetPos);
-        if (state.isAir()) {
-            this.level.setBlockAndUpdate(targetPos, Blocks.NETHERRACK.defaultBlockState());
+        if (state.isAir() || state.is(Blocks.OBSIDIAN)) {
+            this.level.setBlock(targetPos, Blocks.NETHERRACK.defaultBlockState(), 3);
         }
     }
 }
