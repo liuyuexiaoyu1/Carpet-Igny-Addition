@@ -1062,3 +1062,16 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 始终可用管理员方块 (alwaysAvailableGameMasterBlocks) `🐛Beta`
+
+无论任何人任何游戏模式都可以使用管理员方块(调试棒，命令方块等)。
+
+`false`: 遵循原版逻辑。  
+`ops`: 只有管理员可以在任何游戏模式使用管理员方块。  
+`true`: 任何人任何游戏模式都可以使用管理员方块。
+
+- 类型: `string`
+- 默认值: `false`
+- 参考选项: `false`, `ops`, `true`
+- 分类: `IGNY`, `FEATURE`

@@ -52,6 +52,7 @@
     "rule.allowInvalidBeaconEffect.BeaconMenuMixin",
     "rule.allowInvalidMotion.EntityMixin",
     "rule.allowInvalidMotion.Vec3Mixin",
+    "rule.alwaysAvailableGameMasterBlocks.PlayerMixin",
     "rule.betterFlippinCactus.BlockRotatorMixin",
     "rule.betterLoyaltyTrident.ThrownTridentMixin",
     "rule.betterSprintGameTick.ServerTickRateManagerMixin",

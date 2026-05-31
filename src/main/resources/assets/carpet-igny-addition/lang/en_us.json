@@ -278,5 +278,9 @@
   "carpet.rule.entityIDCollisionReintroduce.desc": "Reintroduce entity ID collision caused by creating an entity where the ID constructor only increments the entity counter without checking if an entity with the same ID already exists in the world, reverting the changes from 26.2-pre-1",
   "carpet.rule.entityIDCollisionFix.desc": "Fixes entity ID collision caused by creating an entity where the ID constructor only increments the entity counter without checking if an entity with the same ID already exists in the world",
   "carpet.rule.renewableNetherrack.desc": "Make nether portals generated in the air have 4 netherrack blocks on each side of the obsidian base, just like in Bedrock Edition, making the base 12 blocks total",
-  "carpet.rule.noDuplicateVillagerEnchants.desc": "Villagers will not roll previously generated enchanted books, unless the new book has a lower price or a higher enchantment level"
+  "carpet.rule.noDuplicateVillagerEnchants.desc": "Villagers will not roll previously generated enchanted books, unless the new book has a lower price or a higher enchantment level",
+  "carpet.rule.alwaysAvailableGameMasterBlocks.desc": "Allows players to use Game Master blocks (such as debug sticks, command blocks, etc.) regardless of their game mode or permissions",
+  "carpet.rule.alwaysAvailableGameMasterBlocks.extra.0": "false:Follows vanilla behavior",
+  "carpet.rule.alwaysAvailableGameMasterBlocks.extra.1": "ops:Only operators (OPs) can use Game Master blocks in any game mode",
+  "carpet.rule.alwaysAvailableGameMasterBlocks.extra.2": "true:Anyone can use Game Master blocks in any game mode"
 }

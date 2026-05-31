@@ -850,4 +850,11 @@ public class IGNYSettings {
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );
+
+    public static final RuleAccessor<String> ALWAYS_AVAILABLE_GAME_MASTER_BLOCKS = register(
+            RuleFactory.of("alwaysAvailableGameMasterBlocks", "vanilla")
+                    .addCategories(FEATURE)
+                    .addOptions("false", "ops", "true")
+                    .build()
+    );
 }
