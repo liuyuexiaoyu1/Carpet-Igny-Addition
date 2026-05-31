@@ -13,6 +13,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 public abstract class BaseDataManager<T> {
     protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -84,12 +85,50 @@ public abstract class BaseDataManager<T> {
         Path path = getJsonPath();
         if (path == null) return;
 
+        Path tempPath = null;
+        Path backupPath = null;
+        boolean hasOriginalFile = Files.exists(path);
+
         try {
             Files.createDirectories(path.getParent());
-            try (Writer writer = Files.newBufferedWriter(path)) {
+            tempPath = Files.createTempFile(path.getParent(),
+                    com.google.common.io.Files.getNameWithoutExtension(path.getFileName().toString()) + "-",
+                    ".tmp");
+            try (Writer writer = Files.newBufferedWriter(tempPath)) {
                 GSON.toJson(getCurrentData(), writer);
             }
+            if (hasOriginalFile) {
+                backupPath = path.resolveSibling(path.getFileName() + ".bak");
+                Files.deleteIfExists(backupPath);
+                Files.move(path, backupPath, StandardCopyOption.REPLACE_EXISTING);
+            }
+            try {
+                Files.move(tempPath, path, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                if (backupPath != null && Files.exists(backupPath)) {
+                    Files.move(backupPath, path, StandardCopyOption.REPLACE_EXISTING);
+                }
+                throw e;
+            }
+            if (backupPath != null) {
+                Files.deleteIfExists(backupPath);
+            }
+
         } catch (IOException e) {
+            if (hasOriginalFile && backupPath != null && Files.exists(backupPath)) {
+                try {
+                    Files.move(backupPath, path, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException recoveryError) {
+                    e.addSuppressed(recoveryError);
+                }
+            }
+            if (tempPath != null) {
+                try {
+                    Files.deleteIfExists(tempPath);
+                } catch (IOException cleanupError) {
+                    e.addSuppressed(cleanupError);
+                }
+            }
             IGNYServer.LOGGER.error("Failed to save config [{}]: {}", getFileName(), e.getMessage());
         }
     }
