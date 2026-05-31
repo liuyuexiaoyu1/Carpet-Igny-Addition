@@ -85,7 +85,7 @@ public class BuiltRule<T> implements CarpetRule<T> {
     @SuppressWarnings({"unchecked", "rawtypes"})
     private Function<String, T> createParser() {
         if (this.type == String.class) {
-            return s -> this.type.cast(s.toLowerCase(Locale.ROOT));
+            return this.type::cast;
         } else if (this.type == Boolean.class) {
             return s -> {
                 String lower = s.toLowerCase(Locale.ROOT);
