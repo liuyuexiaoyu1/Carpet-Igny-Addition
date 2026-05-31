@@ -1000,7 +1000,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 实体切换维度内存泄露修复 (entityDimensionChangeMemoryLeakFix) `🐛Beta`
+## 实体切换维度内存泄露修复 (entityDimensionChangeMemoryLeakFix)
 
 修复实体因切换维度而删除自身时不会清除残留的记忆而导致内存泄露的问题。
 
@@ -1009,7 +1009,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `BUGFIX`, `FEATURE`
 
-## 禁止幽匿脉络生长 (disableSculkVeinGrowth) `🐛Beta`
+## 禁止幽匿脉络生长 (disableSculkVeinGrowth)
 
 幽匿催发体只会吸收经验，不会生成幽匿脉络等方块。
 
@@ -1018,7 +1018,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 允许非法信标效果 (allowInvalidBeaconEffect) `🐛Beta` `MC>=26.2`
+## 允许非法信标效果 (allowInvalidBeaconEffect) `MC>=26.2`
 
 重新引入应用信标效果时服务端不对客户端发送数据包进行验证导致的可设置双重信标效果，回退了26.2-pre-1的更改。
 
@@ -1027,7 +1027,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `PORTING`, `FEATURE`
 
-## 重新引入实体ID碰撞 (entityIDCollisionReintroduce) `🐛Beta` `MC>=26.2`
+## 重新引入实体ID碰撞 (entityIDCollisionReintroduce) `MC>=26.2`
 
 重新引入创建实体时构建ID仅对实体计数器自增而未检查世界中是否存在相同ID的实体导致的实体ID碰撞，回退了26.2-pre-1的更改。
 
@@ -1036,7 +1036,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `PORTING`, `FEATURE`
 
-## 实体ID碰撞修复 (entityIDCollisionFix) `🐛Beta` `MC<26.2`
+## 实体ID碰撞修复 (entityIDCollisionFix) `MC<26.2`
 
 修复了创建实体时构建ID仅对实体计数器自增而未检查世界中是否存在相同ID的实体导致的实体ID碰撞。
 
@@ -1045,7 +1045,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `BUGFIX`, `FEATURE`
 
-## 可再生下界岩 (renewableNetherrack) `🐛Beta`
+## 可再生下界岩 (renewableNetherrack)
 
 使在空中生成的下界传送门像基岩版一样，在黑曜石底座两边各会有4个下界岩，使得底座共有12个方块。
 
@@ -1054,7 +1054,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 村民附魔不重复 (noDuplicateVillagerEnchants) `🐛Beta`
+## 村民附魔不重复 (noDuplicateVillagerEnchants)
 
 村民刷新交易时不会出现曾经刷新出过的附魔书，但是允许出现比曾经刷新出过的附魔书价格更低或是等级更高的附魔书。
 

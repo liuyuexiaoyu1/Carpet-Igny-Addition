@@ -1006,7 +1006,7 @@ Make the magma block behave similarly to ice: generate a lava source block when 
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## disableSculkVeinGrowth `🐛Beta`
+## disableSculkVeinGrowth
 
 Sculk catalysts will only absorb experience, without generating sculk veins or other blocks.
 
@@ -1015,7 +1015,7 @@ Sculk catalysts will only absorb experience, without generating sculk veins or o
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## allowInvalidBeaconEffect `🐛Beta` `MC>=26.2`
+## allowInvalidBeaconEffect `MC>=26.2`
 
 Reintroduce the dual beacon effect exploit caused by the server's lack of packet validation when reapplying beacon effects, reverting the changes from 26.2-pre-1.
 
@@ -1024,7 +1024,7 @@ Reintroduce the dual beacon effect exploit caused by the server's lack of packet
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `PORTING`, `FEATURE`
 
-## entityIDCollisionReintroduce `🐛Beta` `MC>=26.2`
+## entityIDCollisionReintroduce `MC>=26.2`
 
 Reintroduce entity ID collision caused by creating an entity where the ID constructor only increments the entity counter without checking if an entity with the same ID already exists in the world, reverting the changes from 26.2-pre-1.
 
@@ -1033,7 +1033,7 @@ Reintroduce entity ID collision caused by creating an entity where the ID constr
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `PORTING`, `FEATURE`
 
-## entityIDCollisionFix `🐛Beta` `MC<26.2`
+## entityIDCollisionFix `MC<26.2`
 
 Fixes entity ID collision caused by creating an entity where the ID constructor only increments the entity counter without checking if an entity with the same ID already exists in the world.
 
@@ -1042,7 +1042,7 @@ Fixes entity ID collision caused by creating an entity where the ID constructor 
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `BUGFIX`, `FEATURE`
 
-## renewableNetherrack `🐛Beta`
+## renewableNetherrack
 
 Make nether portals generated in the air have 4 netherrack blocks on each side of the obsidian base, just like in Bedrock Edition, making the base 12 blocks total.
 
@@ -1051,7 +1051,7 @@ Make nether portals generated in the air have 4 netherrack blocks on each side o
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## noDuplicateVillagerEnchants `🐛Beta`
+## noDuplicateVillagerEnchants
 
 Villagers will not roll previously generated enchanted books, unless the new book has a lower price or a higher enchantment level.
 
@@ -1060,7 +1060,7 @@ Villagers will not roll previously generated enchanted books, unless the new boo
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## alwaysAvailableGameMasterBlocks `🐛Beta`
+## alwaysAvailableGameMasterBlocks  `🐛Beta`
 
 Allows players to use Game Master blocks (such as debug sticks, command blocks, etc.) regardless of their game mode or permissions.
 
