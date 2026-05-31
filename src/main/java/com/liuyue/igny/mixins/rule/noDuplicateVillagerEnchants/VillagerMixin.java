@@ -14,7 +14,7 @@ import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;
 //#if MC >= 26.1
-//$$ import net.minecraft.world.entity.npc.VillagerProfession;
+//$$ import net.minecraft.world.entity.npc.villager.VillagerProfession;
 //$$ import net.minecraft.resources.ResourceKey;
 //#endif
 import net.minecraft.world.item.ItemStack;
