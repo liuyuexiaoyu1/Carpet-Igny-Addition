@@ -78,10 +78,28 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
 
     //#if MC >= 12005
     private boolean isOminousFromNbt(CompoundTag nbt) {
-        if (nbt.contains("config", 10)) {
+        //#if MC >= 12105
+        //$$ if (nbt.getCompound("config").isPresent())
+        //#else
+        if (nbt.contains("config", 10))
+        //#endif
+        {
+            //#if MC >= 12105
+            //$$ CompoundTag config = nbt.getCompound("config").get();
+            //#else
             CompoundTag config = nbt.getCompound("config");
-            if (config.contains("loot_table", 8)) {
+            //#endif
+            //#if MC >= 12105
+            //$$ if (config.getCompound("loot_table").isPresent())
+            //#else
+            if (config.contains("loot_table", 8))
+            //#endif
+            {
+                //#if MC >= 12105
+                //$$ String lootTable = config.getString("loot_table").get();
+                //#else
                 String lootTable = config.getString("loot_table");
+                //#endif
                 return lootTable.contains("reward_ominous");
             }
         }
