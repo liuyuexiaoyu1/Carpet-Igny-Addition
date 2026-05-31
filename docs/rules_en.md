@@ -1050,3 +1050,12 @@ Make nether portals generated in the air have 4 netherrack blocks on each side o
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## noDuplicateVillagerEnchants `🐛Beta`
+
+Villagers will not roll previously generated enchanted books, unless the new book has a lower price or a higher enchantment level.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

@@ -1053,3 +1053,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 村民附魔不重复 (noDuplicateVillagerEnchants) `🐛Beta`
+
+村民刷新交易时不会出现曾经刷新出过的附魔书，但是允许出现比曾经刷新出过的附魔书价格更低或是等级更高的附魔书。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

@@ -136,6 +136,7 @@
     "rule.noCreativeDestroyAttachmentDrops.BlockMixin",
     "rule.noCreativeDestroyAttachmentDrops.FaceAttachedHorizontalDirectionalBlockMixin",
     "rule.noCreativeDestroyAttachmentDrops.ServerPlayerGameModeMixin",
+    "rule.noDuplicateVillagerEnchants.VillagerMixin",
     "rule.noOwnerTntLootingIII.EnchantedCountIncreaseFunctionMixin",
     "rule.noteBlockSelfCheck.NoteBlockMixin",
     "rule.noWardenDarkness.WardenMixin",

@@ -391,5 +391,7 @@
   "carpet.rule.entityIDCollisionFix.name": "实体ID碰撞修复",
   "carpet.rule.entityIDCollisionFix.desc": "修复了创建实体时构建ID仅对实体计数器自增而未检查世界中是否存在相同ID的实体导致的实体ID碰撞",
   "carpet.rule.renewableNetherrack.name": "可再生下界岩",
-  "carpet.rule.renewableNetherrack.desc": "使在空中生成的下界传送门像基岩版一样，在黑曜石底座两边各会有4个下界岩，使得底座共有12个方块"
+  "carpet.rule.renewableNetherrack.desc": "使在空中生成的下界传送门像基岩版一样，在黑曜石底座两边各会有4个下界岩，使得底座共有12个方块",
+  "carpet.rule.noDuplicateVillagerEnchants.name": "村民附魔不重复",
+  "carpet.rule.noDuplicateVillagerEnchants.desc": "村民刷新交易时不会出现曾经刷新出过的附魔书，但是允许出现比曾经刷新出过的附魔书价格更低或是等级更高的附魔书"
 }

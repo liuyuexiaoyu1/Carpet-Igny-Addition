@@ -96,7 +96,8 @@ public class IGNYSettings {
 
     public static final RuleAccessor<CommandPermissionLevel> COMMAND_PLAYER_ENDER_CHEST_DROP = register(
             RuleFactory.of("commandPlayerEnderChestDrop", CommandPermissionLevel.OPS)
-                    .addCategories(COMMAND, FEATURE)
+                    .setCommand()
+                    .addCategories(FEATURE)
                     .build()
     );
 
@@ -173,7 +174,8 @@ public class IGNYSettings {
 
     public static final RuleAccessor<CommandPermissionLevel> COMMAND_FIXNOTEPITCH = register(
             RuleFactory.of("commandFixnotepitch", CommandPermissionLevel.OPS)
-                    .addCategories(COMMAND, CREATIVE, FEATURE)
+                    .setCommand()
+                    .addCategories(CREATIVE, FEATURE)
                     .build()
     );
 
@@ -228,13 +230,15 @@ public class IGNYSettings {
 
     public static final RuleAccessor<CommandPermissionLevel> COMMAND_PLAYER_OPERATE = register(
             RuleFactory.of("commandPlayerOperate", CommandPermissionLevel.OPS)
-                    .addCategories(COMMAND, FEATURE)
+                    .setCommand()
+                    .addCategories(FEATURE)
                     .build()
     );
 
     public static final RuleAccessor<CommandPermissionLevel> COMMAND_CLEAR_LIGHT_QUEUE = register(
             RuleFactory.of("commandClearLightQueue", CommandPermissionLevel.OPS)
-                    .addCategories(COMMAND, FEATURE)
+                    .setCommand()
+                    .addCategories(FEATURE)
                     .build()
     );
 
@@ -410,14 +414,16 @@ public class IGNYSettings {
 
     public static final RuleAccessor<CommandPermissionLevel> COMMAND_CUSTOM_PLAYER_PICKUP_ITEM = register(
             RuleFactory.of("commandCustomPlayerPickupItem", CommandPermissionLevel.FALSE)
-                    .addCategories(COMMAND, CREATIVE, FEATURE)
+                    .setCommand()
+                    .addCategories(CREATIVE, FEATURE)
                     .build()
     );
 
     //#if MC >= 12006
     public static final RuleAccessor<CommandPermissionLevel> COMMAND_CUSTOM_ITEM_MAX_STACK_SIZE = register(
             RuleFactory.of("commandCustomItemMaxStackSize", CommandPermissionLevel.FALSE)
-                    .addCategories(COMMAND, CREATIVE, FEATURE)
+                    .setCommand()
+                    .addCategories(CREATIVE, FEATURE)
                     .build()
     );
     //#endif
@@ -835,6 +841,12 @@ public class IGNYSettings {
 
     public static final RuleAccessor<Boolean> RENEWABLE_NETHERRACK = register(
             RuleFactory.of("renewableNetherrack", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> NO_DUPLICATE_VILLAGER_ENCHANTS = register(
+            RuleFactory.of("noDuplicateVillagerEnchants", false)
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );

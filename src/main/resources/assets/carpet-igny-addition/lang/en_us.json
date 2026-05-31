@@ -277,5 +277,6 @@
   "carpet.rule.allowInvalidBeaconEffect.desc": "Reintroduce the dual beacon effect exploit caused by the server's lack of packet validation when reapplying beacon effects, reverting the changes from 26.2-pre-1",
   "carpet.rule.entityIDCollisionReintroduce.desc": "Reintroduce entity ID collision caused by creating an entity where the ID constructor only increments the entity counter without checking if an entity with the same ID already exists in the world, reverting the changes from 26.2-pre-1",
   "carpet.rule.entityIDCollisionFix.desc": "Fixes entity ID collision caused by creating an entity where the ID constructor only increments the entity counter without checking if an entity with the same ID already exists in the world",
-  "carpet.rule.renewableNetherrack.desc": "Make nether portals generated in the air have 4 netherrack blocks on each side of the obsidian base, just like in Bedrock Edition, making the base 12 blocks total"
+  "carpet.rule.renewableNetherrack.desc": "Make nether portals generated in the air have 4 netherrack blocks on each side of the obsidian base, just like in Bedrock Edition, making the base 12 blocks total",
+  "carpet.rule.noDuplicateVillagerEnchants.desc": "Villagers will not roll previously generated enchanted books, unless the new book has a lower price or a higher enchantment level"
 }
