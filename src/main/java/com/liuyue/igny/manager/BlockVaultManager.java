@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.VaultBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 //#if MC >= 12106
@@ -73,6 +74,19 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
         return getCurrentData().vault.containsKey(getDictKey(level, pos));
     }
 
+    //#if MC >= 12005
+    private boolean isOminousFromNbt(CompoundTag nbt) {
+        if (nbt.contains("config", 10)) {
+            CompoundTag config = nbt.getCompound("config");
+            if (config.contains("loot_table", 8)) {
+                String lootTable = config.getString("loot_table");
+                return lootTable.contains("reward_ominous");
+            }
+        }
+        return false;
+    }
+    //#endif
+
     public void restoreBlock(Level level, BlockPos pos) {
         String[] info = getCurrentData().vault.remove(getDictKey(level, pos));
         getCurrentData().pendingRestore.remove(getDictKey(level, pos));
@@ -89,7 +103,7 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
                         get(rl);
         //#endif
 
-        if (block != Blocks.AIR) {
+        if (!block.equals(Blocks.AIR)) {
             level.setBlock(pos, block.defaultBlockState(), 2 | 16);
             if (info.length > 1 && !info[1].isEmpty()) {
                 try {
@@ -97,6 +111,11 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
                     //$$ CompoundTag nbt = TagParser.parseCompoundFully(info[1]);
                     //#else
                     CompoundTag nbt = TagParser.parseTag(info[1]);
+                    //#endif
+                    //#if MC >= 12005
+                    if (block.equals(Blocks.VAULT) && isOminousFromNbt(nbt)) {
+                        level.setBlock(pos, block.defaultBlockState().setValue(VaultBlock.OMINOUS, true), 2 | 16);
+                    }
                     //#endif
                     BlockEntity be = level.getBlockEntity(pos);
                     if (be != null) {
