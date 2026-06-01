@@ -1075,3 +1075,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `IGNY`, `FEATURE`
+
+## 重新引入末影龙删除跳过 (enderDragonRemoveSkipReintroduce) `🐛Beta`
+
+重新引入末影龙实体仅在死亡时间第200游戏刻时删除，回退了26.1-pre-2的更改。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `PORTING`, `FEATURE`

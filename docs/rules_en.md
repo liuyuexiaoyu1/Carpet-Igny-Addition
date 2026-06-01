@@ -1072,3 +1072,12 @@ Allows players to use Game Master blocks (such as debug sticks, command blocks, 
 - Default value: `false`
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`, `FEATURE`
+
+## enderDragonRemoveSkipReintroduce `🐛Beta`
+
+Reintroduces the behavior where the Ender Dragon entity is only removed at exactly the 200th death tick, reverting the changes made in 26.1-pre-2".
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `PORTING`, `FEATURE`

@@ -856,4 +856,12 @@ public class IGNYSettings {
                     .addCategories(FEATURE)
                     .build()
     );
+
+    //#if MC >= 26.1
+    //$$ public static final RuleAccessor<Boolean> ENDER_DRAGON_REMOVE_SKIP_REINTRODUCE = register(
+    //$$         RuleFactory.of("enderDragonRemoveSkipReintroduce", false)
+    //$$                 .addCategories(PORTING, FEATURE)
+    //$$                 .build()
+    //$$ );
+    //#endif
 }
