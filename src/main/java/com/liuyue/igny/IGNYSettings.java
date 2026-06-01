@@ -851,10 +851,9 @@ public class IGNYSettings {
                     .build()
     );
 
-    public static final RuleAccessor<String> ALWAYS_AVAILABLE_GAME_MASTER_BLOCKS = register(
-            RuleFactory.of("alwaysAvailableGameMasterBlocks", "vanilla")
+    public static final RuleAccessor<CommandPermissionLevel> ALWAYS_AVAILABLE_GAME_MASTER_BLOCKS = register(
+            RuleFactory.of("alwaysAvailableGameMasterBlocks", CommandPermissionLevel.FALSE)
                     .addCategories(FEATURE)
-                    .addOptions("false", "ops", "true")
                     .build()
     );
 }

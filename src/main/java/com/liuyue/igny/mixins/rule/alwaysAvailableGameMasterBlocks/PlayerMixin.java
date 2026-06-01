@@ -1,6 +1,8 @@
 package com.liuyue.igny.mixins.rule.alwaysAvailableGameMasterBlocks;
 
 import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.rule.CommandPermissionLevel;
+import com.liuyue.igny.utils.CommandUtil;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.entity.player.Abilities;
@@ -17,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public class PlayerMixin {
     @WrapOperation(method = "canUseGameMasterBlocks", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/player/Abilities;instabuild:Z", opcode = Opcodes.GETFIELD))
     private boolean canUseGameMasterBlocks(Abilities instance, Operation<Boolean> original) {
-        if (!IGNYSettings.ALWAYS_AVAILABLE_GAME_MASTER_BLOCKS.value().equals("false")) {
+        if (!IGNYSettings.ALWAYS_AVAILABLE_GAME_MASTER_BLOCKS.value().equals(CommandPermissionLevel.FALSE)) {
             return true;
         }
         return original.call(instance);
@@ -31,7 +33,7 @@ public class PlayerMixin {
     private int getPermissionLevel(Player instance, Operation<Integer> original)
     //#endif
     {
-        if (IGNYSettings.ALWAYS_AVAILABLE_GAME_MASTER_BLOCKS.value().equals("true")) {
+        if (CommandUtil.canUseCommand(instance, IGNYSettings.ALWAYS_AVAILABLE_GAME_MASTER_BLOCKS.value())) {
             //#if MC >= 12111
             //$$ return true;
             //#else

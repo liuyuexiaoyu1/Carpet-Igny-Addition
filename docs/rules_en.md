@@ -1060,7 +1060,7 @@ Villagers will not roll previously generated enchanted books, unless the new boo
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## alwaysAvailableGameMasterBlocks  `🐛Beta`
+## alwaysAvailableGameMasterBlocks
 
 Allows players to use Game Master blocks (such as debug sticks, command blocks, etc.) regardless of their game mode or permissions.
 
@@ -1070,5 +1070,5 @@ Allows players to use Game Master blocks (such as debug sticks, command blocks, 
 
 - Type: `string`
 - Default value: `false`
-- Suggested options: `false`, `ops`, `true`
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`, `FEATURE`

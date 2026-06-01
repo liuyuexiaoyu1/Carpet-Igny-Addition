@@ -5,6 +5,7 @@ import com.liuyue.igny.rule.CommandPermissionLevel;
 import net.minecraft.commands.CommandSourceStack;
 import carpet.patches.EntityPlayerMPFake;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 
 //#if MC >= 12111
 //$$ import net.minecraft.commands.Commands;
@@ -27,7 +28,7 @@ public class CommandUtil {
         return IGNYSettings.COMMAND_PLAYER_ENDER_CHEST_DROP.value().canExecute(source);
     }
 
-    public static boolean canUseCommand(ServerPlayer source, Object commandLevel) {
+    public static boolean canUseCommand(Player source, Object commandLevel) {
         if (source == null) return false;
         if (commandLevel instanceof Boolean) {
             return (Boolean) commandLevel;
@@ -55,7 +56,7 @@ public class CommandUtil {
         return false;
     }
 
-    public static boolean hasPermissionLevel(ServerPlayer source, int level) {
+    public static boolean hasPermissionLevel(Player source, int level) {
         //#if MC >= 12111
         //$$ return switch (level) {
         //$$     case 0 -> Commands.LEVEL_ALL.check(source.permissions());

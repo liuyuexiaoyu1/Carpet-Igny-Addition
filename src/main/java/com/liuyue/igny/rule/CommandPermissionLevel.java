@@ -24,7 +24,7 @@ package com.liuyue.igny.rule;
 
 import com.liuyue.igny.utils.CommandUtil;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -74,7 +74,7 @@ public final class CommandPermissionLevel {
         //#endif
     }
 
-    public boolean canExecute(ServerPlayer player) {
+    public boolean canExecute(Player player) {
         if (this == TRUE) return true;
         if (this == FALSE) return false;
         return switch (this.option) {
