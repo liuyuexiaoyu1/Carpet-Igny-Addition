@@ -33,7 +33,7 @@ public class PlayerMixin {
     private int getPermissionLevel(Player instance, Operation<Integer> original)
     //#endif
     {
-        if (CommandUtil.canUseCommand(instance, IGNYSettings.ALWAYS_AVAILABLE_GAME_MASTER_BLOCKS.value())) {
+        if (CommandUtil.canUseCommand((Player) (Object) this, IGNYSettings.ALWAYS_AVAILABLE_GAME_MASTER_BLOCKS.value())){
             //#if MC >= 12111
             //$$ return true;
             //#else
