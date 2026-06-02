@@ -43,7 +43,7 @@ public class EntityMixin {
     private int getNextEntityId(ServerLevel level) {
         int id = 0;
 
-        while (id == 0 || ((ChunkMapAccessor) ((ServerLevelAccessor) level).getChunkSource().chunkMap).getEntityMap().containsKey(id)) {
+        while (id == 0 || ((ChunkMapAccessor) level.getChunkSource().chunkMap).getEntityMap().containsKey(id)) {
             id = ENTITY_COUNTER.incrementAndGet();
         }
 

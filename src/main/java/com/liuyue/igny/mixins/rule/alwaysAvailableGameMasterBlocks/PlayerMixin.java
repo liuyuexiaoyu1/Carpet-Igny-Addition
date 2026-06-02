@@ -40,6 +40,10 @@ public class PlayerMixin {
             return 4;
             //#endif
         }
+        //#if MC >= 12111
+        //$$ return original.call(instance, permission);
+        //#else
         return original.call(instance);
+        //#endif
     }
 }

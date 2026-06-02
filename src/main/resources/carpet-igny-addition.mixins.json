@@ -82,7 +82,6 @@
     "rule.entityDimensionChangeMemoryLeakFix.EntityMixin",
     "rule.entityIDCollisionFix.ChunkMapAccessor",
     "rule.entityIDCollisionFix.EntityMixin",
-    "rule.entityIDCollisionFix.ServerLevelAccessor",
     "rule.entityIDCollisionReintroduce.ServerLevelMixin",
     "rule.entityIDSuppressionWhitelist.ChunkMapMixin",
     "rule.fakePlayerCanPush.EntityMixin",
