@@ -40,6 +40,7 @@ public class IGNYServerMod implements ModInitializer {
         //#endif
         IGNYServer.init();
         IGNYServerRegister.register();
+        IGNYServer.LOGGER.info("{} Version: {} Cia动成功llo～(∠・ω< )⌒★", IGNYServer.fancyName, version);
     }
 
     public static String getModId() {
