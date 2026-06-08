@@ -28,6 +28,7 @@ public class IGNYSettings {
     public static Set<String> EIDWhitelist = new HashSet<>();
     public static final ThreadLocal<Boolean> effectCommandRegistering = ThreadLocal.withInitial(() -> false);
     public static ThreadLocal<Boolean> movingBlocks = ThreadLocal.withInitial(() -> false);
+    public static ThreadLocal<Boolean> canGetBlockEntity = ThreadLocal.withInitial(() -> false);
     /**
      * 物品展示框是否正在保存NBT数据
      */
