@@ -122,7 +122,6 @@
     "rule.linkableEnderChest.EnderChestBlockEntityMixin",
     "rule.linkableEnderChest.EnderChestBlockMixin",
     "rule.linkableEnderChest.HopperBlockEntityMixin",
-    "rule.linkableEnderChest.LevelMixin",
     "rule.linkableEnderChest.PlayerMixin",
     "rule.linkableEnderChest.compat.quickshulker.ServerPlayerGameModeMixin",
     "rule.liquidNeverSpread.FlowingFluidMixin",
