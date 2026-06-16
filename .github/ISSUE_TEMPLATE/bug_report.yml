@@ -9,6 +9,17 @@ body:
         - 使用 **最新的开发构建（Dev Build）** 测试； / Use the **latest Dev Build** to test;
         - 搜索已有 Issue，避免重复。 / Search existing issues to avoid duplicates.
 
+  - type: checkboxes
+    id: verification
+    attributes:
+      label: 预检清单 | Pre-Checklist
+      description: 请确认你已完成以下步骤 | Please confirm you have completed the following steps
+      options:
+        - label: 我已将模组更新至 [最新测试版](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/)，并看过 [最新提交](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/commits/master/)，确认该问题仍然存在。 | I have updated the mod to the [latest beta build](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/) and reviewed the [latest commits](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/commits/master/), and confirmed that the issue still persists.
+          required: true
+        - label: 我已搜索现有 Issue，确认这不是重复报告。 | I have searched existing issues and confirmed this is not a duplicate report.
+          required: true
+
   - type: textarea
     id: description
     attributes:
@@ -48,18 +59,6 @@ body:
       description: 实际发生了什么？ | What actually happened?
       placeholder: 苦力怕把自己发射到了天上 | The creeper launched itself into the sky
 
-  - type: textarea
-    id: logs
-    attributes:
-      label: 相关日志 | Relevant Logs
-      description: |-
-        如果是崩溃问题，请提供 `logs` 文件夹中的最新日志，或 `crash-reports` 中的崩溃报告。
-        If it's a crash, provide logs from the `logs` folder or `crash-reports`.
-        请将日志上传至 [Pastebin](https://pastebin.com/) 或 [mclo.gs](https://mclo.gs/)，并在此粘贴链接。
-        Please upload logs to Pastebin or mclo.gs and paste the link here.
-        ❌ 请勿直接粘贴整份日志内容。/ DO NOT paste full logs directly.
-      placeholder: https://pastebin.com/J6b7lKxR
-
   - type: input
     id: minecraft-version
     attributes:
@@ -78,24 +77,39 @@ body:
     validations:
       required: true
 
+  - type: checkboxes
+    id: environment-check
+    attributes:
+      label: 环境检查 | Environment Check
+      description: 排查第三方模组干扰 | Troubleshooting third-party mod interference
+      options:
+        - label: 环境中存在其他模组（本模组及其前置除外）。若是，我会在下方“其他信息”中提供冲突模组及最小化复现方案。 | There are other mods in the environment (excluding this mod and its dependencies). If so, I will provide the conflicting mods and a minimal reproducible example in the "Other Information" section below.
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 相关日志 | Relevant Logs
+      description: |-
+        如果是崩溃问题，请提供 `logs` 文件夹中的最新日志，或 `crash-reports` 中的崩溃报告。
+        If it's a crash, provide logs from the `logs` folder or `crash-reports`.
+        请将日志上传至 [Pastebin](https://pastebin.com/) 或 [mclo.gs](https://mclo.gs/)，并在此粘贴链接。
+        Please upload logs to Pastebin or mclo.gs and paste the link here.
+        ❌ 请勿直接粘贴整份日志内容。/ DO NOT paste full logs directly.
+      placeholder: https://pastebin.com/J6b7lKxR
+
   - type: textarea
     id: other-information
     attributes:
       label: 其他信息 | Other Information
       description: |
-        例如：仅在特定规则开启时出现。
-        e.g., specific game rules enabled.
+        例如：仅在特定规则开启时出现，或者上述提及的冲突模组与最小化复现方案。
+        e.g., Specific game rules enabled, or the aforementioned conflicting mods and MRE.
       placeholder: 仅当玩家处于生存模式且启用了某规则时才会触发 | Only triggers in survival mode with rule X enabled
 
   - type: checkboxes
-    id: check-list
+    id: follow-up
     attributes:
-      label: 检查清单 | Checklist
+      label: 后续跟进 | Follow-up
       options:
-        - label: 我已将模组更新至 [最新测试版](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/)，并看过 [最新提交](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/commits/master/)，确认该问题仍然存在。 | I've updated the mod to the [latest beta build](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/) and checked the [latest commits](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/commits/master/).
-          required: true
-        - label: 环境中是否存在其他模组（本模组及其前置除外）？若有，请提供冲突的模组及最小化复现方案。 | Are there any other mods in the environment (excluding this mod and its dependencies)? If so, please list the conflicting mods and provide a minimal reproducible example.
-        - label: 我已搜索现有 Issue，确认这不是重复报告。 | I have searched existing issues and confirmed this is not a duplicate.
-          required: true
-        - label: 我愿意尝试提交 Pull Request 来解决此 Bug | I'm willing to try submitting a Pull Request to fix this bug.
-        - label: 我已经仔细阅读过选项里的内容，并且知道这个选项不用勾选 | I have carefully read the content in the option and am aware that this option does not need to be checked.
+        - label: 我愿意尝试提交 Pull Request 来解决此 Bug。 | I am willing to try submitting a Pull Request to fix this bug.
+        - label: 我已经仔细阅读过以上内容，并且知道这个选项不用勾选。 | I have carefully read the terms above and know that this checkbox can be left unchecked.

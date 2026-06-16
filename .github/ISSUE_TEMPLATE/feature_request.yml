@@ -15,7 +15,11 @@ body:
       label: 功能存在性验证 | Feature Verification
       description: 请确认你已完成以下检查 | Please confirm you have completed the following checks
       options:
-        - label: 我已从 [GitHub Actions](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions) 下载并测试了最新版本，确认没有此功能 | I have downloaded and tested the latest version from GitHub Actions and confirmed this feature is missing.
+        - label: 我已从 [GitHub Actions](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions) 下载并测试了最新版本，确认没有此功能。 | I have downloaded and tested the latest version from GitHub Actions and confirmed this feature is missing.
+          required: true
+        - label: 我已看过 [最新提交](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/commits/master/)，确认我想要的功能还没有被合并。 | I have reviewed the [latest commits](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/commits/master/) and confirmed that my desired feature has not been merged yet.
+          required: true
+        - label: 我已搜索现有 Issue，确认这不是重复的建议。 | I have searched existing issues and confirmed this is not a duplicate request.
           required: true
 
   - type: textarea
@@ -42,12 +46,8 @@ body:
       label: 参与意愿 | Willingness to Contribute
       description: 是否愿意协助实现此功能？ | Are you willing to help implement this feature?
       options:
-        - label: 我愿意尝试提交 Pull Request 来实现此功能 | I am willing to submit a Pull Request to implement this.
-        - label: 我已将模组更新至 [最新测试版](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/)，并看过 [最新提交](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/commits/master/)，确认我想要的功能还没有实现。 | I've updated the mod to the [latest beta build](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/) and reviewed the [latest commits](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/commits/master/), and confirmed that the feature I'm looking for hasn't been implemented yet.
-          required: true
-        - label: 我已搜索现有 Issue，确认这不是重复报告。 | I have searched existing issues and confirmed this is not a duplicate.
-          required: true
-        - label: 我已经仔细阅读过选项里的内容，并且知道这个选项不用勾选 | I have carefully read the content in the option and am aware that this option does not need to be checked.
+        - label: 我愿意尝试提交 Pull Request 来实现此功能。 | I am willing to try submitting a Pull Request to implement this feature.
+        - label: 我已经仔细阅读过以上内容，并且知道这个选项不用勾选。 | I have carefully read the terms above and know that this checkbox can be left unchecked.
 
   - type: textarea
     id: other-information
@@ -55,4 +55,4 @@ body:
       label: 其他信息 | Other Information
       description: |
         相关截图、参考模组、技术方案等。若无，请留空。
-        Relevant screenshots, reference mods, technical ideas, etc. Leave blank if none.
+        Relevant screenshots, reference mods, technical schemes/proposals, etc. Leave blank if none.
