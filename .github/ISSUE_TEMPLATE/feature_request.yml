@@ -43,7 +43,11 @@ body:
       description: 是否愿意协助实现此功能？ | Are you willing to help implement this feature?
       options:
         - label: 我愿意尝试提交 Pull Request 来实现此功能 | I am willing to submit a Pull Request to implement this.
-          required: false
+        - label: 我已将模组更新至 [最新测试版](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/)，并看过 [最新提交](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/commits/master/)，确认我想要的功能还没有实现。 | I've updated the mod to the [latest beta build](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/) and reviewed the [latest commits](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/commits/master/), and confirmed that the feature I'm looking for hasn't been implemented yet.
+          required: true
+        - label: 我已搜索现有 Issue，确认这不是重复报告。 | I have searched existing issues and confirmed this is not a duplicate.
+          required: true
+        - label: 我已经仔细阅读过选项里的内容，并且知道这个选项不用勾选 | I have carefully read the content in the option and am aware that this option does not need to be checked.
 
   - type: textarea
     id: other-information

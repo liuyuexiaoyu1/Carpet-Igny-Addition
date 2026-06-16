@@ -83,8 +83,8 @@ body:
     attributes:
       label: 其他信息 | Other Information
       description: |
-        例如：是否安装了其他模组、仅在特定规则开启时出现等。
-        e.g., interaction with other mods, specific game rules enabled, etc.
+        例如：仅在特定规则开启时出现。
+        e.g., specific game rules enabled.
       placeholder: 仅当玩家处于生存模式且启用了某规则时才会触发 | Only triggers in survival mode with rule X enabled
 
   - type: checkboxes
@@ -92,7 +92,10 @@ body:
     attributes:
       label: 检查清单 | Checklist
       options:
-        - label: 我已使用最新版本（含 Dev Build）验证，问题仍然存在。 | I have verified this with the latest version (including Dev Builds).
+        - label: 我已将模组更新至 [最新测试版](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/)，并看过 [最新提交](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/commits/master/)，确认该问题仍然存在。 | I've updated the mod to the [latest beta build](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/actions/) and checked the [latest commits](https://github.com/liuyuexiaoyu1/Carpet-Igny-Addition/commits/master/).
           required: true
+        - label: 环境中是否存在其他模组（本模组及其前置除外）？若有，请提供冲突的模组及最小化复现方案。 | Are there any other mods in the environment (excluding this mod and its dependencies)? If so, please list the conflicting mods and provide a minimal reproducible example.
         - label: 我已搜索现有 Issue，确认这不是重复报告。 | I have searched existing issues and confirmed this is not a duplicate.
           required: true
+        - label: 我愿意尝试提交 Pull Request 来解决此 Bug | I'm willing to try submitting a Pull Request to fix this bug.
+        - label: 我已经仔细阅读过选项里的内容，并且知道这个选项不用勾选 | I have carefully read the content in the option and am aware that this option does not need to be checked.
