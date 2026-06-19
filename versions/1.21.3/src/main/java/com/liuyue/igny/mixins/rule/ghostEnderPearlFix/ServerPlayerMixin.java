@@ -16,7 +16,6 @@ import java.util.UUID;
 
 @Mixin(ServerPlayer.class)
 public class ServerPlayerMixin {
-
     @Shadow
     @Final
     private Set<ThrownEnderpearl> enderPearls;

@@ -29,7 +29,7 @@
     "commands.customPlayerPickupItem.ItemEntityMixin",
     "compat.accessor.fapi.AbstractChanneledNetworkAddonAccessor",
     "compat.fapi.AbstractNetworkAddonMixin",
-    "debug.ParsedRuleMixin",
+    "debug.TranslationsMixin",
     "easterEgg.PlayerListMixin",
     "easterEgg.ServerGamePacketListenerImplMixin",
     "exceptions.PacketUtilsMixin",

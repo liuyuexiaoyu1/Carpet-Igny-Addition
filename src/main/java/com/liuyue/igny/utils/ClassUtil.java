@@ -2,6 +2,7 @@ package com.liuyue.igny.utils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.liuyue.igny.IGNYServer;
 import com.liuyue.igny.utils.deobfuscator.StackTraceDeobfuscator;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -14,32 +15,32 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.CodeSource;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class ClassUtil {
 
     public static void getModIdFromStack(String targetMethodName, boolean obfuscated, Consumer<String> callback) {
         StackTraceElement[] stack = obfuscated ? StackTraceDeobfuscator.deobfuscateStackTrace(Thread.currentThread().getStackTrace()) : Thread.currentThread().getStackTrace();
-        CompletableFuture.supplyAsync(() -> {
-            try {
-                for (int i = 0; i < stack.length; i++) {
-                    if (targetMethodName.equals(stack[i].getMethodName())) {
-                        int callerIndex = i + 1;
-                        if (callerIndex < stack.length) {
-                            String clazzName = stack[callerIndex].getClassName();
-                            return getModIdFromClass(Class.forName(clazzName));
-                        }
-                        break;
+        try {
+            for (int i = 0; i < stack.length; i++) {
+                if (targetMethodName.equals(stack[i].getMethodName())) {
+                    int callerIndex = i + 1;
+                    if (callerIndex < stack.length) {
+                        String clazzName = stack[callerIndex].getClassName();
+                        callback.accept(getModIdFromClass(Class.forName(clazzName)));
+                        return;
                     }
+                    break;
                 }
-            } catch (Exception ignored) {}
-            return "unknown";
-        }).thenAccept(callback);
+            }
+        } catch (Exception e) {
+            IGNYServer.LOGGER.warn("Failed to resolve mod ID from stack (target: {}): {}", targetMethodName, e.getMessage());
+        }
+        callback.accept("unknown");
     }
 
     public static void getModIdFromClass(Class<?> clazz, Consumer<String> callback) {
-        CompletableFuture.supplyAsync(() -> getModIdFromClass(clazz)).thenAccept(callback);
+        callback.accept(getModIdFromClass(clazz));
     }
 
     private static String getModIdFromClass(Class<?> clazz) {

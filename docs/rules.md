@@ -970,7 +970,7 @@ true: 流体源和流体都不会传播。
 - 参考选项: `false`, `onlyLink`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 隐形物品展示框 (invisibleItemFrames) `🐛Beta更改`
+## 隐形物品展示框 (invisibleItemFrames)
 
 当物品展示框为指定名称时，物品展示框内含物品时将会隐形。  
 false: 规则不生效。  

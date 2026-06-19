@@ -1,6 +1,7 @@
 package com.liuyue.igny.mixins.easterEgg;
 
 import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.utils.FestivalUtil;
 import com.liuyue.igny.utils.StringUtil;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -10,8 +11,6 @@ import net.minecraft.network.chat.PlayerChatMessage;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-
-import java.time.LocalDate;
 
 @Mixin(ServerGamePacketListenerImpl.class)
 public class ServerGamePacketListenerImplMixin {
@@ -31,8 +30,7 @@ public class ServerGamePacketListenerImplMixin {
             PlayerChatMessage message,
             Operation<Void> original
     ) {
-        LocalDate date = LocalDate.now();
-        if (IGNYSettings.FESTIVE_EASTER_EGG.value() && date.getMonthValue() == 4 && date.getDayOfMonth() == 1) {
+        if (IGNYSettings.FESTIVE_EASTER_EGG.value() && FestivalUtil.isAprilFoolsDay()) {
             String originalText = message.signedContent();
             if (!originalText.startsWith("/")) {
                 String reversed = StringUtil.reverse(originalText);

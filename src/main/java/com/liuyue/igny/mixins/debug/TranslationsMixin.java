@@ -8,9 +8,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-
 @Mixin(Translations.class)
-public class ParsedRuleMixin {
+public class TranslationsMixin {
     @Inject(method = "trOrNull",at = @At("RETURN"), cancellable = true)
     private static void trOrNull(String key, CallbackInfoReturnable<String> cir) {
         if (cir.getReturnValue() == null && FabricLoader.getInstance().isDevelopmentEnvironment()) {

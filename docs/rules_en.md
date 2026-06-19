@@ -975,7 +975,7 @@ Ender chests without a custom name retain vanilla behavior, showing the player's
 - Suggested options: `false`, `onlyLink`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## invisibleItemFrames `🐛Beta Modify`
+## invisibleItemFrames
 
 Determines when item frames become invisible based on the rule value.
 

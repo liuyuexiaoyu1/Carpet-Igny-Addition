@@ -69,26 +69,11 @@ public class IGNYClientRegister {
         );
         //#if MC >= 12006
         ClientPlayNetworking.registerGlobalReceiver(
-                //#if MC < 12005
-                //$$ IGNYServer.SYNC_STACK_SIZE_PACKET_ID,
-                //#else
                 SyncCustomStackSizePayload.TYPE,
-                //#endif
-                //#if MC < 12005
-                //$$ (client, handler, buf, responseSender) -> {
-                //$$     int size = buf.readVarInt();
-                //$$     Map<String, Integer> map = new java.util.HashMap<>(size);
-                //$$     for (int i = 0; i < size; i++) {
-                //$$         map.put(buf.readUtf(), buf.readVarInt());
-                //$$     }
-                //$$     client.execute(() -> CustomItemMaxStackSizeDataManager.INSTANCE.clientUpdateData(map));
-                //$$ }
-                //#else
                 (payload, context) -> context.client().execute(() ->
-                            CustomItemMaxStackSizeDataManager.INSTANCE.clientUpdateData(payload.customStacks()
-
-                //#endif
-        )));
+                            CustomItemMaxStackSizeDataManager.INSTANCE.clientUpdateData(payload.customStacks())
+                )
+        );
         //#endif
         ClientPlayNetworking.registerGlobalReceiver(
                 //#if MC < 12005

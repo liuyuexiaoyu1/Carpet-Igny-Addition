@@ -1,6 +1,7 @@
 package com.liuyue.igny.mixins.easterEgg;
 
 import com.liuyue.igny.manager.EasterEggDataManager;
+import com.liuyue.igny.utils.FestivalUtil;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Renderable;
@@ -15,8 +16,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,10 +51,7 @@ public abstract class TitleScreenMixin extends Screen {
     private void onInit(CallbackInfo ci) {
         if (isPrankFinishedPermanently || !EasterEggDataManager.INSTANCE.isAprilFoolsActive()) return;
 
-        LocalDate now = LocalDate.now();
-        boolean isDateValid = (now.getMonthValue() == 4 && (now.getDayOfMonth() == 1 || now.getDayOfMonth() == 2));
-
-        if (!isDateValid) {
+        if (!FestivalUtil.isAprilFoolsDay()) {
             isAprilFoolsActive = false;
             return;
         }

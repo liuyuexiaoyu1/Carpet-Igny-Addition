@@ -1,8 +1,8 @@
 package com.liuyue.igny.mixins.rule.ghostEnderPearlFix;
 
-import net.minecraft.server.level.ServerPlayer;
+import com.liuyue.igny.utils.compat.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(ServerPlayer.class)
+@Mixin(DummyClass.class)
 public class ServerPlayerMixin {
 }

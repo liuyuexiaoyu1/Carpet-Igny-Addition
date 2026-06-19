@@ -13,19 +13,20 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.liuyue.igny.utils.IGNYRuleCategory.*;
 
 public class IGNYSettings {
     public static final ThreadLocal<Boolean> CREATIVE_BREAKING = ThreadLocal.withInitial(() -> false);
-    public static Set<String> CRAMMING_ENTITIES = new HashSet<>();
-    public static List<BlockPos> noUpdatePos = new ArrayList<>();
+    public static Set<String> CRAMMING_ENTITIES = ConcurrentHashMap.newKeySet();
+    public static List<BlockPos> noUpdatePos = new CopyOnWriteArrayList<>();
     public static final Map<String, List<String>> MOD_RULE_TREE = new ConcurrentHashMap<>();
     public static final ThreadLocal<Boolean> fakePlayerSpawnMemoryLeakFix = ThreadLocal.withInitial(() -> false);
     public static final ThreadLocal<Boolean> itemStackCountChanged = ThreadLocal.withInitial(() -> true);
     public static float originalTPS = 20.0f;
     public static final Set<UUID> sprintWhitelistPlayers = new HashSet<>();
-    public static Set<String> EIDWhitelist = new HashSet<>();
+    public static Set<String> EIDWhitelist = ConcurrentHashMap.newKeySet();
     public static final ThreadLocal<Boolean> effectCommandRegistering = ThreadLocal.withInitial(() -> false);
     public static ThreadLocal<Boolean> movingBlocks = ThreadLocal.withInitial(() -> false);
     public static ThreadLocal<Boolean> canGetBlockEntity = ThreadLocal.withInitial(() -> true);

@@ -1,6 +1,7 @@
 package com.liuyue.igny.mixins.easterEgg;
 
 import com.liuyue.igny.manager.EasterEggDataManager;
+import com.liuyue.igny.utils.FestivalUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.SplashManager;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -10,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +26,9 @@ public class SplashManagerMixin {
             } else {
                 extra.add("Follow Liuyue_awa!!");
             }
-            LocalDate now = LocalDate.now();
-            boolean birthday = now.getMonthValue() == 11 && now.getDayOfMonth() == 2;
             if (cir.getReturnValue() != null) {
                 try {
-                    if (birthday) {
+                    if (FestivalUtil.isAuthorsBirthday()) {
                         cir.getReturnValue().clear();
                         cir.getReturnValue().add("Happy birthday, Liuyue_awa!!!");
                     } else {
@@ -38,7 +36,7 @@ public class SplashManagerMixin {
                     }
                 } catch (UnsupportedOperationException ignored) {
                     List<String> arrayListTexts = new ArrayList<>(cir.getReturnValue());
-                    if (birthday) {
+                    if (FestivalUtil.isAuthorsBirthday()) {
                         arrayListTexts.clear();
                         arrayListTexts.add("Happy birthday, Liuyue_awa!!!");
                     }

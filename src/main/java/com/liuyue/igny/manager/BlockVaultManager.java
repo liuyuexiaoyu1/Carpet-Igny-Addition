@@ -1,5 +1,6 @@
 package com.liuyue.igny.manager;
 
+import com.liuyue.igny.IGNYServer;
 import com.google.gson.reflect.TypeToken;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -152,7 +153,9 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
                         //#endif
                         be.setChanged();
                     }
-                } catch (Exception ignored) {}
+                } catch (Exception e) {
+                    IGNYServer.LOGGER.error("Failed to restore block entity at {} (block: {}): {}", pos, info[0], e.getMessage());
+                }
             }
         }
     }

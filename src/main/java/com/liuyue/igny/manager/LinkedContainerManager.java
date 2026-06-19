@@ -1,6 +1,7 @@
 package com.liuyue.igny.manager;
 
 import com.google.gson.reflect.TypeToken;
+import com.liuyue.igny.IGNYServer;
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.helper.inventory.LinkedContainer;
 import net.minecraft.core.HolderLookup;
@@ -14,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 //#if MC >= 12105
 //$$ import net.minecraft.util.ProblemReporter;
-//$$ import com.liuyue.igny.IGNYServer;
 //#endif
 //#if MC >= 12105
 //$$ import java.util.Optional;
@@ -70,7 +70,9 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
                 //#endif
                 //#endif
                 containers.put(key, container);
-            } catch (Exception ignored) {}
+            } catch (Exception e) {
+                IGNYServer.LOGGER.warn("Failed to load linked chest data for key '{}': {}", key, e.getMessage());
+            }
         });
     }
 
