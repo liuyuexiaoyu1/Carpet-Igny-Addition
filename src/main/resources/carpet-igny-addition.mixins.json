@@ -178,6 +178,8 @@
     "rule.skeletonsPickupSwordsReintroduced.MobMixin",
     "rule.spawnMaxCountIgnoresChunkOverlap.DistanceManagerMixin",
     "rule.spawnMaxCountIgnoresChunkOverlap.MobCountsMixin",
+    "rule.spawnMaxCountIgnoresChunkOverlap.ServerChunkCacheAccessor",
+    "rule.spawnMaxCountIgnoresChunkOverlap.ServerLevelAccessor",
     "rule.stableTNTExplosion.ExplosionMixin",
     "rule.stickyResinBlock.PistonStructureResolverMixin",
     "rule.structureBlockNoBlockUpdate.DiodeBlockMixin",

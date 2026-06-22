@@ -4,8 +4,8 @@ import carpet.CarpetServer;
 import com.liuyue.igny.IGNYSettings;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.DistanceManager;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,7 +24,12 @@ public class DistanceManagerMixin {
     private void getNaturalSpawnChunkCount(CallbackInfoReturnable<Integer> cir) {
         if (this.playersPerChunk.isEmpty()) return;
         if (IGNYSettings.SPAWN_MAX_COUNT_IGNORES_CHUNK_OVERLAP.value() && CarpetServer.minecraft_server != null) {
-            cir.setReturnValue(CarpetServer.minecraft_server.getPlayerCount() * 289);
+            for (ServerLevel level : CarpetServer.minecraft_server.getAllLevels()) {
+                DistanceManager self = (DistanceManager) (Object) this;
+                if (((ServerChunkCacheAccessor) ((ServerLevelAccessor) level).getChunkSource()).getDistanceManager().equals(self)) {
+                    cir.setReturnValue(level.getPlayers(player -> true).size() * 289);
+                }
+            }
         }
     }
 }
