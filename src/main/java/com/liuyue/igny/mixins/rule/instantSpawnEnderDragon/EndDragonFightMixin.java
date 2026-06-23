@@ -14,14 +14,20 @@ import net.minecraft.world.level.block.state.pattern.BlockPattern;
 //$$ import net.minecraft.world.level.dimension.end.DragonRespawnStage;
 //$$ import net.minecraft.world.level.dimension.end.EnderDragonFight;
 //$$ import net.minecraft.world.level.levelgen.feature.EndSpikeFeature;
+//#if MC < 26.3
 //$$ import net.minecraft.world.level.levelgen.feature.configurations.EndSpikeConfiguration;
+//#else
+//$$ import java.util.Optional;
+//#endif
 //#else
 import net.minecraft.world.level.dimension.end.DragonRespawnAnimation;
 import net.minecraft.world.level.dimension.end.EndDragonFight;
 import net.minecraft.world.level.levelgen.feature.SpikeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.SpikeConfiguration;
 //#endif
+//#if MC < 26.3
 import net.minecraft.world.level.levelgen.feature.Feature;
+//#endif
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -149,13 +155,19 @@ public abstract class EndDragonFightMixin {
                         )) {
                             this.level.removeBlock(pos, false);
                         }
-                        //#if MC >= 26.1
+                        //#if MC >= 26.3
+                        //$$ EndSpikeFeature feature = new EndSpikeFeature(List.of(spike), true, Optional.of(new BlockPos(0, 128, 0)));
+                        //#elseif MC >= 26.1
                         //$$ EndSpikeConfiguration config = new EndSpikeConfiguration(true, List.of(spike), BlockPos.ZERO);
                         //#else
                         SpikeConfiguration config = new SpikeConfiguration(true, List.of(spike), BlockPos.ZERO);
                         //#endif
+                        //#if MC >= 26.3
+                        //$$ feature.place(
+                        //#else
                         Feature.END_SPIKE.place(
                                 config,
+                                //#endif
                                 this.level,
                                 this.level.getChunkSource().getGenerator(),
                                 random,
