@@ -400,5 +400,7 @@
   "carpet.rule.alwaysAvailableGameMasterBlocks.extra.1": "ops:只有管理员可以在任何游戏模式使用管理员方块",
   "carpet.rule.alwaysAvailableGameMasterBlocks.extra.2": "true:任何人任何游戏模式都可以使用管理员方块",
   "carpet.rule.enderDragonRemoveSkipReintroduce.name": "重新引入末影龙删除跳过",
-  "carpet.rule.enderDragonRemoveSkipReintroduce.desc": "重新引入末影龙实体仅在死亡时间第200游戏刻时删除，回退了26.1-pre-2的更改"
+  "carpet.rule.enderDragonRemoveSkipReintroduce.desc": "重新引入末影龙实体仅在死亡时间第200游戏刻时删除，回退了26.1-pre-2的更改",
+  "carpet.rule.visibleSpectators.name": "旁观者可视化",
+  "carpet.rule.visibleSpectators.desc": "使非旁观者模式玩家能够看到旁观者模式玩家。该规则移植自totos carpet tweaks"
 }

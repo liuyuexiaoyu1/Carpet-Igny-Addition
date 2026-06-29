@@ -1081,3 +1081,12 @@ Reintroduces the behavior where the Ender Dragon entity is only removed at exact
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `PORTING`, `FEATURE`
+
+## visibleSpectators  `🐛Beta`
+
+Makes spectators visible to non-spectator players. Ported from totos carpet tweaks.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

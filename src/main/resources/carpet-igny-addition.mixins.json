@@ -204,6 +204,7 @@
     "rule.trialSpawnerCoolDown.TrialSpawnerMixin",
     "rule.trialSpawnerLoot.TrialSpawnerMixin",
     "rule.tripwireHookDupeReintroduced.TripWireHookBlockMixin",
+    "rule.visibleSpectators.ServerPlayerMixin",
     "rule.wardenNeverDig.WardenMixin",
     "rule.wetSpongeCanAbsorbLava.WetSpongeBlockMixin"
   ],

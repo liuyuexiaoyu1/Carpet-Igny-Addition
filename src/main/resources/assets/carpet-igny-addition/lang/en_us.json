@@ -283,5 +283,6 @@
   "carpet.rule.alwaysAvailableGameMasterBlocks.extra.0": "false:Follows vanilla behavior",
   "carpet.rule.alwaysAvailableGameMasterBlocks.extra.1": "ops:Only operators (OPs) can use Game Master blocks in any game mode",
   "carpet.rule.alwaysAvailableGameMasterBlocks.extra.2": "true:Anyone can use Game Master blocks in any game mode",
-  "carpet.rule.enderDragonRemoveSkipReintroduce.desc": "Reintroduces the behavior where the Ender Dragon entity is only removed at exactly the 200th death tick, reverting the changes made in 26.1-pre-2"
+  "carpet.rule.enderDragonRemoveSkipReintroduce.desc": "Reintroduces the behavior where the Ender Dragon entity is only removed at exactly the 200th death tick, reverting the changes made in 26.1-pre-2",
+  "carpet.rule.visibleSpectators.desc": "Makes spectators visible to non-spectator players. Ported from totos carpet tweaks"
 }

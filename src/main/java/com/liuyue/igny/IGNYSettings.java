@@ -867,4 +867,10 @@ public class IGNYSettings {
     //$$                 .build()
     //$$ );
     //#endif
+
+    public static final RuleAccessor<Boolean> VISIBLE_SPECTATORS = register(
+            RuleFactory.of("visibleSpectators", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
 }
