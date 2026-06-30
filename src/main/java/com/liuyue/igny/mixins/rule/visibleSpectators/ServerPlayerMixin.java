@@ -17,8 +17,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin extends Player {
-    public ServerPlayerMixin(Level level, BlockPos pos, float yRot, GameProfile gameProfile) {
+    //#if MC >= 12110
+    //$$ public ServerPlayerMixin(Level level, GameProfile gameProfile)
+    //#else
+    public ServerPlayerMixin(Level level, BlockPos pos, float yRot, GameProfile gameProfile)
+    //#endif
+    {
+        //#if MC >= 12110
+        //$$ super(level, gameProfile);
+        //#else
         super(level, pos, yRot, gameProfile);
+        //#endif
     }
 
     @Shadow
