@@ -873,4 +873,12 @@ public class IGNYSettings {
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );
+
+    public static final ThreadLocal<Boolean> easyPlaceProtocolActive = ThreadLocal.withInitial(() -> false);
+
+    public static final RuleAccessor<Boolean> EASY_PLACE_NO_BLOCK_UPDATE = register(
+            RuleFactory.of("easyPlaceNoBlockUpdate", false)
+                    .addCategories(CREATIVE, FEATURE)
+                    .build()
+    );
 }

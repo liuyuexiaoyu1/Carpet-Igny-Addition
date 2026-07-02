@@ -1082,9 +1082,18 @@ Reintroduces the behavior where the Ender Dragon entity is only removed at exact
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `PORTING`, `FEATURE`
 
-## visibleSpectators  `🐛Beta`
+## visibleSpectators `🐛Beta`
 
 Makes spectators visible to non-spectator players. Ported from totos carpet tweaks.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## easyPlaceNoBlockUpdate `🐛Beta`
+
+When Litematica Easy Place mode places blocks, the placed blocks do not trigger block updates.
 
 - Type: `boolean`
 - Default value: `false`

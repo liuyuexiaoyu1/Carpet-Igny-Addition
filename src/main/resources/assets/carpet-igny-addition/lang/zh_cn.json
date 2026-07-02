@@ -402,5 +402,7 @@
   "carpet.rule.enderDragonRemoveSkipReintroduce.name": "重新引入末影龙删除跳过",
   "carpet.rule.enderDragonRemoveSkipReintroduce.desc": "重新引入末影龙实体仅在死亡时间第200游戏刻时删除，回退了26.1-pre-2的更改",
   "carpet.rule.visibleSpectators.name": "旁观者可视化",
-  "carpet.rule.visibleSpectators.desc": "使非旁观者模式玩家能够看到旁观者模式玩家。该规则移植自totos carpet tweaks"
+  "carpet.rule.visibleSpectators.desc": "使非旁观者模式玩家能够看到旁观者模式玩家。该规则移植自totos carpet tweaks",
+  "carpet.rule.easyPlaceNoBlockUpdate.name": "轻松放置无方块更新",
+  "carpet.rule.easyPlaceNoBlockUpdate.desc": "当投影的轻松放置模式放置方块时，放置的方块不会触发方块更新"
 }
