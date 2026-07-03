@@ -75,7 +75,6 @@
     "rule.drillAnvil.FallingBlockEntityMixin",
     "rule.dyedFrog.FrogAccessor",
     "rule.dyedFrog.TadpoleMixin",
-    "rule.easyPlaceAccurateRail.LevelChunkMixin",
     "rule.easyPlaceNoBlockUpdate.BlockItemMixin",
     "rule.easyPlaceNoBlockUpdate.DiodeBlockMixin",
     "rule.easyPlaceNoBlockUpdate.LevelChunkMixin",

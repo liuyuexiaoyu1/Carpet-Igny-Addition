@@ -413,6 +413,4 @@
   "carpet.rule.easyPlaceNoBlockUpdateCondition.extra.0": "always：总是生效",
   "carpet.rule.easyPlaceNoBlockUpdateCondition.extra.1": "sneaking：仅在蹲下时生效",
   "carpet.rule.easyPlaceNoBlockUpdateCondition.extra.2": "standing：仅在站立时生效",
-  "carpet.rule.easyPlaceAccurateRail.name": "轻松放置精准放置铁轨",
-  "carpet.rule.easyPlaceAccurateRail.desc": "轻松放置模式放置铁轨时会保持投影中指定的连接方向，不会自动连接相邻铁轨"
 }
