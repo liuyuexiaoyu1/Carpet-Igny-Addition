@@ -19,6 +19,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#if MC <= 11904
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
+//#endif
 
 //#if MC >= 12005
 import net.minecraft.core.component.DataComponents;
@@ -41,7 +44,11 @@ public abstract class AbstractContainerScreenMixin {
     //$$ private void onRender(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a, CallbackInfo ci)
     //#else
     @Inject(method = "render", at = @At(value = "RETURN"))
+    //#if MC > 11904
     private void onRender(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci)
+    //#else
+    //$$ private void onRender(PoseStack poseStack, int mouseX, int mouseY, float partialTick, CallbackInfo ci)
+    //#endif
     //#endif
     {
         if (!LinkedContainerManager.isRuleEnabled()) return;
