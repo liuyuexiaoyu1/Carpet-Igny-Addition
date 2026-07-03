@@ -876,9 +876,19 @@ public class IGNYSettings {
 
     public static final ThreadLocal<Boolean> easyPlaceProtocolActive = ThreadLocal.withInitial(() -> false);
 
-    public static final RuleAccessor<Boolean> EASY_PLACE_NO_BLOCK_UPDATE = register(
-            RuleFactory.of("easyPlaceNoBlockUpdate", false)
+    public static final RuleAccessor<String> EASY_PLACE_NO_BLOCK_UPDATE = register(
+            RuleFactory.of("easyPlaceNoBlockUpdate", "false")
                     .addCategories(SURVIVAL, FEATURE)
+                    .addOptions("false", "", "true")
+                    .setLenient()
+                    .build()
+    );
+
+    public static final RuleAccessor<String> EASY_PLACE_NO_BLOCK_UPDATE_CONDITION = register(
+            RuleFactory.of("easyPlaceNoBlockUpdateCondition", "always")
+                    .addCategories(SURVIVAL, FEATURE)
+                    .addOptions("always", "sneaking", "standing")
+                    .setLenient()
                     .build()
     );
 }

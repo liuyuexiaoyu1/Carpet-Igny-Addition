@@ -1093,9 +1093,24 @@ Makes spectators visible to non-spectator players. Ported from totos carpet twea
 
 ## easyPlaceNoBlockUpdate `🐛Beta`
 
-When Litematica Easy Place mode places blocks, the placed blocks do not trigger block updates.
+When Litematica Easy Place mode places blocks, the placed blocks do not trigger block updates.  
+`false`: Disabled.  
+`simple`: Only prevent block updates.  
+`true`: Prevent most block self-checks.
 
-- Type: `boolean`
+- Type: `string`
 - Default value: `false`
-- Suggested options: `false`, `true`
+- Suggested options: `false`, `simple`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## easyPlaceNoBlockUpdateCondition `🐛Beta`
+
+Controls when `easyPlaceNoBlockUpdate` takes effect.  
+`always`: Always active.  
+`sneaking`: Only active when sneaking.  
+`standing`: Only active when standing.
+
+- Type: `string`
+- Default value: `always`
+- Suggested options: `always`, `sneaking`, `standing`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`

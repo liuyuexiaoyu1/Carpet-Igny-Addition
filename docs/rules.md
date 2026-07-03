@@ -1096,9 +1096,24 @@ true: 物品展示框内含物品时将会隐形。
 
 ## 轻松放置无方块更新 (easyPlaceNoBlockUpdate) `🐛Beta`
 
-当投影的轻松放置模式放置方块时，放置的方块不会触发方块更新。
+当投影的轻松放置模式放置方块时，放置的方块不会触发方块更新。  
+`false`：禁用。  
+`simple`：仅不产生方块更新。  
+`true`：阻止大部分方块自检。
 
-- 类型: `boolean`
+- 类型: `string`
 - 默认值: `false`
-- 参考选项: `false`, `true`
+- 参考选项: `false`, `simple`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 轻松放置无方块更新触发条件 (easyPlaceNoBlockUpdateCondition) `🐛Beta`
+
+控制 `easyPlaceNoBlockUpdate` 的生效时机。  
+`always`：总是生效。  
+`sneaking`：仅在蹲下时生效。  
+`standing`：仅在站立时生效。
+
+- 类型: `string`
+- 默认值: `always`
+- 参考选项: `always`, `sneaking`, `standing`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
