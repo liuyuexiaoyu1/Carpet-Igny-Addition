@@ -1094,6 +1094,7 @@ Makes spectators visible to non-spectator players. Ported from totos carpet twea
 ## easyPlaceNoBlockUpdate `🐛Beta`
 
 When Litematica Easy Place mode places blocks, the placed blocks do not trigger block updates.  
+Install on both client and server for full support of blocks with no properties.  
 `false`: Disabled.  
 `simple`: Only prevent block updates.  
 `true`: Prevent most block self-checks.

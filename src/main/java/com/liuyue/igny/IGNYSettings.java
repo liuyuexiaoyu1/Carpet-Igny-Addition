@@ -879,7 +879,7 @@ public class IGNYSettings {
     public static final RuleAccessor<String> EASY_PLACE_NO_BLOCK_UPDATE = register(
             RuleFactory.of("easyPlaceNoBlockUpdate", "false")
                     .addCategories(SURVIVAL, FEATURE)
-                    .addOptions("false", "", "true")
+                    .addOptions("false", "simple", "true")
                     .setLenient()
                     .build()
     );

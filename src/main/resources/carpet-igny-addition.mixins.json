@@ -219,6 +219,7 @@
     "easterEgg.ScreenAccessor",
     "easterEgg.SplashManagerMixin",
     "easterEgg.TitleScreenMixin",
+    "rule.easyPlaceNoBlockUpdate.MultiPlayerGameModeMixin",
     "rule.happyGhastNoClip.LevelRendererMixin",
     "rule.killFakePlayerRemoveVehicle.IntegratedServerMixin",
     "rule.linkableEnderChest.compat.quickshulker.AbstractContainerScreenMixin",

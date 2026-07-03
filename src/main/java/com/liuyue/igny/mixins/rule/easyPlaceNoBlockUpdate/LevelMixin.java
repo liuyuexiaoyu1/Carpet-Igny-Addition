@@ -16,7 +16,7 @@ public class LevelMixin {
     )
     private int igny_stripNeighborUpdates(int flags) {
         if (!"false".equals(IGNYSettings.EASY_PLACE_NO_BLOCK_UPDATE.value()) && IGNYSettings.easyPlaceProtocolActive.get()) {
-            return 2 | 16;
+            return (flags & ~1) | 16;
         }
         return flags;
     }
