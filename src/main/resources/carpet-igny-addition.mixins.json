@@ -76,7 +76,6 @@
     "rule.dyedFrog.FrogAccessor",
     "rule.dyedFrog.TadpoleMixin",
     "rule.easyPlaceAccurateRail.LevelChunkMixin",
-    "rule.easyPlaceNoBlockUpdate.BaseRailBlockMixin",
     "rule.easyPlaceNoBlockUpdate.BlockItemMixin",
     "rule.easyPlaceNoBlockUpdate.DiodeBlockMixin",
     "rule.easyPlaceNoBlockUpdate.LevelChunkMixin",
