@@ -1115,3 +1115,12 @@ Controls when `easyPlaceNoBlockUpdate` takes effect.
 - Default value: `always`
 - Suggested options: `always`, `sneaking`, `standing`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## easyPlaceAccurateRail `🐛Beta`
+
+When Easy Place mode places rails, they keep the connection direction from the schematic and will not auto-connect to adjacent rails.
+
+- Type: `boolean`
+- Default value: `true`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`

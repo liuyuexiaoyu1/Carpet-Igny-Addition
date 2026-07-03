@@ -1118,3 +1118,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `always`
 - 参考选项: `always`, `sneaking`, `standing`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 轻松放置精准放置铁轨 (easyPlaceAccurateRail) `🐛Beta`
+
+轻松放置模式放置铁轨时会保持投影中指定的连接方向，不会自动连接相邻铁轨。
+
+- 类型: `boolean`
+- 默认值: `true`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`

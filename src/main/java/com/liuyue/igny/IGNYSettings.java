@@ -891,4 +891,10 @@ public class IGNYSettings {
                     .setLenient()
                     .build()
     );
+
+    public static final RuleAccessor<Boolean> EASY_PLACE_ACCURATE_RAIL = register(
+            RuleFactory.of("easyPlaceAccurateRail", true)
+                    .addCategories(FEATURE)
+                    .build()
+    );
 }
