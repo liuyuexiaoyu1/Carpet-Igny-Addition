@@ -13,21 +13,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/**
- * 仅在 easyPlaceNoBlockUpdate=true 时生效：
- * 阻止协议放置期间的邻居更新和形状更新。
- */
 @Mixin(NeighborUpdater.class)
 public interface NeighborUpdaterMixin {
-    @Inject(method = "executeShapeUpdate", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "executeShapeUpdate", at = @At(value = "HEAD"), cancellable = true)
+    //#if MC >= 12102
+    //$$ private static void executeShapeUpdate(LevelAccessor levelAccessor, Direction direction, BlockPos blockPos, BlockPos blockPos2, BlockState blockState, int i, int j, CallbackInfo ci) {
+    //#else
     private static void executeShapeUpdate(LevelAccessor levelAccessor, Direction direction, BlockState blockState, BlockPos blockPos, BlockPos blockPos2, int i, int j, CallbackInfo ci) {
+        //#endif
         if ("true".equals(IGNYSettings.EASY_PLACE_NO_BLOCK_UPDATE.value()) && IGNYSettings.easyPlaceProtocolActive.get()) {
             ci.cancel();
         }
     }
 
     @SuppressWarnings("all")
-    @Inject(method = "executeUpdate", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "executeUpdate", at = @At(value = "HEAD"), cancellable = true)
     //#if MC >= 12102
     //$$ private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, net.minecraft.world.level.redstone.Orientation orientation, boolean bl, CallbackInfo ci) {
     //#else

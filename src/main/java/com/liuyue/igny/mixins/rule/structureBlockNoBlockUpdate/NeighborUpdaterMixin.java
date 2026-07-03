@@ -16,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import net.minecraft.world.level.redstone.Orientation;
 //#endif
 
-
 @Mixin(NeighborUpdater.class)
 public interface NeighborUpdaterMixin {
     @Inject(method = "executeShapeUpdate", at = @At("HEAD"), cancellable = true)

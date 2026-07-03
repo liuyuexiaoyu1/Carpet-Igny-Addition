@@ -9,10 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/**
- * 仅在 easyPlaceNoBlockUpdate=true 时生效：
- * 阻止协议放置期间的方块事件（如活塞声音/动画）。
- */
 @Mixin(ServerLevel.class)
 public class ServerLevelMixin {
     @Inject(method = "blockEvent", at = @At("HEAD"), cancellable = true)

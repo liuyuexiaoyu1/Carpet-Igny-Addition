@@ -8,10 +8,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/**
- * 仅在 easyPlaceNoBlockUpdate=true 时生效：
- * 阻止协议放置期间的计划刻调度。
- */
 @Mixin(LevelTicks.class)
 public class LevelTicksMixin {
     @Inject(method = "schedule", at = @At("HEAD"), cancellable = true)
