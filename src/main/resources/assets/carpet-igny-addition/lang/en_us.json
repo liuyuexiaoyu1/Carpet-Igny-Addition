@@ -292,5 +292,5 @@
   "carpet.rule.easyPlaceNoBlockUpdateCondition.desc": "Controls when easyPlaceNoBlockUpdate takes effect",
   "carpet.rule.easyPlaceNoBlockUpdateCondition.extra.0": "always: Always active",
   "carpet.rule.easyPlaceNoBlockUpdateCondition.extra.1": "sneaking: Only when sneaking",
-  "carpet.rule.easyPlaceNoBlockUpdateCondition.extra.2": "standing: Only when standing",
+  "carpet.rule.easyPlaceNoBlockUpdateCondition.extra.2": "standing: Only when standing"
 }
