@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.At;
 public class ServerLevelMixin {
     @WrapOperation(method = "getNextEntityId", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerChunkCache;hasEntityWithId(I)Z"))
     private boolean hasEntityWithId(ServerChunkCache instance, int i, Operation<Boolean> original) {
-        return IGNYSettings.ENTITY_ID_COLLISION_REINTRODUCE.value() || original.call(instance, i);
+        return original.call(instance, i) && !IGNYSettings.ENTITY_ID_COLLISION_REINTRODUCE.value();
     }
 }
