@@ -891,4 +891,16 @@ public class IGNYSettings {
                     .setLenient()
                     .build()
     );
+
+    public static final RuleAccessor<Boolean> SNOW_SPAWN_NO_BLOCK_UPDATE = register(
+            RuleFactory.of("snowSpawnNoBlockUpdate", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> QUICK_PLACE_WATER = register(
+            RuleFactory.of("quickPlaceWater", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
 }

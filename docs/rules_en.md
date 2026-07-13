@@ -1115,3 +1115,20 @@ Controls when `easyPlaceNoBlockUpdate` takes effect.
 - Default value: `always`
 - Suggested options: `always`, `sneaking`, `standing`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## snowSpawnNoBlockUpdate `🐛Beta`
+
+When snow accumulates, the placed snow layers will not trigger block updates.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+## quickPlaceWater `🐛Beta`
+
+When holding ice in offhand, right-click to place water like a water bucket.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

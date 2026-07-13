@@ -1118,3 +1118,21 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `always`
 - 参考选项: `always`, `sneaking`, `standing`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 雪片生成无方块更新 (snowSpawnNoBlockUpdate) `🐛Beta`
+
+下雪时生成的雪片不会触发方块更新。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 快捷放水 (quickPlaceWater) `🐛Beta`
+
+副手持冰时右键像水桶一样放置水。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
