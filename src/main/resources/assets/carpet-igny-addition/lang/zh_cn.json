@@ -105,7 +105,7 @@
   "igny.logger.piston.failure.unknown": "未知原因",
   "igny.logger.piston.action.performed_text": "执行了",
   "igny.logger.piston.action.punctuation": "。",
-  "igny.syncmatica_not_found": "未安装Syncmatica模组",
+  "igny.syncmatica_not_found": "模组未安装",
   "igny.syncmatica_not_permission": "权限不足",
 
   "carpet.rule.wardenNeverDig.name": "监守者永不钻地",
@@ -416,5 +416,11 @@
   "carpet.rule.snowSpawnNoBlockUpdate.name": "雪片生成无方块更新",
   "carpet.rule.snowSpawnNoBlockUpdate.desc": "下雪时生成的雪片不会触发方块更新",
   "carpet.rule.quickPlaceWater.name": "快捷放水",
-  "carpet.rule.quickPlaceWater.desc": "副手持冰时右键像水桶一样放置水"
+  "carpet.rule.quickPlaceWater.desc": "副手持冰时右键像水桶一样放置水",
+  "carpet.rule.emptyChatScreenCanCompletePlayerName.name": "空聊天屏幕可补全玩家名称",
+  "carpet.rule.emptyChatScreenCanCompletePlayerName.desc": "在聊天屏幕(聊天栏)没有内容的情况下可以按下补全键补全玩家名称",
+  "carpet.rule.scalableLuxCompatible.name": "ScalableLux兼容",
+  "carpet.rule.scalableLuxCompatible.desc": "使ScalableLux(StarLight)在加载区块时不会重新计算光照并兼容Carpet-TIS-Addition的lightUpdates规则",
+  "carpet.rule.lightQueueBlockedCanLoadLightedChunk.name": "光照队列堵塞可加载光照计算完成区块",
+  "carpet.rule.lightQueueBlockedCanLoadLightedChunk.desc": "使加载光照计算已经完成的区块时不再等待光照队列计算完成"
 }

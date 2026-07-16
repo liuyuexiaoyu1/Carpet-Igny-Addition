@@ -6,7 +6,7 @@ import carpet.api.settings.SettingsManager;
 import com.liuyue.igny.manager.LinkedContainerManager.LinkedContainerSetting;
 import com.liuyue.igny.rule.*;
 import com.liuyue.igny.rule.validators.EntityValidator;
-import com.liuyue.igny.rule.validators.SyncmaticaValidator;
+import com.liuyue.igny.rule.validators.ModValidator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.NotNull;
@@ -531,7 +531,7 @@ public class IGNYSettings {
 
     public static final RuleAccessor<CommandPermissionLevel> REMOVE_SYNCMATICA_PERMISSION = register(
             RuleFactory.of("removeSyncmaticaPermission", CommandPermissionLevel.TRUE)
-                    .addValidator(SyncmaticaValidator.createValidator())
+                    .addValidator(ModValidator.createValidator("syncmatica", "Syncmatica"))
                     .build()
     );
 
@@ -901,6 +901,31 @@ public class IGNYSettings {
     public static final RuleAccessor<Boolean> QUICK_PLACE_WATER = register(
             RuleFactory.of("quickPlaceWater", false)
                     .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    //#if MC >= 26.1
+    //$$ public static final RuleAccessor<Boolean> EMPTY_CHAT_SCREEN_CAN_COMPLETE_PLAYER_NAME = register(
+    //$$         RuleFactory.of("emptyChatScreenCanCompletePlayerName", false)
+    //$$                 .addCategories(FEATURE)
+    //$$                 .build()
+    //$$ );
+    //#endif
+
+    public static final RuleAccessor<Boolean> SCALABLELUX_COMPATIBLE = register(
+            RuleFactory.of("scalableLuxCompatible", false)
+                    .addCategories(FEATURE)
+                    //#if MC >= 12101
+                    .addValidator(ModValidator.createValidator("scalablelux", "ScalableLux"))
+                    //#else
+                    //$$ .addValidator(ModValidator.createValidator("starlight", "StarLight"))
+                    //#endif
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> LIGHT_QUEUE_BLOCKED_CAN_LOAD_LIGHTED_CHUNK = register(
+            RuleFactory.of("lightQueueBlockedCanLoadLightedChunk", false)
+                    .addCategories(FEATURE)
                     .build()
     );
 }

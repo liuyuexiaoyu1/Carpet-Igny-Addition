@@ -106,7 +106,7 @@
   "igny.logger.piston.failure.unknown": "Unknown reason",
   "igny.logger.piston.action.performed_text": "performed",
   "igny.logger.piston.action.punctuation": ".",
-  "igny.syncmatica_not_found": "The Syncmatica mod is not installed",
+  "igny.mod_not_found": "is not installed",
   "igny.syncmatica_not_permission": "No Permission",
 
   "carpet.rule.wardenNeverDig.desc":"Warden Never Dig",
@@ -294,5 +294,8 @@
   "carpet.rule.easyPlaceNoBlockUpdateCondition.extra.1": "sneaking: Only when sneaking",
   "carpet.rule.easyPlaceNoBlockUpdateCondition.extra.2": "standing: Only when standing",
   "carpet.rule.snowSpawnNoBlockUpdate.desc": "When snow accumulates, the placed snow layers will not trigger block updates",
-  "carpet.rule.quickPlaceWater.desc": "When holding ice in offhand, right-click to place water like a water bucket"
+  "carpet.rule.quickPlaceWater.desc": "When holding ice in offhand, right-click to place water like a water bucket",
+  "carpet.rule.emptyChatScreenCanCompletePlayerName.desc": "Allows completing player names with the completion key even when the chat screen (chat bar) has no content",
+  "carpet.rule.scalableLuxCompatible.desc": "Prevents ScalableLux (StarLight) from recalculating lighting when loading chunks, and ensures compatibility with Carpet-TIS-Addition's lightUpdates rule",
+  "carpet.rule.lightQueueBlockedCanLoadLightedChunk.desc": "Allows loading chunks whose lighting calculation has already been completed without waiting for the light queue to finish processing"
 }

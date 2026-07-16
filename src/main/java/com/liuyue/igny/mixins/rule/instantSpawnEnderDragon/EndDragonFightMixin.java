@@ -1,5 +1,6 @@
 package com.liuyue.igny.mixins.rule.instantSpawnEnderDragon;
 
+import com.google.common.collect.ImmutableList;
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.utils.RuleUtil;
 import net.minecraft.core.BlockPos;
@@ -38,6 +39,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -87,11 +89,6 @@ public abstract class EndDragonFightMixin {
     @Final
     private BlockPattern exitPortalPattern;
 
-    @Unique
-    private List<EndCrystal> getRespawnCrystals() {
-        return this.respawnCrystals;
-    }
-
     @Inject(method = "respawnDragon", at = @At(value = "HEAD"), cancellable = true)
     private void respawnDragon(List<EndCrystal> list , CallbackInfo ci) {
         if (IGNYSettings.INSTANT_SPAWN_ENDER_DRAGON.value()) {
@@ -117,16 +114,15 @@ public abstract class EndDragonFightMixin {
             }
             this.respawnTime = 0;
             this.spawnExitPortal(false);
-            this.respawnCrystals = list;
             ci.cancel();
-            List<EndCrystal> crystals = getRespawnCrystals();
-            if (crystals != null) {
-                for (var crystal : crystals) {
+            if (list != null) {
+                for (var crystal : list) {
                     crystal.setBeamTarget(null);
                     this.level.explode(crystal, crystal.getX(), crystal.getY(), crystal.getZ(), 6.0F, net.minecraft.world.level.Level.ExplosionInteraction.NONE);
                     crystal.discard();
                 }
             }
+            this.respawnCrystals = new ArrayList<>();
             if (!RuleUtil.getCarpetRulesValue("carpet-ams-addition", "preventEndSpikeRespawn").equals("true")) {
                 //#if MC >= 26.1
                 //$$ List<EndSpikeFeature.EndSpike> spikes = EndSpikeFeature.getSpikesForLevel(this.level);
@@ -156,11 +152,11 @@ public abstract class EndDragonFightMixin {
                             this.level.removeBlock(pos, false);
                         }
                         //#if MC >= 26.3
-                        //$$ EndSpikeFeature feature = new EndSpikeFeature(List.of(spike), true, Optional.of(new BlockPos(0, 128, 0)));
+                        //$$ EndSpikeFeature feature = new EndSpikeFeature(ImmutableList.of(spike), true, Optional.of(new BlockPos(0, 128, 0)));
                         //#elseif MC >= 26.1
-                        //$$ EndSpikeConfiguration config = new EndSpikeConfiguration(true, List.of(spike), BlockPos.ZERO);
+                        //$$ EndSpikeConfiguration config = new EndSpikeConfiguration(true, ImmutableList.of(spike), BlockPos.ZERO);
                         //#else
-                        SpikeConfiguration config = new SpikeConfiguration(true, List.of(spike), BlockPos.ZERO);
+                        SpikeConfiguration config = new SpikeConfiguration(true, ImmutableList.of(spike), BlockPos.ZERO);
                         //#endif
                         //#if MC >= 26.3
                         //$$ feature.place(

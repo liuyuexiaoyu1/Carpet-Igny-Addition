@@ -1136,3 +1136,30 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 空聊天屏幕可补全玩家名称 (emptyChatScreenCanCompletePlayerName) `🐛Beta`
+
+在聊天屏幕(聊天栏)没有内容的情况下可以按下补全键补全玩家名称。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`
+
+## ScalableLux兼容 (scalableLuxCompatible) `🐛Beta`
+
+使ScalableLux(StarLight)在加载区块时不会重新计算光照并兼容Carpet-TIS-Addition的lightUpdates规则。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`
+
+## 光照队列堵塞可加载光照计算完成区块 (lightQueueBlockedCanLoadLightedChunk) `🐛Beta`
+
+使加载光照计算已经完成的区块时不再等待光照队列计算完成。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`

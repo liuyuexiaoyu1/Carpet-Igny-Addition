@@ -1124,6 +1124,7 @@ When snow accumulates, the placed snow layers will not trigger block updates.
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+- 
 ## quickPlaceWater `🐛Beta`
 
 When holding ice in offhand, right-click to place water like a water bucket.
@@ -1132,3 +1133,30 @@ When holding ice in offhand, right-click to place water like a water bucket.
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## emptyChatScreenCanCompletePlayerName `🐛Beta`
+
+Allows completing player names with the completion key even when the chat screen (chat bar) has no content.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`
+
+## scalableLuxCompatible `🐛Beta`
+
+Prevents ScalableLux (StarLight) from recalculating lighting when loading chunks, and ensures compatibility with Carpet-TIS-Addition's lightUpdates rule.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`
+
+## lightQueueBlockedCanLoadLightedChunk `🐛Beta`
+
+Allows loading chunks whose lighting calculation has already been completed without waiting for the light queue to finish processing.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`
