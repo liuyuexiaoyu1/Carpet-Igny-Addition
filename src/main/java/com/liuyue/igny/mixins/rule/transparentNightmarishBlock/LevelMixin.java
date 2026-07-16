@@ -30,8 +30,10 @@ public abstract class LevelMixin {
 
     @Unique
     private final Map<BlockPos, Integer> igny$restoreTimers = new HashMap<>();
+
     @Unique
     private final Map<BlockPos, BlockState[]> igny$neighborSnapshots = new HashMap<>();
+
     @Unique
     private boolean igny$initialized = false;
 

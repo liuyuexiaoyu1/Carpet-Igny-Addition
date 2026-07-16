@@ -2,7 +2,10 @@ package com.liuyue.igny.mixins.rule.transparentNightmarishBlock;
 
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.utils.RuleUtil;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,6 +19,19 @@ public class BlockMixin {
             Block block = (Block) (Object) this;
             if (RuleUtil.isNightmarishBlock(block)) {
                 cir.setReturnValue(1200f);
+            }
+        }
+    }
+
+    @Mixin(BlockBehaviour.BlockStateBase.class)
+    static class BlockStateBaseMixin {
+        @Inject(method = "isRedstoneConductor", at = @At(value = "HEAD"), cancellable = true)
+        private void isRedstoneConductor(BlockGetter level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+            if (IGNYSettings.TRANSPARENT_NIGHTMARISH_BLOCK.value()) {
+                Block block = (Block) (Object) this;
+                if (RuleUtil.isNightmarishBlock(block)) {
+                    cir.setReturnValue(false);
+                }
             }
         }
     }

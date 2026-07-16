@@ -42,14 +42,23 @@ public class ItemStackMixin {
         BlockState clickedState = level.getBlockState(clickedPos);
 
         BlockPos targetPos;
-        if (clickedState.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(player, level, clickedPos, clickedState, Fluids.WATER)) {
+        //#if MC <= 12001
+        //$$ if (clickedState.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(level, clickedPos, clickedState, Fluids.WATER))
+        //#else
+        if (clickedState.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(player, level, clickedPos, clickedState, Fluids.WATER))
+        //#endif
+        {
             targetPos = clickedPos;
         } else {
             targetPos = placePos;
         }
 
         BlockState targetState = level.getBlockState(targetPos);
+        //#if MC <= 12001
+        //$$ boolean canPlaceInContainer = targetState.getBlock() instanceof LiquidBlockContainer lc && lc.canPlaceLiquid(level, targetPos, targetState, Fluids.WATER);
+        //#else
         boolean canPlaceInContainer = targetState.getBlock() instanceof LiquidBlockContainer lc && lc.canPlaceLiquid(player, level, targetPos, targetState, Fluids.WATER);
+        //#endif
         boolean canReplace = targetState.canBeReplaced(Fluids.WATER);
 
         if (!targetState.isAir() && !canPlaceInContainer && !canReplace) {
@@ -67,7 +76,12 @@ public class ItemStackMixin {
             level.setBlock(targetPos, Fluids.WATER.defaultFluidState().createLegacyBlock(), 3);
         }
 
-        if (!player.hasInfiniteMaterials()) {
+        //#if MC <= 12005
+        //$$ if (!player.getAbilities().instabuild)
+        //#else
+        if (!player.hasInfiniteMaterials())
+        //#endif
+        {
             offhand.shrink(1);
         }
 

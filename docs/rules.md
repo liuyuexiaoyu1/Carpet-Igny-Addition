@@ -1137,7 +1137,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 空聊天屏幕可补全玩家名称 (emptyChatScreenCanCompletePlayerName) `🐛Beta`
+## 空聊天屏幕可补全玩家名称 (emptyChatScreenCanCompletePlayerName) `🐛Beta` `MC>=26.1`
 
 在聊天屏幕(聊天栏)没有内容的情况下可以按下补全键补全玩家名称。
 

@@ -30,8 +30,12 @@ public abstract class ThreadedLevelLightEngineMixin {
     )
     private void allowAlreadyLightCorrectChunk(int chunkX, int chunkZ, CallbackInfoReturnable<CompletableFuture<?>> cir) {
         if (IGNYSettings.LIGHT_QUEUE_BLOCKED_CAN_LOAD_LIGHTED_CHUNK.value()) {
+            //#if MC >= 26.1
+            //$$ long key = ChunkPos.pack(chunkX, chunkZ);
+            //#else
             long key = ChunkPos.asLong(chunkX, chunkZ);
-            ChunkHolder holder = ((ChunkMapAccessor) this.chunkMap).invokeGetVisibleChunkIfPresent(key);
+            //#endif
+            ChunkHolder holder = ((ChunkMapInvoker) this.chunkMap).invokeGetVisibleChunkIfPresent(key);
 
             if (holder == null) {
                 return;
