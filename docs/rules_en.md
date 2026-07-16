@@ -1134,7 +1134,7 @@ When holding ice in offhand, right-click to place water like a water bucket.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## emptyChatScreenCanCompletePlayerName `🐛Beta`
+## emptyChatScreenCanCompletePlayerName `🐛Beta` `MC>=26.1`
 
 Allows completing player names with the completion key even when the chat screen (chat bar) has no content.
 
