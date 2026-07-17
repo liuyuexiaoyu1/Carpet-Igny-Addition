@@ -28,8 +28,8 @@ public class BlockMixin {
         @Inject(method = "isRedstoneConductor", at = @At(value = "HEAD"), cancellable = true)
         private void isRedstoneConductor(BlockGetter level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
             if (IGNYSettings.TRANSPARENT_NIGHTMARISH_BLOCK.value()) {
-                Block block = (Block) (Object) this;
-                if (RuleUtil.isNightmarishBlock(block)) {
+                BlockBehaviour.BlockStateBase blockState = (BlockBehaviour.BlockStateBase) (Object) this;
+                if (RuleUtil.isNightmarishBlock(blockState.getBlock())) {
                     cir.setReturnValue(false);
                 }
             }
