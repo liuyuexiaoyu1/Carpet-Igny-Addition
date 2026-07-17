@@ -126,7 +126,6 @@
     "rule.killFakePlayerRemoveVehicle.ServerPlayerMixin",
     "rule.lightningBoltNoFire.EntityMixin",
     "rule.lightningBoltNoFire.LightningBoltMixin",
-    "rule.lightQueueBlockedCanLoadLightedChunk.ChunkMapAccessor",
     "rule.lightQueueBlockedCanLoadLightedChunk.ChunkMapInvoker",
     "rule.lightQueueBlockedCanLoadLightedChunk.ThreadedLevelLightEngineMixin",
     "rule.lightQueueBlockedCanLoadLightedChunk.compat.starlight.ScalableLuxStarLightInterfaceMixin",
