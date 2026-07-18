@@ -22,14 +22,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(StarLightInterface.class)
 public class StarLightInterfaceMixin {
     @Inject(method = "blockChange", at = @At(value = "HEAD"), cancellable = true)
-    private void blockChange(BlockPos pos, CallbackInfoReturnable<StarLightInterface.LightQueue.ChunkTasks> cir) {
+    private void blockChange(BlockPos pos, CallbackInfoReturnable<Object> cir) {
         if (!shouldEnqueueLightTask()) {
             cir.setReturnValue(null);
         }
     }
 
     @Inject(method = "sectionChange", at = @At(value = "HEAD"), cancellable = true)
-    private void sectionChange(SectionPos pos, boolean newEmptyValue, CallbackInfoReturnable<StarLightInterface.LightQueue.ChunkTasks> cir) {
+    private void sectionChange(SectionPos pos, boolean newEmptyValue, CallbackInfoReturnable<Object> cir) {
         if (!shouldEnqueueLightTask()) {
             cir.setReturnValue(null);
         }

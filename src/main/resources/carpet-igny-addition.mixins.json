@@ -183,6 +183,7 @@
     "rule.safePlayerDeathDrop.InventoryMixin",
     "rule.safeSoundSuppression.CalibratedSculkSensorVibrationUserMixin",
     "rule.scalableLuxCompatible.StarLightInterfaceMixin",
+    "rule.scalableLuxCompatible.ThreadedLevelLightEngineMixin",
     "rule.scalableLuxCompatible.ThreadedLevelLightEngineVanillaInterfaceMixin",
     "rule.showClassMixinList.CrashReportMixin",
     "rule.showClassMixinList.CrashReportSectionMixin",

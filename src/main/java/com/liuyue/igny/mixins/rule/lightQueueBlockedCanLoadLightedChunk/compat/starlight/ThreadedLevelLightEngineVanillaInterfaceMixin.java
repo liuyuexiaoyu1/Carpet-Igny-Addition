@@ -1,12 +1,15 @@
 package com.liuyue.igny.mixins.rule.lightQueueBlockedCanLoadLightedChunk.compat.starlight;
 
 import ca.spottedleaf.starlight.common.light.StarLightInterface;
-import ca.spottedleaf.starlight.common.light.vanillainterface.ThreadedLevelLightEngineVanillaInterface;
 import com.liuyue.igny.IGNYSettings;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.level.chunk.ChunkAccess;
+//#if MC >= 12101
 import net.minecraft.world.level.chunk.status.ChunkStatus;
+//#else
+//$$ import net.minecraft.world.level.chunk.ChunkStatus;
+//#endif
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,12 +20,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.concurrent.CompletableFuture;
 
-//#if MC >= 12101
 @Restriction(require = @Condition("scalablelux"))
-//#else
-//$$ @Restriction(require = @Condition("starlight"))
-//#endif
-@Mixin(ThreadedLevelLightEngineVanillaInterface.class)
+@Mixin(targets = "ca.spottedleaf.starlight.common.light.vanillainterface.ThreadedLevelLightEngineVanillaInterface", remap = false)
 public abstract class ThreadedLevelLightEngineVanillaInterfaceMixin {
     @Shadow(remap = false) @Final
     protected StarLightInterface lightEngine;
@@ -30,7 +29,11 @@ public abstract class ThreadedLevelLightEngineVanillaInterfaceMixin {
     @Unique
     private static boolean alreadyLighted(ChunkAccess chunk) {
         return chunk != null
+                //#if MC >= 12101
                 && chunk.getPersistedStatus().isOrAfter(ChunkStatus.LIGHT)
+                //#else
+                //$$ && chunk.getStatus().isOrAfter(ChunkStatus.LIGHT)
+                //#endif
                 && chunk.isLightCorrect();
     }
 

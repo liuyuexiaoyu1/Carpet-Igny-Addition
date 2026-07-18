@@ -130,11 +130,8 @@ dependencies {
     autoImplementation ("carpet:fabric-carpet:${project.carpet_core_version}") {
 		exclude group: "net.fabricmc.fabric-api"
 	}
-
-	if (unobfuscated) {
-		autoCompileOnly "maven.modrinth:Ps1zyz6x:sj4ujwsT"
-	} else {
-		autoCompileOnly "maven.modrinth:Ps1zyz6x:w2yQbU01"
+	autoCompileOnly(project.starlight_dependency) {
+		exclude group: "net.fabricmc.fabric-api"
 	}
 }
 
