@@ -1,6 +1,7 @@
 package com.liuyue.igny.mixins.rule.scalableLuxCompatible;
 
 import ca.spottedleaf.starlight.common.light.StarLightInterface;
+import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.utils.RuleUtil;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
@@ -44,12 +45,16 @@ public class StarLightInterfaceMixin {
     @Unique
     @SuppressWarnings("all")
     private boolean shouldEnqueueLightTask() {
-        return !"ignored".equalsIgnoreCase(((Enum<?>)  RuleUtil.getCarpetRulesValue("carpet-tis-addition", "lightUpdates")).name()) &&
+        if (!IGNYSettings.SCALABLELUX_COMPATIBLE.value()) return true;
+        if (RuleUtil.getCarpetRulesValue("carpet-tis-addition", "lightUpdates") == null) return true;
+        return !"ignored".equalsIgnoreCase(((Enum<?>) RuleUtil.getCarpetRulesValue("carpet-tis-addition", "lightUpdates")).name()) &&
                 !"off".equalsIgnoreCase(((Enum<?>) RuleUtil.getCarpetRulesValue("carpet-tis-addition", "lightUpdates")).name());
     }
 
     @Unique
     private boolean shouldExecuteLightTask() {
+        if (!IGNYSettings.SCALABLELUX_COMPATIBLE.value()) return true;
+        if (RuleUtil.getCarpetRulesValue("carpet-tis-addition", "lightUpdates") == null) return true;
         return !"suppressed".equalsIgnoreCase(((Enum<?>) RuleUtil.getCarpetRulesValue("carpet-tis-addition", "lightUpdates")).name());
     }
 }

@@ -30,6 +30,7 @@ public class IGNYSettings {
     public static final ThreadLocal<Boolean> effectCommandRegistering = ThreadLocal.withInitial(() -> false);
     public static ThreadLocal<Boolean> movingBlocks = ThreadLocal.withInitial(() -> false);
     public static ThreadLocal<Boolean> canGetBlockEntity = ThreadLocal.withInitial(() -> true);
+    public static final ThreadLocal<Boolean> easyPlaceProtocolActive = ThreadLocal.withInitial(() -> false);
 
     /**
      * 物品展示框是否正在保存NBT数据
@@ -874,8 +875,6 @@ public class IGNYSettings {
                     .build()
     );
 
-    public static final ThreadLocal<Boolean> easyPlaceProtocolActive = ThreadLocal.withInitial(() -> false);
-
     public static final RuleAccessor<String> EASY_PLACE_NO_BLOCK_UPDATE = register(
             RuleFactory.of("easyPlaceNoBlockUpdate", "false")
                     .addCategories(SURVIVAL, FEATURE)
@@ -928,4 +927,18 @@ public class IGNYSettings {
                     .addCategories(FEATURE)
                     .build()
     );
+
+    public static final RuleAccessor<Boolean> PLAYERS_KILL_DIRECTLY_ENTER_XP = register(
+            RuleFactory.of("playersKillDirectlyEnterXp", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    //#if MC < 26.3
+    public static final RuleAccessor<Boolean> SPECTATOR_CLICK_PORTAL_TELEPORT = register(
+            RuleFactory.of("spectatorClickPortalTeleport", false)
+                    .addCategories(FEATURE)
+                    .build()
+    );
+    //#endif
 }

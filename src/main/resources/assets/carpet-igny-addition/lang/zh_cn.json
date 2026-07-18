@@ -11,6 +11,7 @@
   "igny.settings.failure.unknown_entity": "未知的实体ID",
   "igny.settings.source": "来源",
   "menu.igny.surrender": "我投降",
+  "igny.spectator.cannot_teleport": "无法传送，目的地传送门尚未生成",
 
   "igny.command.enderchest.no_permission": "你没有权限丢弃末影箱物品",
   "igny.command.enderchest.real_player_op_only": "只有管理员玩家可以丢弃真玩家的末影箱物品",
@@ -422,5 +423,9 @@
   "carpet.rule.scalableLuxCompatible.name": "ScalableLux兼容",
   "carpet.rule.scalableLuxCompatible.desc": "使ScalableLux(StarLight)在加载区块时不会重新计算光照并兼容Carpet-TIS-Addition的lightUpdates规则",
   "carpet.rule.lightQueueBlockedCanLoadLightedChunk.name": "光照队列堵塞可加载光照计算完成区块",
-  "carpet.rule.lightQueueBlockedCanLoadLightedChunk.desc": "使加载光照计算已经完成的区块时不再等待光照队列计算完成"
+  "carpet.rule.lightQueueBlockedCanLoadLightedChunk.desc": "使加载光照计算已经完成的区块时不再等待光照队列计算完成",
+  "carpet.rule.playersKillDirectlyEnterXp.name": "玩家击杀直接获得经验",
+  "carpet.rule.playersKillDirectlyEnterXp.desc": "当玩家击杀生物时将不会掉落经验而是直接给予玩家",
+  "carpet.rule.spectatorClickPortalTeleport.name": "旁观者点击传送门传送",
+  "carpet.rule.spectatorClickPortalTeleport.desc": "玩家处于旁观者模式下点击下界传送门或末地传送门将会被传送到对应的维度"
 }

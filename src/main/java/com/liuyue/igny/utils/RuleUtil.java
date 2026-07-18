@@ -46,12 +46,12 @@ public class RuleUtil {
     }
 
     public static Object getCarpetRulesValue(String modId, String ruleName) {
-        if(IGNYServerMod.CARPET_ADDITION_MOD_IDS.contains(modId)){
+        if (IGNYServerMod.CARPET_ADDITION_MOD_IDS.contains(modId)){
             CarpetRule<?> carpetRule = CarpetServer.settingsManager.getCarpetRule(ruleName);
             if (carpetRule == null) {
                 return false;
             }
-            return carpetRule.value() == null ? false : carpetRule.value();
+            return carpetRule.value();
         }
         return false;
     }

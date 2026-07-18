@@ -1163,3 +1163,21 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
+
+## 玩家击杀直接获得经验 (playersKillDirectlyEnterXp) `🐛Beta`
+
+当玩家击杀生物时将不会掉落经验而是直接给予玩家。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 旁观者点击传送门传送 (spectatorClickPortalTeleport) `🐛Beta` `MC<26.3`
+
+玩家处于旁观者模式下点击下界传送门或末地传送门将会被传送到对应的维度。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`

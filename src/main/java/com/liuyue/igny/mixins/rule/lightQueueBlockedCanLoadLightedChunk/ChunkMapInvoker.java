@@ -13,8 +13,7 @@ public interface ChunkMapInvoker {
     //#if MC <= 12004
     //$$ @Invoker("releaseLightTicket")
     //$$ void invokeReleaseLightTicket(ChunkPos chunkPos);
-    //#else
+    //#endif
     @Invoker("getVisibleChunkIfPresent")
     ChunkHolder invokeGetVisibleChunkIfPresent(long key);
-    //#endif
 }

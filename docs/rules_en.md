@@ -1160,3 +1160,21 @@ Allows loading chunks whose lighting calculation has already been completed with
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
+
+## playersKillDirectlyEnterXp `🐛Beta`
+
+When a player kills a mob, the experience will be directly given to the player instead of being dropped as orbs.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## spectatorClickPortalTeleport `🐛Beta` `MC<26.3`
+
+While in spectator mode, clicking on a Nether portal or End portal will teleport the player to the corresponding dimension.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`

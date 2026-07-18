@@ -11,6 +11,7 @@
   "igny.settings.failure.unknown_entity": "Unknown Entity ID",
   "igny.settings.source": "Source",
   "menu.igny.surrender": "I Surrender",
+  "igny.spectator.cannot_teleport": "Unable to teleport. The other side is not generated yet.",
 
   "igny.command.enderchest.no_permission": "You don't have permission to drop ender chest items",
   "igny.command.enderchest.real_player_op_only": "Only operators can drop ender chest items of real players",
@@ -297,5 +298,7 @@
   "carpet.rule.quickPlaceWater.desc": "When holding ice in offhand, right-click to place water like a water bucket",
   "carpet.rule.emptyChatScreenCanCompletePlayerName.desc": "Allows completing player names with the completion key even when the chat screen (chat bar) has no content",
   "carpet.rule.scalableLuxCompatible.desc": "Prevents ScalableLux (StarLight) from recalculating lighting when loading chunks, and ensures compatibility with Carpet-TIS-Addition's lightUpdates rule",
-  "carpet.rule.lightQueueBlockedCanLoadLightedChunk.desc": "Allows loading chunks whose lighting calculation has already been completed without waiting for the light queue to finish processing"
+  "carpet.rule.lightQueueBlockedCanLoadLightedChunk.desc": "Allows loading chunks whose lighting calculation has already been completed without waiting for the light queue to finish processing",
+  "carpet.rule.playersKillDirectlyEnterXp.desc": "When a player kills a mob, the experience will be directly given to the player instead of being dropped as orbs",
+  "carpet.rule.spectatorClickPortalTeleport.desc": "While in spectator mode, clicking on a Nether portal or End portal will teleport the player to the corresponding dimension"
 }
