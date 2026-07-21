@@ -13,7 +13,11 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(ServerLevel.class)
 public class ServerLevelMixin {
     @WrapOperation(
+            //#if MC <= 12001
+            //$$ method = "tickChunk",
+            //#else
             method = "tickPrecipitation",
+            //#endif
             at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z")
     )
     private boolean setBlockAndUpdate(ServerLevel level, BlockPos pos, BlockState state, Operation<Boolean> original) {

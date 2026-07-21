@@ -14,7 +14,10 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
-    //#if MC >= 12101
+    //#if MC >= 12102
+    //$$ @WrapOperation(method = "dropAllDeathLoot", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;dropExperience(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Entity;)V"))
+    //$$ private void dropExperience(LivingEntity instance, ServerLevel serverLevel, Entity entity, Operation<Void> original, @Local(argsOnly = true) DamageSource damageSource)
+    //#elseif MC >= 12101
     @WrapOperation(method = "dropAllDeathLoot", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;dropExperience(Lnet/minecraft/world/entity/Entity;)V"))
     private void dropExperience(LivingEntity instance, Entity entity, Operation<Void> original, @Local(argsOnly = true) DamageSource damageSource)
     //#else
@@ -32,7 +35,9 @@ public class LivingEntityMixin {
                 return;
             }
         }
-        //#if MC >= 12101
+        //#if MC >= 12102
+        //$$ original.call(instance, serverLevel, entity);
+        //#elseif MC >= 12101
         original.call(instance, entity);
         //#else
         //$$ original.call(instance);
