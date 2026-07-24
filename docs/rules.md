@@ -1144,7 +1144,7 @@ true: 物品展示框内含物品时将会隐形。
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
-- 分类: `IGNY`, `FEATURE`
+- 分类: `IGNY`, `CLIENT`, `FEATURE`
 
 ## ScalableLux兼容 (scalableLuxCompatible)
 

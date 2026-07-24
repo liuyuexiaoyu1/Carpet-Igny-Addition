@@ -907,6 +907,7 @@ public class IGNYSettings {
     //$$ public static final RuleAccessor<Boolean> EMPTY_CHAT_SCREEN_CAN_COMPLETE_PLAYER_NAME = register(
     //$$         RuleFactory.of("emptyChatScreenCanCompletePlayerName", false)
     //$$                 .addCategories(FEATURE)
+    //$$                 .setClient()
     //$$                 .build()
     //$$ );
     //#endif

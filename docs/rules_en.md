@@ -1141,7 +1141,7 @@ Allows completing player names with the completion key even when the chat screen
 - Type: `boolean`
 - Default value: `false`
 - Suggested options: `false`, `true`
-- Categories: `IGNY`, `FEATURE`
+- Categories: `IGNY`, `CLIENT`, `FEATURE`
 
 ## scalableLuxCompatible
 
