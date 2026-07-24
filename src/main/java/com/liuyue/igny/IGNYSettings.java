@@ -878,7 +878,7 @@ public class IGNYSettings {
                         MinecraftServer server = IGNYServer.getInstance().getMinecraftServer();
                         if (server != null) {
                             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-                                ((ServerPlayerInvoker) player).updateInvisibilityStatus();
+                                ((ServerPlayerInvoker) player).invokerUpdateInvisibilityStatus();
                             }
                         }
                     })

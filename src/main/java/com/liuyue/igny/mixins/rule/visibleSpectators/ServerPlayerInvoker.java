@@ -7,5 +7,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(ServerPlayer.class)
 public interface ServerPlayerInvoker {
     @Invoker("updateInvisibilityStatus")
-    void updateInvisibilityStatus();
+    void invokerUpdateInvisibilityStatus();
 }
