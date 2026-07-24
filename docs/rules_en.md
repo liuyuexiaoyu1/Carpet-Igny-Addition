@@ -1082,7 +1082,7 @@ Reintroduces the behavior where the Ender Dragon entity is only removed at exact
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `PORTING`, `FEATURE`
 
-## visibleSpectators `🐛Beta`
+## visibleSpectators
 
 Makes spectators visible to non-spectator players. Ported from totos carpet tweaks.
 
@@ -1091,7 +1091,7 @@ Makes spectators visible to non-spectator players. Ported from totos carpet twea
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## easyPlaceNoBlockUpdate `🐛Beta`
+## easyPlaceNoBlockUpdate
 
 When Litematica Easy Place mode places blocks, the placed blocks do not trigger block updates.  
 Install on both client and server for full support of blocks with no properties.  
@@ -1104,7 +1104,7 @@ Install on both client and server for full support of blocks with no properties.
 - Suggested options: `false`, `simple`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## easyPlaceNoBlockUpdateCondition `🐛Beta`
+## easyPlaceNoBlockUpdateCondition
 
 Controls when `easyPlaceNoBlockUpdate` takes effect.  
 `always`: Always active.  
@@ -1116,7 +1116,7 @@ Controls when `easyPlaceNoBlockUpdate` takes effect.
 - Suggested options: `always`, `sneaking`, `standing`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## snowSpawnNoBlockUpdate `🐛Beta`
+## snowSpawnNoBlockUpdate
 
 When snow accumulates, the placed snow layers will not trigger block updates.
 
@@ -1125,7 +1125,7 @@ When snow accumulates, the placed snow layers will not trigger block updates.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 - 
-## quickPlaceWater `🐛Beta`
+## quickPlaceWater
 
 When holding ice in offhand, right-click to place water like a water bucket.
 
@@ -1134,7 +1134,7 @@ When holding ice in offhand, right-click to place water like a water bucket.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## emptyChatScreenCanCompletePlayerName `🐛Beta` `MC>=26.1`
+## emptyChatScreenCanCompletePlayerName `MC>=26.1`
 
 Allows completing player names with the completion key even when the chat screen (chat bar) has no content.
 
@@ -1143,7 +1143,7 @@ Allows completing player names with the completion key even when the chat screen
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## scalableLuxCompatible `🐛Beta`
+## scalableLuxCompatible
 
 Prevents ScalableLux (StarLight) from recalculating lighting when loading chunks, and ensures compatibility with Carpet-TIS-Addition's lightUpdates rule.
 
@@ -1152,7 +1152,7 @@ Prevents ScalableLux (StarLight) from recalculating lighting when loading chunks
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## lightQueueBlockedCanLoadLightedChunk `🐛Beta`
+## lightQueueBlockedCanLoadLightedChunk
 
 Allows loading chunks whose lighting calculation has already been completed without waiting for the light queue to finish processing.
 
@@ -1161,7 +1161,7 @@ Allows loading chunks whose lighting calculation has already been completed with
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## playersKillDirectlyEnterXp `🐛Beta`
+## playersKillDirectlyEnterXp
 
 When a player kills a mob, the experience will be directly given to the player instead of being dropped as orbs.
 
@@ -1170,7 +1170,7 @@ When a player kills a mob, the experience will be directly given to the player i
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## spectatorClickPortalTeleport `🐛Beta` `MC<26.3`
+## spectatorClickPortalTeleport `MC<26.3`
 
 While in spectator mode, clicking on a Nether portal or End portal will teleport the player to the corresponding dimension.
 

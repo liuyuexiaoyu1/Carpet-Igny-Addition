@@ -1085,7 +1085,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `PORTING`, `FEATURE`
 
-## 旁观者可视化 (visibleSpectators) `🐛Beta`
+## 旁观者可视化 (visibleSpectators)
 
 使非旁观者模式玩家能够看到旁观者模式玩家。该规则移植自totos carpet tweaks。
 
@@ -1094,7 +1094,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 轻松放置无方块更新 (easyPlaceNoBlockUpdate) `🐛Beta`
+## 轻松放置无方块更新 (easyPlaceNoBlockUpdate)
 
 当投影的轻松放置模式放置方块时，放置的方块不会触发方块更新。  
 建议在服务端和客户端同时安装本模组以支持无属性方块的识别。  
@@ -1107,7 +1107,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `simple`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 轻松放置无方块更新触发条件 (easyPlaceNoBlockUpdateCondition) `🐛Beta`
+## 轻松放置无方块更新触发条件 (easyPlaceNoBlockUpdateCondition)
 
 控制 `easyPlaceNoBlockUpdate` 的生效时机。  
 `always`：总是生效。  
@@ -1119,7 +1119,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `always`, `sneaking`, `standing`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 雪片生成无方块更新 (snowSpawnNoBlockUpdate) `🐛Beta`
+## 雪片生成无方块更新 (snowSpawnNoBlockUpdate)
 
 下雪时生成的雪片不会触发方块更新。
 
@@ -1128,7 +1128,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 快捷放水 (quickPlaceWater) `🐛Beta`
+## 快捷放水 (quickPlaceWater)
 
 副手持冰时右键像水桶一样放置水。
 
@@ -1137,7 +1137,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 空聊天屏幕可补全玩家名称 (emptyChatScreenCanCompletePlayerName) `🐛Beta` `MC>=26.1`
+## 空聊天屏幕可补全玩家名称 (emptyChatScreenCanCompletePlayerName) `MC>=26.1`
 
 在聊天屏幕(聊天栏)没有内容的情况下可以按下补全键补全玩家名称。
 
@@ -1146,7 +1146,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## ScalableLux兼容 (scalableLuxCompatible) `🐛Beta`
+## ScalableLux兼容 (scalableLuxCompatible)
 
 使ScalableLux(StarLight)在加载区块时不会重新计算光照并兼容Carpet-TIS-Addition的lightUpdates规则。
 
@@ -1155,7 +1155,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 光照队列堵塞可加载光照计算完成区块 (lightQueueBlockedCanLoadLightedChunk) `🐛Beta`
+## 光照队列堵塞可加载光照计算完成区块 (lightQueueBlockedCanLoadLightedChunk)
 
 使加载光照计算已经完成的区块时不再等待光照队列计算完成。
 
@@ -1164,7 +1164,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 玩家击杀直接获得经验 (playersKillDirectlyEnterXp) `🐛Beta`
+## 玩家击杀直接获得经验 (playersKillDirectlyEnterXp)
 
 当玩家击杀生物时将不会掉落经验而是直接给予玩家。
 
@@ -1173,7 +1173,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 旁观者点击传送门传送 (spectatorClickPortalTeleport) `🐛Beta` `MC<26.3`
+## 旁观者点击传送门传送 (spectatorClickPortalTeleport) `MC<26.3`
 
 玩家处于旁观者模式下点击下界传送门或末地传送门将会被传送到对应的维度。
 

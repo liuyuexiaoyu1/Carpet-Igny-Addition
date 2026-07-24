@@ -43,6 +43,7 @@ public abstract class ThreadedLevelLightEngineMixin extends LevelLightEngine {
                 && chunk.isLightCorrect();
     }
 
+    //#if MC > 11904
     @Inject(
             method = "initializeLight(Lnet/minecraft/world/level/chunk/ChunkAccess;Z)Ljava/util/concurrent/CompletableFuture;",
             at = @At("HEAD"),
@@ -64,6 +65,7 @@ public abstract class ThreadedLevelLightEngineMixin extends LevelLightEngine {
             cir.setReturnValue(CompletableFuture.completedFuture(chunk));
         }
     }
+    //#endif
 
     @Inject(
             method = "lightChunk(Lnet/minecraft/world/level/chunk/ChunkAccess;Z)Ljava/util/concurrent/CompletableFuture;",
@@ -82,13 +84,15 @@ public abstract class ThreadedLevelLightEngineMixin extends LevelLightEngine {
         if (lighted && alreadyLighted(chunk)) {
             ChunkPos pos = chunk.getPos();
             chunk.setLightCorrect(true);
-
+            //#if MC <= 11904
+            //$$ super.retainData(pos, false);
+            //#endif
             ((ChunkMapInvoker)this.chunkMap).invokeReleaseLightTicket(pos);
-
             cir.setReturnValue(CompletableFuture.completedFuture(chunk));
         }
     }
 
+    //#if MC >= 12002
     @Inject(
             method = "waitForPendingTasks(II)Ljava/util/concurrent/CompletableFuture;",
             at = @At("HEAD"),
@@ -116,4 +120,5 @@ public abstract class ThreadedLevelLightEngineMixin extends LevelLightEngine {
             cir.setReturnValue(CompletableFuture.completedFuture(null));
         }
     }
+    //#endif
 }
