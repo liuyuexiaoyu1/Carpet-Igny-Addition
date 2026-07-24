@@ -4,10 +4,12 @@ import carpet.CarpetServer;
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.SettingsManager;
 import com.liuyue.igny.manager.LinkedContainerManager.LinkedContainerSetting;
+import com.liuyue.igny.mixins.rule.visibleSpectators.ServerPlayerInvoker;
 import com.liuyue.igny.rule.*;
 import com.liuyue.igny.rule.validators.EntityValidator;
 import com.liuyue.igny.rule.validators.ModValidator;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.NotNull;
 
@@ -872,6 +874,14 @@ public class IGNYSettings {
     public static final RuleAccessor<Boolean> VISIBLE_SPECTATORS = register(
             RuleFactory.of("visibleSpectators", false)
                     .addCategories(SURVIVAL, FEATURE)
+                    .addListener((source, value) -> {
+                        MinecraftServer server = IGNYServer.getInstance().getMinecraftServer();
+                        if (server != null) {
+                            for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+                                ((ServerPlayerInvoker) player).updateInvisibilityStatus();
+                            }
+                        }
+                    })
                     .build()
     );
 

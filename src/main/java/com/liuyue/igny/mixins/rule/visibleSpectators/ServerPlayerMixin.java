@@ -57,4 +57,11 @@ public abstract class ServerPlayerMixin extends Player {
             }
         }
     }
+
+    @Inject(method = "setCamera", at = @At("TAIL"))
+    private void onSetCamera(Entity entity, CallbackInfo ci) {
+        if (IGNYSettings.VISIBLE_SPECTATORS.value()) {
+            this.updateInvisibilityStatus();
+        }
+    }
 }
