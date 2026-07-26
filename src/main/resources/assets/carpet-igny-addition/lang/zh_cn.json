@@ -427,5 +427,7 @@
   "carpet.rule.playersKillDirectlyEnterXp.name": "玩家击杀直接获得经验",
   "carpet.rule.playersKillDirectlyEnterXp.desc": "当玩家击杀生物时将不会掉落经验而是直接给予玩家",
   "carpet.rule.spectatorClickPortalTeleport.name": "旁观者点击传送门传送",
-  "carpet.rule.spectatorClickPortalTeleport.desc": "玩家处于旁观者模式下点击下界传送门或末地传送门将会被传送到对应的维度"
+  "carpet.rule.spectatorClickPortalTeleport.desc": "玩家处于旁观者模式下点击下界传送门或末地传送门将会被传送到对应的维度",
+  "carpet.rule.copperGolemDropOnlyNormal.name": "铜傀儡仅掉落正常形态",
+  "carpet.rule.copperGolemDropOnlyNormal.desc": "破坏铜傀儡时只掉落正常形态(STANDING)，不会出现其他形态的掉落物"
 }

@@ -1181,3 +1181,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
+
+## 铜傀儡仅掉落正常形态 (copperGolemDropOnlyNormal) `🐛Beta` `MC>=1.21.9`
+
+破坏铜傀儡像方块时只掉落正常形态(STANDING)，不会出现其他形态的掉落物。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

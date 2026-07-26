@@ -901,6 +901,14 @@ public class IGNYSettings {
                     .build()
     );
 
+    //#if MC >= 12110
+    public static final RuleAccessor<Boolean> COPPER_GOLEM_DROP_ONLY_NORMAL = register(
+            RuleFactory.of("copperGolemDropOnlyNormal", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+    //#endif
+
     public static final RuleAccessor<Boolean> SNOW_SPAWN_NO_BLOCK_UPDATE = register(
             RuleFactory.of("snowSpawnNoBlockUpdate", false)
                     .addCategories(SURVIVAL, FEATURE)

@@ -68,6 +68,7 @@
     "rule.convenientRegeneratePowderSnow.LayeredCauldronBlockMixin",
     "rule.convenientRegeneratePowderSnow.PointedDripstoneBlockAccessor",
     "rule.convenientRegeneratePowderSnow.PointedDripstoneBlockMixin",
+    "rule.copperGolemDropOnlyNormal.CopperGolemStatueBlockEntityMixin",
     "rule.creativeDestroyWaterloggedBlockNoWater.ServerPlayerGameModeMixin",
     "rule.disableSculkVeinGrowth.SculkSpreaderMixin",
     "rule.disableWatchDog.ServerWatchdogMixin",

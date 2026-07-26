@@ -1178,3 +1178,12 @@ While in spectator mode, clicking on a Nether portal or End portal will teleport
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
+
+## copperGolemDropOnlyNormal `🐛Beta` `MC>=1.21.9`
+
+When breaking a Copper Golem Statue Block, only the STANDING form item will drop, other forms will not drop their specific items.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
