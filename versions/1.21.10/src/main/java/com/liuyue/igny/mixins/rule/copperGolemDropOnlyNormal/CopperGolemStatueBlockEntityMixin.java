@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class CopperGolemStatueBlockEntityMixin {
     @ModifyVariable(method = "getItem", at = @At(value = "HEAD"), argsOnly = true)
     public CopperGolemStatueBlock.Pose modifyPose(CopperGolemStatueBlock.Pose pose) {
-        if (IGNYSettings.copperGolemDropOnlyNormal) {
+        if (IGNYSettings.COPPER_GOLEM_DROP_ONLY_NORMAL.value()) {
             return CopperGolemStatueBlock.Pose.STANDING;
         }
         return pose;
