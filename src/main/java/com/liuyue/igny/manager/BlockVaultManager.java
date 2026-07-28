@@ -13,9 +13,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 //#if MC >= 12005
 import net.minecraft.world.level.block.VaultBlock;
+import net.minecraft.world.level.block.entity.vault.VaultBlockEntity;
 //#endif
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.vault.VaultBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 //#if MC >= 12106
 //$$ import net.minecraft.world.level.storage.TagValueInput;
