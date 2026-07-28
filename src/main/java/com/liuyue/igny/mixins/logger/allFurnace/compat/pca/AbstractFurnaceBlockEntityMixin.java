@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.logger.allFurnace;
+package com.liuyue.igny.mixins.logger.allFurnace.compat.pca;
 
 import carpet.logging.Logger;
 import carpet.logging.LoggerRegistry;
@@ -6,7 +6,6 @@ import com.liuyue.igny.IGNYServerMod;
 import com.liuyue.igny.logger.IGNYLoggers;
 import com.liuyue.igny.mixins.logger.LoggerAccessor;
 import com.liuyue.igny.network.packet.block.HighlightPayload;
-
 import com.liuyue.igny.network.packet.block.RemoveHighlightPayload;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -14,14 +13,17 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
-
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.AbstractCookingRecipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -37,8 +39,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import net.minecraft.world.level.Level;
-
 //#if MC <= 12006
 //$$ import net.minecraft.world.Container;
 //#endif
@@ -53,8 +53,8 @@ import net.minecraft.world.level.Level;
 //$$ import net.minecraft.world.level.storage.ValueInput;
 //#endif
 
-@Restriction(conflict = @Condition("pca"))
-@Mixin(value = AbstractFurnaceBlockEntity.class, priority = 999)
+@Restriction(require = @Condition("pca"))
+@Mixin(value = AbstractFurnaceBlockEntity.class, priority = 1001)
 public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
     @Shadow
     @Final
@@ -111,9 +111,9 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
         }
     }
 
-    @Override
-    public void setChanged() {
-        super.setChanged();
+    @SuppressWarnings("all")
+    @Inject(method = "setChanged", at = @At(value = "RETURN"))
+    private void setChanged(CallbackInfo ci) {
         if (isSleeping && this.level != null && !this.level.isClientSide()) {
             isSleeping = false;
         }

@@ -35,11 +35,12 @@ public abstract class ServerPlayerMixin extends Player {
     @Shadow
     public abstract @NotNull Entity getCamera();
 
-    @Inject(method = "updateInvisibilityStatus", at = @At("HEAD"), cancellable = true)
-    private void noInvisibleSpectators(CallbackInfo ci) {
+    @Inject(method = "updateInvisibilityStatus", at = @At(value = "HEAD"), cancellable = true)
+    private void updateInvisibilityStatus(CallbackInfo ci) {
         if (IGNYSettings.VISIBLE_SPECTATORS.value()) {
-            if (this.isSpectator() && this.getCamera() == this) {
+            if (this.isSpectator()) {
                 this.removeEffectParticles();
+                this.setInvisible(this.getCamera() != this);
             } else {
                 super.updateInvisibilityStatus();
             }
@@ -47,7 +48,7 @@ public abstract class ServerPlayerMixin extends Player {
         }
     }
 
-    @Inject(method = "broadcastToPlayer", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "broadcastToPlayer", at = @At(value = "HEAD"), cancellable = true)
     private void allowSpectatorsToBeSpectated(ServerPlayer player, CallbackInfoReturnable<Boolean> cir) {
         if (IGNYSettings.VISIBLE_SPECTATORS.value()) {
             if (player.isSpectator()) {
@@ -58,7 +59,7 @@ public abstract class ServerPlayerMixin extends Player {
         }
     }
 
-    @Inject(method = "setCamera", at = @At("TAIL"))
+    @Inject(method = "setCamera", at = @At(value = "RETURN"))
     private void onSetCamera(Entity entity, CallbackInfo ci) {
         if (IGNYSettings.VISIBLE_SPECTATORS.value()) {
             this.updateInvisibilityStatus();
