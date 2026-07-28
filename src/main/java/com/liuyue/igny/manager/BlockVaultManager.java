@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.VaultBlock;
 //#endif
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.vault.VaultBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 //#if MC >= 12106
 //$$ import net.minecraft.world.level.storage.TagValueInput;
@@ -77,37 +78,6 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
         return getCurrentData().vault.containsKey(getDictKey(level, pos));
     }
 
-    //#if MC >= 12005
-    private boolean isOminousFromNbt(CompoundTag nbt) {
-        //#if MC >= 12105
-        //$$ if (nbt.getCompound("config").isPresent())
-        //#else
-        if (nbt.contains("config", 10))
-        //#endif
-        {
-            //#if MC >= 12105
-            //$$ CompoundTag config = nbt.getCompound("config").get();
-            //#else
-            CompoundTag config = nbt.getCompound("config");
-            //#endif
-            //#if MC >= 12105
-            //$$ if (config.getCompound("loot_table").isPresent())
-            //#else
-            if (config.contains("loot_table", 8))
-            //#endif
-            {
-                //#if MC >= 12105
-                //$$ String lootTable = config.getString("loot_table").get();
-                //#else
-                String lootTable = config.getString("loot_table");
-                //#endif
-                return lootTable.contains("reward_ominous");
-            }
-        }
-        return false;
-    }
-    //#endif
-
     public void restoreBlock(Level level, BlockPos pos) {
         String[] info = getCurrentData().vault.remove(getDictKey(level, pos));
         getCurrentData().pendingRestore.remove(getDictKey(level, pos));
@@ -133,11 +103,6 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
                     //#else
                     CompoundTag nbt = TagParser.parseTag(info[1]);
                     //#endif
-                    //#if MC >= 12005
-                    if (block.equals(Blocks.VAULT) && isOminousFromNbt(nbt)) {
-                        level.setBlock(pos, block.defaultBlockState().setValue(VaultBlock.OMINOUS, true), 2 | 16);
-                    }
-                    //#endif
                     BlockEntity be = level.getBlockEntity(pos);
                     if (be != null) {
                         //#if MC >= 12005
@@ -151,8 +116,14 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
                         //#else
                         //$$ be.load(nbt);
                         //#endif
+                        //#if MC >= 12005
+                        if (block.equals(Blocks.VAULT) && ((VaultBlockEntity) be).getConfig().lootTable().toString().contains("reward_ominous")) {
+                            level.setBlock(pos, block.defaultBlockState().setValue(VaultBlock.OMINOUS, true), 2 | 16);
+                        }
+                        //#endif
                         be.setChanged();
                     }
+
                 } catch (Exception e) {
                     IGNYServer.LOGGER.error("Failed to restore block entity at {} (block: {}): {}", pos, info[0], e.getMessage());
                 }

@@ -61,9 +61,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
     //#if MC <= 12006
     //$$ private RecipeManager.CachedCheck<Container, ? extends AbstractCookingRecipe> quickCheck;
     //#else
-    private
-
-    RecipeManager.CachedCheck<SingleRecipeInput, ? extends AbstractCookingRecipe> quickCheck;
+    private RecipeManager.CachedCheck<SingleRecipeInput, ? extends AbstractCookingRecipe> quickCheck;
     //#endif
 
     //#if MC >= 12104

@@ -22,7 +22,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
@@ -41,6 +40,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC <= 12006
 //$$ import net.minecraft.world.Container;
+//#else
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 //#endif
 
 //#if MC < 12005
@@ -61,9 +62,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
     //#if MC <= 12006
     //$$ private RecipeManager.CachedCheck<Container, ? extends AbstractCookingRecipe> quickCheck;
     //#else
-    private
-
-    RecipeManager.CachedCheck<SingleRecipeInput, ? extends AbstractCookingRecipe> quickCheck;
+    private RecipeManager.CachedCheck<SingleRecipeInput, ? extends AbstractCookingRecipe> quickCheck;
     //#endif
 
     //#if MC >= 12104
