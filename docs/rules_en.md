@@ -1187,3 +1187,12 @@ When breaking a Copper Golem Statue Block, only the STANDING form item will drop
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## theEndTerrainMissingReintroduce `🐛Beta` `MC>=26.3`
+
+Reintroduces the large gaps in distant End terrain generation, reverting the changes of 26.3-snapshot-6.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`

@@ -4,7 +4,6 @@ import carpet.CarpetServer;
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.SettingsManager;
 import com.liuyue.igny.manager.LinkedContainerManager.LinkedContainerSetting;
-import com.liuyue.igny.mixins.rule.visibleSpectators.ServerPlayerInvoker;
 import com.liuyue.igny.rule.*;
 import com.liuyue.igny.rule.validators.EntityValidator;
 import com.liuyue.igny.rule.validators.ModValidator;
@@ -878,7 +877,7 @@ public class IGNYSettings {
                         MinecraftServer server = IGNYServer.getInstance().getMinecraftServer();
                         if (server != null) {
                             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-                                ((ServerPlayerInvoker) player).invokerUpdateInvisibilityStatus();
+                                player.onUpdateAbilities();
                             }
                         }
                     })
@@ -954,10 +953,18 @@ public class IGNYSettings {
     //#endif
 
     //#if MC >= 12109
-    public static final RuleAccessor<Boolean> COPPER_GOLEM_DROP_ONLY_NORMAL = register(
-            RuleFactory.of("copperGolemDropOnlyNormal", false)
-                    .addCategories(SURVIVAL, FEATURE)
-                    .build()
-    );
+    //$$ public static final RuleAccessor<Boolean> COPPER_GOLEM_DROP_ONLY_NORMAL = register(
+    //$$         RuleFactory.of("copperGolemDropOnlyNormal", false)
+    //$$                 .addCategories(SURVIVAL, FEATURE)
+    //$$                 .build()
+    //$$ );
+    //#endif
+
+    //#if MC >= 26.3
+    //$$ public static final RuleAccessor<Boolean> THE_END_TERRAIN_MISSING_REINTRODUCE = register(
+    //$$         RuleFactory.of("theEndTerrainMissingReintroduce", false)
+    //$$                 .addOptions(SURVIVAL, PORTING, FEATURE)
+    //$$                 .build()
+    //$$ );
     //#endif
 }

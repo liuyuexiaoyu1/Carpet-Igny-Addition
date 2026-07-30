@@ -429,5 +429,7 @@
   "carpet.rule.spectatorClickPortalTeleport.name": "旁观者点击传送门传送",
   "carpet.rule.spectatorClickPortalTeleport.desc": "玩家处于旁观者模式下点击下界传送门或末地传送门将会被传送到对应的维度",
   "carpet.rule.copperGolemDropOnlyNormal.name": "铜傀儡仅掉落正常形态",
-  "carpet.rule.copperGolemDropOnlyNormal.desc": "破坏铜傀儡时只掉落正常形态(STANDING)，不会出现其他形态的掉落物"
+  "carpet.rule.copperGolemDropOnlyNormal.desc": "破坏铜傀儡时只掉落正常形态(STANDING)，不会出现其他形态的掉落物",
+  "carpet.rule.theEndTerrainMissingReintroduce.name": "重新引入末地缺失地形",
+  "carpet.rule.theEndTerrainMissingReintroduce.desc": "重新引入在远距离末地地形生成大面积空缺的现象，回退了26.3-snapshot-6的更改"
 }

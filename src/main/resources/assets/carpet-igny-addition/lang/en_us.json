@@ -301,5 +301,6 @@
   "carpet.rule.lightQueueBlockedCanLoadLightedChunk.desc": "Allows loading chunks whose lighting calculation has already been completed without waiting for the light queue to finish processing",
   "carpet.rule.playersKillDirectlyEnterXp.desc": "When a player kills a mob, the experience will be directly given to the player instead of being dropped as orbs",
   "carpet.rule.spectatorClickPortalTeleport.desc": "While in spectator mode, clicking on a Nether portal or End portal will teleport the player to the corresponding dimension",
-  "carpet.rule.copperGolemDropOnlyNormal.desc": "When breaking a Copper Golem statue, only the STANDING form item will drop, other forms will not drop their specific items"
+  "carpet.rule.copperGolemDropOnlyNormal.desc": "When breaking a Copper Golem statue, only the STANDING form item will drop, other forms will not drop their specific items",
+  "carpet.rule.theEndTerrainMissingReintroduce.desc": "Reintroduces the large gaps in distant End terrain generation, reverting the changes of 26.3-snapshot-6"
 }

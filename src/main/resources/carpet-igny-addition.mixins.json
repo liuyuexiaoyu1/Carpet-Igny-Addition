@@ -217,6 +217,7 @@
     "rule.teleportInheritMinecartsMotionReintroduced.EntityMixin",
     "rule.teleportInheritMinecartsMotionReintroduced.NetherPortalBlockMixin",
     "rule.theEndCanCreateNetherPortal.BaseFireBlockMixin",
+    "rule.theEndTerrainMissingReintroduce.EndIslandDensityFunctionMixin",
     "rule.tntMinecartEmptyDamageSourceFix.EntityInvoker",
     "rule.tntMinecartEmptyDamageSourceFix.MinecartTNTMixin",
     "rule.transparentNightmarishBlock.BlockMixin",
@@ -228,7 +229,6 @@
     "rule.trialSpawnerCoolDown.TrialSpawnerMixin",
     "rule.trialSpawnerLoot.TrialSpawnerMixin",
     "rule.tripwireHookDupeReintroduced.TripWireHookBlockMixin",
-    "rule.visibleSpectators.ServerPlayerInvoker",
     "rule.visibleSpectators.ServerPlayerMixin",
     "rule.wardenNeverDig.WardenMixin",
     "rule.wetSpongeCanAbsorbLava.WetSpongeBlockMixin"
