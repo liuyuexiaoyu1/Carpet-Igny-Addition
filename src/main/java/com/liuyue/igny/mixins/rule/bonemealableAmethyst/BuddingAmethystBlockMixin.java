@@ -18,6 +18,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+//#if MC >= 26.3
+//$$ import net.minecraft.world.level.block.BonemealSource;
+//#endif
 
 @Mixin(BuddingAmethystBlock.class)
 public abstract class BuddingAmethystBlockMixin implements BonemealableBlock {
@@ -27,7 +30,9 @@ public abstract class BuddingAmethystBlockMixin implements BonemealableBlock {
     protected abstract void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random);
 
     @Override
-    //#if MC >= 12002
+    //#if MC >= 26.3
+    //$$ public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, BonemealSource source)
+    //#elseif MC >= 12002
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state)
     //#else
     //$$ public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient)
@@ -59,12 +64,22 @@ public abstract class BuddingAmethystBlockMixin implements BonemealableBlock {
     }
 
     @Override
-    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+    //#if MC >= 26.3
+    //$$ public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source)
+    //#else
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state)
+            //#endif
+    {
         return IGNYSettings.BONEMEALABLE_AMETHYST.value();
     }
 
     @Override
-    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+    //#if MC >= 26.3
+    //$$ public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source)
+    //#else
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state)
+            //#endif
+    {
         if (IGNYSettings.BONEMEALABLE_AMETHYST.value()) {
             try {
                 IS_BONEMEAL.set(true);

@@ -19,7 +19,11 @@ public class ShulkerBoxBlockEntityMixin {
     ))
     private PushReaction getPistonBehaviourOfNoClipPlayers(Entity instance, Operation<PushReaction> original) {
         if (((instance instanceof Player && instance.getRootVehicle() instanceof HappyGhast) || (instance instanceof HappyGhast && instance.isVehicle())) && IGNYSettings.HAPPY_GHAST_NO_CLIP.value())
+            //#if MC >= 26.3
+            //$$ return PushReaction.IGNORE_ENTITY;
+            //#else
             return PushReaction.IGNORE;
+            //#endif
         return original.call(instance);
     }
 }
