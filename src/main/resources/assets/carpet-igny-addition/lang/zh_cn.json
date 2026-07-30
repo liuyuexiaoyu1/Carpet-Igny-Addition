@@ -431,5 +431,15 @@
   "carpet.rule.copperGolemDropOnlyNormal.name": "铜傀儡仅掉落正常形态",
   "carpet.rule.copperGolemDropOnlyNormal.desc": "破坏铜傀儡时只掉落正常形态(STANDING)，不会出现其他形态的掉落物",
   "carpet.rule.theEndTerrainMissingReintroduce.name": "重新引入末地缺失地形",
-  "carpet.rule.theEndTerrainMissingReintroduce.desc": "重新引入在远距离末地地形生成大面积空缺的现象，回退了26.3-snapshot-6的更改"
+  "carpet.rule.theEndTerrainMissingReintroduce.desc": "重新引入在远距离末地地形生成大面积空缺的现象，回退了26.3-snapshot-6的更改",
+  "carpet.rule.spectatorKeepLeashConnectionReintroduce.name": "重新引入旁观者保留拴绳连接",
+  "carpet.rule.spectatorKeepLeashConnectionReintroduce.desc": "重新引入切换到旁观者模式时保留玩家与实体之间的拴绳连接，回退了25w33a的更改",
+  "carpet.rule.hugeMushroomDestroyUnbreakableReintroduce.name": "重新引入巨型蘑菇破坏不可破坏方块",
+  "carpet.rule.hugeMushroomDestroyUnbreakableReintroduce.desc": "重新引入巨型蘑菇生长时破坏不可破坏方块，回退了25w02a的更改",
+  "carpet.rule.kelpNeverGrows.name": "海带永不生长",
+  "carpet.rule.kelpNeverGrows.desc": "海带不再自然生长，只能手动催熟",
+  "carpet.rule.respawnBlockNeverExplode.name": "重生方块永不爆炸",
+  "carpet.rule.respawnBlockNeverExplode.desc": "床和重生锚在错误维度使用时不会爆炸",
+  "carpet.rule.airCompost.name": "空气堆肥",
+  "carpet.rule.airCompost.desc": "允许不使用物品右键堆肥桶进行堆肥"
 }

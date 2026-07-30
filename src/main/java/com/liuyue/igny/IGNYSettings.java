@@ -967,4 +967,38 @@ public class IGNYSettings {
     //$$                 .build()
     //$$ );
     //#endif
+
+    //#if MC >= 12110
+    //$$ public static final RuleAccessor<Boolean> SPECTATOR_KEEP_LEASH_CONNECTION_REINTRODUCE = register(
+    //$$         RuleFactory.of("spectatorKeepLeashConnectionReintroduce", false)
+    //$$                 .addOptions(SURVIVAL, PORTING, FEATURE)
+    //$$                 .build()
+    //$$ );
+    //#endif
+
+    //#if MC >= 12105
+    //$$ public static final RuleAccessor<Boolean> HUGE_MUSHROOM_DESTROY_UNBREAKABLE_REINTRODUCE = register(
+    //$$         RuleFactory.of("hugeMushroomDestroyUnbreakableReintroduce", false)
+    //$$                 .addOptions(SURVIVAL, PORTING, FEATURE)
+    //$$                 .build()
+    //$$ );
+    //#endif
+
+    public static final RuleAccessor<Boolean> KELP_NEVER_GROWS = register(
+            RuleFactory.of("kelpNeverGrows", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> RESPAWN_BLOCK_NEVER_EXPLODE = register(
+            RuleFactory.of("respawnBlockNeverExplode", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> AIR_COMPOST = register(
+            RuleFactory.of("airCompost", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
 }

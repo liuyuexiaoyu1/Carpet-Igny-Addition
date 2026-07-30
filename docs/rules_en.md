@@ -1196,3 +1196,49 @@ Reintroduces the large gaps in distant End terrain generation, reverting the cha
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
+
+
+## spectatorKeepLeashConnectionReintroduce `🐛Beta` `MC>=1.21.10`
+
+Reintroduces keeping leash connections between players and entities when switching to spectator mode, reverting the changes of 25w33a.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
+
+## hugeMushroomDestroyUnbreakableReintroduce `🐛Beta` `MC>=1.21.5`
+
+Reintroduces huge mushrooms destroying unbreakable blocks when growing, reverting the changes of 25w02a.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
+
+## kelpNeverGrows
+
+Kelp will no longer grow naturally, can only be manually bone-mealed.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## respawnBlockNeverExplode
+
+Beds and Respawn Anchors will not explode when used in the wrong dimension.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## airCompost
+
+Allows composting without using any item, just right-click the composter.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

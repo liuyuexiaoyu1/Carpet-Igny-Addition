@@ -1199,3 +1199,50 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
+
+
+
+## 重新引入旁观者保留拴绳连接 (spectatorKeepLeashConnectionReintroduce) `🐛Beta` `MC>=1.21.10`
+
+重新引入切换到旁观者模式时保留玩家与实体之间的拴绳连接，回退了25w33a的更改。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
+
+## 重新引入巨型蘑菇破坏不可破坏方块 (hugeMushroomDestroyUnbreakableReintroduce) `🐛Beta` `MC>=1.21.5`
+
+重新引入巨型蘑菇生长时破坏不可破坏方块，回退了25w02a的更改。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
+
+## 海带永不生长 (kelpNeverGrows) `🐛Beta`
+
+海带不再自然生长，只能手动催熟。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 重生方块永不爆炸 (respawnBlockNeverExplode) `🐛Beta`
+
+床和重生锚在错误维度使用时不会爆炸。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 空气堆肥 (airCompost) `🐛Beta`
+
+允许不使用物品右键堆肥桶进行堆肥。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
