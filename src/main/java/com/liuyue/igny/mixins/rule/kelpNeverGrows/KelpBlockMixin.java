@@ -18,7 +18,7 @@ public abstract class KelpBlockMixin extends GrowingPlantHeadBlock {
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (IGNYSettings.KELP_NEVER_GROWS.value()) {
             return;
         }
