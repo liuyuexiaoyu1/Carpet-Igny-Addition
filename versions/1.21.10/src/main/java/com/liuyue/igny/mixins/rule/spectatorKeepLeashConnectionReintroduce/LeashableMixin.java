@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Leashable.class)
-public class LeashableMixin {
+public interface LeashableMixin {
     @WrapOperation(method = "tickLeash", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;canInteractWithLevel()Z", ordinal = 1))
     private static boolean canInteractWithLevel(Entity instance, Operation<Boolean> original) {
         if (IGNYSettings.SPECTATOR_KEEP_LEASH_CONNECTION_REINTRODUCE.value()) {

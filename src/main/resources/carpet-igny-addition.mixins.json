@@ -73,6 +73,7 @@
     "rule.copperGolemDropOnlyNormal.BlockMixin",
     "rule.creativeDestroyWaterloggedBlockNoWater.ServerPlayerGameModeMixin",
     "rule.disableSculkVeinGrowth.SculkSpreaderMixin",
+    "rule.disableTripwireGenerateInstantScheduledTick.TripwireBlockMixin",
     "rule.disableWatchDog.ServerWatchdogMixin",
     "rule.dispenserTrade.DispenserBlockMixin",
     "rule.drillAnvil.FallingBlockEntityMixin",

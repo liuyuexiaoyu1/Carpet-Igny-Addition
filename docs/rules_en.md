@@ -1216,7 +1216,7 @@ Reintroduces huge mushrooms destroying unbreakable blocks when growing, revertin
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
 
-## kelpNeverGrows
+## kelpNeverGrows `🐛Beta`
 
 Kelp will no longer grow naturally, can only be manually bone-mealed.
 
@@ -1225,7 +1225,7 @@ Kelp will no longer grow naturally, can only be manually bone-mealed.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## respawnBlockNeverExplode
+## respawnBlockNeverExplode `🐛Beta`
 
 Beds and Respawn Anchors will not explode when used in the wrong dimension.
 
@@ -1234,7 +1234,7 @@ Beds and Respawn Anchors will not explode when used in the wrong dimension.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## airCompost
+## airCompost `🐛Beta`
 
 Allows composting without using any item, just right-click the composter.
 
@@ -1242,3 +1242,12 @@ Allows composting without using any item, just right-click the composter.
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## disableTripwireGenerateInstantScheduledTick `🐛Beta` `MC>=26.2`
+
+When a tripwire is deactivated, vanilla schedules an instant tick (0 delay); when enabled, the scheduled tick delay becomes 1 tick.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`
