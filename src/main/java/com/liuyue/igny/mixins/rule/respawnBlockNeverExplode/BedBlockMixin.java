@@ -18,7 +18,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BedBlock.class)
 public class BedBlockMixin {
-    //#if MC <= 12004
+    //#if MC >= 26.3
+    //$$ @Inject(method = "destroyOnUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"), cancellable = true)
+    //$$ private void useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, CallbackInfoReturnable<InteractionResult> cir)
+    //#elseif MC <= 12004
     //$$ @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"), cancellable = true)
     //$$ private void useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir)
     //#else
