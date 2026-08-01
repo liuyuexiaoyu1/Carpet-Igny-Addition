@@ -1003,10 +1003,10 @@ public class IGNYSettings {
     );
 
     //#if MC >= 26.2
+    //$$                 .build()
     //$$ public static final RuleAccessor<Boolean> DISABLE_TRIPWIRE_GENERATE_INSTANT_SCHEDULED_TICK = register(
     //$$         RuleFactory.of("disableTripwireGenerateInstantScheduledTick", false)
     //$$                 .addCategories(FEATURE)
-    //$$                 .build()
     //$$ );
     //#endif
 }
