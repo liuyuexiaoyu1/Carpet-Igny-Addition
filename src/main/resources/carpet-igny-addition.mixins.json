@@ -37,6 +37,7 @@
     "logger.LoggerAccessor",
     "logger.LoggerMixin",
     "logger.allFurnace.AbstractFurnaceBlockEntityMixin",
+    "logger.allFurnace.BlockEntityMixin",
     "logger.allFurnace.LevelMixin",
     "logger.allFurnace.compat.pca.AbstractFurnaceBlockEntityMixin",
     "logger.beacon.BeaconBlockEntityMixin",

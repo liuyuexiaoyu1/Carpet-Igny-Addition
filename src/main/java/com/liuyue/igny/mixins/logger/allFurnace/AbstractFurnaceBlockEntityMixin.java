@@ -8,10 +8,12 @@ import com.liuyue.igny.mixins.logger.LoggerAccessor;
 import com.liuyue.igny.network.packet.block.HighlightPayload;
 
 import com.liuyue.igny.network.packet.block.RemoveHighlightPayload;
+import com.liuyue.igny.utils.interfaces.allFurnace.SleepingBlock;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
+import net.caffeinemc.mods.lithium.common.block.entity.SleepingBlockEntity;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 
@@ -55,7 +57,7 @@ import net.minecraft.world.level.Level;
 
 @Restriction(conflict = @Condition("pca"))
 @Mixin(value = AbstractFurnaceBlockEntity.class, priority = 999)
-public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
+public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity implements SleepingBlock {
     @Shadow
     @Final
     //#if MC <= 12006
@@ -89,6 +91,16 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
     @Unique private static int counter = 0;
     @Unique public int id = 0;
 
+    @Override
+    public boolean igny$isSleeping() {
+        return isSleeping;
+    }
+
+    @Override
+    public void igny$setSleeping(boolean sleeping) {
+        isSleeping = sleeping;
+    }
+
     public AbstractFurnaceBlockEntityMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
     }
@@ -104,16 +116,8 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
                                 //#endif
             //#endif
                                 CallbackInfo ci) {
-        if (isSleeping && this.level != null && !this.level.isClientSide()) {
-            isSleeping = false;
-        }
-    }
-
-    @Override
-    public void setChanged() {
-        super.setChanged();
-        if (isSleeping && this.level != null && !this.level.isClientSide()) {
-            isSleeping = false;
+        if (igny$isSleeping() && this.level != null && !this.level.isClientSide()) {
+            igny$setSleeping(false);
         }
     }
 
@@ -174,7 +178,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
             }
         }
         if (IGNYServerMod.LITHIUM) {
-            if (!hasRecipe && self.isSleeping) return;
+            if (!hasRecipe && self.igny$isSleeping()) return;
         }
         original.call(level, blockPos, blockState, blockEntity);
         self.igny$checkSleep(blockState);
@@ -195,7 +199,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BlockEntity {
                 this.cookingProgress == 0
                 //#endif
                 && (state.is(Blocks.FURNACE) || state.is(Blocks.BLAST_FURNACE) || state.is(Blocks.SMOKER))) {
-            isSleeping = true;
+            igny$setSleeping(true);
         }
     }
 
