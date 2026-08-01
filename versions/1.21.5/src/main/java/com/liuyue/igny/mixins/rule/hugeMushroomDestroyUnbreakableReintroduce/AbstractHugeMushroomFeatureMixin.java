@@ -24,6 +24,6 @@ public class AbstractHugeMushroomFeatureMixin {
         if (IGNYSettings.HUGE_MUSHROOM_DESTROY_UNBREAKABLE_REINTRODUCE.value()) {
             return instance.isSolidRender();
         }
-        return original.call(instance);
+        return original.call(instance, tagKey);
     }
 }

@@ -24,6 +24,7 @@ public class BedBlockMixin {
     //#else
     @Inject(method = "useWithoutItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"), cancellable = true)
     private void useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir)
+    //#endif
     {
         if (IGNYSettings.RESPAWN_BLOCK_NEVER_EXPLODE.value()) {
             cir.setReturnValue(InteractionResult.SUCCESS);
