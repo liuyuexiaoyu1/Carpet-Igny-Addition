@@ -984,8 +984,8 @@ public class IGNYSettings {
     //$$ );
     //#endif
 
-    public static final RuleAccessor<Boolean> KELP_NEVER_GROWS = register(
-            RuleFactory.of("kelpNeverGrows", false)
+    public static final RuleAccessor<Boolean> KELP_NEVER_NATURAL_GROWS = register(
+            RuleFactory.of("kelpNeverNaturalGrows", false)
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );
@@ -1005,7 +1005,7 @@ public class IGNYSettings {
     //#if MC >= 26.2
     //$$ public static final RuleAccessor<Boolean> DISABLE_TRIPWIRE_GENERATE_INSTANT_SCHEDULED_TICK = register(
     //$$         RuleFactory.of("disableTripwireGenerateInstantScheduledTick", false)
-    //$$                 .addCategories(FEATURE)
+    //$$                 .addCategories(BUGFIX, FEATURE)
     //$$                 .build()
     //$$ );
     //#endif

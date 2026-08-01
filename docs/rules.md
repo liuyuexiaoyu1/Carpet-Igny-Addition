@@ -1218,7 +1218,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
 
-## 海带永不生长 (kelpNeverGrows) `🐛Beta`
+## 海带永不自然生长 (kelpNeverNaturalGrows) `🐛Beta`
 
 海带不再自然生长，只能手动催熟。
 
@@ -1252,4 +1252,4 @@ true: 物品展示框内含物品时将会隐形。
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
-- 分类: `IGNY`, `FEATURE`
+- 分类: `IGNY`, `BUGFIX`, `FEATURE`

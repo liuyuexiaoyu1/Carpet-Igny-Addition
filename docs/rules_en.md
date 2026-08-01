@@ -1216,7 +1216,7 @@ Reintroduces huge mushrooms destroying unbreakable blocks when growing, revertin
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
 
-## kelpNeverGrows `🐛Beta`
+## kelpNeverNaturalGrows `🐛Beta`
 
 Kelp will no longer grow naturally, can only be manually bone-mealed.
 
@@ -1250,4 +1250,4 @@ When a tripwire is deactivated, vanilla schedules an instant tick (0 delay); whe
 - Type: `boolean`
 - Default value: `false`
 - Suggested options: `false`, `true`
-- Categories: `IGNY`, `FEATURE`
+- Categories: `IGNY`, `BUGFIX`, `FEATURE`

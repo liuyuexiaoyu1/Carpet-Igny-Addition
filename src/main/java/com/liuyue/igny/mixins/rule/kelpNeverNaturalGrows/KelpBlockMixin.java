@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.kelpNeverGrows;
+package com.liuyue.igny.mixins.rule.kelpNeverNaturalGrows;
 
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.core.BlockPos;
@@ -19,7 +19,7 @@ public abstract class KelpBlockMixin extends GrowingPlantHeadBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (IGNYSettings.KELP_NEVER_GROWS.value()) {
+        if (IGNYSettings.KELP_NEVER_NATURAL_GROWS.value()) {
             return;
         }
         super.randomTick(state, level, pos, random);

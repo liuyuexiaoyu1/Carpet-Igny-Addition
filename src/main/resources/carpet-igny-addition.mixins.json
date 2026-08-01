@@ -127,7 +127,7 @@
     "rule.invisibleItemFrames.EntityMixin",
     "rule.invisibleItemFrames.HangingEntityItemMixin",
     "rule.invisibleItemFrames.ItemFrameMixin",
-    "rule.kelpNeverGrows.KelpBlockMixin",
+    "rule.kelpNeverNaturalGrows.KelpBlockMixin",
     "rule.killFakePlayerRemoveVehicle.EntityPlayerMPFakeMixin",
     "rule.killFakePlayerRemoveVehicle.ServerPlayerMixin",
     "rule.lightningBoltNoFire.EntityMixin",
