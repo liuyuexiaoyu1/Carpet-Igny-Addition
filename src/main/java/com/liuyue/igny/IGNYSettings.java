@@ -963,7 +963,7 @@ public class IGNYSettings {
     //#if MC >= 26.3
     //$$ public static final RuleAccessor<Boolean> THE_END_TERRAIN_MISSING_REINTRODUCE = register(
     //$$         RuleFactory.of("theEndTerrainMissingReintroduce", false)
-    //$$                 .addOptions(SURVIVAL, PORTING, FEATURE)
+    //$$                 .addCategories(SURVIVAL, PORTING, FEATURE)
     //$$                 .build()
     //$$ );
     //#endif
@@ -971,7 +971,7 @@ public class IGNYSettings {
     //#if MC >= 12110
     //$$ public static final RuleAccessor<Boolean> SPECTATOR_KEEP_LEASH_CONNECTION_REINTRODUCE = register(
     //$$         RuleFactory.of("spectatorKeepLeashConnectionReintroduce", false)
-    //$$                 .addOptions(SURVIVAL, PORTING, FEATURE)
+    //$$                 .addCategories(SURVIVAL, PORTING, FEATURE)
     //$$                 .build()
     //$$ );
     //#endif
@@ -979,7 +979,7 @@ public class IGNYSettings {
     //#if MC >= 12105
     //$$ public static final RuleAccessor<Boolean> HUGE_MUSHROOM_DESTROY_UNBREAKABLE_REINTRODUCE = register(
     //$$         RuleFactory.of("hugeMushroomDestroyUnbreakableReintroduce", false)
-    //$$                 .addOptions(SURVIVAL, PORTING, FEATURE)
+    //$$                 .addCategories(SURVIVAL, PORTING, FEATURE)
     //$$                 .build()
     //$$ );
     //#endif
