@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AmethystClusterBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
@@ -137,9 +138,15 @@ public abstract class LevelMixin {
             if (IGNYSettings.TRANSPARENT_NIGHTMARISH_BLOCK.value()) {
                 BlockBehaviour.BlockStateBase state = (BlockBehaviour.BlockStateBase) (Object) this;
                 if (state instanceof BlockState blockState) {
-                    if (RuleUtil.isNightmarishBlock(blockState.getBlock()) || state.getBlock() instanceof AmethystClusterBlock){
+                    if (RuleUtil.isNightmarishBlock(blockState.getBlock()) || state.getBlock() instanceof AmethystClusterBlock) {
                         if (context instanceof EntityCollisionContext ecc && !(ecc.getEntity() instanceof net.minecraft.world.entity.player.Player)) {
-                            cir.setReturnValue(Shapes.empty());
+                            if (state.getBlock() instanceof AmethystClusterBlock) {
+                                if (level.getBlockState(pos.relative(state.getValue(AmethystClusterBlock.FACING).getOpposite())).is(Blocks.BUDDING_AMETHYST)) {
+                                    cir.setReturnValue(Shapes.empty());
+                                }
+                            } else {
+                                cir.setReturnValue(Shapes.empty());
+                            }
                         }
                     }
                 }

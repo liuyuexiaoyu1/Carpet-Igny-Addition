@@ -12,7 +12,11 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(RespawnAnchorBlock.class)
 public class RespawnAnchorBlockMixin {
+    //#if MC <= 12004
+    //$$ @WrapOperation(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/RespawnAnchorBlock;explode(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"))
+    //#else
     @WrapOperation(method = "useWithoutItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/RespawnAnchorBlock;explode(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"))
+    //#endif
     private void explode(RespawnAnchorBlock instance, BlockState state, Level level, BlockPos pos2, Operation<Void> original) {
         if (IGNYSettings.RESPAWN_BLOCK_NEVER_EXPLODE.value()) {
             return;

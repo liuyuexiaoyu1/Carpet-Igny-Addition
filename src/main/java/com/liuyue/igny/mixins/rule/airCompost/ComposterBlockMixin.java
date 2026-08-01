@@ -15,7 +15,11 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ComposterBlock.class)
 public class ComposterBlockMixin {
+    //#if MC <= 12004
+    //$$ @WrapOperation(method = "use", at = @At(value = "INVOKE", target = "Lit/unimi/dsi/fastutil/objects/Object2FloatMap;containsKey(Ljava/lang/Object;)Z"))
+    //#else
     @WrapOperation(method = "useItemOn", at = @At(value = "INVOKE", target = "Lit/unimi/dsi/fastutil/objects/Object2FloatMap;containsKey(Ljava/lang/Object;)Z"))
+    //#endif
     private boolean containsKey(Object2FloatMap<?> instance, Object o, Operation<Boolean> original) {
         if (IGNYSettings.AIR_COMPOST.value() && o instanceof Item item) {
             if (item.equals(Items.AIR)) {
@@ -25,8 +29,14 @@ public class ComposterBlockMixin {
         return original.call(instance, o);
     }
 
+    //#if MC <= 12004
+    //$$ @WrapWithCondition(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"))
+    //$$ private boolean useItemOn(ItemStack instance, int decrement)
+    //#else
     @WrapWithCondition(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;consume(ILnet/minecraft/world/entity/LivingEntity;)V"))
-    private boolean useItemOn(ItemStack instance, int i, LivingEntity livingEntity) {
+    private boolean useItemOn(ItemStack instance, int i, LivingEntity livingEntity)
+    //#endif
+    {
         if (IGNYSettings.AIR_COMPOST.value()) {
             return !instance.is(Items.AIR);
         }
