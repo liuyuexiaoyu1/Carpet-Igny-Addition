@@ -5,8 +5,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 //#if MC >= 12102
 //$$ import net.minecraft.world.InteractionResult;
-//#else
+//#elseif MC >= 12005
 import net.minecraft.world.ItemInteractionResult;
+//#else
+//$$ import net.minecraft.world.InteractionResult;
 //#endif
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
