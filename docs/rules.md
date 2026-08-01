@@ -1191,7 +1191,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 重新引入末地缺失地形 (theEndTerrainMissingReintroduce) `🐛Beta` `MC>=26.3`
+## 重新引入末地缺失地形 (theEndTerrainMissingReintroduced) `🐛Beta` `MC>=26.3`
 
 重新引入在远距离末地地形生成大面积空缺的现象，回退了26.3-snapshot-6的更改。
 
@@ -1200,7 +1200,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
 
-## 重新引入旁观者保留拴绳连接 (spectatorKeepLeashConnectionReintroduce) `🐛Beta` `MC>=1.21.10`
+## 重新引入旁观者保留拴绳连接 (spectatorKeepLeashConnectionReintroduced) `🐛Beta` `MC>=1.21.10`
 
 重新引入切换到旁观者模式时保留玩家与实体之间的拴绳连接，回退了25w33a的更改。
 
@@ -1209,7 +1209,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
 
-## 重新引入巨型蘑菇破坏不可破坏方块 (hugeMushroomDestroyUnbreakableReintroduce) `🐛Beta` `MC>=1.21.5`
+## 重新引入巨型蘑菇破坏不可破坏方块 (hugeMushroomDestroyUnbreakableReintroduced) `🐛Beta` `MC>=1.21.5`
 
 重新引入巨型蘑菇生长时破坏不可破坏方块，回退了25w02a的更改。
 

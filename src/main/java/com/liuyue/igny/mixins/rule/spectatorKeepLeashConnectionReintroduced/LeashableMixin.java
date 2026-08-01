@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.spectatorKeepLeashConnectionReintroduce;
+package com.liuyue.igny.mixins.rule.spectatorKeepLeashConnectionReintroduced;
 
 import com.liuyue.igny.utils.compat.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;

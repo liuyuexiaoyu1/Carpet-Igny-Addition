@@ -961,24 +961,24 @@ public class IGNYSettings {
     //#endif
 
     //#if MC >= 26.3
-    //$$ public static final RuleAccessor<Boolean> THE_END_TERRAIN_MISSING_REINTRODUCE = register(
-    //$$         RuleFactory.of("theEndTerrainMissingReintroduce", false)
+    //$$ public static final RuleAccessor<Boolean> THE_END_TERRAIN_MISSING_REINTRODUCED = register(
+    //$$         RuleFactory.of("theEndTerrainMissingReintroduced", false)
     //$$                 .addCategories(SURVIVAL, PORTING, FEATURE)
     //$$                 .build()
     //$$ );
     //#endif
 
     //#if MC >= 12110
-    //$$ public static final RuleAccessor<Boolean> SPECTATOR_KEEP_LEASH_CONNECTION_REINTRODUCE = register(
-    //$$         RuleFactory.of("spectatorKeepLeashConnectionReintroduce", false)
+    //$$ public static final RuleAccessor<Boolean> SPECTATOR_KEEP_LEASH_CONNECTION_REINTRODUCED = register(
+    //$$         RuleFactory.of("spectatorKeepLeashConnectionReintroduced", false)
     //$$                 .addCategories(SURVIVAL, PORTING, FEATURE)
     //$$                 .build()
     //$$ );
     //#endif
 
     //#if MC >= 12105
-    //$$ public static final RuleAccessor<Boolean> HUGE_MUSHROOM_DESTROY_UNBREAKABLE_REINTRODUCE = register(
-    //$$         RuleFactory.of("hugeMushroomDestroyUnbreakableReintroduce", false)
+    //$$ public static final RuleAccessor<Boolean> HUGE_MUSHROOM_DESTROY_UNBREAKABLE_REINTRODUCED = register(
+    //$$         RuleFactory.of("hugeMushroomDestroyUnbreakableReintroduced", false)
     //$$                 .addCategories(SURVIVAL, PORTING, FEATURE)
     //$$                 .build()
     //$$ );

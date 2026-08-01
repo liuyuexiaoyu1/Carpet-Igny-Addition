@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.theEndTerrainMissingReintroduce;
+package com.liuyue.igny.mixins.rule.theEndTerrainMissingReintroduced;
 
 import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.sugar.Local;

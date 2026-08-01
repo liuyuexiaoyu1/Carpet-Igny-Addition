@@ -304,9 +304,9 @@
   "carpet.rule.playersKillDirectlyEnterXp.desc": "When a player kills a mob, the experience will be directly given to the player instead of being dropped as orbs",
   "carpet.rule.spectatorClickPortalTeleport.desc": "While in spectator mode, clicking on a Nether portal or End portal will teleport the player to the corresponding dimension",
   "carpet.rule.copperGolemDropOnlyNormal.desc": "When breaking a Copper Golem statue, only the STANDING form item will drop, other forms will not drop their specific items",
-  "carpet.rule.theEndTerrainMissingReintroduce.desc": "Reintroduces the large gaps in distant End terrain generation, reverting the changes of 26.3-snapshot-6",
-  "carpet.rule.spectatorKeepLeashConnectionReintroduce.desc": "Reintroduces keeping leash connections between players and entities when switching to spectator mode, reverting the changes of 25w33a",
-  "carpet.rule.hugeMushroomDestroyUnbreakableReintroduce.desc": "Reintroduces huge mushrooms destroying unbreakable blocks when growing, reverting the changes of 25w02a",
+  "carpet.rule.theEndTerrainMissingReintroduced.desc": "Reintroduces the large gaps in distant End terrain generation, reverting the changes of 26.3-snapshot-6",
+  "carpet.rule.spectatorKeepLeashConnectionReintroduced.desc": "Reintroduces keeping leash connections between players and entities when switching to spectator mode, reverting the changes of 25w33a",
+  "carpet.rule.hugeMushroomDestroyUnbreakableReintroduced.desc": "Reintroduces huge mushrooms destroying unbreakable blocks when growing, reverting the changes of 25w02a",
   "carpet.rule.kelpNeverGrows.desc": "Kelp will no longer grow naturally, can only be manually bone-mealed",
   "carpet.rule.respawnBlockNeverExplode.desc": "Beds and Respawn Anchors will not explode when used in the wrong dimension",
   "carpet.rule.airCompost.desc": "Allows composting without using any item, just right-click the composter"

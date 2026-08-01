@@ -1188,7 +1188,7 @@ When breaking a Copper Golem Statue Block, only the STANDING form item will drop
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## theEndTerrainMissingReintroduce `🐛Beta` `MC>=26.3`
+## theEndTerrainMissingReintroduced `🐛Beta` `MC>=26.3`
 
 Reintroduces the large gaps in distant End terrain generation, reverting the changes of 26.3-snapshot-6.
 
@@ -1198,7 +1198,7 @@ Reintroduces the large gaps in distant End terrain generation, reverting the cha
 - Categories: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
 
 
-## spectatorKeepLeashConnectionReintroduce `🐛Beta` `MC>=1.21.10`
+## spectatorKeepLeashConnectionReintroduced `🐛Beta` `MC>=1.21.10`
 
 Reintroduces keeping leash connections between players and entities when switching to spectator mode, reverting the changes of 25w33a.
 
@@ -1207,7 +1207,7 @@ Reintroduces keeping leash connections between players and entities when switchi
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
 
-## hugeMushroomDestroyUnbreakableReintroduce `🐛Beta` `MC>=1.21.5`
+## hugeMushroomDestroyUnbreakableReintroduced `🐛Beta` `MC>=1.21.5`
 
 Reintroduces huge mushrooms destroying unbreakable blocks when growing, reverting the changes of 25w02a.
 

@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.spectatorKeepLeashConnectionReintroduce;
+package com.liuyue.igny.mixins.rule.spectatorKeepLeashConnectionReintroduced;
 
 import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;

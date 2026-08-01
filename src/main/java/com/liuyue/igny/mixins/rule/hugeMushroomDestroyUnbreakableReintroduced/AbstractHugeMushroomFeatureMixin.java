@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.hugeMushroomDestroyUnbreakableReintroduce;
+package com.liuyue.igny.mixins.rule.hugeMushroomDestroyUnbreakableReintroduced;
 
 import com.liuyue.igny.utils.compat.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
