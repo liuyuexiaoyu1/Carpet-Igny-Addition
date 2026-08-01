@@ -10,7 +10,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(AbstractHugeMushroomFeature.class)
-public class AbstractHugeMushroomFeatureMixin {
+//#if MC >= 26.3
+//$$ public interface AbstractHugeMushroomFeatureMixin
+//#else
+public class AbstractHugeMushroomFeatureMixin
+    //#endif
+{
     @WrapOperation(method = "placeMushroomBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;isAir()Z"))
     private boolean isAir(BlockState instance, Operation<Boolean> original) {
         if (IGNYSettings.HUGE_MUSHROOM_DESTROY_UNBREAKABLE_REINTRODUCE.value()) {
