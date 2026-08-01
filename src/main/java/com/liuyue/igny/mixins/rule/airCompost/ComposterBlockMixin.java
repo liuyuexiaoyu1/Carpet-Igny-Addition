@@ -45,7 +45,7 @@ public class ComposterBlockMixin extends Block {
     {
         if (IGNYSettings.AIR_COMPOST.value()) {
             int i = state.getValue(ComposterBlock.LEVEL);
-            //#if MC >= 12101
+            //#if MC >= 12005
             if (i < 8 && stack.is(Items.AIR))
             //#else
                 //$$ if (i < 8 && player.getItemInHand(hand).is(Items.AIR))
@@ -63,7 +63,7 @@ public class ComposterBlockMixin extends Block {
                 }
                 //#if MC >= 12102
                 //$$ cir.setReturnValue(InteractionResult.SUCCESS);
-                //#elseif MC >= 12101
+                //#elseif MC >= 12005
                 cir.setReturnValue(ItemInteractionResult.sidedSuccess(level.isClientSide()));
                 //#else
                 //$$ cir.setReturnValue(InteractionResult.sidedSuccess(level.isClientSide()));
