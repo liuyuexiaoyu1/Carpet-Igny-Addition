@@ -275,8 +275,6 @@
   "carpet.rule.magmaBlockMelt.desc": "Make the magma block behave similarly to ice: generate a lava source block when mined without Silk Touch, or drop the item when mined with Silk Touch",
   "carpet.rule.entityDimensionChangeMemoryLeakFix.desc": "Fix entity memory leak from residual brain memories during dimension changes",
   "carpet.rule.disableSculkVeinGrowth.desc": "Sculk catalysts will only absorb experience, without generating sculk veins or other blocks",
-  "carpet.rule.disableTripwireGenerateInstantScheduledTick.name": "Disable Tripwire Instant Scheduled Tick",
-  "carpet.rule.disableTripwireGenerateInstantScheduledTick.desc": "When a tripwire is deactivated, vanilla schedules an instant tick (0 delay); when enabled, the scheduled tick delay becomes 1 tick",
   "carpet.rule.allowInvalidBeaconEffect.desc": "Reintroduce the dual beacon effect exploit caused by the server's lack of packet validation when reapplying beacon effects, reverting the changes from 26.2-pre-1",
   "carpet.rule.entityIDCollisionReintroduce.desc": "Reintroduce entity ID collision caused by creating an entity where the ID constructor only increments the entity counter without checking if an entity with the same ID already exists in the world, reverting the changes from 26.2-pre-1",
   "carpet.rule.entityIDCollisionFix.desc": "Fixes entity ID collision caused by creating an entity where the ID constructor only increments the entity counter without checking if an entity with the same ID already exists in the world",
@@ -309,5 +307,6 @@
   "carpet.rule.hugeMushroomDestroyUnbreakableReintroduced.desc": "Reintroduces huge mushrooms destroying unbreakable blocks when growing, reverting the changes of 25w02a",
   "carpet.rule.kelpNeverNaturalGrows.desc": "Kelp will no longer grow naturally, can only be manually bone-mealed",
   "carpet.rule.respawnBlockNeverExplode.desc": "Beds and Respawn Anchors will not explode when used in the wrong dimension",
-  "carpet.rule.airCompost.desc": "Allows composting without using any item, just right-click the composter"
+  "carpet.rule.airCompost.desc": "Allows composting without using any item, just right-click the composter",
+  "carpet.rule.disableTripwireGenerateInstantScheduledTick.desc": "Prevents tripwire from generating an instant scheduled tick (0-delay) when deactivated"
 }

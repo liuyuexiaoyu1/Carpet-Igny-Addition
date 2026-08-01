@@ -1245,7 +1245,7 @@ Allows composting without using any item, just right-click the composter.
 
 ## disableTripwireGenerateInstantScheduledTick `🐛Beta` `MC>=26.2`
 
-When a tripwire is deactivated, vanilla schedules an instant tick (0 delay); when enabled, the scheduled tick delay becomes 1 tick.
+Prevents tripwire from generating an instant scheduled tick (0-delay) when deactivated.
 
 - Type: `boolean`
 - Default value: `false`
