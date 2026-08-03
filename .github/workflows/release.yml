@@ -167,6 +167,7 @@ jobs:
 
       - name: Publish Minecraft Mods
         uses: Kira-NT/mc-publish@v3.3
+        continue-on-error: true
         with:
           modrinth-id: 7PCm6yD1
           modrinth-token: ${{ secrets.MODRINTH_API_TOKEN }}
