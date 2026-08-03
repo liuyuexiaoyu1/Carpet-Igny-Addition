@@ -1179,7 +1179,7 @@ While in spectator mode, clicking on a Nether portal or End portal will teleport
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## copperGolemDropOnlyNormal `🐛Beta` `MC>=1.21.9`
+## copperGolemDropOnlyNormal `MC>=1.21.9`
 
 When breaking a Copper Golem Statue Block, only the STANDING form item will drop, other forms will not drop their specific items.
 
@@ -1188,7 +1188,7 @@ When breaking a Copper Golem Statue Block, only the STANDING form item will drop
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## theEndTerrainMissingReintroduced `🐛Beta` `MC>=26.3`
+## theEndTerrainMissingReintroduced `MC>=26.3`
 
 Reintroduces the large gaps in distant End terrain generation, reverting the changes of 26.3-snapshot-6.
 
@@ -1198,7 +1198,7 @@ Reintroduces the large gaps in distant End terrain generation, reverting the cha
 - Categories: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
 
 
-## spectatorKeepLeashConnectionReintroduced `🐛Beta` `MC>=1.21.10`
+## spectatorKeepLeashConnectionReintroduced `MC>=1.21.10`
 
 Reintroduces keeping leash connections between players and entities when switching to spectator mode, reverting the changes of 25w33a.
 
@@ -1207,7 +1207,7 @@ Reintroduces keeping leash connections between players and entities when switchi
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
 
-## hugeMushroomDestroyUnbreakableReintroduced `🐛Beta` `MC>=1.21.5`
+## hugeMushroomDestroyUnbreakableReintroduced `MC>=1.21.5`
 
 Reintroduces huge mushrooms destroying unbreakable blocks when growing, reverting the changes of 25w02a.
 
@@ -1216,7 +1216,7 @@ Reintroduces huge mushrooms destroying unbreakable blocks when growing, revertin
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
 
-## kelpNeverNaturalGrows `🐛Beta`
+## kelpNeverNaturalGrows
 
 Kelp will no longer grow naturally, can only be manually bone-mealed.
 
@@ -1225,7 +1225,7 @@ Kelp will no longer grow naturally, can only be manually bone-mealed.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## respawnBlockNeverExplode `🐛Beta`
+## respawnBlockNeverExplode
 
 Beds and Respawn Anchors will not explode when used in the wrong dimension.
 
@@ -1234,7 +1234,7 @@ Beds and Respawn Anchors will not explode when used in the wrong dimension.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## airCompost `🐛Beta`
+## airCompost
 
 Allows composting without using any item, just right-click the composter.
 
@@ -1243,7 +1243,7 @@ Allows composting without using any item, just right-click the composter.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## disableTripwireGenerateInstantScheduledTick `🐛Beta` `MC>=26.2`
+## disableTripwireGenerateInstantScheduledTick `MC>=26.2`
 
 Prevents tripwire from generating an instant scheduled tick (0-delay) when deactivated.
 

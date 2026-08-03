@@ -1182,7 +1182,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 铜傀儡仅掉落正常形态 (copperGolemDropOnlyNormal) `🐛Beta` `MC>=1.21.9`
+## 铜傀儡仅掉落正常形态 (copperGolemDropOnlyNormal) `MC>=1.21.9`
 
 破坏铜傀儡像方块时只掉落正常形态(STANDING)，不会出现其他形态的掉落物。
 
@@ -1191,7 +1191,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 重新引入末地缺失地形 (theEndTerrainMissingReintroduced) `🐛Beta` `MC>=26.3`
+## 重新引入末地缺失地形 (theEndTerrainMissingReintroduced) `MC>=26.3`
 
 重新引入在远距离末地地形生成大面积空缺的现象，回退了26.3-snapshot-6的更改。
 
@@ -1200,7 +1200,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
 
-## 重新引入旁观者保留拴绳连接 (spectatorKeepLeashConnectionReintroduced) `🐛Beta` `MC>=1.21.10`
+## 重新引入旁观者保留拴绳连接 (spectatorKeepLeashConnectionReintroduced) `MC>=1.21.10`
 
 重新引入切换到旁观者模式时保留玩家与实体之间的拴绳连接，回退了25w33a的更改。
 
@@ -1209,7 +1209,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
 
-## 重新引入巨型蘑菇破坏不可破坏方块 (hugeMushroomDestroyUnbreakableReintroduced) `🐛Beta` `MC>=1.21.5`
+## 重新引入巨型蘑菇破坏不可破坏方块 (hugeMushroomDestroyUnbreakableReintroduced) `MC>=1.21.5`
 
 重新引入巨型蘑菇生长时破坏不可破坏方块，回退了25w02a的更改。
 
@@ -1218,7 +1218,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `PORTING`, `FEATURE`
 
-## 海带永不自然生长 (kelpNeverNaturalGrows) `🐛Beta`
+## 海带永不自然生长 (kelpNeverNaturalGrows)
 
 海带不再自然生长，只能手动催熟。
 
@@ -1227,7 +1227,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 重生方块永不爆炸 (respawnBlockNeverExplode) `🐛Beta`
+## 重生方块永不爆炸 (respawnBlockNeverExplode)
 
 床和重生锚在错误维度使用时不会爆炸。
 
@@ -1236,7 +1236,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 空气堆肥 (airCompost) `🐛Beta`
+## 空气堆肥 (airCompost)
 
 允许不使用物品右键堆肥桶进行堆肥。
 
@@ -1245,7 +1245,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 禁用绊线无延迟计划刻 (disableTripwireGenerateInstantScheduledTick) `🐛Beta` `MC>=26.2`
+## 禁用绊线无延迟计划刻 (disableTripwireGenerateInstantScheduledTick) `MC>=26.2`
 
 禁止绊线断电时生成一个延迟为0的计划刻。
 
