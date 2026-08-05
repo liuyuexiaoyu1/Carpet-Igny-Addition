@@ -1247,7 +1247,7 @@ true: 物品展示框内含物品时将会隐形。
 
 ## 禁用绊线无延迟计划刻 (disableTripwireGenerateInstantScheduledTick) `MC>=26.2`
 
-禁止绊线断电时生成一个延迟为0的计划刻。
+绊线断电时会生成一个延迟为0的即时计划刻，开启后计划刻延迟改为1tick。
 
 - 类型: `boolean`
 - 默认值: `false`

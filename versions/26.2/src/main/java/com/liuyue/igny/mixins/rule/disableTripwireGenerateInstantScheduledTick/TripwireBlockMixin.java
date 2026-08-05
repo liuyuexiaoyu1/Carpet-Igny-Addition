@@ -12,9 +12,10 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(TripWireBlock.class)
 public class TripwireBlockMixin {
-    @WrapOperation(method = "checkPressed(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Ljava/util/List;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Block;I)V"))
+    @WrapOperation(method = "checkPressed(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Ljava/util/List;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Block;I)V", ordinal = 1))
     private void scheduleTick(Level instance, BlockPos pos, Block block, int i, Operation<Void> original) {
         if (IGNYSettings.DISABLE_TRIPWIRE_GENERATE_INSTANT_SCHEDULED_TICK.value()) {
+            original.call(instance, pos, block, 1);
             return;
         }
         original.call(instance, pos, block, i);

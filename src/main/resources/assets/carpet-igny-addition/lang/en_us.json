@@ -308,5 +308,5 @@
   "carpet.rule.kelpNeverNaturalGrows.desc": "Kelp will no longer grow naturally, can only be manually bone-mealed",
   "carpet.rule.respawnBlockNeverExplode.desc": "Beds and Respawn Anchors will not explode when used in the wrong dimension",
   "carpet.rule.airCompost.desc": "Allows composting without using any item, just right-click the composter",
-  "carpet.rule.disableTripwireGenerateInstantScheduledTick.desc": "Prevents tripwire from generating an instant scheduled tick (0-delay) when deactivated"
+  "carpet.rule.disableTripwireGenerateInstantScheduledTick.desc": "When a tripwire is deactivated, vanilla schedules an instant tick (0 delay); when enabled, the scheduled tick delay becomes 1 tick"
 }

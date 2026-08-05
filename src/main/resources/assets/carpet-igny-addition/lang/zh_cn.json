@@ -443,5 +443,5 @@
   "carpet.rule.airCompost.name": "空气堆肥",
   "carpet.rule.airCompost.desc": "允许不使用物品右键堆肥桶进行堆肥",
   "carpet.rule.disableTripwireGenerateInstantScheduledTick.name": "禁用绊线无延迟计划刻",
-  "carpet.rule.disableTripwireGenerateInstantScheduledTick.desc": "禁止绊线断电时生成一个延迟为0的即时计划刻"
+  "carpet.rule.disableTripwireGenerateInstantScheduledTick.desc": "绊线断电时会生成一个延迟为0的即时计划刻，开启后计划刻延迟改为1tick"
 }
