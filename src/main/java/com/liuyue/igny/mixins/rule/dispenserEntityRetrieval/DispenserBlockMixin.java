@@ -92,7 +92,7 @@ public abstract class DispenserBlockMixin {
             if (!leftover.isEmpty())
             //#endif
             {
-                //#if MC >= 12002
+                //#if MC >= 12101
                 Vec3 position = blockPos.getCenter()
                         .add(0.7 * direction.getStepX(), 0.7 * direction.getStepY(), 0.7 * direction.getStepZ());
                 DefaultDispenseItemBehavior.spawnItem(serverLevel, leftover, 6, direction, position);
