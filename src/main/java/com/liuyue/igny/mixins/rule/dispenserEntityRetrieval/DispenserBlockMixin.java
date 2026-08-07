@@ -4,6 +4,9 @@ import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+//#if MC <= 12001
+//$$ import net.minecraft.core.BlockSourceImpl;
+//#endif
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,15 +35,19 @@ public abstract class DispenserBlockMixin {
             cancellable = true
     )
     private void dispenseFrom(ServerLevel serverLevel,
-                                               //#if MC >= 12002
-                                               BlockState blockState,
-                                               //#endif
-                                               BlockPos blockPos, CallbackInfo ci,
-                                               @Local DispenserBlockEntity blockEntity, @Local int i, @Local ItemStack itemStack) {
+                              //#if MC >= 12002
+                              BlockState blockState,
+                              //#endif
+                              BlockPos blockPos, CallbackInfo ci,
+                              @Local DispenserBlockEntity blockEntity, @Local int i, @Local ItemStack itemStack
+                              //#if MC <= 12001
+                              //$$ ,@Local BlockSourceImpl blockSource
+                              //#endif
+    ) {
         if (!IGNYSettings.DISPENSER_ENTITY_RETRIEVAL.value()) return;
         if (!itemStack.is(Items.BUCKET)) return;
 
-        //#if MC < 12002
+        //#if MC <= 12001
         //$$ BlockState blockState = serverLevel.getBlockState(blockPos);
         //#endif
         Direction direction = blockState.getValue(DispenserBlock.FACING);
@@ -57,7 +64,11 @@ public abstract class DispenserBlockMixin {
         LivingEntity fish = entities.getFirst();
         Bucketable bucketable = (Bucketable) fish;
 
+        //#if MC >= 12002
         ItemStack waterBucket = bucketPickup.pickupBlock(null, serverLevel, pos, targetState);
+        //#else
+        //$$ ItemStack waterBucket = bucketPickup.pickupBlock(serverLevel, pos, targetState);
+        //#endif
         if (waterBucket.isEmpty()) return;
 
         ItemStack fishBucket = bucketable.getBucketItemStack();
@@ -73,13 +84,23 @@ public abstract class DispenserBlockMixin {
         if (itemStack.isEmpty()) {
             result = fishBucket;
         } else {
+            //#if MC <= 12006
+            //$$ int leftover = blockEntity.addItem(fishBucket);
+            //$$ if (leftover < 0)
+            //#else
             ItemStack leftover = blockEntity.insertItem(fishBucket);
-            if (!leftover.isEmpty()) {
+            if (!leftover.isEmpty())
+            //#endif
+            {
+                //#if MC >= 12002
                 Vec3 position = blockPos.getCenter()
                         .add(0.7 * direction.getStepX(), 0.7 * direction.getStepY(), 0.7 * direction.getStepZ());
                 DefaultDispenseItemBehavior.spawnItem(serverLevel, leftover, 6, direction, position);
                 serverLevel.levelEvent(1000, blockPos, 0);
                 serverLevel.levelEvent(2000, blockPos, direction.get3DDataValue());
+                //#else
+                //$$ DefaultDispenseItemBehavior.NOOP.dispense(blockSource, fishBucket);
+                //#endif
             }
             result = itemStack;
         }
