@@ -4,7 +4,9 @@ import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-//#if MC <= 12001
+//#if MC >= 12002
+//$$ import net.minecraft.core.dispenser.BlockSource;
+//#else
 //$$ import net.minecraft.core.BlockSourceImpl;
 //#endif
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
@@ -40,7 +42,9 @@ public abstract class DispenserBlockMixin {
                               //#endif
                               BlockPos blockPos, CallbackInfo ci,
                               @Local DispenserBlockEntity blockEntity, @Local int i, @Local ItemStack itemStack
-                              //#if MC <= 12001
+                              //#if MC >= 12002
+                              //$$ ,@Local BlockSource blockSource
+                              //#else
                               //$$ ,@Local BlockSourceImpl blockSource
                               //#endif
     ) {
