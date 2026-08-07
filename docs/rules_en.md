@@ -1127,7 +1127,7 @@ When snow accumulates, the placed snow layers will not trigger block updates.
 - 
 ## quickPlaceWater
 
-When holding ice in offhand, right-click to place water like a water bucket.
+When holding ice in your off-hand, placing the ice places water just like a water bucket.
 
 - Type: `boolean`
 - Default value: `false`
@@ -1251,3 +1251,39 @@ When a tripwire is deactivated, vanilla schedules an instant tick (0 delay); whe
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `BUGFIX`, `FEATURE`
+
+## preventDolphinItemDropAnimationClogging `🐛Beta` `MC>=26.1`
+
+Prevents the item drop animation played when a dolphin drops items from clogging the item drop process, reverting the change from 26.1-pre-2.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `PORTING`, `FEATURE`
+
+## dispenserEntityRetrieval `🐛Beta`
+
+When a dispenser uses a bucket to retrieve water, it can also retrieve fish in the water as fish buckets, or retrieve Sulfur Cubes as Sulfur Cube buckets.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## quickPlaceLava `🐛Beta`
+
+When holding a magma block in your off-hand, placing the magma block places lava just like a lava bucket.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## sequentialArrowHitEntityReintroduced `🐛Beta` `MC>=1.21.11`
+
+Reintroduces the behavior where an arrow calculates and collides with all entities along its path one by one, reverting the change from 25w41a.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `PORTING`, `FEATURE`

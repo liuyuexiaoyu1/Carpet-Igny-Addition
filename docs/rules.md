@@ -1128,9 +1128,9 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 快捷放水 (quickPlaceWater)
+## 快捷放置水 (quickPlaceWater)
 
-副手持冰时右键像水桶一样放置水。
+副手持冰时放置冰像水桶一样放置水。
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -1253,3 +1253,39 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `BUGFIX`, `FEATURE`
+
+## 阻止海豚丢弃物品动画堵塞 (preventDolphinItemDropAnimationClogging) `🐛Beta` `MC>=26.1`
+
+阻止海豚丢弃物品时播放动画导致堵塞丢弃物品进程，回退了26.1-pre-2的更改。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `PORTING`, `FEATURE`
+
+## 发射器回收实体 (dispenserEntityRetrieval) `🐛Beta`
+
+发射器使用桶回收水时可一并回收水中的鱼类变为鱼桶，或者是回收硫方怪变为硫方怪桶。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 快速放置熔岩 (quickPlaceLava) `🐛Beta`
+
+副手持岩浆块时放置岩浆块像熔岩桶一样放置熔岩。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 重新引入箭矢逐一碰撞实体 (sequentialArrowHitEntityReintroduced) `🐛Beta` `MC>=1.21.11`
+
+重新引入箭矢会逐一计算并碰撞路径上的所有实体的行为，回退了25w41a的更改。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `PORTING`, `FEATURE`

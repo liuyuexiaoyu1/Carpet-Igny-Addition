@@ -416,8 +416,8 @@
   "carpet.rule.easyPlaceNoBlockUpdateCondition.extra.2": "standing：仅在站立时生效",
   "carpet.rule.snowSpawnNoBlockUpdate.name": "雪片生成无方块更新",
   "carpet.rule.snowSpawnNoBlockUpdate.desc": "下雪时生成的雪片不会触发方块更新",
-  "carpet.rule.quickPlaceWater.name": "快捷放水",
-  "carpet.rule.quickPlaceWater.desc": "副手持冰时右键像水桶一样放置水",
+  "carpet.rule.quickPlaceWater.name": "快捷放置水",
+  "carpet.rule.quickPlaceWater.desc": "副手持冰时放置冰像水桶一样放置水",
   "carpet.rule.emptyChatScreenCanCompletePlayerName.name": "空聊天屏幕可补全玩家名称",
   "carpet.rule.emptyChatScreenCanCompletePlayerName.desc": "在聊天屏幕(聊天栏)没有内容的情况下可以按下补全键补全玩家名称",
   "carpet.rule.scalableLuxCompatible.name": "ScalableLux兼容",
@@ -443,5 +443,13 @@
   "carpet.rule.airCompost.name": "空气堆肥",
   "carpet.rule.airCompost.desc": "允许不使用物品右键堆肥桶进行堆肥",
   "carpet.rule.disableTripwireGenerateInstantScheduledTick.name": "禁用绊线无延迟计划刻",
-  "carpet.rule.disableTripwireGenerateInstantScheduledTick.desc": "绊线断电时会生成一个延迟为0的即时计划刻，开启后计划刻延迟改为1tick"
+  "carpet.rule.disableTripwireGenerateInstantScheduledTick.desc": "绊线断电时会生成一个延迟为0的即时计划刻，开启后计划刻延迟改为1tick",
+  "carpet.rule.preventDolphinItemDropAnimationClogging.name": "阻止海豚丢弃物品动画堵塞",
+  "carpet.rule.preventDolphinItemDropAnimationClogging.desc": "阻止海豚丢弃物品时播放动画导致堵塞丢弃物品进程，回退了26.1-pre-2的更改",
+  "carpet.rule.dispenserEntityRetrieval.name": "发射器回收实体",
+  "carpet.rule.dispenserEntityRetrieval.desc": "发射器使用桶回收水时可一并回收水中的鱼类变为鱼桶，或者是回收硫方怪变为硫方怪桶",
+  "carpet.rule.quickPlaceLava.name": "快速放置熔岩",
+  "carpet.rule.quickPlaceLava.desc": "副手持岩浆块时放置岩浆块像熔岩桶一样放置熔岩",
+  "carpet.rule.sequentialArrowHitEntityReintroduced.name": "重新引入箭矢逐一碰撞实体",
+  "carpet.rule.sequentialArrowHitEntityReintroduced.desc": "重新引入箭矢会逐一计算并碰撞路径上的所有实体的行为，回退了25w41a的更改"
 }

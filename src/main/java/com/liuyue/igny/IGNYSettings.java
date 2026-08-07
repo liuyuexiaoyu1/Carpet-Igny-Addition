@@ -2,6 +2,7 @@ package com.liuyue.igny;
 
 import carpet.CarpetServer;
 import carpet.api.settings.CarpetRule;
+import carpet.api.settings.Rule;
 import carpet.api.settings.SettingsManager;
 import com.liuyue.igny.manager.LinkedContainerManager.LinkedContainerSetting;
 import com.liuyue.igny.rule.*;
@@ -1006,6 +1007,34 @@ public class IGNYSettings {
     //$$ public static final RuleAccessor<Boolean> DISABLE_TRIPWIRE_GENERATE_INSTANT_SCHEDULED_TICK = register(
     //$$         RuleFactory.of("disableTripwireGenerateInstantScheduledTick", false)
     //$$                 .addCategories(BUGFIX, FEATURE)
+    //$$                 .build()
+    //$$ );
+    //#endif
+
+    //#if MC >= 26.1
+    //$$ public static final RuleAccessor<Boolean> PREVENT_DOLPHIN_ITEM_DROP_ANIMATION_CLOGGING = register(
+    //$$         RuleFactory.of("preventDolphinItemDropAnimationClogging", false)
+    //$$                 .addCategories(PORTING, FEATURE)
+    //$$                 .build()
+    //$$ );
+    //#endif
+
+    public static final RuleAccessor<Boolean> DISPENSER_ENTITY_RETRIEVAL = register(
+            RuleFactory.of("dispenserEntityRetrieval", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> QUICK_PLACE_LAVA = register(
+            RuleFactory.of("quickPlaceLava", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    //#if MC >= 12111
+    //$$ public static final RuleAccessor<Boolean> SEQUENTIAL_ARROW_HIT_ENTITY_REINTRODUCED = register(
+    //$$         RuleFactory.of("sequentialArrowHitEntityReintroduced", false)
+    //$$                 .addCategories(PORTING, FEATURE)
     //$$                 .build()
     //$$ );
     //#endif
