@@ -139,4 +139,9 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
     public Set<String> getPendingRestore() { return getCurrentData().pendingRestore; }
     @Override protected StorageScope getScope() { return StorageScope.WORLD; }
     @Override protected SideRestraint getSideRestraint() { return SideRestraint.SERVER; }
+
+    @Override
+    public void clear() {
+
+    }
 }

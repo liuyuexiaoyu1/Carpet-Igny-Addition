@@ -12,6 +12,11 @@ public class RuleChangeDataManager extends BaseDataManager<Map<String, List<Rule
     @Override protected StorageScope getScope() {return StorageScope.WORLD;}
     @Override protected SideRestraint getSideRestraint() {return SideRestraint.SERVER;}
 
+    @Override
+    public void clear() {
+
+    }
+
     @Override protected String getFileName() { return "rule_changes.json"; }
     @Override protected Type getDataType() { return new TypeToken<Map<String, List<RuleChangeRecord>>>(){}.getType(); }
     @Override public Map<String, List<RuleChangeRecord>> getDefaultData() { return new HashMap<>(); }

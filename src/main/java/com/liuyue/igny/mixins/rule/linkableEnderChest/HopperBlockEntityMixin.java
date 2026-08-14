@@ -6,6 +6,7 @@ import com.liuyue.igny.utils.interfaces.linkableEnderChest.LinkedEnderChest;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -13,6 +14,9 @@ import net.minecraft.world.level.block.entity.Hopper;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
@@ -44,6 +48,13 @@ public class HopperBlockEntityMixin {
             return original.call(level, hopper);
         } finally {
             IGNYSettings.canGetBlockEntity.set(true);
+        }
+    }
+
+    @Inject(method = "getContainerAt(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/Container;", at = @At(value = "HEAD"), cancellable = true)
+    private static void getContainerAt(Level level, BlockPos pos, CallbackInfoReturnable<Container> cir) {
+        if (level.getBlockEntity(pos) instanceof LinkedEnderChest chest && !chest.carpet_Igny_Addition$isLinked()) {
+            cir.setReturnValue(null);
         }
     }
 }

@@ -14,9 +14,13 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class BaseDataManager<T> {
     protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+
+    private static final Set<BaseDataManager<?>> managers = ConcurrentHashMap.newKeySet();
 
     protected MinecraftServer server;
 
@@ -29,14 +33,16 @@ public abstract class BaseDataManager<T> {
     protected abstract StorageScope getScope();
     protected abstract SideRestraint getSideRestraint();
 
+    BaseDataManager() {
+        managers.add(this);
+    }
+
     @SuppressWarnings("all")
     protected boolean isEffective() {
         EnvType currentEnv = FabricLoader.getInstance().getEnvironmentType();
         SideRestraint restraint = getSideRestraint();
 
-        if (restraint == SideRestraint.CLIENT) return currentEnv == EnvType.CLIENT;
-        if (restraint == SideRestraint.SERVER) return true;
-        return true;
+        return restraint == SideRestraint.CLIENT ? currentEnv == EnvType.CLIENT : true;
     }
 
     protected Path getJsonPath() {
@@ -54,7 +60,7 @@ public abstract class BaseDataManager<T> {
         if (server != null) {
             load();
         } else if (getScope() == StorageScope.WORLD) {
-            clearInMemoryCache();
+            reset();
         }
     }
 
@@ -133,7 +139,17 @@ public abstract class BaseDataManager<T> {
         }
     }
 
-    public void clearInMemoryCache() {
+    public abstract void clear();
+
+    public static void saveAll() {
+        managers.forEach(BaseDataManager::save);
+    }
+
+    public static void clearAll() {
+        managers.forEach(BaseDataManager::clear);
+    }
+
+    public void reset() {
         applyData(getDefaultData());
     }
 

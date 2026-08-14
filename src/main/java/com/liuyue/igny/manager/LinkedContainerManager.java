@@ -114,6 +114,11 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
     @Override protected StorageScope getScope() { return StorageScope.WORLD; }
     @Override protected SideRestraint getSideRestraint() { return SideRestraint.SERVER; }
 
+    @Override
+    public void clear() {
+        containers.forEach((key, container) -> container.clearContent());
+    }
+
     public static boolean isRuleEnabled() {
         return IGNYSettings.LINKEABLE_ENDER_CHEST.value() != LinkedContainerSetting.FALSE;
     }

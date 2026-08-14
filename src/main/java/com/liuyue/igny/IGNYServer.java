@@ -4,8 +4,7 @@ import carpet.CarpetExtension;
 import carpet.CarpetServer;
 import com.liuyue.igny.commands.*;
 import com.liuyue.igny.logger.IGNYLoggers;
-import com.liuyue.igny.manager.BlockVaultManager;
-import com.liuyue.igny.manager.LinkedContainerManager;
+import com.liuyue.igny.manager.BaseDataManager;
 import com.liuyue.igny.network.packet.PacketUtil;
 import com.liuyue.igny.utils.ComponentTranslate;
 import com.liuyue.igny.utils.TickUtil;
@@ -105,8 +104,14 @@ public class IGNYServer implements CarpetExtension {
        TickUtil.checkTickRate(minecraftServer);
     }
 
-    public static void onLevelSave() {
-        BlockVaultManager.INSTANCE.save();
-        LinkedContainerManager.INSTANCE.save();
+    @Override
+    public void onServerClosed(MinecraftServer server) {
+        BaseDataManager.clearAll();
     }
+
+    public static void onLevelSave() {
+        BaseDataManager.saveAll();
+    }
+
+
 }

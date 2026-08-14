@@ -50,6 +50,7 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
         }
     }
 
+    @Override
     public void clear() {
         customStacks.clear();
         runtimeRules.clear();
@@ -123,5 +124,5 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
     private record StackRule(String pattern, Predicate<ItemStack> predicate, int size) {}
 }
 //#else
-//$$ public class CustomItemMaxStackSizeDataManager { }
+//$$ public class CustomItemMaxStackSizeDataManager {}
 //#endif

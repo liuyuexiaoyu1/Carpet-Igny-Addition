@@ -14,6 +14,11 @@ public class EasterEggDataManager extends BaseDataManager<EasterEggDataManager.E
     @Override protected SideRestraint getSideRestraint() { return SideRestraint.CLIENT; }
 
     @Override
+    public void clear() {
+
+    }
+
+    @Override
     protected void applyData(EasterEggData data) {
         if (data != null) {
             this.data = data;

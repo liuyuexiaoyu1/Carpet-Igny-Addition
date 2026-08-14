@@ -138,6 +138,7 @@
     "rule.lightQueueBlockedCanLoadLightedChunk.compat.starlight.ThreadedLevelLightEngineVanillaInterfaceMixin",
     "rule.linkableEnderChest.BlockEntityMixin",
     "rule.linkableEnderChest.BlockItemMixin",
+    "rule.linkableEnderChest.DropperBlockMixin",
     "rule.linkableEnderChest.EnderChestBlockEntityMixin",
     "rule.linkableEnderChest.EnderChestBlockMixin",
     "rule.linkableEnderChest.HopperBlockEntityMixin",

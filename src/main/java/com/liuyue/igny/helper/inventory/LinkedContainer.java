@@ -79,7 +79,7 @@ public class LinkedContainer extends PlayerEnderChestContainer {
     }
 
     @Override
-    public void clearContent() {}
+    public void clearContent() {activeChests.clear();}
 
     @Override
     public void setChanged() {

@@ -15,6 +15,11 @@ public class CustomPickupDataManager extends BaseDataManager<Map<String, CustomP
     @Override protected StorageScope getScope() {return StorageScope.WORLD;}
     @Override protected SideRestraint getSideRestraint() {return SideRestraint.SERVER;}
 
+    @Override
+    public void clear() {
+
+    }
+
     @Override protected void applyData(Map<String, PlayerSetting> data) {
         settings.clear();
         settings.putAll(data);
