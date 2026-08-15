@@ -1,6 +1,5 @@
 package com.liuyue.igny.mixins.rule.linkableEnderChest;
 
-import com.liuyue.igny.helper.inventory.LinkedContainer;
 import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.utils.interfaces.linkableEnderChest.ViewingChest;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -61,16 +60,17 @@ public class EnderChestBlockMixin extends Block {
         //#else
         String name = be.components().get(DataComponents.CUSTOM_NAME).getString();
         //#endif
-        LinkedContainer container = LinkedContainerManager.get(name);
-        if (LinkedContainerManager.isRuleEnabled()) {
-            return original.call(instance, new SimpleMenuProvider((i, inventory, playerx) ->
-                    ChestMenu.threeRows(i, inventory, container), Component.literal(name))
-            );
-        } else {
-            return original.call(instance, new SimpleMenuProvider((i, inventory, playerx) ->
-                    ChestMenu.threeRows(i, inventory, chestContainer), Component.literal(name))
-            );
-        }
+        PlayerEnderChestContainer container = LinkedContainerManager.isRuleEnabled() ? LinkedContainerManager.get(name) : chestContainer;
+        int size = container.getContainerSize();
+        int rows = container.getContainerSize() / 9;
+        MenuProvider provider = new SimpleMenuProvider((i, inventory, playerx) -> {
+            switch (rows) {
+                case 6: return ChestMenu.sixRows(i, inventory, container);
+                case 3: return ChestMenu.threeRows(i, inventory, container);
+                default: return null;
+            }
+        }, Component.literal(name));
+        return original.call(instance, provider);
     }
 
     @SuppressWarnings("deprecation")

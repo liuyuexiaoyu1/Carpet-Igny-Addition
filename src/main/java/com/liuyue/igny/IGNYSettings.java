@@ -2,7 +2,6 @@ package com.liuyue.igny;
 
 import carpet.CarpetServer;
 import carpet.api.settings.CarpetRule;
-import carpet.api.settings.Rule;
 import carpet.api.settings.SettingsManager;
 import com.liuyue.igny.manager.LinkedContainerManager.LinkedContainerSetting;
 import com.liuyue.igny.rule.*;
