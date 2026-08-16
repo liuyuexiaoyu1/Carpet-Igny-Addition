@@ -3,6 +3,9 @@
   "minVersion": "0.8",
   "package": "com.liuyue.igny.mixins",
   "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
+  "mixinextras": {
+    "minVersion": "0.5.4"
+  },
   "plugin": "com.liuyue.igny.utils.IGNYMixinConfigPlugin",
   "mixins": [
     "carpet.EntityPlayerMPFakeMixin",

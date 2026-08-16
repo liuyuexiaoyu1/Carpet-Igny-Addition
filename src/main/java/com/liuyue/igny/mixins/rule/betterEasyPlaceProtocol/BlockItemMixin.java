@@ -34,7 +34,7 @@ public abstract class BlockItemMixin {
     protected abstract boolean canPlace(BlockPlaceContext context, BlockState state);
 
     @Inject(method = "getPlacementState", at = @At("HEAD"), cancellable = true)
-    private void igny_betterEasyplaceProtocolDecode(BlockPlaceContext context, CallbackInfoReturnable<BlockState> cir) {
+    private void igny_betterEasyPlaceProtocolDecode(BlockPlaceContext context, CallbackInfoReturnable<BlockState> cir) {
         if (!BetterEasyPlaceProtocolHandler.isRuleEnabled()) return;
         double relativeHitX = getRelativeHitX(context.getClickLocation(), context.getClickedPos());
         if (!isProtocol(relativeHitX)) return;
@@ -103,7 +103,7 @@ public abstract class BlockItemMixin {
             method = "place",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/BlockItem;updateCustomBlockEntityTag(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/block/state/BlockState;)Z")
     )
-    private boolean igny_betterEasyplaceProtocolItemStack(BlockItem instance, BlockPos pos, Level level, Player player, ItemStack stack, BlockState state, Operation<Boolean> original, @Local(argsOnly = true) BlockPlaceContext context) {
+    private boolean igny_betterEasyPlaceProtocolItemStack(BlockItem instance, BlockPos pos, Level level, Player player, ItemStack stack, BlockState state, Operation<Boolean> original, @Local(argsOnly = true) BlockPlaceContext context) {
         ItemStack newStack = BetterEasyPlaceProtocolHandler.applyItemStackProtocolData(stack, context);
         if (newStack == null) {
             return original.call(instance, pos, level, player, stack, state);

@@ -29,7 +29,7 @@ public abstract class StandingAndWallBlockItemMixin extends BlockItem {
     }
 
     @Inject(method = "getPlacementState", at = @At("HEAD"), cancellable = true)
-    private void igny_betterEasyplaceProtocolDecode(BlockPlaceContext context, CallbackInfoReturnable<BlockState> cir) {
+    private void igny_betterEasyPlaceProtocolDecode(BlockPlaceContext context, CallbackInfoReturnable<BlockState> cir) {
         if (!BetterEasyPlaceProtocolHandler.isRuleEnabled()) return;
 
         double relativeHitX = getRelativeHitX(context.getClickLocation(), context.getClickedPos());

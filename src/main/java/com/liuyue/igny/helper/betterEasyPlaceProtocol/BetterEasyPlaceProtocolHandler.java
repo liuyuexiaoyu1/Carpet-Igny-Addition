@@ -2,9 +2,6 @@ package com.liuyue.igny.helper.betterEasyPlaceProtocol;
 
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.helper.betterEasyPlaceProtocol.adapter.*;
-//#if MC >= 12105
-//$$ import com.liuyue.igny.rule.betterEasyplaceProtocol.adapter.FlowerBedBlockProtocolAdapter;
-//#endif
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.ItemStackProtocolDataAdapter;
 import net.minecraft.core.Direction;
