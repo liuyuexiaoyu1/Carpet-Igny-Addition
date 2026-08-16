@@ -1052,6 +1052,7 @@ public class IGNYSettings {
 
     public static final RuleAccessor<Boolean> BETTER_EASY_PLACE_PROTOCOL = register(
             RuleFactory.of("betterEasyPlaceProtocol", false)
+                    .setClient()
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );

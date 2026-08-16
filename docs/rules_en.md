@@ -1313,4 +1313,4 @@ Fills in some block states that cannot be synced by the easy place mode when pla
 - Type: `boolean`
 - Default value: `false`
 - Suggested options: `false`, `true`
-- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+- Categories: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
