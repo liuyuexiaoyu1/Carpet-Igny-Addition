@@ -1287,3 +1287,30 @@ Reintroduces the behavior where an arrow calculates and collides with all entiti
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `PORTING`, `FEATURE`
+
+## disableTntDispense `🐛Beta`
+
+When the launcher fires TNT, it no longer ignites it into a TNT entity, but instead throws it out directly like a normal item.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## noteBlockNoteUnchanged `🐛Beta`
+
+When right-clicking a note block, it no longer cycles through pitches, but it still causes a block update.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## betterEasyPlaceProtocol `🐛Beta`
+
+Fills in some block states that cannot be synced by the easy place mode when placing blocks from schematics.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

@@ -1289,3 +1289,30 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `PORTING`, `FEATURE`
+
+## 关闭TNT投掷 (disableTntDispense) `🐛Beta`
+
+发射器发射TNT时不再将其点燃成TNT实体，而是像普通物品一样直接扔出。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 音符盒音高不变 (noteBlockNoteUnchanged) `🐛Beta`
+
+右键点击音符盒时不再循环切换音高，但仍会产生方块更新。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 更好的轻松放置协议 (betterEasyPlaceProtocol) `🐛Beta`
+
+补全一些投影的轻松放置模式放置方块无法同步的方块状态。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

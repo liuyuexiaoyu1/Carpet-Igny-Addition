@@ -86,6 +86,7 @@ dependencies {
 		if (mcVersion < 12003) {
 			autoCompileOnly ("com.github.End-Tech:syncmatica:${project.syncmatica_version}") {
 				exclude group: "net.fabricmc.fabric-api"
+
 			}
 		} else {
 			autoCompileOnly ("com.github.sakura-ryoko:syncmatica:${project.syncmatica_version}") {
@@ -122,6 +123,15 @@ dependencies {
 	//Lithium
 	if (mcVersion >= 12006) {
 		autoCompileOnly(project.lithium_dependency) {
+			exclude group: "net.fabricmc.fabric-api"
+		}
+	}
+
+	//Litematica（betterEasyplaceProtocol 客户端协议编码的编译期依赖；
+	//合成器禁用槽位等方块实体协议数据需要从 schematic 世界读取；
+	//1.20.6 以下版本的坐标在 modrinth，1.20.6+ 在 sakura-ryoko maven；26.3 暂未发布）
+	if (mcVersion < 260300) {
+		autoCompileOnly(project.litematica_dependency) {
 			exclude group: "net.fabricmc.fabric-api"
 		}
 	}

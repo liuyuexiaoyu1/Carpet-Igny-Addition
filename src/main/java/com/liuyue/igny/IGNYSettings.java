@@ -1037,4 +1037,22 @@ public class IGNYSettings {
     //$$                 .build()
     //$$ );
     //#endif
+
+    public static final RuleAccessor<Boolean> DISABLE_TNT_DISPENSE = register(
+            RuleFactory.of("disableTntDispense", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> NOTE_BLOCK_NOTE_UNCHANGED = register(
+            RuleFactory.of("noteBlockNoteUnchanged", false)
+                    .addCategories(CREATIVE, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> BETTER_EASY_PLACE_PROTOCOL = register(
+            RuleFactory.of("betterEasyPlaceProtocol", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
 }
