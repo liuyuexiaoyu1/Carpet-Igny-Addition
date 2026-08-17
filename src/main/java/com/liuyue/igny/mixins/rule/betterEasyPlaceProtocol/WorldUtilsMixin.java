@@ -50,6 +50,7 @@ import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProto
 @Mixin(WorldUtils.class)
 public abstract class WorldUtilsMixin {
 
+    //#if MC < 26.2
     @Unique
     private static void igny_encodeProtocol(BlockPos pos, BlockState state, Vec3 hitVecIn, CallbackInfoReturnable<Vec3> cir) {
         if (!BetterEasyPlaceProtocolHandler.isRuleEnabled()) {
@@ -128,6 +129,7 @@ public abstract class WorldUtilsMixin {
     private static void igny_replaceV3Protocol(BlockPos pos, BlockState state, Vec3 hitVecIn, CallbackInfoReturnable<Vec3> cir) {
         igny_encodeProtocol(pos, state, hitVecIn, cir);
     }
+    //#endif
 
     @Definition(id = "applyCarpetProtocolHitVec", method = "Lfi/dy/masa/litematica/util/WorldUtils;applyCarpetProtocolHitVec(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;")
     @Expression("? = applyCarpetProtocolHitVec(?, ?, ?)")

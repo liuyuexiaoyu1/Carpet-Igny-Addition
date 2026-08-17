@@ -66,6 +66,7 @@
     "rule.betterEasyPlaceProtocol.DetectorRailBlockMixin",
     "rule.betterEasyPlaceProtocol.DiodeBlockMixin",
     "rule.betterEasyPlaceProtocol.EasyPlaceUtilsInvoker",
+    "rule.betterEasyPlaceProtocol.EasyPlaceUtilsMixin",
     "rule.betterEasyPlaceProtocol.LeverBlockMixin",
     "rule.betterEasyPlaceProtocol.PistonBaseBlockMixin",
     "rule.betterEasyPlaceProtocol.RedStoneWireBlockMixin",
