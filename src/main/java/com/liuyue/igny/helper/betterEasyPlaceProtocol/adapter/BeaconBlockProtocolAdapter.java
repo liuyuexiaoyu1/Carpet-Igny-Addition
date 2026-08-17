@@ -94,11 +94,19 @@ public class BeaconBlockProtocolAdapter implements BlockProtocolStateAdapter, It
         int p = 0;
         int s = 0;
         if (primary != null) {
+            //#if MC >= 12005
             MobEffect effect = primary.value();
+            //#else
+            //$$ MobEffect effect = primary;
+            //#endif
             p = BuiltInRegistries.MOB_EFFECT.getId(effect) + 1;
         }
         if (secondary != null) {
+            //#if MC >= 12005
             MobEffect effect = secondary.value();
+            //#else
+            //$$ MobEffect effect = secondary;
+            //#endif
             s = BuiltInRegistries.MOB_EFFECT.getId(effect) + 1;
         }
         return (p << 7) | s;
