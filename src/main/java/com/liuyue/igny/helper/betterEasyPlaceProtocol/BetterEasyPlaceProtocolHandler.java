@@ -44,7 +44,6 @@ import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProto
 public class BetterEasyPlaceProtocolHandler {
     public static final long EASY_PLACE_RAIL_BLOCK_NO_SHAPE_UPDATE = 1L;
     public static final long EASY_PLACE_PISTON_NO_UPDATE = 1L << 1;
-    public static final long EASY_PLACE_REDSTONE_WIRE_NO_UPDATE = 1L << 2;
     public static final long EASY_PLACE_PISTON_PLACE_HEAD = 1L << 3;
 
     private static final Map<Class<? extends Block>, BlockProtocolStateAdapter> ADAPTERS = new HashMap<>();
@@ -75,6 +74,7 @@ public class BetterEasyPlaceProtocolHandler {
         register(PistonBaseBlock.class, new PistonBaseBlockProtocolAdapter());
         register(PoweredRailBlock.class, new PoweredRailBlockProtocolAdapter());
         register(RailBlock.class, new RailBlockProtocolAdapter());
+        register(RedStoneWireBlock.class, new RedStoneWireBlockProtocolAdapter());
         register(RedstoneLampBlock.class, new RedstoneLampBlockProtocolAdapter());
         register(RedstoneTorchBlock.class, new RedstoneTorchBlockProtocolAdapter());
         register(RedstoneWallTorchBlock.class, new RedstoneWallTorchBlockProtocolAdapter());
@@ -261,7 +261,7 @@ public class BetterEasyPlaceProtocolHandler {
             @SuppressWarnings({"unchecked", "rawtypes"})
             List<Comparable> values = new ArrayList<>((java.util.Collection) property.getPossibleValues());
             @SuppressWarnings({"unchecked", "rawtypes"})
-            Comparator<Comparable> naturalOrder = (Comparator) Comparator.naturalOrder();
+            Comparator<Comparable> naturalOrder = Comparator.naturalOrder();
             values.sort(naturalOrder);
             int requiredBits = Mth.ceil(Mth.log2(values.size()));
             int valueIndex = (raw >>> shiftAmount) & ((1 << requiredBits) - 1);
@@ -295,18 +295,25 @@ public class BetterEasyPlaceProtocolHandler {
 
         int addition = raw >>> 4;
         if (addition != 0) {
-            if (block instanceof net.minecraft.world.level.block.CakeBlock) {
-                state = state.setValue(BlockStateProperties.BITES, Math.min(addition, 6));
-                decoded = true;
-            } else if (block instanceof net.minecraft.world.level.block.StairBlock && addition == 1) {
-                state = state.setValue(BlockStateProperties.HALF, net.minecraft.world.level.block.state.properties.Half.TOP);
-                decoded = true;
-            } else if (block instanceof net.minecraft.world.level.block.TrapDoorBlock && addition == 1) {
-                state = state.setValue(BlockStateProperties.OPEN, true);
-                decoded = true;
-            } else if (block instanceof net.minecraft.world.level.block.SlabBlock && addition == 1) {
-                state = state.setValue(BlockStateProperties.SLAB_TYPE, net.minecraft.world.level.block.state.properties.SlabType.DOUBLE);
-                decoded = true;
+            switch (block) {
+                case CakeBlock cakeBlock -> {
+                    state = state.setValue(BlockStateProperties.BITES, Math.min(addition, 6));
+                    decoded = true;
+                }
+                case StairBlock stairBlock when addition == 1 -> {
+                    state = state.setValue(BlockStateProperties.HALF, net.minecraft.world.level.block.state.properties.Half.TOP);
+                    decoded = true;
+                }
+                case TrapDoorBlock trapDoorBlock when addition == 1 -> {
+                    state = state.setValue(BlockStateProperties.OPEN, true);
+                    decoded = true;
+                }
+                case SlabBlock slabBlock when addition == 1 -> {
+                    state = state.setValue(BlockStateProperties.SLAB_TYPE, net.minecraft.world.level.block.state.properties.SlabType.DOUBLE);
+                    decoded = true;
+                }
+                default -> {
+                }
             }
         }
 

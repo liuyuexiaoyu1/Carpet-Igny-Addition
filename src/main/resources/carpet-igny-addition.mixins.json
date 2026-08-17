@@ -69,7 +69,6 @@
     "rule.betterEasyPlaceProtocol.EasyPlaceUtilsMixin",
     "rule.betterEasyPlaceProtocol.LeverBlockMixin",
     "rule.betterEasyPlaceProtocol.PistonBaseBlockMixin",
-    "rule.betterEasyPlaceProtocol.RedStoneWireBlockMixin",
     "rule.betterEasyPlaceProtocol.RepeaterBlockMixin",
     "rule.betterEasyPlaceProtocol.StandingAndWallBlockItemAccessor",
     "rule.betterEasyPlaceProtocol.StandingAndWallBlockItemMixin",
