@@ -28,8 +28,8 @@ import net.minecraft.world.level.block.state.properties.RedstoneSide;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -51,6 +51,11 @@ import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProto
 )
 @Mixin(targets = "fi.dy.masa.litematica.util.WorldUtils")
 public abstract class WorldUtilsMixin {
+    @Shadow
+    @Deprecated(forRemoval = true)
+    private static void cacheEasyPlacePosition(BlockPos pos) {
+    }
+
     @Unique
     private static void igny_encodeProtocol(BlockPos pos, BlockState state, Vec3 hitVecIn, CallbackInfoReturnable<Vec3> cir) {
         if (!BetterEasyPlaceProtocolHandler.isRuleEnabled()) {
@@ -79,7 +84,6 @@ public abstract class WorldUtilsMixin {
         if (!(BetterEasyPlaceProtocolHandler.getAdapter(block) instanceof BlockProtocolStateAdapter adapter)) {
             if (isWallBlock) {
                 cir.setReturnValue(encodeProtocolValueToHitVecX(wallProtocolValue, hitVecIn));
-                cir.cancel();
             }
             return;
         }
@@ -101,7 +105,6 @@ public abstract class WorldUtilsMixin {
             }
 
             cir.setReturnValue(returnValue);
-            cir.cancel();
         } else {
             
             int protocolValue = addExtraProtocolBit(adapter.igny$toProtocolValue(0, state));
@@ -119,7 +122,6 @@ public abstract class WorldUtilsMixin {
             }
             //#endif
             cir.setReturnValue(encodeProtocolValueToHitVecX(protocolValue, hitVecIn));
-            cir.cancel();
         }
     }
 
@@ -266,16 +268,11 @@ public abstract class WorldUtilsMixin {
             int protocolRawValue = multiStageAdapter.igny$toProtocolValueLoop(ctx);
             Vec3 protocolHitVec = encodeExtraProtocolValueToHitVecX(protocolRawValue, hitPos);
 
-            BlockHitResult hitResult = new BlockHitResult(protocolHitVec, Direction.DOWN, pos, false);
+            BlockHitResult hitResult = new BlockHitResult(protocolHitVec, Direction.UP, pos, false);
             mc.gameMode.useItemOn(mc.player, hand, hitResult);
             ctx.stateClient = mc.level.getBlockState(pos);
         }
-        igny$cacheEasyPlacePosition(pos);
+        cacheEasyPlacePosition(pos);
         cir.setReturnValue(InteractionResult.SUCCESS);
-    }
-
-    @Invoker("cacheEasyPlacePosition")
-    private static void igny$cacheEasyPlacePosition(BlockPos pos) {
-        throw new AssertionError();
     }
 }

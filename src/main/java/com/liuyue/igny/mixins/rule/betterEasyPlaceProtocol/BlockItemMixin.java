@@ -44,7 +44,6 @@ public abstract class BlockItemMixin {
         if (state == null) {
             if (isExtended && BetterEasyPlaceProtocolHandler.getAdapter(this.getBlock()) != null) {
                 cir.setReturnValue(null);
-                cir.cancel();
             }
             return;
         }
