@@ -2,6 +2,7 @@ package com.liuyue.igny.helper.betterEasyPlaceProtocol;
 
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.helper.betterEasyPlaceProtocol.adapter.*;
+import com.liuyue.igny.mixins.rule.betterEasyPlaceProtocol.BeaconBlockEntityAccessor;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.ItemStackProtocolDataAdapter;
 import net.minecraft.core.Direction;
@@ -50,6 +51,7 @@ public class BetterEasyPlaceProtocolHandler {
 
     static {
         register(BannerBlock.class, new BannerBlockProtocolAdapter());
+        register(BeaconBlock.class, new BeaconBlockProtocolAdapter());
         register(BellBlock.class, new BellBlockProtocolAdapter());
         register(CampfireBlock.class, new CampfireBlockProtocolAdapter());
         register(CandleBlock.class, new CandleBlockProtocolAdapter());
@@ -375,6 +377,10 @@ public class BetterEasyPlaceProtocolHandler {
             return bits & 0b0001_1111_1111;
         }
         //#endif
+        if (blockEntity instanceof net.minecraft.world.level.block.entity.BeaconBlockEntity beaconBlockEntity) {
+            BeaconBlockEntityAccessor accessor = (BeaconBlockEntityAccessor) beaconBlockEntity;
+            return BeaconBlockProtocolAdapter.encodeEffects(accessor.igny$getPrimaryPower(), accessor.igny$getSecondaryPower());
+        }
         return 0;
     }
 }

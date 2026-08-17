@@ -133,10 +133,8 @@ dependencies {
 		}
 	}
 
-	if (mcVersion < 260300) {
-		autoCompileOnly(project.litematica_dependency) {
-			exclude group: "net.fabricmc.fabric-api"
-		}
+	autoCompileOnly(project.litematica_dependency) {
+		exclude group: "net.fabricmc.fabric-api"
 	}
 
     // Carpet

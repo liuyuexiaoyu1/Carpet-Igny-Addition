@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.RedstoneSide;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -34,10 +35,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-//#if MC < 260300
 import fi.dy.masa.litematica.world.SchematicWorldHandler;
-//#endif
 
 import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.addExtraProtocolBit;
 import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.encodeExtraProtocolValueToHitVecX;
@@ -52,9 +50,7 @@ import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProto
 @Mixin(targets = "fi.dy.masa.litematica.util.WorldUtils")
 public abstract class WorldUtilsMixin {
     @Shadow
-    @Deprecated(forRemoval = true)
-    private static void cacheEasyPlacePosition(BlockPos pos) {
-    }
+    private static void cacheEasyPlacePosition(BlockPos pos) {}
 
     @Unique
     private static void igny_encodeProtocol(BlockPos pos, BlockState state, Vec3 hitVecIn, CallbackInfoReturnable<Vec3> cir) {
@@ -63,13 +59,10 @@ public abstract class WorldUtilsMixin {
         }
 
         Block block = state.getBlock();
-
-        
         int wallProtocolValue = 0;
         boolean isWallBlock = false;
         if (block.asItem() instanceof StandingAndWallBlockItem standingAndWallBlockItem) {
             isWallBlock = true;
-
             if (block.equals(((StandingAndWallBlockItemAccessor) standingAndWallBlockItem).igny$getWallBlock())) {
                 Property<Direction> dir = EasyPlaceExtraProtocolHelper.getFirstDirectionProperty(state);
                 if (dir != null) {
@@ -90,7 +83,6 @@ public abstract class WorldUtilsMixin {
 
         if (adapter.igny$getProtocolType() == BlockProtocolStateAdapter.ProtocolType.REPLACE) {
             int protocolRawValue = adapter.igny$toProtocolValue(0, state);
-
             Vec3 returnValue;
             if (isWallBlock) {
                 if ((wallProtocolValue & 0b0000_0001) == 0b0000_0001) {
@@ -98,20 +90,15 @@ public abstract class WorldUtilsMixin {
                 } else {
                     protocolRawValue <<= 1;
                 }
-
                 returnValue = encodeProtocolValueToHitVecX(protocolRawValue, hitVecIn);
             } else {
                 returnValue = encodeExtraProtocolValueToHitVecX(protocolRawValue, hitVecIn);
             }
-
             cir.setReturnValue(returnValue);
         } else {
             
             int protocolValue = addExtraProtocolBit(adapter.igny$toProtocolValue(0, state));
-            //#if MC < 260300
             if (block instanceof PistonBaseBlock && state.getValue(PistonBaseBlock.EXTENDED)) {
-                
-                
                 Level schematicWorld = SchematicWorldHandler.getSchematicWorld();
                 if (schematicWorld != null) {
                     BlockState headState = schematicWorld.getBlockState(pos.relative(state.getValue(PistonBaseBlock.FACING)));
@@ -120,7 +107,6 @@ public abstract class WorldUtilsMixin {
                     }
                 }
             }
-            //#endif
             cir.setReturnValue(encodeProtocolValueToHitVecX(protocolValue, hitVecIn));
         }
     }
@@ -171,14 +157,10 @@ public abstract class WorldUtilsMixin {
 
     @Unique
     private static Vec3 encodeHitPosItemData(Vec3 hitPos, BlockPos pos, Level world, BlockState stateSchematic) {
-        
         if (!BetterEasyPlaceProtocolHandler.isRuleEnabled()) {
             return hitPos;
         }
-
         Block block = stateSchematic.getBlock();
-
-        
         if (block instanceof RedStoneWireBlock) {
             int upBits = 0;
             if (stateSchematic.getValue(RedStoneWireBlock.NORTH) == RedstoneSide.UP) upBits |= 0b0001;
@@ -190,24 +172,16 @@ public abstract class WorldUtilsMixin {
             }
             return hitPos;
         }
-
-        
         if (!(BetterEasyPlaceProtocolHandler.getAdapter(block) instanceof ItemStackProtocolDataAdapter)) {
             return hitPos;
         }
-
-        
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        //#if MC < 260300
         if (blockEntity == null) {
             blockEntity = getSchematicWorldBlockEntity(pos);
         }
-        //#endif
         if (blockEntity == null) {
             return hitPos;
         }
-
-        
         int protocolAdditionValue = BetterEasyPlaceProtocolHandler.encodeBlockEntityProtocolAddition(blockEntity);
         if (protocolAdditionValue == 0) {
             return hitPos;
@@ -215,16 +189,14 @@ public abstract class WorldUtilsMixin {
         return encodeProtocolValueToHitVecZ(protocolAdditionValue, hitPos);
     }
 
-    //#if MC < 260300
     @Unique
-    private static @org.jetbrains.annotations.Nullable BlockEntity getSchematicWorldBlockEntity(BlockPos pos) {
+    private static @Nullable BlockEntity getSchematicWorldBlockEntity(BlockPos pos) {
         Level schematicWorld = SchematicWorldHandler.getSchematicWorld();
         if (schematicWorld == null) {
             return null;
         }
         return schematicWorld.getBlockEntity(pos);
     }
-    //#endif
 
     @Definition(id = "getEffectiveProtocolVersion", method = "Lfi/dy/masa/litematica/util/PlacementHandler;getEffectiveProtocolVersion()Lfi/dy/masa/litematica/util/EasyPlaceProtocol;")
     @Expression("? = getEffectiveProtocolVersion()")

@@ -98,15 +98,32 @@ public abstract class BlockItemMixin {
         return result;
     }
 
+    //#if MC >= 26.3
+    //$$ @WrapOperation(
+    //$$          method = "place",
+    //$$          at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/BlockItem;updateCustomBlockEntityTag(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)Z")
+    //$$  )
+    //$$  private boolean igny_betterEasyPlaceProtocolItemStack(Level level, Player player, BlockPos pos, ItemStack stack, Operation<Boolean> original, @Local(argsOnly = true) BlockPlaceContext context)
+    //#else
     @WrapOperation(
             method = "place",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/BlockItem;updateCustomBlockEntityTag(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/block/state/BlockState;)Z")
     )
-    private boolean igny_betterEasyPlaceProtocolItemStack(BlockItem instance, BlockPos pos, Level level, Player player, ItemStack stack, BlockState state, Operation<Boolean> original, @Local(argsOnly = true) BlockPlaceContext context) {
+    private boolean igny_betterEasyPlaceProtocolItemStack(BlockItem instance, BlockPos pos, Level level, Player player, ItemStack stack, BlockState state, Operation<Boolean> original, @Local(argsOnly = true) BlockPlaceContext context)
+    //#endif
+    {
         ItemStack newStack = BetterEasyPlaceProtocolHandler.applyItemStackProtocolData(stack, context);
         if (newStack == null) {
+            //#if MC >= 26.3
+            //$$ return original.call(level, player, pos, stack);
+            //#else
             return original.call(instance, pos, level, player, stack, state);
+            //#endif
         }
+        //#if MC >= 26.3
+        //$$ return original.call(level, player, pos, newStack);
+        //#else
         return original.call(instance, pos, level, player, newStack, state);
+        //#endif
     }
 }
