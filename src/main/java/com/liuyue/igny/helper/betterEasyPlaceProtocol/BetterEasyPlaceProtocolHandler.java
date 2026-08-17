@@ -5,8 +5,10 @@ import com.liuyue.igny.helper.betterEasyPlaceProtocol.adapter.*;
 import com.liuyue.igny.mixins.rule.betterEasyPlaceProtocol.BeaconBlockEntityAccessor;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.ItemStackProtocolDataAdapter;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.*;
@@ -58,7 +60,7 @@ public class BetterEasyPlaceProtocolHandler {
         register(CommandBlock.class, new CommandBlockProtocolAdapter());
         register(ComparatorBlock.class, new ComparatorBlockProtocolAdapter());
         register(ComposterBlock.class, new ComposterBlockProtocolAdapter());
-        register(CoralWallFanBlock.class, new CoralWallFanBlockProtocolAdapter());
+        register(BaseCoralWallFanBlock.class, new CoralWallFanBlockProtocolAdapter());
         register(DaylightDetectorBlock.class, new DaylightDetectorBlockProtocolAdapter());
         register(DetectorRailBlock.class, new DetectorRailBlockProtocolAdapter());
         register(DoorBlock.class, new DoorBlockProtocolAdapter());
@@ -97,10 +99,16 @@ public class BetterEasyPlaceProtocolHandler {
         //#else
         register(PinkPetalsBlock.class, new FlowerBedBlockProtocolAdapter());
         //#endif
+        register(HorizontalDirectionalBlock.class, new HorizontalDirectionalBlockProtocolAdapter());
+        register(HopperBlock.class, new HopperBlockProtocolAdapter());
+        register(WallBlock.class, new WallBlockProtocolAdapter());
+        register(IronBarsBlock.class,  new IronBarsBlockProtocolAdapter());
     }
 
     private static boolean easyPlaceState = false;
     private static long placeProperty = 0;
+    private static BlockPos placeTargetPos = BlockPos.ZERO;
+    private static Block placeTargetBlock = Blocks.AIR;
 
     private BetterEasyPlaceProtocolHandler() {
     }
@@ -123,6 +131,22 @@ public class BetterEasyPlaceProtocolHandler {
 
     public static void setPlaceProperty(long val) {
         placeProperty = val;
+    }
+
+    public static BlockPos getPlaceTargetPos() {
+        return placeTargetPos;
+    }
+
+    public static void setPlaceTargetPos(BlockPos pos) {
+        placeTargetPos = pos;
+    }
+
+    public static Block getPlaceTargetBlock() {
+        return placeTargetBlock;
+    }
+
+    public static void setPlaceTargetBlock(Block block) {
+        placeTargetBlock = block;
     }
 
     public static boolean hasPlaceFlag(long flag) {

@@ -1,6 +1,7 @@
 package com.liuyue.igny.mixins.rule.betterEasyPlaceProtocol;
 
 import com.liuyue.igny.helper.betterEasyPlaceProtocol.BetterEasyPlaceProtocolHandler;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -46,31 +48,37 @@ public abstract class BlockItemMixin {
                 cir.setReturnValue(null);
             }
             return;
+        } else if (state.is(Blocks.AIR)) {
+            cir.setReturnValue(null);
         }
         if (!this.canPlace(context, state)) return;
         cir.setReturnValue(state);
     }
 
-    @Inject(method = "place", at = @At("HEAD"))
-    private void igny_setPlaceState(BlockPlaceContext context, CallbackInfoReturnable<InteractionResult> cir) {
+    @WrapMethod(method = "place")
+    private InteractionResult igny_setPlaceState(BlockPlaceContext context, Operation<InteractionResult> original) {
         if (BetterEasyPlaceProtocolHandler.isRuleEnabled() && isProtocol(getRelativeHitX(context.getClickLocation(), context.getClickedPos()))) {
             BetterEasyPlaceProtocolHandler.setEasyPlaceState(true);
+            BetterEasyPlaceProtocolHandler.setPlaceTargetPos(context.getClickedPos());
+            BetterEasyPlaceProtocolHandler.setPlaceTargetBlock(this.getBlock());
         }
-    }
-
-    @Inject(method = "place", at = @At("RETURN"))
-    private void igny_clearPlaceState(BlockPlaceContext context, CallbackInfoReturnable<InteractionResult> cir) {
-        BetterEasyPlaceProtocolHandler.setEasyPlaceState(false);
-        BetterEasyPlaceProtocolHandler.setPlaceProperty(0);
+        try {
+            return original.call(context);
+        } finally {
+            BetterEasyPlaceProtocolHandler.setEasyPlaceState(false);
+            BetterEasyPlaceProtocolHandler.setPlaceProperty(0);
+            BetterEasyPlaceProtocolHandler.setPlaceTargetPos(BlockPos.ZERO);
+            BetterEasyPlaceProtocolHandler.setPlaceTargetBlock(Blocks.AIR);
+        }
     }
 
     @WrapOperation(
             method = "place",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/BlockItem;placeBlock(Lnet/minecraft/world/item/context/BlockPlaceContext;Lnet/minecraft/world/level/block/state/BlockState;)Z")
     )
-    private boolean igny_placePistonHead(BlockItem instance, BlockPlaceContext context, BlockState state, Operation<Boolean> original) {
+    private boolean igny_onPlace(BlockItem instance, BlockPlaceContext context, BlockState state, Operation<Boolean> original) {
+
         boolean result = original.call(instance, context, state);
-        
         if (result && BetterEasyPlaceProtocolHandler.hasPlaceFlag(BetterEasyPlaceProtocolHandler.EASY_PLACE_PISTON_PLACE_HEAD)) {
             Level level = context.getLevel();
             BlockPos pos = context.getClickedPos();

@@ -29,16 +29,20 @@ public class CandleBlockProtocolAdapter implements MultiStageBlockProtocolStateA
 
     @Override
     public int igny$toProtocolValueLoop(LoopContext ctx) {
-        return (ctx.stateSchematic.getValue(CandleBlock.CANDLES) - 1) & 0b0011;
+        int candles = (ctx.stateSchematic.getValue(CandleBlock.CANDLES) - 1) & 0b0011;
+        boolean lit = ctx.stateSchematic.getValue(CandleBlock.LIT);
+        int litBit = lit ? 0b0100 : 0b0000;
+        return candles | litBit;
     }
 
     @Override
     public @Nullable BlockState igny$fromProtocolValue(int extraProtocolValue, BlockState fromState, BlockPlaceContext context) {
-        int maxCandles = (extraProtocolValue & 0b0011) + 1;
-        if (fromState.getValue(CandleBlock.CANDLES) > maxCandles) {
+        int candles = (extraProtocolValue & 0b0011) + 1;
+        boolean lit = ((extraProtocolValue >> 2) & 0b1) == 0b1;
+        if (fromState.getValue(CandleBlock.CANDLES) > candles) {
             return null;
         }
-        return fromState;
+        return fromState.setValue(CandleBlock.CANDLES, candles).setValue(CandleBlock.LIT, lit);
     }
 
     @Override

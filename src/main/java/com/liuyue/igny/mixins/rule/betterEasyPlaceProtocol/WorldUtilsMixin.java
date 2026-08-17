@@ -18,6 +18,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseCoralWallFanBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RedStoneWireBlock;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
@@ -30,6 +31,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+//#if MC <= 12006
+//$$ import org.spongepowered.asm.mixin.Shadow;
+//#endif
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -49,6 +53,9 @@ import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProto
 )
 @Mixin(WorldUtils.class)
 public abstract class WorldUtilsMixin {
+    //#if MC <= 12006
+    //$$ @Shadow private static void cacheEasyPlacePosition(BlockPos pos) {}
+    //#endif
 
     //#if MC < 26.2
     @Unique
@@ -244,7 +251,33 @@ public abstract class WorldUtilsMixin {
             mc.gameMode.useItemOn(mc.player, hand, hitResult);
             ctx.stateClient = mc.level.getBlockState(pos);
         }
+        //#if MC <= 12006
+        //$$ cacheEasyPlacePosition(pos)
+        //#else
         EasyPlaceUtilsInvoker.invokeCacheEasyPlacePosition(pos);
+        //#endif
         cir.setReturnValue(InteractionResult.SUCCESS);
+    }
+
+    @Definition(id = "applyPlacementProtocolV3", method = "Lfi/dy/masa/litematica/util/WorldUtils;applyPlacementProtocolV3(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;")
+    @Expression("? = applyPlacementProtocolV3(?, ?, ?)")
+    @Inject(
+            method = "doEasyPlaceAction(Lnet/minecraft/client/Minecraft;)Lnet/minecraft/world/InteractionResult;",
+            at = @At(value = "MIXINEXTRAS:EXPRESSION", shift = At.Shift.AFTER),
+            cancellable = true,
+            require = 0
+    )
+    private static void igny_checkCoralFanAttachment(
+            Minecraft mc, CallbackInfoReturnable<InteractionResult> cir,
+            @Local(name = "pos") BlockPos pos,
+            @Local(name = "stateSchematic") BlockState stateSchematic
+    ) {
+        if (!BetterEasyPlaceProtocolHandler.isRuleEnabled()) return;
+        if (!(stateSchematic.getBlock() instanceof BaseCoralWallFanBlock)) return;
+        Direction facing = stateSchematic.getValue(BaseCoralWallFanBlock.FACING).getOpposite();
+        BlockPos attachPos = pos.relative(facing);
+        if (!mc.level.getBlockState(attachPos).isFaceSturdy(mc.level, attachPos, facing.getOpposite())) {
+            cir.setReturnValue(InteractionResult.FAIL);
+        }
     }
 }

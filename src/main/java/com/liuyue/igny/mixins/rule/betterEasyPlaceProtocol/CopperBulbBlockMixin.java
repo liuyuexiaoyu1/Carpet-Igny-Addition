@@ -41,7 +41,9 @@ public abstract class CopperBulbBlockMixin {
         if (!BetterEasyPlaceProtocolHandler.isEasyPlaceState()) {
             return;
         }
-        ci.cancel();
+        if (pos.equals(BetterEasyPlaceProtocolHandler.getPlaceTargetPos()) && block == BetterEasyPlaceProtocolHandler.getPlaceTargetBlock()) {
+            ci.cancel();
+        }
     }
     //#endif
 }

@@ -2,6 +2,7 @@ package com.liuyue.igny.mixins.rule.betterEasyPlaceProtocol;
 
 import com.liuyue.igny.helper.betterEasyPlaceProtocol.BetterEasyPlaceProtocolHandler;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.Block;
@@ -39,6 +40,8 @@ public abstract class BaseRailBlockMixin {
         if (!BetterEasyPlaceProtocolHandler.isEasyPlaceState()) {
             return;
         }
-        ci.cancel();
+        if (world.getBlockState(fromPos).is(BlockTags.RAILS)) {
+            ci.cancel();
+        }
     }
 }

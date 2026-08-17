@@ -47,6 +47,8 @@ public abstract class PistonBaseBlockMixin {
         if (!BetterEasyPlaceProtocolHandler.isEasyPlaceState()) {
             return;
         }
-        ci.cancel();
+        if (pos.equals(BetterEasyPlaceProtocolHandler.getPlaceTargetPos()) && block == BetterEasyPlaceProtocolHandler.getPlaceTargetBlock()) {
+            ci.cancel();
+        }
     }
 }

@@ -22,6 +22,8 @@ public abstract class RepeaterBlockMixin {
         if (!BetterEasyPlaceProtocolHandler.isEasyPlaceState()) {
             return;
         }
-        cir.setReturnValue(state);
+        if (pos.equals(BetterEasyPlaceProtocolHandler.getPlaceTargetPos())) {
+            cir.setReturnValue(state);
+        }
     }
 }
