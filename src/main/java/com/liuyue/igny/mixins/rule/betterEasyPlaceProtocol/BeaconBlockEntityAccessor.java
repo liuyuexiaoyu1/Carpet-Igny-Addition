@@ -11,14 +11,14 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(BeaconBlockEntity.class)
 public interface BeaconBlockEntityAccessor {
     @Accessor("primaryPower")
-        //#if MC >= 12005
+    //#if MC >= 12005
     Holder<MobEffect> igny$getPrimaryPower();
     //#else
     //$$ MobEffect igny$getPrimaryPower();
     //#endif
 
     @Accessor("secondaryPower")
-        //#if MC >= 12005
+    //#if MC >= 12005
     Holder<MobEffect> igny$getSecondaryPower();
     //#else
     //$$ MobEffect igny$getSecondaryPower();

@@ -2,7 +2,9 @@ package com.liuyue.igny.helper.betterEasyPlaceProtocol.adapter;
 
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.ItemStackProtocolDataAdapter;
+//#if MC >= 12005
 import net.minecraft.core.Holder;
+//#endif
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
@@ -90,7 +92,12 @@ public class BeaconBlockProtocolAdapter implements BlockProtocolStateAdapter, It
         return setBlockEntityTag(stackCopy, tag);
     }
 
-    public static int encodeEffects(@Nullable Holder<MobEffect> primary, @Nullable Holder<MobEffect> secondary) {
+    //#if MC >= 12005
+    public static int encodeEffects(@Nullable Holder<MobEffect> primary, @Nullable Holder<MobEffect> secondary)
+    //#else
+    //$$ public static int encodeEffects(@Nullable MobEffect primary, @Nullable MobEffect secondary)
+    //#endif
+    {
         int p = 0;
         int s = 0;
         if (primary != null) {
