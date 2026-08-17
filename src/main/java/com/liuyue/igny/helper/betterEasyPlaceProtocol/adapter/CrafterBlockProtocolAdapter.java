@@ -21,7 +21,11 @@ import net.minecraft.world.item.component.CustomData;
 //#endif
 //#if MC >= 12110
 //$$ import net.minecraft.world.item.component.TypedEntityData;
+//#if MC >= 26.2
+//$$ import net.minecraft.world.level.block.entity.BlockEntityTypes;
+//#else
 //$$ import net.minecraft.world.level.block.entity.BlockEntityType;
+//#endif
 //#endif
 //#if MC < 12005
 //$$ import net.minecraft.nbt.CompoundTag;
@@ -134,7 +138,11 @@ public class CrafterBlockProtocolAdapter implements BlockProtocolStateAdapter, I
     //$$ }
     //$$ private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
     //$$     ItemStack stackCopy = stack.copy();
+    //#if MC >= 26.2
+    //$$     stackCopy.set(DataComponents.BLOCK_ENTITY_DATA, TypedEntityData.of(BlockEntityTypes.CRAFTER, tag));
+    //#else
     //$$     stackCopy.set(DataComponents.BLOCK_ENTITY_DATA, TypedEntityData.of(BlockEntityType.CRAFTER, tag));
+    //#endif
     //$$     return stackCopy;
     //$$ }
     //#endif

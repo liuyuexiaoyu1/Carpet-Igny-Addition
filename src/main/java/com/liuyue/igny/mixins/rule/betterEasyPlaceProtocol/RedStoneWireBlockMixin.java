@@ -16,6 +16,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#if MC >= 12103
+//$$ import net.minecraft.world.level.redstone.Orientation;
+//#endif
 
 @Mixin(RedStoneWireBlock.class)
 public abstract class RedStoneWireBlockMixin {
@@ -24,29 +27,29 @@ public abstract class RedStoneWireBlockMixin {
             method = "onPlace",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/RedStoneWireBlock;updatePowerStrength(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V")
     )
-    private static void igny_skipUpdatePowerStrength(RedStoneWireBlock instance, Level level, BlockPos pos, BlockState state, Operation<Void> original) {
-        if (!BetterEasyPlaceProtocolHandler.isEasyPlaceState() ||
-                !BetterEasyPlaceProtocolHandler.hasPlaceFlag(BetterEasyPlaceProtocolHandler.EASY_PLACE_REDSTONE_WIRE_NO_UPDATE)) {
-            original.call(instance, level, pos, state);
-            return;
-        }
-        original.call(instance, level, pos, state);
+    private static void igny_skipUpdatePowerStrength(RedStoneWireBlock instance, Level level, BlockPos pos, BlockState state, Operation<Void> original)
     //#else
     //$$ @WrapOperation(
-    //$$         method = "onPlace",
-    //$$         at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/RedStoneWireBlock;updatePowerStrength(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/redstone/Orientation;Z)V")
-    //$$ )
-    //$$ private static void igny_skipUpdatePowerStrength(Level level, BlockPos pos, BlockState state, net.minecraft.world.level.redstone.Orientation orientation, boolean flag, Operation<Void> original) {
-    //$$     if (!BetterEasyPlaceProtocolHandler.isEasyPlaceState() ||
-    //$$             !BetterEasyPlaceProtocolHandler.hasPlaceFlag(BetterEasyPlaceProtocolHandler.EASY_PLACE_REDSTONE_WIRE_NO_UPDATE)) {
-    //$$         original.call(level, pos, state, orientation, flag);
-    //$$         return;
-    //$$     }
-    //$$
-    //$$     original.call(level, pos, state, orientation, flag);
+    //$$          method = "onPlace",
+    //$$          at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/RedStoneWireBlock;updatePowerStrength(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/redstone/Orientation;Z)V")
+    //$$  )
+    //$$  private static void igny_skipUpdatePowerStrength(RedStoneWireBlock instance, Level level, BlockPos pos, BlockState state, Orientation orientation, boolean b, Operation<Void> original)
     //#endif
-
-        
+    {
+        if (!BetterEasyPlaceProtocolHandler.isEasyPlaceState() ||
+                !BetterEasyPlaceProtocolHandler.hasPlaceFlag(BetterEasyPlaceProtocolHandler.EASY_PLACE_REDSTONE_WIRE_NO_UPDATE)) {
+            //#if MC < 12103
+            original.call(instance, level, pos, state);
+            //#else
+            //$$ original.call(instance, level, pos, state, orientation, b);
+            //#endif
+            return;
+        }
+        //#if MC < 12103
+        original.call(instance, level, pos, state);
+        //#else
+        //$$ original.call(instance, level, pos, state, orientation, b);
+        //#endif
         long prop = BetterEasyPlaceProtocolHandler.getPlaceProperty();
         BlockState current = level.getBlockState(pos);
         if (!current.is(Blocks.REDSTONE_WIRE)) {
