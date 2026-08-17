@@ -19,7 +19,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EnchantedCountIncreaseFunctionMixin {
     @Shadow protected abstract boolean hasLimit();
 
-    //#if MC >= 26.1
+    //#if MC >= 26.3
+    //$$ @Shadow @Final private Holder<NumberProvider> count;
+    //#elseif MC >= 26.1
     //$$ @Shadow @Final private NumberProvider count;
     //#else
     @Shadow @Final private NumberProvider value;
@@ -38,7 +40,9 @@ public abstract class EnchantedCountIncreaseFunctionMixin {
                 damageSource != null &&
                 damageSource.getDirectEntity() instanceof PrimedTnt &&
                 ((PrimedTnt) damageSource.getDirectEntity()).getOwner() == null) {
-            //#if MC >= 26.1
+            //#if MC >= 26.3
+            //$$ float f = 3 * this.count.value().getFloat(lootContext);
+            //#elseif MC >= 26.1
             //$$ float f = 3 * this.count.getFloat(lootContext);
             //#else
             float f = 3 * this.value.getFloat(lootContext);
