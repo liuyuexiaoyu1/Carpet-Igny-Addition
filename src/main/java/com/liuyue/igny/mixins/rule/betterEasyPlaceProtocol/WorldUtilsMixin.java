@@ -8,6 +8,7 @@ import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.MultiStageBlockP
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.sugar.Local;
+import fi.dy.masa.litematica.util.WorldUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.client.Minecraft;
@@ -29,7 +30,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -47,10 +47,8 @@ import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProto
                 @Condition(value = "litematica", versionPredicates = ">=0.14")
         }
 )
-@Mixin(targets = "fi.dy.masa.litematica.util.WorldUtils")
+@Mixin(WorldUtils.class)
 public abstract class WorldUtilsMixin {
-    @Shadow
-    private static void cacheEasyPlacePosition(BlockPos pos) {}
 
     @Unique
     private static void igny_encodeProtocol(BlockPos pos, BlockState state, Vec3 hitVecIn, CallbackInfoReturnable<Vec3> cir) {
@@ -244,7 +242,7 @@ public abstract class WorldUtilsMixin {
             mc.gameMode.useItemOn(mc.player, hand, hitResult);
             ctx.stateClient = mc.level.getBlockState(pos);
         }
-        cacheEasyPlacePosition(pos);
+        EasyPlaceUtilsInvoker.invokeCacheEasyPlacePosition(pos);
         cir.setReturnValue(InteractionResult.SUCCESS);
     }
 }
