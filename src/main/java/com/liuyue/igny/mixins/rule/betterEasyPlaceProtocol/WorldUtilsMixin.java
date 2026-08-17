@@ -252,7 +252,7 @@ public abstract class WorldUtilsMixin {
             ctx.stateClient = mc.level.getBlockState(pos);
         }
         //#if MC <= 12006
-        //$$ cacheEasyPlacePosition(pos)
+        //$$ cacheEasyPlacePosition(pos);
         //#else
         EasyPlaceUtilsInvoker.invokeCacheEasyPlacePosition(pos);
         //#endif
