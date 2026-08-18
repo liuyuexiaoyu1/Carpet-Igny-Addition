@@ -4,7 +4,7 @@
   "package": "com.liuyue.igny.mixins",
   "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
   "mixinextras": {
-    "minVersion": "0.5.4"
+    "minVersion": "0.5.3"
   },
   "plugin": "com.liuyue.igny.utils.IGNYMixinConfigPlugin",
   "mixins": [

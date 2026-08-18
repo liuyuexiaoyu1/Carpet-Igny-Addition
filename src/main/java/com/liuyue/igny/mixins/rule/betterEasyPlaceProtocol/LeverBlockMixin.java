@@ -17,6 +17,7 @@ public abstract class LeverBlockMixin extends FaceAttachedHorizontalDirectionalB
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
         if (!BetterEasyPlaceProtocolHandler.isEasyPlaceState()) {
             super.onPlace(blockState, level, blockPos, blockState2, bl);
