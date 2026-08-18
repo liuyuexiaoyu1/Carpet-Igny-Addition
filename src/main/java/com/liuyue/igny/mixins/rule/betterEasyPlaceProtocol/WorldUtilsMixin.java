@@ -138,7 +138,11 @@ public abstract class WorldUtilsMixin {
     }
     //#endif
 
+    //#if MC >= 26.2
+    //$$ @Definition(id = "applyCarpetProtocolHitVec", method = "Lfi/dy/masa/litematica/util/EasyPlaceUtils;applyCarpetProtocolHitVec(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;")
+    //#else
     @Definition(id = "applyCarpetProtocolHitVec", method = "Lfi/dy/masa/litematica/util/WorldUtils;applyCarpetProtocolHitVec(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;")
+    //#endif
     @Expression("? = applyCarpetProtocolHitVec(?, ?, ?)")
     @ModifyVariable(
             method = "doEasyPlaceAction(Lnet/minecraft/client/Minecraft;)Lnet/minecraft/world/InteractionResult;",
@@ -150,7 +154,11 @@ public abstract class WorldUtilsMixin {
         return encodeHitPosItemData(hitPos, pos, world, stateSchematic);
     }
 
+    //#if MC >= 26.2
+    //$$ @Definition(id = "applyPlacementProtocolV3", method = "Lfi/dy/masa/litematica/util/EasyPlaceUtils;applyPlacementProtocolV3(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;")
+    //#else
     @Definition(id = "applyPlacementProtocolV3", method = "Lfi/dy/masa/litematica/util/WorldUtils;applyPlacementProtocolV3(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;")
+    //#endif
     @Expression("? = applyPlacementProtocolV3(?, ?, ?)")
     @ModifyVariable(
             method = "doEasyPlaceAction(Lnet/minecraft/client/Minecraft;)Lnet/minecraft/world/InteractionResult;",
@@ -259,11 +267,9 @@ public abstract class WorldUtilsMixin {
         cir.setReturnValue(InteractionResult.SUCCESS);
     }
 
-    @Definition(id = "applyPlacementProtocolV3", method = "Lfi/dy/masa/litematica/util/WorldUtils;applyPlacementProtocolV3(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;")
-    @Expression("? = applyPlacementProtocolV3(?, ?, ?)")
     @Inject(
             method = "doEasyPlaceAction(Lnet/minecraft/client/Minecraft;)Lnet/minecraft/world/InteractionResult;",
-            at = @At(value = "MIXINEXTRAS:EXPRESSION", shift = At.Shift.AFTER),
+            at = @At(value = "NEW", target = "(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/core/Direction;Lnet/minecraft/core/BlockPos;Z)Lnet/minecraft/world/phys/BlockHitResult;"),
             cancellable = true,
             require = 0
     )
