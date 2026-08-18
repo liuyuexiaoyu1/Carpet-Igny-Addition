@@ -44,8 +44,7 @@ public class FenceGateBlockProtocolAdapter implements BlockProtocolStateAdapter 
         boolean isOpen = (extraProtocolValue & 0b0001_0000) == 0b0001_0000;
 
         return fromState.setValue(FenceGateBlock.FACING, facing)
-                .setValue(FenceGateBlock.OPEN, isOpen)
-                .setValue(FenceGateBlock.POWERED, isOpen);
+                .setValue(FenceGateBlock.OPEN, isOpen);
     }
 
     @Override

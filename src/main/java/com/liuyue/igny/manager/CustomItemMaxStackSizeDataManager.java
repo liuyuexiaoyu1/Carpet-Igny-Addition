@@ -31,6 +31,11 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
     @Override protected SideRestraint getSideRestraint() {return SideRestraint.SERVER;}
 
     @Override
+    public void clear() {
+
+    }
+
+    @Override
     protected void applyData(Map<String, Integer> data) {
         this.customStacks.clear();
         this.customStacks.putAll(data);
@@ -50,8 +55,7 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
         }
     }
 
-    @Override
-    public void clear() {
+    public void clearMemory() {
         customStacks.clear();
         runtimeRules.clear();
         save();

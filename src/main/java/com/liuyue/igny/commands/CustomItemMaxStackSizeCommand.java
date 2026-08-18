@@ -59,7 +59,7 @@ public class CustomItemMaxStackSizeCommand {
                                 })))
                 .then(Commands.literal("clear")
                         .executes(context -> {
-                            CustomItemMaxStackSizeDataManager.INSTANCE.clear();
+                            CustomItemMaxStackSizeDataManager.INSTANCE.clearMemory();
                             context.getSource().sendSuccess(
                                     //#if MC > 11904
                                     () ->
