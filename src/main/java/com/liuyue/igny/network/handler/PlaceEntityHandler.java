@@ -63,7 +63,11 @@ public class PlaceEntityHandler {
     private static final long MIN_INTERVAL_TICKS = 1L;
 
     private static ResourceLocation id(String path) {
+        //#if MC <= 12006
+        //$$ new ResourceLocation("minecraft", path);
+        //#else
         return ResourceLocation.fromNamespaceAndPath("minecraft", path);
+        //#endif
     }
 
     private static Map.Entry<ResourceLocation, ResourceLocation> entry(String entity, String item) {
