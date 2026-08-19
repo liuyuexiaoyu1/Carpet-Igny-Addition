@@ -64,7 +64,7 @@ public class PlaceEntityHandler {
 
     private static ResourceLocation id(String path) {
         //#if MC <= 12006
-        //$$ new ResourceLocation("minecraft", path);
+        //$$ return new ResourceLocation("minecraft", path);
         //#else
         return ResourceLocation.fromNamespaceAndPath("minecraft", path);
         //#endif
