@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -66,22 +67,18 @@ public class VineBlockProtocolAdapter implements MultiStageBlockProtocolStateAda
     }
 
     private static @Nullable BlockState withDirection(BlockState state, BlockGetter world, BlockPos pos, Direction direction) {
-        
         BooleanProperty property = VineBlock.getPropertyForFace(direction);
         boolean isVine = state.getBlock() instanceof VineBlock;
 
-        
         if (isVine && state.getValue(property)) {
             return null;
         }
 
-        
-        if (!VineBlock.isAcceptableNeighbour(world, pos, direction)) {
+        if (!VineBlock.isAcceptableNeighbour(world, pos.relative(direction), direction)) {
             return null;
         }
 
-        
-        BlockState baseState = isVine ? state : state.getBlock().defaultBlockState();
+        BlockState baseState = isVine ? state : Blocks.VINE.defaultBlockState();
         return baseState.setValue(property, true);
     }
 
