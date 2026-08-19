@@ -2,7 +2,7 @@ package com.liuyue.igny.manager;
 
 //#if MC >= 12006
 import com.google.gson.reflect.TypeToken;
-import com.liuyue.igny.network.packet.PacketUtil;
+import com.liuyue.igny.network.PacketUtil;
 import com.mojang.brigadier.StringReader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.CommandBuildContext;
@@ -55,7 +55,7 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
         }
     }
 
-    public void clearMemory() {
+    public void clearData() {
         customStacks.clear();
         runtimeRules.clear();
         save();

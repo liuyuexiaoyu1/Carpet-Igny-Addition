@@ -5,7 +5,7 @@ import carpet.CarpetServer;
 import com.liuyue.igny.commands.*;
 import com.liuyue.igny.logger.IGNYLoggers;
 import com.liuyue.igny.manager.BaseDataManager;
-import com.liuyue.igny.network.packet.PacketUtil;
+import com.liuyue.igny.network.PacketUtil;
 import com.liuyue.igny.utils.ComponentTranslate;
 import com.liuyue.igny.utils.TickUtil;
 import com.mojang.brigadier.CommandDispatcher;
@@ -112,6 +112,4 @@ public class IGNYServer implements CarpetExtension {
     public static void onLevelSave() {
         BaseDataManager.saveAll();
     }
-
-
 }

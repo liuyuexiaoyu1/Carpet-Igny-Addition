@@ -26,7 +26,7 @@ public class ServerPlayerGameModeMixin {
         MenuProvider menuProvider = state.getMenuProvider(level, pos);
         if (IGNYSettings.SPECTATOR_CLICK_PORTAL_TELEPORT.value() && menuProvider == null) {
             if (state.getBlock() instanceof EndPortalBlock || state.getBlock() instanceof NetherPortalBlock) {
-                ((BlockBehaviourInvoker) state.getBlock()).entityInside(state, player.level(), hitResult.getBlockPos(), player);
+                ((BlockBehaviourInvoker) state.getBlock()).invokeEntityInside(state, player.level(), hitResult.getBlockPos(), player);
             }
         }
     }

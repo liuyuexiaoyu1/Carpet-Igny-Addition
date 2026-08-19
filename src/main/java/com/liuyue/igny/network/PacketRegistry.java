@@ -1,10 +1,11 @@
-package com.liuyue.igny.network.packet;
+package com.liuyue.igny.network;
 
 //#if MC >= 12005
 import com.liuyue.igny.network.packet.block.HighlightPayload;
 import com.liuyue.igny.network.packet.block.RemoveHighlightPayload;
 import com.liuyue.igny.network.packet.config.SyncCustomStackSizePayload;
 import com.liuyue.igny.network.packet.config.SyncLinkedEnderChestPayload;
+import com.liuyue.igny.network.packet.entity.PlaceEntityPayload;
 import com.liuyue.igny.network.packet.render.BoxPayload;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 //#endif
@@ -28,8 +29,10 @@ public class PacketRegistry {
     public static void c2s() {
         //#if MC >= 26.1
         //$$ PayloadTypeRegistry.serverboundPlay().register(SyncLinkedEnderChestPayload.TYPE, SyncLinkedEnderChestPayload.CODEC);
+        //$$ PayloadTypeRegistry.serverboundPlay().register(PlaceEntityPayload.TYPE, PlaceEntityPayload.CODEC);
         //#else
         PayloadTypeRegistry.playC2S().register(SyncLinkedEnderChestPayload.TYPE, SyncLinkedEnderChestPayload.CODEC);
+        PayloadTypeRegistry.playC2S().register(PlaceEntityPayload.TYPE, PlaceEntityPayload.CODEC);
         //#endif
     }
     //#endif

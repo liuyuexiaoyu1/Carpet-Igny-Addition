@@ -1,4 +1,4 @@
-package com.liuyue.igny.network.packet;
+package com.liuyue.igny.network;
 
 //#if MC >= 12005
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

@@ -12,5 +12,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(BlockBehaviour.class)
 public interface BlockBehaviourInvoker {
     @Invoker("entityInside")
-    void entityInside(BlockState state, Level level, BlockPos pos, Entity entity);
+    void invokeEntityInside(BlockState state, Level level, BlockPos pos, Entity entity);
 }

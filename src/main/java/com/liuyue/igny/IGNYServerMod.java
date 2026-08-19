@@ -1,6 +1,6 @@
 package com.liuyue.igny;
 
-import com.liuyue.igny.network.packet.PacketRegistry;
+import com.liuyue.igny.network.PacketRegistry;
 import com.liuyue.igny.utils.deobfuscator.StackTraceDeobfuscator;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;

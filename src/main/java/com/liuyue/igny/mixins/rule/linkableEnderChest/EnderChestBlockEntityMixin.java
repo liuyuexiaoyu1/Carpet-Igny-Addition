@@ -44,7 +44,9 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
         //#if MC >= 12005
         Component component = self.components().get(DataComponents.CUSTOM_NAME);
         //#else
-        //$$ Component component = Component.Serializer.fromJson(self.saveWithFullMetadata().getString("CustomName"));
+        //$$ CompoundTag tag = self.saveWithFullMetadata();
+        //$$ Component component = tag.contains("CustomName", Tag.TAG_STRING)
+        //$$         ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;
         //#endif
         if (component != null) {
             return LinkedContainerManager.get(
@@ -128,7 +130,9 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
             //#if MC >= 12005
             String name = this.components().get(DataComponents.CUSTOM_NAME).getString();
             //#else
-            //$$ String name = Component.Serializer.fromJson(this.saveWithFullMetadata().getString("CustomName")).getString();
+            //$$ CompoundTag tag = this.saveWithFullMetadata();
+            //$$ String name = tag.contains("CustomName", Tag.TAG_STRING)
+            //$$         ? Component.Serializer.fromJson(tag.getString("CustomName")).getString() : null;
             //#endif
             return LinkedContainerManager.get(name);
         }
@@ -203,7 +207,8 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
             //#if MC >= 12005
             Component customName = this.components().get(DataComponents.CUSTOM_NAME);
             //#else
-            //$$ Component customName = Component.Serializer.fromJson(this.saveWithFullMetadata().getString("CustomName"));
+            //$$ CompoundTag tag = this.saveWithFullMetadata();
+            //$$ Component customName = tag.contains("CustomName", Tag.TAG_STRING) ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;
             //#endif
             if (customName != null) {
                 this.registerToLinkedContainer(customName.getString());
@@ -218,7 +223,9 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
             //#if MC >= 12005
             Component customName = this.components().get(DataComponents.CUSTOM_NAME);
             //#else
-            //$$ Component customName = Component.Serializer.fromJson(this.saveWithFullMetadata().getString("CustomName"));
+            //$$ CompoundTag tag = this.saveWithFullMetadata();
+            //$$ Component customName = tag.contains("CustomName", Tag.TAG_STRING)
+            //$$         ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;
             //#endif
             if (customName != null) {
                 this.registerToLinkedContainer(customName.getString());
@@ -246,7 +253,8 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
         //#if MC >= 12005
         Component customName = this.components().get(DataComponents.CUSTOM_NAME);
         //#else
-        //$$ Component customName = Component.Serializer.fromJson(this.saveWithFullMetadata().getString("CustomName"));
+        //$$ CompoundTag tag = this.saveWithFullMetadata();
+        //$$ Component customName = tag.contains("CustomName", Tag.TAG_STRING) ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;
         //#endif
         if (customName != null) {
             LinkedContainer linked = LinkedContainerManager.get(customName.getString());
@@ -260,7 +268,8 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
             //#if MC >= 12005
             Component customName = blockEntity.components().get(DataComponents.CUSTOM_NAME);
             //#else
-            //$$ Component customName = Component.Serializer.fromJson(blockEntity.saveWithFullMetadata().getString("CustomName"));
+            //$$ CompoundTag tag = blockEntity.saveWithFullMetadata();
+            //$$ Component customName = tag.contains("CustomName", Tag.TAG_STRING) ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;
             //#endif
             if (customName != null) {
                 LinkedContainer linked = LinkedContainerManager.get(customName.getString());
@@ -270,13 +279,13 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
         }
     }
     
-    //#if MC <= 11904
+    //#if MC < 12005
     //$$  @Unique private Component customName;
     //$$  
     //$$  @Override
     //$$  public void load(CompoundTag tag) {
     //$$      super.load(tag);
-    //$$      if (tag.contains("CustomName")) {
+    //$$      if (tag.contains("CustomName", Tag.TAG_STRING)) {
     //$$          this.customName = Component.Serializer.fromJson(tag.getString("CustomName"));
     //$$      }
     //$$  }

@@ -1,7 +1,7 @@
 package com.liuyue.igny.network.packet.render;
 
 //#if MC >= 12005
-import com.liuyue.igny.network.packet.PacketUtil;
+import com.liuyue.igny.network.PacketUtil;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
