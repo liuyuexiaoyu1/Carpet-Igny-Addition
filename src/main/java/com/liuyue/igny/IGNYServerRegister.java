@@ -48,8 +48,10 @@ public class IGNYServerRegister {
                     });
                 }
         );
+        //#if MC >= 12005
         ServerPlayNetworking.registerGlobalReceiver(PlaceEntityPayload.TYPE, (payload, context) ->
                 context.server().execute(() -> PlaceEntityHandler.handle(context.player(), payload))
         );
+        //#endif
     }
 }
