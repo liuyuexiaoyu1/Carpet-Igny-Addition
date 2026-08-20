@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 public record PlaceEntityPayload(
         ResourceLocation entityTypeId,
         double x, double y, double z,
-        float yaw, float pitch
+        float yaw, float yawHead, float pitch
 )
         //#if MC >= 12005
         implements CustomPacketPayload
@@ -37,7 +37,7 @@ public record PlaceEntityPayload(
                             buf.readResourceLocation(),
                             //#endif
                             buf.readDouble(), buf.readDouble(), buf.readDouble(),
-                            buf.readFloat(), buf.readFloat()
+                            buf.readFloat(), buf.readFloat(), buf.readFloat()
                     );
                 }
 
@@ -52,6 +52,7 @@ public record PlaceEntityPayload(
                     buf.writeDouble(value.y());
                     buf.writeDouble(value.z());
                     buf.writeFloat(value.yaw());
+                    buf.writeFloat(value.yawHead());
                     buf.writeFloat(value.pitch());
                 }
             };
