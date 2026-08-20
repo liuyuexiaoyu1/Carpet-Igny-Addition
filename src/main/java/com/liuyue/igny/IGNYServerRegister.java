@@ -1,13 +1,9 @@
 package com.liuyue.igny;
 
 import com.liuyue.igny.network.packet.config.SyncLinkedEnderChestPayload;
-import com.liuyue.igny.network.packet.entity.PlaceEntityPayload;
 import com.liuyue.igny.utils.interfaces.linkableEnderChest.ViewingChest;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.world.entity.player.Player;
-//#if MC >= 12005
-import com.liuyue.igny.network.handler.PlaceEntityHandler;
-//#endif
 //#if MC < 12005
 //$$ import com.liuyue.igny.IGNYServer;
 //#endif
@@ -16,7 +12,6 @@ public class IGNYServerRegister {
     public static void register() {
         registerNetworkPackReceiver();
     }
-
     private static void registerNetworkPackReceiver() {
         ServerPlayNetworking.registerGlobalReceiver(
                 //#if MC < 12005
@@ -48,10 +43,5 @@ public class IGNYServerRegister {
                     });
                 }
         );
-        //#if MC >= 12005
-        ServerPlayNetworking.registerGlobalReceiver(PlaceEntityPayload.TYPE, (payload, context) ->
-                context.server().execute(() -> PlaceEntityHandler.handle(context.player(), payload))
-        );
-        //#endif
     }
 }
