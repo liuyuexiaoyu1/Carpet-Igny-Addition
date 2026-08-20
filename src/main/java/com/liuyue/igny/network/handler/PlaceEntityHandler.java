@@ -104,6 +104,7 @@ public class PlaceEntityHandler {
             return;
         }
         float yaw = Mth.wrapDegrees(payload.yaw());
+        float yawHead = Mth.wrapDegrees(payload.yawHead());
         float pitch = Mth.clamp(payload.pitch(), -90.0F, 90.0F);
         long gameTime = level.getGameTime();
         Long last = LAST_PLACE_TICK.get(player.getUUID());
@@ -121,6 +122,9 @@ public class PlaceEntityHandler {
             return;
         }
         entity.moveTo(payload.x(), payload.y(), payload.z(), yaw, pitch);
+        entity.setYRot(yaw);
+        entity.setYHeadRot(yawHead);
+        entity.setXRot(pitch);
         level.addFreshEntityWithPassengers(entity);
 
         if (!player.getAbilities().instabuild) {
