@@ -63,7 +63,6 @@ public class BetterEasyPlaceProtocolHandler {
         register(BaseCoralWallFanBlock.class, new CoralWallFanBlockProtocolAdapter());
         register(DaylightDetectorBlock.class, new DaylightDetectorBlockProtocolAdapter());
         register(DetectorRailBlock.class, new DetectorRailBlockProtocolAdapter());
-        register(DoorBlock.class, new DoorBlockProtocolAdapter());
         register(FaceAttachedHorizontalDirectionalBlock.class, new FaceAttachedHorizontalDirectionalBlockProtocolAdapter());
         register(FenceGateBlock.class, new FenceGateBlockProtocolAdapter());
         register(HugeMushroomBlock.class, new HugeMushroomBlockProtocolAdapter());
@@ -102,7 +101,7 @@ public class BetterEasyPlaceProtocolHandler {
         register(HorizontalDirectionalBlock.class, new HorizontalDirectionalBlockProtocolAdapter());
         register(HopperBlock.class, new HopperBlockProtocolAdapter());
         register(WallBlock.class, new WallBlockProtocolAdapter());
-        register(IronBarsBlock.class,  new IronBarsBlockProtocolAdapter());
+        register(CrossCollisionBlock.class,  new CrossCollisionBlockProtocolAdapter());
     }
 
     private static boolean easyPlaceState = false;

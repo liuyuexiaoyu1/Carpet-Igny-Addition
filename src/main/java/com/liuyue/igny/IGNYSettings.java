@@ -32,6 +32,7 @@ public class IGNYSettings {
     public static ThreadLocal<Boolean> movingBlocks = ThreadLocal.withInitial(() -> false);
     public static ThreadLocal<Boolean> canGetBlockEntity = ThreadLocal.withInitial(() -> true);
     public static final ThreadLocal<Boolean> easyPlaceProtocolActive = ThreadLocal.withInitial(() -> false);
+    public static BlockPos lastPistonHeadPos = null;
 
     /**
      * 物品展示框是否正在保存NBT数据

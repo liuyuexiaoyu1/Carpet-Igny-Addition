@@ -2,23 +2,23 @@ package com.liuyue.igny.helper.betterEasyPlaceProtocol.adapter;
 
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.block.IronBarsBlock;
+import net.minecraft.world.level.block.CrossCollisionBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class IronBarsBlockProtocolAdapter implements BlockProtocolStateAdapter {
-    public static final IronBarsBlockProtocolAdapter INSTANCE = new IronBarsBlockProtocolAdapter();
+public class CrossCollisionBlockProtocolAdapter implements BlockProtocolStateAdapter {
+    public static final CrossCollisionBlockProtocolAdapter INSTANCE = new CrossCollisionBlockProtocolAdapter();
 
-    public IronBarsBlockProtocolAdapter() {
+    public CrossCollisionBlockProtocolAdapter() {
     }
 
     @Override
     public int igny$toProtocolValue(int protocolValue, BlockState fromState) {
-        boolean north = fromState.getValue(IronBarsBlock.NORTH);
-        boolean east = fromState.getValue(IronBarsBlock.EAST);
-        boolean south = fromState.getValue(IronBarsBlock.SOUTH);
-        boolean west = fromState.getValue(IronBarsBlock.WEST);
+        boolean north = fromState.getValue(CrossCollisionBlock.NORTH);
+        boolean east = fromState.getValue(CrossCollisionBlock.EAST);
+        boolean south = fromState.getValue(CrossCollisionBlock.SOUTH);
+        boolean west = fromState.getValue(CrossCollisionBlock.WEST);
         int bits = 0;
         if (north) bits |= 1;
         if (east) bits |= 1 << 1;
@@ -35,10 +35,10 @@ public class IronBarsBlockProtocolAdapter implements BlockProtocolStateAdapter {
         boolean south = ((extraProtocolValue >> 2) & 0b1) == 0b1;
         boolean west = ((extraProtocolValue >> 3) & 0b1) == 0b1;
 
-        return fromState.setValue(IronBarsBlock.NORTH, north)
-                .setValue(IronBarsBlock.EAST, east)
-                .setValue(IronBarsBlock.SOUTH, south)
-                .setValue(IronBarsBlock.WEST, west);
+        return fromState.setValue(CrossCollisionBlock.NORTH, north)
+                .setValue(CrossCollisionBlock.EAST, east)
+                .setValue(CrossCollisionBlock.SOUTH, south)
+                .setValue(CrossCollisionBlock.WEST, west);
     }
 
     @Override

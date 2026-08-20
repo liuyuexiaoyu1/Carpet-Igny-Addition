@@ -1,5 +1,6 @@
 package com.liuyue.igny.mixins.rule.betterEasyPlaceProtocol;
 
+import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.helper.betterEasyPlaceProtocol.BetterEasyPlaceProtocolHandler;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -77,6 +78,13 @@ public abstract class BlockItemMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/BlockItem;placeBlock(Lnet/minecraft/world/item/context/BlockPlaceContext;Lnet/minecraft/world/level/block/state/BlockState;)Z")
     )
     private boolean igny_onPlace(BlockItem instance, BlockPlaceContext context, BlockState state, Operation<Boolean> original) {
+        if (state.getBlock() instanceof PistonBaseBlock && state.getValue(PistonBaseBlock.EXTENDED)) {
+            BlockPos headPos = context.getClickedPos().relative(state.getValue(PistonBaseBlock.FACING));
+            BlockState headTarget = context.getLevel().getBlockState(headPos);
+            if (!headTarget.isAir() && !headTarget.canBeReplaced()) {
+                state = state.setValue(PistonBaseBlock.EXTENDED, false);
+            }
+        }
 
         boolean result = original.call(instance, context, state);
         if (result && BetterEasyPlaceProtocolHandler.hasPlaceFlag(BetterEasyPlaceProtocolHandler.EASY_PLACE_PISTON_PLACE_HEAD)) {
@@ -95,10 +103,14 @@ public abstract class BlockItemMixin {
                                             ? net.minecraft.world.level.block.state.properties.PistonType.STICKY
                                             : net.minecraft.world.level.block.state.properties.PistonType.DEFAULT)
                             .setValue(net.minecraft.world.level.block.piston.PistonHeadBlock.SHORT, false);
-                    level.setBlock(headPos, headState, 3);
+                    try {
+                        if (level.setBlock(headPos, headState, 3)) {
+                            IGNYSettings.lastPistonHeadPos = headPos;
+                        }
+                    } catch (Exception ignored) {}
                     BlockState baseNow = level.getBlockState(pos);
                     if (baseNow.getBlock() instanceof PistonBaseBlock && !baseNow.getValue(PistonBaseBlock.EXTENDED)) {
-                        level.setBlock(pos, baseNow.setValue(PistonBaseBlock.EXTENDED, true), 3);
+                        level.setBlock(pos, baseNow.setValue(PistonBaseBlock.EXTENDED, true), 2 | 16);
                     }
                 }
             }
