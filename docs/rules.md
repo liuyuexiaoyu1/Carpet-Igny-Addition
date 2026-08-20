@@ -1254,7 +1254,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `BUGFIX`, `FEATURE`
 
-## 阻止海豚丢弃物品动画堵塞 (preventDolphinItemDropAnimationClogging) `🐛Beta` `MC>=26.1`
+## 阻止海豚丢弃物品动画堵塞 (preventDolphinItemDropAnimationClogging) `MC>=26.1`
 
 阻止海豚丢弃物品时播放动画导致堵塞丢弃物品进程，回退了26.1-pre-2的更改。
 
@@ -1263,7 +1263,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `PORTING`, `FEATURE`
 
-## 发射器回收实体 (dispenserEntityRetrieval) `🐛Beta`
+## 发射器回收实体 (dispenserEntityRetrieval)
 
 发射器使用桶回收水时可一并回收水中的鱼类变为鱼桶，或者是回收硫方怪变为硫方怪桶。
 
@@ -1272,7 +1272,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 快速放置熔岩 (quickPlaceLava) `🐛Beta`
+## 快速放置熔岩 (quickPlaceLava)
 
 副手持岩浆块时放置岩浆块像熔岩桶一样放置熔岩。
 
@@ -1281,7 +1281,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 重新引入箭矢逐一碰撞实体 (sequentialArrowHitEntityReintroduced) `🐛Beta` `MC>=1.21.11`
+## 重新引入箭矢逐一碰撞实体 (sequentialArrowHitEntityReintroduced) `MC>=1.21.11`
 
 重新引入箭矢会逐一计算并碰撞路径上的所有实体的行为，回退了25w41a的更改。
 
@@ -1290,7 +1290,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `PORTING`, `FEATURE`
 
-## 关闭TNT投掷 (disableTntDispense) `🐛Beta`
+## 关闭TNT投掷 (disableTntDispense)
 
 发射器发射TNT时不再将其点燃成TNT实体，而是像普通物品一样直接扔出。
 
@@ -1299,7 +1299,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 音符盒音高不变 (noteBlockNoteUnchanged) `🐛Beta`
+## 音符盒音高不变 (noteBlockNoteUnchanged)
 
 右键点击音符盒时不再循环切换音高，但仍会产生方块更新。
 
@@ -1308,7 +1308,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
-## 更好的轻松放置协议 (betterEasyPlaceProtocol) `🐛Beta`
+## 更好的轻松放置协议 (betterEasyPlaceProtocol)
 
 补全一些投影的轻松放置模式放置方块无法同步的方块状态。
 

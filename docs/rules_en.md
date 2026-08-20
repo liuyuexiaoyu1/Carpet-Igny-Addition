@@ -1252,7 +1252,7 @@ When a tripwire is deactivated, vanilla schedules an instant tick (0 delay); whe
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `BUGFIX`, `FEATURE`
 
-## preventDolphinItemDropAnimationClogging `🐛Beta` `MC>=26.1`
+## preventDolphinItemDropAnimationClogging `MC>=26.1`
 
 Prevents the item drop animation played when a dolphin drops items from clogging the item drop process, reverting the change from 26.1-pre-2.
 
@@ -1261,7 +1261,7 @@ Prevents the item drop animation played when a dolphin drops items from clogging
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `PORTING`, `FEATURE`
 
-## dispenserEntityRetrieval `🐛Beta`
+## dispenserEntityRetrieval
 
 When a dispenser uses a bucket to retrieve water, it can also retrieve fish in the water as fish buckets, or retrieve Sulfur Cubes as Sulfur Cube buckets.
 
@@ -1270,7 +1270,7 @@ When a dispenser uses a bucket to retrieve water, it can also retrieve fish in t
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## quickPlaceLava `🐛Beta`
+## quickPlaceLava
 
 When holding a magma block in your off-hand, placing the magma block places lava just like a lava bucket.
 
@@ -1279,7 +1279,7 @@ When holding a magma block in your off-hand, placing the magma block places lava
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## sequentialArrowHitEntityReintroduced `🐛Beta` `MC>=1.21.11`
+## sequentialArrowHitEntityReintroduced `MC>=1.21.11`
 
 Reintroduces the behavior where an arrow calculates and collides with all entities along its path one by one, reverting the change from 25w41a.
 
@@ -1288,7 +1288,7 @@ Reintroduces the behavior where an arrow calculates and collides with all entiti
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `PORTING`, `FEATURE`
 
-## disableTntDispense `🐛Beta`
+## disableTntDispense
 
 When the launcher fires TNT, it no longer ignites it into a TNT entity, but instead throws it out directly like a normal item.
 
@@ -1297,7 +1297,7 @@ When the launcher fires TNT, it no longer ignites it into a TNT entity, but inst
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## noteBlockNoteUnchanged `🐛Beta`
+## noteBlockNoteUnchanged
 
 When right-clicking a note block, it no longer cycles through pitches, but it still causes a block update.
 
@@ -1306,7 +1306,7 @@ When right-clicking a note block, it no longer cycles through pitches, but it st
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## betterEasyPlaceProtocol `🐛Beta`
+## betterEasyPlaceProtocol
 
 Fills in some block states that cannot be synced by the easy place mode when placing blocks from schematics.
 
