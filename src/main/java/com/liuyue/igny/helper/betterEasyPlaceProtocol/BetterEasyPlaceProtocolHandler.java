@@ -15,19 +15,11 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 //#if MC >= 12003
 //#endif
@@ -124,10 +116,6 @@ public class BetterEasyPlaceProtocolHandler {
         easyPlaceState = value;
     }
 
-    public static long getPlaceProperty() {
-        return placeProperty;
-    }
-
     public static void setPlaceProperty(long val) {
         placeProperty = val;
     }
@@ -170,18 +158,6 @@ public class BetterEasyPlaceProtocolHandler {
         return null;
     }
 
-    public static boolean isExtraProtocolPlacement(Block block, BlockPlaceContext context) {
-        if (!isRuleEnabled()) return false;
-
-        double relativeHitX = getRelativeHitX(context.getClickLocation(), context.getClickedPos());
-        if (!isProtocol(relativeHitX)) return false;
-
-        int protocolValue = decodeProtocolValueFromHitDim(relativeHitX);
-        if (!isExtraProtocol(protocolValue)) return false;
-
-        return getAdapter(block) != null;
-    }
-
     public static @Nullable BlockState decodePlacementState(Block block, BlockPlaceContext context) {
         if (!isRuleEnabled()) return null;
 
@@ -191,8 +167,7 @@ public class BetterEasyPlaceProtocolHandler {
         
         int protocolValue = decodeProtocolValueFromHitDim(relativeHitX);
         if (!isExtraProtocol(protocolValue)) {
-            
-            return decodeVanillaPlacementState(block, context, relativeHitX);
+            return null;
         }
 
         BlockProtocolStateAdapter adapter = getAdapter(block);
@@ -215,132 +190,6 @@ public class BetterEasyPlaceProtocolHandler {
         }
         
         return adapter.igny$fromProtocolValue(protocolValue, vanillaState, context);
-    }
-
-    private static final Set<String> VANILLA_V3_WHITELISTED_PROPERTY_NAMES = new HashSet<>(Arrays.asList(
-            "inverted",
-            "open",
-            "attachment",
-            "axis",
-            "half",
-            "face",
-            "type",
-            "mode",
-            "hinge",
-            "orientation",
-            "shape",
-            "straight_shape",
-            "bites",
-            "delay",
-            "note",
-            "rotation"
-    ));
-
-    public static @Nullable BlockState decodeVanillaPlacementState(Block block, BlockPlaceContext context, double relativeHitX) {
-        if (!isProtocol(relativeHitX)) return null;
-
-        int raw = ((int) relativeHitX - 2) >>> 1;
-        if (raw < 0) return null;
-
-        boolean v2AdditionBlock = block instanceof net.minecraft.world.level.block.CakeBlock
-                || block instanceof net.minecraft.world.level.block.StairBlock
-                || block instanceof net.minecraft.world.level.block.TrapDoorBlock
-                || block instanceof net.minecraft.world.level.block.SlabBlock;
-
-        if (v2AdditionBlock && (raw & 0b0000_1000) == 0) {
-            return decodeVanillaV2PlacementState(block, context, raw);
-        }
-        return decodeVanillaV3PlacementState(block, context, raw);
-    }
-
-    private static @Nullable BlockState decodeVanillaV3PlacementState(Block block, BlockPlaceContext context, int raw) {
-        BlockState state = block.getStateForPlacement(context);
-        if (state == null) {
-            state = block.defaultBlockState();
-        }
-        boolean decoded = false;
-
-        
-        
-        Property<Direction> directionProperty = EasyPlaceExtraProtocolHelper.getFirstDirectionProperty(state);
-        int shiftAmount = 3;
-        if (directionProperty != null && !"vertical_direction".equals(directionProperty.getName())) {
-            int facingOrdinal = raw & 0b0000_0111;
-            state = state.setValue(directionProperty, Direction.values()[facingOrdinal % 6]);
-            decoded = true;
-        } else {
-            shiftAmount = 0;
-            directionProperty = null;
-        }
-
-        
-        List<Property<?>> props = new ArrayList<>(state.getProperties());
-        props.sort(Comparator.comparing(Property::getName));
-
-        for (Property<?> property : props) {
-            if (property == directionProperty) continue;
-            if (!VANILLA_V3_WHITELISTED_PROPERTY_NAMES.contains(property.getName())) continue;
-
-            @SuppressWarnings({"unchecked", "rawtypes"})
-            List<Comparable> values = new ArrayList<>((java.util.Collection) property.getPossibleValues());
-            @SuppressWarnings({"unchecked", "rawtypes"})
-            Comparator<Comparable> naturalOrder = Comparator.naturalOrder();
-            values.sort(naturalOrder);
-            int requiredBits = Mth.ceil(Mth.log2(values.size()));
-            int valueIndex = (raw >>> shiftAmount) & ((1 << requiredBits) - 1);
-            shiftAmount += requiredBits;
-
-            if (valueIndex >= values.size()) {
-                continue;
-            }
-            @SuppressWarnings({"unchecked", "rawtypes"})
-            BlockState newState = state.setValue((Property) property, values.get(valueIndex));
-            state = newState;
-            decoded = true;
-        }
-
-        return decoded ? state : null;
-    }
-
-    private static @Nullable BlockState decodeVanillaV2PlacementState(Block block, BlockPlaceContext context, int raw) {
-        BlockState state = block.getStateForPlacement(context);
-        if (state == null) {
-            state = block.defaultBlockState();
-        }
-        boolean decoded = false;
-
-        Property<Direction> directionProperty = EasyPlaceExtraProtocolHelper.getFirstDirectionProperty(state);
-        if (directionProperty != null) {
-            int facingOrdinal = raw & 0b0000_0111;
-            state = state.setValue(directionProperty, Direction.values()[facingOrdinal % 6]);
-            decoded = true;
-        }
-
-        int addition = raw >>> 4;
-        if (addition != 0) {
-            switch (block) {
-                case CakeBlock cakeBlock -> {
-                    state = state.setValue(BlockStateProperties.BITES, Math.min(addition, 6));
-                    decoded = true;
-                }
-                case StairBlock stairBlock when addition == 1 -> {
-                    state = state.setValue(BlockStateProperties.HALF, net.minecraft.world.level.block.state.properties.Half.TOP);
-                    decoded = true;
-                }
-                case TrapDoorBlock trapDoorBlock when addition == 1 -> {
-                    state = state.setValue(BlockStateProperties.OPEN, true);
-                    decoded = true;
-                }
-                case SlabBlock slabBlock when addition == 1 -> {
-                    state = state.setValue(BlockStateProperties.SLAB_TYPE, net.minecraft.world.level.block.state.properties.SlabType.DOUBLE);
-                    decoded = true;
-                }
-                default -> {
-                }
-            }
-        }
-
-        return decoded ? state : null;
     }
 
     public static @Nullable BlockState decodeAttachablePlacementState(Block standingBlock, Block wallBlock, BlockPlaceContext context) {

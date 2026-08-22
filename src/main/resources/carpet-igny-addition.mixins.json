@@ -214,6 +214,7 @@
     "rule.renewableNetherrack.PortalForcerMixin",
     "rule.respawnBlockNeverExplode.BedBlockMixin",
     "rule.respawnBlockNeverExplode.RespawnAnchorBlockMixin",
+    "rule.safePlayerDeathDrop.EntityEquipmentMixin",
     "rule.safePlayerDeathDrop.InventoryMixin",
     "rule.safeSoundSuppression.CalibratedSculkSensorVibrationUserMixin",
     "rule.scalableLuxCompatible.StarLightInterfaceMixin",
