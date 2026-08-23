@@ -24,9 +24,33 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
     public static final LinkedContainerManager INSTANCE = new LinkedContainerManager();
     private final Map<String, LinkedContainer> containers = new HashMap<>();
 
-    @Override protected String getFileName() { return "linked_chests.json"; }
-    @Override protected Type getDataType() { return new TypeToken<Map<String, String>>(){}.getType(); }
-    @Override public Map<String, String> getDefaultData() { return new HashMap<>(); }
+    public static LinkedContainer get(String key) {
+        return INSTANCE.containers.computeIfAbsent(key, LinkedContainer::new);
+    }
+
+    public static boolean isRuleEnabled() {
+        return IGNYSettings.LINKEABLE_ENDER_CHEST.value() != LinkedContainerSetting.FALSE;
+    }
+
+    public static boolean isRuleFully() {
+        return IGNYSettings.LINKEABLE_ENDER_CHEST.value() == LinkedContainerSetting.TRUE;
+    }
+
+    @Override
+    protected String getFileName() {
+        return "linked_chests.json";
+    }
+
+    @Override
+    protected Type getDataType() {
+        return new TypeToken<Map<String, String>>() {
+        }.getType();
+    }
+
+    @Override
+    public Map<String, String> getDefaultData() {
+        return new HashMap<>();
+    }
 
     @Override
     protected void applyData(Map<String, String> data) {
@@ -107,24 +131,19 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
         return data;
     }
 
-    public static LinkedContainer get(String key) {
-        return INSTANCE.containers.computeIfAbsent(key, LinkedContainer::new);
+    @Override
+    protected StorageScope getScope() {
+        return StorageScope.WORLD;
     }
 
-    @Override protected StorageScope getScope() { return StorageScope.WORLD; }
-    @Override protected SideRestraint getSideRestraint() { return SideRestraint.SERVER; }
+    @Override
+    protected SideRestraint getSideRestraint() {
+        return SideRestraint.SERVER;
+    }
 
     @Override
     public void clear() {
-        containers.forEach((key, container) -> container.clearContent());
-    }
-
-    public static boolean isRuleEnabled() {
-        return IGNYSettings.LINKEABLE_ENDER_CHEST.value() != LinkedContainerSetting.FALSE;
-    }
-
-    public static boolean isRuleFully() {
-        return IGNYSettings.LINKEABLE_ENDER_CHEST.value() == LinkedContainerSetting.TRUE;
+        containers.clear();
     }
 
     public enum LinkedContainerSetting {

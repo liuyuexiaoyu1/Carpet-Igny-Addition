@@ -34,20 +34,29 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
 
     private VaultData data;
 
-    public static class VaultData {
-        public Map<String, String[]> vault = new HashMap<>();
-        public Set<String> pendingRestore = new HashSet<>();
+    @Override
+    protected String getFileName() {
+        return "nightmarish_vault.json";
     }
 
-    @Override protected String getFileName() { return "nightmarish_vault.json"; }
-    @Override protected Type getDataType() { return new TypeToken<VaultData>(){}.getType(); }
-    @Override public VaultData getDefaultData() { return new VaultData(); }
+    @Override
+    protected Type getDataType() {
+        return new TypeToken<VaultData>() {
+        }.getType();
+    }
 
-    @Override protected void applyData(VaultData data) {
+    @Override
+    public VaultData getDefaultData() {
+        return new VaultData();
+    }
+
+    @Override
+    protected void applyData(VaultData data) {
         this.data = data != null ? data : new VaultData();
     }
 
-    @Override public VaultData getCurrentData() {
+    @Override
+    public VaultData getCurrentData() {
         if (this.data == null) this.data = new VaultData();
         return this.data;
     }
@@ -136,12 +145,28 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
             getCurrentData().pendingRestore.add(getDictKey(level, pos));
         }
     }
-    public Set<String> getPendingRestore() { return getCurrentData().pendingRestore; }
-    @Override protected StorageScope getScope() { return StorageScope.WORLD; }
-    @Override protected SideRestraint getSideRestraint() { return SideRestraint.SERVER; }
+
+    public Set<String> getPendingRestore() {
+        return getCurrentData().pendingRestore;
+    }
+
+    @Override
+    protected StorageScope getScope() {
+        return StorageScope.WORLD;
+    }
+
+    @Override
+    protected SideRestraint getSideRestraint() {
+        return SideRestraint.SERVER;
+    }
 
     @Override
     public void clear() {
+        this.data = null;
+    }
 
+    public static class VaultData {
+        public Map<String, String[]> vault = new HashMap<>();
+        public Set<String> pendingRestore = new HashSet<>();
     }
 }

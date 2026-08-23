@@ -1,32 +1,57 @@
 package com.liuyue.igny.manager;
 
 import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class RuleChangeDataManager extends BaseDataManager<Map<String, List<RuleChangeDataManager.RuleChangeRecord>>> {
     public static final RuleChangeDataManager INSTANCE = new RuleChangeDataManager();
-    private final Map<String, List<RuleChangeRecord>> inMemoryCache = new HashMap<>();
     private static final int MAX_HISTORY = 3;
-    @Override protected StorageScope getScope() {return StorageScope.WORLD;}
-    @Override protected SideRestraint getSideRestraint() {return SideRestraint.SERVER;}
+    private final Map<String, List<RuleChangeRecord>> inMemoryCache = new HashMap<>();
+
+    @Override
+    protected StorageScope getScope() {
+        return StorageScope.WORLD;
+    }
+
+    @Override
+    protected SideRestraint getSideRestraint() {
+        return SideRestraint.SERVER;
+    }
 
     @Override
     public void clear() {
-
+        inMemoryCache.clear();
     }
 
-    @Override protected String getFileName() { return "rule_changes.json"; }
-    @Override protected Type getDataType() { return new TypeToken<Map<String, List<RuleChangeRecord>>>(){}.getType(); }
-    @Override public Map<String, List<RuleChangeRecord>> getDefaultData() { return new HashMap<>(); }
+    @Override
+    protected String getFileName() {
+        return "rule_changes.json";
+    }
 
-    @Override protected void applyData(Map<String, List<RuleChangeRecord>> data) {
+    @Override
+    protected Type getDataType() {
+        return new TypeToken<Map<String, List<RuleChangeRecord>>>() {
+        }.getType();
+    }
+
+    @Override
+    public Map<String, List<RuleChangeRecord>> getDefaultData() {
+        return new HashMap<>();
+    }
+
+    @Override
+    protected void applyData(Map<String, List<RuleChangeRecord>> data) {
         inMemoryCache.clear();
         inMemoryCache.putAll(data);
     }
 
-    @Override public Map<String, List<RuleChangeRecord>> getCurrentData() { return inMemoryCache; }
+    @Override
+    public Map<String, List<RuleChangeRecord>> getCurrentData() {
+        return inMemoryCache;
+    }
 
     public void recordRuleChange(String ruleName, Object originalValue, String userInput, String sourceName, long timestamp) {
         List<RuleChangeRecord> history = inMemoryCache.computeIfAbsent(ruleName, k -> new ArrayList<>());

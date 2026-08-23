@@ -69,7 +69,6 @@ public class BetterEasyPlaceProtocolHandler {
         register(RailBlock.class, new RailBlockProtocolAdapter());
         register(RedStoneWireBlock.class, new RedStoneWireBlockProtocolAdapter());
         register(RedstoneLampBlock.class, new RedstoneLampBlockProtocolAdapter());
-        register(RedstoneTorchBlock.class, new RedstoneTorchBlockProtocolAdapter());
         register(RedstoneWallTorchBlock.class, new RedstoneWallTorchBlockProtocolAdapter());
         register(RepeaterBlock.class, new RepeaterBlockProtocolAdapter());
         register(SeaPickleBlock.class, new SeaPickleBlockProtocolAdapter());

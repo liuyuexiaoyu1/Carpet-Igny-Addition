@@ -40,7 +40,7 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     @Override
     public Container carpet_Igny_Addition$getContainer() {
         if (!LinkedContainerManager.isRuleFully()) return null;
-        EnderChestBlockEntity self = (EnderChestBlockEntity)(Object)this;
+        EnderChestBlockEntity self = (EnderChestBlockEntity)(Object) this;
         //#if MC >= 12005
         Component component = self.components().get(DataComponents.CUSTOM_NAME);
         //#else

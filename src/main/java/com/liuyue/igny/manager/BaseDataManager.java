@@ -24,18 +24,31 @@ public abstract class BaseDataManager<T> {
 
     protected MinecraftServer server;
 
-    protected abstract String getFileName();
-    protected abstract Type getDataType();
-    public abstract T getDefaultData();
-    protected abstract void applyData(T data);
-    public abstract T getCurrentData();
-
-    protected abstract StorageScope getScope();
-    protected abstract SideRestraint getSideRestraint();
-
     BaseDataManager() {
         managers.add(this);
     }
+
+    public static void saveAll() {
+        managers.forEach(BaseDataManager::save);
+    }
+
+    public static void clearAll() {
+        managers.forEach(BaseDataManager::clear);
+    }
+
+    protected abstract String getFileName();
+
+    protected abstract Type getDataType();
+
+    public abstract T getDefaultData();
+
+    protected abstract void applyData(T data);
+
+    public abstract T getCurrentData();
+
+    protected abstract StorageScope getScope();
+
+    protected abstract SideRestraint getSideRestraint();
 
     @SuppressWarnings("all")
     protected boolean isEffective() {
@@ -140,14 +153,6 @@ public abstract class BaseDataManager<T> {
     }
 
     public abstract void clear();
-
-    public static void saveAll() {
-        managers.forEach(BaseDataManager::save);
-    }
-
-    public static void clearAll() {
-        managers.forEach(BaseDataManager::clear);
-    }
 
     public void reset() {
         applyData(getDefaultData());

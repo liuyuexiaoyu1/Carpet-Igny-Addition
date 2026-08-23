@@ -1,6 +1,7 @@
 package com.liuyue.igny.manager;
 
 //#if MC >= 12006
+
 import com.google.gson.reflect.TypeToken;
 import com.liuyue.igny.network.PacketUtil;
 import com.mojang.brigadier.StringReader;
@@ -24,15 +25,36 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
     private final Map<String, Integer> customStacks = new HashMap<>();
     private final List<StackRule> runtimeRules = new ArrayList<>();
 
-    @Override protected String getFileName() { return "custom_item_max_stack_size.json"; }
-    @Override protected Type getDataType() { return new TypeToken<Map<String, Integer>>(){}.getType(); }
-    @Override public Map<String, Integer> getDefaultData() { return new HashMap<>(); }
-    @Override protected StorageScope getScope() {return StorageScope.WORLD;}
-    @Override protected SideRestraint getSideRestraint() {return SideRestraint.SERVER;}
+    @Override
+    protected String getFileName() {
+        return "custom_item_max_stack_size.json";
+    }
+
+    @Override
+    protected Type getDataType() {
+        return new TypeToken<Map<String, Integer>>() {
+        }.getType();
+    }
+
+    @Override
+    public Map<String, Integer> getDefaultData() {
+        return new HashMap<>();
+    }
+
+    @Override
+    protected StorageScope getScope() {
+        return StorageScope.WORLD;
+    }
+
+    @Override
+    protected SideRestraint getSideRestraint() {
+        return SideRestraint.SERVER;
+    }
 
     @Override
     public void clear() {
-
+        this.customStacks.clear();
+        this.runtimeRules.clear();
     }
 
     @Override
@@ -73,7 +95,10 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
         }
     }
 
-    @Override public Map<String, Integer> getCurrentData() { return new HashMap<>(customStacks); }
+    @Override
+    public Map<String, Integer> getCurrentData() {
+        return new HashMap<>(customStacks);
+    }
 
     public int getCustomStackSize(ItemStack stack) {
         for (StackRule rule : runtimeRules) {
@@ -113,7 +138,7 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
                             //#if MC >= 12102
                             //$$ getValue(BuiltInRegistries.ITEM.getDefaultKey()))
                             //#else
-                            get(BuiltInRegistries.ITEM.getDefaultKey()))
+                                    get(BuiltInRegistries.ITEM.getDefaultKey()))
                     //#endif
                     {
                         newRules.add(new StackRule(pattern, stack -> stack.is(item), count));
@@ -125,7 +150,8 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
         runtimeRules.addAll(newRules);
     }
 
-    private record StackRule(String pattern, Predicate<ItemStack> predicate, int size) {}
+    private record StackRule(String pattern, Predicate<ItemStack> predicate, int size) {
+    }
 }
 //#else
 //$$ public class CustomItemMaxStackSizeDataManager {}

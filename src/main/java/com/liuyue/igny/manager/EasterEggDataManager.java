@@ -7,11 +7,30 @@ public class EasterEggDataManager extends BaseDataManager<EasterEggDataManager.E
 
     private EasterEggData data = new EasterEggData();
 
-    @Override protected String getFileName() { return "easter_egg.json"; }
-    @Override protected Type getDataType() { return EasterEggData.class; }
-    @Override public EasterEggData getDefaultData() { return new EasterEggData(); }
-    @Override protected StorageScope getScope() { return StorageScope.GLOBAL; }
-    @Override protected SideRestraint getSideRestraint() { return SideRestraint.CLIENT; }
+    @Override
+    protected String getFileName() {
+        return "easter_egg.json";
+    }
+
+    @Override
+    protected Type getDataType() {
+        return EasterEggData.class;
+    }
+
+    @Override
+    public EasterEggData getDefaultData() {
+        return new EasterEggData();
+    }
+
+    @Override
+    protected StorageScope getScope() {
+        return StorageScope.GLOBAL;
+    }
+
+    @Override
+    protected SideRestraint getSideRestraint() {
+        return SideRestraint.CLIENT;
+    }
 
     @Override
     public void clear() {
@@ -33,6 +52,7 @@ public class EasterEggDataManager extends BaseDataManager<EasterEggDataManager.E
     public boolean isSplashEnabled() {
         return data.splash;
     }
+
     @SuppressWarnings("all")
     public boolean isAprilFoolsActive() {
         return data.aprilFools;

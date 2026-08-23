@@ -16,6 +16,7 @@ public class CommandBlockProtocolAdapter implements BlockProtocolStateAdapter {
     @Override
     public int igny$toProtocolValue(int protocolValue, BlockState fromState) {
         boolean isConditional = fromState.getValue(CommandBlock.CONDITIONAL);
+
         int bits = (isConditional ? 0b0001_0000 : 0b0000_0000);
         return protocolValue | bits;
     }
