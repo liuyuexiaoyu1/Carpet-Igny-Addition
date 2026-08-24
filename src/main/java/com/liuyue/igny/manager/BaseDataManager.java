@@ -150,25 +150,31 @@ public abstract class BaseDataManager<T> {
         }
 
         try (Reader reader = Files.newBufferedReader(path)) {
-            JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
+            JsonElement root = JsonParser.parseReader(reader);
 
             int oldVersion;
             JsonElement dataElement;
-            if (json.has(DATA_KEY)) {
-                oldVersion = json.has(DATA_VERSION_KEY) ? json.get(DATA_VERSION_KEY).getAsInt() : 0;
+            if (root.isJsonObject() && ((JsonObject) root).has(DATA_VERSION_KEY)) {
+                JsonObject json = root.getAsJsonObject();
+                oldVersion = json.get(DATA_VERSION_KEY).getAsInt();
+                dataElement = json.has(DATA_KEY) ? json.get(DATA_KEY) : null;
+
+                if (oldVersion < getCurrentVersion()) {
+                    json = upgradeData(json, oldVersion);
+                    dataElement = json.has(DATA_KEY) ? json.get(DATA_KEY) : dataElement;
+                }
             } else {
                 oldVersion = 0;
                 JsonObject wrapped = new JsonObject();
-                wrapped.add(DATA_KEY, json);
-                json = wrapped;
+                wrapped.add(DATA_KEY, root);
+                JsonObject upgraded = upgradeData(wrapped, 0);
+                dataElement = upgraded.has(DATA_KEY) ? upgraded.get(DATA_KEY) : root;
             }
-            dataElement = json.get(DATA_KEY);
 
-            if (oldVersion < getCurrentVersion()) {
-                json = upgradeData(json, oldVersion);
-                if (json.has(DATA_KEY)) {
-                    dataElement = json.get(DATA_KEY);
-                }
+            if (dataElement == null) {
+                applyData(getDefaultData());
+                save();
+                return;
             }
 
             T data = GSON.fromJson(dataElement, getDataType());
