@@ -13,6 +13,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#if MC >= 26.3
+//$$ import net.minecraft.util.Prediction;
+//#endif
 
 @Mixin(EntityPlayerActionPack.class)
 public class EntityPlayerActionPackMixin {
@@ -25,7 +28,11 @@ public class EntityPlayerActionPackMixin {
     private void dropItemFromSlot(int slot, boolean dropAll) {
         Inventory inv = player.getInventory();
         if (!inv.getItem(slot).isEmpty()) {
+            //#if MC >= 26.3
+            //$$ player.drop(inv.removeItem(slot, dropAll ? inv.getItem(slot).getCount() : 1), false, Prediction.PREDICTED);
+            //#else
             player.drop(inv.removeItem(slot, dropAll ? inv.getItem(slot).getCount() : 1), false, true);
+            //#endif
         }
     }
 
@@ -49,7 +56,11 @@ public class EntityPlayerActionPackMixin {
                 }
             }
 
+            //#if MC >= 26.3
+            //$$ player.drop(dropStack, false, Prediction.PREDICTED);
+            //#else
             player.drop(dropStack, false, true);
+            //#endif
         }
     }
 

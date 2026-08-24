@@ -64,7 +64,11 @@ public class BetterEasyPlaceProtocolHandler {
         register(PistonBaseBlock.class, new PistonBaseBlockProtocolAdapter());
         register(PoweredRailBlock.class, new PoweredRailBlockProtocolAdapter());
         register(RailBlock.class, new RailBlockProtocolAdapter());
+        //#if MC >= 26.3
+        //$$ register(RedstoneWireBlock.class, new RedStoneWireBlockProtocolAdapter());
+        //#else
         register(RedStoneWireBlock.class, new RedStoneWireBlockProtocolAdapter());
+        //#endif
         register(RedstoneLampBlock.class, new RedstoneLampBlockProtocolAdapter());
         register(RedstoneWallTorchBlock.class, new RedstoneWallTorchBlockProtocolAdapter());
         register(RepeaterBlock.class, new RepeaterBlockProtocolAdapter());

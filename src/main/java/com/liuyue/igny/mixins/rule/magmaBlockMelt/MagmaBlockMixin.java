@@ -8,10 +8,15 @@ import net.minecraft.tags.EnchantmentTags;
 //#else
 //$$ import net.minecraft.world.item.enchantment.Enchantments;
 //#endif
+//#if MC >= 26.3
+//$$ import net.minecraft.server.level.ServerLevel;
+//$$ import net.minecraft.server.level.ServerPlayer;
+//#else
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+//#endif
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MagmaBlock;
@@ -27,7 +32,12 @@ public class MagmaBlockMixin extends Block {
     }
 
     @Override
-    public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
+    //#if MC >= 26.3
+    //$$ public void playerDestroy(ServerLevel level, ServerPlayer player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool)
+    //#else
+    public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool)
+    //#endif
+    {
         player.awardStat(Stats.BLOCK_MINED.get(this));
         player.causeFoodExhaustion(0.005F);
         //#if MC >= 12101
