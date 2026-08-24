@@ -43,6 +43,6 @@ public class CrossCollisionBlockProtocolAdapter implements BlockProtocolStateAda
 
     @Override
     public @NotNull BlockProtocolStateAdapter.ProtocolType igny$getProtocolType() {
-        return BlockProtocolStateAdapter.ProtocolType.REPLACE;
+        return BlockProtocolStateAdapter.ProtocolType.ADDED;
     }
 }

@@ -27,6 +27,6 @@ public class StandingSignBlockProtocolAdapter implements BlockProtocolStateAdapt
 
     @Override
     public @NotNull ProtocolType igny$getProtocolType() {
-        return ProtocolType.REPLACE;
+        return ProtocolType.ADDED;
     }
 }

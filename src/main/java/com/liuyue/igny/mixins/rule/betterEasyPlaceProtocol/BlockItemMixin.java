@@ -23,9 +23,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.decodeProtocolValueFromHitDim;
 import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.getRelativeHitX;
-import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.isExtraProtocol;
+import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.getRelativeHitZ;
 import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.isProtocol;
 
 @Mixin(value = BlockItem.class, priority = 950)
@@ -39,18 +38,17 @@ public abstract class BlockItemMixin {
     @Inject(method = "getPlacementState", at = @At("HEAD"), cancellable = true)
     private void igny_betterEasyPlaceProtocolDecode(BlockPlaceContext context, CallbackInfoReturnable<BlockState> cir) {
         if (!BetterEasyPlaceProtocolHandler.isRuleEnabled()) return;
-        double relativeHitX = getRelativeHitX(context.getClickLocation(), context.getClickedPos());
-        if (!isProtocol(relativeHitX)) return;
-        int protocolValue = decodeProtocolValueFromHitDim(relativeHitX);
-        boolean isExtended = isExtraProtocol(protocolValue);
-        BlockState state = BetterEasyPlaceProtocolHandler.decodePlacementState(this.getBlock(), context);
+        double relativeHitZ = getRelativeHitZ(context.getClickLocation(), context.getClickedPos());
+        if (!isProtocol(relativeHitZ)) return;
+
+        BlockState baseState = cir.getReturnValue();
+        if (baseState == null) {
+            baseState = this.getBlock().getStateForPlacement(context);
+        }
+        BlockState state = BetterEasyPlaceProtocolHandler.decodePlacementState(this.getBlock(), context, baseState);
         if (state == null) {
-            if (isExtended && BetterEasyPlaceProtocolHandler.getAdapter(this.getBlock()) != null) {
-                cir.setReturnValue(null);
-            }
-            return;
-        } else if (state.is(Blocks.AIR)) {
             cir.setReturnValue(null);
+            return;
         }
         if (!this.canPlace(context, state)) return;
         cir.setReturnValue(state);

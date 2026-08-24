@@ -86,6 +86,6 @@ public class FlowerBedBlockProtocolAdapter implements MultiStageBlockProtocolSta
 
     @Override
     public @NotNull ProtocolType igny$getProtocolType() {
-        return ProtocolType.REPLACE;
+        return ProtocolType.ADDED;
     }
 }

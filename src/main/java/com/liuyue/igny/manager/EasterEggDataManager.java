@@ -13,6 +13,11 @@ public class EasterEggDataManager extends BaseDataManager<EasterEggDataManager.E
     }
 
     @Override
+    protected int getCurrentVersion() {
+        return 1;
+    }
+
+    @Override
     protected Type getDataType() {
         return EasterEggData.class;
     }

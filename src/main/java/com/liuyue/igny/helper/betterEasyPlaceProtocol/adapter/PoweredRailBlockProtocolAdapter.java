@@ -44,6 +44,6 @@ public class PoweredRailBlockProtocolAdapter implements BlockProtocolStateAdapte
 
     @Override
     public @NotNull ProtocolType igny$getProtocolType() {
-        return ProtocolType.REPLACE;
+        return ProtocolType.ADDED;
     }
 }

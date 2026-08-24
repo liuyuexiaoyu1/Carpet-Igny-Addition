@@ -31,6 +31,11 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
     }
 
     @Override
+    protected int getCurrentVersion() {
+        return 1;
+    }
+
+    @Override
     protected Type getDataType() {
         return new TypeToken<Map<String, Integer>>() {
         }.getType();

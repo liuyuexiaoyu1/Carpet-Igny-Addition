@@ -40,6 +40,11 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
     }
 
     @Override
+    protected int getCurrentVersion() {
+        return 1;
+    }
+
+    @Override
     protected Type getDataType() {
         return new TypeToken<VaultData>() {
         }.getType();

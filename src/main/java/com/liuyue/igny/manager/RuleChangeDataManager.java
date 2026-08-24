@@ -32,6 +32,11 @@ public class RuleChangeDataManager extends BaseDataManager<Map<String, List<Rule
     }
 
     @Override
+    protected int getCurrentVersion() {
+        return 1;
+    }
+
+    @Override
     protected Type getDataType() {
         return new TypeToken<Map<String, List<RuleChangeRecord>>>() {
         }.getType();

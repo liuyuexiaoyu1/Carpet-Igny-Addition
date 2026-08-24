@@ -32,6 +32,6 @@ public class CeilingHangingSignBlockProtocolAdapter implements BlockProtocolStat
 
     @Override
     public @NotNull ProtocolType igny$getProtocolType() {
-        return ProtocolType.REPLACE;
+        return ProtocolType.ADDED;
     }
 }

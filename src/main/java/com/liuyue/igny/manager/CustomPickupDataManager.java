@@ -16,6 +16,11 @@ public class CustomPickupDataManager extends BaseDataManager<Map<String, CustomP
     }
 
     @Override
+    protected int getCurrentVersion() {
+        return 1;
+    }
+
+    @Override
     protected Type getDataType() {
         return new TypeToken<Map<String, PlayerSetting>>() {
         }.getType();

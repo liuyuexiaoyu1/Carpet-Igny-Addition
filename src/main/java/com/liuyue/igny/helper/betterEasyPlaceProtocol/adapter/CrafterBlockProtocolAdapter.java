@@ -52,7 +52,7 @@ public class CrafterBlockProtocolAdapter implements BlockProtocolStateAdapter, I
 
     @Override
     public @NotNull ProtocolType igny$getProtocolType() {
-        return ProtocolType.REPLACE;
+        return ProtocolType.ADDED;
     }
 
     @Override

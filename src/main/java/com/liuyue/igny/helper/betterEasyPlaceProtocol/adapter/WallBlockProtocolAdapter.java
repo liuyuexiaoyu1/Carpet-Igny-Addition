@@ -64,6 +64,6 @@ public class WallBlockProtocolAdapter implements BlockProtocolStateAdapter {
 
     @Override
     public @NotNull BlockProtocolStateAdapter.ProtocolType igny$getProtocolType() {
-        return BlockProtocolStateAdapter.ProtocolType.REPLACE;
+        return BlockProtocolStateAdapter.ProtocolType.ADDED;
     }
 }

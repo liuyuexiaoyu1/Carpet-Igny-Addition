@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -30,9 +29,7 @@ import java.util.Map;
 //#endif
 
 import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.decodeProtocolValueFromHitDim;
-import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.getRelativeHitX;
 import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.getRelativeHitZ;
-import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.isExtraProtocol;
 import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.isProtocol;
 
 public class BetterEasyPlaceProtocolHandler {
@@ -157,76 +154,53 @@ public class BetterEasyPlaceProtocolHandler {
         return null;
     }
 
-    public static @Nullable BlockState decodePlacementState(Block block, BlockPlaceContext context) {
+    public static @Nullable BlockState decodePlacementState(Block block, BlockPlaceContext context, @Nullable BlockState baseState) {
         if (!isRuleEnabled()) return null;
-
-        double relativeHitX = getRelativeHitX(context.getClickLocation(), context.getClickedPos());
-        if (!isProtocol(relativeHitX)) return null;
-
-        
-        int protocolValue = decodeProtocolValueFromHitDim(relativeHitX);
-        if (!isExtraProtocol(protocolValue)) {
-            return null;
+        if (baseState == null) {
+            baseState = block.getStateForPlacement(context);
+            if (baseState == null) {
+                baseState = block.defaultBlockState();
+            }
         }
 
         BlockProtocolStateAdapter adapter = getAdapter(block);
-        if (adapter == null) return null;
-
-        BlockState vanillaState = block.getStateForPlacement(context);
-        if (vanillaState == null) {
-            
-            
-            if (adapter.igny$getProtocolType() != BlockProtocolStateAdapter.ProtocolType.REPLACE) {
-                return null;
-            }
-            vanillaState = block.defaultBlockState();
+        if (adapter == null || adapter instanceof ItemStackProtocolDataAdapter) {
+            return baseState;
         }
 
-        if (adapter.igny$getProtocolType() == BlockProtocolStateAdapter.ProtocolType.REPLACE) {
-            
-            int rawProtocolValue = EasyPlaceExtraProtocolHelper.extraProtocolValueToRawProtocolValue(protocolValue);
-            return adapter.igny$fromProtocolValue(rawProtocolValue, vanillaState, context);
+        double relativeHitZ = getRelativeHitZ(context.getClickLocation(), context.getClickedPos());
+        if (!isProtocol(relativeHitZ)) {
+            return baseState;
         }
-        
-        return adapter.igny$fromProtocolValue(protocolValue, vanillaState, context);
+        int additionValue = decodeProtocolValueFromHitDim(relativeHitZ);
+        return adapter.igny$fromProtocolValue(additionValue, baseState, context);
     }
 
     public static @Nullable BlockState decodeAttachablePlacementState(Block standingBlock, Block wallBlock, BlockPlaceContext context) {
         if (!isRuleEnabled()) return null;
 
-        double relativeHitX = getRelativeHitX(context.getClickLocation(), context.getClickedPos());
-        if (!isProtocol(relativeHitX)) return null;
-
-        int protocolValue = decodeProtocolValueFromHitDim(relativeHitX);
-        boolean isWallType = (protocolValue & 0b0000_0001) == 0b0000_0001;
-        protocolValue >>>= 1;
-
-        if (isWallType) {
-            BlockState wallState = wallBlock.getStateForPlacement(context);
-            if (wallState == null) return null;
-
-            
-            Property<Direction> directionProperty = EasyPlaceExtraProtocolHelper.getFirstDirectionProperty(wallState);
-            if (directionProperty != null) {
-                int facingIndex = (protocolValue & 0b0000_0011) + 2;
-                wallState = wallState.setValue(directionProperty, Direction.values()[facingIndex]);
-            }
-            protocolValue >>>= 2;
-
-            BlockProtocolStateAdapter adapter = getAdapter(wallBlock);
-            if (adapter != null) {
-                return adapter.igny$fromProtocolValue(protocolValue, wallState, context);
-            }
-            return wallState;
+        BlockState baseState = null;
+        if (context.getClickedFace().getAxis() != Direction.Axis.Y) {
+            baseState = wallBlock.getStateForPlacement(context);
+        }
+        if (baseState == null) {
+            baseState = standingBlock.getStateForPlacement(context);
+        }
+        if (baseState == null) {
+            return null;
         }
 
-        BlockProtocolStateAdapter adapter = getAdapter(standingBlock);
-        if (adapter == null) return null;
-
-        BlockState standingState = standingBlock.getStateForPlacement(context);
-        if (standingState == null) return null;
-
-        return adapter.igny$fromProtocolValue(protocolValue, standingState, context);
+        double relativeHitZ = getRelativeHitZ(context.getClickLocation(), context.getClickedPos());
+        if (!isProtocol(relativeHitZ)) {
+            return baseState;
+        }
+        int additionValue = decodeProtocolValueFromHitDim(relativeHitZ);
+        BlockProtocolStateAdapter adapter = getAdapter(baseState.getBlock());
+        if (adapter == null || adapter instanceof ItemStackProtocolDataAdapter) {
+            return baseState;
+        }
+        BlockState applied = adapter.igny$fromProtocolValue(additionValue, baseState, context);
+        return applied != null ? applied : baseState;
     }
 
     public static @Nullable ItemStack applyItemStackProtocolData(ItemStack stack, BlockPlaceContext context) {

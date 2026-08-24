@@ -5,11 +5,6 @@ import carpet.CarpetServer;
 import com.liuyue.igny.commands.*;
 import com.liuyue.igny.logger.IGNYLoggers;
 import com.liuyue.igny.manager.BaseDataManager;
-import com.liuyue.igny.manager.BlockVaultManager;
-import com.liuyue.igny.manager.CustomItemMaxStackSizeDataManager;
-import com.liuyue.igny.manager.CustomPickupDataManager;
-import com.liuyue.igny.manager.LinkedContainerManager;
-import com.liuyue.igny.manager.RuleChangeDataManager;
 import com.liuyue.igny.network.PacketUtil;
 import com.liuyue.igny.utils.ComponentTranslate;
 import com.liuyue.igny.utils.TickUtil;
@@ -111,15 +106,8 @@ public class IGNYServer implements CarpetExtension {
 
     @Override
     public void onServerClosed(MinecraftServer server) {
-        // 清空所有 Manager 状态，防止切换存档后读到上个存档的数据
         BaseDataManager.clearAll();
-        CustomPickupDataManager.INSTANCE.setServer(null);
-        //#if MC >= 12006
-        CustomItemMaxStackSizeDataManager.INSTANCE.setServer(null);
-        //#endif
-        BlockVaultManager.INSTANCE.setServer(null);
-        LinkedContainerManager.INSTANCE.setServer(null);
-        RuleChangeDataManager.INSTANCE.setServer(null);
+        BaseDataManager.setServerAll(null);
     }
 
     public static void onLevelSave() {

@@ -2,10 +2,7 @@
 package com.liuyue.igny.mixins.interfaces;
 
 import com.liuyue.igny.IGNYServer;
-import com.liuyue.igny.manager.BlockVaultManager;
-import com.liuyue.igny.manager.CustomPickupDataManager;
-import com.liuyue.igny.manager.CustomItemMaxStackSizeDataManager;
-import com.liuyue.igny.manager.LinkedContainerManager;
+import com.liuyue.igny.manager.BaseDataManager;
 import com.liuyue.igny.task.ITask;
 import com.liuyue.igny.task.TaskManager;
 import com.liuyue.igny.tracker.RuleChangeTracker;
@@ -24,12 +21,7 @@ public abstract class MinecraftServerMixin {
         MinecraftServer server = IGNYServer.getInstance().getMinecraftServer();
         if (server != null && server.isRunning()) {
             RuleChangeTracker.init(server);
-            CustomPickupDataManager.INSTANCE.setServer(server);
-            //#if MC >= 12006
-            CustomItemMaxStackSizeDataManager.INSTANCE.setServer(server);
-            //#endif
-            BlockVaultManager.INSTANCE.setServer(server);
-            LinkedContainerManager.INSTANCE.setServer(server);
+            BaseDataManager.setServerAll(server);
         }
     }
 

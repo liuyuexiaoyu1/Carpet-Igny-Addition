@@ -14,8 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.decodeProtocolValueFromHitDim;
-import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.getRelativeHitX;
+import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.getRelativeHitZ;
 import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.isProtocol;
 
 @Mixin(value = StandingAndWallBlockItem.class, priority = 950)
@@ -32,17 +31,12 @@ public abstract class StandingAndWallBlockItemMixin extends BlockItem {
     private void igny_betterEasyPlaceProtocolDecode(BlockPlaceContext context, CallbackInfoReturnable<BlockState> cir) {
         if (!BetterEasyPlaceProtocolHandler.isRuleEnabled()) return;
 
-        double relativeHitX = getRelativeHitX(context.getClickLocation(), context.getClickedPos());
-        if (!isProtocol(relativeHitX)) return;
-
-        int protocolValue = decodeProtocolValueFromHitDim(relativeHitX);
-        boolean isWallType = (protocolValue & 0b0000_0001) == 0b0000_0001;
+        double relativeHitZ = getRelativeHitZ(context.getClickLocation(), context.getClickedPos());
+        if (!isProtocol(relativeHitZ)) return;
 
         BlockState state = BetterEasyPlaceProtocolHandler.decodeAttachablePlacementState(this.getBlock(), this.wallBlock, context);
         if (state == null) {
-            if (isWallType && BetterEasyPlaceProtocolHandler.getAdapter(this.wallBlock) != null) {
-                cir.setReturnValue(null);
-            }
+            cir.setReturnValue(null);
             return;
         }
         if (!this.canPlace(context, state)) return;

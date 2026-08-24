@@ -1,8 +1,6 @@
 package com.liuyue.igny.mixins.rule.betterEasyPlaceProtocol;
 
 import com.liuyue.igny.helper.betterEasyPlaceProtocol.BetterEasyPlaceProtocolHandler;
-import com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper;
-import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.ItemStackProtocolDataAdapter;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.MultiStageBlockProtocolStateAdapter;
 import com.llamalad7.mixinextras.expression.Definition;
@@ -16,17 +14,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseCoralWallFanBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RedStoneWireBlock;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.piston.PistonHeadBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.block.state.properties.RedstoneSide;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -41,9 +35,6 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import fi.dy.masa.litematica.world.SchematicWorldHandler;
 
-import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.addExtraProtocolBit;
-import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.encodeExtraProtocolValueToHitVecX;
-import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.encodeProtocolValueToHitVecX;
 import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.encodeProtocolValueToHitVecZ;
 
 @Restriction(
@@ -55,87 +46,6 @@ import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProto
 public abstract class WorldUtilsMixin {
     //#if MC <= 12006
     //$$ @Shadow private static void cacheEasyPlacePosition(BlockPos pos) {}
-    //#endif
-
-    //#if MC < 26.2
-    @Unique
-    private static void igny_encodeProtocol(BlockPos pos, BlockState state, Vec3 hitVecIn, CallbackInfoReturnable<Vec3> cir) {
-        if (!BetterEasyPlaceProtocolHandler.isRuleEnabled()) {
-            return;
-        }
-
-        Block block = state.getBlock();
-        int wallProtocolValue = 0;
-        boolean isWallBlock = false;
-        if (block.asItem() instanceof StandingAndWallBlockItem standingAndWallBlockItem) {
-            isWallBlock = true;
-            if (block.equals(((StandingAndWallBlockItemAccessor) standingAndWallBlockItem).igny$getWallBlock())) {
-                Property<Direction> dir = EasyPlaceExtraProtocolHelper.getFirstDirectionProperty(state);
-                if (dir != null) {
-                    int facingIndex = state.getValue(dir).ordinal() - 2;
-                    wallProtocolValue = ((facingIndex & 0b0000_0011) << 1);
-                }
-
-                wallProtocolValue |= 0b0000_0001;
-            }
-        }
-
-        if (!(BetterEasyPlaceProtocolHandler.getAdapter(block) instanceof BlockProtocolStateAdapter adapter)) {
-            if (isWallBlock) {
-                cir.setReturnValue(encodeProtocolValueToHitVecX(wallProtocolValue, hitVecIn));
-            }
-            return;
-        }
-
-        if (adapter.igny$getProtocolType() == BlockProtocolStateAdapter.ProtocolType.REPLACE) {
-            int protocolRawValue = adapter.igny$toProtocolValue(0, state);
-            Vec3 returnValue;
-            if (isWallBlock) {
-                if ((wallProtocolValue & 0b0000_0001) == 0b0000_0001) {
-                    protocolRawValue = (protocolRawValue << 3) | (wallProtocolValue & 0b0000_0111);
-                } else {
-                    protocolRawValue <<= 1;
-                }
-                returnValue = encodeProtocolValueToHitVecX(protocolRawValue, hitVecIn);
-            } else {
-                returnValue = encodeExtraProtocolValueToHitVecX(protocolRawValue, hitVecIn);
-            }
-            cir.setReturnValue(returnValue);
-        } else {
-            
-            int protocolValue = addExtraProtocolBit(adapter.igny$toProtocolValue(0, state));
-            if (block instanceof PistonBaseBlock && state.getValue(PistonBaseBlock.EXTENDED)) {
-                Level schematicWorld = SchematicWorldHandler.getSchematicWorld();
-                if (schematicWorld != null) {
-                    BlockState headState = schematicWorld.getBlockState(pos.relative(state.getValue(PistonBaseBlock.FACING)));
-                    if (headState.getBlock() instanceof PistonHeadBlock) {
-                        protocolValue |= 0b1_0000_0000;
-                    }
-                }
-            }
-            cir.setReturnValue(encodeProtocolValueToHitVecX(protocolValue, hitVecIn));
-        }
-    }
-
-    @Inject(
-            method = "applyCarpetProtocolHitVec(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;",
-            at = @At(value = "HEAD"),
-            cancellable = true,
-            require = 0
-    )
-    private static void igny_replaceExtraProtocol(BlockPos pos, BlockState state, Vec3 hitVecIn, CallbackInfoReturnable<Vec3> cir) {
-        igny_encodeProtocol(pos, state, hitVecIn, cir);
-    }
-
-    @Inject(
-            method = "applyPlacementProtocolV3(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;",
-            at = @At(value = "HEAD"),
-            cancellable = true,
-            require = 0
-    )
-    private static void igny_replaceV3Protocol(BlockPos pos, BlockState state, Vec3 hitVecIn, CallbackInfoReturnable<Vec3> cir) {
-        igny_encodeProtocol(pos, state, hitVecIn, cir);
-    }
     //#endif
 
     //#if MC >= 26.2
@@ -176,18 +86,24 @@ public abstract class WorldUtilsMixin {
             return hitPos;
         }
         Block block = stateSchematic.getBlock();
-        if (block instanceof RedStoneWireBlock) {
-            int upBits = 0;
-            if (stateSchematic.getValue(RedStoneWireBlock.NORTH) == RedstoneSide.UP) upBits |= 0b0001;
-            if (stateSchematic.getValue(RedStoneWireBlock.EAST) == RedstoneSide.UP) upBits |= 0b0010;
-            if (stateSchematic.getValue(RedStoneWireBlock.SOUTH) == RedstoneSide.UP) upBits |= 0b0100;
-            if (stateSchematic.getValue(RedStoneWireBlock.WEST) == RedstoneSide.UP) upBits |= 0b1000;
-            if (upBits != 0) {
-                return encodeProtocolValueToHitVecZ(upBits, hitPos);
-            }
-            return hitPos;
-        }
         if (!(BetterEasyPlaceProtocolHandler.getAdapter(block) instanceof ItemStackProtocolDataAdapter)) {
+            com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter adapter =
+                    BetterEasyPlaceProtocolHandler.getAdapter(block);
+            if (adapter != null) {
+                int added = adapter.igny$toProtocolValue(0, stateSchematic);
+                if (block instanceof PistonBaseBlock && stateSchematic.getValue(PistonBaseBlock.EXTENDED)) {
+                    Level schematicWorld = SchematicWorldHandler.getSchematicWorld();
+                    if (schematicWorld != null) {
+                        BlockState headState = schematicWorld.getBlockState(pos.relative(stateSchematic.getValue(PistonBaseBlock.FACING)));
+                        if (headState.getBlock() instanceof PistonHeadBlock) {
+                            added |= 0b1_0000_0000;
+                        }
+                    }
+                }
+                if (added != 0) {
+                    return encodeProtocolValueToHitVecZ(added, hitPos);
+                }
+            }
             return hitPos;
         }
         BlockEntity blockEntity = world.getBlockEntity(pos);
@@ -253,7 +169,7 @@ public abstract class WorldUtilsMixin {
         for (int i = 0; i < loopCount; ++i) {
             ctx.loopIndex = i;
             int protocolRawValue = multiStageAdapter.igny$toProtocolValueLoop(ctx);
-            Vec3 protocolHitVec = encodeExtraProtocolValueToHitVecX(protocolRawValue, hitPos);
+            Vec3 protocolHitVec = encodeProtocolValueToHitVecZ(protocolRawValue, hitPos);
 
             BlockHitResult hitResult = new BlockHitResult(protocolHitVec, Direction.UP, pos, false);
             mc.gameMode.useItemOn(mc.player, hand, hitResult);

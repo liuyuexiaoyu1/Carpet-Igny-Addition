@@ -27,6 +27,6 @@ public class NoteBlockProtocolAdapter implements BlockProtocolStateAdapter {
 
     @Override
     public @NotNull ProtocolType igny$getProtocolType() {
-        return ProtocolType.REPLACE;
+        return ProtocolType.ADDED;
     }
 }

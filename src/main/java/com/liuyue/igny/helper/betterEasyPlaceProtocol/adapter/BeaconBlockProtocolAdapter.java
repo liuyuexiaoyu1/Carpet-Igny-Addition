@@ -51,7 +51,7 @@ public class BeaconBlockProtocolAdapter implements BlockProtocolStateAdapter, It
 
     @Override
     public @NotNull ProtocolType igny$getProtocolType() {
-        return ProtocolType.REPLACE;
+        return ProtocolType.ADDED;
     }
 
     @Override
