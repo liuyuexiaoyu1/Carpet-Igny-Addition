@@ -1,8 +1,11 @@
 package com.liuyue.igny.mixins.rule.instantPortalTeleport;
 
-import com.liuyue.igny.utils.compat.DummyClass;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(DummyClass.class)
+@Mixin(Entity.class)
 public interface EntityInvoker {
+    @Invoker("handlePortal")
+    void invokeHandlePortal();
 }

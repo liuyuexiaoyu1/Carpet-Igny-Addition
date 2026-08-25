@@ -23,8 +23,9 @@ public abstract class ServerLevelMixin {
         BlockPos pos = entity.blockPosition();
         BlockState state = level.getBlockState(pos);
         if (!(state.getBlock() instanceof Portal portal)) return;
-        net.minecraft.world.level.portal.DimensionTransition transition = portal.getPortalDestination(level, entity, pos);
-        if (transition == null) return;
-        entity.changeDimension(transition);
+        if (entity.canUsePortal(false)) {
+            entity.setAsInsidePortal(portal, pos);
+            ((EntityInvoker) entity).invokeHandlePortal();
+        }
     }
 }
