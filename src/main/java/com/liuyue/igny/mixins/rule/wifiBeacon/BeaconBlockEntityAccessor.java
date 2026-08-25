@@ -17,30 +17,30 @@ public interface BeaconBlockEntityAccessor {
     void igny$setLevels(int levels);
 
     @Accessor("primaryPower")
-        //#if MC <= 12004
-        //$$ MobEffect igny$getPrimaryPower();
-        //#else
+    //#if MC <= 12004
+    //$$ MobEffect igny$getPrimaryPower();
+    //#else
     Holder<MobEffect> igny$getPrimaryPower();
     //#endif
 
     @Accessor("primaryPower")
-        //#if MC <= 12004
-        //$$ void igny$setPrimaryPower(MobEffect primaryPower);
-        //#else
+    //#if MC <= 12004
+    //$$ void igny$setPrimaryPower(MobEffect primaryPower);
+    //#else
     void igny$setPrimaryPower(Holder<MobEffect> primaryPower);
     //#endif
 
     @Accessor("secondaryPower")
-        //#if MC <= 12004
-        //$$ MobEffect igny$getSecondaryPower();
-        //#else
+    //#if MC <= 12004
+    //$$ MobEffect igny$getSecondaryPower();
+    //#else
     Holder<MobEffect> igny$getSecondaryPower();
     //#endif
 
     @Accessor("secondaryPower")
-        //#if MC <= 12004
-        //$$ void igny$setSecondaryPower(MobEffect primaryPower);
-        //#else
+    //#if MC <= 12004
+    //$$ void igny$setSecondaryPower(MobEffect primaryPower);
+    //#else
     void igny$setSecondaryPower(Holder<MobEffect> secondaryPower);
     //#endif
 }
