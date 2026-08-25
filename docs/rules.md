@@ -1316,3 +1316,21 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
+
+## 信标无线中继 (wifiBeacon) `🐛Beta`
+
+在一个已激活的信标效果范围内，如果有另一个信标，该信标会继承父信标的效果并向自己的范围广播。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 瞬时传送门传送 (instantPortalTeleport) `🐛Beta`
+
+生成在传送门内的实体立即传送，不再等待实体首个tick执行再传送。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

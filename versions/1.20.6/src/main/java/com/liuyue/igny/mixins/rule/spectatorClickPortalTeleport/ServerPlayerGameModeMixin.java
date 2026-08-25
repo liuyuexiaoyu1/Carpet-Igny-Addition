@@ -10,8 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.EndPortalBlock;
-import net.minecraft.world.level.block.NetherPortalBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,8 +24,11 @@ public class ServerPlayerGameModeMixin {
     private void useItemOn(ServerPlayer player, Level level, ItemStack stack, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir, @Local BlockState state, @Local BlockPos pos) {
         MenuProvider menuProvider = state.getMenuProvider(level, pos);
         if (IGNYSettings.SPECTATOR_CLICK_PORTAL_TELEPORT.value() && menuProvider == null) {
-            if (state.getBlock() instanceof EndPortalBlock || state.getBlock() instanceof NetherPortalBlock) {
+            if (state.is(Blocks.END_PORTAL) || state.is(Blocks.NETHER_PORTAL)) {
                 ((BlockBehaviourInvoker) state.getBlock()).invokeEntityInside(state, player.level(), hitResult.getBlockPos(), player);
+                if (state.is(Blocks.NETHER_PORTAL)) {
+                    ((EntityInvoker) player).invokeHandleNetherPortal();
+                }
             }
         }
     }

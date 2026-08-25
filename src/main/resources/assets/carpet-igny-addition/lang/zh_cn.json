@@ -457,5 +457,9 @@
   "carpet.rule.noteBlockNoteUnchanged.name": "音符盒音高不变",
   "carpet.rule.noteBlockNoteUnchanged.desc": "右键点击音符盒时不再循环切换音高，但仍会产生方块更新",
   "carpet.rule.betterEasyPlaceProtocol.name": "更好的轻松放置协议",
-  "carpet.rule.betterEasyPlaceProtocol.desc": "补全一些投影的轻松放置模式放置方块无法同步的方块状态"
+  "carpet.rule.betterEasyPlaceProtocol.desc": "补全一些投影的轻松放置模式放置方块无法同步的方块状态",
+  "carpet.rule.wifiBeacon.name": "信标无线中继",
+  "carpet.rule.wifiBeacon.desc": "在一个已激活的信标效果范围内，如果有另一个信标，该信标会继承父信标的效果并向自己的范围广播",
+  "carpet.rule.instantPortalTeleport.name": "瞬时传送门传送",
+  "carpet.rule.instantPortalTeleport.desc": "生成在传送门内的实体立即传送，不再等待实体首个tick执行再传送"
 }

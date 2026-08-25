@@ -141,6 +141,8 @@
     "rule.happyGhastNoClip.StandingAndWallBlockItemMixin",
     "rule.hugeMushroomDestroyUnbreakableReintroduced.AbstractHugeMushroomFeatureMixin",
     "rule.instantFrogEat.FrogMixin",
+    "rule.instantPortalTeleport.EntityInvoker",
+    "rule.instantPortalTeleport.ServerLevelMixin",
     "rule.instantSpawnEnderDragon.EndDragonFightMixin",
     "rule.instantTrialSpawnerSpawnLoot.TrialSpawnerStateMixin",
     "rule.instantVaultSpawnLoot.VaultBlockEntityServerInvoker",
@@ -235,6 +237,7 @@
     "rule.spawnMaxCountIgnoresChunkOverlap.ServerChunkCacheAccessor",
     "rule.spawnMaxCountIgnoresChunkOverlap.ServerLevelAccessor",
     "rule.spectatorClickPortalTeleport.BlockBehaviourInvoker",
+    "rule.spectatorClickPortalTeleport.EntityInvoker",
     "rule.spectatorClickPortalTeleport.NetherPortalBlockMixin",
     "rule.spectatorClickPortalTeleport.ServerPlayerGameModeMixin",
     "rule.spectatorKeepLeashConnectionReintroduced.LeashableMixin",
@@ -267,7 +270,9 @@
     "rule.tripwireHookDupeReintroduced.TripWireHookBlockMixin",
     "rule.visibleSpectators.ServerPlayerMixin",
     "rule.wardenNeverDig.WardenMixin",
-    "rule.wetSpongeCanAbsorbLava.WetSpongeBlockMixin"
+    "rule.wetSpongeCanAbsorbLava.WetSpongeBlockMixin",
+    "rule.wifiBeacon.BeaconBlockEntityAccessor",
+    "rule.wifiBeacon.BeaconBlockEntityMixin"
   ],
   "client": [
     "easterEgg.ScreenAccessor",

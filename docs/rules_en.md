@@ -1314,3 +1314,21 @@ Fills in some block states that cannot be synced by the easy place mode when pla
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
+- 
+## wifiBeacon `🐛Beta`
+
+If another beacon is within the effect range of an active beacon, that beacon inherits the parent beacon's effects and broadcasts them over its own range.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## instantPortalTeleport `🐛Beta`
+
+Entities spawned inside a portal teleport immediately, without waiting for their first tick.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

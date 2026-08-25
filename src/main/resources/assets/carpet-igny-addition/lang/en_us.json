@@ -315,5 +315,9 @@
   "carpet.rule.sequentialArrowHitEntityReintroduced.desc": "Reintroduces the behavior where an arrow calculates and collides with all entities along its path one by one, reverting the change from 25w41a",
   "carpet.rule.disableTntDispense.desc": "When the launcher fires TNT, it no longer ignites it into a TNT entity, but instead throws it out directly like a normal item",
   "carpet.rule.noteBlockNoteUnchanged.desc": "When right-clicking a note block, it no longer cycles through pitches, but it still causes a block update",
-  "carpet.rule.betterEasyPlaceProtocol.desc": "Fills in some block states that cannot be synced by the easy place mode when placing blocks from schematics"
+  "carpet.rule.betterEasyPlaceProtocol.desc": "Fills in some block states that cannot be synced by the easy place mode when placing blocks from schematics",
+  "carpet.rule.wifiBeacon.name": "Wireless Beacon Relay",
+  "carpet.rule.wifiBeacon.desc": "If another beacon is within the effect range of an active beacon, that beacon inherits the parent beacon's effects and broadcasts them over its own range",
+  "carpet.rule.instantPortalTeleport.name": "Instant Portal Teleport",
+  "carpet.rule.instantPortalTeleport.desc": "Entities spawned inside a portal teleport immediately, without waiting for their first tick"
 }

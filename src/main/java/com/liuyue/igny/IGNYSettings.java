@@ -1057,4 +1057,26 @@ public class IGNYSettings {
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );
+
+    /**
+     * wifiBeacon：信标无线中继。
+     * 在一个已激活（有底座且已设置效果）的信标效果范围内，如果有另一个信标
+     * （没有底座或未激活），该信标会继承父信标的效果并向自己的范围广播，
+     * 可以无限中继下去。
+     */
+    public static final RuleAccessor<Boolean> WIFI_BEACON = register(
+            RuleFactory.of("wifiBeacon", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    /**
+     * instantPortalTeleport：生成在传送门内的实体立即传送（1gt），
+     * 不再等待实体首个 tick（原版需要 2gt）。
+     */
+    public static final RuleAccessor<Boolean> INSTANT_PORTAL_TELEPORT = register(
+            RuleFactory.of("instantPortalTeleport", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
 }
