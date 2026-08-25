@@ -18,6 +18,7 @@ public abstract class ServerLevelMixin {
     private void addEntity(Entity entity, CallbackInfoReturnable<Boolean> cir) {
         if (!cir.getReturnValue()) return;
         if (!IGNYSettings.INSTANT_PORTAL_TELEPORT.value()) return;
+        if (IGNYSettings.isPortalSpawn.get()) return;
         if (entity.isOnPortalCooldown()) return;
         ServerLevel level = (ServerLevel) entity.level();
         BlockPos pos = entity.blockPosition();

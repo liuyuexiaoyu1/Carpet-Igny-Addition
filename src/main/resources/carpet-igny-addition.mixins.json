@@ -142,6 +142,7 @@
     "rule.hugeMushroomDestroyUnbreakableReintroduced.AbstractHugeMushroomFeatureMixin",
     "rule.instantFrogEat.FrogMixin",
     "rule.instantPortalTeleport.EntityInvoker",
+    "rule.instantPortalTeleport.NetherPortalBlockMixin",
     "rule.instantPortalTeleport.ServerLevelMixin",
     "rule.instantSpawnEnderDragon.EndDragonFightMixin",
     "rule.instantTrialSpawnerSpawnLoot.TrialSpawnerStateMixin",
