@@ -1070,11 +1070,13 @@ public class IGNYSettings {
                     .build()
     );
 
+    //#if MC >= 12004
     public static final RuleAccessor<Boolean> OPEN_DECORATED_POT_GUI = register(
             RuleFactory.of("openDecoratedPotGui", false)
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );
+    //#endif
 
     public static final RuleAccessor<Boolean> INSTANT_SPREAD_LIQUID = register(
             RuleFactory.of("instantSpreadLiquid", false)
@@ -1084,6 +1086,37 @@ public class IGNYSettings {
 
     public static final RuleAccessor<Boolean> DISABLE_CHICKEN_EGG_LAYING = register(
             RuleFactory.of("disableChickenEggLaying", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> DISABLE_CHUNK_BAN = register(
+            RuleFactory.of("disableChunkBan", false)
+                    .addCategories(FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> ENDER_PEARLS_NO_ENDER_MITES = register(
+            RuleFactory.of("enderPearlsNoEnderMites", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Integer> COMMAND_BLOCK_CHARACTER_LIMIT = register(
+            RuleFactory.of("commandBlockCharacterLimit", 32500)
+                    .addCategories(CREATIVE, FEATURE)
+                    .setClient()
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> WATER_CAN_PUSH_SQUID = register(
+            RuleFactory.of("waterCanPushSquid", false)
+                    .addCategories(FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> NETHER_PORTALS_ALWAYS_ON_ROOF = register(
+            RuleFactory.of("netherPortalsAlwaysOnRoof", false)
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );

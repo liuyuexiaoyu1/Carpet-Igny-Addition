@@ -2,7 +2,9 @@ package com.liuyue.igny.utils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+//#if MC >= 12101
 import net.minecraft.world.level.block.Portal;
+//#endif
 import net.minecraft.world.phys.AABB;
 //#if MC <= 12006
 //$$ import net.minecraft.world.level.block.Blocks;

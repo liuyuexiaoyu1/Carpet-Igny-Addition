@@ -1342,7 +1342,7 @@ Entities spawned inside a portal teleport immediately, without waiting for their
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## openDecoratedPotGui `🐛Beta`
+## openDecoratedPotGui `🐛Beta` `MC>=1.20.4`
 
 Interacting with a decorated pot while holding no item allows operating the items inside the decorated pot.
 
@@ -1363,6 +1363,50 @@ Makes fluids skip fluid ticks and instantly calculate all flow paths.
 ## disableChickenEggLaying `🐛Beta`
 
 Prevents chickens from laying eggs.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## disableChunkBan `🐛Beta`
+
+Prevents players from being kicked due to excessively large outgoing packets.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`
+
+## enderPearlsNoEnderMites `🐛Beta`
+
+Adjust the character limit for commands in command blocks.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## commandBlockCharacterLimit `🐛Beta`
+
+Adjust the character limit for commands in command blocks.
+
+- Type: `int`
+- Default value: `32500`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## waterCanPushSquid `🐛Beta`
+
+Water flow can push squids.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`
+
+## netherPortalsAlwaysOnRoof `🐛Beta`
+
+Nether portals are always placed at Y = 128 or above when created.
 
 - Type: `boolean`
 - Default value: `false`

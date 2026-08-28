@@ -467,5 +467,15 @@
   "carpet.rule.instantSpreadLiquid.name": "瞬时传播流体",
   "carpet.rule.instantSpreadLiquid.desc": "使流体不再添加流体刻，而是瞬时计算所有路径",
   "carpet.rule.disableChickenEggLaying.name": "禁止鸡下蛋",
-  "carpet.rule.disableChickenEggLaying.desc": "使鸡不再下蛋"
+  "carpet.rule.disableChickenEggLaying.desc": "使鸡不再下蛋",
+  "carpet.rule.disableChunkBan.name": "禁用区块封禁",
+  "carpet.rule.disableChunkBan.desc": "防止因为发送的单个数据包过大导致玩家被踢出服务器",
+  "carpet.rule.enderPearlsNoEnderMites.name": "末影珍珠无末影螨",
+  "carpet.rule.enderPearlsNoEnderMites.desc": "掷出的末影珍珠无论如何都不会生成末影螨",
+  "carpet.rule.commandBlockCharacterLimit.name": "命令方块字符限制",
+  "carpet.rule.commandBlockCharacterLimit.desc": "可调整命令方块中指令的字符数上限",
+  "carpet.rule.waterCanPushSquid.name": "水流可推动鱿鱼",
+  "carpet.rule.waterCanPushSquid.desc": "水流可以使鱿鱼位移",
+  "carpet.rule.netherPortalsAlwaysOnRoof.name": "下界传送门永远置于上层",
+  "carpet.rule.netherPortalsAlwaysOnRoof.desc": "创建下界传送门时，最低生成高度处于Y轴坐标128格处"
 }

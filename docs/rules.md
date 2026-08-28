@@ -1344,7 +1344,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 打开饰纹陶罐界面 (openDecoratedPotGui) `🐛Beta`
+## 打开饰纹陶罐界面 (openDecoratedPotGui) `🐛Beta` `MC>=1.20.4`
 
 手中无物品时交互饰纹陶罐可操作饰纹陶罐中的物品。
 
@@ -1365,6 +1365,50 @@ true: 物品展示框内含物品时将会隐形。
 ## 禁止鸡下蛋 (disableChickenEggLaying) `🐛Beta`
 
 使鸡不再下蛋。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 禁用区块封禁 (disableChunkBan) `🐛Beta`
+
+防止因为发送的单个数据包过大导致玩家被踢出服务器。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`
+
+## 末影珍珠无末影螨 (enderPearlsNoEnderMites) `🐛Beta`
+
+掷出的末影珍珠无论如何都不会生成末影螨。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 命令方块字符限制 (commandBlockCharacterLimit) `🐛Beta`
+
+可调整命令方块中指令的字符数上限。
+
+- 类型: `int`
+- 默认值: `32500`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 水流可推动鱿鱼 (waterCanPushSquid) `🐛Beta`
+
+水流可以使鱿鱼位移。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`
+
+## 下界传送门永远置于上层 (netherPortalsAlwaysOnRoof) `🐛Beta`
+
+创建下界传送门时，最低生成高度处于Y轴坐标128格处。
 
 - 类型: `boolean`
 - 默认值: `false`

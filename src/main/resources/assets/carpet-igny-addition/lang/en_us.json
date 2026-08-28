@@ -322,5 +322,10 @@
   "carpet.rule.instantPortalTeleport.desc": "Entities spawned inside a portal teleport immediately, without waiting for their first tick",
   "carpet.rule.openDecoratedPotGui.desc": "Interacting with a decorated pot while holding no item allows operating the items inside the decorated pot",
   "carpet.rule.instantSpreadLiquid.desc": "Makes fluids skip fluid ticks and instantly calculate all flow paths",
-  "carpet.rule.disableChickenEggLaying.desc": "Prevents chickens from laying eggs"
+  "carpet.rule.disableChickenEggLaying.desc": "Prevents chickens from laying eggs",
+  "carpet.rule.disableChunkBan.desc": "Prevents players from being kicked due to excessively large outgoing packets",
+  "carpet.rule.enderPearlsNoEnderMites.desc": "Thrown ender pearls never spawn endermites",
+  "carpet.rule.commandBlockCharacterLimit.desc": "Adjust the character limit for commands in command blocks",
+  "carpet.rule.waterCanPushSquid.desc": "Water flow can push squids",
+  "carpet.rule.netherPortalsAlwaysOnRoof.desc": "Nether portals are always placed at Y = 128 or above when created"
 }
