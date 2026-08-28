@@ -21,6 +21,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#if MC >= 26.3
+//$$ import net.minecraft.world.item.component.SwingAnimation;
+//#endif
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
@@ -90,7 +93,11 @@ public class ItemStackMixin {
         if (player instanceof ServerPlayer serverPlayer) {
             serverPlayer.awardStat(net.minecraft.stats.Stats.ITEM_USED.get(Items.MAGMA_BLOCK));
         }
-
+        //#if MC >= 26.3
+        //$$ player.swing(InteractionHand.OFF_HAND, SwingAnimation.DEFAULT, true);
+        //#else
+        player.swing(InteractionHand.OFF_HAND);
+        //#endif
         cir.setReturnValue(InteractionResult.SUCCESS);
     }
 }
