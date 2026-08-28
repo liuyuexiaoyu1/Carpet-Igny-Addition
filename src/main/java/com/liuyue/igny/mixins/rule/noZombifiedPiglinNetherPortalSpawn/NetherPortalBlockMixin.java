@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(NetherPortalBlock.class)
 public class NetherPortalBlockMixin {
-    @Inject(method="randomTick", at=@At("HEAD"), cancellable = true)
+    @Inject(method = "randomTick", at = @At(value = "HEAD"), cancellable = true)
     private void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
         if (IGNYSettings.NO_ZOMBIFIED_PIGLIN_NETHER_PORTAL_SPAWN.value()) {
             ci.cancel();

@@ -85,6 +85,15 @@
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
+## 僵尸猪灵不会自然生成在下界传送门 (noZombifiedPiglinNetherPortalSpawn)
+
+当主世界的下界传送门方块接收到随机刻时，僵尸猪灵将不会自然生成在主世界的下界传送门中。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
 ## 重新引入投掷物复制 (projectileDuplicationReintroduced) `MC>=1.21.2`
 
 重新引入1.21.2以下的投掷物残留刻复制行为（可视作恢复药水、鸡蛋、雪球等复制行为）。
