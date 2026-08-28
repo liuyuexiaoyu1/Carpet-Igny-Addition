@@ -1395,7 +1395,7 @@ true: 物品展示框内含物品时将会隐形。
 
 - 类型: `int`
 - 默认值: `32500`
-- 分类: `IGNY`, `CREATIVE`, `FEATURE`
+- 分类: `IGNY`, `CLIENT`, `CREATIVE`, `FEATURE`
 
 ## 水流可推动鱿鱼 (waterCanPushSquid) `🐛Beta`
 

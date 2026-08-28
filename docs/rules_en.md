@@ -1393,7 +1393,7 @@ Adjust the character limit for commands in command blocks.
 
 - Type: `int`
 - Default value: `32500`
-- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+- Categories: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
 
 ## waterCanPushSquid `🐛Beta`
 
