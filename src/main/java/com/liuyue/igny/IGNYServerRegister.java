@@ -9,7 +9,12 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
+//#if MC >= 12101
 import net.minecraft.world.level.block.Portal;
+//#else
+//$$ import net.minecraft.world.level.block.Blocks;
+//$$ import net.minecraft.world.level.block.state.BlockState;
+//#endif
 //#if MC < 12005
 //$$ import com.liuyue.igny.IGNYServer;
 //#endif
@@ -56,10 +61,22 @@ public class IGNYServerRegister {
             ServerLevel level = (ServerLevel) entity.level();
             BlockPos portalPos = EntityUtil.findPortalInBoundingBox(level, entity.getBoundingBox());
             if (portalPos == null) return;
+            //#if MC >= 12101
             if (level.getBlockState(portalPos).getBlock() instanceof Portal portal && entity.canUsePortal(false)) {
                 entity.setAsInsidePortal(portal, portalPos);
                 ((EntityInvoker) entity).invokeHandlePortal();
             }
+            //#else
+            //$$ BlockState state = level.getBlockState(portalPos);
+            //$$ if (!state.is(Blocks.NETHER_PORTAL) && !state.is(Blocks.END_PORTAL)) return;
+            //$$ EntityInvoker invoker = (EntityInvoker) entity;
+            //$$ if (entity.canChangeDimensions()) {
+            //$$     entity.handleInsidePortal(portalPos);
+            //$$     if (state.is(Blocks.NETHER_PORTAL)) {
+            //$$         invoker.igny$invokeHandleNetherPortal();
+            //$$     }
+            //$$ }
+            //#endif
         });
     }
 }
