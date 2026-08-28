@@ -86,9 +86,9 @@ public abstract class WorldUtilsMixin {
             return hitPos;
         }
         Block block = stateSchematic.getBlock();
-        if (!(BetterEasyPlaceProtocolHandler.getAdapter(block) instanceof ItemStackProtocolDataAdapter)) {
-            com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter adapter =
-                    BetterEasyPlaceProtocolHandler.getAdapter(block);
+        com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter adapter =
+                BetterEasyPlaceProtocolHandler.getAdapter(block);
+        if (!(adapter instanceof ItemStackProtocolDataAdapter)) {
             if (adapter != null) {
                 int added = adapter.igny$toProtocolValue(0, stateSchematic);
                 if (block instanceof PistonBaseBlock && stateSchematic.getValue(PistonBaseBlock.EXTENDED)) {
@@ -100,9 +100,7 @@ public abstract class WorldUtilsMixin {
                         }
                     }
                 }
-                if (added != 0) {
-                    return encodeProtocolValueToHitVecZ(added, hitPos);
-                }
+                return encodeProtocolValueToHitVecZ(added, hitPos);
             }
             return hitPos;
         }
@@ -119,7 +117,6 @@ public abstract class WorldUtilsMixin {
         }
         return encodeProtocolValueToHitVecZ(protocolAdditionValue, hitPos);
     }
-
     @Unique
     private static @Nullable BlockEntity getSchematicWorldBlockEntity(BlockPos pos) {
         Level schematicWorld = SchematicWorldHandler.getSchematicWorld();

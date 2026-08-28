@@ -21,6 +21,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#if MC >= 12111
+//$$ import net.minecraft.world.attribute.EnvironmentAttributes;
+//#endif
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
@@ -37,6 +40,11 @@ public class ItemStackMixin {
 
         Level level = context.getLevel();
         BlockPos clickedPos = context.getClickedPos();
+        //#if MC >= 12111
+        //$$ if ((Boolean) level.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, clickedPos)) return;
+        //#else
+        if (level.dimensionType().ultraWarm()) return;
+        //#endif
         Direction direction = context.getClickedFace();
         BlockPos placePos = clickedPos.relative(direction);
         BlockState clickedState = level.getBlockState(clickedPos);
@@ -65,11 +73,6 @@ public class ItemStackMixin {
             return;
         }
 
-        if (level.isClientSide()) {
-            cir.setReturnValue(InteractionResult.SUCCESS);
-            return;
-        }
-
         if (canPlaceInContainer) {
             ((LiquidBlockContainer) targetState.getBlock()).placeLiquid(level, targetPos, targetState, Fluids.WATER.defaultFluidState());
         } else {
@@ -90,7 +93,7 @@ public class ItemStackMixin {
         if (player instanceof ServerPlayer serverPlayer) {
             serverPlayer.awardStat(net.minecraft.stats.Stats.ITEM_USED.get(Items.ICE));
         }
-
+        player.swing(InteractionHand.OFF_HAND);
         cir.setReturnValue(InteractionResult.SUCCESS);
     }
 }

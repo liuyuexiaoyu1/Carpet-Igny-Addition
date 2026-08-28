@@ -319,5 +319,8 @@
   "carpet.rule.wifiBeacon.name": "Wireless Beacon Relay",
   "carpet.rule.wifiBeacon.desc": "If another beacon is within the effect range of an active beacon, that beacon inherits the parent beacon's effects and broadcasts them over its own range",
   "carpet.rule.instantPortalTeleport.name": "Instant Portal Teleport",
-  "carpet.rule.instantPortalTeleport.desc": "Entities spawned inside a portal teleport immediately, without waiting for their first tick"
+  "carpet.rule.instantPortalTeleport.desc": "Entities spawned inside a portal teleport immediately, without waiting for their first tick",
+  "carpet.rule.openDecoratedPotGui.desc": "Interacting with a decorated pot while holding no item allows operating the items inside the decorated pot",
+  "carpet.rule.instantSpreadLiquid.desc": "Makes fluids skip fluid ticks and instantly calculate all flow paths",
+  "carpet.rule.disableChickenEggLaying.desc": "Prevents chickens from laying eggs"
 }

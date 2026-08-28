@@ -1,9 +1,15 @@
 package com.liuyue.igny;
 
+import com.liuyue.igny.mixins.rule.instantPortalTeleport.EntityInvoker;
 import com.liuyue.igny.network.packet.config.SyncLinkedEnderChestPayload;
+import com.liuyue.igny.utils.EntityUtil;
 import com.liuyue.igny.utils.interfaces.linkableEnderChest.ViewingChest;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Portal;
 //#if MC < 12005
 //$$ import com.liuyue.igny.IGNYServer;
 //#endif
@@ -43,5 +49,17 @@ public class IGNYServerRegister {
                     });
                 }
         );
+        ServerEntityEvents.ENTITY_LOAD.register((entity, serverLevel) -> {
+            if (!IGNYSettings.INSTANT_PORTAL_TELEPORT.value()) return;
+            if (entity.isOnPortalCooldown()) return;
+
+            ServerLevel level = (ServerLevel) entity.level();
+            BlockPos portalPos = EntityUtil.findPortalInBoundingBox(level, entity.getBoundingBox());
+            if (portalPos == null) return;
+            if (level.getBlockState(portalPos).getBlock() instanceof Portal portal && entity.canUsePortal(false)) {
+                entity.setAsInsidePortal(portal, portalPos);
+                ((EntityInvoker) entity).invokeHandlePortal();
+            }
+        });
     }
 }

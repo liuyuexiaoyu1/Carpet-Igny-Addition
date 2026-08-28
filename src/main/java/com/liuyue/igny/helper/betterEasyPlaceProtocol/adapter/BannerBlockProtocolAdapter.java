@@ -16,12 +16,13 @@ public class BannerBlockProtocolAdapter implements BlockProtocolStateAdapter {
     @Override
     public int igny$toProtocolValue(int protocolValue, BlockState fromState) {
         int rotation = fromState.getValue(BannerBlock.ROTATION);
-        return rotation & 0b0000_1111;
+        return (protocolValue & 0b1111_0000) | ((rotation + 1) & 0b0000_1111);
     }
 
     @Override
     public @Nullable BlockState igny$fromProtocolValue(int extraProtocolValue, BlockState fromState, BlockPlaceContext context) {
-        int rotation = extraProtocolValue & 0b0000_1111;
+        int rotation = (extraProtocolValue & 0b0000_1111) - 1;
+        if (rotation < 0) rotation = 0;
         return fromState.setValue(BannerBlock.ROTATION, rotation);
     }
 

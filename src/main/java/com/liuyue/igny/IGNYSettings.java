@@ -33,7 +33,6 @@ public class IGNYSettings {
     public static ThreadLocal<Boolean> canGetBlockEntity = ThreadLocal.withInitial(() -> true);
     public static final ThreadLocal<Boolean> easyPlaceProtocolActive = ThreadLocal.withInitial(() -> false);
     public static BlockPos lastPistonHeadPos = null;
-    public static final ThreadLocal<Boolean> isPortalSpawn = ThreadLocal.withInitial(() -> false);
 
     /**
      * 物品展示框是否正在保存NBT数据
@@ -1059,24 +1058,32 @@ public class IGNYSettings {
                     .build()
     );
 
-    /**
-     * wifiBeacon：信标无线中继。
-     * 在一个已激活（有底座且已设置效果）的信标效果范围内，如果有另一个信标
-     * （没有底座或未激活），该信标会继承父信标的效果并向自己的范围广播，
-     * 可以无限中继下去。
-     */
     public static final RuleAccessor<Boolean> WIFI_BEACON = register(
             RuleFactory.of("wifiBeacon", false)
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );
 
-    /**
-     * instantPortalTeleport：生成在传送门内的实体立即传送（1gt），
-     * 不再等待实体首个 tick（原版需要 2gt）。
-     */
     public static final RuleAccessor<Boolean> INSTANT_PORTAL_TELEPORT = register(
             RuleFactory.of("instantPortalTeleport", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> OPEN_DECORATED_POT_GUI = register(
+            RuleFactory.of("openDecoratedPotGui", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> INSTANT_SPREAD_LIQUID = register(
+            RuleFactory.of("instantSpreadLiquid", false)
+                    .addCategories(CREATIVE, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> DISABLE_CHICKEN_EGG_LAYING = register(
+            RuleFactory.of("disableChickenEggLaying", false)
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );

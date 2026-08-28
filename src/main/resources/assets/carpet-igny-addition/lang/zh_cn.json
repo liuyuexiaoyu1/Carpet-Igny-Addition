@@ -461,5 +461,11 @@
   "carpet.rule.wifiBeacon.name": "信标无线中继",
   "carpet.rule.wifiBeacon.desc": "在一个已激活的信标效果范围内，如果有另一个信标，该信标会继承父信标的效果并向自己的范围广播",
   "carpet.rule.instantPortalTeleport.name": "瞬时传送门传送",
-  "carpet.rule.instantPortalTeleport.desc": "生成在传送门内的实体立即传送，不再等待实体首个tick执行再传送"
+  "carpet.rule.instantPortalTeleport.desc": "生成在传送门内的实体立即传送，不再等待实体首个tick执行再传送",
+  "carpet.rule.openDecoratedPotGui.name": "打开饰纹陶罐界面",
+  "carpet.rule.openDecoratedPotGui.desc": "手中无物品时交互饰纹陶罐可操作饰纹陶罐中的物品",
+  "carpet.rule.instantSpreadLiquid.name": "瞬时传播流体",
+  "carpet.rule.instantSpreadLiquid.desc": "使流体不再添加流体刻，而是瞬时计算所有路径",
+  "carpet.rule.disableChickenEggLaying.name": "禁止鸡下蛋",
+  "carpet.rule.disableChickenEggLaying.desc": "使鸡不再下蛋"
 }

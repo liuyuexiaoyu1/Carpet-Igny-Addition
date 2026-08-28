@@ -77,6 +77,8 @@ public class BetterEasyPlaceProtocolHandler {
         register(SnowLayerBlock.class, new SnowLayerBlockProtocolAdapter());
         register(StairBlock.class, new StairBlockProtocolAdapter());
         register(StandingSignBlock.class, new StandingSignBlockProtocolAdapter());
+        register(WallSignBlock.class, new StandingSignBlockProtocolAdapter());
+        register(WallHangingSignBlock.class, new CeilingHangingSignBlockProtocolAdapter());
         register(StructureBlock.class, new StructureBlockProtocolAdapter());
         register(TrapDoorBlock.class, new TrapDoorBlockProtocolAdapter());
         register(TurtleEggBlock.class, new TurtleEggBlockProtocolAdapter());
@@ -168,7 +170,7 @@ public class BetterEasyPlaceProtocolHandler {
         }
 
         BlockProtocolStateAdapter adapter = getAdapter(block);
-        if (adapter == null || adapter instanceof ItemStackProtocolDataAdapter) {
+        if (adapter == null) {
             return baseState;
         }
 
@@ -177,7 +179,8 @@ public class BetterEasyPlaceProtocolHandler {
             return baseState;
         }
         int additionValue = decodeProtocolValueFromHitDim(relativeHitZ);
-        return adapter.igny$fromProtocolValue(additionValue, baseState, context);
+        BlockState applied = adapter.igny$fromProtocolValue(additionValue, baseState, context);
+        return applied != null ? applied : baseState;
     }
 
     public static @Nullable BlockState decodeAttachablePlacementState(Block standingBlock, Block wallBlock, BlockPlaceContext context) {
@@ -200,7 +203,7 @@ public class BetterEasyPlaceProtocolHandler {
         }
         int additionValue = decodeProtocolValueFromHitDim(relativeHitZ);
         BlockProtocolStateAdapter adapter = getAdapter(baseState.getBlock());
-        if (adapter == null || adapter instanceof ItemStackProtocolDataAdapter) {
+        if (adapter == null) {
             return baseState;
         }
         BlockState applied = adapter.igny$fromProtocolValue(additionValue, baseState, context);

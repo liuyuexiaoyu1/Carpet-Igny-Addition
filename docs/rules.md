@@ -1334,3 +1334,30 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 打开饰纹陶罐界面 (openDecoratedPotGui) `🐛Beta`
+
+手中无物品时交互饰纹陶罐可操作饰纹陶罐中的物品。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 瞬时传播流体 (instantSpreadLiquid) `🐛Beta`
+
+使流体不再添加流体刻，而是瞬时计算所有路径。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 禁止鸡下蛋 (disableChickenEggLaying) `🐛Beta`
+
+使鸡不再下蛋。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

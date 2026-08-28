@@ -15,14 +15,20 @@ public class StandingSignBlockProtocolAdapter implements BlockProtocolStateAdapt
 
     @Override
     public int igny$toProtocolValue(int protocolValue, BlockState fromState) {
-        int rotation = fromState.getValue(StandingSignBlock.ROTATION);
-        return rotation & 0b0000_1111;
+        if (fromState.getBlock() instanceof StandingSignBlock) {
+            int rotation = fromState.getValue(StandingSignBlock.ROTATION);
+            return protocolValue | (rotation & 0b0000_1111);
+        }
+        return protocolValue;
     }
 
     @Override
     public @Nullable BlockState igny$fromProtocolValue(int extraProtocolValue, BlockState fromState, BlockPlaceContext context) {
-        int rotation = extraProtocolValue & 0b0000_1111;
-        return fromState.setValue(StandingSignBlock.ROTATION, rotation);
+        if (fromState.getBlock() instanceof StandingSignBlock) {
+            int rotation = extraProtocolValue & 0b0000_1111;
+            return fromState.setValue(StandingSignBlock.ROTATION, rotation);
+        }
+        return fromState;
     }
 
     @Override

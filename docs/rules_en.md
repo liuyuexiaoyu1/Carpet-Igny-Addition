@@ -1332,3 +1332,30 @@ Entities spawned inside a portal teleport immediately, without waiting for their
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## openDecoratedPotGui `🐛Beta`
+
+Interacting with a decorated pot while holding no item allows operating the items inside the decorated pot.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## instantSpreadLiquid `🐛Beta`
+
+Makes fluids skip fluid ticks and instantly calculate all flow paths.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## disableChickenEggLaying `🐛Beta`
+
+Prevents chickens from laying eggs.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

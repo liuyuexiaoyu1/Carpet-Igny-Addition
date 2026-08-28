@@ -17,8 +17,9 @@ public class CeilingHangingSignBlockProtocolAdapter implements BlockProtocolStat
     public int igny$toProtocolValue(int protocolValue, BlockState fromState) {
         int rotation = fromState.getValue(CeilingHangingSignBlock.ROTATION);
         boolean isAttached = fromState.getValue(CeilingHangingSignBlock.ATTACHED);
-        return (rotation & 0b0000_1111) |
-        (isAttached ? 0b0001_0000 : 0b0000_0000);
+        return protocolValue
+                | (rotation & 0b0000_1111)
+                | (isAttached ? 0b0001_0000 : 0b0000_0000);
     }
 
     @Override
