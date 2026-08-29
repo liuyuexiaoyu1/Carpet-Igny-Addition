@@ -19,6 +19,9 @@ public class CeilingHangingSignBlockProtocolAdapter implements BlockProtocolStat
     private static final int BIT_GLOWING = 0b10_0000;
     private static final int BIT_COLOR_MASK = 0b1111 << 6;
     private static final int BIT_COLOR_SHIFT = 6;
+    private static final int BIT_BACK_GLOWING = 0b1000_0000_0000;
+    private static final int BIT_BACK_COLOR_MASK = 0b1111 << 12;
+    private static final int BIT_BACK_COLOR_SHIFT = 12;
     private static final int BIT_WAXED = 0b100_0000_0000;
 
     public CeilingHangingSignBlockProtocolAdapter() {
@@ -52,7 +55,7 @@ public class CeilingHangingSignBlockProtocolAdapter implements BlockProtocolStat
         if (fromState.getBlock() instanceof WallHangingSignBlock) {
             int facingData = extraProtocolValue & 0b0000_0111;
             Direction[] dirs = Direction.values();
-            Direction facing = facingData >= 0 && facingData < dirs.length ? dirs[facingData] : Direction.NORTH;
+            Direction facing = facingData < dirs.length ? dirs[facingData] : Direction.NORTH;
             return fromState.setValue(WallHangingSignBlock.FACING, facing);
         }
         return fromState;
@@ -63,41 +66,20 @@ public class CeilingHangingSignBlockProtocolAdapter implements BlockProtocolStat
         return ProtocolType.ADDED;
     }
 
+    //#if MC >= 12001
     @Override
     public int igny$toProtocolValueAddition(ItemStack fromStack) {
         int attributes = 0;
-        //#if MC >= 12005
-        CompoundTag tag = getBlockEntityTag(fromStack);
+        CompoundTag tag = this.getBlockEntityTag(fromStack);
         if (tag == null) {
             return 0;
         }
+        attributes |= encodeSignTextFromTag(tag, "front_text", BIT_GLOWING, BIT_COLOR_MASK, BIT_COLOR_SHIFT);
+        attributes |= encodeSignTextFromTag(tag, "back_text", BIT_BACK_GLOWING, BIT_BACK_COLOR_MASK, BIT_BACK_COLOR_SHIFT);
         //#if MC >= 12105
-        //$$ CompoundTag frontText = tag.getCompound("front_text").orElse(null);
-        //$$ if (frontText != null && !frontText.isEmpty()) {
-        //$$     if (frontText.getBoolean("has_glowing_text").orElse(false)) attributes |= BIT_GLOWING;
-        //$$     String colorName = frontText.getString("color").orElse("");
-        //$$     for (DyeColor c : DyeColor.values()) {
-        //$$         if (c.getName().equals(colorName)) {
-        //$$             attributes |= (c.ordinal() & 0b1111) << BIT_COLOR_SHIFT;
-        //$$             break;
-        //$$         }
-        //$$     }
-        //$$ }
         //$$ if (tag.getBoolean("is_waxed").orElse(false)) attributes |= BIT_WAXED;
         //#else
-        CompoundTag frontText = tag.getCompound("front_text");
-        if (frontText != null && !frontText.isEmpty()) {
-            if (frontText.getBoolean("has_glowing_text")) attributes |= BIT_GLOWING;
-            String colorName = frontText.getString("color");
-            for (DyeColor c : DyeColor.values()) {
-                if (c.getName().equals(colorName)) {
-                    attributes |= (c.ordinal() & 0b1111) << BIT_COLOR_SHIFT;
-                    break;
-                }
-            }
-        }
         if (tag.getBoolean("is_waxed")) attributes |= BIT_WAXED;
-        //#endif
         //#endif
         return attributes;
     }
@@ -108,33 +90,56 @@ public class CeilingHangingSignBlockProtocolAdapter implements BlockProtocolStat
 
         boolean glowing = (extraProtocolValue & BIT_GLOWING) != 0;
         int colorOrdinal = (extraProtocolValue & BIT_COLOR_MASK) >>> BIT_COLOR_SHIFT;
+        boolean backGlowing = (extraProtocolValue & BIT_BACK_GLOWING) != 0;
+        int backColorOrdinal = (extraProtocolValue & BIT_BACK_COLOR_MASK) >>> BIT_BACK_COLOR_SHIFT;
 
         DyeColor[] colors = DyeColor.values();
-        DyeColor color = colorOrdinal < colors.length
-                ? colors[colorOrdinal]
-                : DyeColor.BLACK;
+        DyeColor color = colorOrdinal < colors.length ? colors[colorOrdinal] : DyeColor.BLACK;
+        DyeColor backColor = backColorOrdinal < colors.length ? colors[backColorOrdinal] : DyeColor.BLACK;
 
-        //#if MC >= 12005
         CompoundTag tag = getBlockEntityTag(stackCopy);
         if (tag == null) {
             tag = new CompoundTag();
         }
         applySignTextProperties(tag, "front_text", color, glowing);
-        applySignTextProperties(tag, "back_text", color, glowing);
+        applySignTextProperties(tag, "back_text", backColor, backGlowing);
         return setBlockEntityTag(stackCopy, tag);
-        //#else
-        //$$ CompoundTag tag = stackCopy.getTagElement("BlockEntityTag");
-        //$$ if (tag == null) {
-        //$$     return fromStack;
-        //$$ }
-        //$$ applySignTextProperties(tag, "front_text", color, glowing);
-        //$$ applySignTextProperties(tag, "back_text", color, glowing);
-        //$$ stackCopy.getOrCreateTag().put("BlockEntityTag", tag);
-        //$$ return stackCopy;
-        //#endif
     }
 
-    //#if MC >= 12005
+    //#if MC >= 12105
+    //$$ private static int encodeSignTextFromTag(CompoundTag tag, String key, int glowingBit, int colorMask, int colorShift) {
+    //$$     int attributes = 0;
+    //$$     CompoundTag text = tag.getCompound(key).orElse(null);
+    //$$     if (text != null && !text.isEmpty()) {
+    //$$         if (text.getBoolean("has_glowing_text").orElse(false)) attributes |= glowingBit;
+    //$$         String colorName = text.getString("color").orElse("");
+    //$$         for (DyeColor c : DyeColor.values()) {
+    //$$             if (c.getName().equals(colorName)) {
+    //$$                 attributes |= (c.ordinal() & 0b1111) << colorShift;
+    //$$                 break;
+    //$$             }
+    //$$         }
+    //$$     }
+    //$$     return attributes;
+    //$$ }
+    //#else
+    private static int encodeSignTextFromTag(CompoundTag tag, String key, int glowingBit, int colorMask, int colorShift) {
+        int attributes = 0;
+        CompoundTag text = tag.getCompound(key);
+        if (!text.isEmpty()) {
+            if (text.getBoolean("has_glowing_text")) attributes |= glowingBit;
+            String colorName = text.getString("color");
+            for (DyeColor c : DyeColor.values()) {
+                if (c.getName().equals(colorName)) {
+                    attributes |= (c.ordinal() & 0b1111) << colorShift;
+                    break;
+                }
+            }
+        }
+        return attributes;
+    }
+    //#endif
+
     private static void applySignTextProperties(CompoundTag tag, String key, DyeColor color, boolean glowing) {
         //#if MC >= 12105
         //$$ CompoundTag text = tag.getCompound(key).orElse(null);
@@ -157,25 +162,51 @@ public class CeilingHangingSignBlockProtocolAdapter implements BlockProtocolStat
         tag.put(key, text);
     }
     //#else
-    //$$ private static void applySignTextProperties(CompoundTag tag, String key, DyeColor color, boolean glowing) {
-    //$$     CompoundTag text = tag.getCompound(key);
-    //$$     if (text == null) {
-    //$$         text = new CompoundTag();
-    //$$         tag.put(key, text);
+    //$$ @Override
+    //$$ public int igny$toProtocolValueAddition(ItemStack fromStack) {
+    //$$     int attributes = 0;
+    //$$     CompoundTag tag = getBlockEntityTag(fromStack);
+    //$$     if (tag == null) {
+    //$$         return 0;
     //$$     }
-    //$$     if (!text.contains("messages")) {
-    //$$         net.minecraft.nbt.ListTag messages = new net.minecraft.nbt.ListTag();
-    //$$         for (int i = 0; i < 4; ++i) {
-    //$$             messages.add(net.minecraft.nbt.StringTag.valueOf(""));
+    //$$     if (tag.getBoolean("GlowingText")) attributes |= BIT_GLOWING;
+    //$$     String colorName = tag.getString("Color");
+    //$$     for (DyeColor c : DyeColor.values()) {
+    //$$         if (c.getName().equals(colorName)) {
+    //$$             attributes |= (c.ordinal() & 0b1111) << BIT_COLOR_SHIFT;
+    //$$             break;
     //$$         }
-    //$$         text.put("messages", messages);
     //$$     }
-    //$$     text.putString("color", color.getName());
-    //$$     text.putBoolean("has_glowing_text", glowing);
-    //$$     tag.put(key, text);
+    //$$     return attributes;
+    //$$ }
+    //$$
+    //$$ @Override
+    //$$ public @NotNull ItemStack igny$fromProtocolValueAddition(int extraProtocolValue, ItemStack fromStack) {
+    //$$     ItemStack stackCopy = fromStack.copy();
+    //$$     boolean glowing = (extraProtocolValue & BIT_GLOWING) != 0;
+    //$$     int colorOrdinal = (extraProtocolValue & BIT_COLOR_MASK) >>> BIT_COLOR_SHIFT;
+    //$$     DyeColor[] colors = DyeColor.values();
+    //$$     DyeColor color = colorOrdinal < colors.length ? colors[colorOrdinal] : DyeColor.BLACK;
+    //$$     CompoundTag tag = getBlockEntityTag(stackCopy);
+    //$$     if (tag == null) {
+    //$$         tag = new CompoundTag();
+    //$$     }
+    //$$     tag.putString("Color", color.getName());
+    //$$     tag.putBoolean("GlowingText", glowing);
+    //$$     return setBlockEntityTag(stackCopy, tag);
     //$$ }
     //#endif
 
+    //#if MC < 12005
+    //$$ private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
+    //$$     return stack.getTagElement("BlockEntityTag");
+    //$$ }
+    //$$ private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
+    //$$     ItemStack stackCopy = stack.copy();
+    //$$     stackCopy.getOrCreateTag().put("BlockEntityTag", tag);
+    //$$     return stackCopy;
+    //$$ }
+    //#endif
     //#if MC >= 12005 && MC < 12110
     private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
         net.minecraft.world.item.component.CustomData data = stack.get(net.minecraft.core.component.DataComponents.BLOCK_ENTITY_DATA);

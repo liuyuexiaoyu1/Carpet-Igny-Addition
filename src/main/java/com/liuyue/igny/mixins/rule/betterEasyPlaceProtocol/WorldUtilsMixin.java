@@ -117,7 +117,7 @@ public abstract class WorldUtilsMixin {
         }
         int protocolAdditionValue = adapter.igny$toProtocolValue(0, stateSchematic);
         int attributesValue = 0;
-        //#if MC >= 12005
+        //#if MC >= 12001
         net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
         if (mc.player != null) {
             net.minecraft.world.item.ItemStack handStack = mc.player.getMainHandItem();

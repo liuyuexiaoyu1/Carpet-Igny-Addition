@@ -223,39 +223,52 @@ public class BetterEasyPlaceProtocolHandler {
         return itemStackProtocolDataAdapter.igny$fromProtocolValueAddition(protocolAdditionValue, stack);
     }
 
-    //#if MC >= 12005
+    //#if MC >= 12001
     public static int encodeSignAttributesFromTag(net.minecraft.nbt.CompoundTag tag) {
         if (tag == null) {
             return 0;
         }
         int bits = 0;
+        bits |= encodeSignTextFromTag(tag, "front_text", 0b10_0000, 6);
+        bits |= encodeSignTextFromTag(tag, "back_text", 0b1000_0000_0000, 12);
         //#if MC >= 12105
-        //$$ net.minecraft.nbt.CompoundTag frontText = tag.getCompound("front_text").orElse(null);
-        //$$ if (frontText != null && !frontText.isEmpty()) {
-        //$$     if (frontText.getBoolean("has_glowing_text").orElse(false)) bits |= 0b10_0000;
-        //$$     String colorName = frontText.getString("color").orElse("");
-        //$$     for (net.minecraft.world.item.DyeColor c : net.minecraft.world.item.DyeColor.values()) {
-        //$$         if (c.getName().equals(colorName)) {
-        //$$             bits |= (c.ordinal() & 0b1111) << 6;
-        //$$             break;
-        //$$         }
-        //$$     }
-        //$$ }
         //$$ if (tag.getBoolean("is_waxed").orElse(false)) bits |= 0b100_0000_0000;
         //#else
-        net.minecraft.nbt.CompoundTag frontText = tag.getCompound("front_text");
-        if (frontText != null && !frontText.isEmpty()) {
-            if (frontText.getBoolean("has_glowing_text")) bits |= 0b10_0000;
-            String colorName = frontText.getString("color");
+        if (tag.getBoolean("is_waxed")) bits |= 0b100_0000_0000;
+        //#endif
+        return bits;
+    }
+
+    //#if MC >= 12105
+    //$$ private static int encodeSignTextFromTag(net.minecraft.nbt.CompoundTag tag, String key, int glowingBit, int colorShift) {
+    //$$     int bits = 0;
+    //$$     net.minecraft.nbt.CompoundTag text = tag.getCompound(key).orElse(null);
+    //$$     if (text != null && !text.isEmpty()) {
+    //$$         if (text.getBoolean("has_glowing_text").orElse(false)) bits |= glowingBit;
+    //$$         String colorName = text.getString("color").orElse("");
+    //$$         for (net.minecraft.world.item.DyeColor c : net.minecraft.world.item.DyeColor.values()) {
+    //$$             if (c.getName().equals(colorName)) {
+    //$$                 bits |= (c.ordinal() & 0b1111) << colorShift;
+    //$$                 break;
+    //$$             }
+    //$$         }
+    //$$     }
+    //$$     return bits;
+    //$$ }
+    //#else
+    private static int encodeSignTextFromTag(net.minecraft.nbt.CompoundTag tag, String key, int glowingBit, int colorShift) {
+        int bits = 0;
+        net.minecraft.nbt.CompoundTag text = tag.getCompound(key);
+        if (!text.isEmpty()) {
+            if (text.getBoolean("has_glowing_text")) bits |= glowingBit;
+            String colorName = text.getString("color");
             for (net.minecraft.world.item.DyeColor c : net.minecraft.world.item.DyeColor.values()) {
                 if (c.getName().equals(colorName)) {
-                    bits |= (c.ordinal() & 0b1111) << 6;
+                    bits |= (c.ordinal() & 0b1111) << colorShift;
                     break;
                 }
             }
         }
-        if (tag.getBoolean("is_waxed")) bits |= 0b100_0000_0000;
-        //#endif
         return bits;
     }
     //#endif
@@ -276,14 +289,26 @@ public class BetterEasyPlaceProtocolHandler {
             BeaconBlockEntityAccessor accessor = (BeaconBlockEntityAccessor) beaconBlockEntity;
             return BeaconBlockProtocolAdapter.encodeEffects(accessor.igny$getPrimaryPower(), accessor.igny$getSecondaryPower());
         }
+        //#if MC >= 12001
         if (blockEntity instanceof net.minecraft.world.level.block.entity.SignBlockEntity signBlockEntity) {
-            net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getFrontText();
             int bits = 0;
+            net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getFrontText();
             if (frontText.hasGlowingText()) bits |= 0b10_0000;
             bits |= (frontText.getColor().ordinal() & 0b1111) << 6;
+            net.minecraft.world.level.block.entity.SignText backText = signBlockEntity.getBackText();
+            if (backText.hasGlowingText()) bits |= 0b1000_0000_0000;
+            bits |= (backText.getColor().ordinal() & 0b1111) << 12;
             if (signBlockEntity.isWaxed()) bits |= 0b100_0000_0000;
             return bits;
         }
+        //#else
+        //$$ if (blockEntity instanceof net.minecraft.world.level.block.entity.SignBlockEntity signBlockEntity194) {
+        //$$     int bits = 0;
+        //$$     if (signBlockEntity194.hasGlowingText()) bits |= 0b10_0000;
+        //$$     bits |= (signBlockEntity194.getColor().ordinal() & 0b1111) << 6;
+        //$$     return bits;
+        //$$ }
+        //#endif
         return 0;
     }
 
@@ -292,10 +317,21 @@ public class BetterEasyPlaceProtocolHandler {
             return 0;
         }
         try {
-            //#if MC >= 12005
+            //#if MC >= 12001
             if (tag.contains("front_text")) {
                 return encodeSignAttributesFromTag(tag);
             }
+            //#else
+            //$$ int bits = 0;
+            //$$ if (tag.getBoolean("GlowingText")) bits |= 0b10_0000;
+            //$$ String colorName = tag.getString("Color");
+            //$$ for (net.minecraft.world.item.DyeColor c : net.minecraft.world.item.DyeColor.values()) {
+            //$$     if (c.getName().equals(colorName)) {
+            //$$         bits |= (c.ordinal() & 0b1111) << 6;
+            //$$         break;
+            //$$     }
+            //$$ }
+            //$$ return bits;
             //#endif
         } catch (Exception e) {
             return 0;
