@@ -322,6 +322,7 @@ public class BetterEasyPlaceProtocolHandler {
             if (tag.contains("front_text")) {
                 return encodeSignAttributesFromTag(tag);
             }
+            return 0;
             //#else
             //$$ int bits = 0;
             //$$ if (tag.getBoolean("GlowingText")) bits |= 0b10_0000;
@@ -337,6 +338,5 @@ public class BetterEasyPlaceProtocolHandler {
         } catch (Exception e) {
             return 0;
         }
-        return 0;
     }
 }
