@@ -1421,3 +1421,12 @@ A pointed dripstone stalactite can grow if it is attached to the underside of a 
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## containerBreakMomentumRemoved `🐛Beta`
+
+Removes random momentum from items dropped when a container is destroyed.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`

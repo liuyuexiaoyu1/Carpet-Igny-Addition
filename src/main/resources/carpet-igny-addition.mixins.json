@@ -88,6 +88,7 @@
     "rule.comparatorDupeReintroduced.ComparatorBlockMixin",
     "rule.comparatorDupeReintroduced.DiodeBlockMixin",
     "rule.constantSpeedHopperMinecart.AbstractMinecartContainerMixin",
+    "rule.containerBreakNoRandomMomentum.ContainersMixin",
     "rule.convenientRegeneratePowderSnow.AbstractCauldronBlockMixin",
     "rule.convenientRegeneratePowderSnow.CauldronBlockMixin",
     "rule.convenientRegeneratePowderSnow.LayeredCauldronBlockMixin",

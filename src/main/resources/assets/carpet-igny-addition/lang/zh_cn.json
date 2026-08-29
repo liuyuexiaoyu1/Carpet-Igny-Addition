@@ -479,5 +479,7 @@
   "carpet.rule.netherPortalsAlwaysOnRoof.name": "下界传送门永远置于上层",
   "carpet.rule.netherPortalsAlwaysOnRoof.desc": "创建下界传送门时，最低生成高度处于Y轴坐标128格处",
   "carpet.rule.betterPointedDripstoneGrow.name": "更好的滴水石锥生长",
-  "carpet.rule.betterPointedDripstoneGrow.desc": "当滴水石锥附着于下表面的滴水石块上方为含水方块时，下方的滴水石锥可以生长"
+  "carpet.rule.betterPointedDripstoneGrow.desc": "当滴水石锥附着于下表面的滴水石块上方为含水方块时，下方的滴水石锥可以生长",
+  "carpet.rule.containerBreakNoRandomMomentum.name": "容器破坏随机动量移除",
+  "carpet.rule.containerBreakNoRandomMomentum.desc": "破坏容器扔出物品时的随机动量将被移除"
 }

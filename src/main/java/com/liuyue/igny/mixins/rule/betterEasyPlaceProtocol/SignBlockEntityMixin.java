@@ -9,6 +9,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#if MC >= 26.3
+//$$ import net.minecraft.world.level.block.entity.SignTextSlot;
+//#endif
 
 import java.util.List;
 
@@ -28,7 +31,12 @@ public abstract class SignBlockEntityMixin implements ISignBlockEntity {
     }
 
     @Inject(method = "updateSignText", at = @At(value = "RETURN"))
-    private void igny_applyPendingWaxed(Player player, boolean front, List<FilteredText> lines, CallbackInfo ci) {
+    //#if MC >= 26.3
+    //$$ private void igny_applyPendingWaxed(Player player, SignTextSlot slot, List<FilteredText> lines, CallbackInfo ci)
+    //#else
+    private void igny_applyPendingWaxed(Player player, boolean front, List<FilteredText> lines, CallbackInfo ci)
+    //#endif
+    {
         if (this.igny$pendingWaxed) {
             SignBlockEntity self = (SignBlockEntity) (Object) this;
             self.setWaxed(true);

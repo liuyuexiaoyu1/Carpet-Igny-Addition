@@ -1129,4 +1129,10 @@ public class IGNYSettings {
                     .build()
     );
     //#endif
+
+    public static final RuleAccessor<Boolean> CONTAINER_BREAK_NO_RANDOM_MOMENTUM = register(
+            RuleFactory.of("containerBreakNoRandomMomentum", false)
+                    .addCategories(CREATIVE, FEATURE)
+                    .build()
+    );
 }
