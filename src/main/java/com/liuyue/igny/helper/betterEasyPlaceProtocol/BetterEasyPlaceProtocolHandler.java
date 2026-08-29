@@ -301,7 +301,7 @@ public class BetterEasyPlaceProtocolHandler {
             if (frontText.hasGlowingText()) bits |= 0b10_0000;
             bits |= (frontText.getColor().ordinal() & 0b1111) << 6;
             //#if MC >= 26.3
-            //$$ net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getText(net.minecraft.world.level.block.entity.SignTextSlot.BACK);
+            //$$ net.minecraft.world.level.block.entity.SignText backText = signBlockEntity.getText(net.minecraft.world.level.block.entity.SignTextSlot.BACK);
             //#else
             net.minecraft.world.level.block.entity.SignText backText = signBlockEntity.getBackText();
             //#endif
