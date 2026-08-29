@@ -6,12 +6,20 @@ import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.MultiStageBlockP
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.sugar.Local;
+import fi.dy.masa.litematica.data.DataManager;
+import fi.dy.masa.litematica.schematic.LitematicaSchematic;
+import fi.dy.masa.litematica.schematic.container.LitematicaBlockStateContainer;
+import fi.dy.masa.litematica.schematic.placement.SchematicPlacement;
+import fi.dy.masa.litematica.schematic.placement.SchematicPlacementManager;
+import fi.dy.masa.litematica.schematic.placement.SubRegionPlacement;
+import fi.dy.masa.litematica.util.SchematicUtils;
 import fi.dy.masa.litematica.util.WorldUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.Level;
@@ -34,6 +42,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import fi.dy.masa.litematica.world.SchematicWorldHandler;
+
+import java.util.List;
+import java.util.Map;
 
 import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.encodeProtocolValueToHitVecZ;
 
@@ -88,7 +99,7 @@ public abstract class WorldUtilsMixin {
         Block block = stateSchematic.getBlock();
         com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter adapter =
                 BetterEasyPlaceProtocolHandler.getAdapter(block);
-        if (!(adapter instanceof ItemStackProtocolDataAdapter)) {
+        if (!(adapter instanceof ItemStackProtocolDataAdapter itemStackAdapter)) {
             if (adapter != null) {
                 int added = adapter.igny$toProtocolValue(0, stateSchematic);
                 if (block instanceof PistonBaseBlock && stateSchematic.getValue(PistonBaseBlock.EXTENDED)) {
@@ -104,14 +115,31 @@ public abstract class WorldUtilsMixin {
             }
             return hitPos;
         }
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity == null) {
-            blockEntity = getSchematicWorldBlockEntity(pos);
+        int protocolAdditionValue = adapter.igny$toProtocolValue(0, stateSchematic);
+        int attributesValue = 0;
+        //#if MC >= 12005
+        net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+        if (mc.player != null) {
+            net.minecraft.world.item.ItemStack handStack = mc.player.getMainHandItem();
+            if (handStack.isEmpty()) {
+                handStack = mc.player.getOffhandItem();
+            }
+            attributesValue = itemStackAdapter.igny$toProtocolValueAddition(handStack);
         }
-        if (blockEntity == null) {
-            return hitPos;
+        //#endif
+        if (attributesValue == 0) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity == null) {
+                blockEntity = getSchematicWorldBlockEntity(pos);
+            }
+            if (blockEntity != null) {
+                attributesValue = BetterEasyPlaceProtocolHandler.encodeBlockEntityProtocolAddition(blockEntity);
+            }
+            if (attributesValue == 0) {
+                attributesValue = BetterEasyPlaceProtocolHandler.encodeBlockEntityNbtProtocolAddition(getSchematicBlockEntityNbt(pos));
+            }
         }
-        int protocolAdditionValue = BetterEasyPlaceProtocolHandler.encodeBlockEntityProtocolAddition(blockEntity);
+        protocolAdditionValue |= attributesValue;
         if (protocolAdditionValue == 0) {
             return hitPos;
         }
@@ -124,6 +152,47 @@ public abstract class WorldUtilsMixin {
             return null;
         }
         return schematicWorld.getBlockEntity(pos);
+    }
+
+    @Unique
+    private static @Nullable CompoundTag getSchematicBlockEntityNbt(BlockPos pos) {
+        try {
+            List<SchematicPlacementManager.PlacementPart> parts = DataManager.getSchematicPlacementManager().getAllPlacementsTouchingChunk(pos);
+            if (parts.isEmpty()) {
+                return null;
+            }
+            for (SchematicPlacementManager.PlacementPart part : parts) {
+                SchematicPlacement schematicPlacement = part.getPlacement();
+                String regionName = part.getSubRegionName();
+                if (schematicPlacement == null || regionName == null) {
+                    continue;
+                }
+                SubRegionPlacement placement = schematicPlacement.getRelativeSubRegionPlacement(regionName);
+                if (placement == null || !placement.isEnabled()) {
+                    continue;
+                }
+                LitematicaSchematic schematic = schematicPlacement.getSchematic();
+                if (schematic == null) {
+                    continue;
+                }
+                LitematicaBlockStateContainer container = schematic.getSubRegionContainer(regionName);
+                Map<BlockPos, CompoundTag> blockEntityMap = schematic.getBlockEntityMapForRegion(regionName);
+                if (container == null || blockEntityMap == null || blockEntityMap.isEmpty()) {
+                    continue;
+                }
+                BlockPos schematicPos = SchematicUtils.getSchematicContainerPositionFromWorldPosition(
+                        pos, schematic, regionName, schematicPlacement, placement, container);
+                if (schematicPos != null) {
+                    CompoundTag nbt = blockEntityMap.get(schematicPos);
+                    if (nbt != null) {
+                        return nbt;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return null;
     }
 
     @Definition(id = "getEffectiveProtocolVersion", method = "Lfi/dy/masa/litematica/util/PlacementHandler;getEffectiveProtocolVersion()Lfi/dy/masa/litematica/util/EasyPlaceProtocol;")

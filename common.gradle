@@ -137,6 +137,12 @@ dependencies {
 		exclude group: "net.fabricmc.fabric-api"
 	}
 
+	// litematica 的 POM 把 malilib 声明为 runtime scope，compileOnly 不会传递它；
+	// 而我们的代码引用 litematica 的 DataManager（implements malilib 接口），编译时必须解析 malilib 类型
+	autoCompileOnly(project.malilib_dependency) {
+		exclude group: "net.fabricmc.fabric-api"
+	}
+
     // Carpet
     autoImplementation ("carpet:fabric-carpet:${project.carpet_core_version}") {
 		exclude group: "net.fabricmc.fabric-api"

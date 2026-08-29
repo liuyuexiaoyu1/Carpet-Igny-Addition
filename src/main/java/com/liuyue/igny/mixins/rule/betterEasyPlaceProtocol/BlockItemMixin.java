@@ -2,6 +2,7 @@ package com.liuyue.igny.mixins.rule.betterEasyPlaceProtocol;
 
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.helper.betterEasyPlaceProtocol.BetterEasyPlaceProtocolHandler;
+import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.ISignBlockEntity;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -15,6 +16,8 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,6 +26,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.decodeProtocolValueFromHitDim;
 import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.getRelativeHitX;
 import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.getRelativeHitZ;
 import static com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper.isProtocol;
@@ -139,9 +143,18 @@ public abstract class BlockItemMixin {
             //#endif
         }
         //#if MC >= 26.3
-        //$$ return original.call(level, player, pos, newStack);
+        //$$ boolean result = original.call(level, player, pos, newStack);
         //#else
-        return original.call(instance, pos, level, player, newStack, state);
+        boolean result = original.call(instance, pos, level, player, newStack, state);
         //#endif
+        double relativeHitZ = getRelativeHitZ(context.getClickLocation(), context.getClickedPos());
+        int protocolValue = decodeProtocolValueFromHitDim(relativeHitZ);
+        if ((protocolValue & 0b100_0000_0000) != 0) {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof SignBlockEntity sbe) {
+                ((ISignBlockEntity) sbe).igny$setPendingWaxed(true);
+            }
+        }
+        return result;
     }
 }

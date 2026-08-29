@@ -76,9 +76,9 @@ public class BetterEasyPlaceProtocolHandler {
         register(SkullBlock.class, new SkullBlockProtocolAdapter());
         register(SnowLayerBlock.class, new SnowLayerBlockProtocolAdapter());
         register(StairBlock.class, new StairBlockProtocolAdapter());
-        register(StandingSignBlock.class, new StandingSignBlockProtocolAdapter());
-        register(WallSignBlock.class, new StandingSignBlockProtocolAdapter());
+        register(SignBlock.class, new StandingSignBlockProtocolAdapter());
         register(WallHangingSignBlock.class, new CeilingHangingSignBlockProtocolAdapter());
+        register(CeilingHangingSignBlock.class, new  CeilingHangingSignBlockProtocolAdapter());
         register(StructureBlock.class, new StructureBlockProtocolAdapter());
         register(TrapDoorBlock.class, new TrapDoorBlockProtocolAdapter());
         register(TurtleEggBlock.class, new TurtleEggBlockProtocolAdapter());
@@ -223,6 +223,43 @@ public class BetterEasyPlaceProtocolHandler {
         return itemStackProtocolDataAdapter.igny$fromProtocolValueAddition(protocolAdditionValue, stack);
     }
 
+    //#if MC >= 12005
+    public static int encodeSignAttributesFromTag(net.minecraft.nbt.CompoundTag tag) {
+        if (tag == null) {
+            return 0;
+        }
+        int bits = 0;
+        //#if MC >= 12105
+        //$$ net.minecraft.nbt.CompoundTag frontText = tag.getCompound("front_text").orElse(null);
+        //$$ if (frontText != null && !frontText.isEmpty()) {
+        //$$     if (frontText.getBoolean("has_glowing_text").orElse(false)) bits |= 0b10_0000;
+        //$$     String colorName = frontText.getString("color").orElse("");
+        //$$     for (net.minecraft.world.item.DyeColor c : net.minecraft.world.item.DyeColor.values()) {
+        //$$         if (c.getName().equals(colorName)) {
+        //$$             bits |= (c.ordinal() & 0b1111) << 6;
+        //$$             break;
+        //$$         }
+        //$$     }
+        //$$ }
+        //$$ if (tag.getBoolean("is_waxed").orElse(false)) bits |= 0b100_0000_0000;
+        //#else
+        net.minecraft.nbt.CompoundTag frontText = tag.getCompound("front_text");
+        if (frontText != null && !frontText.isEmpty()) {
+            if (frontText.getBoolean("has_glowing_text")) bits |= 0b10_0000;
+            String colorName = frontText.getString("color");
+            for (net.minecraft.world.item.DyeColor c : net.minecraft.world.item.DyeColor.values()) {
+                if (c.getName().equals(colorName)) {
+                    bits |= (c.ordinal() & 0b1111) << 6;
+                    break;
+                }
+            }
+        }
+        if (tag.getBoolean("is_waxed")) bits |= 0b100_0000_0000;
+        //#endif
+        return bits;
+    }
+    //#endif
+
     public static int encodeBlockEntityProtocolAddition(BlockEntity blockEntity) {
         //#if MC >= 12003
         if (blockEntity instanceof net.minecraft.world.level.block.entity.CrafterBlockEntity crafterBlockEntity) {
@@ -238,6 +275,32 @@ public class BetterEasyPlaceProtocolHandler {
         if (blockEntity instanceof net.minecraft.world.level.block.entity.BeaconBlockEntity beaconBlockEntity) {
             BeaconBlockEntityAccessor accessor = (BeaconBlockEntityAccessor) beaconBlockEntity;
             return BeaconBlockProtocolAdapter.encodeEffects(accessor.igny$getPrimaryPower(), accessor.igny$getSecondaryPower());
+        }
+        //#if MC >= 12005
+        if (blockEntity instanceof net.minecraft.world.level.block.entity.SignBlockEntity signBlockEntity) {
+            net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getFrontText();
+            int bits = 0;
+            if (frontText.hasGlowingText()) bits |= 0b10_0000;
+            bits |= (frontText.getColor().ordinal() & 0b1111) << 6;
+            if (signBlockEntity.isWaxed()) bits |= 0b100_0000_0000;
+            return bits;
+        }
+        //#endif
+        return 0;
+    }
+
+    public static int encodeBlockEntityNbtProtocolAddition(@Nullable net.minecraft.nbt.CompoundTag tag) {
+        if (tag == null) {
+            return 0;
+        }
+        try {
+            //#if MC >= 12005
+            if (tag.contains("front_text")) {
+                return encodeSignAttributesFromTag(tag);
+            }
+            //#endif
+        } catch (Exception e) {
+            return 0;
         }
         return 0;
     }
