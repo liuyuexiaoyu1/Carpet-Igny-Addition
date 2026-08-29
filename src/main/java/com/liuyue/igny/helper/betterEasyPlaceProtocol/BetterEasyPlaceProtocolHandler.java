@@ -238,6 +238,7 @@ public class BetterEasyPlaceProtocolHandler {
         //#endif
         return bits;
     }
+    //#endif
 
     //#if MC >= 12105
     //$$ private static int encodeSignTextFromTag(net.minecraft.nbt.CompoundTag tag, String key, int glowingBit, int colorShift) {
