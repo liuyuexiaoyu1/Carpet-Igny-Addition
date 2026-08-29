@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Squid.class)
 //#if MC >= 12103
-//$$ public class SquidMixin extends AgeableWaterCreature
+//$$ public abstract class SquidMixin extends AgeableWaterCreature
 //#else
 public class SquidMixin extends WaterAnimal
 //#endif
