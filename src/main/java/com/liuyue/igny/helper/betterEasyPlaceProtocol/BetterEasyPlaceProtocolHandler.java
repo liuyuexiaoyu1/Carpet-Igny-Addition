@@ -294,14 +294,14 @@ public class BetterEasyPlaceProtocolHandler {
         if (blockEntity instanceof net.minecraft.world.level.block.entity.SignBlockEntity signBlockEntity) {
             int bits = 0;
             //#if MC >= 26.3
-            //$$ net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getFrontText(net.minecraft.world.level.block.entity.SignTextSlot.FRONT);
+            //$$ net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getText(net.minecraft.world.level.block.entity.SignTextSlot.FRONT);
             //#else
             net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getFrontText();
             //#endif
             if (frontText.hasGlowingText()) bits |= 0b10_0000;
             bits |= (frontText.getColor().ordinal() & 0b1111) << 6;
             //#if MC >= 26.3
-            //$$ net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getFrontText(net.minecraft.world.level.block.entity.SignTextSlot.BACK);
+            //$$ net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getText(net.minecraft.world.level.block.entity.SignTextSlot.BACK);
             //#else
             net.minecraft.world.level.block.entity.SignText backText = signBlockEntity.getBackText();
             //#endif
