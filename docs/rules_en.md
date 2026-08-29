@@ -1412,3 +1412,12 @@ Nether portals are always placed at Y = 128 or above when created.
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## betterPointedDripstoneGrow `🐛Beta` `MC<26.1`
+
+A pointed dripstone stalactite can grow if it is attached to the underside of a dripstone block that has a waterlogged block directly above it.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

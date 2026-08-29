@@ -327,5 +327,6 @@
   "carpet.rule.enderPearlsNoEnderMites.desc": "Thrown ender pearls never spawn endermites",
   "carpet.rule.commandBlockCharacterLimit.desc": "Adjust the character limit for commands in command blocks",
   "carpet.rule.waterCanPushSquid.desc": "Water flow can push squids",
-  "carpet.rule.netherPortalsAlwaysOnRoof.desc": "Nether portals are always placed at Y = 128 or above when created"
+  "carpet.rule.netherPortalsAlwaysOnRoof.desc": "Nether portals are always placed at Y = 128 or above when created",
+  "carpet.rule.betterPointedDripstoneGrow.desc": "A pointed dripstone stalactite can grow if it is attached to the underside of a dripstone block that has a waterlogged block directly above it"
 }

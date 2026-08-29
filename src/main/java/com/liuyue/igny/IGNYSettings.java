@@ -2,6 +2,7 @@ package com.liuyue.igny;
 
 import carpet.CarpetServer;
 import carpet.api.settings.CarpetRule;
+import carpet.api.settings.Rule;
 import carpet.api.settings.SettingsManager;
 import com.liuyue.igny.manager.LinkedContainerManager.LinkedContainerSetting;
 import com.liuyue.igny.rule.*;
@@ -1120,4 +1121,12 @@ public class IGNYSettings {
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );
+
+    //#if MC < 26.1
+    public static final RuleAccessor<Boolean> BETTER_POINTED_DRIPSTONE_GROW = register(
+            RuleFactory.of("betterPointedDripstoneGrow", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+    //#endif
 }

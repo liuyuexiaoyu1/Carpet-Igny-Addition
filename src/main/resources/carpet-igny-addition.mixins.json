@@ -78,6 +78,7 @@
     "rule.betterEasyPlaceProtocol.StandingAndWallBlockItemMixin",
     "rule.betterFlippinCactus.BlockRotatorMixin",
     "rule.betterLoyaltyTrident.ThrownTridentMixin",
+    "rule.betterPointedDripstoneGrow.PointedDripstoneBlockMixin",
     "rule.betterSprintGameTick.ServerTickRateManagerMixin",
     "rule.betterSprintGameTick.TickCommandMixin",
     "rule.blockableAmethyst.BuddingAmethystBlockMixin",

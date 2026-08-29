@@ -8,8 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Fluids;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,9 +25,10 @@ public abstract class ServerPlayerGameModeMixin {
 
     @WrapOperation(method = "destroyBlock",at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"))
     private boolean wrapDestroyBlock(ServerLevel instance, BlockPos blockPos, boolean b, Operation<Boolean> original) {
-        BlockState currentState = this.level.getBlockState(blockPos);
-        if (IGNYSettings.CREATIVE_DESTROY_WATERLOGGED_BLOCK_NO_WATER.value() && this.player.isCreative() && currentState.hasProperty(BlockStateProperties.WATERLOGGED) && currentState.getValue(BlockStateProperties.WATERLOGGED)) {
-            return level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 3);
+        if (IGNYSettings.CREATIVE_DESTROY_WATERLOGGED_BLOCK_NO_WATER.value()
+                && this.player.isCreative()
+                && this.level.getFluidState(blockPos) != Fluids.EMPTY.defaultFluidState()) {
+            return level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 3 | (b ? 64 : 0));
         }
         return original.call(instance, blockPos, b);
     }

@@ -1414,3 +1414,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 更好的滴水石锥生长 (betterPointedDripstoneGrow) `🐛Beta`
+
+当滴水石锥附着于下表面的滴水石块上方为含水方块时，下方的滴水石锥可以生长。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
