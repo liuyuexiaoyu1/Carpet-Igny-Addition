@@ -1415,7 +1415,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 更好的滴水石锥生长 (betterPointedDripstoneGrow) `🐛Beta`
+## 更好的滴水石锥生长 (betterPointedDripstoneGrow) `🐛Beta` `MC<26.1`
 
 当滴水石锥附着于下表面的滴水石块上方为含水方块时，下方的滴水石锥可以生长。
 
@@ -1423,3 +1423,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 容器破坏随机动量移除 (containerBreakNoRandomMomentum) `🐛Beta`
+
+破坏容器扔出物品时的随机动量将被移除。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`
