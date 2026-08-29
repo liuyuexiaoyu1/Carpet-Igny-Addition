@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //#endif
 import org.spongepowered.asm.mixin.Mixin;
 
-//#if MC < 26.1
+//#if MC >= 26.1
 //$$ @Mixin(DummyClass.class)
 //#else
 @Mixin(PointedDripstoneBlock.class)
