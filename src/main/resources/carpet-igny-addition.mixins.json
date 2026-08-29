@@ -67,7 +67,6 @@
     "rule.betterEasyPlaceProtocol.DiodeBlockMixin",
     "rule.betterEasyPlaceProtocol.EasyPlaceUtilsInvoker",
     "rule.betterEasyPlaceProtocol.EasyPlaceUtilsMixin",
-    "rule.betterEasyPlaceProtocol.HangingSignItemMixin",
     "rule.betterEasyPlaceProtocol.HopperBlockMixin",
     "rule.betterEasyPlaceProtocol.LeverBlockMixin",
     "rule.betterEasyPlaceProtocol.PistonBaseBlockMixin",
