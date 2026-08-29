@@ -147,6 +147,7 @@ public abstract class BlockItemMixin {
         //#else
         boolean result = original.call(instance, pos, level, player, newStack, state);
         //#endif
+        //#if MC >= 12001
         double relativeHitZ = getRelativeHitZ(context.getClickLocation(), context.getClickedPos());
         int protocolValue = decodeProtocolValueFromHitDim(relativeHitZ);
         if ((protocolValue & 0b100_0000_0000) != 0) {
@@ -155,6 +156,7 @@ public abstract class BlockItemMixin {
                 ((ISignBlockEntity) sbe).igny$setPendingWaxed(true);
             }
         }
+        //#endif
         return result;
     }
 }

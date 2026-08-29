@@ -276,7 +276,6 @@ public class BetterEasyPlaceProtocolHandler {
             BeaconBlockEntityAccessor accessor = (BeaconBlockEntityAccessor) beaconBlockEntity;
             return BeaconBlockProtocolAdapter.encodeEffects(accessor.igny$getPrimaryPower(), accessor.igny$getSecondaryPower());
         }
-        //#if MC >= 12005
         if (blockEntity instanceof net.minecraft.world.level.block.entity.SignBlockEntity signBlockEntity) {
             net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getFrontText();
             int bits = 0;
@@ -285,7 +284,6 @@ public class BetterEasyPlaceProtocolHandler {
             if (signBlockEntity.isWaxed()) bits |= 0b100_0000_0000;
             return bits;
         }
-        //#endif
         return 0;
     }
 
