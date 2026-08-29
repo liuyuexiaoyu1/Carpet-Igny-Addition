@@ -293,20 +293,28 @@ public class BetterEasyPlaceProtocolHandler {
         //#if MC >= 12001
         if (blockEntity instanceof net.minecraft.world.level.block.entity.SignBlockEntity signBlockEntity) {
             int bits = 0;
+            //#if MC >= 26.3
+            //$$ net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getFrontText(net.minecraft.world.level.block.entity.SignTextSlot.FRONT);
+            //#else
             net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getFrontText();
+            //#endif
             if (frontText.hasGlowingText()) bits |= 0b10_0000;
             bits |= (frontText.getColor().ordinal() & 0b1111) << 6;
+            //#if MC >= 26.3
+            //$$ net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getFrontText(net.minecraft.world.level.block.entity.SignTextSlot.BACK);
+            //#else
             net.minecraft.world.level.block.entity.SignText backText = signBlockEntity.getBackText();
+            //#endif
             if (backText.hasGlowingText()) bits |= 0b1000_0000_0000;
             bits |= (backText.getColor().ordinal() & 0b1111) << 12;
             if (signBlockEntity.isWaxed()) bits |= 0b100_0000_0000;
             return bits;
         }
         //#else
-        //$$ if (blockEntity instanceof net.minecraft.world.level.block.entity.SignBlockEntity signBlockEntity194) {
+        //$$ if (blockEntity instanceof net.minecraft.world.level.block.entity.SignBlockEntity signBlockEntity) {
         //$$     int bits = 0;
-        //$$     if (signBlockEntity194.hasGlowingText()) bits |= 0b10_0000;
-        //$$     bits |= (signBlockEntity194.getColor().ordinal() & 0b1111) << 6;
+        //$$     if (signBlockEntity.hasGlowingText()) bits |= 0b10_0000;
+        //$$     bits |= (signBlockEntity.getColor().ordinal() & 0b1111) << 6;
         //$$     return bits;
         //$$ }
         //#endif
