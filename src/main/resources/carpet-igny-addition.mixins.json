@@ -290,7 +290,7 @@
     "rule.tripwireHookDupeReintroduced.TripWireHookBlockMixin",
     "rule.visibleSpectators.ServerPlayerMixin",
     "rule.wardenNeverDig.WardenMixin",
-    "rule.waterCanPushSquid.SquidMixin",
+    "rule.waterCanPushSquid.WaterAnimalMixin",
     "rule.wetSpongeCanAbsorbLava.WetSpongeBlockMixin",
     "rule.wifiBeacon.BeaconBlockEntityAccessor",
     "rule.wifiBeacon.BeaconBlockEntityMixin"
