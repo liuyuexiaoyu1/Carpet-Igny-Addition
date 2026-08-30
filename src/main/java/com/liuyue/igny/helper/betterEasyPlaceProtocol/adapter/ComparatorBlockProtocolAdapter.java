@@ -18,24 +18,40 @@ public class ComparatorBlockProtocolAdapter implements BlockProtocolStateAdapter
 
     @Override
     public int igny$toProtocolValue(int protocolValue, BlockState fromState) {
-        int bits = (fromState.getValue(HorizontalDirectionalBlock.FACING).ordinal() - 2) & 0b0000_0011;
-        if (fromState.getValue(ComparatorBlock.MODE) == ComparatorMode.SUBTRACT) {
-            bits |= 0b0000_0100;
-        }
-        if (fromState.getValue(ComparatorBlock.POWERED)) {
-            bits |= 0b0000_1000;
-        }
-        return bits;
+        Direction facing = fromState.getValue(HorizontalDirectionalBlock.FACING);
+        int facingBits = switch (facing) {
+            case NORTH -> 0b00;
+            case EAST -> 0b01;
+            case SOUTH -> 0b10;
+            case WEST -> 0b11;
+            default -> 0b00;
+        };
+        boolean isSubtract = fromState.getValue(ComparatorBlock.MODE) == ComparatorMode.SUBTRACT;
+        int modeBits = isSubtract ? 0b0100 : 0;
+        boolean isPowered = fromState.getValue(ComparatorBlock.POWERED);
+        int poweredBits = isPowered ? 0b1000 : 0;
+        return (protocolValue & ~0b1111) | facingBits | modeBits | poweredBits;
     }
 
     @Override
     public @Nullable BlockState igny$fromProtocolValue(int extraProtocolValue, BlockState fromState, BlockPlaceContext context) {
-        
-        int facingIndex = (extraProtocolValue & 0b0000_0011) + 2;
+        int facingBits = extraProtocolValue & 0b0011;
+        Direction facing = switch (facingBits) {
+            case 0 -> Direction.NORTH;
+            case 1 -> Direction.EAST;
+            case 2 -> Direction.SOUTH;
+            case 3 -> Direction.WEST;
+            default -> Direction.NORTH;
+        };
+        ComparatorMode mode = (extraProtocolValue & 0b0100) != 0
+                ? ComparatorMode.SUBTRACT
+                : ComparatorMode.COMPARE;
+        boolean isPowered = (extraProtocolValue & 0b1000) != 0;
+
         return fromState
-                .setValue(HorizontalDirectionalBlock.FACING, Direction.values()[facingIndex])
-                .setValue(ComparatorBlock.MODE, (extraProtocolValue & 0b0000_0100) != 0 ? ComparatorMode.SUBTRACT : ComparatorMode.COMPARE)
-                .setValue(ComparatorBlock.POWERED, (extraProtocolValue & 0b0000_1000) != 0);
+                .setValue(HorizontalDirectionalBlock.FACING, facing)
+                .setValue(ComparatorBlock.MODE, mode)
+                .setValue(ComparatorBlock.POWERED, isPowered);
     }
 
     @Override

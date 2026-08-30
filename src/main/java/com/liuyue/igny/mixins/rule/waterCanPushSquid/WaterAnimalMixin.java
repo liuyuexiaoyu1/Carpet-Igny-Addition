@@ -24,7 +24,7 @@ public class WaterAnimalMixin {
         //$$ AgeableWaterCreature waterAnimal = (AgeableWaterCreature) (Object) this;
         //#else
         WaterAnimal waterAnimal = (WaterAnimal) (Object) this;
-        //3endif
+        //#endif
         if (IGNYSettings.WATER_CAN_PUSH_SQUID.value() && waterAnimal instanceof Squid) {
             cir.setReturnValue(true);
         }

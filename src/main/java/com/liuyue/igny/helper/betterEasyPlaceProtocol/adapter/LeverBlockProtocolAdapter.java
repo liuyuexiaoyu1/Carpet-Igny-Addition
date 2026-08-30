@@ -1,6 +1,7 @@
 package com.liuyue.igny.helper.betterEasyPlaceProtocol.adapter;
 
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
 import net.minecraft.world.level.block.LeverBlock;
@@ -12,6 +13,11 @@ import org.jetbrains.annotations.Nullable;
 public class LeverBlockProtocolAdapter implements BlockProtocolStateAdapter {
     public static final LeverBlockProtocolAdapter INSTANCE = new LeverBlockProtocolAdapter();
 
+    private static final int BIT_FACING_MASK = 0b111;
+    private static final int BIT_FACE_MASK = 0b0011_0000;
+    private static final int BIT_FACE_SHIFT = 4;
+    private static final int BIT_POWERED = 0b0100_0000;
+
     public LeverBlockProtocolAdapter() {
     }
 
@@ -19,19 +25,49 @@ public class LeverBlockProtocolAdapter implements BlockProtocolStateAdapter {
     public int igny$toProtocolValue(int protocolValue, BlockState fromState) {
         int faceOrdinal = fromState.getValue(FaceAttachedHorizontalDirectionalBlock.FACE).ordinal();
         boolean isPowered = fromState.getValue(LeverBlock.POWERED);
+        int facingBits = ((horizontalFacingIndex(fromState.getValue(FaceAttachedHorizontalDirectionalBlock.FACING)) + 1) & BIT_FACING_MASK);
         int bits =
-                ((faceOrdinal & 0b0000_0011) << 4) |
-                (isPowered ? 0b0100_0000 : 0b0000_0000);
+                facingBits |
+                ((faceOrdinal & 0b11) << BIT_FACE_SHIFT) |
+                (isPowered ? BIT_POWERED : 0);
         return protocolValue | bits;
     }
 
     @Override
     public @Nullable BlockState igny$fromProtocolValue(int extraProtocolValue, BlockState fromState, BlockPlaceContext context) {
-        int faceOrdinal = ((extraProtocolValue & 0b0011_0000) >>> 4) % 3;
-        boolean isPowered = (extraProtocolValue & 0b0100_0000) == 0b0100_0000;
-        return fromState
+        int faceOrdinal = ((extraProtocolValue & BIT_FACE_MASK) >>> BIT_FACE_SHIFT) % 3;
+        boolean isPowered = (extraProtocolValue & BIT_POWERED) == BIT_POWERED;
+        BlockState state = fromState
                 .setValue(FaceAttachedHorizontalDirectionalBlock.FACE, AttachFace.values()[faceOrdinal])
                 .setValue(LeverBlock.POWERED, isPowered);
+
+        int facingIndex = (extraProtocolValue & BIT_FACING_MASK) - 1;
+        if (facingIndex >= 0 && facingIndex <= 3) {
+            Direction facing = horizontalFacing(facingIndex);
+            if (FaceAttachedHorizontalDirectionalBlock.FACING.getPossibleValues().contains(facing)) {
+                state = state.setValue(FaceAttachedHorizontalDirectionalBlock.FACING, facing);
+            }
+        }
+        return state;
+    }
+
+    private static int horizontalFacingIndex(Direction facing) {
+        return switch (facing) {
+            case NORTH -> 0;
+            case EAST -> 1;
+            case SOUTH -> 2;
+            case WEST -> 3;
+            default -> 0;
+        };
+    }
+
+    private static Direction horizontalFacing(int index) {
+        return switch (index) {
+            case 1 -> Direction.EAST;
+            case 2 -> Direction.SOUTH;
+            case 3 -> Direction.WEST;
+            default -> Direction.NORTH;
+        };
     }
 
     @Override

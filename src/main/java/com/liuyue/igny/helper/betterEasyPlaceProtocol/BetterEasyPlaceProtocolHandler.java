@@ -169,18 +169,18 @@ public class BetterEasyPlaceProtocolHandler {
             }
         }
 
-        BlockProtocolStateAdapter adapter = getAdapter(block);
-        if (adapter == null) {
-            return baseState;
-        }
-
         double relativeHitZ = getRelativeHitZ(context.getClickLocation(), context.getClickedPos());
-        if (!isProtocol(relativeHitZ)) {
-            return baseState;
+        if (isProtocol(relativeHitZ)) {
+            BlockProtocolStateAdapter adapter = getAdapter(block);
+            if (adapter != null) {
+                int additionValue = decodeProtocolValueFromHitDim(relativeHitZ);
+                BlockState applied = adapter.igny$fromProtocolValue(additionValue, baseState, context);
+                if (applied != null) {
+                    baseState = applied;
+                }
+            }
         }
-        int additionValue = decodeProtocolValueFromHitDim(relativeHitZ);
-        BlockState applied = adapter.igny$fromProtocolValue(additionValue, baseState, context);
-        return applied != null ? applied : baseState;
+        return baseState;
     }
 
     public static @Nullable BlockState decodeAttachablePlacementState(Block standingBlock, Block wallBlock, BlockPlaceContext context) {

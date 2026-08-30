@@ -28,7 +28,10 @@ public abstract class FireChargeItemMixin {
     @WrapOperation(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/BaseFireBlock;canBePlacedAt(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z"))
     private boolean onUseOn(Level level, BlockPos pos, Direction forwardDirection, Operation<Boolean> original, @Local(argsOnly = true) UseOnContext context) {
         boolean result = original.call(level, pos, forwardDirection);
-        if (!result) {
+        if (!result
+                || ((level.getBlockState(context.getClickedPos()).is(Blocks.OBSIDIAN)
+                || level.getBlockState(context.getClickedPos()).is(Blocks.NETHER_PORTAL))
+                && context.getClickedFace().equals(Direction.UP))) {
             pos = context.getClickedPos();
             if (!IGNYSettings.GENERATE_NETHER_PORTAL.value()) {
                 return false;
