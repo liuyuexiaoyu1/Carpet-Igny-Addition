@@ -20,7 +20,7 @@ public class ContainersMixin {
     @WrapOperation(method = "dropItemStack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/item/ItemEntity;setDeltaMovement(DDD)V"))
     private static void setDeltaMovement(ItemEntity instance, double x, double y, double z, Operation<Void> original) {
         if (shouldRemove) {
-            original.call(instance, 0, 0, 0);
+            original.call(instance, 0d, 0d, 0d);
             return;
         }
         original.call(instance, x, y, z);

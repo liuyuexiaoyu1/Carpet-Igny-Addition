@@ -283,7 +283,7 @@ public class BetterEasyPlaceProtocolHandler {
                     bits |= (1 << i);
                 }
             }
-            return bits & 0b0001_1111_1111;
+            return (bits & 0b0001_1111_1111) << 4;
         }
         //#endif
         if (blockEntity instanceof net.minecraft.world.level.block.entity.BeaconBlockEntity beaconBlockEntity) {

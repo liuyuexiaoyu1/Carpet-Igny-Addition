@@ -17,12 +17,12 @@ public class JigsawBlockProtocolAdapter implements BlockProtocolStateAdapter {
     @Override
     public int igny$toProtocolValue(int protocolValue, BlockState fromState) {
         int orientationOrdinal = fromState.getValue(JigsawBlock.ORIENTATION).ordinal();
-        return orientationOrdinal & 0b0000_1111;
+        return protocolValue | ((orientationOrdinal + 1) & 0b0000_1111);
     }
 
     @Override
     public @Nullable BlockState igny$fromProtocolValue(int extraProtocolValue, BlockState fromState, BlockPlaceContext context) {
-        int orientationOrdinal = (extraProtocolValue & 0b0000_1111) % 12;
+        int orientationOrdinal = Math.floorMod((extraProtocolValue & 0b0000_1111) - 1, 12);
         return fromState.setValue(JigsawBlock.ORIENTATION, FrontAndTop.values()[orientationOrdinal]);
     }
 

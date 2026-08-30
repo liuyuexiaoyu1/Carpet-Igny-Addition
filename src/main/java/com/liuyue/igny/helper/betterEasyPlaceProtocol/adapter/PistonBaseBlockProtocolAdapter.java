@@ -21,14 +21,17 @@ public class PistonBaseBlockProtocolAdapter implements BlockProtocolStateAdapter
         if (fromState.getValue(PistonBaseBlock.EXTENDED)) {
             bits |= 0b0001_0000;
         }
-        bits |= (fromState.getValue(PistonBaseBlock.FACING).ordinal() & 0b0000_0111) << 5;
+        bits |= ((fromState.getValue(PistonBaseBlock.FACING).ordinal() + 1) & 0b0000_0111) << 5;
         return bits;
     }
 
     @Override
     public @Nullable BlockState igny$fromProtocolValue(int extraProtocolValue, BlockState fromState, BlockPlaceContext context) {
         boolean isExtended = (extraProtocolValue & 0b0001_0000) == 0b0001_0000;
-        int facingIndex = (extraProtocolValue >>> 5) & 0b0000_0111;
+        int facingIndex = ((extraProtocolValue >>> 5) & 0b0000_0111) - 1;
+        if (facingIndex < 0) {
+            facingIndex = 0;
+        }
         Direction facing = Direction.values()[facingIndex % 6];
 
         if (isExtended) {

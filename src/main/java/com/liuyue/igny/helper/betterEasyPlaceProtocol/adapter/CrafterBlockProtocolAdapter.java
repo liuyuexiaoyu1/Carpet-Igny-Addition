@@ -40,13 +40,12 @@ public class CrafterBlockProtocolAdapter implements BlockProtocolStateAdapter, I
     @Override
     public int igny$toProtocolValue(int protocolValue, BlockState fromState) {
         int orientationOrdinal = fromState.getValue(BlockStateProperties.ORIENTATION).ordinal();
-        return orientationOrdinal & 0b0000_1111;
+        return protocolValue | ((orientationOrdinal + 1) & 0b0000_1111);
     }
 
     @Override
     public @Nullable BlockState igny$fromProtocolValue(int extraProtocolValue, BlockState fromState, BlockPlaceContext context) {
-        
-        int orientationOrdinal = (extraProtocolValue & 0b0000_1111) % 12;
+        int orientationOrdinal = Math.floorMod((extraProtocolValue & 0b0000_1111) - 1, 12);
         return fromState.setValue(BlockStateProperties.ORIENTATION, FrontAndTop.values()[orientationOrdinal]);
     }
 
@@ -70,12 +69,13 @@ public class CrafterBlockProtocolAdapter implements BlockProtocolStateAdapter, I
                 bits |= (mask << slotIdx);
             }
         }
-        return bits & 0b0001_1111_1111;
+        return (bits & 0b0001_1111_1111) << 4;
     }
 
     @Override
     public @NotNull ItemStack igny$fromProtocolValueAddition(int extraProtocolValue, ItemStack fromStack) {
-        int disCount = Integer.bitCount(extraProtocolValue & 0b0001_1111_1111);
+        int slotBits = (extraProtocolValue >>> 4) & 0b0001_1111_1111;
+        int disCount = Integer.bitCount(slotBits);
         if (disCount == 0) {
             return fromStack;
         }
@@ -84,7 +84,7 @@ public class CrafterBlockProtocolAdapter implements BlockProtocolStateAdapter, I
         int slotIdx = 0;
         int mask = 1;
         for (int i = 0; i < 9; ++i) {
-            if ((extraProtocolValue & mask) == mask) {
+            if ((slotBits & mask) == mask) {
                 disSlots[slotIdx++] = i;
             }
             mask <<= 1;
