@@ -13,7 +13,11 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(EntityEquipment.class)
 public class EntityEquipmentMixin {
+    //#if MC >= 26.3
+    //$$ @WrapOperation(method = "dropAll", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;createItemStackToDrop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;"))
+    //#else
     @WrapOperation(method = "dropAll", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;"))
+    //#endif
     private ItemEntity drop(LivingEntity instance, ItemStack itemStack, boolean a, boolean b, Operation<ItemEntity> original) {
         if (IGNYSettings.SAFE_PLAYER_DEATH_DROP.value()) {
             ItemEntity itemEntity = original.call(instance, itemStack, a, b);

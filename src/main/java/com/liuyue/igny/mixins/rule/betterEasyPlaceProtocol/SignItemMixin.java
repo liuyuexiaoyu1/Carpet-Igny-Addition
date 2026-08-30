@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.SignItem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SignBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -15,7 +16,7 @@ public class SignItemMixin {
     private boolean modifySuccess(boolean success, @Local(argsOnly = true) BlockPos pos, @Local(argsOnly = true) Level level) {
         if (BetterEasyPlaceProtocolHandler.isEasyPlaceState()
                 && BetterEasyPlaceProtocolHandler.getPlaceTargetPos().equals(pos)
-                && level.getBlockState(pos).is(BetterEasyPlaceProtocolHandler.getPlaceTargetBlock())) {
+                && level.getBlockState(pos).getBlock() instanceof SignBlock) {
             return false;
         }
         return success;
