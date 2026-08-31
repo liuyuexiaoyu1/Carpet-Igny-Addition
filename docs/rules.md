@@ -1326,7 +1326,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
 
-## 信标无线中继 (wifiBeacon) `🐛Beta`
+## 信标无线中继 (wifiBeacon)
 
 在一个已激活的信标效果范围内，如果有另一个信标，该信标会继承父信标的效果并向自己的范围广播。
 
@@ -1335,7 +1335,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 瞬时传送门传送 (instantPortalTeleport) `🐛Beta`
+## 瞬时传送门传送 (instantPortalTeleport)
 
 生成在传送门内的实体立即传送，不再等待实体首个tick执行再传送。
 
@@ -1344,7 +1344,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 打开饰纹陶罐界面 (openDecoratedPotGui) `🐛Beta` `MC>=1.20.4`
+## 打开饰纹陶罐界面 (openDecoratedPotGui) `MC>=1.20.4`
 
 手中无物品时交互饰纹陶罐可操作饰纹陶罐中的物品。
 
@@ -1353,7 +1353,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 瞬时传播流体 (instantSpreadLiquid) `🐛Beta`
+## 瞬时传播流体 (instantSpreadLiquid)
 
 使流体不再添加流体刻，而是瞬时计算所有路径。
 
@@ -1362,7 +1362,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
-## 禁止鸡下蛋 (disableChickenEggLaying) `🐛Beta`
+## 禁止鸡下蛋 (disableChickenEggLaying)
 
 使鸡不再下蛋。
 
@@ -1371,7 +1371,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 禁用区块封禁 (disableChunkBan) `🐛Beta`
+## 禁用区块封禁 (disableChunkBan)
 
 防止因为发送的单个数据包过大导致玩家被踢出服务器。
 
@@ -1380,7 +1380,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 末影珍珠无末影螨 (enderPearlsNoEnderMites) `🐛Beta`
+## 末影珍珠无末影螨 (enderPearlsNoEnderMites)
 
 掷出的末影珍珠无论如何都不会生成末影螨。
 
@@ -1389,7 +1389,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 命令方块字符限制 (commandBlockCharacterLimit) `🐛Beta`
+## 命令方块字符限制 (commandBlockCharacterLimit)
 
 可调整命令方块中指令的字符数上限。
 
@@ -1397,7 +1397,7 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `32500`
 - 分类: `IGNY`, `CLIENT`, `CREATIVE`, `FEATURE`
 
-## 水流可推动鱿鱼 (waterCanPushSquid) `🐛Beta`
+## 水流可推动鱿鱼 (waterCanPushSquid)
 
 水流可以使鱿鱼位移。
 
@@ -1406,7 +1406,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 下界传送门永远置于上层 (netherPortalsAlwaysOnRoof) `🐛Beta`
+## 下界传送门永远置于上层 (netherPortalsAlwaysOnRoof)
 
 创建下界传送门时，最低生成高度处于Y轴坐标128格处。
 
@@ -1415,7 +1415,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 更好的滴水石锥生长 (betterPointedDripstoneGrow) `🐛Beta` `MC<26.1`
+## 更好的滴水石锥生长 (betterPointedDripstoneGrow) `MC<26.1`
 
 当滴水石锥附着于下表面的滴水石块上方为含水方块时，下方的滴水石锥可以生长。
 
@@ -1424,7 +1424,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 容器破坏随机动量移除 (containerBreakNoRandomMomentum) `🐛Beta`
+## 容器破坏随机动量移除 (containerBreakNoRandomMomentum)
 
 破坏容器扔出物品时的随机动量将被移除。
 

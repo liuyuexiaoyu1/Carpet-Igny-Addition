@@ -1324,7 +1324,7 @@ Fills in some block states that cannot be synced by the easy place mode when pla
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
 - 
-## wifiBeacon `🐛Beta`
+## wifiBeacon
 
 If another beacon is within the effect range of an active beacon, that beacon inherits the parent beacon's effects and broadcasts them over its own range.
 
@@ -1333,7 +1333,7 @@ If another beacon is within the effect range of an active beacon, that beacon in
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## instantPortalTeleport `🐛Beta`
+## instantPortalTeleport
 
 Entities spawned inside a portal teleport immediately, without waiting for their first tick.
 
@@ -1342,7 +1342,7 @@ Entities spawned inside a portal teleport immediately, without waiting for their
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## openDecoratedPotGui `🐛Beta` `MC>=1.20.4`
+## openDecoratedPotGui `MC>=1.20.4`
 
 Interacting with a decorated pot while holding no item allows operating the items inside the decorated pot.
 
@@ -1351,7 +1351,7 @@ Interacting with a decorated pot while holding no item allows operating the item
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## instantSpreadLiquid `🐛Beta`
+## instantSpreadLiquid
 
 Makes fluids skip fluid ticks and instantly calculate all flow paths.
 
@@ -1360,7 +1360,7 @@ Makes fluids skip fluid ticks and instantly calculate all flow paths.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## disableChickenEggLaying `🐛Beta`
+## disableChickenEggLaying
 
 Prevents chickens from laying eggs.
 
@@ -1369,7 +1369,7 @@ Prevents chickens from laying eggs.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## disableChunkBan `🐛Beta`
+## disableChunkBan
 
 Prevents players from being kicked due to excessively large outgoing packets.
 
@@ -1378,7 +1378,7 @@ Prevents players from being kicked due to excessively large outgoing packets.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## enderPearlsNoEnderMites `🐛Beta`
+## enderPearlsNoEnderMites
 
 Adjust the character limit for commands in command blocks.
 
@@ -1387,7 +1387,7 @@ Adjust the character limit for commands in command blocks.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## commandBlockCharacterLimit `🐛Beta`
+## commandBlockCharacterLimit
 
 Adjust the character limit for commands in command blocks.
 
@@ -1395,7 +1395,7 @@ Adjust the character limit for commands in command blocks.
 - Default value: `32500`
 - Categories: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
 
-## waterCanPushSquid `🐛Beta`
+## waterCanPushSquid
 
 Water flow can push squids.
 
@@ -1404,7 +1404,7 @@ Water flow can push squids.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## netherPortalsAlwaysOnRoof `🐛Beta`
+## netherPortalsAlwaysOnRoof
 
 Nether portals are always placed at Y = 128 or above when created.
 
@@ -1413,7 +1413,7 @@ Nether portals are always placed at Y = 128 or above when created.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## betterPointedDripstoneGrow `🐛Beta` `MC<26.1`
+## betterPointedDripstoneGrow `MC<26.1`
 
 A pointed dripstone stalactite can grow if it is attached to the underside of a dripstone block that has a waterlogged block directly above it.
 
@@ -1422,7 +1422,7 @@ A pointed dripstone stalactite can grow if it is attached to the underside of a 
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## containerBreakMomentumRemoved `🐛Beta`
+## containerBreakMomentumRemoved
 
 Removes random momentum from items dropped when a container is destroyed.
 
