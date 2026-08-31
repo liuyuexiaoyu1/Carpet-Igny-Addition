@@ -35,6 +35,7 @@ public class NetherPortalBlockMixin {
                     pos.above(), MobSpawnType.STRUCTURE, false, false);
             if (entity != null) {
                 entity.setPortalCooldown();
+                level.addFreshEntity(entity);
                 ci.cancel();
             }
         }
