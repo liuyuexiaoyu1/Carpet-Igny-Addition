@@ -24,7 +24,7 @@ public class ServerPlayerGameModeMixin {
     private void useItemOn(ServerPlayer player, Level level, ItemStack stack, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir, @Local BlockState state, @Local BlockPos pos) {
         MenuProvider menuProvider = state.getMenuProvider(level, pos);
         if (IGNYSettings.SPECTATOR_CLICK_PORTAL_TELEPORT.value() && menuProvider == null) {
-            if (state.is(Blocks.END_PORTAL) || state.is(Blocks.NETHER_PORTAL)) {
+            if (state.is(Blocks.END_PORTAL) || state.is(Blocks.NETHER_PORTAL) || state.is(Blocks.END_GATEWAY)) {
                 ((BlockBehaviourInvoker) state.getBlock()).invokeEntityInside(state, player.level(), hitResult.getBlockPos(), player);
                 if (state.is(Blocks.NETHER_PORTAL)) {
                     ((EntityInvoker) player).invokeHandleNetherPortal();

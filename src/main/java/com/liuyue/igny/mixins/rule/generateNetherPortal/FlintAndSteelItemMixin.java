@@ -31,65 +31,58 @@ public class FlintAndSteelItemMixin {
     @WrapOperation(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/BaseFireBlock;canBePlacedAt(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z"))
     private boolean onUseOn(Level level, BlockPos pos, Direction forwardDirection, Operation<Boolean> original, @Local(argsOnly = true) UseOnContext context) {
         boolean result = original.call(level, pos, forwardDirection);
-        if (!result) {
-            pos = context.getClickedPos();
-            if (!IGNYSettings.GENERATE_NETHER_PORTAL.value()) {
-                return false;
-            }
-            BlockState clickedState = level.getBlockState(pos);
-            Player player = context.getPlayer();
-            if (!clickedState.is(Blocks.OBSIDIAN) && !clickedState.is(Blocks.NETHER_PORTAL)) {
-                return false;
-            }
-            if (player == null) {
-                return false;
-            }
-            if (player.isShiftKeyDown()) {
-                return false;
-            }
-            if (!BaseFireBlockInvoker.inPortalDimension(level) && !player.isCreative()) {
-                return false;
-            }
-            Direction face = context.getClickedFace();
-            BlockPos targetPos = pos.relative(face);
-            if (!level.isEmptyBlock(targetPos) && !level.getBlockState(targetPos).is(Blocks.FIRE)) {
-                return false;
-            }
-            BlockState targetState = level.getBlockState(targetPos);
-            if (!targetState.is(Blocks.FIRE) && !targetState.is(Blocks.AIR)) {
-                return false;
-            }
-            Direction.Axis portalAxis = getPortalAxisFromFace(face, player, clickedState);
-            if (clickedState.is(Blocks.NETHER_PORTAL)) {
-                Direction.Axis existingAxis = clickedState.getValue(NetherPortalBlock.AXIS);
-                if ((existingAxis == Direction.Axis.Z && portalAxis == Direction.Axis.X) ||
-                        (existingAxis == Direction.Axis.X && portalAxis == Direction.Axis.Z)) {
-                    return false;
-                }
-            }
-
-            BlockState portalState = Blocks.NETHER_PORTAL.defaultBlockState()
-                    .setValue(NetherPortalBlock.AXIS, portalAxis);
-
-            level.setBlock(targetPos, portalState, 2);
-            level.playSound(player, targetPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F,
-                    level.getRandom().nextFloat() * 0.4F + 0.8F);
-
-            ItemStack itemStack = context.getItemInHand();
-            itemStack.hurtAndBreak(1, player,
-                    //#if MC >= 12109
-                    //$$ context.getHand().asEquipmentSlot()
-                    //#elseif MC >= 12005
-                    LivingEntity.getSlotForHand(context.getHand())
-                    //#else
-                    //$$ p -> p.broadcastBreakEvent(context.getHand())
-                    //#endif
-            );
-
-            flag = true;
-            return false;
+        if (!IGNYSettings.GENERATE_NETHER_PORTAL.value()) {
+            return result;
         }
-        return true;
+        BlockState clickedState = level.getBlockState(context.getClickedPos());
+        if (!clickedState.is(Blocks.OBSIDIAN) && !clickedState.is(Blocks.NETHER_PORTAL)) {
+            return result;
+        }
+        Player player = context.getPlayer();
+        if (player == null) {
+            return result;
+        }
+        if (player.isShiftKeyDown()) {
+            return result;
+        }
+        if (!BaseFireBlockInvoker.inPortalDimension(level) && !player.isCreative()) {
+            return result;
+        }
+        Direction face = context.getClickedFace();
+        BlockPos targetPos = context.getClickedPos().relative(face);
+        BlockState targetState = level.getBlockState(targetPos);
+        if (!targetState.is(Blocks.FIRE) && !targetState.is(Blocks.AIR)) {
+            return result;
+        }
+        Direction.Axis portalAxis = getPortalAxisFromFace(face, player, clickedState);
+        if (clickedState.is(Blocks.NETHER_PORTAL)) {
+            Direction.Axis existingAxis = clickedState.getValue(NetherPortalBlock.AXIS);
+            if ((existingAxis == Direction.Axis.Z && portalAxis == Direction.Axis.X) ||
+                    (existingAxis == Direction.Axis.X && portalAxis == Direction.Axis.Z)) {
+                return result;
+            }
+        }
+
+        BlockState portalState = Blocks.NETHER_PORTAL.defaultBlockState()
+                .setValue(NetherPortalBlock.AXIS, portalAxis);
+
+        level.setBlock(targetPos, portalState, 2);
+        level.playSound(player, targetPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F,
+                level.getRandom().nextFloat() * 0.4F + 0.8F);
+
+        ItemStack itemStack = context.getItemInHand();
+        itemStack.hurtAndBreak(1, player,
+                //#if MC >= 12109
+                //$$ context.getHand().asEquipmentSlot()
+                //#elseif MC >= 12005
+                LivingEntity.getSlotForHand(context.getHand())
+                //#else
+                //$$ p -> p.broadcastBreakEvent(context.getHand())
+                //#endif
+        );
+
+        flag = true;
+        return false;
     }
 
     @Inject(method = "useOn", at = @At(value = "RETURN"), cancellable = true)
