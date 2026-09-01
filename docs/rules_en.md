@@ -1430,3 +1430,12 @@ Removes random momentum from items dropped when a container is destroyed.
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## easyPlaceCanPlaceWaterloggedBlock `🐛Beta`
+
+Allows the easy place mode to sync the waterlogged state of waterloggable blocks placed from schematics when the `betterEasyPlaceProtocol` rule is enabled.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`

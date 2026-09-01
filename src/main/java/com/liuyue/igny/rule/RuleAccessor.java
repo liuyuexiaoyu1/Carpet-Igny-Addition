@@ -50,4 +50,8 @@ public final class RuleAccessor<T> {
     public boolean isDisabled() {
         return !this.rule.isEnable();
     }
+
+    public String name() {
+        return this.rule.name();
+    }
 }

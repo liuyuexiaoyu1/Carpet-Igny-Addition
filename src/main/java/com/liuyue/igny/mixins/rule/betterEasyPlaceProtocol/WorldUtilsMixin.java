@@ -1,6 +1,8 @@
 package com.liuyue.igny.mixins.rule.betterEasyPlaceProtocol;
 
 import com.liuyue.igny.helper.betterEasyPlaceProtocol.BetterEasyPlaceProtocolHandler;
+import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.ItemStackProtocolDataAdapter;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.MultiStageBlockProtocolStateAdapter;
 import com.llamalad7.mixinextras.expression.Definition;
@@ -25,10 +27,12 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseCoralWallFanBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.piston.PistonHeadBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -100,8 +104,9 @@ public abstract class WorldUtilsMixin {
         com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter adapter =
                 BetterEasyPlaceProtocolHandler.getAdapter(block);
         if (!(adapter instanceof ItemStackProtocolDataAdapter itemStackAdapter)) {
+            int added = 0;
             if (adapter != null) {
-                int added = adapter.igny$toProtocolValue(0, stateSchematic);
+                added = adapter.igny$toProtocolValue(0, stateSchematic);
                 if (block instanceof PistonBaseBlock && stateSchematic.getValue(PistonBaseBlock.EXTENDED)) {
                     Level schematicWorld = SchematicWorldHandler.getSchematicWorld();
                     if (schematicWorld != null) {
@@ -111,9 +116,12 @@ public abstract class WorldUtilsMixin {
                         }
                     }
                 }
-                return encodeProtocolValueToHitVecZ(added, hitPos);
             }
-            return hitPos;
+            added |= waterloggedBit(stateSchematic);
+            if (added == 0) {
+                return hitPos;
+            }
+            return encodeProtocolValueToHitVecZ(added, hitPos);
         }
         int protocolAdditionValue = adapter.igny$toProtocolValue(0, stateSchematic);
         int attributesValue = 0;
@@ -140,11 +148,28 @@ public abstract class WorldUtilsMixin {
             }
         }
         protocolAdditionValue |= attributesValue;
+        protocolAdditionValue |= waterloggedBit(stateSchematic);
         if (protocolAdditionValue == 0) {
             return hitPos;
         }
         return encodeProtocolValueToHitVecZ(protocolAdditionValue, hitPos);
     }
+
+    @Unique
+    private static int waterloggedBit(BlockState state) {
+        if (!IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value()) {
+            return 0;
+        }
+        if (!(state.getBlock() instanceof SimpleWaterloggedBlock)) {
+            return 0;
+        }
+        if (!state.hasProperty(BlockStateProperties.WATERLOGGED)) {
+            return 0;
+        }
+        return state.getValue(BlockStateProperties.WATERLOGGED)
+                ? EasyPlaceExtraProtocolHelper.WATERLOGGED_BIT : 0;
+    }
+
     @Unique
     private static @Nullable BlockEntity getSchematicWorldBlockEntity(BlockPos pos) {
         Level schematicWorld = SchematicWorldHandler.getSchematicWorld();

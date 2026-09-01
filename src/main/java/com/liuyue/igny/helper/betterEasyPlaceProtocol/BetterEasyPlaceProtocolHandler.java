@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -171,13 +172,18 @@ public class BetterEasyPlaceProtocolHandler {
 
         double relativeHitZ = getRelativeHitZ(context.getClickLocation(), context.getClickedPos());
         if (isProtocol(relativeHitZ)) {
+            int additionValue = decodeProtocolValueFromHitDim(relativeHitZ);
             BlockProtocolStateAdapter adapter = getAdapter(block);
             if (adapter != null) {
-                int additionValue = decodeProtocolValueFromHitDim(relativeHitZ);
                 BlockState applied = adapter.igny$fromProtocolValue(additionValue, baseState, context);
                 if (applied != null) {
                     baseState = applied;
                 }
+            }
+            if ((additionValue & EasyPlaceExtraProtocolHelper.WATERLOGGED_BIT) != 0
+                    && baseState.hasProperty(BlockStateProperties.WATERLOGGED)
+                    && IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value()) {
+                baseState = baseState.setValue(BlockStateProperties.WATERLOGGED, true);
             }
         }
         return baseState;
@@ -203,11 +209,18 @@ public class BetterEasyPlaceProtocolHandler {
         }
         int additionValue = decodeProtocolValueFromHitDim(relativeHitZ);
         BlockProtocolStateAdapter adapter = getAdapter(baseState.getBlock());
-        if (adapter == null) {
-            return baseState;
+        if (adapter != null) {
+            BlockState applied = adapter.igny$fromProtocolValue(additionValue, baseState, context);
+            if (applied != null) {
+                baseState = applied;
+            }
         }
-        BlockState applied = adapter.igny$fromProtocolValue(additionValue, baseState, context);
-        return applied != null ? applied : baseState;
+        if ((additionValue & EasyPlaceExtraProtocolHelper.WATERLOGGED_BIT) != 0
+                && baseState.hasProperty(BlockStateProperties.WATERLOGGED)
+                && IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value()) {
+            baseState = baseState.setValue(BlockStateProperties.WATERLOGGED, true);
+        }
+        return baseState;
     }
 
     public static @Nullable ItemStack applyItemStackProtocolData(ItemStack stack, BlockPlaceContext context) {

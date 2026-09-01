@@ -2,12 +2,12 @@ package com.liuyue.igny;
 
 import carpet.CarpetServer;
 import carpet.api.settings.CarpetRule;
-import carpet.api.settings.Rule;
 import carpet.api.settings.SettingsManager;
 import com.liuyue.igny.manager.LinkedContainerManager.LinkedContainerSetting;
 import com.liuyue.igny.rule.*;
 import com.liuyue.igny.rule.validators.EntityValidator;
 import com.liuyue.igny.rule.validators.ModValidator;
+import com.liuyue.igny.rule.validators.PrerequisiteRuleValidator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -1133,6 +1133,14 @@ public class IGNYSettings {
     public static final RuleAccessor<Boolean> CONTAINER_BREAK_NO_RANDOM_MOMENTUM = register(
             RuleFactory.of("containerBreakNoRandomMomentum", false)
                     .addCategories(CREATIVE, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK = register(
+            RuleFactory.of("easyPlaceCanPlaceWaterloggedBlock", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .addValidator(PrerequisiteRuleValidator.createValidator(IGNYSettings.BETTER_EASY_PLACE_PROTOCOL, true))
+                    .setClient()
                     .build()
     );
 }

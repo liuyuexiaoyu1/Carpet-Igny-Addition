@@ -108,6 +108,7 @@
   "igny.logger.piston.action.performed_text": "performed",
   "igny.logger.piston.action.punctuation": ".",
   "igny.mod_not_found": "is not installed",
+  "igny.prerequisite_rule": "rule needs to be enabled",
   "igny.syncmatica_not_permission": "No Permission",
 
   "carpet.rule.wardenNeverDig.desc":"Warden Never Dig",
@@ -329,5 +330,6 @@
   "carpet.rule.waterCanPushSquid.desc": "Water flow can push squids",
   "carpet.rule.netherPortalsAlwaysOnRoof.desc": "Nether portals are always placed at Y = 128 or above when created",
   "carpet.rule.betterPointedDripstoneGrow.desc": "A pointed dripstone stalactite can grow if it is attached to the underside of a dripstone block that has a waterlogged block directly above it",
-  "carpet.rule.containerBreakNoRandomMomentum.desc": "Removes random momentum from items dropped when a container is destroyed"
+  "carpet.rule.containerBreakNoRandomMomentum.desc": "Removes random momentum from items dropped when a container is destroyed",
+  "carpet.rule.easyPlaceCanPlaceWaterloggedBlock.desc": "Allows the easy place mode to sync the waterlogged state of waterloggable blocks placed from schematics when the betterEasyPlaceProtocol rule is enabled"
 }

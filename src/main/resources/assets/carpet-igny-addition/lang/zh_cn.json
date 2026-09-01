@@ -106,7 +106,8 @@
   "igny.logger.piston.failure.unknown": "未知原因",
   "igny.logger.piston.action.performed_text": "执行了",
   "igny.logger.piston.action.punctuation": "。",
-  "igny.syncmatica_not_found": "模组未安装",
+  "igny.mod_not_found": "模组未安装",
+  "igny.prerequisite_rule": "规则未启用",
   "igny.syncmatica_not_permission": "权限不足",
 
   "carpet.rule.wardenNeverDig.name": "监守者永不钻地",
@@ -481,5 +482,7 @@
   "carpet.rule.betterPointedDripstoneGrow.name": "更好的滴水石锥生长",
   "carpet.rule.betterPointedDripstoneGrow.desc": "当滴水石锥附着于下表面的滴水石块上方为含水方块时，下方的滴水石锥可以生长",
   "carpet.rule.containerBreakNoRandomMomentum.name": "容器破坏随机动量移除",
-  "carpet.rule.containerBreakNoRandomMomentum.desc": "破坏容器扔出物品时的随机动量将被移除"
+  "carpet.rule.containerBreakNoRandomMomentum.desc": "破坏容器扔出物品时的随机动量将被移除",
+  "carpet.rule.easyPlaceCanPlaceWaterloggedBlock.name": "轻松放置可放置含水方块",
+  "carpet.rule.easyPlaceCanPlaceWaterloggedBlock.desc": "当betterEasyPlaceProtocol规则开启时，轻松放置可以同步投影中含水方块的含水状态"
 }

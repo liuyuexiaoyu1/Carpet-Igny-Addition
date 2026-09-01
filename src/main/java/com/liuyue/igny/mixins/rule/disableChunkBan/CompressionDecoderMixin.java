@@ -10,9 +10,6 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 public class CompressionDecoderMixin {
     @ModifyConstant(method = "decode", constant = @Constant(intValue = 8388608), require = 0)
     private int decode(int original) {
-        if (IGNYSettings.DISABLE_CHUNK_BAN.value()) {
-            return Integer.MAX_VALUE;
-        }
-        return original;
+        return IGNYSettings.DISABLE_CHUNK_BAN.value() ? Integer.MAX_VALUE : original;
     }
 }

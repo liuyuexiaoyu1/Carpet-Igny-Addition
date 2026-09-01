@@ -8,6 +8,8 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public class EasyPlaceExtraProtocolHelper {
+    public static final int WATERLOGGED_BIT = 1 << 16;
+
     public static boolean isProtocol(double relativeHitDim) {
         return relativeHitDim >= (double) 2.0F;
     }
