@@ -109,11 +109,13 @@ public class CrafterBlockProtocolAdapter implements BlockProtocolStateAdapter, I
     //$$ }
     //$$ private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
     //$$     ItemStack stackCopy = stack.copy();
+    //$$     tag.putString("id", "minecraft:crafter");
     //$$     CompoundTag beTag = stackCopy.getTagElement("BlockEntityTag");
     //$$     if (beTag == null) {
     //$$         beTag = tag;
     //$$         stackCopy.getOrCreateTag().put("BlockEntityTag", beTag);
     //$$     } else {
+    //$$         beTag.putString("id", "minecraft:crafter");
     //$$         beTag.putIntArray("disabled_slots", tag.getIntArray("disabled_slots"));
     //$$     }
     //$$     return stackCopy;
@@ -127,6 +129,7 @@ public class CrafterBlockProtocolAdapter implements BlockProtocolStateAdapter, I
 
     private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
         ItemStack stackCopy = stack.copy();
+        tag.putString("id", "minecraft:crafter");
         stackCopy.set(DataComponents.BLOCK_ENTITY_DATA, CustomData.of(tag));
         return stackCopy;
     }

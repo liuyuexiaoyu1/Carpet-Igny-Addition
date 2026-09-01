@@ -197,6 +197,7 @@ public class StandingSignBlockProtocolAdapter implements BlockProtocolStateAdapt
     //$$ }
     //$$ private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
     //$$     ItemStack stackCopy = stack.copy();
+    //$$     tag.putString("id", "minecraft:sign");
     //$$     stackCopy.getOrCreateTag().put("BlockEntityTag", tag);
     //$$     return stackCopy;
     //$$ }
@@ -209,6 +210,7 @@ public class StandingSignBlockProtocolAdapter implements BlockProtocolStateAdapt
 
     private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
         ItemStack stackCopy = stack.copy();
+        tag.putString("id", "minecraft:sign");
         stackCopy.set(net.minecraft.core.component.DataComponents.BLOCK_ENTITY_DATA, net.minecraft.world.item.component.CustomData.of(tag));
         return stackCopy;
     }

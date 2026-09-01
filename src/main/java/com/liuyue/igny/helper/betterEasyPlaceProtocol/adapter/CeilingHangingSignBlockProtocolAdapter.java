@@ -203,6 +203,7 @@ public class CeilingHangingSignBlockProtocolAdapter implements BlockProtocolStat
     //$$ }
     //$$ private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
     //$$     ItemStack stackCopy = stack.copy();
+    //$$     tag.putString("id", "minecraft:hanging_sign");
     //$$     stackCopy.getOrCreateTag().put("BlockEntityTag", tag);
     //$$     return stackCopy;
     //$$ }
@@ -215,6 +216,7 @@ public class CeilingHangingSignBlockProtocolAdapter implements BlockProtocolStat
 
     private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
         ItemStack stackCopy = stack.copy();
+        tag.putString("id", "minecraft:hanging_sign");
         stackCopy.set(net.minecraft.core.component.DataComponents.BLOCK_ENTITY_DATA, net.minecraft.world.item.component.CustomData.of(tag));
         return stackCopy;
     }
@@ -229,9 +231,9 @@ public class CeilingHangingSignBlockProtocolAdapter implements BlockProtocolStat
     //$$     ItemStack stackCopy = stack.copy();
     //$$     stackCopy.set(net.minecraft.core.component.DataComponents.BLOCK_ENTITY_DATA,
     //#if MC >= 26.2
-    //$$             net.minecraft.world.item.component.TypedEntityData.of(net.minecraft.world.level.block.entity.BlockEntityTypes.SIGN, tag));
+    //$$             net.minecraft.world.item.component.TypedEntityData.of(net.minecraft.world.level.block.entity.BlockEntityTypes.HANGING_SIGN, tag));
     //#else
-    //$$             net.minecraft.world.item.component.TypedEntityData.of(net.minecraft.world.level.block.entity.BlockEntityType.SIGN, tag));
+    //$$             net.minecraft.world.item.component.TypedEntityData.of(net.minecraft.world.level.block.entity.BlockEntityType.HANGING_SIGN, tag));
     //#endif
     //$$     return stackCopy;
     //$$ }
