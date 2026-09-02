@@ -195,7 +195,7 @@ public class BuiltRule<T> implements CarpetRule<T> {
             if (!valueValidator.validate(value)) {
                 if (source != null && source.getEntity() instanceof net.minecraft.server.level.ServerPlayer) {
                     valueValidator.notifyFailure(source, this, userInput);
-                    throw new InvalidRuleValueException("Invalid value for rule " + this.name + ": " + userInput);
+                    throw valueValidator.shouldSendDetail() ? new InvalidRuleValueException("Invalid value for rule " + this.name + ": " + userInput) : new InvalidRuleValueException();
                 }
                 value = this.defaultValue;
                 userInput = RuleHelper.toRuleString(this.defaultValue);

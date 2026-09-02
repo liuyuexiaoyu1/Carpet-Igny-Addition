@@ -6,14 +6,6 @@ import net.minecraft.server.MinecraftServer;
 
 public class RuleChangeTracker {
 
-    /**
-     * 规则变更数据由 {@link com.liuyue.igny.manager.BaseDataManager#setServerAll} 统一加载，
-     * 此方法保留仅为兼容旧调用（如独立使用 RuleChangeDataManager 时）。
-     */
-    public static void init(MinecraftServer server){
-            RuleChangeDataManager.INSTANCE.setServer(server);
-    }
-
     public static <T> void ruleChanged(CommandSourceStack source, carpet.api.settings.CarpetRule<T> rule, T rawValue, String userInput) {
             String sourceName = getSourceName(source);
             long timestamp = System.currentTimeMillis();

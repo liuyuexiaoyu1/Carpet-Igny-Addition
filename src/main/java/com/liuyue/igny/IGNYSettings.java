@@ -402,8 +402,8 @@ public class IGNYSettings {
                     .addCategories(OPTIMIZATION, FEATURE)
                     .addOptions("#none", "minecraft:warden", "minecraft:piglin", "minecraft:warden,minecraft:piglin")
                     .setLenient()
-                    .addValidator(EntityValidator.createOptimizedEntityValidator())
-                    .addListener(EntityValidator::onOptimizedEntityListChanged)
+                    .addValidator(EntityValidator.createValidator())
+                    .addListener((source, value) -> EntityValidator.applyChange(value, CRAMMING_ENTITIES))
                     .build()
     );
 
@@ -675,8 +675,8 @@ public class IGNYSettings {
                     .addCategories(CREATIVE, FEATURE)
                     .addOptions("#all", "#none", "minecraft:item")
                     .setLenient()
-                    .addValidator(EntityValidator.createEntityIDSuppressionValidator())
-                    .addListener(EntityValidator::onEntityIDWhitelistChanged)
+                    .addValidator(EntityValidator.createValidator())
+                    .addListener((source, value) -> EntityValidator.applyChange(value, EIDWhitelist))
                     .build()
     );
 

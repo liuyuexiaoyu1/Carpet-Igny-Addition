@@ -3,6 +3,7 @@ package com.liuyue.igny.rule.validators;
 import carpet.utils.Translations;
 import com.liuyue.igny.rule.ValueValidator;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
 public class ModValidator {
@@ -12,9 +13,15 @@ public class ModValidator {
             public boolean validate(T newValue) {
                 return FabricLoader.getInstance().isModLoaded(modId);
             }
+
+            @Override
+            public boolean shouldSendDetail() {
+                return false;
+            }
+
             @Override
             public Component errorMessage() {
-                return Component.literal(modName + " " + Translations.tr("igny.mod_not_found"));
+                return Component.literal(modName + " " + Translations.tr("igny.mod_not_found")).withStyle(ChatFormatting.RED);
             }
         };
     }

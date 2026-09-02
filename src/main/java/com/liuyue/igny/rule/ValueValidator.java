@@ -35,9 +35,13 @@ public interface ValueValidator<T> {
 
     Component errorMessage();
 
+    default boolean shouldSendDetail() {
+        return true;
+    }
+
     default void notifyFailure(CommandSourceStack source, CarpetRule<T> currentRule, String providedValue) {
         if (source != null) {
-            Messenger.m(source, "r " + errorMessage().getString());
+            source.sendSystemMessage(errorMessage());
         }
     }
 

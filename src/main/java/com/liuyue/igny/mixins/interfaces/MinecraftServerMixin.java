@@ -20,7 +20,6 @@ public abstract class MinecraftServerMixin {
     private void afterServerLoadWorld(CallbackInfo ci){
         MinecraftServer server = IGNYServer.getInstance().getMinecraftServer();
         if (server != null && server.isRunning()) {
-            RuleChangeTracker.init(server);
             BaseDataManager.setServerAll(server);
         }
     }
