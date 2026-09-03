@@ -1,6 +1,5 @@
 package com.liuyue.igny.mixins.rule.removeSyncmaticaPermission;
 
-//#if MC < 26.1
 import carpet.utils.Translations;
 import ch.endte.syncmatica.communication.ExchangeTarget;
 import ch.endte.syncmatica.communication.MessageType;
@@ -13,16 +12,12 @@ import ch.endte.syncmatica.data.ServerPlacement;
 //#if MC > 12004
 import ch.endte.syncmatica.network.PacketType;
 //#endif
-//#endif
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.utils.CommandUtil;
 import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.network.FriendlyByteBuf;
-//#if MC >= 26.1
-//$$ import com.liuyue.igny.utils.compat.DummyClass;
-//#endif
 import net.minecraft.server.level.ServerPlayer;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,14 +37,9 @@ import java.util.Map;
                 @Condition("syncmatica")
         }
 )
-//#if MC >= 26.1
-//$$ @Mixin(DummyClass.class)
-//#else
 @Mixin(ServerCommunicationManager.class)
-//#endif
 @Pseudo
 public abstract class ServerCommunicationManagerMixin {
-    //#if MC < 26.1
     @Shadow
     @Final
     private Map<ExchangeTarget, ServerPlayer> playerMap;
@@ -72,5 +62,4 @@ public abstract class ServerCommunicationManagerMixin {
             ci.cancel();
         }
     }
-    //#endif
 }

@@ -84,18 +84,16 @@ dependencies {
     autoImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     autoImplementation ("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}")
 
-	if (!unobfuscated) {
-		if (mcVersion < 12003) {
-			autoCompileOnly ("com.github.End-Tech:syncmatica:${project.syncmatica_version}") {
-				exclude group: "net.fabricmc.fabric-api"
-
-			}
-		} else {
-			autoCompileOnly ("com.github.sakura-ryoko:syncmatica:${project.syncmatica_version}") {
-				exclude group: "net.fabricmc.fabric-api"
-			}
+	if (mcVersion < 12003) {
+		autoCompileOnly ("com.github.End-Tech:syncmatica:${project.syncmatica_version}") {
+			exclude group: "net.fabricmc.fabric-api"
+		}
+	} else {
+		autoCompileOnly ("com.github.sakura-ryoko:syncmatica:${project.syncmatica_version}") {
+			exclude group: "net.fabricmc.fabric-api"
 		}
 	}
+
 
 	include(autoImplementation("me.fallenbreath:conditional-mixin-fabric:0.6.4")) {
 		exclude group: "net.fabricmc.fabric-api"
@@ -137,8 +135,6 @@ dependencies {
 		exclude group: "net.fabricmc.fabric-api"
 	}
 
-	// litematica 的 POM 把 malilib 声明为 runtime scope，compileOnly 不会传递它；
-	// 而我们的代码引用 litematica 的 DataManager（implements malilib 接口），编译时必须解析 malilib 类型
 	autoCompileOnly(project.malilib_dependency) {
 		exclude group: "net.fabricmc.fabric-api"
 	}
