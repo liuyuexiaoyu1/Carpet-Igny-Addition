@@ -3,7 +3,6 @@ package com.liuyue.igny.helper.betterEasyPlaceProtocol.adapter;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Half;
@@ -32,15 +31,10 @@ public class TrapDoorBlockProtocolAdapter implements BlockProtocolStateAdapter {
         int halfOrdinal = (extraProtocolValue & 0b0000_0100) >>> 2;
         boolean isOpen = (extraProtocolValue & 0b0000_1000) == 0b0000_1000;
 
-        BlockState newState = fromState
+        return fromState
                 .setValue(TrapDoorBlock.FACING, Direction.values()[facingOrdinal])
-                .setValue(TrapDoorBlock.HALF, Half.values()[halfOrdinal]);
-
-        if (!fromState.getBlock().equals(Blocks.IRON_TRAPDOOR)) {
-            newState = newState.setValue(TrapDoorBlock.OPEN, isOpen);
-        }
-
-        return newState;
+                .setValue(TrapDoorBlock.HALF, Half.values()[halfOrdinal])
+                .setValue(TrapDoorBlock.OPEN, isOpen);
     }
 
     @Override
