@@ -1,6 +1,7 @@
 package com.liuyue.igny.mixins.rule.betterEasyPlaceProtocol;
 
 import com.liuyue.igny.helper.betterEasyPlaceProtocol.BetterEasyPlaceProtocolHandler;
+import com.liuyue.igny.helper.betterEasyPlaceProtocol.ClientEasyPlaceProtocolHelper;
 import com.liuyue.igny.helper.betterEasyPlaceProtocol.EasyPlaceExtraProtocolHelper;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.MultiStageBlockProtocolStateAdapter;
 import com.llamalad7.mixinextras.expression.Definition;
@@ -52,7 +53,7 @@ public abstract class WorldUtilsMixin {
             require = 0
     )
     private static Vec3 igny_replaceHitPos(Vec3 hitPos, @Local(name = "pos") BlockPos pos, @Local(name = "world") Level world, @Local(name = "stateSchematic") BlockState stateSchematic) {
-        return EasyPlaceExtraProtocolHelper.encodeHitPosItemData(hitPos, pos, world, stateSchematic);
+        return ClientEasyPlaceProtocolHelper.encodeHitPosItemData(hitPos, pos, world, stateSchematic);
     }
 
     //#if MC >= 26.2
@@ -68,7 +69,7 @@ public abstract class WorldUtilsMixin {
             require = 0
     )
     private static Vec3 igny_replaceHitPosV3(Vec3 hitPos, @Local(name = "pos") BlockPos pos, @Local(name = "world") Level world, @Local(name = "stateSchematic") BlockState stateSchematic) {
-        return EasyPlaceExtraProtocolHelper.encodeHitPosItemData(hitPos, pos, world, stateSchematic);
+        return ClientEasyPlaceProtocolHelper.encodeHitPosItemData(hitPos, pos, world, stateSchematic);
     }
 
 
