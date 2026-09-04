@@ -147,7 +147,11 @@ public class StandingSignBlockProtocolAdapter implements BlockProtocolStateAdapt
         if (!text.contains("messages")) {
             net.minecraft.nbt.ListTag messages = new net.minecraft.nbt.ListTag();
             for (int i = 0; i < 4; ++i) {
-                messages.add(net.minecraft.nbt.StringTag.valueOf(""));
+                //#if MC >= 12110
+                //$$ messages.add(net.minecraft.nbt.StringTag.valueOf(""));
+                //#else
+                messages.add(net.minecraft.nbt.StringTag.valueOf("\"\""));
+                //#endif
             }
             text.put("messages", messages);
         }
