@@ -26,6 +26,9 @@ import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.injection.At;
+//#if MC >= 12103
+//$$ import net.minecraft.server.level.ServerLevel;
+//#endif
 
 import java.util.ArrayList;
 
@@ -35,7 +38,15 @@ import java.util.ArrayList;
 //$$ @Mixin(AbstractMinecart.class)
 //#endif
 public class VehicleEntityOrAbstractMinecartMixin {
-    //#if MC >= 12003
+    //#if MC >= 12103
+    //$$ @WrapOperation(
+    //$$         method = "destroy(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/Item;)V",
+    //$$         at = @At(
+    //$$                 value = "INVOKE",
+    //$$                 target = "Lnet/minecraft/world/entity/vehicle/VehicleEntity;spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;"
+    //$$         )
+    //$$ )
+    //#elseif MC >= 12003
     @WrapOperation(
             method = "destroy(Lnet/minecraft/world/item/Item;)V",
             at = @At(
@@ -58,9 +69,16 @@ public class VehicleEntityOrAbstractMinecartMixin {
             //#else
             //$$ AbstractMinecart instance,
             //#endif
+            //#if MC >= 12103
+            //$$ ServerLevel world,
+            //#endif
             ItemStack itemStack, Operation<ItemEntity> original) {
         if (IGNYSettings.INSANE_BEHAVIORS.value().equals("off") || IGNYSettings.INSANE_BEHAVIORS_CART_YEETING_EXCEPTION.value().equals("disableVehicleItem")) {
+            //#if MC >= 12103
+            //$$ return original.call(world, instance, itemStack);
+            //#else
             return original.call(instance, itemStack);
+            //#endif
         }
         ArrayList<Float> unitValueList = InsaneBehaviors.nextEvenlyDistributedPoint(2);
         Vec3 velocity = new Vec3(
