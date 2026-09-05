@@ -65,19 +65,31 @@ public class InsaneBehaviors {
     public static int resetCounterAndResolution(CommandSourceStack c) {
         counter = 0;
         resolution = 2;
-        c.sendSuccess(() -> Component.translatable("igny.command.insanebehaviors.reset"), false);
+        c.sendSuccess(
+                //#if MC > 11904
+                () ->
+                //#endif
+                Component.translatable("igny.command.insanebehaviors.reset"), false);
         return 1;
     }
 
     public static int getState(CommandSourceStack c) {
-        c.sendSuccess(() -> Component.translatable("igny.command.insanebehaviors.getstate", resolution, counter), false);
+        c.sendSuccess(
+                //#if MC > 11904
+                () ->
+                //#endif
+                Component.translatable("igny.command.insanebehaviors.getstate", resolution, counter), false);
         return 1;
     }
 
     public static int setState(CommandSourceStack c, int _resolution, int _counter) {
         resolution = _resolution;
         counter = _counter;
-        c.sendSuccess(() -> Component.translatable("igny.command.insanebehaviors.setState", resolution, counter), false);
+        c.sendSuccess(
+                //#if MC > 11904
+                () ->
+                //#endif
+                Component.translatable("igny.command.insanebehaviors.setState", resolution, counter), false);
         return 1;
     }
 }
