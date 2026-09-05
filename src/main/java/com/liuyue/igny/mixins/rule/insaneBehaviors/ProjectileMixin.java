@@ -27,7 +27,11 @@ import static com.liuyue.igny.utils.insaneBehaviors.InsaneBehaviors.mapUnitVeloc
 @Mixin(Projectile.class)
 public class ProjectileMixin {
     @WrapOperation(
-           method = "getMovementToShoot",
+            //#if MC >= 12005
+            method = "getMovementToShoot",
+            //#else
+            //$$ method = "shoot",
+            //#endif
             at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/phys/Vec3;add(DDD)Lnet/minecraft/world/phys/Vec3;"

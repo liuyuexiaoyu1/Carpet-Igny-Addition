@@ -16,17 +16,26 @@ import com.liuyue.igny.utils.insaneBehaviors.InsaneBehaviors;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.vehicle.VehicleEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
+//#if MC >= 12003
+import net.minecraft.world.entity.vehicle.VehicleEntity;
+//#else
+//$$ import net.minecraft.world.entity.vehicle.AbstractMinecart;
+//#endif
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.ArrayList;
 
+//#if MC >= 12003
 @Mixin(VehicleEntity.class)
+//#else
+//$$ @Mixin(AbstractMinecart.class)
+//#endif
 public class VehicleEntityOrAbstractMinecartMixin {
+    //#if MC >= 12003
     @WrapOperation(
             method = "destroy(Lnet/minecraft/world/item/Item;)V",
             at = @At(
@@ -34,7 +43,22 @@ public class VehicleEntityOrAbstractMinecartMixin {
                     target = "Lnet/minecraft/world/entity/vehicle/VehicleEntity;spawnAtLocation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;"
             )
     )
-    private ItemEntity spawnAtLocation(VehicleEntity instance, ItemStack itemStack, Operation<ItemEntity> original) {
+    //#else
+    //$$ @WrapOperation(
+    //$$         method = "Lnet/minecraft/world/entity/vehicle/AbstractMinecart;destroy(Lnet/minecraft/world/damagesource/DamageSource;)V",
+    //$$         at = @At(
+    //$$                 value = "INVOKE",
+    //$$                 target = "Lnet/minecraft/world/entity/vehicle/AbstractMinecart;spawnAtLocation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;"
+    //$$         )
+    //$$ )
+    //#endif
+    private ItemEntity spawnAtLocation(
+            //#if MC >= 12003
+            VehicleEntity instance,
+            //#else
+            //$$ AbstractMinecart instance,
+            //#endif
+            ItemStack itemStack, Operation<ItemEntity> original) {
         if (IGNYSettings.INSANE_BEHAVIORS.value().equals("off") || IGNYSettings.INSANE_BEHAVIORS_CART_YEETING_EXCEPTION.value().equals("disableVehicleItem")) {
             return original.call(instance, itemStack);
         }
@@ -50,5 +74,4 @@ public class VehicleEntityOrAbstractMinecartMixin {
         level.addFreshEntity(itemEntity);
         return itemEntity;
     }
-
 }
