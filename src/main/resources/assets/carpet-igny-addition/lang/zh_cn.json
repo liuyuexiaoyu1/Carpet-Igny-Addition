@@ -75,6 +75,9 @@
   "igny.command.CustomItemMaxStackSize.list_empty": "当前没有设置任何自定义堆叠上限",
   "igny.command.CustomItemMaxStackSize.list_header": "--- 自定义堆叠上限列表 ---",
   "igny.command.CustomItemMaxStackSize.click_to_remove": "点击移除此物品",
+  "igny.command.insanebehaviors.reset": "已重置",
+  "igny.command.insanebehaviors.getstate": "当前状态：分辨率=%d，计数器=%d",
+  "igny.command.insanebehaviors.setState": "已更新分辨率和计数器：分辨率=%d，计数器=%d",
 
   "igny.task.status.infinite": "§7无限次",
   "igny.task.status.cycle": "§7第§f%s§7/§f%s§7轮",
@@ -484,5 +487,19 @@
   "carpet.rule.containerBreakNoRandomMomentum.name": "容器破坏随机动量移除",
   "carpet.rule.containerBreakNoRandomMomentum.desc": "破坏容器扔出物品时的随机动量将被移除",
   "carpet.rule.easyPlaceCanPlaceWaterloggedBlock.name": "轻松放置可放置含水方块",
-  "carpet.rule.easyPlaceCanPlaceWaterloggedBlock.desc": "当betterEasyPlaceProtocol规则开启时，轻松放置可以同步投影中含水方块的含水状态"
+  "carpet.rule.easyPlaceCanPlaceWaterloggedBlock.desc": "当betterEasyPlaceProtocol规则开启时，轻松放置可以同步投影中含水方块的含水状态",
+
+  "carpet.rule.insaneBehaviors.name": "疯狂行为",
+  "carpet.rule.insaneBehaviors.desc": "让投掷器和弹射物（以及被活塞破坏方块的掉落位置与速度）的随机速度按系统化的方式遍历所有可能的最极端值，然后反复遍历介于其间的所有中点，某种意义上相当于尝试一个分辨率缓慢增加的3维/5维\"网格\"中的每一个点。\n对于投掷器和弹射物，此设置决定最大值对应旧的gaussian随机限制（\"extreme\"），还是1.19引入的三角分布随机限制（\"sensible\"）。两种设置在活塞破坏方块时功能相同。\n`/insanebehaviors <reset/getstate/setstate>` 命令参见 `/carpet commandInsaneBehaviors`。\n注意：insaneBehaviors 使用一个全局迭代器：任何触发事件都会使所有其他 insaneBehaviors 事件也步进一次迭代",
+  "carpet.rule.insaneBehaviorsIncrement.name": "疯狂行为增量",
+  "carpet.rule.insaneBehaviorsIncrement.desc": "决定 `insaneBehaviors` 规则的递增行为。若为 `normal`，计数器正常递增，直到当前分辨率的所有点耗尽，再进入下一个分辨率。\n`loopCurrentResolution` 将在当前分辨率重新开始。\n`freeze` 将同时停止计数器和分辨率的递增",
+  "carpet.rule.insaneBehaviorsSkipVisitedPoints.name": "疯狂行为跳过已访问点",
+  "carpet.rule.insaneBehaviorsSkipVisitedPoints.desc": "使 `insaneBehaviors` 规则跳过与之前分辨率重合的点，从而将总搜索空间减少一个趋近于 1/(2^resolution) 的比例",
+  "carpet.rule.insaneBehaviorsCartYeetingException.name": "疯狂行为矿车投掷例外",
+  "carpet.rule.insaneBehaviorsCartYeetingException.desc": "通过禁用两种掉落物之一（载具本体物品和容器内物品），使矿车投掷测试成为可能，避免不同迭代器互相干扰",
+  "carpet.rule.commandInsaneBehaviors.name": "疯狂行为指令",
+  "carpet.rule.commandInsaneBehaviors.desc": "用于 `insaneBehaviors` 规则的指令\n\"reset\" 将 `resolution` 和 `counter` 重置为默认值。\"getstate\" 与 \"setstate\" 用于手动读取和写入当前迭代状态",
+  "carpet.rule.commandInsaneBehaviors.extra.0": "用法：/insanebehaviors reset - 重置分辨率和计数器",
+  "carpet.rule.commandInsaneBehaviors.extra.1": "用法：/insanebehaviors getstate - 显示当前的分辨率和计数器",
+  "carpet.rule.commandInsaneBehaviors.extra.2": "用法：/insanebehaviors setstate <resolution> <counter> - 设置分辨率和计数器"
 }

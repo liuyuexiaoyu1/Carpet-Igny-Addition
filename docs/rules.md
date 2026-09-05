@@ -1441,3 +1441,63 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
+
+## 疯狂行为 (insaneBehaviors) `🐛Beta`
+
+让投掷器和弹射物（以及被活塞破坏方块的掉落位置与速度）的随机速度按系统化的方式遍历所有可能的最极端值，然后反复遍历介于其间的所有中点，某种意义上相当于尝试一个分辨率缓慢增加的3维/5维"网格"中的每一个点。
+对于投掷器和弹射物，此设置决定最大值对应旧的gaussian随机限制（"extreme"），还是1.19引入的三角分布随机限制（"sensible"）。两种设置在活塞破坏方块时功能相同。
+`/insanebehaviors <reset/getstate/setstate>` 命令参见 `/carpet commandInsaneBehaviors`。
+注意：insaneBehaviors 使用一个全局迭代器：任何触发事件都会使所有其他 insaneBehaviors 事件也步进一次迭代。  
+**移植自 JoaCarpet**
+
+- 类型: `string`
+- 默认值: `off`
+- 参考选项: `extreme`, `sensible`, `off`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 疯狂行为增量 (insaneBehaviorsIncrement) `🐛Beta`
+
+决定 `insaneBehaviors` 规则的递增行为。若为 `normal`，计数器正常递增，直到当前分辨率的所有点耗尽，再进入下一个分辨率。
+`loopCurrentResolution` 将在当前分辨率重新开始。
+`freeze` 将同时停止计数器和分辨率的递增。  
+**移植自 JoaCarpet**
+
+- 类型: `string`
+- 默认值: `normal`
+- 参考选项: `normal`, `loopCurrentResolution`, `freeze`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 疯狂行为跳过已访问点 (insaneBehaviorsSkipVisitedPoints) `🐛Beta`
+
+使 `insaneBehaviors` 规则跳过与之前分辨率重合的点，从而将总搜索空间减少一个趋近于 1/(2^resolution) 的比例。  
+**移植自 JoaCarpet**
+
+- 类型: `string`
+- 默认值: `false`
+- 参考选项: `true`, `false`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 疯狂行为矿车投掷例外 (insaneBehaviorsCartYeetingException) `🐛Beta`
+
+通过禁用两种掉落物之一（载具本体物品和容器内物品），使矿车投掷测试成为可能，避免不同迭代器互相干扰。  
+**移植自 JoaCarpet**
+
+- 类型: `string`
+- 默认值: `none`
+- 参考选项: `none`, `disableVehicleItem`, `disableContainerContents`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 疯狂行为指令 (commandInsaneBehaviors) `🐛Beta`
+
+用于 `insaneBehaviors` 规则的指令。
+"reset" 将 `resolution` 和 `counter` 重置为默认值。"getstate" 与 "setstate" 用于手动读取和写入当前迭代状态。
+用法:
+`/insanebehaviors reset` - 重置分辨率和计数器;
+`/insanebehaviors getstate` - 显示当前的分辨率和计数器;
+`/insanebehaviors setstate <resolution> <counter>` - 设置分辨率和计数器。  
+**移植自 JoaCarpet**
+
+- 类型: `string`
+- 默认值: `ops`
+- 参考选项: `true`, `false`, `ops`, `0`, `1`, `2`, `3`, `4`
+- 分类: `IGNY`, `CREATIVE`, `FEATURE`

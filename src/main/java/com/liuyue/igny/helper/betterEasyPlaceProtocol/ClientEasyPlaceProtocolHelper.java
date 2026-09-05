@@ -25,11 +25,12 @@ import java.util.Map;
 
 public class ClientEasyPlaceProtocolHelper {
 
-    public static Vec3 encodeHitPosItemData(Vec3 hitPos, BlockPos pos, Level world, BlockState stateSchematic) {
+    public static Vec3 encodeHitPosItemData(Vec3 hitPos, BlockPos pos, BlockState stateSchematic) {
         if (!BetterEasyPlaceProtocolHandler.isRuleEnabled()) {
             return hitPos;
         }
         Block block = stateSchematic.getBlock();
+        Level world = SchematicWorldHandler.getSchematicWorld();
         com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter adapter =
                 BetterEasyPlaceProtocolHandler.getAdapter(block);
         if (!(adapter instanceof ItemStackProtocolDataAdapter itemStackAdapter)) {
@@ -66,9 +67,6 @@ public class ClientEasyPlaceProtocolHelper {
         //#endif
         if (attributesValue == 0) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity == null) {
-                blockEntity = getSchematicWorldBlockEntity(pos);
-            }
             if (blockEntity != null) {
                 attributesValue = BetterEasyPlaceProtocolHandler.encodeBlockEntityProtocolAddition(blockEntity);
             }
@@ -82,14 +80,6 @@ public class ClientEasyPlaceProtocolHelper {
             return hitPos;
         }
         return EasyPlaceExtraProtocolHelper.encodeProtocolValueToHitVecZ(protocolAdditionValue, hitPos);
-    }
-
-    private static @Nullable BlockEntity getSchematicWorldBlockEntity(BlockPos pos) {
-        Level schematicWorld = SchematicWorldHandler.getSchematicWorld();
-        if (schematicWorld == null) {
-            return null;
-        }
-        return schematicWorld.getBlockEntity(pos);
     }
 
     private static @Nullable CompoundTag getSchematicBlockEntityNbt(BlockPos pos) {

@@ -1439,3 +1439,63 @@ Allows the easy place mode to sync the waterlogged state of waterloggable blocks
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
+
+## insaneBehaviors `🐛Beta`
+
+Makes the random velocities of droppers and projectiles (as well as both the position and velocity of blocks broken by pistons) systematically iterate through the most extreme values possible, and then repeatedly iterate through all the halfway points in between, in a sense attempting every point in a 3d/5d "grid" that slowly increases in resolution.
+For droppers and projectiles, this setting determines whether the max value corresponds to the old gaussian randomness limits ("extreme"), or the limits of the triangular randomness introduced in 1.19 ("sensible"). Both settings function the same for blocks being broken by pistons.
+For the `/insanebehaviors <reset/getstate/setstate>` command, see `/carpet commandInsaneBehaviors`.
+Do note that insaneBehaviors works on a global iterator: any triggering event will step through an iteration from all other insaneBehaviors events, too.  
+**ported from JoaCarpet**
+
+- Type: `string`
+- Default value: `off`
+- Suggested options: `extreme`, `sensible`, `off`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## insaneBehaviorsIncrement `🐛Beta`
+
+Determines the incrementing behavior of the `insaneBehaviors` rule. If set to `normal`, the counter increments normally until all points of the current resolution have been exhausted, then step to the next resolution.
+`loopCurrentResolution` will instead restart at the beginning of the current resolution.
+`freeze` will stop both the counter and resolution from incrementing.  
+**ported from JoaCarpet**
+
+- Type: `string`
+- Default value: `normal`
+- Suggested options: `normal`, `loopCurrentResolution`, `freeze`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## insaneBehaviorsSkipVisitedPoints `🐛Beta`
+
+Makes the `insaneBehaviors` rule skip points that coincide with previous resolutions, reducing the overall search space by a fraction that approaches 1/(2^resolution).  
+**ported from JoaCarpet**
+
+- Type: `string`
+- Default value: `false`
+- Suggested options: `true`, `false`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## insaneBehaviorsCartYeetingException `🐛Beta`
+
+Makes testing cart yeeting possible by disabling one of the two types of item drops (vehicle item and container items), to make the different iterators not interfere with each other.  
+**ported from JoaCarpet**
+
+- Type: `string`
+- Default value: `none`
+- Suggested options: `none`, `disableVehicleItem`, `disableContainerContents`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## commandInsaneBehaviors `🐛Beta`
+
+The command used for the `insaneBehaviors` rule.
+"reset" sets the `resolution` and `counter` back to the default values. "getstate" and "setstate" are used to manually read and write the current iteration state.
+Usage:
+`/insanebehaviors reset` - resets the resolution and counter;
+`/insanebehaviors getstate` - shows the current resolution and counter;
+`/insanebehaviors setstate <resolution> <counter>` - sets the resolution and counter.  
+**ported from JoaCarpet**
+
+- Type: `string`
+- Default value: `ops`
+- Suggested options: `true`, `false`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `IGNY`, `CREATIVE`, `FEATURE`

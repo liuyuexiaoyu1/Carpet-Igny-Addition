@@ -1143,4 +1143,37 @@ public class IGNYSettings {
                     .setClient()
                     .build()
     );
+
+    public static final RuleAccessor<String> INSANE_BEHAVIORS = register(
+            RuleFactory.of("insaneBehaviors", "off")
+                    .addCategories(CREATIVE, FEATURE)
+                    .addOptions("extreme", "sensible", "off")
+                    .build()
+    );
+
+    public static final RuleAccessor<String> INSANE_BEHAVIORS_INCREMENT = register(
+            RuleFactory.of("insaneBehaviorsIncrement", "normal")
+                    .addCategories(CREATIVE, FEATURE)
+                    .addOptions("normal", "loopCurrentResolution", "freeze")
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> INSANE_BEHAVIORS_SKIP_VISITED_POINTS = register(
+            RuleFactory.of("insaneBehaviorsSkipVisitedPoints", false)
+                    .addCategories(CREATIVE, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<String> INSANE_BEHAVIORS_CART_YEETING_EXCEPTION = register(
+            RuleFactory.of("insaneBehaviorsCartYeetingException", "none")
+                    .addCategories(CREATIVE, FEATURE)
+                    .addOptions("none", "disableVehicleItem", "disableContainerContents")
+                    .build()
+    );
+
+    public static final RuleAccessor<CommandPermissionLevel> COMMAND_INSANE_BEHAVIORS = register(
+            RuleFactory.of("commandInsaneBehaviors", CommandPermissionLevel.OPS)
+                    .addCategories(CREATIVE, FEATURE)
+                    .build()
+    );
 }

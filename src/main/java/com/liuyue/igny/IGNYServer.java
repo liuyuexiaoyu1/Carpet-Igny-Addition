@@ -71,6 +71,7 @@ public class IGNYServer implements CarpetExtension {
         ClearLightQueueCommand.register(dispatcher);
         CustomPlayerPickupItemCommand.register(dispatcher, commandBuildContext);
         CustomItemMaxStackSizeCommand.register(dispatcher, commandBuildContext);
+        InsaneBehaviorsCommand.register(dispatcher);
     }
 
     @Override

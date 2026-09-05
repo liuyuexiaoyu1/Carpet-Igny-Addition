@@ -75,6 +75,9 @@
   "igny.command.CustomItemMaxStackSize.list_empty": "No custom stack sizes set.",
   "igny.command.CustomItemMaxStackSize.list_header": "--- Custom Stack Sizes ---",
   "igny.command.CustomItemMaxStackSize.click_to_remove": "Click to remove this setting",
+  "igny.command.insanebehaviors.reset": "Reset",
+  "igny.command.insanebehaviors.getstate": "Current state: Resolution=%d, Counter=%d",
+  "igny.command.insanebehaviors.setState": "Updated resolution and counter: Resolution=%d, Counter=%d",
 
   "igny.task.status.infinite": "§7Infinite",
   "igny.task.status.cycle": "§7Cycle §f%s§7/§f%s",
@@ -331,5 +334,13 @@
   "carpet.rule.netherPortalsAlwaysOnRoof.desc": "Nether portals are always placed at Y = 128 or above when created",
   "carpet.rule.betterPointedDripstoneGrow.desc": "A pointed dripstone stalactite can grow if it is attached to the underside of a dripstone block that has a waterlogged block directly above it",
   "carpet.rule.containerBreakNoRandomMomentum.desc": "Removes random momentum from items dropped when a container is destroyed",
-  "carpet.rule.easyPlaceCanPlaceWaterloggedBlock.desc": "Allows the easy place mode to sync the waterlogged state of waterloggable blocks placed from schematics when the betterEasyPlaceProtocol rule is enabled"
+  "carpet.rule.easyPlaceCanPlaceWaterloggedBlock.desc": "Allows the easy place mode to sync the waterlogged state of waterloggable blocks placed from schematics when the betterEasyPlaceProtocol rule is enabled",
+  "carpet.rule.insaneBehaviors.desc": "Makes the random velocities of droppers and projectiles (as well as both the position and velocity of blocks broken by pistons) systematically iterate through the most extreme values possible, and then repeatedly iterate through all the halfway points in between, in a sense attempting every point in a 3d/5d \"grid\" that slowly increases in resolution.\nFor droppers and projectiles, this setting determines whether the max value corresponds to the old gaussian randomness limits (\"extreme\"), or the limits of the triangular randomness introduced in 1.19 (\"sensible\"). Both settings function the same for blocks being broken by pistons.\nFor the `/insanebehaviors <reset/getstate/setstate>` command, see `/carpet commandInsaneBehaviors`.\nDo note that insaneBehaviors works on a global iterator: any triggering event will step through an iteration from all other insaneBehaviors events, too",
+  "carpet.rule.insaneBehaviorsIncrement.desc": "Determines the incrementing behavior of the `insaneBehaviors` rule. If set to `normal`, the counter increments normally until all points of the current resolution have been exhausted, then step to the next resolution.\n`loopCurrentResolution` will instead restart at the beginning of the current resolution.\n`freeze` will stop both the counter and resolution from incrementing",
+  "carpet.rule.insaneBehaviorsSkipVisitedPoints.desc": "Makes the `insaneBehaviors` rule skip points that coincide with previous resolutions, reducing the overall search space by a fraction that approaches 1/(2^resolution)",
+  "carpet.rule.insaneBehaviorsCartYeetingException.desc": "Makes testing cart yeeting possible by disabling one of the two types of item drops (vehicle item and container items), to make the different iterators not interfere with each other",
+  "carpet.rule.commandInsaneBehaviors.desc": "The command used for the `insaneBehaviors` rule.\n\"reset\" sets the `resolution` and `counter` back to the default values. \"getstate\" and \"setstate\" are used to manually read and write the current iteration state",
+  "carpet.rule.commandInsaneBehaviors.extra.0": "Usage: /insanebehaviors reset - resets the resolution and counter",
+  "carpet.rule.commandInsaneBehaviors.extra.1": "Usage: /insanebehaviors getstate - shows the current resolution and counter",
+  "carpet.rule.commandInsaneBehaviors.extra.2": "Usage: /insanebehaviors setstate <resolution> <counter> - sets the resolution and counter"
 }
