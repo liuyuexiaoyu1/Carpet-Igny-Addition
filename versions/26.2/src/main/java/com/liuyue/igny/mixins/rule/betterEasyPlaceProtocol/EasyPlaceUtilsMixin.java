@@ -1,5 +1,6 @@
 package com.liuyue.igny.mixins.rule.betterEasyPlaceProtocol;
 
+import com.liuyue.igny.helper.betterEasyPlaceProtocol.BetterEasyPlaceProtocolHandler;
 import com.liuyue.igny.helper.betterEasyPlaceProtocol.ClientEasyPlaceProtocolHelper;
 import fi.dy.masa.litematica.util.EasyPlaceUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
@@ -21,7 +22,7 @@ public abstract class EasyPlaceUtilsMixin {
             require = 0,
             cancellable = true)
     private static void igny_replaceHitPos(BlockPos pos, BlockState state, Vec3 hitVecIn, CallbackInfoReturnable<Vec3> cir) {
-        cir.setReturnValue(ClientEasyPlaceProtocolHelper.encodeHitPosItemData(cir.getReturnValue(), pos, state));
+        if (BetterEasyPlaceProtocolHandler.isRuleEnabled()) cir.setReturnValue(ClientEasyPlaceProtocolHelper.encodeHitPosItemData(cir.getReturnValue(), pos, state));
     }
 
     @Inject(
@@ -30,6 +31,6 @@ public abstract class EasyPlaceUtilsMixin {
             require = 0,
             cancellable = true)
     private static void igny_replaceHitPosV3(BlockPos pos, BlockState state, Vec3 hitVecIn, CallbackInfoReturnable<Vec3> cir) {
-        cir.setReturnValue(ClientEasyPlaceProtocolHelper.encodeHitPosItemData(cir.getReturnValue(), pos, state));
+        if (BetterEasyPlaceProtocolHandler.isRuleEnabled()) cir.setReturnValue(ClientEasyPlaceProtocolHelper.encodeHitPosItemData(cir.getReturnValue(), pos, state));
     }
 }

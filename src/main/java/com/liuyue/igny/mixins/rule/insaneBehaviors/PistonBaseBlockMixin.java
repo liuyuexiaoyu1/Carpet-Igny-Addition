@@ -61,6 +61,6 @@ public class PistonBaseBlockMixin {
         double posX = (double)blockPos.getX() + 0.5 + unitValueList.get(2) * 0.5 - 0.25;
         double posZ = (double)blockPos.getZ() + 0.5 + unitValueList.get(3) * 0.5 - 0.25;
         double posY = (double)blockPos.getY() + 0.5 + unitValueList.get(4) * 0.5 - 0.25;
-        BlockMixin.popResourceInvoker(level, () -> new ItemEntity(level, posX, posY, posZ, itemStack, velX, 0.2, velZ), itemStack);
+        BlockInvoker.popResourceInvoker(level, () -> new ItemEntity(level, posX, posY, posZ, itemStack, velX, 0.2, velZ), itemStack);
     }
 }

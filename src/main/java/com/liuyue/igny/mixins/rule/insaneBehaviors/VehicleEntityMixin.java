@@ -37,7 +37,7 @@ import java.util.ArrayList;
 //#else
 //$$ @Mixin(AbstractMinecart.class)
 //#endif
-public class VehicleEntityOrAbstractMinecartMixin {
+public class VehicleEntityMixin {
     //#if MC >= 12103
     //$$ @WrapOperation(
     //$$         method = "destroy(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/Item;)V",
@@ -75,7 +75,7 @@ public class VehicleEntityOrAbstractMinecartMixin {
             ItemStack itemStack, Operation<ItemEntity> original) {
         if (IGNYSettings.INSANE_BEHAVIORS.value().equals("off") || IGNYSettings.INSANE_BEHAVIORS_CART_YEETING_EXCEPTION.value().equals("disableVehicleItem")) {
             //#if MC >= 12103
-            //$$ return original.call(world, instance, itemStack);
+            //$$ return original.call(instance, world, itemStack);
             //#else
             return original.call(instance, itemStack);
             //#endif

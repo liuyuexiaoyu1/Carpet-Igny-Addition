@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import java.util.function.Supplier;
 
 @Mixin(Block.class)
-public interface BlockMixin {
+public interface BlockInvoker {
     @Invoker("popResource")
     static void popResourceInvoker(Level level, Supplier<ItemEntity> supplier, ItemStack itemStack) {}
 }

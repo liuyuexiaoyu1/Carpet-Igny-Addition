@@ -41,7 +41,7 @@ public abstract class WorldUtilsMixin {
             require = 0,
             cancellable = true)
     private static void igny_replaceHitPos(BlockPos pos, BlockState state, Vec3 hitVecIn, CallbackInfoReturnable<Vec3> cir) {
-        cir.setReturnValue(ClientEasyPlaceProtocolHelper.encodeHitPosItemData(cir.getReturnValue(), pos, state));
+        if (BetterEasyPlaceProtocolHandler.isRuleEnabled()) cir.setReturnValue(ClientEasyPlaceProtocolHelper.encodeHitPosItemData(cir.getReturnValue(), pos, state));
     }
 
     @Inject(
@@ -50,7 +50,7 @@ public abstract class WorldUtilsMixin {
             require = 0,
             cancellable = true)
     private static void igny_replaceHitPosV3(BlockPos pos, BlockState state, Vec3 hitVecIn, CallbackInfoReturnable<Vec3> cir) {
-        cir.setReturnValue(ClientEasyPlaceProtocolHelper.encodeHitPosItemData(cir.getReturnValue(), pos, state));
+        if (BetterEasyPlaceProtocolHandler.isRuleEnabled()) cir.setReturnValue(ClientEasyPlaceProtocolHelper.encodeHitPosItemData(cir.getReturnValue(), pos, state));
     }
     //#endif
 
