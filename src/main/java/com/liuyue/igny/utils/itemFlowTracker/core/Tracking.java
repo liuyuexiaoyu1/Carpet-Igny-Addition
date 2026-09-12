@@ -45,7 +45,7 @@ public class Tracking {
     }
 
     public static TrackMark newMark(DyeColor color, int capacity, int pathInterval) {
-        //#if MC >= 12000
+        //#if MC >= 12101
         int colorInt = color.getTextureDiffuseColor();
         //#else
         //$$ float[] rgb = color.getTextureDiffuseColors();
