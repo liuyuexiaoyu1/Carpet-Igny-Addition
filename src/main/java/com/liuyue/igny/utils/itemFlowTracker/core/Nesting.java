@@ -71,7 +71,7 @@ public final class Nesting {
             @Nullable ItemContainerContents container,
             @Nullable BundleContents bundle,
             int depth) {
-        //#if MC >= 12105
+        //#if MC >= 26.1
         //$$ if (container != null) {
         //$$     for (ItemStackTemplate nested : container.nonEmptyItems()) {
         //$$         TrackMark mark = inTemplate(nested, depth + 1);
