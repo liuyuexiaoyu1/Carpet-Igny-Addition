@@ -1499,3 +1499,57 @@ Usage:
 - Default value: `ops`
 - Suggested options: `true`, `false`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
+
+## preventWeakLoadingEntityPiling `🐛Beta`
+
+Clears every wither skull and shulker bullet in weakly loaded chunks once every 20 game ticks.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## itemFlowTracker `🐛Beta`
+
+Tracks items as they move through containers, item entities and so on; see the `itemFlowTrackerFastMark` or `commandItemFlowTracker` rules.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `COMMAND`, `SURVIVAL`, `FEATURE`
+
+## itemFlowTrackerMaxSessions `🐛Beta`
+
+Maximum number of live tracking sessions. When the limit is reached the oldest session is retired first. Set to 0 for unlimited.  
+Requires the `itemFlowTracker` rule to be enabled.
+
+- Type: `int`
+- Default value: `512`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## itemFlowTrackerFastMark `🐛Beta`
+
+Dropping the item in your main hand while holding a dye in the off-hand marks it with that dye colour.  
+Requires the `itemFlowTracker` rule to be enabled.
+
+- Type: `boolean`
+- Default value: `true`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## commandItemFlowTracker `🐛Beta`
+
+The permission level required for the `/itemflowtracker` command.  
+Requires the `itemFlowTracker` rule to be enabled.  
+Usage:  
+`/itemflowtracker mark <colour> [<track_path>]` - marks the item in your main hand;  
+`/itemflowtracker mark <colour> <targets> [<track_path>]` - marks the specified dropped items in the world;  
+`/itemflowtracker mark hex <rrggbb> [<track_path>]` - marks with a custom colour;  
+`/itemflowtracker status` - lists every live tracking session and its remaining budget;  
+`/itemflowtracker clear` - stops every tracking session and removes all highlights.  
+The optional `<track_path>` is the trail sampling interval in ticks; it defaults to 5, and 0 turns the trail off.
+
+- Type: `string`
+- Default value: `ops`
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `IGNY`, `COMMAND`, `SURVIVAL`, `FEATURE`

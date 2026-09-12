@@ -1501,3 +1501,57 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `ops`
 - 参考选项: `true`, `false`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
+
+## 防止弱加载实体堆积 (preventWeakLoadingEntityPiling) `🐛Beta`
+
+每20游戏刻清除一次所有处于弱加载区块中的凋灵之首和潜影弹。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 物品流向追踪 (itemFlowTracker) `🐛Beta`
+
+追踪物品在容器、物品实体等之间的流动，详见 `itemFlowTrackerFastMark` 或 `commandItemFlowTracker` 规则。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `COMMAND`, `SURVIVAL`, `FEATURE`
+
+## 物品流向追踪最大会话数 (itemFlowTrackerMaxSessions) `🐛Beta`
+
+同时存在的追踪会话上限。达到上限时会优先回收最旧的会话，设为 0 表示不限制。  
+需先开启 `itemFlowTracker`。
+
+- 类型: `int`
+- 默认值: `512`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 物品流向追踪快速标记 (itemFlowTrackerFastMark) `🐛Beta`
+
+副手持有染料时丢弃主手物品会自动被标记为该染料颜色。  
+需先开启 `itemFlowTracker`。
+
+- 类型: `boolean`
+- 默认值: `true`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 物品流向追踪指令 (commandItemFlowTracker) `🐛Beta`
+
+使用 `/itemflowtracker` 指令所需的权限等级。  
+需先开启 `itemFlowTracker`。  
+用法:  
+`/itemflowtracker mark <颜色> [<跟踪间隔>]` - 标记主手中的物品；  
+`/itemflowtracker mark <颜色> <目标物品实体> [<跟踪间隔>]` - 标记世界中的指定的掉落物；  
+`/itemflowtracker mark hex <rrggbb> [<跟踪间隔>]` - 使用自定义颜色；  
+`/itemflowtracker status` - 列出所有追踪会话及其剩余额度；  
+`/itemflowtracker clear` - 结束所有追踪会话并清除全部高亮。  
+可选的 `<跟踪间隔>` 是轨迹采样间隔（tick），缺省为 5，填 0 关闭轨迹。  
+
+- 类型: `string`
+- 默认值: `ops`
+- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- 分类: `IGNY`, `COMMAND`, `SURVIVAL`, `FEATURE`

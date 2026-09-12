@@ -1176,4 +1176,40 @@ public class IGNYSettings {
                     .addCategories(CREATIVE, FEATURE)
                     .build()
     );
+
+    public static final RuleAccessor<Boolean> PREVENT_WEAK_LOADING_ENTITY_PILING = register(
+            RuleFactory.of("preventWeakLoadingEntityPiling", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> ITEM_FLOW_TRACKER = register(
+            RuleFactory.of("itemFlowTracker", false)
+                    .setCommand()
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Integer> ITEM_FLOW_TRACKER_MAX_SESSIONS = register(
+            RuleFactory.of("itemFlowTrackerMaxSessions", 512)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .addValidator(PrerequisiteRuleValidator.createValidator(IGNYSettings.ITEM_FLOW_TRACKER, true))
+                    .setLenient()
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> ITEM_FLOW_TRACKER_FAST_MARK = register(
+            RuleFactory.of("itemFlowTrackerFastMark", true)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .addValidator(PrerequisiteRuleValidator.createValidator(IGNYSettings.ITEM_FLOW_TRACKER, true))
+                    .build()
+    );
+
+    public static final RuleAccessor<CommandPermissionLevel> COMMAND_ITEM_FLOW_TRACKER = register(
+            RuleFactory.of("commandItemFlowTracker", CommandPermissionLevel.OPS)
+                    .setCommand()
+                    .addCategories(SURVIVAL, FEATURE)
+                    .addValidator(PrerequisiteRuleValidator.createValidator(IGNYSettings.ITEM_FLOW_TRACKER, true))
+                    .build()
+    );
 }

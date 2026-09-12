@@ -100,3 +100,31 @@
     - `...clear` Clears all configured custom stack size rules.
     - `...list` Lists all currently active custom stack size settings.
         - Cursor hover over the item name to view its full ResourceLocation (Namespace ID).
+
+## Item Flow Tracker (`/itemflowtracker`)
+
+Requires the `itemFlowTracker` rule to be enabled.
+
+### Syntax
+- `/itemflowtracker`
+    - `...mark`
+        - `...<colour>`
+            - `[<track_path>]`
+            - `...<targets>`
+                - `[<track_path>]`
+        - `...hex <rrggbb>`
+            - `[<track_path>]`
+            - `...<targets>`
+                - `[<track_path>]`
+    - `...status`
+    - `...clear`
+
+### Effects
+- `/itemflowtracker` manages the item flow tracking sessions.
+    - `...mark` starts a tracking session with the given colour.
+        - `...<colour>` is one of the dye names: `white`, `orange`, `magenta`, `light_blue`, `yellow`, `lime`, `pink`, `gray`, `light_gray`, `cyan`, `purple`, `blue`, `brown`, `green`, `red`, `black`.
+        - `...<targets>` marks the specified dropped item entities in the world; when omitted the item in your main hand is marked.
+        - `...hex <rrggbb>` uses a custom colour; `<rrggbb>` may be `ff8800` or `0xff8800`, and `#` has to be quoted.
+        - `[<track_path>]` is the trail sampling interval in ticks; it defaults to 5, and 0 turns the trail off.
+    - `...status` lists every live tracking session and its remaining budget.
+    - `...clear` stops every tracking session and removes all highlights.

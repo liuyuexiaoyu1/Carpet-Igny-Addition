@@ -3,22 +3,22 @@ package com.liuyue.igny.mixins.rule.linkableEnderChest.compat.quickshulker;
 import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.network.packet.config.SyncLinkedEnderChestPayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-//#if MC >= 26.1
-//$$ import net.minecraft.client.gui.GuiGraphicsExtractor;
-//#else
-import net.minecraft.client.gui.GuiGraphics;
-//#endif
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+//#if MC >= 12109
+//$$ import net.minecraft.client.input.MouseButtonEvent;
+//#endif
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //#if MC <= 11904
 //$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
@@ -35,48 +35,40 @@ import net.minecraft.core.component.DataComponents;
 public abstract class AbstractContainerScreenMixin {
     @Shadow @Nullable protected Slot hoveredSlot;
 
-    @Unique
-    @Nullable
-    private Slot igny$lastHoveredSlot = null;
+    @Shadow
+    @Final
+    protected AbstractContainerMenu menu;
 
-    //#if MC >= 26.1
-    //$$ @Inject(method = "extractRenderState", at = @At(value = "RETURN"))
-    //$$ private void onRender(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a, CallbackInfo ci)
+    @Inject(method = "mouseClicked", at = @At(value = "HEAD"))
+    //#if MC >= 12109
+    //$$ private void onClick(MouseButtonEvent event, boolean isDoubleClick, CallbackInfoReturnable<Boolean> cir)
     //#else
-    @Inject(method = "render", at = @At(value = "RETURN"))
-    //#if MC > 11904
-    private void onRender(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci)
-    //#else
-    //$$ private void onRender(PoseStack poseStack, int mouseX, int mouseY, float partialTick, CallbackInfo ci)
-    //#endif
+    private void onClick(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir)
     //#endif
     {
         if (!LinkedContainerManager.isRuleEnabled()) return;
 
-        if (this.hoveredSlot == this.igny$lastHoveredSlot) {
-            return;
-        }
-
-        this.igny$lastHoveredSlot = this.hoveredSlot;
-
-        if (this.hoveredSlot == null || !this.hoveredSlot.hasItem()) {
-            return;
-        }
-
-        //#if MC < 12005
-        //$$ if (!ClientPlayNetworking.canSend(IGNYServer.SYNC_LINKED_ENDER_CHEST_PACKET_ID)) return;
+        //#if MC >= 12109
+        //$$ if (this.menu.getCarried().isEmpty() && event.button() == 1 && this.hoveredSlot != null)
         //#else
-        if (!ClientPlayNetworking.canSend(SyncLinkedEnderChestPayload.TYPE)) return;
+        if (this.menu.getCarried().isEmpty() && button == 1 && this.hoveredSlot != null)
         //#endif
-
-        ItemStack stack = this.hoveredSlot.getItem();
-        if (stack.is(Items.ENDER_CHEST)) {
-            //#if MC >= 12005
-            String customName = stack.has(DataComponents.CUSTOM_NAME) ? stack.getHoverName().getString() : "";
+        {
+            //#if MC < 12005
+            //$$ if (!ClientPlayNetworking.canSend(IGNYServer.SYNC_LINKED_ENDER_CHEST_PACKET_ID)) return;
             //#else
-            //$$ String customName = stack.hasCustomHoverName() ? stack.getHoverName().getString() : "";
+            if (!ClientPlayNetworking.canSend(SyncLinkedEnderChestPayload.TYPE)) return;
             //#endif
-            syncEnderChest(customName);
+
+            ItemStack stack = this.hoveredSlot.getItem();
+            if (stack.is(Items.ENDER_CHEST)) {
+                //#if MC >= 12005
+                String customName = stack.has(DataComponents.CUSTOM_NAME) ? stack.getHoverName().getString() : "";
+                //#else
+                //$$ String customName = stack.hasCustomHoverName() ? stack.getHoverName().getString() : "";
+                //#endif
+                syncEnderChest(customName);
+            }
         }
     }
 

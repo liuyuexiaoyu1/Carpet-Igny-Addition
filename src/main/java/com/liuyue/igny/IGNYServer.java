@@ -6,6 +6,7 @@ import com.liuyue.igny.commands.*;
 import com.liuyue.igny.logger.IGNYLoggers;
 import com.liuyue.igny.manager.BaseDataManager;
 import com.liuyue.igny.network.PacketUtil;
+import com.liuyue.igny.tracker.ItemFlowTracker;
 import com.liuyue.igny.utils.ComponentTranslate;
 import com.liuyue.igny.utils.TickUtil;
 import com.mojang.brigadier.CommandDispatcher;
@@ -72,6 +73,7 @@ public class IGNYServer implements CarpetExtension {
         CustomPlayerPickupItemCommand.register(dispatcher, commandBuildContext);
         CustomItemMaxStackSizeCommand.register(dispatcher, commandBuildContext);
         InsaneBehaviorsCommand.register(dispatcher);
+        ItemFlowTrackerCommand.register(dispatcher);
     }
 
     @Override
@@ -109,6 +111,7 @@ public class IGNYServer implements CarpetExtension {
     public void onServerClosed(MinecraftServer server) {
         BaseDataManager.clearAll();
         BaseDataManager.setServerAll(null);
+        ItemFlowTracker.clearAll();
     }
 
     public static void onLevelSave() {

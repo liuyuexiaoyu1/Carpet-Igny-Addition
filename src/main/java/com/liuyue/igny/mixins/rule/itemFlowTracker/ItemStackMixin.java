@@ -1,0 +1,59 @@
+package com.liuyue.igny.mixins.rule.itemFlowTracker;
+
+import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
+import com.liuyue.igny.utils.itemFlowTracker.core.TrackedStack;
+import com.liuyue.igny.utils.itemFlowTracker.core.Tracking;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+@Mixin(ItemStack.class)
+public abstract class ItemStackMixin implements TrackedStack {
+    @Unique
+    @Nullable
+    private TrackMark igny$mark;
+
+    @Override
+    public @Nullable TrackMark igny$getMark() {
+        return this.igny$mark;
+    }
+
+    @Override
+    public void igny$setMark(@Nullable TrackMark mark) {
+        this.igny$mark = mark;
+    }
+
+    @Inject(method = "copy", at = @At(value = "RETURN"))
+    private void igny$copy(CallbackInfoReturnable<ItemStack> cir) {
+        Tracking.spread((ItemStack) (Object) this, cir.getReturnValue());
+    }
+
+    //#if MC >= 12001
+    @Inject(method = "copyAndClear", at = @At(value = "RETURN"))
+    private void igny$copyAndClear(CallbackInfoReturnable<ItemStack> cir) {
+        Tracking.spread((ItemStack) (Object) this, cir.getReturnValue());
+    }
+    //#endif
+
+    @Inject(method = "copyWithCount", at = @At(value = "RETURN"))
+    private void igny$copyWithCount(int count, CallbackInfoReturnable<ItemStack> cir) {
+        Tracking.spread((ItemStack) (Object) this, cir.getReturnValue());
+    }
+
+    @Inject(method = "split", at = @At(value = "RETURN"))
+    private void igny$split(int count, CallbackInfoReturnable<ItemStack> cir) {
+        Tracking.onSplit((ItemStack) (Object) this, cir.getReturnValue());
+    }
+
+    //#if MC >= 12006
+    @Inject(method = "transmuteCopyIgnoreEmpty", at = @At(value = "RETURN"))
+    private void igny$transmuteCopy(ItemLike item, int count, CallbackInfoReturnable<ItemStack> cir) {
+        Tracking.spread((ItemStack) (Object) this, cir.getReturnValue());
+    }
+    //#endif
+}
