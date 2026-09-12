@@ -56,7 +56,11 @@ public final class VirtualDisplay {
         this.level = level;
         this.entity = entity;
         this.entity.setNoGravity(true);
+        //#if MC >= 26.3
+        //$$ this.entity.setPermanentlyInvulnerable(true);
+        //#else
         this.entity.setInvulnerable(true);
+        //#ednfi
         ((DisplayAccessor) this.entity).igny$setViewRange(VIEW_RANGE_DATA);
     }
 
