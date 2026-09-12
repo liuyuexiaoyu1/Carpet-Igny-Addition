@@ -11,7 +11,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 //#endif
-//#if MC >= 12105
+//#if MC >= 26.1
 //$$ import net.minecraft.world.item.ItemStackTemplate;
 //#endif
 
@@ -117,7 +117,7 @@ public final class Nesting {
     }
     //#endif
 
-    //#if MC >= 12105
+    //#if MC >= 26.1
     //$$ @Nullable
     //$$ private static TrackMark inTemplate(ItemStackTemplate template, int depth) {
     //$$     if (depth >= MAX_DEPTH) {
