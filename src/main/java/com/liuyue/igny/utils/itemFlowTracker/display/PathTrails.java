@@ -1,5 +1,7 @@
 package com.liuyue.igny.utils.itemFlowTracker.display;
 
+import com.liuyue.igny.utils.display.Shapes;
+import com.liuyue.igny.utils.display.VirtualDisplay;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackedEntity;
 import com.liuyue.igny.utils.itemFlowTracker.core.Tracking;
@@ -211,17 +213,18 @@ public final class PathTrails {
     private static void spawn(ServerLevel level, TrackMark mark, Vec3 start, Vec3 end) {
         List<Marker> markers = TRAILS.computeIfAbsent(mark, ignored -> new ArrayList<>());
 
-        if (markers.size() >= MAX_MARKERS) {
-            markers.remove(0).display.remove();
-        }
-
         VirtualDisplay display = VirtualDisplay
                 .block(level, start.x, start.y, start.z, MARKER_BLOCK.defaultBlockState())
-                .glow(mark)
+                .glow(mark.rgb())
                 .bright()
                 .transform(Shapes.segment(start, end));
 
         display.sync();
+
+        while (markers.size() >= MAX_MARKERS) {
+            markers.remove(0).display.remove();
+        }
+
         markers.add(new Marker(display));
     }
 }

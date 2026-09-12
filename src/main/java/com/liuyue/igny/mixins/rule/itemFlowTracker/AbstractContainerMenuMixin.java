@@ -1,5 +1,6 @@
 package com.liuyue.igny.mixins.rule.itemFlowTracker;
 
+import com.liuyue.igny.utils.ItemUtil;
 import com.liuyue.igny.utils.itemFlowTracker.ItemFlowTrackerSettings;
 import com.liuyue.igny.utils.itemFlowTracker.core.Nesting;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
@@ -66,7 +67,7 @@ public abstract class AbstractContainerMenuMixin {
             return;
         }
 
-        DyeColor dye = Tracking.dyeOf(player.getOffhandItem());
+        DyeColor dye = ItemUtil.dyeOf(player.getOffhandItem());
         Container playerInventory = player.getInventory();
 
         for (int i = 0; i < this.slots.size() && i < before.length; i++) {
@@ -93,7 +94,7 @@ public abstract class AbstractContainerMenuMixin {
             TrackMark mark = Tracking.get(now);
 
             if (mark != null) {
-                if (old.isEmpty() || Tracking.getRaw(old) == mark) {
+                if (old.isEmpty() || Tracking.has(old, mark)) {
                     Tracking.arrive(now, mark, arrived);
                 }
 
@@ -101,13 +102,18 @@ public abstract class AbstractContainerMenuMixin {
                 continue;
             }
 
-            mark = dye != null
-                    ? Tracking.newMark(dye, arrived)
-                    : igny$incomingMark(before, beforeCarried, now);
+            if (dye != null) {
+                TrackMark fresh = Tracking.newMark(dye, arrived);
+                Tracking.arrive(now, fresh, arrived);
+                TrackingWatch.onEnterContainer(slot.container, null, null, fresh);
+                continue;
+            }
 
-            if (mark != null) {
-                Tracking.arrive(now, mark, arrived);
-                TrackingWatch.onEnterContainer(slot.container, null, null, mark);
+            ItemStack incoming = igny$incomingStack(before, beforeCarried, now);
+
+            if (incoming != null) {
+                Tracking.arrive(now, incoming, arrived);
+                TrackingWatch.onEnterContainer(slot.container, null, null, Tracking.get(now));
             } else if (Nesting.carriesMark(now)) {
                 TrackingWatch.onEnterContainer(slot.container, null, null, Nesting.inStack(now));
             }
@@ -116,18 +122,14 @@ public abstract class AbstractContainerMenuMixin {
 
     @Unique
     @Nullable
-    private TrackMark igny$incomingMark(ItemStack[] before, @Nullable ItemStack beforeCarried, ItemStack destination) {
-        TrackMark mark = Tracking.get(beforeCarried);
-
-        if (mark != null && igny$sameStack(beforeCarried, destination)) {
-            return mark;
+    private ItemStack igny$incomingStack(ItemStack[] before, @Nullable ItemStack beforeCarried, ItemStack destination) {
+        if (Tracking.isMarked(beforeCarried) && igny$sameStack(beforeCarried, destination)) {
+            return beforeCarried;
         }
 
         for (ItemStack candidate : before) {
-            mark = Tracking.get(candidate);
-
-            if (mark != null && igny$sameStack(candidate, destination)) {
-                return mark;
+            if (Tracking.isMarked(candidate) && igny$sameStack(candidate, destination)) {
+                return candidate;
             }
         }
 

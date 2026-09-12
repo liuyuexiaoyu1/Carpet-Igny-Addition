@@ -1,4 +1,4 @@
-package com.liuyue.igny.utils.itemFlowTracker.display;
+package com.liuyue.igny.utils.display;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-public final class DisplayIndex<K, V extends HighlightEntry> {
+public final class DisplayIndex<K, V> {
     private final Map<ResourceKey<Level>, Map<K, V>> levels = new HashMap<>();
 
     public Map<K, V> view(ResourceKey<Level> dimension) {

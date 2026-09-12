@@ -1,6 +1,5 @@
 package com.liuyue.igny.mixins.rule.itemFlowTracker;
 
-import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
 import com.liuyue.igny.utils.itemFlowTracker.core.Tracking;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -16,15 +15,13 @@ public abstract class InventoryMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;grow(I)V")
     )
     private void igny$carryMarkIntoSlot(int slot, ItemStack stack, CallbackInfoReturnable<Integer> cir) {
-        TrackMark mark = Tracking.getRaw(stack);
-
-        if (mark == null) {
+        if (!Tracking.isMarked(stack)) {
             return;
         }
 
         Inventory self = (Inventory) (Object) this;
         ItemStack destination = self.getItem(slot);
         int moved = Math.min(stack.getCount(), destination.getMaxStackSize() - destination.getCount());
-        Tracking.arrive(destination, mark, moved);
+        Tracking.arrive(destination, stack, moved);
     }
 }

@@ -1,5 +1,6 @@
 package com.liuyue.igny.mixins.rule.itemFlowTracker;
 
+import com.liuyue.igny.utils.ItemUtil;
 import com.liuyue.igny.utils.itemFlowTracker.ItemFlowTrackerSettings;
 import com.liuyue.igny.utils.itemFlowTracker.core.Tracking;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackingWatch;
@@ -53,7 +54,7 @@ public abstract class DropFastMarkMixin {
             return;
         }
 
-        DyeColor dye = Tracking.dyeOf(offhand);
+        DyeColor dye = ItemUtil.dyeOf(offhand);
 
         if (dye != null && Tracking.get(stack) == null) {
             Tracking.set(stack, Tracking.newMark(dye, stack.getCount()));

@@ -1,5 +1,7 @@
 package com.liuyue.igny.utils.itemFlowTracker.display;
 
+import com.liuyue.igny.utils.display.DisplayIndex;
+import com.liuyue.igny.utils.display.VirtualDisplay;
 import com.liuyue.igny.utils.itemFlowTracker.core.Nesting;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackingWatch;
@@ -9,7 +11,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.phys.AABB;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -20,7 +21,7 @@ public final class EntityHighlights {
     //#else
     private static final Block OUTLINE_BLOCK = Blocks.WHITE_STAINED_GLASS;
     //#endif
-    private static final DisplayIndex<Integer, EntityEntry> DISPLAYS = new DisplayIndex<>();
+    private static final DisplayIndex<Integer, HighlightEntry> DISPLAYS = new DisplayIndex<>();
 
     public static void tick(ServerLevel level) {
         ResourceKey<Level> dimension = level.dimension();
@@ -32,7 +33,7 @@ public final class EntityHighlights {
             int id = watchEntry.getKey();
             TrackingWatch.Watch watch = watchEntry.getValue();
             Entity entity = level.getEntity(id);
-            EntityEntry tracked = DISPLAYS.get(dimension, id);
+            HighlightEntry tracked = DISPLAYS.get(dimension, id);
 
             if (entity == null || entity.isRemoved()) {
                 watch.setMark(null);
@@ -51,18 +52,20 @@ public final class EntityHighlights {
             }
 
             if (tracked == null || !mark.equals(tracked.mark)) {
+                HighlightEntry fresh = new HighlightEntry();
+                fresh.mark = mark;
+                fresh.display = VirtualDisplay
+                        .block(level, entity.getX(), entity.getY(), entity.getZ(), OUTLINE_BLOCK.defaultBlockState())
+                        .glow(mark.rgb())
+                        .bright()
+                        .ride(entity);
+                DISPLAYS.put(dimension, id, fresh);
+
                 if (tracked != null) {
                     tracked.dispose();
                 }
 
-                tracked = new EntityEntry();
-                tracked.mark = mark;
-                tracked.display = VirtualDisplay
-                        .block(level, entity.getX(), entity.getY(), entity.getZ(), OUTLINE_BLOCK.defaultBlockState())
-                        .glow(mark)
-                        .bright()
-                        .ride(entity);
-                DISPLAYS.put(dimension, id, tracked);
+                tracked = fresh;
             }
 
             follow(tracked, entity);
@@ -78,28 +81,16 @@ public final class EntityHighlights {
         DISPLAYS.clear();
     }
 
-    private static void dispose(ResourceKey<Level> dimension, int id, EntityEntry tracked) {
+    private static void dispose(ResourceKey<Level> dimension, int id, HighlightEntry tracked) {
         if (tracked != null) {
             tracked.dispose();
             DISPLAYS.remove(dimension, id);
         }
     }
 
-    private static void follow(EntityEntry entry, Entity entity) {
-        VirtualDisplay display = entry.display;
-
-        if (display == null) {
-            return;
+    private static void follow(HighlightEntry entry, Entity entity) {
+        if (entry.display != null) {
+            entry.display.follow(entity);
         }
-
-        AABB box = entity.getBoundingBox();
-
-        if (entry.lastWidth != box.getXsize() || entry.lastHeight != box.getYsize()) {
-            entry.lastWidth = box.getXsize();
-            entry.lastHeight = box.getYsize();
-            display.transform(Shapes.entity(entity, box));
-        }
-
-        display.sync();
     }
 }

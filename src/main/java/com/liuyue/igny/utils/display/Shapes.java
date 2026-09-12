@@ -1,4 +1,4 @@
-package com.liuyue.igny.utils.itemFlowTracker.display;
+package com.liuyue.igny.utils.display;
 
 import com.mojang.math.Transformation;
 import net.minecraft.core.Direction;

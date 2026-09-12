@@ -1,5 +1,7 @@
 package com.liuyue.igny.utils.itemFlowTracker.display;
 
+import com.liuyue.igny.utils.display.DisplayIndex;
+import com.liuyue.igny.utils.display.VirtualDisplay;
 import com.liuyue.igny.utils.itemFlowTracker.core.Nesting;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackingWatch;
@@ -7,14 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.AbstractChestBlock;
-import net.minecraft.world.level.block.ShulkerBoxBlock;
-import net.minecraft.world.level.block.state.BlockState;
-//#if MC >= 12003
-import net.minecraft.world.level.block.DecoratedPotBlock;
-//#endif
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
@@ -91,14 +86,14 @@ public final class BlockHighlights {
             return;
         }
 
-        if (tracked != null) {
-            tracked.dispose();
-        }
-
         HighlightEntry fresh = new HighlightEntry();
         fresh.mark = mark;
         fresh.display = create(level, pos, mark);
         DISPLAYS.put(dimension, pos, fresh);
+
+        if (tracked != null) {
+            tracked.dispose();
+        }
     }
 
     private static void dispose(ResourceKey<Level> dimension, BlockPos pos) {
@@ -126,44 +121,13 @@ public final class BlockHighlights {
 
     @Nullable
     private static VirtualDisplay create(ServerLevel level, BlockPos pos, TrackMark mark) {
-        BlockState state = level.getBlockState(pos);
-        VirtualDisplay display = usesSpecialRenderer(state)
-                ? createItem(level, pos, state)
-                : createBlock(level, pos, state);
+        VirtualDisplay display = VirtualDisplay.ofBlock(level, pos, level.getBlockState(pos));
 
         if (display == null) {
             return null;
         }
 
-        display.glow(mark).bright().sync();
+        display.glow(mark.rgb()).bright().sync();
         return display;
-    }
-
-    private static VirtualDisplay createBlock(ServerLevel level, BlockPos pos, BlockState state) {
-        return VirtualDisplay
-                .block(level, pos.getX(), pos.getY(), pos.getZ(), state)
-                .transform(Shapes.outline());
-    }
-
-    @Nullable
-    private static VirtualDisplay createItem(ServerLevel level, BlockPos pos, BlockState state) {
-        ItemStack stack = new ItemStack(state.getBlock());
-
-        if (stack.isEmpty()) {
-            return null;
-        }
-
-        return VirtualDisplay
-                .item(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, stack)
-                .transform(Shapes.item(state));
-    }
-
-    private static boolean usesSpecialRenderer(BlockState state) {
-        //#if MC >= 12003
-        if (state.getBlock() instanceof DecoratedPotBlock) {
-            return true;
-        }
-        //#endif
-        return state.getBlock() instanceof AbstractChestBlock<?> || state.getBlock() instanceof ShulkerBoxBlock;
     }
 }

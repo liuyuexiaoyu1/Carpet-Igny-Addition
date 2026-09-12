@@ -12,20 +12,22 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.List;
+
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin implements TrackedStack {
     @Unique
     @Nullable
-    private TrackMark igny$mark;
+    private List<TrackMark> igny$marks;
 
     @Override
-    public @Nullable TrackMark igny$getMark() {
-        return this.igny$mark;
+    public @Nullable List<TrackMark> igny$getMarks() {
+        return this.igny$marks;
     }
 
     @Override
-    public void igny$setMark(@Nullable TrackMark mark) {
-        this.igny$mark = mark;
+    public void igny$setMarks(@Nullable List<TrackMark> marks) {
+        this.igny$marks = marks;
     }
 
     @Inject(method = "copy", at = @At(value = "RETURN"))

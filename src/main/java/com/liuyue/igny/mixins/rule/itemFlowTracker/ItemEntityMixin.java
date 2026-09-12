@@ -5,6 +5,8 @@ import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackedEntity;
 import com.liuyue.igny.utils.itemFlowTracker.core.Tracking;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackingWatch;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
@@ -53,11 +55,16 @@ public abstract class ItemEntityMixin implements TrackedEntity {
     )
     private void igny$refundOnDrop(CallbackInfo ci) {
         ItemEntity self = (ItemEntity) (Object) this;
+        ItemStack stack = self.getItem();
         this.igny$handDropped = TrackingWatch.takeHandDrop();
         this.igny$ejectionAnchor = TrackingWatch.takeEjection();
 
-        if (!self.level().isClientSide() && Tracking.isMarked(self.getItem())) {
-            Tracking.moved(self.getItem());
+        if (!self.level().isClientSide() && Tracking.isMarked(stack)) {
+            Tracking.moved(stack);
+        }
+
+        if (self.level() instanceof ServerLevel level) {
+            TrackingWatch.takeBlockMark(level, BlockPos.containing(self.position()), stack);
         }
     }
 
@@ -88,11 +95,10 @@ public abstract class ItemEntityMixin implements TrackedEntity {
             at = @At(value = "RETURN")
     )
     private static void igny$merge(ItemStack destination, ItemStack source, int limit, CallbackInfoReturnable<ItemStack> cir) {
-        TrackMark mark = Tracking.getRaw(source);
         ItemStack merged = cir.getReturnValue();
 
-        if (mark != null && merged != null) {
-            Tracking.arrive(merged, mark, merged.getCount() - destination.getCount());
+        if (Tracking.isMarked(source) && merged != null) {
+            Tracking.arrive(merged, source, merged.getCount() - destination.getCount());
         }
     }
 }

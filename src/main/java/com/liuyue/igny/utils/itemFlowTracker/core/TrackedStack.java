@@ -2,9 +2,11 @@ package com.liuyue.igny.utils.itemFlowTracker.core;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public interface TrackedStack {
     @Nullable
-    TrackMark igny$getMark();
+    List<TrackMark> igny$getMarks();
 
-    void igny$setMark(@Nullable TrackMark mark);
+    void igny$setMarks(@Nullable List<TrackMark> marks);
 }

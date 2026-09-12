@@ -1,5 +1,6 @@
 package com.liuyue.igny.utils.itemFlowTracker.display;
 
+import com.liuyue.igny.utils.display.VirtualDisplay;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
 import org.jetbrains.annotations.Nullable;
 

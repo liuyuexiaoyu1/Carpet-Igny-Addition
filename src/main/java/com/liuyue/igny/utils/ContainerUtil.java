@@ -1,4 +1,4 @@
-package com.liuyue.igny.utils.itemFlowTracker.core;
+package com.liuyue.igny.utils;
 
 import com.liuyue.igny.mixins.rule.itemFlowTracker.accessors.CompoundContainerAccessor;
 import net.minecraft.world.CompoundContainer;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public final class Containers {
+public final class ContainerUtil {
 
     public static List<Container> leaves(@Nullable Container container) {
         List<Container> leaves = new ArrayList<>();

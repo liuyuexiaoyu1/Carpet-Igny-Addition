@@ -1,11 +1,11 @@
-package com.liuyue.igny.utils.itemFlowTracker.display;
+package com.liuyue.igny.utils.display;
 
 import com.liuyue.igny.mixins.rule.itemFlowTracker.accessors.BlockDisplayAccessor;
 import com.liuyue.igny.mixins.rule.itemFlowTracker.accessors.DisplayAccessor;
 import com.liuyue.igny.mixins.rule.itemFlowTracker.accessors.ItemDisplayAccessor;
 import com.liuyue.igny.mixins.rule.itemFlowTracker.accessors.SetPassengersPacketAccessor;
-import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
 import com.mojang.math.Transformation;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.protocol.game.ClientboundRemoveEntitiesPacket;
 import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket;
@@ -19,7 +19,13 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.AbstractChestBlock;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.state.BlockState;
+//#if MC >= 12003
+import net.minecraft.world.level.block.DecoratedPotBlock;
+//#endif
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,6 +57,8 @@ public final class VirtualDisplay {
     private Entity vehicle;
 
     private boolean dataDirty = true;
+    private double lastWidth = -1.0D;
+    private double lastHeight = -1.0D;
 
     private VirtualDisplay(ServerLevel level, Display entity) {
         this.level = level;
@@ -80,13 +88,37 @@ public final class VirtualDisplay {
         return new VirtualDisplay(level, display);
     }
 
-    public VirtualDisplay glow(@Nullable TrackMark mark) {
-        if (mark != null) {
-            this.entity.setGlowingTag(true);
-            ((DisplayAccessor) this.entity).igny$setGlowColorOverride(mark.rgb());
-            this.dataDirty = true;
+    @Nullable
+    public static VirtualDisplay ofBlock(ServerLevel level, BlockPos pos, BlockState state) {
+        if (usesItemRenderer(state)) {
+            ItemStack stack = new ItemStack(state.getBlock());
+
+            if (stack.isEmpty()) {
+                return null;
+            }
+
+            return item(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, stack)
+                    .transform(Shapes.item(state));
         }
 
+        return block(level, pos.getX(), pos.getY(), pos.getZ(), state)
+                .transform(Shapes.outline());
+    }
+
+    private static boolean usesItemRenderer(BlockState state) {
+        //#if MC >= 12003
+        if (state.getBlock() instanceof DecoratedPotBlock) {
+            return true;
+        }
+        //#endif
+
+        return state.getBlock() instanceof AbstractChestBlock<?> || state.getBlock() instanceof ShulkerBoxBlock;
+    }
+
+    public VirtualDisplay glow(int rgb) {
+        this.entity.setGlowingTag(true);
+        ((DisplayAccessor) this.entity).igny$setGlowColorOverride(rgb);
+        this.dataDirty = true;
         return this;
     }
 
@@ -109,6 +141,18 @@ public final class VirtualDisplay {
     public VirtualDisplay ride(Entity vehicle) {
         this.vehicle = vehicle;
         return this;
+    }
+
+    public void follow(Entity entity) {
+        AABB box = entity.getBoundingBox();
+
+        if (this.lastWidth != box.getXsize() || this.lastHeight != box.getYsize()) {
+            this.lastWidth = box.getXsize();
+            this.lastHeight = box.getYsize();
+            this.transform(Shapes.entity(entity, box));
+        }
+
+        this.sync();
     }
 
     public void sync() {

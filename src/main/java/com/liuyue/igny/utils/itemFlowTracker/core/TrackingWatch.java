@@ -1,5 +1,6 @@
 package com.liuyue.igny.utils.itemFlowTracker.core;
 
+import com.liuyue.igny.utils.ContainerUtil;
 import com.liuyue.igny.utils.itemFlowTracker.ItemFlowTrackerSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
@@ -185,7 +186,7 @@ public final class TrackingWatch {
             return;
         }
 
-        Containers.forEachLeaf(container, leaf -> watch(leaf, from, previous, Nesting.inContainer(leaf)));
+        ContainerUtil.forEachLeaf(container, leaf -> watch(leaf, from, previous, Nesting.inContainer(leaf)));
     }
 
     private static void watch(@Nullable Container leaf, @Nullable Vec3 from, @Nullable Vec3 previous, @Nullable TrackMark mark) {
@@ -204,7 +205,7 @@ public final class TrackingWatch {
 
     @Nullable
     public static Container holderOf(@Nullable Container container, TrackMark mark) {
-        List<Container> leaves = Containers.leaves(container);
+        List<Container> leaves = ContainerUtil.leaves(container);
 
         for (Container leaf : leaves) {
             if (Nesting.holds(leaf, mark)) {
@@ -232,7 +233,12 @@ public final class TrackingWatch {
     @Nullable
     public static Vec3 trailOf(Entity entity) {
         Watch watch = entities(entity.level().dimension()).get(entity.getId());
-        return watch != null ? watch.trailLast : null;
+
+        if (watch != null && watch.trailLast != null) {
+            return watch.trailLast;
+        }
+
+        return entity instanceof TrackedEntity tracked ? tracked.igny$ejectionAnchor() : null;
     }
 
     public static void watchBlock(ServerLevel level, BlockPos pos) {
@@ -286,6 +292,16 @@ public final class TrackingWatch {
         watch.blockMarkOwner = level.getBlockState(pos).getBlock();
         watch.lastTouched = level.getGameTime();
         PENDING.add(new PendingBlock(level, anchor, mark));
+
+        if (level.getBlockEntity(anchor) instanceof Container container) {
+            for (int slot = 0; slot < container.getContainerSize(); slot++) {
+                ItemStack stack = container.getItem(slot);
+
+                if (!stack.isEmpty()) {
+                    Tracking.setIfAbsent(stack, mark);
+                }
+            }
+        }
     }
 
     public static void takeBlockMark(Level level, BlockPos pos, ItemStack stack) {
@@ -293,15 +309,31 @@ public final class TrackingWatch {
             return;
         }
 
-        Watch watch = blocks(serverLevel.dimension()).get(pos);
+        TrackMark mark = markOfDroppedStack(serverLevel, pos, stack);
 
-        if (watch == null || !Tracking.isLive(watch.blockMark) || watch.blockMarkOwner == null) {
-            return;
+        if (mark != null) {
+            Tracking.setIfAbsent(stack, mark);
+        }
+    }
+
+    @Nullable
+    private static TrackMark markOfDroppedStack(ServerLevel level, BlockPos pos, ItemStack stack) {
+        Watch watch = blocks(level.dimension()).get(pos);
+
+        if (watch == null) {
+            return null;
         }
 
-        if (stack.getItem() == watch.blockMarkOwner.asItem()) {
-            Tracking.setIfAbsent(stack, watch.blockMark);
+        if (Tracking.isLive(watch.blockMark) && watch.blockMarkOwner != null
+                && stack.getItem() == watch.blockMarkOwner.asItem()) {
+            return watch.blockMark;
         }
+
+        if (stack.getItem() != level.getBlockState(pos).getBlock().asItem()) {
+            return null;
+        }
+
+        return level.getBlockEntity(pos) instanceof Container container ? Nesting.inContainer(container) : null;
     }
 
     @Nullable

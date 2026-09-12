@@ -67,12 +67,10 @@ public abstract class HopperBlockEntityMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V")
     )
     private static void igny$mergedIntoSlot(Container source, Container target, ItemStack stack, int slot, Direction direction, CallbackInfoReturnable<ItemStack> cir) {
-        TrackMark mark = Tracking.getRaw(stack);
-
-        if (mark != null) {
+        if (Tracking.getRaw(stack) != null) {
             ItemStack destination = target.getItem(slot);
             int moved = Math.min(stack.getCount(), stack.getMaxStackSize() - destination.getCount());
-            Tracking.arrive(destination, mark, moved);
+            Tracking.arrive(destination, stack, moved);
         }
 
         if (Nesting.carriesMark(stack)) {
