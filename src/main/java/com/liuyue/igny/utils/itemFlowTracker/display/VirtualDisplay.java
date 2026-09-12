@@ -60,7 +60,7 @@ public final class VirtualDisplay {
         //$$ this.entity.setPermanentlyInvulnerable(true);
         //#else
         this.entity.setInvulnerable(true);
-        //#ednfi
+        //#endif
         ((DisplayAccessor) this.entity).igny$setViewRange(VIEW_RANGE_DATA);
     }
 
