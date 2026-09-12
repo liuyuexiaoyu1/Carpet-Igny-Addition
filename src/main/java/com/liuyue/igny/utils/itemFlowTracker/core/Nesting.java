@@ -16,6 +16,7 @@ import net.minecraft.world.item.component.ItemContainerContents;
 //#endif
 
 public final class Nesting {
+    private static final int MAX_DEPTH = 4;
 
     @Nullable
     public static TrackMark inStack(@Nullable ItemStack stack) {
