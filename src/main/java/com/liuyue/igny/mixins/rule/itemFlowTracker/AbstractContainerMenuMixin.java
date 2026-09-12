@@ -97,7 +97,7 @@ public abstract class AbstractContainerMenuMixin {
                     Tracking.arrive(now, mark, arrived);
                 }
 
-                TrackingWatch.onEnterContainer(slot.container);
+                TrackingWatch.onEnterContainer(slot.container, null, null, mark);
                 continue;
             }
 
@@ -107,9 +107,9 @@ public abstract class AbstractContainerMenuMixin {
 
             if (mark != null) {
                 Tracking.arrive(now, mark, arrived);
-                TrackingWatch.onEnterContainer(slot.container);
+                TrackingWatch.onEnterContainer(slot.container, null, null, mark);
             } else if (Nesting.carriesMark(now)) {
-                TrackingWatch.onEnterContainer(slot.container);
+                TrackingWatch.onEnterContainer(slot.container, null, null, Nesting.inStack(now));
             }
         }
     }

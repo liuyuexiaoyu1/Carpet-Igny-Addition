@@ -177,6 +177,7 @@
     "rule.itemFlowTracker.BlockItemMixin",
     "rule.itemFlowTracker.BlockMixin",
     "rule.itemFlowTracker.ContainersMixin",
+    "rule.itemFlowTracker.DefaultDispenseItemBehaviorMixin",
     "rule.itemFlowTracker.DropFastMarkMixin",
     "rule.itemFlowTracker.HopperBlockEntityMixin",
     "rule.itemFlowTracker.InventoryMixin",

@@ -55,7 +55,7 @@ public final class BlockHighlights {
             BlockPos pos = entry.getKey();
 
             if (!level.isLoaded(pos)) {
-                watch.mark = null;
+                watch.setMark(null);
                 dispose(dimension, pos);
                 continue;
             }
@@ -63,12 +63,18 @@ public final class BlockHighlights {
             TrackMark mark = markAt(level, pos, watch);
 
             if (mark != null) {
-                watch.mark = mark;
+                watch.setMark(mark);
                 apply(level, pos, mark);
                 continue;
             }
 
-            watch.mark = null;
+            TrackMark lost = watch.mark;
+            watch.setMark(null);
+
+            if (lost != null) {
+                TrackingWatch.rememberLoss(level, pos, lost);
+            }
+
             dispose(dimension, pos);
 
             if (now - watch.lastTouched > PRUNE_TICKS) {

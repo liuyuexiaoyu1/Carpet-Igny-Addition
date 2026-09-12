@@ -1,18 +1,20 @@
 package com.liuyue.igny.utils.itemFlowTracker.display;
 
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
+import com.liuyue.igny.utils.itemFlowTracker.core.TrackedEntity;
 import com.liuyue.igny.utils.itemFlowTracker.core.Tracking;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackingWatch;
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,30 +41,84 @@ public final class PathTrails {
     }
 
     public static void tick(ServerLevel level) {
+        tickHops(level);
+        tickMovingEntities(level);
+    }
+
+    private static final class Leg {
+        @Nullable
+        private Vec3 previous;
+
+        @Nullable
+        private Vec3 from;
+
+        private Vec3 to;
+    }
+
+    private static void tickHops(ServerLevel level) {
+        Map<TrackMark, List<Leg>> legs = new LinkedHashMap<>();
+
+        for (TrackingWatch.TrailHop hop : TrackingWatch.drainTrailHops(level)) {
+            List<Leg> markLegs = legs.computeIfAbsent(hop.mark(), ignored -> new ArrayList<>());
+            Leg previous = markLegs.isEmpty() ? null : markLegs.get(markLegs.size() - 1);
+
+            if (previous != null && previous.to.equals(hop.to())) {
+                if (previous.from == null || previous.from.equals(previous.to)) {
+                    previous.previous = hop.previous();
+                    previous.from = hop.from();
+                }
+
+                continue;
+            }
+
+            Leg leg = new Leg();
+            leg.previous = hop.previous();
+            leg.from = hop.from();
+            leg.to = hop.to();
+            markLegs.add(leg);
+        }
+
+        for (Map.Entry<TrackMark, List<Leg>> entry : legs.entrySet()) {
+            for (Leg leg : entry.getValue()) {
+                extend(level, entry.getKey(), leg);
+            }
+        }
+    }
+
+    private static void extend(ServerLevel level, TrackMark mark, Leg leg) {
+        if (mark.pathInterval() <= 0 || !Tracking.isLive(mark)) {
+            return;
+        }
+
+        Vec3 from = leg.from != null ? leg.from : leg.previous;
+
+        if (leg.previous != null && from != null && !leg.previous.equals(from)) {
+            append(level, mark, leg.previous, from);
+        }
+
+        append(level, mark, from, leg.to);
+    }
+
+    private static void tickMovingEntities(ServerLevel level) {
         long time = level.getGameTime();
 
         for (Map.Entry<Integer, TrackingWatch.Watch> entry : TrackingWatch.entities(level.dimension()).entrySet()) {
             TrackingWatch.Watch watch = entry.getValue();
+            TrackMark mark = watch.mark;
 
-            if (!wantsStamp(watch.mark, time)) {
+            if (mark == null || mark.pathInterval() <= 0 || !Tracking.isLive(mark)) {
+                continue;
+            }
+
+            if (watch.trailLast != null && time % mark.pathInterval() != 0) {
                 continue;
             }
 
             Entity entity = level.getEntity(entry.getKey());
 
             if (entity != null && !entity.isRemoved()) {
-                stamp(level, watch, entity.position());
+                stamp(level, watch, entity, entity.position());
             }
-        }
-
-        for (Map.Entry<BlockPos, TrackingWatch.Watch> entry : TrackingWatch.blocks(level.dimension()).entrySet()) {
-            TrackingWatch.Watch watch = entry.getValue();
-
-            if (!wantsStamp(watch.mark, time) || !level.isLoaded(entry.getKey())) {
-                continue;
-            }
-
-            stamp(level, watch, Vec3.atCenterOf(entry.getKey()));
         }
     }
 
@@ -104,14 +160,7 @@ public final class PathTrails {
         TRAILS.clear();
     }
 
-    private static boolean wantsStamp(TrackMark mark, long time) {
-        return mark != null
-                && mark.pathInterval() > 0
-                && Tracking.isLive(mark)
-                && time % mark.pathInterval() == 0;
-    }
-
-    private static void stamp(ServerLevel level, TrackingWatch.Watch watch, Vec3 at) {
+    private static void stamp(ServerLevel level, TrackingWatch.Watch watch, Entity entity, Vec3 at) {
         TrackMark mark = watch.mark;
 
         if (mark == null) {
@@ -120,19 +169,43 @@ public final class PathTrails {
 
         Vec3 previous = watch.trailLast;
 
-        if (previous != null) {
-            double distance = previous.distanceTo(at);
+        if (previous == null) {
+            previous = ejectionAnchor(entity);
 
-            if (distance < MIN_SEGMENT) {
-                return;
-            }
-
-            if (distance <= MAX_SEGMENT) {
-                spawn(level, mark, previous, at);
+            if (previous == null && !handDropped(entity)) {
+                previous = TrackingWatch.lostAnchor(level, mark, at);
             }
         }
 
+        if (previous != null && previous.distanceTo(at) < MIN_SEGMENT) {
+            return;
+        }
+
+        append(level, mark, previous, at);
         watch.trailLast = at;
+    }
+
+    @Nullable
+    private static Vec3 ejectionAnchor(Entity entity) {
+        return entity instanceof TrackedEntity tracked ? tracked.igny$ejectionAnchor() : null;
+    }
+
+    private static boolean handDropped(Entity entity) {
+        return entity instanceof TrackedEntity tracked && tracked.igny$handDropped();
+    }
+
+    private static void append(ServerLevel level, TrackMark mark, @Nullable Vec3 previous, Vec3 point) {
+        if (previous == null) {
+            return;
+        }
+
+        double distance = previous.distanceTo(point);
+
+        if (distance < MIN_SEGMENT || distance > MAX_SEGMENT) {
+            return;
+        }
+
+        spawn(level, mark, previous, point);
     }
 
     private static void spawn(ServerLevel level, TrackMark mark, Vec3 start, Vec3 end) {

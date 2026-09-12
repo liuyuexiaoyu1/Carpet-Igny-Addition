@@ -2,6 +2,7 @@ package com.liuyue.igny.mixins.rule.itemFlowTracker;
 
 import com.liuyue.igny.utils.itemFlowTracker.ItemFlowTrackerSettings;
 import com.liuyue.igny.utils.itemFlowTracker.core.Tracking;
+import com.liuyue.igny.utils.itemFlowTracker.core.TrackingWatch;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -11,6 +12,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#if MC >= 26.3
+//$$ import net.minecraft.util.Prediction;
+//#endif
 
 //#if MC >= 12105
 //$$ @Mixin(LivingEntity.class)
@@ -19,11 +23,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //#endif
 public abstract class DropFastMarkMixin {
     @Inject(
+            //#if MC >= 26.3
+            //$$ method = "drop",
+            //#else
             method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;",
+            //#endif
             at = @At(value = "HEAD")
     )
-    private void igny$markThrownItem(ItemStack stack, boolean randomly, boolean thrownFromHand, CallbackInfoReturnable<ItemEntity> cir) {
+    //#if MC >= 26.3
+    //$$ private void igny$markThrownItem(ItemStack stack, boolean thrownFromHand, Prediction prediction, CallbackInfoReturnable<ItemEntity> cir)
+    //#else
+    private void igny$markThrownItem(ItemStack stack, boolean randomly, boolean thrownFromHand, CallbackInfoReturnable<ItemEntity> cir)
+    //#endif
+    {
         LivingEntity self = (LivingEntity) (Object) this;
+        TrackingWatch.beginHandDrop();
 
         if (!ItemFlowTrackerSettings.fastMark() || !ItemFlowTrackerSettings.enabled()) {
             return;
@@ -44,5 +58,22 @@ public abstract class DropFastMarkMixin {
         if (dye != null && Tracking.get(stack) == null) {
             Tracking.set(stack, Tracking.newMark(dye, stack.getCount()));
         }
+    }
+
+    @Inject(
+            //#if MC >= 26.3
+            //$$ method = "drop",
+            //#else
+            method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;",
+            //#endif
+            at = @At(value = "RETURN")
+    )
+    //#if MC >= 26.3
+    //$$ private void igny$endHandDrop(ItemStack stack, boolean thrownFromHand, Prediction prediction, CallbackInfoReturnable<ItemEntity> cir)
+    //#else
+    private void igny$endHandDrop(ItemStack stack, boolean randomly, boolean thrownFromHand, CallbackInfoReturnable<ItemEntity> cir)
+    //#endif
+    {
+        TrackingWatch.endHandDrop();
     }
 }

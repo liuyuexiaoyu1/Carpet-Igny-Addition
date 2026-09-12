@@ -10,6 +10,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -21,7 +22,10 @@ public abstract class HopperBlockEntityMixin {
             at = @At(value = "RETURN")
     )
     private static void igny$pickedUpFrom(Container container, ItemEntity itemEntity, CallbackInfoReturnable<Boolean> cir) {
-        TrackingWatch.onEnterContainer(container, itemEntity.position());
+        if (cir.getReturnValueZ()) {
+            ItemStack picked = itemEntity.getItem();
+            TrackingWatch.onEnterContainer(container, itemEntity.position(), TrackingWatch.trailOf(itemEntity), Nesting.inStack(picked));
+        }
     }
 
     @Inject(
@@ -45,9 +49,17 @@ public abstract class HopperBlockEntityMixin {
             Tracking.moved(stack);
         }
 
-        if (Nesting.carriesMark(stack)) {
-            TrackingWatch.onEnterContainer(target, TrackingWatch.positionOf(source));
+        TrackMark carried = Nesting.inStack(stack);
+
+        if (carried != null) {
+            igny$movedInto(target, source, carried);
         }
+    }
+
+    @Unique
+    private static void igny$movedInto(Container target, Container source, TrackMark carried) {
+        Container leaf = TrackingWatch.holderOf(source, carried);
+        TrackingWatch.onEnterContainer(target, TrackingWatch.positionOf(leaf), TrackingWatch.trailOf(leaf), carried);
     }
 
     @Inject(
@@ -64,7 +76,7 @@ public abstract class HopperBlockEntityMixin {
         }
 
         if (Nesting.carriesMark(stack)) {
-            TrackingWatch.onEnterContainer(target, TrackingWatch.positionOf(source));
+            igny$movedInto(target, source, Nesting.inStack(stack));
         }
     }
 }

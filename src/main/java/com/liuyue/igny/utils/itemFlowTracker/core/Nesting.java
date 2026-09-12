@@ -57,6 +57,16 @@ public final class Nesting {
         return null;
     }
 
+    public static boolean holds(Container container, TrackMark mark) {
+        for (int slot = 0; slot < container.getContainerSize(); slot++) {
+            if (inStack(container.getItem(slot)) == mark) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     @Nullable
     public static TrackMark inEntity(Entity entity) {
         if (entity instanceof ItemEntity item) {

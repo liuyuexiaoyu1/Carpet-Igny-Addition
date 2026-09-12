@@ -35,14 +35,14 @@ public final class EntityHighlights {
             EntityEntry tracked = DISPLAYS.get(dimension, id);
 
             if (entity == null || entity.isRemoved()) {
-                watch.mark = null;
+                watch.setMark(null);
                 dispose(dimension, id, tracked);
                 it.remove();
                 continue;
             }
 
             TrackMark mark = Nesting.inEntity(entity);
-            watch.mark = mark;
+            watch.setMark(mark);
 
             if (mark == null) {
                 dispose(dimension, id, tracked);

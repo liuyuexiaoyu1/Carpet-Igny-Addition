@@ -5,9 +5,17 @@ import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.Container;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public final class Containers {
+
+    public static List<Container> leaves(@Nullable Container container) {
+        List<Container> leaves = new ArrayList<>();
+        forEachLeaf(container, leaves::add);
+        return leaves;
+    }
 
     public static void forEachLeaf(@Nullable Container container, Consumer<Container> sink) {
         if (container == null) {
