@@ -287,6 +287,7 @@ public final class TrackingWatch {
         watch.lastTouched = level.getGameTime();
 
         if (mark != null) {
+            watch.setMark(mark);
             PENDING.add(new PendingBlock(level, anchor, mark));
             PENDING_TRAILS.add(new TrailHop(level, mark, previous, from, pointAt(level, anchor)));
         }
@@ -305,17 +306,27 @@ public final class TrackingWatch {
         watchEntity(entity, from, null);
     }
 
+    public static void link(@Nullable Vec3 from, @Nullable Container target, @Nullable TrackMark mark) {
+        if (from == null || mark == null || target == null) {
+            return;
+        }
+
+        if (target instanceof Entity entity && entity.level() instanceof ServerLevel level) {
+            PENDING_TRAILS.add(new TrailHop(level, mark, null, from, entity.position()));
+            return;
+        }
+
+        if (target instanceof BlockEntity blockEntity && blockEntity.getLevel() instanceof ServerLevel level) {
+            PENDING_TRAILS.add(new TrailHop(level, mark, null, from, pointAt(level, blockEntity.getBlockPos())));
+        }
+    }
+
     public static void watchEntity(Entity entity, @Nullable Vec3 from, @Nullable TrackMark mark) {
         if (!ItemFlowTrackerSettings.enabled()) {
             return;
         }
 
         Watch watch = entities(entity.level().dimension()).computeIfAbsent(entity.getId(), key -> new Watch());
-
-        if (mark != null) {
-            watch.setMark(mark);
-        }
-
         seed(watch, from);
         watch.lastTouched = entity.level().getGameTime();
     }
@@ -411,26 +422,12 @@ public final class TrackingWatch {
         }
 
         if (mark == null) {
-            mark = watchMarkAt(serverLevel, pos);
-        }
-
-        if (mark == null) {
             return null;
         }
 
         Tracking.setIfAbsent(stack, mark);
         PENDING_TRAILS.add(new TrailHop(serverLevel, mark, null, pointAt(serverLevel, pos), at));
         return mark;
-    }
-
-    @Nullable
-    public static TrackMark watchMarkAt(Level level, BlockPos pos) {
-        if (!(level instanceof ServerLevel serverLevel)) {
-            return null;
-        }
-
-        Watch watch = blocks(serverLevel.dimension()).get(pos);
-        return watch != null && Tracking.isLive(watch.mark) ? watch.mark : null;
     }
 
     @Nullable

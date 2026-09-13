@@ -1,12 +1,14 @@
 package com.liuyue.igny.utils;
 
 import com.liuyue.igny.mixins.rule.itemFlowTracker.accessors.CompoundContainerAccessor;
+import com.liuyue.igny.mixins.rule.itemFlowTracker.compat.tis.LargeBarrelHelperInvoker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -44,9 +46,8 @@ public final class ContainerUtil {
     @Nullable
     public static BlockPos partner(Level level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
-
-        if (!(state.getBlock() instanceof ChestBlock)) {
-            return null;
+        if (!state.hasProperty(ChestBlock.TYPE) || !state.hasProperty(ChestBlock.FACING)) {
+            return largeBarrelPartner(level, pos, state);
         }
 
         ChestType type = state.getValue(ChestBlock.TYPE);
@@ -58,7 +59,29 @@ public final class ContainerUtil {
         Direction facing = state.getValue(ChestBlock.FACING);
         BlockPos other = pos.relative(type == ChestType.LEFT ? facing.getClockWise() : facing.getCounterClockWise());
 
-        if (!level.isLoaded(other) || !(level.getBlockState(other).getBlock() instanceof ChestBlock)) {
+        if (!level.isLoaded(other) || !level.getBlockState(other).hasProperty(ChestBlock.TYPE)) {
+            return null;
+        }
+
+        return other;
+    }
+    @Nullable
+    private static BlockPos largeBarrelPartner(Level level, BlockPos pos, BlockState state) {
+        if (!(state.getBlock() instanceof BarrelBlock)) {
+            return null;
+        }
+
+        if (!Boolean.TRUE.equals(RuleUtil.getCarpetRulesValue("carpet-tis-addition", "largeBarrel"))) {
+            return null;
+        }
+
+        if (!LargeBarrelHelperInvoker.igny$isLargeBarrel(state, level, pos)) {
+            return null;
+        }
+
+        BlockPos other = LargeBarrelHelperInvoker.igny$getOtherPos(state, level, pos);
+
+        if (other == null || !level.isLoaded(other) || !(level.getBlockState(other).getBlock() instanceof BarrelBlock)) {
             return null;
         }
 

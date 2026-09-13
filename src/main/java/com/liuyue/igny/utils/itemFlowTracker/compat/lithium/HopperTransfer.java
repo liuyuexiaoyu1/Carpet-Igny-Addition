@@ -90,6 +90,10 @@ public final class HopperTransfer {
                 source == null ? null : source.at(),
                 source == null ? null : source.previous(),
                 move.mark());
+
+        if (source != null && source.pos() == null && source.at() != null) {
+            TrackingWatch.link(source.at(), move.target(), move.mark());
+        }
     }
 
     private static void handOver(Move move) {

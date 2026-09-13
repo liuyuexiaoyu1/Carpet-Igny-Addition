@@ -188,6 +188,7 @@
     "rule.itemFlowTracker.accessors.CompoundContainerAccessor",
     "rule.itemFlowTracker.accessors.DisplayAccessor",
     "rule.itemFlowTracker.accessors.ItemDisplayAccessor",
+    "rule.itemFlowTracker.compat.tis.LargeBarrelHelperInvoker",
     "rule.itemFlowTracker.accessors.SetPassengersPacketAccessor",
     "rule.itemFlowTracker.compat.lithium.HopperHelperMixin",
     "rule.kelpNeverNaturalGrows.KelpBlockMixin",

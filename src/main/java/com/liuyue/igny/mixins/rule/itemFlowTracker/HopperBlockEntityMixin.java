@@ -4,9 +4,12 @@ import com.liuyue.igny.utils.itemFlowTracker.core.Nesting;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
 import com.liuyue.igny.utils.itemFlowTracker.core.Tracking;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackingWatch;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,16 +31,31 @@ public abstract class HopperBlockEntityMixin {
         }
     }
 
-    @Inject(
-            method = "addItem(Lnet/minecraft/world/Container;Lnet/minecraft/world/Container;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/core/Direction;)Lnet/minecraft/world/item/ItemStack;",
-            at = @At(value = "RETURN")
-    )
-    private static void igny$refundRejected(Container source, Container target, ItemStack stack, Direction direction, CallbackInfoReturnable<ItemStack> cir) {
-        ItemStack rejected = cir.getReturnValue();
+    @WrapMethod(method = "addItem(Lnet/minecraft/world/Container;Lnet/minecraft/world/Container;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/core/Direction;)Lnet/minecraft/world/item/ItemStack;")
+    private static ItemStack igny$addItem(Container source, Container target, ItemStack stack, Direction direction, Operation<ItemStack> original) {
+        TrackMark carried = Nesting.inStack(stack);
+        Item item = stack.getItem();
+        ItemStack result = original.call(source, target, stack, direction);
 
-        if (rejected != null && !rejected.isEmpty()) {
-            Tracking.returned(rejected);
+        if (result != null && !result.isEmpty()) {
+            Tracking.returned(result);
         }
+
+        if (carried == null) {
+            return result;
+        }
+
+        for (int slot = 0; slot < target.getContainerSize(); slot++) {
+            ItemStack now = target.getItem(slot);
+
+            if (!now.isEmpty() && now.getItem() == item) {
+                Tracking.setIfAbsent(now, carried);
+                break;
+            }
+        }
+
+        TrackingWatch.onEnterContainer(target, null, null, carried);
+        return result;
     }
 
     @Inject(

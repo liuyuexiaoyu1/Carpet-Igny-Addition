@@ -106,8 +106,8 @@ public final class VirtualDisplay {
                     .transform(Shapes.item(state, width));
         }
 
-        return block(level, pos.getX(), pos.getY(), pos.getZ(), state)
-                .transform(Shapes.outline());
+        return block(level, at.x, at.y, at.z, state)
+                .transform(Shapes.outline(state, width));
     }
 
     private static boolean usesItemRenderer(BlockState state) {

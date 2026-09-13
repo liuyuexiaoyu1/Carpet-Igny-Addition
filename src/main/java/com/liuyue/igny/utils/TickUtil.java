@@ -14,6 +14,8 @@ import net.minecraft.world.TickRateManager;
 //#endif
 
 public class TickUtil {
+    private static boolean lastSprint = true;
+
     public static boolean shouldSprint(MinecraftServer server) {
         switch (IGNYSettings.BETTER_SPRINT_GAME_TICK.value()) {
             case "false" -> {
@@ -45,12 +47,18 @@ public class TickUtil {
             //$$ TickRateManager manager = ((MinecraftServerInterface)server).getTickRateManager();
             //#endif
             if (!IGNYSettings.BETTER_SPRINT_GAME_TICK.value().equals("false")) {
-                if (!TickUtil.shouldSprint(server)) {
-                    //#if MC <= 11904
-                    //$$ TickSpeed.tickrate(20);
-                    //#else
-                    manager.setTickRate(20);
-                    //#endif
+                boolean sprint = TickUtil.shouldSprint(server);
+
+                if (sprint != lastSprint) {
+                    lastSprint = sprint;
+
+                    if (!sprint) {
+                        //#if MC <= 11904
+                        //$$ TickSpeed.tickrate(20);
+                        //#else
+                        manager.setTickRate(20);
+                        //#endif
+                    }
                 }
                 return;
             }
