@@ -102,6 +102,26 @@
     - `...list` 列出当前所有已生效的自定义堆叠设置。
         - 鼠标指针悬浮在物品名称上可查看其完整物品ID。
 
+## 疯狂行为 (`/insanebehaviors`)
+
+需先开启 `insaneBehaviors` 规则（不为 `off`），访问权限由 `commandInsaneBehaviors` 规则控制。
+
+### 语法
+- `/insanebehaviors`
+    - `...reset`
+    - `...getstate`
+    - `...setstate <resolution> <counter>`
+
+### 效果
+- `/insanebehaviors` 读取或修改 `insaneBehaviors` 规则的全局迭代状态。
+    - `...reset` 将分辨率与计数器重置为默认值（分辨率 `2`，计数器 `0`）。
+    - `...getstate` 显示当前的分辨率与计数器。
+    - `...setstate <resolution> <counter>` 直接写入分辨率与计数器。
+        - `<resolution>` 为不小于 `2` 的整数，即当前“网格”的细分层数。
+        - `<counter>` 为不小于 `0` 的整数，即当前分辨率下已经走到的位置。
+- 注意：`insaneBehaviors` 使用**全局**迭代器——任意一次触发事件都会让所有 insaneBehaviors 事件共同前进一次迭代，因此手动改写状态会影响全部相关事件。
+- 该规则族移植自 JoaCarpet。
+
 ## 物品流向追踪 (`/itemflowtracker`)
 
 需先开启 `itemFlowTracker` 规则。

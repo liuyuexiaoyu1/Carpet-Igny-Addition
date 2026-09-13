@@ -1433,7 +1433,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
-## 轻松放置可放置含水方块 (easyPlaceCanPlaceWaterloggedBlock) `🐛Beta`
+## 轻松放置可放置含水方块 (easyPlaceCanPlaceWaterloggedBlock)
 
 当`betterEasyPlaceProtocol`规则开启时，轻松放置可以同步投影中含水方块的含水状态。
 
@@ -1442,7 +1442,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
 
-## 疯狂行为 (insaneBehaviors) `🐛Beta`
+## 疯狂行为 (insaneBehaviors)
 
 让投掷器和弹射物（以及被活塞破坏方块的掉落位置与速度）的随机速度按系统化的方式遍历所有可能的最极端值，然后反复遍历介于其间的所有中点，某种意义上相当于尝试一个分辨率缓慢增加的3维/5维"网格"中的每一个点。
 对于投掷器和弹射物，此设置决定最大值对应旧的gaussian随机限制（"extreme"），还是1.19引入的三角分布随机限制（"sensible"）。两种设置在活塞破坏方块时功能相同。
@@ -1455,7 +1455,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `extreme`, `sensible`, `off`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
-## 疯狂行为增量 (insaneBehaviorsIncrement) `🐛Beta`
+## 疯狂行为增量 (insaneBehaviorsIncrement)
 
 决定 `insaneBehaviors` 规则的递增行为。若为 `normal`，计数器正常递增，直到当前分辨率的所有点耗尽，再进入下一个分辨率。
 `loopCurrentResolution` 将在当前分辨率重新开始。
@@ -1467,7 +1467,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `normal`, `loopCurrentResolution`, `freeze`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
-## 疯狂行为跳过已访问点 (insaneBehaviorsSkipVisitedPoints) `🐛Beta`
+## 疯狂行为跳过已访问点 (insaneBehaviorsSkipVisitedPoints)
 
 使 `insaneBehaviors` 规则跳过与之前分辨率重合的点，从而将总搜索空间减少一个趋近于 1/(2^resolution) 的比例。  
 **移植自 JoaCarpet**
@@ -1477,7 +1477,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `true`, `false`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
-## 疯狂行为矿车投掷例外 (insaneBehaviorsCartYeetingException) `🐛Beta`
+## 疯狂行为矿车投掷例外 (insaneBehaviorsCartYeetingException)
 
 通过禁用两种掉落物之一（载具本体物品和容器内物品），使矿车投掷测试成为可能，避免不同迭代器互相干扰。  
 **移植自 JoaCarpet**
@@ -1487,7 +1487,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `none`, `disableVehicleItem`, `disableContainerContents`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
-## 疯狂行为指令 (commandInsaneBehaviors) `🐛Beta`
+## 疯狂行为指令 (commandInsaneBehaviors)
 
 用于 `insaneBehaviors` 规则的指令。
 "reset" 将 `resolution` 和 `counter` 重置为默认值。"getstate" 与 "setstate" 用于手动读取和写入当前迭代状态。
@@ -1502,7 +1502,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `true`, `false`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
-## 防止弱加载实体堆积 (preventWeakLoadingEntityPiling) `🐛Beta`
+## 防止弱加载实体堆积 (preventWeakLoadingEntityPiling)
 
 每20游戏刻清除一次所有处于弱加载区块中的凋灵之首和潜影弹。
 
@@ -1511,7 +1511,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 物品流向追踪 (itemFlowTracker) `🐛Beta`
+## 物品流向追踪 (itemFlowTracker)
 
 追踪物品在容器、物品实体等之间的流动，详见 `itemFlowTrackerFastMark` 或 `commandItemFlowTracker` 规则。
 
@@ -1520,7 +1520,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `COMMAND`, `SURVIVAL`, `FEATURE`
 
-## 物品流向追踪最大会话数 (itemFlowTrackerMaxSessions) `🐛Beta`
+## 物品流向追踪最大会话数 (itemFlowTrackerMaxSessions)
 
 同时存在的追踪会话上限。达到上限时会优先回收最旧的会话，设为 0 表示不限制。  
 需先开启 `itemFlowTracker`。
@@ -1529,7 +1529,7 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `512`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 物品流向追踪快速标记 (itemFlowTrackerFastMark) `🐛Beta`
+## 物品流向追踪快速标记 (itemFlowTrackerFastMark)
 
 副手持有染料时丢弃主手物品会自动被标记为该染料颜色。  
 需先开启 `itemFlowTracker`。
@@ -1539,7 +1539,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 物品流向追踪指令 (commandItemFlowTracker) `🐛Beta`
+## 物品流向追踪指令 (commandItemFlowTracker)
 
 使用 `/itemflowtracker` 指令所需的权限等级。  
 需先开启 `itemFlowTracker`。  
@@ -1556,7 +1556,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `IGNY`, `COMMAND`, `SURVIVAL`, `FEATURE`
 
-## 物品流向追踪轨迹常驻 (itemFlowTrackerPersistentTrail) `🐛Beta`
+## 物品流向追踪轨迹常驻 (itemFlowTrackerPersistentTrail)
 
 开启后轨迹永不消失，直到关闭规则或执行 `/itemflowtracker clear`；关闭时轨迹会在 200 tick 后消失。  
 需先开启 `itemFlowTracker`。

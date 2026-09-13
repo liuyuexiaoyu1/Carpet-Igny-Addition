@@ -101,6 +101,26 @@
     - `...list` Lists all currently active custom stack size settings.
         - Cursor hover over the item name to view its full ResourceLocation (Namespace ID).
 
+## Insane Behaviors (`/insanebehaviors`)
+
+Requires the `insaneBehaviors` rule to be enabled (not `off`); access is controlled by the `commandInsaneBehaviors` rule.
+
+### Syntax
+- `/insanebehaviors`
+    - `...reset`
+    - `...getstate`
+    - `...setstate <resolution> <counter>`
+
+### Effects
+- `/insanebehaviors` reads or writes the global iteration state of the `insaneBehaviors` rule.
+    - `...reset` resets the resolution and counter to their defaults (resolution `2`, counter `0`).
+    - `...getstate` prints the current resolution and counter.
+    - `...setstate <resolution> <counter>` writes the resolution and counter directly.
+        - `<resolution>` is an integer of at least `2`, i.e. the refinement level of the current "grid".
+        - `<counter>` is an integer of at least `0`, i.e. the position already reached at that resolution.
+- Note that `insaneBehaviors` works on a **global** iterator: any triggering event steps through an iteration for all insaneBehaviors events at once, so writing the state by hand affects every related event.
+- This rule family is ported from JoaCarpet.
+
 ## Item Flow Tracker (`/itemflowtracker`)
 
 Requires the `itemFlowTracker` rule to be enabled.

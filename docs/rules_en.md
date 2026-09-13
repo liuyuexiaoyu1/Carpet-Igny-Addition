@@ -1431,7 +1431,7 @@ Removes random momentum from items dropped when a container is destroyed.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## easyPlaceCanPlaceWaterloggedBlock `🐛Beta`
+## easyPlaceCanPlaceWaterloggedBlock
 
 Allows the easy place mode to sync the waterlogged state of waterloggable blocks placed from schematics when the `betterEasyPlaceProtocol` rule is enabled.
 
@@ -1440,7 +1440,7 @@ Allows the easy place mode to sync the waterlogged state of waterloggable blocks
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CLIENT`, `SURVIVAL`, `FEATURE`
 
-## insaneBehaviors `🐛Beta`
+## insaneBehaviors
 
 Makes the random velocities of droppers and projectiles (as well as both the position and velocity of blocks broken by pistons) systematically iterate through the most extreme values possible, and then repeatedly iterate through all the halfway points in between, in a sense attempting every point in a 3d/5d "grid" that slowly increases in resolution.
 For droppers and projectiles, this setting determines whether the max value corresponds to the old gaussian randomness limits ("extreme"), or the limits of the triangular randomness introduced in 1.19 ("sensible"). Both settings function the same for blocks being broken by pistons.
@@ -1453,7 +1453,7 @@ Do note that insaneBehaviors works on a global iterator: any triggering event wi
 - Suggested options: `extreme`, `sensible`, `off`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## insaneBehaviorsIncrement `🐛Beta`
+## insaneBehaviorsIncrement
 
 Determines the incrementing behavior of the `insaneBehaviors` rule. If set to `normal`, the counter increments normally until all points of the current resolution have been exhausted, then step to the next resolution.
 `loopCurrentResolution` will instead restart at the beginning of the current resolution.
@@ -1465,7 +1465,7 @@ Determines the incrementing behavior of the `insaneBehaviors` rule. If set to `n
 - Suggested options: `normal`, `loopCurrentResolution`, `freeze`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## insaneBehaviorsSkipVisitedPoints `🐛Beta`
+## insaneBehaviorsSkipVisitedPoints
 
 Makes the `insaneBehaviors` rule skip points that coincide with previous resolutions, reducing the overall search space by a fraction that approaches 1/(2^resolution).  
 **ported from JoaCarpet**
@@ -1475,7 +1475,7 @@ Makes the `insaneBehaviors` rule skip points that coincide with previous resolut
 - Suggested options: `true`, `false`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## insaneBehaviorsCartYeetingException `🐛Beta`
+## insaneBehaviorsCartYeetingException
 
 Makes testing cart yeeting possible by disabling one of the two types of item drops (vehicle item and container items), to make the different iterators not interfere with each other.  
 **ported from JoaCarpet**
@@ -1485,7 +1485,7 @@ Makes testing cart yeeting possible by disabling one of the two types of item dr
 - Suggested options: `none`, `disableVehicleItem`, `disableContainerContents`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## commandInsaneBehaviors `🐛Beta`
+## commandInsaneBehaviors
 
 The command used for the `insaneBehaviors` rule.
 "reset" sets the `resolution` and `counter` back to the default values. "getstate" and "setstate" are used to manually read and write the current iteration state.
@@ -1500,7 +1500,7 @@ Usage:
 - Suggested options: `true`, `false`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## preventWeakLoadingEntityPiling `🐛Beta`
+## preventWeakLoadingEntityPiling
 
 Clears every wither skull and shulker bullet in weakly loaded chunks once every 20 game ticks.
 
@@ -1509,7 +1509,7 @@ Clears every wither skull and shulker bullet in weakly loaded chunks once every 
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## itemFlowTracker `🐛Beta`
+## itemFlowTracker
 
 Tracks items as they move through containers, item entities and so on; see the `itemFlowTrackerFastMark` or `commandItemFlowTracker` rules.
 
@@ -1518,7 +1518,7 @@ Tracks items as they move through containers, item entities and so on; see the `
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `COMMAND`, `SURVIVAL`, `FEATURE`
 
-## itemFlowTrackerMaxSessions `🐛Beta`
+## itemFlowTrackerMaxSessions
 
 Maximum number of live tracking sessions. When the limit is reached the oldest session is retired first. Set to 0 for unlimited.  
 Requires the `itemFlowTracker` rule to be enabled.
@@ -1527,7 +1527,7 @@ Requires the `itemFlowTracker` rule to be enabled.
 - Default value: `512`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## itemFlowTrackerFastMark `🐛Beta`
+## itemFlowTrackerFastMark
 
 Dropping the item in your main hand while holding a dye in the off-hand marks it with that dye colour.  
 Requires the `itemFlowTracker` rule to be enabled.
@@ -1537,7 +1537,7 @@ Requires the `itemFlowTracker` rule to be enabled.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## commandItemFlowTracker `🐛Beta`
+## commandItemFlowTracker
 
 The permission level required for the `/itemflowtracker` command.  
 Requires the `itemFlowTracker` rule to be enabled.  
@@ -1554,7 +1554,7 @@ The optional `<track_path>` is the trail sampling interval in ticks; it defaults
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`, `COMMAND`, `SURVIVAL`, `FEATURE`
 
-## itemFlowTrackerPersistentTrail `🐛Beta`
+## itemFlowTrackerPersistentTrail
 
 When enabled the trail never disappears until the rule is turned off or `/itemflowtracker clear` is used; otherwise its markers fade after 200 ticks.  
 Requires the `itemFlowTracker` rule to be enabled.
