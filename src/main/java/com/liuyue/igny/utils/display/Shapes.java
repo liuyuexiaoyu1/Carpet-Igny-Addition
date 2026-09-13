@@ -25,24 +25,6 @@ public final class Shapes {
                 new Vector3f(OUTLINE_SCALE, OUTLINE_SCALE, OUTLINE_SCALE));
     }
 
-    public static Transformation outline(BlockState state, float width) {
-        Quaternionf rotation = new Quaternionf();
-
-        if (state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
-            Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
-            rotation.rotateY((float) Math.toRadians(-facing.toYRot()));
-        }
-
-        float offset = (OUTLINE_SCALE - 1.0F) / 2.0F;
-        Vector3f translation = new Vector3f(-offset, -offset, -offset);
-
-        if (width != 1.0F) {
-            translation.add(rotation.transform(new Vector3f(-(width - 1.0F) / 2.0F, 0.0F, 0.0F)));
-        }
-
-        return of(translation, rotation, new Vector3f(OUTLINE_SCALE * width, OUTLINE_SCALE, OUTLINE_SCALE));
-    }
-
     public static Transformation item(BlockState state, float width) {
         Quaternionf rotation = new Quaternionf();
 

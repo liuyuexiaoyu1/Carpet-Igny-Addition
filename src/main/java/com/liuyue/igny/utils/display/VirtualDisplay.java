@@ -20,6 +20,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.AbstractChestBlock;
+import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.state.BlockState;
 //#if MC >= 12003
@@ -106,8 +107,8 @@ public final class VirtualDisplay {
                     .transform(Shapes.item(state, width));
         }
 
-        return block(level, at.x, at.y, at.z, state)
-                .transform(Shapes.outline(state, width));
+        return block(level, pos.getX(), pos.getY(), pos.getZ(), state)
+                .transform(Shapes.outline());
     }
 
     private static boolean usesItemRenderer(BlockState state) {
@@ -117,7 +118,9 @@ public final class VirtualDisplay {
         }
         //#endif
 
-        return state.getBlock() instanceof AbstractChestBlock<?> || state.getBlock() instanceof ShulkerBoxBlock;
+        return state.getBlock() instanceof AbstractChestBlock<?>
+                || state.getBlock() instanceof ShulkerBoxBlock
+                || state.getBlock() instanceof BarrelBlock;
     }
 
     public VirtualDisplay glow(int rgb) {
