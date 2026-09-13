@@ -13,7 +13,6 @@ import java.util.List;
 
 public class Tracking {
     private static final List<TrackMark> ACTIVE = new ArrayList<>();
-    private static final int EXHAUSTED_GRACE_TICKS = 40;
     private static final int DEFAULT_PATH_INTERVAL = 5;
 
     private static int generation;
@@ -29,7 +28,7 @@ public class Tracking {
         while (it.hasNext()) {
             TrackMark mark = it.next();
 
-            if (mark.generation() != generation || mark.tickExhausted() > EXHAUSTED_GRACE_TICKS) {
+            if (mark.generation() != generation) {
                 mark.retire();
                 it.remove();
             }
@@ -56,11 +55,6 @@ public class Tracking {
                 generation,
                 capacity,
                 resolvePathInterval(pathInterval)));
-    }
-
-    public static TrackMark handOver(TrackMark parent, int capacity) {
-        parent.spend(parent.capacity());
-        return derive(parent, capacity);
     }
 
     public static TrackMark derive(TrackMark parent, int capacity) {
@@ -186,6 +180,22 @@ public class Tracking {
             return;
         }
 
+        attach(stack, mark);
+    }
+
+    public static void spread(@Nullable ItemStack from, @Nullable ItemStack to) {
+        if (!ItemFlowTrackerSettings.enabled() || to == null || to == ItemStack.EMPTY) {
+            return;
+        }
+
+        for (TrackMark mark : new ArrayList<>(marksOf(from))) {
+            if (isLive(mark)) {
+                attach(to, mark);
+            }
+        }
+    }
+
+    private static void attach(ItemStack stack, TrackMark mark) {
         TrackedStack holder = (TrackedStack) (Object) stack;
         List<TrackMark> marks = marksOn(holder);
 
@@ -201,16 +211,6 @@ public class Tracking {
         }
     }
 
-    public static void spread(@Nullable ItemStack from, @Nullable ItemStack to) {
-        if (!ItemFlowTrackerSettings.enabled() || to == null || to == ItemStack.EMPTY) {
-            return;
-        }
-
-        for (TrackMark mark : marksOf(from)) {
-            add(to, mark);
-        }
-    }
-
     public static void onSplit(ItemStack source, ItemStack taken) {
         List<TrackMark> marks = marksOf(source);
 
@@ -218,11 +218,37 @@ public class Tracking {
             return;
         }
 
-        for (TrackMark mark : marks) {
+        for (TrackMark mark : new ArrayList<>(marks)) {
             add(taken, mark);
         }
+    }
 
-        spend(marks, taken.getCount());
+    public static void withdrawn(ItemStack source, int amount) {
+        List<TrackMark> marks = marksOf(source);
+
+        if (marks.isEmpty() || amount <= 0) {
+            return;
+        }
+
+        for (TrackMark mark : new ArrayList<>(marks)) {
+            remove(source, mark);
+        }
+    }
+
+    public static void remove(ItemStack stack, TrackMark mark) {
+        TrackedStack holder = holderOf(stack);
+
+        if (holder == null) {
+            return;
+        }
+
+        List<TrackMark> marks = holder.igny$getMarks();
+
+        if (marks == null || !marks.remove(mark)) {
+            return;
+        }
+
+        holder.igny$setMarks(marks.isEmpty() ? null : marks);
     }
 
     public static void arrive(ItemStack destination, TrackMark incoming, int amount) {
@@ -239,7 +265,7 @@ public class Tracking {
             return;
         }
 
-        for (TrackMark mark : marksOf(source)) {
+        for (TrackMark mark : new ArrayList<>(marksOf(source))) {
             arrive(destination, mark, amount);
         }
     }
@@ -248,26 +274,16 @@ public class Tracking {
         moved(stack);
     }
 
+    public static void refunded(ItemStack stack, int amount) {
+        refund(marksOf(stack), amount);
+    }
+
     public static void moved(ItemStack stack) {
         refund(marksOf(stack), stack.getCount());
     }
 
     public static List<TrackMark> activeSessions() {
         return Collections.unmodifiableList(ACTIVE);
-    }
-
-    private static void spend(List<TrackMark> marks, int amount) {
-        int left = amount;
-
-        for (TrackMark mark : marks) {
-            if (left <= 0) {
-                return;
-            }
-
-            int spent = Math.min(left, mark.budget());
-            mark.spend(spent);
-            left -= spent;
-        }
     }
 
     private static void refund(List<TrackMark> marks, int amount) {

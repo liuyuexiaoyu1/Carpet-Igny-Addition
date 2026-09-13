@@ -526,5 +526,7 @@
   "carpet.rule.commandItemFlowTracker.extra.2": "用法：/itemflowtracker mark hex <rrggbb> [<跟踪间隔>] - 使用自定义颜色",
   "carpet.rule.commandItemFlowTracker.extra.3": "用法：/itemflowtracker status - 列出所有追踪会话及其剩余额度",
   "carpet.rule.commandItemFlowTracker.extra.4": "用法：/itemflowtracker clear - 结束所有追踪会话并清除全部高亮",
-  "carpet.rule.commandItemFlowTracker.extra.5": "可选的 <跟踪间隔> 是轨迹采样间隔（tick）；缺省时为 5，填 0 关闭轨迹"
+  "carpet.rule.commandItemFlowTracker.extra.5": "可选的 <跟踪间隔> 是轨迹采样间隔（tick）；缺省时为 5，填 0 关闭轨迹",
+  "carpet.rule.itemFlowTrackerPersistentTrail.name": "物品流向追踪轨迹常驻",
+  "carpet.rule.itemFlowTrackerPersistentTrail.desc": "开启后轨迹永不消失，直到关闭规则或执行 /itemflowtracker clear；关闭时轨迹会在 200 tick 后消失"
 }

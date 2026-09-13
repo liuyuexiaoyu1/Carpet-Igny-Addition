@@ -1555,3 +1555,13 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `ops`
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `IGNY`, `COMMAND`, `SURVIVAL`, `FEATURE`
+
+## 物品流向追踪轨迹常驻 (itemFlowTrackerPersistentTrail) `🐛Beta`
+
+开启后轨迹永不消失，直到关闭规则或执行 `/itemflowtracker clear`；关闭时轨迹会在 200 tick 后消失。  
+需先开启 `itemFlowTracker`。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

@@ -1212,4 +1212,11 @@ public class IGNYSettings {
                     .addValidator(PrerequisiteRuleValidator.createValidator(IGNYSettings.ITEM_FLOW_TRACKER, true))
                     .build()
     );
+
+    public static final RuleAccessor<Boolean> ITEM_FLOW_TRACKER_PERSISTENT_TRAIL = register(
+            RuleFactory.of("itemFlowTrackerPersistentTrail", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .addValidator(PrerequisiteRuleValidator.createValidator(IGNYSettings.ITEM_FLOW_TRACKER, true))
+                    .build()
+    );
 }

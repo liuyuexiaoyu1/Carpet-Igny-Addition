@@ -2,6 +2,7 @@ package com.liuyue.igny.utils.itemFlowTracker.display;
 
 import com.liuyue.igny.utils.display.Shapes;
 import com.liuyue.igny.utils.display.VirtualDisplay;
+import com.liuyue.igny.utils.itemFlowTracker.ItemFlowTrackerSettings;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackedEntity;
 import com.liuyue.igny.utils.itemFlowTracker.core.Tracking;
@@ -27,18 +28,32 @@ public final class PathTrails {
     private static final Block MARKER_BLOCK = Blocks.BLACK_STAINED_GLASS;
     //#endif
     private static final double MIN_SEGMENT = 0.05D;
+    private static final double GUESS_MIN_SEGMENT = 0.75D;
     private static final double MAX_SEGMENT = 8.0D;
+    private static final double MAX_MOTION_SEGMENT = 64.0D;
+    private static final double MERGE_DEVIATION_SQR = 0.0004D;
+    private static final double MERGE_MAX_LENGTH = 6.0D;
+    private static final double DUPLICATE_SQR = 0.0001D;
+    private static final int FADE_SPLIT_TICKS = 60;
+    private static final int FADE_PIECES = 4;
     private static final int LIFETIME_TICKS = 200;
-    private static final int MAX_MARKERS = 512;
+    private static final int MAX_MARKERS = 4096;
 
     private static final Map<TrackMark, List<Marker>> TRAILS = new HashMap<>();
 
     private static final class Marker {
         private final VirtualDisplay display;
+        private final ServerLevel level;
+        private final Vec3 start;
+        private Vec3 end;
         private int life = LIFETIME_TICKS;
+        private boolean split;
 
-        private Marker(VirtualDisplay display) {
+        private Marker(VirtualDisplay display, Vec3 start, Vec3 end, ServerLevel level) {
             this.display = display;
+            this.start = start;
+            this.end = end;
+            this.level = level;
         }
     }
 
@@ -62,7 +77,7 @@ public final class PathTrails {
 
         for (TrackingWatch.TrailHop hop : TrackingWatch.drainTrailHops(level)) {
             List<Leg> markLegs = legs.computeIfAbsent(hop.mark(), ignored -> new ArrayList<>());
-            Leg previous = markLegs.isEmpty() ? null : markLegs.get(markLegs.size() - 1);
+            Leg previous = markLegs.isEmpty() ? null : markLegs.getLast();
 
             if (previous != null && previous.to.equals(hop.to())) {
                 if (previous.from == null || previous.from.equals(previous.to)) {
@@ -94,7 +109,7 @@ public final class PathTrails {
 
         Vec3 from = leg.from != null ? leg.from : leg.previous;
 
-        if (leg.previous != null && from != null && !leg.previous.equals(from)) {
+        if (leg.previous != null && !leg.previous.equals(from)) {
             append(level, mark, leg.previous, from);
         }
 
@@ -125,27 +140,71 @@ public final class PathTrails {
     }
 
     public static void expire() {
+        if (ItemFlowTrackerSettings.persistentTrail()) {
+            for (List<Marker> markers : TRAILS.values()) {
+                for (Marker marker : markers) {
+                    marker.display.sync();
+                }
+            }
+
+            return;
+        }
+
         Iterator<Map.Entry<TrackMark, List<Marker>>> it = TRAILS.entrySet().iterator();
 
         while (it.hasNext()) {
             Map.Entry<TrackMark, List<Marker>> entry = it.next();
+            TrackMark mark = entry.getKey();
             List<Marker> markers = entry.getValue();
-            boolean alive = Tracking.isLive(entry.getKey());
+            boolean alive = Tracking.isLive(mark);
+            List<Marker> kept = new ArrayList<>(markers.size());
 
-            markers.removeIf(marker -> {
+            for (Marker marker : markers) {
                 if (!alive || --marker.life <= 0) {
                     marker.display.remove();
-                    return true;
+                    continue;
+                }
+
+                if (marker.life == FADE_SPLIT_TICKS && !marker.split) {
+                    marker.split = true;
+                    split(mark, marker, kept);
+                    continue;
                 }
 
                 marker.display.sync();
-                return false;
-            });
+                kept.add(marker);
+            }
+
+            markers.clear();
+            markers.addAll(kept);
 
             if (markers.isEmpty()) {
                 it.remove();
             }
         }
+    }
+
+    private static void split(TrackMark mark, Marker marker, List<Marker> sink) {
+        Vec3 span = marker.end.subtract(marker.start);
+
+        for (int i = 0; i < FADE_PIECES; i++) {
+            Vec3 from = marker.start.add(span.scale(i / (double) FADE_PIECES));
+            Vec3 to = marker.start.add(span.scale((i + 1) / (double) FADE_PIECES));
+            VirtualDisplay display = VirtualDisplay
+                    .block(marker.level, from.x, from.y, from.z, MARKER_BLOCK.defaultBlockState())
+                    .glow(mark.rgb())
+                    .bright()
+                    .transform(Shapes.segment(from, to));
+
+            display.sync();
+
+            Marker piece = new Marker(display, from, to, marker.level);
+            piece.life = Math.max(1, FADE_SPLIT_TICKS * (i + 1) / (FADE_PIECES + 1));
+            piece.split = true;
+            sink.add(piece);
+        }
+
+        marker.display.remove();
     }
 
     public static boolean active() {
@@ -170,20 +229,26 @@ public final class PathTrails {
         }
 
         Vec3 previous = watch.trailLast;
+        boolean guessed = false;
 
         if (previous == null) {
             previous = ejectionAnchor(entity);
 
             if (previous == null && !handDropped(entity)) {
                 previous = TrackingWatch.lostAnchor(level, mark, at);
+                guessed = previous != null;
             }
         }
 
-        if (previous != null && previous.distanceTo(at) < MIN_SEGMENT) {
-            return;
-        }
+        if (previous != null) {
+            double distance = previous.distanceTo(at);
 
-        append(level, mark, previous, at);
+            if (distance < MIN_SEGMENT || (guessed && distance < GUESS_MIN_SEGMENT)) {
+                watch.trailLast = at;
+                return;
+            }
+        }
+        append(level, mark, previous, at, MAX_MOTION_SEGMENT);
         watch.trailLast = at;
     }
 
@@ -197,13 +262,17 @@ public final class PathTrails {
     }
 
     private static void append(ServerLevel level, TrackMark mark, @Nullable Vec3 previous, Vec3 point) {
+        append(level, mark, previous, point, MAX_SEGMENT);
+    }
+
+    private static void append(ServerLevel level, TrackMark mark, @Nullable Vec3 previous, Vec3 point, double limit) {
         if (previous == null) {
             return;
         }
 
         double distance = previous.distanceTo(point);
 
-        if (distance < MIN_SEGMENT || distance > MAX_SEGMENT) {
+        if (distance < MIN_SEGMENT || distance > limit) {
             return;
         }
 
@@ -212,6 +281,22 @@ public final class PathTrails {
 
     private static void spawn(ServerLevel level, TrackMark mark, Vec3 start, Vec3 end) {
         List<Marker> markers = TRAILS.computeIfAbsent(mark, ignored -> new ArrayList<>());
+
+        if (!markers.isEmpty()) {
+            Marker last = markers.getLast();
+
+            if (last.start.distanceToSqr(start) < DUPLICATE_SQR && last.end.distanceToSqr(end) < DUPLICATE_SQR) {
+                return;
+            }
+
+            if (!last.split && canExtend(last, end)) {
+                last.display.transform(Shapes.segment(last.start, end));
+                last.display.sync();
+                last.end = end;
+                last.life = LIFETIME_TICKS;
+                return;
+            }
+        }
 
         VirtualDisplay display = VirtualDisplay
                 .block(level, start.x, start.y, start.z, MARKER_BLOCK.defaultBlockState())
@@ -222,9 +307,23 @@ public final class PathTrails {
         display.sync();
 
         while (markers.size() >= MAX_MARKERS) {
-            markers.remove(0).display.remove();
+            markers.removeFirst().display.remove();
         }
 
-        markers.add(new Marker(display));
+        markers.add(new Marker(display, start, end, level));
+    }
+
+    private static boolean canExtend(Marker last, Vec3 end) {
+        Vec3 direction = last.end.subtract(last.start);
+        double length = direction.length();
+        Vec3 toEnd = end.subtract(last.start);
+        double total = toEnd.length();
+
+        if (length <= 0.0D || total <= length || total > MERGE_MAX_LENGTH) {
+            return false;
+        }
+
+        Vec3 deviation = toEnd.subtract(direction.scale(total / length));
+        return deviation.lengthSqr() <= MERGE_DEVIATION_SQR;
     }
 }

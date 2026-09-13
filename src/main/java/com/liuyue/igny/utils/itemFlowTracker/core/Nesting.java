@@ -46,6 +46,7 @@ public final class Nesting {
 
     @Nullable
     public static TrackMark inContainer(Container container) {
+        if (container == null) return null;
         for (int slot = 0; slot < container.getContainerSize(); slot++) {
             TrackMark mark = inStack(container.getItem(slot));
 

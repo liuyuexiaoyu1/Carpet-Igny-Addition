@@ -4,6 +4,7 @@ import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
 import com.liuyue.igny.utils.itemFlowTracker.core.Tracking;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackingWatch;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
@@ -20,30 +21,46 @@ public abstract class ContainersMixin {
             at = @At(value = "HEAD")
     )
     private static void igny$markSpilledContents(Level level, BlockPos pos, Container container, CallbackInfo ci) {
-        TrackMark blockMark = TrackingWatch.peekBlockMark(level, pos);
-
-        if (blockMark == null) {
+        if (!(level instanceof ServerLevel serverLevel)) {
             return;
         }
 
-        int total = 0;
+        TrackMark blockMark = TrackingWatch.peekBlockMark(level, pos);
 
-        for (int slot = 0; slot < container.getContainerSize(); slot++) {
-            total += container.getItem(slot).getCount();
-        }
-
-        if (total > 0) {
-            TrackMark spilled = Tracking.derive(blockMark, total);
+        if (blockMark != null) {
+            int total = 0;
 
             for (int slot = 0; slot < container.getContainerSize(); slot++) {
-                ItemStack stack = container.getItem(slot);
-
-                if (!stack.isEmpty()) {
-                    Tracking.setIfAbsent(stack, spilled);
-                }
+                total += container.getItem(slot).getCount();
             }
+
+            if (total > 0) {
+                TrackMark spilled = Tracking.derive(blockMark, total);
+
+                for (int slot = 0; slot < container.getContainerSize(); slot++) {
+                    ItemStack stack = container.getItem(slot);
+
+                    if (!stack.isEmpty()) {
+                        Tracking.setIfAbsent(stack, spilled);
+                    }
+                }
+
+                TrackingWatch.rememberLoss(serverLevel, pos, spilled);
+            }
+
+            TrackingWatch.clearBlockMark(level, pos);
         }
 
-        TrackingWatch.clearBlockMark(level, pos);
+        for (int slot = 0; slot < container.getContainerSize(); slot++) {
+            ItemStack stack = container.getItem(slot);
+
+            if (stack.isEmpty()) {
+                continue;
+            }
+
+            for (TrackMark mark : Tracking.marksOf(stack)) {
+                TrackingWatch.rememberLoss(serverLevel, pos, mark);
+            }
+        }
     }
 }

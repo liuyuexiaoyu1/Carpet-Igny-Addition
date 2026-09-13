@@ -20,9 +20,9 @@ import net.minecraft.world.level.block.Portal;
 public class ServerLevelMixin {
     @Inject(method = "addEntity", at = @At(value = "RETURN"))
     private void addEntity(Entity entity, CallbackInfoReturnable<Boolean> cir) {
+        if (!cir.getReturnValue()) return;
         if (!IGNYSettings.INSTANT_PORTAL_TELEPORT.value()) return;
         if (entity.isOnPortalCooldown()) return;
-
         ServerLevel level = (ServerLevel) entity.level();
         BlockPos portalPos = EntityUtil.findPortalInBoundingBox(level, entity.getBoundingBox());
         if (portalPos == null) return;

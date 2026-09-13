@@ -90,6 +90,11 @@ public final class VirtualDisplay {
 
     @Nullable
     public static VirtualDisplay ofBlock(ServerLevel level, BlockPos pos, BlockState state) {
+        return ofBlock(level, Vec3.atCenterOf(pos), pos, state, 1.0F);
+    }
+
+    @Nullable
+    public static VirtualDisplay ofBlock(ServerLevel level, Vec3 at, BlockPos pos, BlockState state, float width) {
         if (usesItemRenderer(state)) {
             ItemStack stack = new ItemStack(state.getBlock());
 
@@ -97,8 +102,8 @@ public final class VirtualDisplay {
                 return null;
             }
 
-            return item(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, stack)
-                    .transform(Shapes.item(state));
+            return item(level, at.x, at.y, at.z, stack)
+                    .transform(Shapes.item(state, width));
         }
 
         return block(level, pos.getX(), pos.getY(), pos.getZ(), state)

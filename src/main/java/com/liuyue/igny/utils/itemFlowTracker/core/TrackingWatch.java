@@ -22,7 +22,9 @@ import java.util.Map;
 
 public final class TrackingWatch {
     private static final double BRIDGE_RANGE = 3.0D;
+    private static final double CARRIER_RANGE_SQR = 4.0D;
     private static final long LOSS_TICKS = 3L;
+    public static final long DORMANT_TICKS = 6000L;
     private static final Map<ResourceKey<Level>, Map<BlockPos, Watch>> BLOCKS = new HashMap<>();
     private static final Map<ResourceKey<Level>, Map<Integer, Watch>> ENTITIES = new HashMap<>();
     private static final Map<ResourceKey<Level>, List<Loss>> LOSSES = new HashMap<>();
@@ -47,10 +49,15 @@ public final class TrackingWatch {
         @Nullable
         public Vec3 trailLast;
 
+        @Nullable
+        public BlockPos displayAnchor;
+
+        public long dormantSince;
+
         public long lastTouched;
 
         public void setMark(@Nullable TrackMark mark) {
-            if (this.mark != null && this.mark != mark) {
+            if (this.mark != null && mark != null && this.mark != mark) {
                 this.trailLast = null;
             }
 
@@ -176,6 +183,28 @@ public final class TrackingWatch {
         losses.add(new Loss(pos.immutable(), mark, now));
     }
 
+    @Nullable
+    public static TrackMark lossMarkAt(ServerLevel level, BlockPos pos) {
+        List<Loss> losses = LOSSES.get(level.dimension());
+
+        if (losses == null) {
+            return null;
+        }
+
+        long now = level.getGameTime();
+        TrackMark best = null;
+
+        for (Loss loss : losses) {
+            if (!loss.pos().equals(pos) || now - loss.time() > LOSS_TICKS) {
+                continue;
+            }
+
+            best = loss.mark();
+        }
+
+        return best;
+    }
+
     public static void onEnterContainer(@Nullable Container container, @Nullable Vec3 from, @Nullable Vec3 previous, @Nullable TrackMark moved) {
         if (!ItemFlowTrackerSettings.enabled()) {
             return;
@@ -199,7 +228,7 @@ public final class TrackingWatch {
                 watchBlock(level, blockEntity.getBlockPos(), from, previous, mark);
             }
         } else if (leaf instanceof Entity entity && !entity.level().isClientSide()) {
-            watchEntity(entity, from);
+            watchEntity(entity, from, mark);
         }
     }
 
@@ -218,11 +247,7 @@ public final class TrackingWatch {
 
     @Nullable
     public static Vec3 positionOf(@Nullable Container leaf) {
-        if (leaf instanceof BlockEntity blockEntity) {
-            return Vec3.atCenterOf(blockEntity.getBlockPos());
-        }
-
-        return leaf instanceof Entity entity ? entity.position() : null;
+        return ContainerUtil.centreOf(leaf);
     }
 
     @Nullable
@@ -263,20 +288,36 @@ public final class TrackingWatch {
 
         if (mark != null) {
             PENDING.add(new PendingBlock(level, anchor, mark));
-            PENDING_TRAILS.add(new TrailHop(level, mark, previous, from, Vec3.atCenterOf(anchor)));
+            PENDING_TRAILS.add(new TrailHop(level, mark, previous, from, pointAt(level, anchor)));
         }
     }
 
+    private static Vec3 pointAt(ServerLevel level, BlockPos pos) {
+        Vec3 centre = level.getBlockEntity(pos) instanceof Container container ? ContainerUtil.centreOf(container) : null;
+        return centre == null ? Vec3.atCenterOf(pos) : centre;
+    }
+
     public static void watchEntity(Entity entity) {
-        watchEntity(entity, null);
+        watchEntity(entity, null, null);
     }
 
     public static void watchEntity(Entity entity, @Nullable Vec3 from) {
+        watchEntity(entity, from, null);
+    }
+
+    public static void watchEntity(Entity entity, @Nullable Vec3 from, @Nullable TrackMark mark) {
         if (!ItemFlowTrackerSettings.enabled()) {
             return;
         }
 
-        seed(entities(entity.level().dimension()).computeIfAbsent(entity.getId(), key -> new Watch()), from);
+        Watch watch = entities(entity.level().dimension()).computeIfAbsent(entity.getId(), key -> new Watch());
+
+        if (mark != null) {
+            watch.setMark(mark);
+        }
+
+        seed(watch, from);
+        watch.lastTouched = entity.level().getGameTime();
     }
 
     private static void seed(Watch watch, @Nullable Vec3 from) {
@@ -287,33 +328,118 @@ public final class TrackingWatch {
 
     public static void markBlock(ServerLevel level, BlockPos pos, TrackMark mark) {
         BlockPos anchor = pos.immutable();
+        watchBlock(level, anchor, lastCarrier(level, mark, anchor), null, mark);
+
         Watch watch = blocks(level.dimension()).computeIfAbsent(anchor, key -> new Watch());
         watch.blockMark = mark;
         watch.blockMarkOwner = level.getBlockState(pos).getBlock();
-        watch.lastTouched = level.getGameTime();
-        PENDING.add(new PendingBlock(level, anchor, mark));
+    }
 
-        if (level.getBlockEntity(anchor) instanceof Container container) {
-            for (int slot = 0; slot < container.getContainerSize(); slot++) {
-                ItemStack stack = container.getItem(slot);
+    @Nullable
+    public static Vec3 lastCarrier(ServerLevel level, TrackMark mark, BlockPos near) {
+        Vec3 target = Vec3.atCenterOf(near);
+        Vec3 best = null;
+        long bestTime = Long.MIN_VALUE;
+        double bestDistance = Double.MAX_VALUE;
 
-                if (!stack.isEmpty()) {
-                    Tracking.setIfAbsent(stack, mark);
-                }
+        for (Map.Entry<BlockPos, Watch> entry : blocks(level.dimension()).entrySet()) {
+            Watch watch = entry.getValue();
+
+            if (watch.mark != mark) {
+                continue;
             }
+
+            Vec3 centre = Vec3.atCenterOf(entry.getKey());
+            double distance = centre.distanceToSqr(target);
+
+            if (distance > CARRIER_RANGE_SQR) {
+                continue;
+            }
+
+            if (watch.lastTouched > bestTime || (watch.lastTouched == bestTime && distance < bestDistance)) {
+                bestTime = watch.lastTouched;
+                bestDistance = distance;
+                best = centre;
+            }
+        }
+
+        for (Map.Entry<Integer, Watch> entry : entities(level.dimension()).entrySet()) {
+            Watch watch = entry.getValue();
+
+            if (watch.mark != mark) {
+                continue;
+            }
+
+            Entity entity = level.getEntity(entry.getKey());
+
+            if (entity == null) {
+                continue;
+            }
+
+            double distance = entity.position().distanceToSqr(target);
+
+            if (distance > CARRIER_RANGE_SQR) {
+                continue;
+            }
+
+            if (watch.lastTouched > bestTime || (watch.lastTouched == bestTime && distance < bestDistance)) {
+                bestTime = watch.lastTouched;
+                bestDistance = distance;
+                best = entity.position();
+            }
+        }
+
+        return best;
+    }
+
+    public static void handOver(@Nullable Container source) {
+        if (source instanceof BlockEntity blockEntity && blockEntity.getLevel() instanceof ServerLevel level) {
+            clearBlockMark(level, blockEntity.getBlockPos());
         }
     }
 
-    public static void takeBlockMark(Level level, BlockPos pos, ItemStack stack) {
+    @Nullable
+    public static TrackMark takeBlockMark(Level level, BlockPos pos, Vec3 at, ItemStack stack) {
         if (!(level instanceof ServerLevel serverLevel) || stack.isEmpty()) {
-            return;
+            return null;
         }
 
         TrackMark mark = markOfDroppedStack(serverLevel, pos, stack);
 
-        if (mark != null) {
-            Tracking.setIfAbsent(stack, mark);
+        if (mark == null) {
+            mark = lossMarkAt(serverLevel, pos);
         }
+
+        if (mark == null) {
+            mark = watchMarkAt(serverLevel, pos);
+        }
+
+        if (mark == null) {
+            return null;
+        }
+
+        Tracking.setIfAbsent(stack, mark);
+        PENDING_TRAILS.add(new TrailHop(serverLevel, mark, null, pointAt(serverLevel, pos), at));
+        return mark;
+    }
+
+    @Nullable
+    public static TrackMark watchMarkAt(Level level, BlockPos pos) {
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return null;
+        }
+
+        Watch watch = blocks(serverLevel.dimension()).get(pos);
+        return watch != null && Tracking.isLive(watch.mark) ? watch.mark : null;
+    }
+
+    @Nullable
+    public static TrackMark blockMarkOf(@Nullable Container container) {
+        if (container instanceof BlockEntity blockEntity && blockEntity.getLevel() instanceof ServerLevel level) {
+            return peekBlockMark(level, blockEntity.getBlockPos());
+        }
+
+        return null;
     }
 
     @Nullable
@@ -351,7 +477,17 @@ public final class TrackingWatch {
             return;
         }
 
-        Watch watch = blocks(serverLevel.dimension()).get(pos);
+        clearBlockMarkAt(serverLevel, pos);
+
+        BlockPos other = ContainerUtil.partner(serverLevel, pos);
+
+        if (other != null) {
+            clearBlockMarkAt(serverLevel, other);
+        }
+    }
+
+    private static void clearBlockMarkAt(ServerLevel level, BlockPos pos) {
+        Watch watch = blocks(level.dimension()).get(pos);
 
         if (watch != null) {
             watch.blockMark = null;

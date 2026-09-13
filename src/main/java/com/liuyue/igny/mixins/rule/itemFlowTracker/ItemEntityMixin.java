@@ -64,7 +64,11 @@ public abstract class ItemEntityMixin implements TrackedEntity {
         }
 
         if (self.level() instanceof ServerLevel level) {
-            TrackingWatch.takeBlockMark(level, BlockPos.containing(self.position()), stack);
+            TrackMark inherited = TrackingWatch.takeBlockMark(level, BlockPos.containing(self.position()), self.position(), stack);
+
+            if (inherited != null) {
+                TrackingWatch.watchEntity(self, self.position(), inherited);
+            }
         }
     }
 

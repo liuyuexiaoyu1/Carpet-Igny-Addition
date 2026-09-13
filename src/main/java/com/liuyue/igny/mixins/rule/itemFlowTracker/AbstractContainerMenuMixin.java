@@ -23,6 +23,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Set;
+
 @Mixin(AbstractContainerMenu.class)
 public abstract class AbstractContainerMenuMixin {
     @Shadow
@@ -78,13 +80,17 @@ public abstract class AbstractContainerMenuMixin {
             }
 
             ItemStack now = slot.getItem();
+            ItemStack old = before[i];
+            boolean sameStack = igny$sameStack(old, now);
+
+            if (Tracking.isMarked(old) && sameStack && !now.isEmpty() && now.getCount() < old.getCount()) {
+                Tracking.withdrawn(now, old.getCount() - now.getCount());
+            }
 
             if (now.isEmpty()) {
                 continue;
             }
 
-            ItemStack old = before[i];
-            boolean sameStack = igny$sameStack(old, now);
             int arrived = sameStack ? now.getCount() - old.getCount() : now.getCount();
 
             if (arrived <= 0) {
@@ -123,17 +129,37 @@ public abstract class AbstractContainerMenuMixin {
     @Unique
     @Nullable
     private ItemStack igny$incomingStack(ItemStack[] before, @Nullable ItemStack beforeCarried, ItemStack destination) {
-        if (Tracking.isMarked(beforeCarried) && igny$sameStack(beforeCarried, destination)) {
+        if (Tracking.isMarked(beforeCarried) && igny$sameStack(beforeCarried, destination)
+                && igny$left(beforeCarried, this.getCarried())) {
             return beforeCarried;
         }
 
-        for (ItemStack candidate : before) {
-            if (Tracking.isMarked(candidate) && igny$sameStack(candidate, destination)) {
-                return candidate;
+        ItemStack source = null;
+
+        for (int i = 0; i < before.length && i < this.slots.size(); i++) {
+            ItemStack candidate = before[i];
+
+            if (candidate == null || !Tracking.isMarked(candidate) || !igny$sameStack(candidate, destination)) {
+                continue;
             }
+
+            if (!igny$left(candidate, this.slots.get(i).getItem())) {
+                continue;
+            }
+
+            if (source != null) {
+                return null;
+            }
+
+            source = candidate;
         }
 
-        return null;
+        return source;
+    }
+
+    @Unique
+    private static boolean igny$left(ItemStack before, ItemStack now) {
+        return before.getCount() > now.getCount();
     }
 
     @Unique

@@ -51,6 +51,14 @@ public abstract class HopperBlockEntityMixin {
 
         TrackMark carried = Nesting.inStack(stack);
 
+        if (carried == null) {
+            carried = TrackingWatch.blockMarkOf(source);
+
+            if (carried != null) {
+                Tracking.setIfAbsent(target.getItem(slot), carried);
+            }
+        }
+
         if (carried != null) {
             igny$movedInto(target, source, carried);
         }
@@ -60,6 +68,7 @@ public abstract class HopperBlockEntityMixin {
     private static void igny$movedInto(Container target, Container source, TrackMark carried) {
         Container leaf = TrackingWatch.holderOf(source, carried);
         TrackingWatch.onEnterContainer(target, TrackingWatch.positionOf(leaf), TrackingWatch.trailOf(leaf), carried);
+        TrackingWatch.handOver(leaf);
     }
 
     @Inject(
@@ -67,14 +76,27 @@ public abstract class HopperBlockEntityMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V")
     )
     private static void igny$mergedIntoSlot(Container source, Container target, ItemStack stack, int slot, Direction direction, CallbackInfoReturnable<ItemStack> cir) {
+        ItemStack destination = target.getItem(slot);
+        int moved = Math.min(stack.getCount(), stack.getMaxStackSize() - destination.getCount());
+
         if (Tracking.getRaw(stack) != null) {
-            ItemStack destination = target.getItem(slot);
-            int moved = Math.min(stack.getCount(), stack.getMaxStackSize() - destination.getCount());
             Tracking.arrive(destination, stack, moved);
         }
 
-        if (Nesting.carriesMark(stack)) {
-            igny$movedInto(target, source, Nesting.inStack(stack));
+        Tracking.withdrawn(stack, moved);
+
+        TrackMark carried = Nesting.inStack(stack);
+
+        if (carried == null) {
+            carried = TrackingWatch.blockMarkOf(source);
+
+            if (carried != null) {
+                Tracking.setIfAbsent(destination, carried);
+            }
+        }
+
+        if (carried != null) {
+            igny$movedInto(target, source, carried);
         }
     }
 }

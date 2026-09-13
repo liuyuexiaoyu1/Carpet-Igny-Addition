@@ -24,7 +24,7 @@ public final class Shapes {
                 new Vector3f(OUTLINE_SCALE, OUTLINE_SCALE, OUTLINE_SCALE));
     }
 
-    public static Transformation item(BlockState state) {
+    public static Transformation item(BlockState state, float width) {
         Quaternionf rotation = new Quaternionf();
 
         if (state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
@@ -32,7 +32,10 @@ public final class Shapes {
             rotation.rotateY((float) Math.toRadians(-facing.toYRot()));
         }
 
-        return of(new Vector3f(), rotation, new Vector3f(OUTLINE_SCALE, OUTLINE_SCALE, OUTLINE_SCALE));
+        return of(
+                new Vector3f(),
+                rotation,
+                new Vector3f(OUTLINE_SCALE * width, OUTLINE_SCALE, OUTLINE_SCALE));
     }
 
     public static Transformation entity(Entity entity, AABB box) {

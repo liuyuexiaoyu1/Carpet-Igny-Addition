@@ -8,7 +8,6 @@ public class TrackMark {
     private final int capacity;
 
     private int budget;
-    private int exhaustedTicks;
     private boolean retired;
 
     TrackMark(int rgb, String label, int generation, int capacity, int pathInterval) {
@@ -48,25 +47,12 @@ public class TrackMark {
         return this.retired;
     }
 
-    void spend(int amount) {
-        this.budget -= amount;
-    }
-
     void refund(int amount) {
         this.budget = Math.min(this.capacity, this.budget + amount);
     }
 
     void retire() {
         this.retired = true;
-    }
-
-    int tickExhausted() {
-        if (this.budget > 0) {
-            this.exhaustedTicks = 0;
-            return 0;
-        }
-
-        return ++this.exhaustedTicks;
     }
 
     @Override

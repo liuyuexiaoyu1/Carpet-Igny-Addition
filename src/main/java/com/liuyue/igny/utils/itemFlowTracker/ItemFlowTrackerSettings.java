@@ -15,4 +15,8 @@ public final class ItemFlowTrackerSettings {
     public static boolean fastMark() {
         return IGNYSettings.ITEM_FLOW_TRACKER_FAST_MARK.value();
     }
+
+    public static boolean persistentTrail() {
+        return IGNYSettings.ITEM_FLOW_TRACKER_PERSISTENT_TRAIL.value();
+    }
 }

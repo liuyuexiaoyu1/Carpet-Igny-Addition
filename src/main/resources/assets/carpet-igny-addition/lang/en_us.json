@@ -362,5 +362,6 @@
   "carpet.rule.commandItemFlowTracker.extra.2": "Usage: /itemflowtracker mark hex <rrggbb> [<track_path>] - marks with a custom colour",
   "carpet.rule.commandItemFlowTracker.extra.3": "Usage: /itemflowtracker status - lists every live tracking session and its remaining budget",
   "carpet.rule.commandItemFlowTracker.extra.4": "Usage: /itemflowtracker clear - stops every tracking session and removes all highlights",
-  "carpet.rule.commandItemFlowTracker.extra.5": "The optional <track_path> is the trail sampling interval in ticks; the default is 5, and 0 turns the trail off"
+  "carpet.rule.commandItemFlowTracker.extra.5": "The optional <track_path> is the trail sampling interval in ticks; the default is 5, and 0 turns the trail off",
+  "carpet.rule.itemFlowTrackerPersistentTrail.desc": "When enabled the trail never disappears until the rule is turned off or /itemflowtracker clear is used; otherwise its markers fade after 200 ticks"
 }

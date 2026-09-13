@@ -4,17 +4,26 @@ import com.liuyue.igny.utils.display.VirtualDisplay;
 import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HighlightEntry {
     @Nullable
     public TrackMark mark;
 
-    @Nullable
-    public VirtualDisplay display;
+    public final List<VirtualDisplay> displays = new ArrayList<>();
+
+    public void sync() {
+        for (VirtualDisplay display : this.displays) {
+            display.sync();
+        }
+    }
 
     public void dispose() {
-        if (this.display != null) {
-            this.display.remove();
-            this.display = null;
+        for (VirtualDisplay display : this.displays) {
+            display.remove();
         }
+
+        this.displays.clear();
     }
 }

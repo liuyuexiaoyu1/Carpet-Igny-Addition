@@ -1553,3 +1553,13 @@ The optional `<track_path>` is the trail sampling interval in ticks; it defaults
 - Default value: `ops`
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`, `COMMAND`, `SURVIVAL`, `FEATURE`
+
+## itemFlowTrackerPersistentTrail `🐛Beta`
+
+When enabled the trail never disappears until the rule is turned off or `/itemflowtracker clear` is used; otherwise its markers fade after 200 ticks.  
+Requires the `itemFlowTracker` rule to be enabled.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
