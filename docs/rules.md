@@ -1565,3 +1565,13 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 拆解台 (uncraftingTable) `🐛Beta`
+
+让工作台的结果槽可以放入一个物品，会将该物品的合成配方摊到 3x3 合成槽里。  
+同一产物有多个配方时，对着结果槽按丢弃键轮换下一个。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

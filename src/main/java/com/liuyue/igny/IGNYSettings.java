@@ -1219,4 +1219,10 @@ public class IGNYSettings {
                     .addValidator(PrerequisiteRuleValidator.createValidator(IGNYSettings.ITEM_FLOW_TRACKER, true))
                     .build()
     );
+
+    public static final RuleAccessor<Boolean> UNCRAFTING_TABLE = register(
+            RuleFactory.of("uncraftingTable", false)
+                    .addCategories(IGNY, SURVIVAL, FEATURE)
+                    .build()
+    );
 }
