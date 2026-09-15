@@ -20,6 +20,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#if MC >= 26.3
+//$$ import net.minecraft.util.Prediction;
+//#endif
 
 import java.util.List;
 
@@ -174,7 +177,11 @@ public abstract class UncraftingMenuMixin {
             state.igny$setUncraftWritten(null);
 
             if (!player.getInventory().add(products)) {
+                //#if MC >= 26.3
+                //$$ player.drop(products, false, Prediction.PREDICTED);
+                //#else
                 player.drop(products, false);
+                //#endif
             }
 
             menu.broadcastChanges();
