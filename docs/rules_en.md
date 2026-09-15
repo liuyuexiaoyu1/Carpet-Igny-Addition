@@ -1566,7 +1566,7 @@ Requires the `itemFlowTracker` rule to be enabled.
 
 ## uncraftingTable `🐛Beta`
 
-Lets you put an item into the crafting table's result slot; its crafting recipe will be laid out on the 3x3 grid.  
+Lets you put item into the crafting table's result slot; its crafting recipe will be laid out on the 3x3 grid.  
 If several recipes share the same product, press the drop key while pointing at the result slot to cycle to the next one.
 
 - Type: `boolean`

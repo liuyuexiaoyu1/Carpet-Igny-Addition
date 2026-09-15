@@ -20,6 +20,12 @@ import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
+//#if MC >= 12103
+//$$ import java.util.Iterator;
+//$$ import net.minecraft.core.Holder;
+//$$ import net.minecraft.world.item.Item;
+//#endif
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -185,12 +191,13 @@ public final class UncraftingTable {
     }
 
     private static ItemStack representative(@Nullable Ingredient ingredient) {
-        if (ingredient == null || ingredient.isEmpty()) {
+        if (ingredient == null) {
             return ItemStack.EMPTY;
         }
 
         //#if MC >= 12103
-        //$$ return ingredient.items().findFirst().map(holder -> new ItemStack(holder.value())).orElse(ItemStack.EMPTY);
+        //$$ Iterator<Holder<Item>> iterator = ingredient.items().iterator();
+        //$$ return iterator.hasNext() ? single(new ItemStack(iterator.next().value())) : ItemStack.EMPTY;
         //#else
         ItemStack[] stacks = ingredient.getItems();
         return stacks.length == 0 ? ItemStack.EMPTY : single(stacks[0]);

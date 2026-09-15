@@ -530,5 +530,5 @@
   "carpet.rule.itemFlowTrackerPersistentTrail.name": "物品流向追踪轨迹常驻",
   "carpet.rule.itemFlowTrackerPersistentTrail.desc": "开启后轨迹永不消失，直到关闭规则或执行 /itemflowtracker clear；关闭时轨迹会在 200 tick 后消失",
   "carpet.rule.uncraftingTable.name": "拆解台",
-  "carpet.rule.uncraftingTable.desc": "让工作台的结果槽可以放入一个物品，会将该物品的合成配方摊到3x3合成槽里\n同一产物有多个配方时，对着结果槽按丢弃键轮换下一个"
+  "carpet.rule.uncraftingTable.desc": "让工作台的结果槽可以放入物品，会将该物品的合成配方摊到3x3合成槽里\n同一产物有多个配方时，对着结果槽按丢弃键轮换下一个"
 }
