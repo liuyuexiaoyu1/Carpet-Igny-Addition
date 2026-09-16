@@ -210,6 +210,10 @@ public final class UncraftingTable {
         return copy;
     }
 
+    public static boolean decomposable(ItemStack stack) {
+        return !stack.isEmpty() && !stack.isEnchanted() && !stack.isDamaged();
+    }
+
     @Nullable
     public static ItemStack[] gridOf(@Nullable Object holder) {
         CraftingRecipe recipe = recipeOf(holder);

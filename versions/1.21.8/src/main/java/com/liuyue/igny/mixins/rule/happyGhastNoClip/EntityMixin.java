@@ -15,12 +15,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EntityMixin {
 
     @Inject(method = "getBoundingBox", at = @At("HEAD"), cancellable = true)
-    private void HappyGhastNoBoundingBox(CallbackInfoReturnable<AABB> cir) {
+    private void getBoundingBox(CallbackInfoReturnable<AABB> cir) {
         Entity self = (Entity) (Object) this;
         if (self instanceof HappyGhast && self.isVehicle() && IGNYSettings.HAPPY_GHAST_NO_CLIP.value()) {
             cir.setReturnValue(new AABB(0, 0, 0, 0, 0, 0));
         }
+    }
 
+    @Inject(method = "shouldRenderAtSqrDistance", at = @At("HEAD"), cancellable = true)
+    private void shouldRenderAtSqrDistance(double distance, CallbackInfoReturnable<Boolean> cir) {
+        Entity self = (Entity) (Object) this;
+        if (self instanceof HappyGhast && self.isVehicle() && IGNYSettings.HAPPY_GHAST_NO_CLIP.value()
+                && self.level().isClientSide()) {
+            cir.setReturnValue(true);
+        }
     }
 
     @Inject(method = "tick", at = @At("HEAD"))

@@ -75,7 +75,9 @@ public abstract class UncraftingMenuMixin {
             if (products.isEmpty() && !state.igny$uncrafting()) {
                 ItemStack placed = UncraftingTable.single(carried);
                 placed.setCount(amount);
-                List<?> candidates = UncraftingTable.candidates(player.level(), placed);
+                List<?> candidates = UncraftingTable.decomposable(placed)
+                        ? UncraftingTable.candidates(player.level(), placed)
+                        : List.of();
                 carried.shrink(amount);
                 menu.setCarried(carried);
                 result.set(placed);

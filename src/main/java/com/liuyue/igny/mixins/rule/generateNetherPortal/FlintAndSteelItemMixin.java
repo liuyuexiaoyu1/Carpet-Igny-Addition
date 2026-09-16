@@ -54,6 +54,9 @@ public class FlintAndSteelItemMixin {
         if (!targetState.is(Blocks.FIRE) && !targetState.is(Blocks.AIR)) {
             return result;
         }
+        if (BaseFireBlockInvoker.isPortal(level, targetPos, face)) {
+            return result;
+        }
         Direction.Axis portalAxis = getPortalAxisFromFace(face, player, clickedState);
         if (clickedState.is(Blocks.NETHER_PORTAL)) {
             Direction.Axis existingAxis = clickedState.getValue(NetherPortalBlock.AXIS);
