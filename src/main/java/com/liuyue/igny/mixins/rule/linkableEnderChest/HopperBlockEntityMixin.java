@@ -33,7 +33,7 @@ public class HopperBlockEntityMixin {
                     return original.call(level, hopper);
                 }
                 if (level.getBlockEntity(blockPos) instanceof LinkedEnderChest enderChest) {
-                    if (enderChest.carpet_Igny_Addition$isLinked()) {
+                    if (enderChest.igny$isLinked()) {
                         List<ItemEntity> items = HopperBlockEntity.getItemsAtAndAbove(level, hopper);
                         if (!items.isEmpty()) {
                             IGNYSettings.canGetBlockEntity.set(false);
@@ -53,7 +53,7 @@ public class HopperBlockEntityMixin {
 
     @Inject(method = "getContainerAt(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/Container;", at = @At(value = "HEAD"), cancellable = true)
     private static void getContainerAt(Level level, BlockPos pos, CallbackInfoReturnable<Container> cir) {
-        if (level.getBlockEntity(pos) instanceof LinkedEnderChest chest && !chest.carpet_Igny_Addition$isLinked()) {
+        if (level.getBlockEntity(pos) instanceof LinkedEnderChest chest && !chest.igny$isLinked()) {
             cir.setReturnValue(null);
         }
     }

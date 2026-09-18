@@ -6,6 +6,7 @@ apply plugin: unobfuscated ? 'net.fabricmc.fabric-loom' : 'net.fabricmc.fabric-l
 apply plugin: 'com.replaymod.preprocess'
 
 repositories {
+	mavenCentral()
 	maven {
 		url = 'https://api.modrinth.com/maven'
 	}
@@ -137,6 +138,12 @@ dependencies {
 
 	autoCompileOnly(project.malilib_dependency) {
 		exclude group: "net.fabricmc.fabric-api"
+	}
+
+	if (project.hasProperty('servux_dependency')) {
+		autoCompileOnly(project.servux_dependency) {
+			exclude group: "net.fabricmc.fabric-api"
+		}
 	}
 
     // Carpet

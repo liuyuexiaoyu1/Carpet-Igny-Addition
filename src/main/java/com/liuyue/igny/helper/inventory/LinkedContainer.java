@@ -1,6 +1,8 @@
 package com.liuyue.igny.helper.inventory;
 
 import com.liuyue.igny.utils.interfaces.linkableEnderChest.ViewingChest;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.PlayerEnderChestContainer;
 import net.minecraft.world.level.Level;
@@ -68,6 +70,26 @@ public class LinkedContainer extends PlayerEnderChestContainer {
     @Override
     public boolean stillValid(Player player) {
         return true;
+    }
+
+    public Tag igny$createItemsTag(HolderLookup.Provider provider) {
+        //#if MC >= 12105
+        //$$ com.mojang.serialization.DynamicOps<net.minecraft.nbt.Tag> ops = net.minecraft.resources.RegistryOps.create(net.minecraft.nbt.NbtOps.INSTANCE, provider);
+        //$$ java.util.List<net.minecraft.world.item.ItemStack> list = new java.util.ArrayList<>();
+        //$$ for (int i = 0; i < this.getContainerSize(); i++) {
+        //$$     list.add(this.getItem(i));
+        //$$ }
+        //$$ net.minecraft.world.item.component.ItemContainerContents contents = net.minecraft.world.item.component.ItemContainerContents.fromItems(list);
+        //$$ return net.minecraft.world.item.component.ItemContainerContents.CODEC.encodeStart(ops, contents)
+        //$$         .resultOrPartial(err -> com.liuyue.igny.IGNYServer.LOGGER.error("Encoding error: {}", err))
+        //$$         .orElse(null);
+        //#else
+        //#if MC >= 12005
+        return this.createTag(provider);
+        //#else
+        //$$ return this.createTag();
+        //#endif
+        //#endif
     }
 
     public boolean isActiveChest(EnderChestBlockEntity chest) {

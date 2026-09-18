@@ -38,7 +38,7 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     }
 
     @Override
-    public Container carpet_Igny_Addition$getContainer() {
+    public Container igny$getContainer() {
         if (!LinkedContainerManager.isRuleFully()) return null;
         EnderChestBlockEntity self = (EnderChestBlockEntity)(Object) this;
         //#if MC >= 12005
@@ -58,7 +58,7 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     }
 
     @Override
-    public boolean carpet_Igny_Addition$isLinked() {
+    public boolean igny$isLinked() {
         if (!LinkedContainerManager.isRuleEnabled()) return false;
         EnderChestBlockEntity self = (EnderChestBlockEntity)(Object)this;
         //#if MC >= 12005

@@ -36,7 +36,7 @@ public class DropperBlockMixin {
     //$$ private void getContainerAt(ServerLevel level, BlockPos pos, CallbackInfo ci, @Local(ordinal = 0) ItemStack itemStack, @Local BlockSourceImpl blockSource, @Local int slot, @Local DispenserBlockEntity blockEntity, @Local Direction direction)
     //#endif
     {
-        if (level.getBlockEntity(pos.relative(direction)) instanceof LinkedEnderChest chest && !chest.carpet_Igny_Addition$isLinked()) {
+        if (level.getBlockEntity(pos.relative(direction)) instanceof LinkedEnderChest chest && !chest.igny$isLinked()) {
             blockEntity.setItem(slot, DISPENSE_BEHAVIOUR.dispense(blockSource, itemStack));
             ci.cancel();
         }

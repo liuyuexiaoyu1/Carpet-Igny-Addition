@@ -180,6 +180,9 @@ public class BetterEasyPlaceProtocolHandler {
                     baseState = applied;
                 }
             }
+            if (baseState.getBlock() instanceof SculkShriekerBlock) {
+                baseState = baseState.setValue(SculkShriekerBlock.CAN_SUMMON, false);
+            }
             if ((additionValue & EasyPlaceExtraProtocolHelper.WATERLOGGED_BIT) != 0
                     && baseState.hasProperty(BlockStateProperties.WATERLOGGED)
                     && IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value()) {
@@ -213,6 +216,9 @@ public class BetterEasyPlaceProtocolHandler {
             BlockState applied = adapter.igny$fromProtocolValue(additionValue, baseState, context);
             if (applied != null) {
                 baseState = applied;
+            }
+            if (baseState.getBlock() instanceof SculkShriekerBlock) {
+                baseState = baseState.setValue(SculkShriekerBlock.CAN_SUMMON, false);
             }
         }
         if ((additionValue & EasyPlaceExtraProtocolHelper.WATERLOGGED_BIT) != 0

@@ -113,24 +113,8 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
         HolderLookup.Provider provider = server.registryAccess();
         containers.forEach((key, container) -> {
             CompoundTag nbt = new CompoundTag();
-            //#if MC >= 12105
-            //$$ com.mojang.serialization.DynamicOps<net.minecraft.nbt.Tag> ops = net.minecraft.resources.RegistryOps.create(net.minecraft.nbt.NbtOps.INSTANCE, provider);
-            //$$ java.util.List<net.minecraft.world.item.ItemStack> list = new java.util.ArrayList<>();
-            //$$ for (int i = 0; i < container.getContainerSize(); i++) {
-            //$$     list.add(container.getItem(i));
-            //$$ }
-            //$$ net.minecraft.world.item.component.ItemContainerContents contents = net.minecraft.world.item.component.ItemContainerContents.fromItems(list);
-            //$$
-            //$$ net.minecraft.world.item.component.ItemContainerContents.CODEC.encodeStart(ops, contents)
-            //$$         .resultOrPartial(err -> IGNYServer.LOGGER.error("Encoding error: {}", err))
-            //$$         .ifPresent(tag -> nbt.put("Items", tag));
-            //#else
-            //#if MC >= 12005
-            nbt.put("Items", container.createTag(provider));
-            //#else
-            //$$ nbt.put("Items", container.createTag());
-            //#endif
-            //#endif
+            Tag items = container.igny$createItemsTag(provider);
+            if (items != null) nbt.put("Items", items);
             data.put(key, nbt.toString());
         });
         return data;
