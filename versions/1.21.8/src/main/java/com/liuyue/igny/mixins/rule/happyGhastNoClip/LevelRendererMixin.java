@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.happyGhastNoClip;
 
-import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.helper.happyGhastNoClip.NoClipHelper;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.client.player.LocalPlayer;
@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.LevelRenderer;
 //#if MC >= 26.2
 //$$ import net.minecraft.client.Camera;
 //#endif
-import net.minecraft.world.entity.animal.HappyGhast;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -27,8 +26,8 @@ public class LevelRendererMixin {
     //$$  private boolean isSpectatorWrap(LocalPlayer instance, Operation<Boolean> original) {
     //#else
     @WrapOperation(method = "renderLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isSpectator()Z"))
-    private boolean isSpectatorWrap(LocalPlayer instance, Operation<Boolean> original) {
+    private boolean isSpectator(LocalPlayer instance, Operation<Boolean> original) {
         //#endif
-        return original.call(instance) || instance.getVehicle() instanceof HappyGhast && IGNYSettings.HAPPY_GHAST_NO_CLIP.value();
+        return original.call(instance) || NoClipHelper.isActiveRider(instance);
     }
 }

@@ -1566,8 +1566,9 @@ Requires the `itemFlowTracker` rule to be enabled.
 
 ## uncraftingTable `🐛Beta`
 
-Lets you put item into the crafting table's result slot; its crafting recipe will be laid out on the 3x3 grid.  
-If several recipes share the same product, press the drop key while pointing at the result slot to cycle to the next one.
+Allows placing items into the crafting table's result slot to uncraft them.  
+If multiple recipes exist for the same output, press the drop key while hovering over the result slot to cycle through them.  
+This rule also applies to the Crafter. To use it, name the Crafter with the number corresponding to the recipe index (e.g., name it "1" for the first recipe).
 
 - Type: `boolean`
 - Default value: `false`

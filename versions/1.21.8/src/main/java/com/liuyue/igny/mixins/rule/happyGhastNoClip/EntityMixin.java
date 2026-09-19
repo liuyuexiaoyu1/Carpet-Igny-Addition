@@ -1,55 +1,49 @@
 package com.liuyue.igny.mixins.rule.happyGhastNoClip;
 
-import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.helper.happyGhastNoClip.NoClipHelper;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.animal.HappyGhast;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.List;
+
 @Mixin(Entity.class)
 public abstract class EntityMixin {
 
-    @Inject(method = "getBoundingBox", at = @At("HEAD"), cancellable = true)
-    private void getBoundingBox(CallbackInfoReturnable<AABB> cir) {
+    @Inject(method = "move", at = @At(value = "HEAD"))
+    private void move(MoverType type, Vec3 movement, CallbackInfo ci) {
         Entity self = (Entity) (Object) this;
-        if (self instanceof HappyGhast && self.isVehicle() && IGNYSettings.HAPPY_GHAST_NO_CLIP.value()) {
-            cir.setReturnValue(new AABB(0, 0, 0, 0, 0, 0));
+
+        if (NoClipHelper.isActiveGhast(self)) {
+            self.noPhysics = true;
         }
     }
 
-    @Inject(method = "shouldRenderAtSqrDistance", at = @At("HEAD"), cancellable = true)
-    private void shouldRenderAtSqrDistance(double distance, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "isInWall", at = @At(value = "HEAD"), cancellable = true)
+    private void isInWall(CallbackInfoReturnable<Boolean> cir) {
         Entity self = (Entity) (Object) this;
-        if (self instanceof HappyGhast && self.isVehicle() && IGNYSettings.HAPPY_GHAST_NO_CLIP.value()
-                && self.level().isClientSide()) {
-            cir.setReturnValue(true);
-        }
-    }
 
-    @Inject(method = "tick", at = @At("HEAD"))
-    private void setNoPhysics(CallbackInfo ci) {
-        Entity self = (Entity) (Object) this;
-        if (self instanceof HappyGhast) {
-            self.noPhysics = self.isVehicle() && IGNYSettings.HAPPY_GHAST_NO_CLIP.value();
-        }
-    }
-
-    @Inject(method = "isInWall", at = @At("HEAD"), cancellable = true)
-    private void onIsInWall(CallbackInfoReturnable<Boolean> cir) {
-        Entity self = (Entity) (Object) this;
-        if (self instanceof HappyGhast && self.isVehicle() && IGNYSettings.HAPPY_GHAST_NO_CLIP.value() || (self instanceof Player && self.getRootVehicle() instanceof HappyGhast && IGNYSettings.HAPPY_GHAST_NO_CLIP.value())) {
+        if (NoClipHelper.isActiveGhastOrRider(self)) {
             cir.setReturnValue(false);
+            return;
         }
-        if (self instanceof HappyGhast && IGNYSettings.HAPPY_GHAST_NO_CLIP.value()) {
-            if (((HappyGhastInvoker) self).invokeScanPlayerAboveGhast()) {
-                cir.setReturnValue(false);
+
+        if (self instanceof Player player && !player.isPassenger() && NoClipHelper.isActive()) {
+            List<HappyGhast> ghasts = player.level().getEntitiesOfClass(HappyGhast.class, player.getBoundingBox().inflate(1.0D));
+
+            for (HappyGhast ghast : ghasts) {
+                if (((HappyGhastInvoker) ghast).invokeScanPlayerAboveGhast()) {
+                    cir.setReturnValue(false);
+                    return;
+                }
             }
         }
     }
-
 }

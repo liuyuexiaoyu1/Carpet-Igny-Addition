@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
@@ -35,7 +36,37 @@ public final class UncraftingTable {
 
     private static boolean filling;
 
+    public static final int CRAFTER_RESULT_SLOT = 0;
+
     private UncraftingTable() {
+    }
+
+    public static boolean isActive() {
+        return com.liuyue.igny.IGNYSettings.UNCRAFTING_TABLE.value();
+    }
+
+    public static boolean isUncraftMode(@Nullable net.minecraft.network.chat.Component name) {
+        return isActive() && indexOf(name) >= 0;
+    }
+
+    public static int indexOf(@Nullable net.minecraft.network.chat.Component name) {
+        if (name == null) {
+            return -1;
+        }
+
+        String text = name.getString().trim();
+
+        if (text.isEmpty() || text.length() > 8) {
+            return -1;
+        }
+
+        for (int i = 0; i < text.length(); i++) {
+            if (!Character.isDigit(text.charAt(i))) {
+                return -1;
+            }
+        }
+
+        return Integer.parseInt(text);
     }
 
     public static List<?> candidates(Level level, ItemStack product) {
@@ -84,7 +115,38 @@ public final class UncraftingTable {
             }
         }
 
+        found.sort(Comparator.comparing(holder -> keyOf(level, holder)));
+
         return found;
+    }
+
+    private static String keyOf(Level level, Object holder) {
+        //#if MC >= 12002
+        if (holder instanceof RecipeHolder<?> recipeHolder) {
+            return recipeHolder.id().toString();
+        }
+        //#endif
+
+        CraftingRecipe recipe = recipeOf(holder);
+
+        if (recipe == null) {
+            return "";
+        }
+
+        StringBuilder builder = new StringBuilder(registryName(outputOf(level, recipe)));
+        ItemStack[] base = decompose(recipe);
+
+        if (base != null) {
+            for (ItemStack stack : base) {
+                builder.append('|').append(registryName(stack));
+            }
+        }
+
+        return builder.toString();
+    }
+
+    private static String registryName(ItemStack stack) {
+        return stack.isEmpty() ? "" : net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
     }
 
     @Nullable

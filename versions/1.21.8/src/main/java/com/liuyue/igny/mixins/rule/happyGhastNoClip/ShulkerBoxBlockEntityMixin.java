@@ -1,11 +1,9 @@
 package com.liuyue.igny.mixins.rule.happyGhastNoClip;
 
-import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.helper.happyGhastNoClip.NoClipHelper;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.animal.HappyGhast;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.level.material.PushReaction;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,13 +15,15 @@ public class ShulkerBoxBlockEntityMixin {
             value = "INVOKE",
             target = "Lnet/minecraft/world/entity/Entity;getPistonPushReaction()Lnet/minecraft/world/level/material/PushReaction;"
     ))
-    private PushReaction getPistonBehaviourOfNoClipPlayers(Entity instance, Operation<PushReaction> original) {
-        if (((instance instanceof Player && instance.getRootVehicle() instanceof HappyGhast) || (instance instanceof HappyGhast && instance.isVehicle())) && IGNYSettings.HAPPY_GHAST_NO_CLIP.value())
+    private PushReaction getPistonPushReaction(Entity instance, Operation<PushReaction> original) {
+        if (NoClipHelper.isActiveGhastOrRider(instance)) {
             //#if MC >= 26.3
             //$$ return PushReaction.IGNORE_ENTITY;
             //#else
             return PushReaction.IGNORE;
             //#endif
+        }
+
         return original.call(instance);
     }
 }

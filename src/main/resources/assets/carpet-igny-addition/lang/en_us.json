@@ -364,5 +364,6 @@
   "carpet.rule.commandItemFlowTracker.extra.4": "Usage: /itemflowtracker clear - stops every tracking session and removes all highlights",
   "carpet.rule.commandItemFlowTracker.extra.5": "The optional <track_path> is the trail sampling interval in ticks; the default is 5, and 0 turns the trail off",
   "carpet.rule.itemFlowTrackerPersistentTrail.desc": "When enabled the trail never disappears until the rule is turned off or /itemflowtracker clear is used; otherwise its markers fade after 200 ticks",
-  "carpet.rule.uncraftingTable.desc": "Lets you put item into the crafting table's result slot; its crafting recipe will be laid out on the 3x3 grid.\nIf several recipes share the same product, press the drop key while pointing at the result slot to cycle to the next one"
+  "carpet.rule.uncraftingTable.desc": "Allows placing items into the crafting table's result slot to uncraft them.\nIf multiple recipes exist for the same output, press the drop key while hovering over the result slot to cycle through them",
+  "carpet.rule.uncraftingTable.extra.0": "This rule also applies to the Crafter. To use it, name the Crafter with the number corresponding to the recipe index (e.g., name it \"1\" for the first recipe)"
 }

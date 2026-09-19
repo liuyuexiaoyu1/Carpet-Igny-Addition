@@ -461,7 +461,7 @@
   "carpet.rule.preventDolphinItemDropAnimationClogging.desc": "阻止海豚丢弃物品时播放动画导致堵塞丢弃物品进程，回退了26.1-pre-2的更改",
   "carpet.rule.dispenserEntityRetrieval.name": "发射器回收实体",
   "carpet.rule.dispenserEntityRetrieval.desc": "发射器使用桶回收水时可一并回收水中的鱼类变为鱼桶，或者是回收硫方怪变为硫方怪桶",
-  "carpet.rule.quickPlaceLava.name": "快速放置熔岩",
+  "carpet.rule.quickPlaceLava.name": "快捷放置熔岩",
   "carpet.rule.quickPlaceLava.desc": "副手持岩浆块时放置岩浆块像熔岩桶一样放置熔岩",
   "carpet.rule.sequentialArrowHitEntityReintroduced.name": "重新引入箭矢逐一碰撞实体",
   "carpet.rule.sequentialArrowHitEntityReintroduced.desc": "重新引入箭矢会逐一计算并碰撞路径上的所有实体的行为，回退了25w41a的更改",
@@ -530,5 +530,6 @@
   "carpet.rule.itemFlowTrackerPersistentTrail.name": "物品流向追踪轨迹常驻",
   "carpet.rule.itemFlowTrackerPersistentTrail.desc": "开启后轨迹永不消失，直到关闭规则或执行 /itemflowtracker clear；关闭时轨迹会在 200 tick 后消失",
   "carpet.rule.uncraftingTable.name": "拆解台",
-  "carpet.rule.uncraftingTable.desc": "让工作台的结果槽可以放入物品，会将该物品的合成配方摊到3x3合成槽里\n同一产物有多个配方时，对着结果槽按丢弃键轮换下一个"
+  "carpet.rule.uncraftingTable.desc": "允许将物品放入工作台的结果槽并将其分解。\n同一产物有多个配方时，对着结果槽按丢弃键可轮换到下一个配方",
+  "carpet.rule.uncraftingTable.extra.0": "该规则同样适用于合成器。将合成器命名为配方索引对应的数字即可使用（例如对应第一个配方时命名为1）"
 }
