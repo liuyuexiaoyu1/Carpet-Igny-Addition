@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#if MC < 12005
 //$$ import net.minecraft.nbt.CompoundTag;
+//$$ import net.minecraft.world.level.Level;
 //#else
 import net.minecraft.world.item.crafting.RecipeHolder;
 //#endif
@@ -44,7 +45,7 @@ public abstract class CrafterBlockMixin {
             return;
         }
 
-        int index = UncraftingTable.indexOf(name) + 1;
+        int index = UncraftingTable.indexOf(name) - 1;
         ItemStack input = crafter.getItem(UncraftingTable.CRAFTER_RESULT_SLOT);
 
         if (input.isEmpty()) {
@@ -53,7 +54,7 @@ public abstract class CrafterBlockMixin {
 
         List<?> candidates = UncraftingTable.candidates(level, input);
 
-        if (index >= candidates.size()) {
+        if (index < 0 || index >= candidates.size()) {
             return;
         }
 
@@ -62,17 +63,19 @@ public abstract class CrafterBlockMixin {
         ItemStack[] base = recipe == null ? null : UncraftingTable.decompose(recipe);
 
         if (base == null) {
+            ci.cancel();
             return;
         }
 
         int per = Math.max(1, UncraftingTable.outputCount(level, holder));
-        int applications = input.getCount() / per;
 
-        if (applications <= 0) {
+        if (input.getCount() < per) {
             return;
         }
 
-        input.shrink(applications * per);
+        int applications = 1;
+
+        input.shrink(per);
         crafter.setItem(UncraftingTable.CRAFTER_RESULT_SLOT, input.isEmpty() ? ItemStack.EMPTY : input);
 
         for (ItemStack material : base) {

@@ -38,9 +38,6 @@ public final class UncraftingTable {
 
     public static final int CRAFTER_RESULT_SLOT = 0;
 
-    private UncraftingTable() {
-    }
-
     public static boolean isActive() {
         return com.liuyue.igny.IGNYSettings.UNCRAFTING_TABLE.value();
     }
@@ -50,23 +47,27 @@ public final class UncraftingTable {
     }
 
     public static int indexOf(@Nullable net.minecraft.network.chat.Component name) {
+        int result = -1;
         if (name == null) {
-            return -1;
+            return result;
         }
 
         String text = name.getString().trim();
 
         if (text.isEmpty() || text.length() > 8) {
-            return -1;
+            return result;
         }
 
         for (int i = 0; i < text.length(); i++) {
             if (!Character.isDigit(text.charAt(i))) {
-                return -1;
+                return result;
             }
         }
 
-        return Integer.parseInt(text);
+        try {
+            result = Integer.parseInt(text);
+        } catch (NumberFormatException ignored) {}
+        return result;
     }
 
     public static List<?> candidates(Level level, ItemStack product) {
