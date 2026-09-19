@@ -190,6 +190,7 @@
     "rule.itemFlowTracker.accessors.ItemDisplayAccessor",
     "rule.itemFlowTracker.accessors.SetPassengersPacketAccessor",
     "rule.itemFlowTracker.compat.lithium.HopperHelperMixin",
+    "rule.itemFlowTracker.compat.lithium.OldVersionHopperHelperMixin",
     "rule.itemFlowTracker.compat.tis.LargeBarrelHelperInvoker",
     "rule.kelpNeverNaturalGrows.KelpBlockMixin",
     "rule.killFakePlayerRemoveVehicle.EntityPlayerMPFakeMixin",

@@ -20,9 +20,11 @@ public class TrapDoorBlockProtocolAdapter implements BlockProtocolStateAdapter {
         int facingOrdinal = fromState.getValue(TrapDoorBlock.FACING).ordinal() - 2;
         int halfOrdinal = fromState.getValue(TrapDoorBlock.HALF).ordinal();
         boolean isOpen = fromState.getValue(TrapDoorBlock.OPEN);
+        boolean isPowered = fromState.getValue(TrapDoorBlock.POWERED);
         return (facingOrdinal & 0b0000_0011) |
-        (halfOrdinal & 0b0000_0001) << 2 |
-        (isOpen ? 0b0000_1000 : 0b0000_0000);
+                (halfOrdinal & 0b0000_0001) << 2 |
+                (isOpen ? 0b0000_1000 : 0b0000_0000) |
+                (isPowered ? 0b0001_0000 : 0b0000_0000);
     }
 
     @Override
@@ -30,11 +32,13 @@ public class TrapDoorBlockProtocolAdapter implements BlockProtocolStateAdapter {
         int facingOrdinal = (extraProtocolValue & 0b0000_0011) + 2;
         int halfOrdinal = (extraProtocolValue & 0b0000_0100) >>> 2;
         boolean isOpen = (extraProtocolValue & 0b0000_1000) == 0b0000_1000;
+        boolean isPowered = (extraProtocolValue & 0b0001_0000) == 0b0001_0000;
 
         return fromState
                 .setValue(TrapDoorBlock.FACING, Direction.values()[facingOrdinal])
                 .setValue(TrapDoorBlock.HALF, Half.values()[halfOrdinal])
-                .setValue(TrapDoorBlock.OPEN, isOpen);
+                .setValue(TrapDoorBlock.OPEN, isOpen)
+                .setValue(TrapDoorBlock.POWERED, isPowered);
     }
 
     @Override

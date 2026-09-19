@@ -32,11 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
 
-@Restriction(
-        require = {
-                @Condition("syncmatica")
-        }
-)
+@Restriction(require = @Condition("syncmatica"))
 @Mixin(ServerCommunicationManager.class)
 @Pseudo
 public abstract class ServerCommunicationManagerMixin {

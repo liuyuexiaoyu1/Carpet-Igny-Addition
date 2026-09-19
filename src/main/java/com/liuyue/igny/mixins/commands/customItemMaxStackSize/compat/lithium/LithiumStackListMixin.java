@@ -9,11 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Restriction(
-        require = {
-                @Condition(value = "lithium", versionPredicates = ">0.13.1")
-        }
-)
+@Restriction(require = @Condition(value = "lithium", versionPredicates = ">0.13.1"))
 @Mixin(targets = "net.caffeinemc.mods.lithium.common.hopper.LithiumStackList")
 public abstract class LithiumStackListMixin {
     //#if MC >= 12006
