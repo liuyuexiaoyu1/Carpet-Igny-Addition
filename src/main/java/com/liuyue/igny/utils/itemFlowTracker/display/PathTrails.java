@@ -37,14 +37,6 @@ public final class PathTrails {
 
     private static final Map<TrackMark, List<Marker>> TRAILS = new HashMap<>();
 
-    private static final Map<Integer, Remembered> ENTITY_MEMORY = new HashMap<>();
-    private static final int MEMORY_TICKS = 40;
-
-    private static final class Remembered {
-        private TrackMark mark;
-        private long seen;
-    }
-
     private static final class Marker {
         private final VirtualDisplay display;
         private final Vec3 start;
@@ -128,28 +120,12 @@ public final class PathTrails {
             Entity entity = level.getEntity(entry.getKey());
 
             if (entity == null || entity.isRemoved()) {
-                ENTITY_MEMORY.remove(entry.getKey());
                 continue;
             }
 
             TrackMark mark = Nesting.inEntity(entity);
 
-            if (mark != null) {
-                Remembered remembered = ENTITY_MEMORY.computeIfAbsent(entry.getKey(), ignored -> new Remembered());
-                remembered.mark = mark;
-                remembered.seen = time;
-            } else {
-                Remembered remembered = ENTITY_MEMORY.get(entry.getKey());
-
-                if (remembered == null || time - remembered.seen > MEMORY_TICKS) {
-                    ENTITY_MEMORY.remove(entry.getKey());
-                    continue;
-                }
-
-                mark = remembered.mark;
-            }
-
-            if (mark.pathInterval() <= 0 || !Tracking.isLive(mark)) {
+            if (mark == null || mark.pathInterval() <= 0 || !Tracking.isLive(mark)) {
                 continue;
             }
 
@@ -231,7 +207,6 @@ public final class PathTrails {
         }
 
         TRAILS.clear();
-        ENTITY_MEMORY.clear();
     }
 
     private static void stamp(ServerLevel level, TrackingWatch.Watch watch, Entity entity, Vec3 at, TrackMark mark) {

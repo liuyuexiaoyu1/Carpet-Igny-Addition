@@ -29,7 +29,7 @@ public final class HopperTransfer {
     public record Source(Vec3 at, @Nullable Vec3 previous, @Nullable BlockPos pos) {
     }
 
-    public record Move(TrackMark mark, @Nullable TrackMark own, @Nullable Source source, Container target, ItemStack stack, int before, int[] targetBefore) {
+    public record Move(TrackMark mark, @Nullable Source source, Container target, ItemStack stack, int before, int[] targetBefore) {
     }
 
     @Nullable
@@ -40,7 +40,6 @@ public final class HopperTransfer {
             return null;
         }
 
-        TrackMark own = Tracking.get(stack);
         TrackMark mark = Nesting.inStack(stack);
         Source source = sourceOf(target, direction, mark, stack);
 
@@ -54,11 +53,9 @@ public final class HopperTransfer {
             if (mark == null) {
                 return null;
             }
-
-            own = mark;
         }
 
-        return new Move(mark, own, source, target, stack, stack.getCount(), snapshot(target));
+        return new Move(mark, source, target, stack, stack.getCount(), snapshot(target));
     }
 
     private static int[] snapshot(Container target) {
@@ -114,12 +111,6 @@ public final class HopperTransfer {
     }
 
     private static void attach(Move move) {
-        TrackMark own = move.own();
-
-        if (own == null) {
-            return;
-        }
-
         Container target = move.target();
 
         int size = Math.min(target.getContainerSize(), move.targetBefore().length);
@@ -134,7 +125,7 @@ public final class HopperTransfer {
             }
 
             if (ItemStack.isSameItemSameComponents(now, move.stack())) {
-                Tracking.setIfAbsent(now, own);
+                Tracking.setIfAbsent(now, move.mark());
                 Tracking.refunded(now, movedAmount(move));
                 return;
             }
@@ -148,7 +139,7 @@ public final class HopperTransfer {
 
         if (gained >= 0 && !ambiguous) {
             ItemStack now = target.getItem(gained);
-            Tracking.setIfAbsent(now, own);
+            Tracking.setIfAbsent(now, move.mark());
             Tracking.refunded(now, movedAmount(move));
         }
     }

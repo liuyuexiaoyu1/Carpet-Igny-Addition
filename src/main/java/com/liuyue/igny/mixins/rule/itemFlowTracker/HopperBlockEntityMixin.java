@@ -34,7 +34,6 @@ public abstract class HopperBlockEntityMixin {
     @WrapMethod(method = "addItem(Lnet/minecraft/world/Container;Lnet/minecraft/world/Container;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/core/Direction;)Lnet/minecraft/world/item/ItemStack;")
     private static ItemStack igny$addItem(Container source, Container target, ItemStack stack, Direction direction, Operation<ItemStack> original) {
         TrackMark carried = Nesting.inStack(stack);
-        TrackMark own = Tracking.get(stack);
         Item item = stack.getItem();
         ItemStack result = original.call(source, target, stack, direction);
 
@@ -42,20 +41,19 @@ public abstract class HopperBlockEntityMixin {
             Tracking.returned(result);
         }
 
-        if (own != null) {
-            for (int slot = 0; slot < target.getContainerSize(); slot++) {
-                ItemStack now = target.getItem(slot);
+        if (carried == null) {
+            return result;
+        }
 
-                if (!now.isEmpty() && now.getItem() == item) {
-                    Tracking.setIfAbsent(now, own);
-                    break;
-                }
+        for (int slot = 0; slot < target.getContainerSize(); slot++) {
+            ItemStack now = target.getItem(slot);
+            if (!now.isEmpty() && now.getItem() == item) {
+                Tracking.setIfAbsent(now, carried);
+                break;
             }
         }
 
-        if (carried != null) {
-            TrackingWatch.onEnterContainer(target, null, null, carried);
-        }
+        TrackingWatch.onEnterContainer(target, null, null, carried);
 
         return result;
     }
