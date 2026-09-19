@@ -41,62 +41,58 @@ public abstract class CrafterBlockMixin {
 
         Component name = crafter.getCustomName();
 
-        if (!UncraftingTable.isUncraftMode(name)) {
-            return;
-        }
-
-        int index = UncraftingTable.indexOf(name) - 1;
-        ItemStack input = crafter.getItem(UncraftingTable.CRAFTER_RESULT_SLOT);
-
-        if (input.isEmpty()) {
-            return;
-        }
-
-        List<?> candidates = UncraftingTable.candidates(level, input);
-
-        if (index < 0 || index >= candidates.size()) {
-            return;
-        }
-
-        Object holder = candidates.get(index);
-        CraftingRecipe recipe = UncraftingTable.recipeOf(holder);
-        ItemStack[] base = recipe == null ? null : UncraftingTable.decompose(recipe);
-
-        if (base == null) {
+        if (UncraftingTable.isUncraftMode(name)) {
             ci.cancel();
-            return;
-        }
+            int index = UncraftingTable.indexOf(name) - 1;
+            ItemStack input = crafter.getItem(UncraftingTable.CRAFTER_RESULT_SLOT);
 
-        int per = Math.max(1, UncraftingTable.outputCount(level, holder));
-
-        if (input.getCount() < per) {
-            return;
-        }
-
-        int applications = 1;
-
-        input.shrink(per);
-        crafter.setItem(UncraftingTable.CRAFTER_RESULT_SLOT, input.isEmpty() ? ItemStack.EMPTY : input);
-
-        for (ItemStack material : base) {
-            if (material.isEmpty()) {
-                continue;
+            if (input.isEmpty()) {
+                return;
             }
 
-            int remaining = material.getCount() * applications;
-            int max = Math.max(1, material.getMaxStackSize());
+            List<?> candidates = UncraftingTable.candidates(level, input);
 
-            while (remaining > 0) {
-                int chunk = Math.min(remaining, max);
-                //#if MC >= 12005
-                this.dispenseItem(level, pos, crafter, material.copyWithCount(chunk), state, (RecipeHolder<?>) holder);
-                //#else
-                //$$ this.dispenseItem(level, pos, crafter, material.copyWithCount(chunk), state);
-                //#endif
-                remaining -= chunk;
+            if (index < 0 || index >= candidates.size()) {
+                return;
+            }
+
+            Object holder = candidates.get(index);
+            CraftingRecipe recipe = UncraftingTable.recipeOf(holder);
+            ItemStack[] base = recipe == null ? null : UncraftingTable.decompose(recipe);
+
+            if (base == null) {
+                return;
+            }
+
+            int per = Math.max(1, UncraftingTable.outputCount(level, holder));
+
+            if (input.getCount() < per) {
+                return;
+            }
+
+            int applications = 1;
+
+            input.shrink(per);
+            crafter.setItem(UncraftingTable.CRAFTER_RESULT_SLOT, input.isEmpty() ? ItemStack.EMPTY : input);
+
+            for (ItemStack material : base) {
+                if (material.isEmpty()) {
+                    continue;
+                }
+
+                int remaining = material.getCount() * applications;
+                int max = Math.max(1, material.getMaxStackSize());
+
+                while (remaining > 0) {
+                    int chunk = Math.min(remaining, max);
+                    //#if MC >= 12005
+                    this.dispenseItem(level, pos, crafter, material.copyWithCount(chunk), state, (RecipeHolder<?>) holder);
+                    //#else
+                    //$$ this.dispenseItem(level, pos, crafter, material.copyWithCount(chunk), state);
+                    //#endif
+                    remaining -= chunk;
+                }
             }
         }
-
-        ci.cancel();
     }
 }

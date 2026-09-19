@@ -43,7 +43,7 @@ public final class UncraftingTable {
     }
 
     public static boolean isUncraftMode(@Nullable net.minecraft.network.chat.Component name) {
-        return isActive() && indexOf(name) >= 0;
+        return isActive() && indexOf(name) > 0;
     }
 
     public static int indexOf(@Nullable net.minecraft.network.chat.Component name) {
