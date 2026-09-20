@@ -17,7 +17,7 @@ pluginManagement {
 		eachPlugin {
 			switch (requested.id.id) {
 				case "com.replaymod.preprocess": {
-					useModule("com.github.Fallen-Breath:preprocessor:${requested.version}")
+					useModule("com.github.liuyuexiaoyu1:preprocessor:${requested.version}")
 					break
 				}
 			}

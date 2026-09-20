@@ -216,26 +216,31 @@ version = fullProjectVersion
 
 // See https://youtrack.jetbrains.com/issue/IDEA-296490
 // if IDEA complains about "Cannot resolve resource filtering of MatchingCopyAction" and you want to know why
+// Values used by processResources are computed here, at configuration time: the closures passed to
+// filesMatching/filter run at execution time (i.e. when the task runs) and reading the project or any
+// other build script state from them is unsupported with the configuration cache.
+def fabricModJsonValues = [
+		"id": project.mod_id,
+		"name": project.mod_name,
+		"version": fullModVersion,
+		"carpet_dependency": project.carpet_dependency,
+		"minecraft_dependency": project.minecraft_dependency,
+]
+def mixinCompatibilityLevel = "JAVA_${MIXIN_COMPATIBILITY_LEVEL.ordinal() + 1}"
+
 processResources {
 	inputs.property "id", project.mod_id
 	inputs.property "name", project.mod_name
 	inputs.property "version", fullModVersion
-    inputs.property "carpet_dependency", project.carpet_dependency
+	inputs.property "carpet_dependency", project.carpet_dependency
 	inputs.property "minecraft_dependency", project.minecraft_dependency
 
 	filesMatching("fabric.mod.json") {
-		def valueMap = [
-				"id": project.mod_id,
-				"name": project.mod_name,
-				"version": fullModVersion,
-                "carpet_dependency": project.carpet_dependency,
-				"minecraft_dependency": project.minecraft_dependency,
-		]
-		expand valueMap
+		expand fabricModJsonValues
 	}
 
 	filesMatching(MIXIN_CONFIG_PATH) {
-		filter { s -> s.replace('{{COMPATIBILITY_LEVEL}}', "JAVA_${MIXIN_COMPATIBILITY_LEVEL.ordinal() + 1}") }
+		filter { s -> s.replace('{{COMPATIBILITY_LEVEL}}', mixinCompatibilityLevel) }
 	}
 }
 
