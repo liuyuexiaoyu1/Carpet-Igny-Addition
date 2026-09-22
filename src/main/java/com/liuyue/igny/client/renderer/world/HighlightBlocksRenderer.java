@@ -37,11 +37,7 @@ public class HighlightBlocksRenderer extends BaseTickingShapeRenderer {
     @Override
     protected void updateShape(ResourceLocation id, ShapeData data) {
         Color color = parseColor(data.color);
-        //#if MC >= 26.2
-        //$$ Vec3 center = Vec3.atCenterOf(data.pos);
-        //#else
-        Vec3 center = data.pos.getCenter();
-        //#endif
+        Vec3 center = data.pos.getCenter(); //#replace >= 26.2 ? Vec3 center = Vec3.atCenterOf(data.pos);
         double p = data.currentSize;
         Vec3 min = new Vec3(
                 Mth.lerp(p, center.x, data.minX),

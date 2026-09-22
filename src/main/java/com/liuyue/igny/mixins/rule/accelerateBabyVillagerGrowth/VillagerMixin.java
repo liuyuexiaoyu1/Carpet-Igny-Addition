@@ -19,13 +19,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Set;
 
-//#if MC >= 12102
-//$$ import net.minecraft.tags.ItemTags;
-//#endif
+//?>= 1.21.2 ? import net.minecraft.tags.ItemTags;
 
 @Mixin(Villager.class)
 public abstract class VillagerMixin {
-    //#if MC <= 12101
+    //#if <= 1.21.1
     @Shadow
     @Final
     private static Set<Item> WANTED_ITEMS;
@@ -42,11 +40,7 @@ public abstract class VillagerMixin {
             Level level = self.level();
             ItemStack stack = player.getItemInHand(hand);
             if (level.isClientSide() || !self.isAlive() || self.isTrading() || self.isSleeping() || !self.isBaby()) return;
-            //#if MC >= 12102
-            //$$ if (!stack.is(ItemTags.VILLAGER_PICKS_UP)) return;
-            //#else
-            if (!WANTED_ITEMS.contains(stack.getItem())) return;
-            //#endif
+            if (!WANTED_ITEMS.contains(stack.getItem())) return; //#replace >= 1.21.2 ? if (!stack.is(ItemTags.VILLAGER_PICKS_UP)) return;
             int age = self.getAge();
             if (age >= 0) return;
             int remainingTicks = -age;

@@ -34,7 +34,7 @@ public class IGNYServerMod implements ModInitializer {
     public void onInitialize() {
         StackTraceDeobfuscator.fetchMapping();
         version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
-        //#if MC >= 12005
+        //#if >= 1.20.5
         PacketRegistry.s2c();
         PacketRegistry.c2s();
         //#endif

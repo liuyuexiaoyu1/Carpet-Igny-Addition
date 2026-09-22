@@ -8,28 +8,16 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-//#if MC >= 12102
-//$$ import net.minecraft.world.level.ServerExplosion;
-//#else
-import net.minecraft.world.level.Explosion;
-//#endif
+import net.minecraft.world.level.Explosion; //#replace >= 1.21.2 ? import net.minecraft.world.level.ServerExplosion;
 
-//#if MC >= 12102
-//$$ @Mixin(ServerExplosion.class)
-//#else
-@Mixin(Explosion.class)
-//#endif
+@Mixin(Explosion.class) //#replace >= 1.21.2 ? @Mixin(ServerExplosion.class)
 public class ExplosionMixin {
     @Shadow
     @Final
     private Entity source;
 
     @ModifyExpressionValue(
-            //#if MC >= 12102
-            //$$ method = "calculateExplodedPositions",
-            //#else
-            method = "explode",
-            //#endif
+            method = "explode", //#replace >= 1.21.2 ? method = "calculateExplodedPositions",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/util/RandomSource;nextFloat()F")

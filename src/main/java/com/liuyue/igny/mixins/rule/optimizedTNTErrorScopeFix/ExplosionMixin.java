@@ -11,21 +11,17 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-//#if MC >= 12102
-//$$ import net.minecraft.core.BlockPos;
-//$$ import net.minecraft.world.level.ServerExplosion;
-//$$ import java.util.List;
+//#if >= 1.21.2
+/*$$import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ServerExplosion;
+import java.util.List;$$*/
 //#endif
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(
-        //#if MC >= 12102
-        //$$ value = ServerExplosion.class,
-        //#else
-        value = Explosion.class,
-        //#endif
+        value = Explosion.class, //#replace >= 1.21.2 ? value = ServerExplosion.class,
         priority = 900
 )
 public abstract class ExplosionMixin
@@ -37,24 +33,12 @@ public abstract class ExplosionMixin
     private static final Object igny$lock = new Object();
 
     @WrapMethod(
-            //#if MC < 12102
-            method = "explode"
-            //#else
-            //$$ method = "calculateExplodedPositions"
-            //#endif
+            method = "explode" //#replace >= 1.21.2 ? method = "calculateExplodedPositions"
     )
     private
-            //#if MC >= 12102
-            //$$ List<BlockPos>
-            //#else
-            void
-            //#endif
+            void //#replace >= 1.21.2 ? List<BlockPos>
     onExplosionAHighPriority(
-            //#if MC < 12102
-            Operation<Void> original
-            //#else
-            //$$ Operation<List<BlockPos>> original
-            //#endif
+            Operation<Void> original //#replace >= 1.21.2 ? Operation<List<BlockPos>> original
     ) {
         synchronized (igny$lock) {
             boolean changed = CarpetSettings.optimizedTNT;
@@ -62,11 +46,7 @@ public abstract class ExplosionMixin
                 CarpetSettings.optimizedTNT = this.source instanceof PrimedTnt;
             }
             try {
-                //#if MC >= 12102
-                //$$ return original.call();
-                //#else
-                original.call();
-                //#endif
+                original.call(); //#replace >= 1.21.2 ? return original.call();
             } finally {
                 CarpetSettings.optimizedTNT = changed;
             }
@@ -74,7 +54,7 @@ public abstract class ExplosionMixin
 
     }
 
-    //#if MC < 12102
+    //#if < 1.21.2
     @WrapMethod(
             method = "finalizeExplosion"
     )

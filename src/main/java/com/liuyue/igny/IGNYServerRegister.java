@@ -4,9 +4,7 @@ import com.liuyue.igny.network.packet.config.SyncLinkedEnderChestPayload;
 import com.liuyue.igny.utils.interfaces.linkableEnderChest.ViewingChest;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.world.entity.player.Player;
-//#if MC < 12005
-//$$ import com.liuyue.igny.IGNYServer;
-//#endif
+//?< 1.20.5 ? import com.liuyue.igny.IGNYServer;
 
 public class IGNYServerRegister {
     public static void register() {
@@ -14,27 +12,15 @@ public class IGNYServerRegister {
     }
     private static void registerNetworkPackReceiver() {
         ServerPlayNetworking.registerGlobalReceiver(
-                //#if MC < 12005
-                //$$ IGNYServer.SYNC_LINKED_ENDER_CHEST_PACKET_ID,
-                //#else
-                SyncLinkedEnderChestPayload.TYPE,
-                //#endif
-                //#if MC < 12005
-                //$$ (server, player, impl, buf, sender) -> {
-                //#else
-                (payload, context) -> {
-                    //#endif
-                    //#if MC < 12005
+                SyncLinkedEnderChestPayload.TYPE, //#replace < 1.20.5 ? IGNYServer.SYNC_LINKED_ENDER_CHEST_PACKET_ID,
+                (payload, context) -> { //#replace < 1.20.5 ? (server, player, impl, buf, sender) -> {
+                    //#if < 1.20.5
                     //$$ String chestName = buf.readUtf();
                     //#else
                     String chestName = payload.key();
                     Player player = context.player();
                     //#endif
-                    //#if MC < 12005
-                    //$$ server.execute(() -> {
-                    //#else
-                    context.server().execute(() -> {
-                        //#endif
+                    context.server().execute(() -> { //#replace < 1.20.5 ? server.execute(() -> {
                         if (chestName == null || chestName.isEmpty()) {
                             ((ViewingChest) player).igny$setLinkedKey(null);
                         } else {

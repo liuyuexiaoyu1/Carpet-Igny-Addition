@@ -30,9 +30,7 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-//#if MC >= 12111
-//$$ import net.minecraft.commands.Commands;
-//#endif
+//?>= 1.21.11 ? import net.minecraft.commands.Commands;
 
 public class CustomPlayerPickupItemCommand {
 
@@ -94,9 +92,9 @@ public class CustomPlayerPickupItemCommand {
                     BuiltInRegistries.ITEM.getOptional(res).ifPresent(holder -> {
                         MutableComponent deleteBtn = Component.literal("[x] ")
                                 .withStyle(style -> style.withColor(ChatFormatting.RED).withBold(true)
-                                        //#if MC >= 12105
-                                        //$$ .withClickEvent(new ClickEvent.RunCommand("/customPlayerPickupItem " + targetName + " items remove " + id))
-                                        //$$ .withHoverEvent(new HoverEvent.ShowText(Component.literal("Click to remove " + id))));
+                                        //#if >= 1.21.5
+                                        /*$$.withClickEvent(new ClickEvent.RunCommand("/customPlayerPickupItem " + targetName + " items remove " + id))
+                                        .withHoverEvent(new HoverEvent.ShowText(Component.literal("Click to remove " + id))));$$*/
                                         //#else
                                         .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/customPlayerPickupItem " + targetName + " items remove " + id))
                                         .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("Click to remove " + id))));
@@ -111,9 +109,7 @@ public class CustomPlayerPickupItemCommand {
         }
 
         source.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                         message, false);
         return 1;
     }
@@ -141,9 +137,7 @@ public class CustomPlayerPickupItemCommand {
         CustomPickupDataManager.INSTANCE.updateAndSave(targetName, setting);
 
         source.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                         Component.translatable("igny.command.customPlayerPickupItem.mode_success", targetName, modeStr)
                                 .withStyle(ChatFormatting.GREEN), true);
         return 1;
@@ -161,11 +155,7 @@ public class CustomPlayerPickupItemCommand {
             currentItems.clear();
         } else {
             Item item = ItemArgument.getItem(ctx, "item")
-                    //#if MC >= 26.1
-                    //$$ .item().value();
-                    //#else
-                    .getItem();
-                    //#endif
+                    .getItem(); //#replace >= 26.1 ? .item().value();
             String itemId = BuiltInRegistries.ITEM.getKey(item).toString();
 
             if (action.equals("add")) {
@@ -179,9 +169,7 @@ public class CustomPlayerPickupItemCommand {
         CustomPickupDataManager.INSTANCE.updateAndSave(targetName, setting);
 
         source.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                         Component.translatable("igny.command.customPlayerPickupItem.items_success", targetName, currentItems.stream().sorted().collect(Collectors.joining(", "))).withStyle(ChatFormatting.GREEN), true);
         return 1;
     }
@@ -189,18 +177,14 @@ public class CustomPlayerPickupItemCommand {
     private static boolean checkPermission(CommandSourceStack source, String targetName) {
         CustomPickupDataManager.INSTANCE.setServer(source.getServer());
         if (
-            //#if MC >= 12111
+            //#if >= 1.21.11
             //$$ !Commands.LEVEL_GAMEMASTERS.check(source.permissions())
             //#else
                 !source.hasPermission(2)
             //#endif
         ) {
             if (source.getPlayer() == null || (!source.getPlayer().getGameProfile()
-                    //#if MC >= 12110
-                    //$$ .name()
-                    //#else
-                    .getName()
-                    //#endif
+                    .getName() //#replace >= 1.21.10 ? .name()
                     .equalsIgnoreCase(targetName) && !(source.getPlayer() instanceof EntityPlayerMPFake))) {
                 source.sendFailure(Component.translatable("igny.command.customPlayerPickupItem.no_permission")
                         .withStyle(ChatFormatting.RED));
@@ -214,7 +198,7 @@ public class CustomPlayerPickupItemCommand {
         CommandSourceStack source = context.getSource();
         Collection<String> players;
         if (
-            //#if MC >= 12111
+            //#if >= 1.21.11
             //$$ Commands.LEVEL_GAMEMASTERS.check(source.permissions())
             //#else
                 source.hasPermission(2)
@@ -223,11 +207,7 @@ public class CustomPlayerPickupItemCommand {
             players = Arrays.asList(source.getServer().getPlayerNames());
         } else if (source.getPlayer() != null) {
             players = Set.of(source.getPlayer().getGameProfile()
-                            //#if MC >= 12110
-                            //$$ .name()
-                            //#else
-                            .getName()
-                    //#endif
+                            .getName() //#replace >= 1.21.10 ? .name()
             );
         } else {
             players = Set.of();

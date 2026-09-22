@@ -9,11 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
-//#if MC >= 26.2
-//$$ import net.minecraft.world.entity.EntityTypes;
-//#else
-import net.minecraft.world.entity.EntityType;
-//#endif
+import net.minecraft.world.entity.EntityType; //#replace >= 26.2 ? import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
@@ -35,9 +31,7 @@ import java.util.List;
 public abstract class DispenserBlockMixin {
     @Inject(method = "dispenseFrom", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/DispenserBlockEntity;getRandomSlot(Lnet/minecraft/util/RandomSource;)I"), cancellable = true)
     private void dispenseFrom(ServerLevel serverLevel,
-                              //#if MC >= 12002
-                              BlockState blockState,
-                              //#endif
+                              BlockState blockState, //?>= 1.20.2
                               BlockPos blockPos, CallbackInfo ci, @Local DispenserBlockEntity blockEntity) {
         if (!IGNYSettings.DISPENSER_TRADE.value()) return;
         Component component = blockEntity.getName();
@@ -49,15 +43,9 @@ public abstract class DispenserBlockMixin {
         } catch (NumberFormatException e) {
             return;
         }
-        //#if MC < 12002
-        //$$ BlockState blockState = serverLevel.getBlockState(blockPos);
-        //#endif
+        //?< 1.20.2 ? BlockState blockState = serverLevel.getBlockState(blockPos);
         Direction facing = blockState.getValue(DispenserBlock.FACING);
-        //#if MC >= 26.2
-        //$$ List<Villager> villagers = serverLevel.getEntities(EntityTypes.VILLAGER, new AABB(blockPos.relative(facing)), e -> true);
-        //#else
-        List<Villager> villagers = serverLevel.getEntities(EntityType.VILLAGER, new AABB(blockPos.relative(facing)), e -> true);
-        //#endif
+        List<Villager> villagers = serverLevel.getEntities(EntityType.VILLAGER, new AABB(blockPos.relative(facing)), e -> true); //#replace >= 26.2 ? List<Villager> villagers = serverLevel.getEntities(EntityTypes.VILLAGER, new AABB(blockPos.relative(facing)), e -> true);
         if (!villagers.isEmpty()) {
             Villager villager = villagers.getFirst();
             MerchantOffers offers = villager.getOffers();
@@ -67,11 +55,7 @@ public abstract class DispenserBlockMixin {
                 if (!IGNYSettings.DISPENSER_TRADE_FAIL_DISPERSE_ITEM.value()){
                     ci.cancel();
                     serverLevel.levelEvent(1001, blockPos, facing.get3DDataValue());
-                    //#if MC > 12004
-                    villager.makeSound(SoundEvents.VILLAGER_NO);
-                    //#else
-                    //$$ villager.playSound(SoundEvents.VILLAGER_NO);
-                    //#endif
+                    villager.makeSound(SoundEvents.VILLAGER_NO); //#replace <= 1.20.4 ? villager.playSound(SoundEvents.VILLAGER_NO);
                     return;
                 }
                 return;
@@ -82,11 +66,7 @@ public abstract class DispenserBlockMixin {
                 if (!IGNYSettings.DISPENSER_TRADE_FAIL_DISPERSE_ITEM.value()){
                     ci.cancel();
                     serverLevel.levelEvent(1001, blockPos, facing.get3DDataValue());
-                    //#if MC > 12004
-                    villager.makeSound(SoundEvents.VILLAGER_NO);
-                    //#else
-                    //$$ villager.playSound(SoundEvents.VILLAGER_NO);
-                    //#endif
+                    villager.makeSound(SoundEvents.VILLAGER_NO); //#replace <= 1.20.4 ? villager.playSound(SoundEvents.VILLAGER_NO);
                     return;
                 }
                 return;
@@ -94,11 +74,7 @@ public abstract class DispenserBlockMixin {
             villager.notifyTrade(offer);
             ItemStack result = offer.getResult().copy();
             Position position = DispenserBlock.getDispensePosition(
-                    //#if MC > 12001
-                    new BlockSource(serverLevel, blockPos, blockState, blockEntity)
-                    //#else
-                    //$$ new BlockSourceImpl(serverLevel, blockPos)
-                    //#endif
+                    new BlockSource(serverLevel, blockPos, blockState, blockEntity) //#replace <= 1.20.1 ? new BlockSourceImpl(serverLevel, blockPos)
             );
             double spawnX = position.x();
             double spawnY = position.y();
@@ -120,11 +96,7 @@ public abstract class DispenserBlockMixin {
             serverLevel.addFreshEntity(itemEntity);
             serverLevel.levelEvent(1000, blockPos, facing.get3DDataValue());
             serverLevel.broadcastEntityEvent(villager, (byte)14);
-            //#if MC > 12004
-            villager.makeSound(SoundEvents.VILLAGER_YES);
-            //#else
-            //$$ villager.playSound(SoundEvents.VILLAGER_YES);
-            //#endif
+            villager.makeSound(SoundEvents.VILLAGER_YES); //#replace <= 1.20.4 ? villager.playSound(SoundEvents.VILLAGER_YES);
             ci.cancel();
         }
     }

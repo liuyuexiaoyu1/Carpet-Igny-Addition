@@ -1,8 +1,6 @@
 package com.liuyue.igny.mixins.rule.betterEasyPlaceProtocol;
 
-//#if MC >= 12005
-import net.minecraft.core.Holder;
-//#endif
+import net.minecraft.core.Holder; //?>= 1.20.5
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,16 +9,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(BeaconBlockEntity.class)
 public interface BeaconBlockEntityAccessor {
     @Accessor("primaryPower")
-    //#if MC >= 12005
-    Holder<MobEffect> igny$getPrimaryPower();
-    //#else
-    //$$ MobEffect igny$getPrimaryPower();
-    //#endif
+    Holder<MobEffect> igny$getPrimaryPower(); //#replace < 1.20.5 ? MobEffect igny$getPrimaryPower();
 
     @Accessor("secondaryPower")
-    //#if MC >= 12005
-    Holder<MobEffect> igny$getSecondaryPower();
-    //#else
-    //$$ MobEffect igny$getSecondaryPower();
-    //#endif
+    Holder<MobEffect> igny$getSecondaryPower(); //#replace < 1.20.5 ? MobEffect igny$getSecondaryPower();
 }

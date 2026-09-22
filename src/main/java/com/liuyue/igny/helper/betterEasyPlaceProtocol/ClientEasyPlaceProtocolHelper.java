@@ -55,7 +55,7 @@ public class ClientEasyPlaceProtocolHelper {
         }
         int protocolAdditionValue = adapter.igny$toProtocolValue(0, stateSchematic);
         int attributesValue = 0;
-        //#if MC >= 12001
+        //#if >= 1.20.1
         net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
         if (mc.player != null) {
             net.minecraft.world.item.ItemStack handStack = mc.player.getMainHandItem();

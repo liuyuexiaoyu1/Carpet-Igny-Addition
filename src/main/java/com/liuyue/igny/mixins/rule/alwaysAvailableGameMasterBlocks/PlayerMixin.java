@@ -10,9 +10,9 @@ import net.minecraft.world.entity.player.Player;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-//#if MC >= 12111
-//$$ import net.minecraft.server.permissions.Permission;
-//$$ import net.minecraft.server.permissions.PermissionSet;
+//#if >= 1.21.11
+/*$$import net.minecraft.server.permissions.Permission;
+import net.minecraft.server.permissions.PermissionSet;$$*/
 //#endif
 
 @Mixin(Player.class)
@@ -25,25 +25,17 @@ public class PlayerMixin {
         return original.call(instance);
     }
 
-    //#if MC >= 12111
-    //$$ @WrapOperation(method = "canUseGameMasterBlocks", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/permissions/PermissionSet;hasPermission(Lnet/minecraft/server/permissions/Permission;)Z"))
-    //$$  private boolean getPermissionLevel(PermissionSet instance, Permission permission, Operation<Boolean> original)
+    //#if >= 1.21.11
+    /*$$@WrapOperation(method = "canUseGameMasterBlocks", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/permissions/PermissionSet;hasPermission(Lnet/minecraft/server/permissions/Permission;)Z"))
+    private boolean getPermissionLevel(PermissionSet instance, Permission permission, Operation<Boolean> original)$$*/
     //#else
     @WrapOperation(method = "canUseGameMasterBlocks", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getPermissionLevel()I"))
     private int getPermissionLevel(Player instance, Operation<Integer> original)
     //#endif
     {
         if (CommandUtil.canUseCommand((Player) (Object) this, IGNYSettings.ALWAYS_AVAILABLE_GAME_MASTER_BLOCKS.value())){
-            //#if MC >= 12111
-            //$$ return true;
-            //#else
-            return 4;
-            //#endif
+            return 4; //#replace >= 1.21.11 ? return true;
         }
-        //#if MC >= 12111
-        //$$ return original.call(instance, permission);
-        //#else
-        return original.call(instance);
-        //#endif
+        return original.call(instance); //#replace >= 1.21.11 ? return original.call(instance, permission);
     }
 }

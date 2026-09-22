@@ -11,17 +11,17 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.function.Consumer;
-//#if MC >= 26.1
-//$$ import java.util.stream.Stream;
-//$$ import java.util.List;
+//#if >= 26.1
+/*$$import java.util.stream.Stream;
+import java.util.List;$$*/
 //#endif
 
 @Mixin(ItemUtils.class)
 public class ItemUtilsMixin {
-    //#if MC >= 26.1
-    //$$ @SuppressWarnings("unchecked")
-    //$$ @WrapOperation(method = "onContainerDestroyed", at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;forEach(Ljava/util/function/Consumer;)V"))
-    //$$ private static <T> void forEach(Stream<?> instance, Consumer<? super T> consumer, Operation<Void> original, @Local(argsOnly = true) ItemEntity itemEntity)
+    //#if >= 26.1
+    /*$$@SuppressWarnings("unchecked")
+    @WrapOperation(method = "onContainerDestroyed", at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;forEach(Ljava/util/function/Consumer;)V"))
+    private static <T> void forEach(Stream<?> instance, Consumer<? super T> consumer, Operation<Void> original, @Local(argsOnly = true) ItemEntity itemEntity)$$*/
     //#else
     @WrapOperation(method = "onContainerDestroyed", at = @At(value = "INVOKE", target = "Ljava/lang/Iterable;forEach(Ljava/util/function/Consumer;)V"))
     private static <T> void forEach(Iterable<?> instance, Consumer<? super T> consumer, Operation<Void> original, @Local(argsOnly = true) ItemEntity itemEntity)
@@ -29,15 +29,9 @@ public class ItemUtilsMixin {
     {
         int customMax = CustomItemMaxStackSizeDataManager.INSTANCE.getCustomStackSize(itemEntity.getItem());
         if (IGNYSettings.itemStackCountChanged.get() && customMax != -1) {
-            //#if MC >= 26.1
-            //$$ List<?> contents = instance.toList();
-            //#endif
+            //?>= 26.1 ? List<?> contents = instance.toList();
             for (int i = 0; i < itemEntity.getItem().getCount(); i++) {
-                //#if MC >= 26.1
-                //$$ contents.forEach((Consumer) consumer);
-                //#else
-                original.call(instance, consumer);
-                //#endif
+                original.call(instance, consumer); //#replace >= 26.1 ? contents.forEach((Consumer) consumer);
             }
             return;
         }

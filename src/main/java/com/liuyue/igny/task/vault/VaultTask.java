@@ -7,9 +7,7 @@ import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.task.ITask;
 import com.liuyue.igny.task.TaskManager;
 import net.minecraft.commands.CommandSourceStack;
-//#if MC > 12006
-import net.minecraft.network.DisconnectionDetails;
-//#endif
+import net.minecraft.network.DisconnectionDetails; //?> 1.20.6
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
@@ -45,9 +43,7 @@ public class VaultTask implements ITask {
     private String pendingFakeName = null;
     private final ServerPlayer operator;
     private boolean paused = false;
-    //#if MC >= 12005
-    private static final int INSTANT_WAIT_TICKS = 7;
-    //#endif
+    private static final int INSTANT_WAIT_TICKS = 7; //?>= 1.20.5
 
     private enum Stage {
         SPAWNING,
@@ -225,11 +221,7 @@ public class VaultTask implements ITask {
                     spi.getActionPack().stopAll();
                 }
                 if (currentFakePlayer instanceof EntityPlayerMPFake) {
-                    //#if MC <= 12006
-                    //$$ currentFakePlayer.connection.onDisconnect(Component.literal("Vault cleanup"));
-                    //#else
-                    currentFakePlayer.connection.onDisconnect(new DisconnectionDetails(Component.literal("Vault cleanup")));
-                    //#endif
+                    currentFakePlayer.connection.onDisconnect(new DisconnectionDetails(Component.literal("Vault cleanup"))); //#replace <= 1.20.6 ? currentFakePlayer.connection.onDisconnect(Component.literal("Vault cleanup"));
                 }
             } catch (Exception e) {
                 IGNYServer.LOGGER.error(e.getStackTrace());
@@ -323,7 +315,7 @@ public class VaultTask implements ITask {
             pendingFakeName = null;
             return;
         }
-        //#if MC >= 12005
+        //#if >= 1.20.5
         if (IGNYSettings.INSTANT_VAULT_SPAWN_LOOT.value()) {
             if (stageTickCounter >= INSTANT_WAIT_TICKS) {
                 currentStage = Stage.LOGGING_OUT;
@@ -335,7 +327,7 @@ public class VaultTask implements ITask {
                 currentStage = Stage.LOGGING_OUT;
                 stageTickCounter = 0;
             }
-        //#if MC >= 12005
+        //#if >=1.20.5
         }
         //#endif
     }
@@ -343,21 +335,13 @@ public class VaultTask implements ITask {
     private void handleLoggingOut() {
         if (currentFakePlayer != null) {
             logoutPlayerName = currentFakePlayer.getGameProfile()
-                    //#if MC>=12109
-                    //$$ .name();
-                    //#else
-                    .getName();
-            //#endif
+                    .getName(); //#replace >= 1.21.9 ? .name();
 
             if (currentFakePlayer instanceof carpet.fakes.ServerPlayerInterface spi) {
                 spi.getActionPack().start(EntityPlayerActionPack.ActionType.USE, null);
             }
             if (currentFakePlayer instanceof EntityPlayerMPFake) {
-                //#if MC <= 12006
-                //$$ currentFakePlayer.connection.onDisconnect(Component.literal("Vault cycle completed"));
-                //#else
-                currentFakePlayer.connection.onDisconnect(new DisconnectionDetails(Component.literal("Vault cycle completed")));
-                //#endif
+                currentFakePlayer.connection.onDisconnect(new DisconnectionDetails(Component.literal("Vault cycle completed"))); //#replace <= 1.20.6 ? currentFakePlayer.connection.onDisconnect(Component.literal("Vault cycle completed"));
             }
             currentFakePlayer = null;
         }

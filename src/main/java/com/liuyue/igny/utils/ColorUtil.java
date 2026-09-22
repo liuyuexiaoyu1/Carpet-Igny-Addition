@@ -5,14 +5,14 @@ import net.minecraft.world.item.DyeColor;
 public final class ColorUtil {
 
     public static int of(DyeColor color) {
-        //#if MC >= 12101
+        //#if >= 1.21.1
         return color.getTextureDiffuseColor();
         //#else
-        //$$ float[] rgb = color.getTextureDiffuseColors();
-        //$$ return 0xFF000000
-        //$$         | ((int) (rgb[0] * 255.0F) << 16)
-        //$$         | ((int) (rgb[1] * 255.0F) << 8)
-        //$$         | (int) (rgb[2] * 255.0F);
+        /*$$float[] rgb = color.getTextureDiffuseColors();
+        return 0xFF000000
+                | ((int) (rgb[0] * 255.0F) << 16)
+                | ((int) (rgb[1] * 255.0F) << 8)
+        | (int) (rgb[2] * 255.0F);$$*/
         //#endif
     }
 

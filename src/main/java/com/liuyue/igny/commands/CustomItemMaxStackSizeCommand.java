@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class CustomItemMaxStackSizeCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandBuildContext) {
-        //#if MC >= 12006
+        //#if >= 1.20.6
         dispatcher.register(Commands.literal("customItemMaxStackSize")
                 .requires(source -> CommandUtil.canUseCommand(source.getPlayer(), IGNYSettings.COMMAND_CUSTOM_ITEM_MAX_STACK_SIZE.value()))
                 .then(Commands.literal("set")
@@ -36,9 +36,7 @@ public class CustomItemMaxStackSizeCommand {
                                             CustomItemMaxStackSizeDataManager.INSTANCE.set(pattern, count, commandBuildContext);
                                             Component nameDisplay = getNameComponent(pattern);
                                             context.getSource().sendSuccess(
-                                                    //#if MC > 11904
-                                                    () ->
-                                                            //#endif
+                                                    () -> //?> 1.19.4
                                                      Component.translatable("igny.command.CustomItemMaxStackSize.set_success", nameDisplay, count), true
                                             );
                                             return 1;
@@ -51,9 +49,7 @@ public class CustomItemMaxStackSizeCommand {
                                     CustomItemMaxStackSizeDataManager.INSTANCE.remove(pattern, commandBuildContext);
                                     Component nameDisplay = getNameComponent(pattern);
                                     context.getSource().sendSuccess(
-                                            //#if MC > 11904
-                                            () ->
-                                                    //#endif
+                                            () -> //?> 1.19.4
                                              Component.translatable("igny.command.CustomItemMaxStackSize.remove_success", nameDisplay), true);
                                     return 1;
                                 })))
@@ -61,9 +57,7 @@ public class CustomItemMaxStackSizeCommand {
                         .executes(context -> {
                             CustomItemMaxStackSizeDataManager.INSTANCE.clearData();
                             context.getSource().sendSuccess(
-                                    //#if MC > 11904
-                                    () ->
-                                            //#endif
+                                    () -> //?> 1.19.4
                                      Component.translatable("igny.command.CustomItemMaxStackSize.clear_success"), true);
                             return 1;
                         }))
@@ -72,24 +66,20 @@ public class CustomItemMaxStackSizeCommand {
                             Map<String, Integer> stacks = CustomItemMaxStackSizeDataManager.INSTANCE.getCurrentData();
                             if (stacks.isEmpty()) {
                                 context.getSource().sendSuccess(
-                                        //#if MC > 11904
-                                        () ->
-                                                //#endif
+                                        () -> //?> 1.19.4
                                          Component.translatable("igny.command.CustomItemMaxStackSize.list_empty"), false);
                                 return 1;
                             }
                             context.getSource().sendSuccess(
-                                    //#if MC > 11904
-                                    () ->
-                                            //#endif
+                                    () -> //?> 1.19.4
                                      Component.translatable("igny.command.CustomItemMaxStackSize.list_header").withStyle(ChatFormatting.GOLD), false);
                             stacks.forEach((pattern, size) -> {
                                 Component deleteButton = Component.literal("[X] ")
                                         .withStyle(ChatFormatting.RED)
                                         .withStyle(style -> style
-                                                //#if MC >= 12105
-                                                //$$ .withClickEvent(new ClickEvent.RunCommand("/customItemMaxStackSize remove " + pattern))
-                                                //$$ .withHoverEvent(new HoverEvent.ShowText(Component.translatable("igny.command.CustomItemMaxStackSize.click_to_remove"))));
+                                                //#if >= 1.21.5
+                                                /*$$.withClickEvent(new ClickEvent.RunCommand("/customItemMaxStackSize remove " + pattern))
+                                                .withHoverEvent(new HoverEvent.ShowText(Component.translatable("igny.command.CustomItemMaxStackSize.click_to_remove"))));$$*/
                                                 //#else
                                                 .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/customItemMaxStackSize remove " + "\"" + pattern + "\""))
                                                 .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("igny.command.CustomItemMaxStackSize.click_to_remove"))));
@@ -97,17 +87,11 @@ public class CustomItemMaxStackSizeCommand {
                                 ChatFormatting color = pattern.startsWith("#") || pattern.startsWith("*") ? ChatFormatting.YELLOW : ChatFormatting.AQUA;
                                 MutableComponent nameComponent = getNameComponent(pattern).withStyle(color)
                                             .withStyle(style ->
-                                                    //#if MC >= 12105
-                                                    //$$ style.withHoverEvent(new HoverEvent.ShowText(Component.literal(pattern)))
-                                                    //#else
-                                                    style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal(pattern)))
-                                                    //#endif
+                                                    style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal(pattern))) //#replace >= 1.21.5 ? style.withHoverEvent(new HoverEvent.ShowText(Component.literal(pattern)))
                                             );
                                 MutableComponent sizeComponent = Component.literal(": " + size).withStyle(ChatFormatting.WHITE);
                                 context.getSource().sendSuccess(
-                                        //#if MC > 11904
-                                        () ->
-                                        //#endif
+                                        () -> //?> 1.19.4
                                         Component.empty().append(deleteButton).append(nameComponent).append(sizeComponent), false);
                             });
                             return 1;
@@ -121,17 +105,9 @@ public class CustomItemMaxStackSizeCommand {
             ResourceLocation res = ResourceLocation.tryParse(pattern);
             if (res != null) {
                 Item item = BuiltInRegistries.ITEM.
-                        //#if MC >= 12102
-                        //$$ getValue(res);
-                        //#else
-                        get(res);
-                        //#endif
+                        get(res); //#replace >= 1.21.2 ? getValue(res);
                 if (item != BuiltInRegistries.ITEM.
-                        //#if MC >= 12102
-                        //$$ getValue(BuiltInRegistries.ITEM.getDefaultKey())
-                        //#else
-                        get(BuiltInRegistries.ITEM.getDefaultKey())
-                        //#endif
+                        get(BuiltInRegistries.ITEM.getDefaultKey()) //#replace >= 1.21.2 ? getValue(BuiltInRegistries.ITEM.getDefaultKey())
                 ) {
                     return Component.translatable(item.getDescriptionId());
                 }

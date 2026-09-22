@@ -16,11 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(NeighborUpdater.class)
 public interface NeighborUpdaterMixin {
     @Inject(method = "executeShapeUpdate", at = @At(value = "HEAD"), cancellable = true)
-    //#if MC >= 12102
-    //$$ private static void executeShapeUpdate(LevelAccessor levelAccessor, Direction direction, BlockPos blockPos, BlockPos blockPos2, BlockState blockState, int i, int j, CallbackInfo ci) {
-    //#else
-    private static void executeShapeUpdate(LevelAccessor levelAccessor, Direction direction, BlockState blockState, BlockPos blockPos, BlockPos blockPos2, int i, int j, CallbackInfo ci) {
-        //#endif
+    private static void executeShapeUpdate(LevelAccessor levelAccessor, Direction direction, BlockState blockState, BlockPos blockPos, BlockPos blockPos2, int i, int j, CallbackInfo ci) { //#replace >= 1.21.2 ? private static void executeShapeUpdate(LevelAccessor levelAccessor, Direction direction, BlockPos blockPos, BlockPos blockPos2, BlockState blockState, int i, int j, CallbackInfo ci) {
         if ("true".equals(IGNYSettings.EASY_PLACE_NO_BLOCK_UPDATE.value()) && IGNYSettings.easyPlaceProtocolActive.get()) {
             ci.cancel();
         }
@@ -28,11 +24,7 @@ public interface NeighborUpdaterMixin {
 
     @SuppressWarnings("all")
     @Inject(method = "executeUpdate", at = @At(value = "HEAD"), cancellable = true)
-    //#if MC >= 12102
-    //$$ private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, net.minecraft.world.level.redstone.Orientation orientation, boolean bl, CallbackInfo ci) {
-    //#else
-    private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, BlockPos blockPos2, boolean bl, CallbackInfo ci) {
-        //#endif
+    private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, BlockPos blockPos2, boolean bl, CallbackInfo ci) { //#replace >= 1.21.2 ? private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, net.minecraft.world.level.redstone.Orientation orientation, boolean bl, CallbackInfo ci) {
         if ("true".equals(IGNYSettings.EASY_PLACE_NO_BLOCK_UPDATE.value()) && IGNYSettings.easyPlaceProtocolActive.get()) {
             ci.cancel();
         }

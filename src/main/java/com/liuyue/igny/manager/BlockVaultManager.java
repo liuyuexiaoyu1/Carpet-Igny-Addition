@@ -11,16 +11,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-//#if MC >= 12005
+//#if >= 1.20.5
 import net.minecraft.world.level.block.VaultBlock;
 import net.minecraft.world.level.block.entity.vault.VaultBlockEntity;
 //#endif
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-//#if MC >= 12106
-//$$ import net.minecraft.world.level.storage.TagValueInput;
-//$$ import com.mojang.logging.LogUtils;
-//$$ import net.minecraft.util.ProblemReporter;
+//#if >= 1.21.6
+/*$$import net.minecraft.world.level.storage.TagValueInput;
+import com.mojang.logging.LogUtils;
+import net.minecraft.util.ProblemReporter;$$*/
 //#endif
 
 import java.lang.reflect.Type;
@@ -77,7 +77,7 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
 
         BlockEntity be = level.getBlockEntity(pos);
         if (be != null) {
-            //#if MC >= 12005
+            //#if >= 1.20.5
             HolderLookup.Provider provider = level.registryAccess();
             snbt = be.saveWithFullMetadata(provider).toString();
             //#else
@@ -102,7 +102,7 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
         if (rl == null) return;
 
         Block block = BuiltInRegistries.BLOCK.
-                //#if MC >= 12102
+                //#if >= 1.21.2
                 //$$ getValue(rl);
                 //#else
                         get(rl);
@@ -112,25 +112,21 @@ public class BlockVaultManager extends BaseDataManager<BlockVaultManager.VaultDa
             level.setBlock(pos, block.defaultBlockState(), 2 | 16);
             if (info.length > 1 && !info[1].isEmpty()) {
                 try {
-                    //#if MC >= 12105
-                    //$$ CompoundTag nbt = TagParser.parseCompoundFully(info[1]);
-                    //#else
-                    CompoundTag nbt = TagParser.parseTag(info[1]);
-                    //#endif
+                    CompoundTag nbt = TagParser.parseTag(info[1]); //#replace >= 1.21.5 ? CompoundTag nbt = TagParser.parseCompoundFully(info[1]);
                     BlockEntity be = level.getBlockEntity(pos);
                     if (be != null) {
-                        //#if MC >= 12005
+                        //#if >= 1.20.5
                         HolderLookup.Provider provider = level.registryAccess();
-                        //#if MC >= 12106
-                        //$$ ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(be.problemPath(), LogUtils.getLogger());
-                        //$$ be.loadWithComponents(TagValueInput.create(reporter, provider, nbt));
+                        //#if >= 1.21.6
+                        /*$$ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(be.problemPath(), LogUtils.getLogger());
+                        be.loadWithComponents(TagValueInput.create(reporter, provider, nbt));$$*/
                         //#else
                         be.loadWithComponents(nbt, provider);
                         //#endif
                         //#else
                         //$$ be.load(nbt);
                         //#endif
-                        //#if MC >= 12005
+                        //#if >= 1.20.5
                         if (block.equals(Blocks.VAULT) && ((VaultBlockEntity) be).getConfig().lootTable().toString().contains("reward_ominous")) {
                             level.setBlock(pos, block.defaultBlockState().setValue(VaultBlock.OMINOUS, true), 2 | 16);
                         }

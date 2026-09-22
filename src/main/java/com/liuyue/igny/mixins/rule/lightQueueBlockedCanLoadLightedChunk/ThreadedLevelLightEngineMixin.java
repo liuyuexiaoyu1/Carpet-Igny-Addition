@@ -101,16 +101,8 @@ public abstract class ThreadedLevelLightEngineMixin extends LevelLightEngine {
             CallbackInfoReturnable<CompletableFuture<?>> cir
     ) {
         ChunkHolder holder = ((ChunkMapInvoker)this.chunkMap)
-                //#if MC >= 26.1
-                //$$ .invokeGetVisibleChunkIfPresent(ChunkPos.pack(chunkX, chunkZ));
-                //#else
-                .invokeGetVisibleChunkIfPresent(ChunkPos.asLong(chunkX, chunkZ));
-        //#endif
-        //#if MC <= 12006
-        //$$ ChunkAccess chunk = holder == null ? null : holder.getLastAvailable();
-        //#else
-        ChunkAccess chunk = holder == null ? null : holder.getChunkIfPresent(ChunkStatus.LIGHT);
-        //#endif
+                .invokeGetVisibleChunkIfPresent(ChunkPos.asLong(chunkX, chunkZ)); //#replace >= 26.1 ? .invokeGetVisibleChunkIfPresent(ChunkPos.pack(chunkX, chunkZ));
+        ChunkAccess chunk = holder == null ? null : holder.getChunkIfPresent(ChunkStatus.LIGHT); //#replace <= 1.20.6 ? ChunkAccess chunk = holder == null ? null : holder.getLastAvailable();
 
         if (IGNYSettings.LIGHT_QUEUE_BLOCKED_CAN_LOAD_LIGHTED_CHUNK.value() && alreadyLighted(chunk)) {
             cir.setReturnValue(CompletableFuture.completedFuture(null));

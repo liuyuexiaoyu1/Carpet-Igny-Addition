@@ -3,11 +3,7 @@ package com.liuyue.igny.mixins.rule.invisibleItemFrames;
 import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-//#if MC < 12108
-import net.minecraft.nbt.CompoundTag;
-//#else
-//$$ import net.minecraft.world.level.storage.ValueOutput;
-//#endif
+import net.minecraft.nbt.CompoundTag; //#replace >= 1.21.8 ? import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.entity.decoration.ItemFrame;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -15,11 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public class ItemFrameMixin {
     @WrapMethod(method = "addAdditionalSaveData")
     private void saving(
-            //#if MC < 12108
-            CompoundTag value,
-            //#else
-            //$$ ValueOutput value,
-            //#endif
+            CompoundTag value, //#replace >= 1.21.8 ? ValueOutput value,
             Operation<Void> original
     ) {
         try {

@@ -4,7 +4,7 @@ import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.core.BlockPos;
-//#if MC >= 12103
+//#if >= 1.21.3
 //$$ import net.minecraft.server.level.ServerLevel;
 //#else
 import net.minecraft.server.level.ServerLevel;
@@ -17,9 +17,9 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(FlowingFluid.class)
 public class FlowingFluidMixin {
-    //#if MC >= 12103
-    //$$ @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/material/Fluid;I)V"))
-    //$$ private void scheduleTick1(ServerLevel instance, BlockPos pos, Fluid fluid, int i, Operation<Void> original)
+    //#if >= 1.21.3
+    /*$$@WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/material/Fluid;I)V"))
+    private void scheduleTick1(ServerLevel instance, BlockPos pos, Fluid fluid, int i, Operation<Void> original)$$*/
     //#else
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/material/Fluid;I)V"))
     private void scheduleTick(Level instance, BlockPos pos, Fluid fluid, int i, Operation<Void> original)

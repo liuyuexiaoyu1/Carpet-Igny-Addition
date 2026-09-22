@@ -27,17 +27,11 @@ import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.world.entity.vehicle.MinecartHopper;
 import org.spongepowered.asm.mixin.Mixin;
-//#if MC < 12006
-//$$ import com.liuyue.igny.utils.compat.DummyClass;
-//#endif
+//?< 1.20.6 ? import com.liuyue.igny.utils.compat.DummyClass;
 
-//#if MC >= 12006
-@Mixin(value = MinecartHopper.class, priority = 900)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
+@Mixin(value = MinecartHopper.class, priority = 900) //#replace < 1.20.6 ? @Mixin(DummyClass.class)
 public class MinecartHopperMixin {
-    //#if MC >= 12006
+    //#if >= 1.20.6
     @WrapMethod(method = "tick")
     private void tick(Operation<Void> original) {
         boolean changed = IGNYSettings.itemStackCountChanged.get();

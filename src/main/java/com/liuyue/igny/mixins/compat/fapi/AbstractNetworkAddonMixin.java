@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value = AbstractNetworkAddon.class, priority = 980, remap = false)
 public abstract class AbstractNetworkAddonMixin {
-    //#if MC <= 12002
+    //#if <= 1.20.2
     @WrapOperation(method = "lateInit", at = @At(value = "INVOKE", target = "Lnet/fabricmc/fabric/impl/networking/GlobalReceiverRegistry;startSession(Lnet/fabricmc/fabric/impl/networking/AbstractNetworkAddon;)V"))
     private void notStartSession_ifFakeClientConnection(GlobalReceiverRegistry<?> instance, AbstractNetworkAddon<?> addon, Operation<Void> original) {
         if ((IGNYSettings.fakePlayerSpawnMemoryLeakFix.get() || IGNYSettings.FAKE_PLAYER_MEMORY_LEAK_FIX.value()) && addon instanceof AbstractChanneledNetworkAddon<?>) {

@@ -23,9 +23,7 @@ import net.minecraft.world.level.block.AbstractChestBlock;
 import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.state.BlockState;
-//#if MC >= 12003
-import net.minecraft.world.level.block.DecoratedPotBlock;
-//#endif
+import net.minecraft.world.level.block.DecoratedPotBlock; //?>= 1.20.3
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -36,11 +34,11 @@ import java.util.Set;
 import java.util.UUID;
 
 public final class VirtualDisplay {
-    //#if MC >= 26.2
-    //$$ private static final EntityType<Display.BlockDisplay> BLOCK_TYPE =
-    //$$         net.minecraft.world.entity.EntityTypes.BLOCK_DISPLAY;
-    //$$ private static final EntityType<Display.ItemDisplay> ITEM_TYPE =
-    //$$         net.minecraft.world.entity.EntityTypes.ITEM_DISPLAY;
+    //#if >= 26.2
+    /*$$private static final EntityType<Display.BlockDisplay> BLOCK_TYPE =
+            net.minecraft.world.entity.EntityTypes.BLOCK_DISPLAY;
+    private static final EntityType<Display.ItemDisplay> ITEM_TYPE =
+    net.minecraft.world.entity.EntityTypes.ITEM_DISPLAY;$$*/
     //#else
     private static final EntityType<Display.BlockDisplay> BLOCK_TYPE = EntityType.BLOCK_DISPLAY;
     private static final EntityType<Display.ItemDisplay> ITEM_TYPE = EntityType.ITEM_DISPLAY;
@@ -65,11 +63,7 @@ public final class VirtualDisplay {
         this.level = level;
         this.entity = entity;
         this.entity.setNoGravity(true);
-        //#if MC >= 26.3
-        //$$ this.entity.setPermanentlyInvulnerable(true);
-        //#else
-        this.entity.setInvulnerable(true);
-        //#endif
+        this.entity.setInvulnerable(true); //#replace >= 26.3 ? this.entity.setPermanentlyInvulnerable(true);
         ((DisplayAccessor) this.entity).igny$setViewRange(VIEW_RANGE_DATA);
     }
 
@@ -112,7 +106,7 @@ public final class VirtualDisplay {
     }
 
     private static boolean usesItemRenderer(BlockState state) {
-        //#if MC >= 12003
+        //#if >= 1.20.3
         if (state.getBlock() instanceof DecoratedPotBlock) {
             return true;
         }

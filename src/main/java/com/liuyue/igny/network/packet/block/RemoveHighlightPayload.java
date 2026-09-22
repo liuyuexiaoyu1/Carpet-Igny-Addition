@@ -1,6 +1,6 @@
 package com.liuyue.igny.network.packet.block;
 
-//#if MC >= 12005
+//#if >= 1.20.5
 
 import com.liuyue.igny.network.PacketUtil;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -11,11 +11,9 @@ import org.jetbrains.annotations.NotNull;
 import net.minecraft.core.BlockPos;
 
 public record RemoveHighlightPayload(BlockPos pos)
-        //#if MC >= 12005
-        implements CustomPacketPayload
-        //#endif
+        implements CustomPacketPayload //?>= 1.20.5
 {
-    //#if MC >= 12005
+    //#if >= 1.20.5
     public static final Type<RemoveHighlightPayload> TYPE = PacketUtil.createId("remove_highlight_block");
 
     @Override

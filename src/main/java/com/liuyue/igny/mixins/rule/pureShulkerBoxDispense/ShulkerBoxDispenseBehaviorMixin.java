@@ -6,9 +6,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-//#if MC >= 12005
-import net.minecraft.core.component.DataComponents;
-//#endif
+import net.minecraft.core.component.DataComponents; //?>= 1.20.5
 import net.minecraft.core.dispenser.ShulkerBoxDispenseBehavior;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
@@ -32,20 +30,12 @@ public abstract class ShulkerBoxDispenseBehaviorMixin {
     private InteractionResult BlockItem(BlockItem instance, BlockPlaceContext blockPlaceContext, Operation<InteractionResult> original, @Local(argsOnly = true) ItemStack itemStack, @Local(ordinal = 0) Direction direction, @Local BlockPos blockPos, @Local(ordinal = 1) Direction direction2) {
         if (IGNYSettings.PURE_SHULKER_BOX_DISPENSE.value()) {
             ItemStack originalStack = blockPlaceContext.getItemInHand();
-            //#if MC >= 12005
-            originalStack.remove(DataComponents.CUSTOM_NAME);
-            //#else
-            //$$ originalStack.resetHoverName();
-            //#endif
+            originalStack.remove(DataComponents.CUSTOM_NAME); //#replace < 1.20.5 ? originalStack.resetHoverName();
             if (((BlockItem) itemStack.getItem()).getBlock() instanceof ShulkerBoxBlock && !itemStack.is(Items.SHULKER_BOX)) {
                 ItemStack cleanStack = new ItemStack(Items.SHULKER_BOX);
                 cleanStack.setCount(originalStack.getCount());
                 instance = (BlockItem) cleanStack.getItem();
-                //#if MC >= 12005
-                cleanStack.applyComponents(originalStack.getComponents());
-                //#else
-                //$$ if (itemStack.getTag() != null) cleanStack.setTag(itemStack.getTag().copy());
-                //#endif
+                cleanStack.applyComponents(originalStack.getComponents()); //#replace < 1.20.5 ? if (itemStack.getTag() != null) cleanStack.setTag(itemStack.getTag().copy());
                 DirectionalPlaceContext newContext = new DirectionalPlaceContext(
                         blockPlaceContext.getLevel(),
                         blockPos,

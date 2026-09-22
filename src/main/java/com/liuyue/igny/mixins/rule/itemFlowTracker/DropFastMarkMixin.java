@@ -13,29 +13,15 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#if MC >= 26.3
-//$$ import net.minecraft.util.Prediction;
-//#endif
+//?>= 26.3 ? import net.minecraft.util.Prediction;
 
-//#if MC >= 12105
-//$$ @Mixin(LivingEntity.class)
-//#else
-@Mixin(Player.class)
-//#endif
+@Mixin(Player.class) //#replace >= 1.21.5 ? @Mixin(LivingEntity.class)
 public abstract class DropFastMarkMixin {
     @Inject(
-            //#if MC >= 26.3
-            //$$ method = "drop",
-            //#else
-            method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;",
-            //#endif
+            method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", //#replace >= 26.3 ? method = "drop",
             at = @At(value = "HEAD")
     )
-    //#if MC >= 26.3
-    //$$ private void igny$markThrownItem(ItemStack stack, boolean thrownFromHand, Prediction prediction, CallbackInfoReturnable<ItemEntity> cir)
-    //#else
-    private void igny$markThrownItem(ItemStack stack, boolean randomly, boolean thrownFromHand, CallbackInfoReturnable<ItemEntity> cir)
-    //#endif
+    private void igny$markThrownItem(ItemStack stack, boolean randomly, boolean thrownFromHand, CallbackInfoReturnable<ItemEntity> cir) //#replace >= 26.3 ? private void igny$markThrownItem(ItemStack stack, boolean thrownFromHand, Prediction prediction, CallbackInfoReturnable<ItemEntity> cir)
     {
         LivingEntity self = (LivingEntity) (Object) this;
         TrackingWatch.beginHandDrop();
@@ -62,18 +48,10 @@ public abstract class DropFastMarkMixin {
     }
 
     @Inject(
-            //#if MC >= 26.3
-            //$$ method = "drop",
-            //#else
-            method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;",
-            //#endif
+            method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", //#replace >= 26.3 ? method = "drop",
             at = @At(value = "RETURN")
     )
-    //#if MC >= 26.3
-    //$$ private void igny$endHandDrop(ItemStack stack, boolean thrownFromHand, Prediction prediction, CallbackInfoReturnable<ItemEntity> cir)
-    //#else
-    private void igny$endHandDrop(ItemStack stack, boolean randomly, boolean thrownFromHand, CallbackInfoReturnable<ItemEntity> cir)
-    //#endif
+    private void igny$endHandDrop(ItemStack stack, boolean randomly, boolean thrownFromHand, CallbackInfoReturnable<ItemEntity> cir) //#replace >= 26.3 ? private void igny$endHandDrop(ItemStack stack, boolean thrownFromHand, Prediction prediction, CallbackInfoReturnable<ItemEntity> cir)
     {
         TrackingWatch.endHandDrop();
     }

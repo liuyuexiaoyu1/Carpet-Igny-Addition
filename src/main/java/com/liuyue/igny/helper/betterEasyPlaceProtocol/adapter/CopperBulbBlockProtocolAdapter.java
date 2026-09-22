@@ -1,6 +1,6 @@
 package com.liuyue.igny.helper.betterEasyPlaceProtocol.adapter;
 
-//#if MC >= 12003
+//#if >= 1.20.3
 
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter;
 import net.minecraft.world.item.context.BlockPlaceContext;

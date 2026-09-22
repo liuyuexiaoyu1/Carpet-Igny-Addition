@@ -40,11 +40,7 @@ public class FrogMixin {
                 net.minecraft.sounds.SoundEvents.FROG_EAT,
                 net.minecraft.sounds.SoundSource.NEUTRAL, 2.0F, 1.0F);
         if (target.isAlive()) {
-            //#if MC >= 12102
-            //$$ frog.doHurtTarget(level, target);
-            //#else
-            frog.doHurtTarget(target);
-            //#endif
+            frog.doHurtTarget(target); //#replace >= 1.21.2 ? frog.doHurtTarget(level, target);
             if (!target.isAlive()) {
                 target.remove(Entity.RemovalReason.KILLED);
             }

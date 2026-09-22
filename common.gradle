@@ -111,13 +111,7 @@ dependencies {
 		}
 	}
 
-	if (unobfuscated) {
-		if (mcVersion == 260200) {
-			include(implementation(name: 'ryansrenderingkit', version: '1.2.0+26.2'))
-		} else {
-			include(implementation(name: 'ryansrenderingkit', version: '1.2.0+26.1.2'))
-		}
-	} else if (mcVersion >= 12110) {
+	if (mcVersion >= 12110) {
 		include(autoImplementation("io.github.hotpad100c:ryansrenderingkit:${project.ryansrenderingkit_version}"))
 	} else {
 		include(autoImplementation("io.github.hotpad100c:ryansrenderingkit:${project.ryansrenderingkit_version}")) {
@@ -142,6 +136,12 @@ dependencies {
 
 	if (project.hasProperty('servux_dependency')) {
 		autoCompileOnly(project.servux_dependency) {
+			exclude group: "net.fabricmc.fabric-api"
+		}
+	}
+
+	if (project.hasProperty('minihud_dependency')) {
+		autoCompileOnly(project.minihud_dependency) {
 			exclude group: "net.fabricmc.fabric-api"
 		}
 	}

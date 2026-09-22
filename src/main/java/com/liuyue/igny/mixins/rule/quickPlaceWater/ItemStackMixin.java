@@ -21,12 +21,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#if MC >= 26.3
-//$$ import net.minecraft.world.item.component.SwingAnimation;
-//#endif
-//#if MC >= 12111
-//$$ import net.minecraft.world.attribute.EnvironmentAttributes;
-//#endif
+//?>= 26.3 ? import net.minecraft.world.item.component.SwingAnimation;
+//?>= 1.21.11 ? import net.minecraft.world.attribute.EnvironmentAttributes;
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
@@ -43,21 +39,13 @@ public class ItemStackMixin {
 
         Level level = context.getLevel();
         BlockPos clickedPos = context.getClickedPos();
-        //#if MC >= 12111
-        //$$ if ((Boolean) level.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, clickedPos)) return;
-        //#else
-        if (level.dimensionType().ultraWarm()) return;
-        //#endif
+        if (level.dimensionType().ultraWarm()) return; //#replace >= 1.21.11 ? if ((Boolean) level.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, clickedPos)) return;
         Direction direction = context.getClickedFace();
         BlockPos placePos = clickedPos.relative(direction);
         BlockState clickedState = level.getBlockState(clickedPos);
 
         BlockPos targetPos;
-        //#if MC <= 12001
-        //$$ if (clickedState.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(level, clickedPos, clickedState, Fluids.WATER))
-        //#else
-        if (clickedState.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(player, level, clickedPos, clickedState, Fluids.WATER))
-        //#endif
+        if (clickedState.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(player, level, clickedPos, clickedState, Fluids.WATER)) //#replace <= 1.20.1 ? if (clickedState.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(level, clickedPos, clickedState, Fluids.WATER))
         {
             targetPos = clickedPos;
         } else {
@@ -65,11 +53,7 @@ public class ItemStackMixin {
         }
 
         BlockState targetState = level.getBlockState(targetPos);
-        //#if MC <= 12001
-        //$$ boolean canPlaceInContainer = targetState.getBlock() instanceof LiquidBlockContainer lc && lc.canPlaceLiquid(level, targetPos, targetState, Fluids.WATER);
-        //#else
-        boolean canPlaceInContainer = targetState.getBlock() instanceof LiquidBlockContainer lc && lc.canPlaceLiquid(player, level, targetPos, targetState, Fluids.WATER);
-        //#endif
+        boolean canPlaceInContainer = targetState.getBlock() instanceof LiquidBlockContainer lc && lc.canPlaceLiquid(player, level, targetPos, targetState, Fluids.WATER); //#replace <= 1.20.1 ? boolean canPlaceInContainer = targetState.getBlock() instanceof LiquidBlockContainer lc && lc.canPlaceLiquid(level, targetPos, targetState, Fluids.WATER);
         boolean canReplace = targetState.canBeReplaced(Fluids.WATER);
 
         if (!targetState.isAir() && !canPlaceInContainer && !canReplace) {
@@ -82,11 +66,7 @@ public class ItemStackMixin {
             level.setBlock(targetPos, Fluids.WATER.defaultFluidState().createLegacyBlock(), 3);
         }
 
-        //#if MC <= 12005
-        //$$ if (!player.getAbilities().instabuild)
-        //#else
-        if (!player.hasInfiniteMaterials())
-        //#endif
+        if (!player.hasInfiniteMaterials()) //#replace <= 1.20.5 ? if (!player.getAbilities().instabuild)
         {
             offhand.shrink(1);
         }
@@ -96,11 +76,7 @@ public class ItemStackMixin {
         if (player instanceof ServerPlayer serverPlayer) {
             serverPlayer.awardStat(net.minecraft.stats.Stats.ITEM_USED.get(Items.ICE));
         }
-        //#if MC >= 26.3
-        //$$ player.swing(InteractionHand.OFF_HAND, SwingAnimation.DEFAULT, true);
-        //#else
-        player.swing(InteractionHand.OFF_HAND);
-        //#endif
+        player.swing(InteractionHand.OFF_HAND); //#replace >= 26.3 ? player.swing(InteractionHand.OFF_HAND, SwingAnimation.DEFAULT, true);
         cir.setReturnValue(InteractionResult.SUCCESS);
     }
 }

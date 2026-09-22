@@ -18,35 +18,25 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
-//#if MC >= 12003
-import net.minecraft.world.entity.vehicle.VehicleEntity;
-//#else
-//$$ import net.minecraft.world.entity.vehicle.AbstractMinecart;
-//#endif
+import net.minecraft.world.entity.vehicle.VehicleEntity; //#replace < 1.20.3 ? import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.injection.At;
-//#if MC >= 12103
-//$$ import net.minecraft.server.level.ServerLevel;
-//#endif
+//?>= 1.21.3 ? import net.minecraft.server.level.ServerLevel;
 
 import java.util.ArrayList;
 
-//#if MC >= 12003
-@Mixin(VehicleEntity.class)
-//#else
-//$$ @Mixin(AbstractMinecart.class)
-//#endif
+@Mixin(VehicleEntity.class) //#replace < 1.20.3 ? @Mixin(AbstractMinecart.class)
 public class VehicleEntityMixin {
-    //#if MC >= 12103
-    //$$ @WrapOperation(
-    //$$         method = "destroy(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/Item;)V",
-    //$$         at = @At(
-    //$$                 value = "INVOKE",
-    //$$                 target = "Lnet/minecraft/world/entity/vehicle/VehicleEntity;spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;"
-    //$$         )
-    //$$ )
-    //#elseif MC >= 12003
+    //#if >= 1.21.3
+    /*$$@WrapOperation(
+            method = "destroy(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/Item;)V",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/vehicle/VehicleEntity;spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;"
+            )
+    )$$*/
+    //#elseif >= 1.20.3
     @WrapOperation(
             method = "destroy(Lnet/minecraft/world/item/Item;)V",
             at = @At(
@@ -55,30 +45,20 @@ public class VehicleEntityMixin {
             )
     )
     //#else
-    //$$ @WrapOperation(
-    //$$         method = "Lnet/minecraft/world/entity/vehicle/AbstractMinecart;destroy(Lnet/minecraft/world/damagesource/DamageSource;)V",
-    //$$         at = @At(
-    //$$                 value = "INVOKE",
-    //$$                 target = "Lnet/minecraft/world/entity/vehicle/AbstractMinecart;spawnAtLocation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;"
-    //$$         )
-    //$$ )
+    /*$$@WrapOperation(
+            method = "Lnet/minecraft/world/entity/vehicle/AbstractMinecart;destroy(Lnet/minecraft/world/damagesource/DamageSource;)V",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/vehicle/AbstractMinecart;spawnAtLocation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;"
+    )
+    )$$*/
     //#endif
     private ItemEntity spawnAtLocation(
-            //#if MC >= 12003
-            VehicleEntity instance,
-            //#else
-            //$$ AbstractMinecart instance,
-            //#endif
-            //#if MC >= 12103
-            //$$ ServerLevel world,
-            //#endif
+            VehicleEntity instance, //#replace < 1.20.3 ? AbstractMinecart instance,
+            //?>= 1.21.3 ? ServerLevel world,
             ItemStack itemStack, Operation<ItemEntity> original) {
         if (IGNYSettings.INSANE_BEHAVIORS.value().equals("off") || IGNYSettings.INSANE_BEHAVIORS_CART_YEETING_EXCEPTION.value().equals("disableVehicleItem")) {
-            //#if MC >= 12103
-            //$$ return original.call(instance, world, itemStack);
-            //#else
-            return original.call(instance, itemStack);
-            //#endif
+            return original.call(instance, itemStack); //#replace >= 1.21.3 ? return original.call(instance, world, itemStack);
         }
         ArrayList<Float> unitValueList = InsaneBehaviors.nextEvenlyDistributedPoint(2);
         Vec3 velocity = new Vec3(

@@ -18,9 +18,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-//#if MC >= 26.3
-//$$ import net.minecraft.world.level.block.BonemealSource;
-//#endif
+//?>= 26.3 ? import net.minecraft.world.level.block.BonemealSource;
 
 @Mixin(BuddingAmethystBlock.class)
 public abstract class BuddingAmethystBlockMixin implements BonemealableBlock {
@@ -30,9 +28,9 @@ public abstract class BuddingAmethystBlockMixin implements BonemealableBlock {
     protected abstract void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random);
 
     @Override
-    //#if MC >= 26.3
+    //#if >= 26.3
     //$$ public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, BonemealSource source)
-    //#elseif MC >= 12002
+    //#elseif >= 1.20.2
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state)
     //#else
     //$$ public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient)
@@ -64,21 +62,13 @@ public abstract class BuddingAmethystBlockMixin implements BonemealableBlock {
     }
 
     @Override
-    //#if MC >= 26.3
-    //$$ public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source)
-    //#else
-    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state)
-            //#endif
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) //#replace >= 26.3 ? public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source)
     {
         return IGNYSettings.BONEMEALABLE_AMETHYST.value();
     }
 
     @Override
-    //#if MC >= 26.3
-    //$$ public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source)
-    //#else
-    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state)
-            //#endif
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) //#replace >= 26.3 ? public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source)
     {
         if (IGNYSettings.BONEMEALABLE_AMETHYST.value()) {
             try {

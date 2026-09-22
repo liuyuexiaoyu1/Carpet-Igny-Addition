@@ -19,11 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class PathTrails {
-    //#if MC >= 26.2
-    //$$ private static final Block MARKER_BLOCK = Blocks.CONCRETE.black();
-    //#else
-    private static final Block MARKER_BLOCK = Blocks.BLACK_CONCRETE;
-    //#endif
+    private static final Block MARKER_BLOCK = Blocks.BLACK_CONCRETE; //#replace >= 26.2 ? private static final Block MARKER_BLOCK = Blocks.CONCRETE.black();
     private static final double MIN_SEGMENT = 0.05D;
     private static final double GUESS_MIN_SEGMENT = 0.75D;
     private static final double MAX_SEGMENT = 8.0D;

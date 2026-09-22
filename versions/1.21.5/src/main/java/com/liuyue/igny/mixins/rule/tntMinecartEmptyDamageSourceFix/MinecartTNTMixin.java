@@ -15,11 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MinecartTNT.class)
 public abstract class MinecartTNTMixin
-        //#if MC < 12109
-        extends AbstractMinecart
-        //#endif
+        extends AbstractMinecart //?< 1.21.9
 {
-    //#if MC < 12109
+    //#if < 1.21.9
     protected MinecartTNTMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }

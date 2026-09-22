@@ -4,11 +4,11 @@ import carpet.patches.EntityPlayerMPFake;
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-//#if MC >= 12003
+//#if >= 1.20.3
 import net.minecraft.world.TickRateManager;
-//#elseif MC > 11904
-//$$ import carpet.helpers.TickRateManager;
-//$$ import carpet.fakes.MinecraftServerInterface;
+//#elseif > 1.19.4
+/*$$import carpet.helpers.TickRateManager;
+import carpet.fakes.MinecraftServerInterface;$$*/
 //#else
 //$$ import carpet.helpers.TickSpeed;
 //#endif
@@ -41,9 +41,9 @@ public class TickUtil {
 
     public static void checkTickRate(MinecraftServer server) {
         if (server != null) {
-            //#if MC >= 12003
+            //#if >= 1.20.3
             TickRateManager manager = server.tickRateManager();
-            //#elseif MC > 11904
+            //#elseif > 1.19.4
             //$$ TickRateManager manager = ((MinecraftServerInterface)server).getTickRateManager();
             //#endif
             if (!IGNYSettings.BETTER_SPRINT_GAME_TICK.value().equals("false")) {
@@ -53,25 +53,13 @@ public class TickUtil {
                     lastSprint = sprint;
 
                     if (!sprint) {
-                        //#if MC <= 11904
-                        //$$ TickSpeed.tickrate(20);
-                        //#else
-                        manager.setTickRate(20);
-                        //#endif
+                        manager.setTickRate(20); //#replace <= 1.19.4 ? TickSpeed.tickrate(20);
                     }
                 }
                 return;
             }
-            //#if MC <= 11904
-            //$$ if (TickUtil.shouldSprint(server) && TickSpeed.tickrate != IGNYSettings.originalTPS) {
-            //#else
-            if (TickUtil.shouldSprint(server) && manager.tickrate() != IGNYSettings.originalTPS) {
-                //#endif
-                //#if MC <= 11904
-                //$$ TickSpeed.tickrate(IGNYSettings.originalTPS);
-                //#else
-                manager.setTickRate(IGNYSettings.originalTPS);
-                //#endif
+            if (TickUtil.shouldSprint(server) && manager.tickrate() != IGNYSettings.originalTPS) { //#replace <= 1.19.4 ? if (TickUtil.shouldSprint(server) && TickSpeed.tickrate != IGNYSettings.originalTPS) {
+                manager.setTickRate(IGNYSettings.originalTPS); //#replace <= 1.19.4 ? TickSpeed.tickrate(IGNYSettings.originalTPS);
             }
         }
     }

@@ -14,10 +14,10 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.AABB;
-//#if MC < 12005
-//$$ import com.liuyue.igny.IGNYServer;
-//$$ import net.minecraft.core.BlockPos;
-//$$ import java.util.Map;
+//#if < 1.20.5
+/*$$import com.liuyue.igny.IGNYServer;
+import net.minecraft.core.BlockPos;
+import java.util.Map;$$*/
 //#else
 //$$ import com.liuyue.igny.network.packet.block.HighlightPayload;
 //#endif
@@ -31,19 +31,15 @@ public class IGNYClientRegister {
 
     private static void registerNetworkPackReceiver() {
         ClientPlayNetworking.registerGlobalReceiver(
-                //#if MC < 12005
-                //$$ IGNYServer.HIGHLIGHT_PACKET_ID,
-                //#else
-                HighlightPayload.TYPE,
-                //#endif
-                //#if MC < 12005
-                //$$ (client, handler, buf, responseSender) -> {
-                //$$     BlockPos pos = buf.readBlockPos();
-                //$$     int color = buf.readInt();
-                //$$     int duration = buf.readInt();
-                //$$     boolean permanent = buf.readBoolean();
-                //$$     client.execute(() -> HighlightBlocksRenderer.addHighlight(pos, color, duration, permanent));
-                //$$ }
+                HighlightPayload.TYPE, //#replace < 1.20.5 ? IGNYServer.HIGHLIGHT_PACKET_ID,
+                //#if < 1.20.5
+                /*$$(client, handler, buf, responseSender) -> {
+                    BlockPos pos = buf.readBlockPos();
+                    int color = buf.readInt();
+                    int duration = buf.readInt();
+                    boolean permanent = buf.readBoolean();
+                    client.execute(() -> HighlightBlocksRenderer.addHighlight(pos, color, duration, permanent));
+                }$$*/
                 //#else
                 (payload, context) -> context.client().execute(() ->
                         HighlightBlocksRenderer.addHighlight(payload.pos(), payload.color(), payload.durationTicks(), payload.permanent())
@@ -51,23 +47,19 @@ public class IGNYClientRegister {
                 //#endif
         );
         ClientPlayNetworking.registerGlobalReceiver(
-                //#if MC < 12005
-                //$$ IGNYServer.REMOVE_HIGHLIGHT_PACKET_ID,
-                //#else
-                RemoveHighlightPayload.TYPE,
-                //#endif
-                //#if MC < 12005
-                //$$ (client, handler, buf, responseSender) -> {
-                //$$     BlockPos pos = buf.readBlockPos();
-                //$$     client.execute(() -> HighlightBlocksRenderer.INSTANCE.remove(pos, null));
-                //$$ }
+                RemoveHighlightPayload.TYPE, //#replace < 1.20.5 ? IGNYServer.REMOVE_HIGHLIGHT_PACKET_ID,
+                //#if < 1.20.5
+                /*$$(client, handler, buf, responseSender) -> {
+                    BlockPos pos = buf.readBlockPos();
+                    client.execute(() -> HighlightBlocksRenderer.INSTANCE.remove(pos, null));
+                }$$*/
                 //#else
                 (payload, context) -> context.client().execute(() ->
                         HighlightBlocksRenderer.INSTANCE.remove(payload.pos(), null)
                 )
                 //#endif
         );
-        //#if MC >= 12006
+        //#if >= 1.20.6
         ClientPlayNetworking.registerGlobalReceiver(
                 SyncCustomStackSizePayload.TYPE,
                 (payload, context) -> context.client().execute(() ->
@@ -76,29 +68,25 @@ public class IGNYClientRegister {
         );
         //#endif
         ClientPlayNetworking.registerGlobalReceiver(
-                //#if MC < 12005
-                //$$ IGNYServer.RENDER_BOX_PACKET_ID,
-                //#else
-                BoxPayload.TYPE,
-                //#endif
-                //#if MC < 12005
-                //$$ (client, handler, buf, responseSender) -> {
-                //$$     BlockPos pos = buf.readBlockPos();
-                //$$     int color = buf.readInt();
-                //$$     int duration = buf.readInt();
-                //$$     boolean permanent = buf.readBoolean();
-                //$$     boolean depthTest = buf.readBoolean();
-                //$$     double minX = buf.readDouble();
-                //$$     double minY = buf.readDouble();
-                //$$     double minZ = buf.readDouble();
-                //$$     double maxX = buf.readDouble();
-                //$$     double maxY = buf.readDouble();
-                //$$     double maxZ = buf.readDouble();
-                //$$     boolean withLine = buf.readBoolean();
-                //$$     boolean lineDepthTest = buf.readBoolean();
-                //$$     boolean smooth = buf.readBoolean();
-                //$$     client.execute(() -> BoxRenderer.addBox(pos, color, duration, permanent, depthTest, minX, minY, minZ, maxX, maxY, maxZ, withLine, lineDepthTest, smooth));
-                //$$ }
+                BoxPayload.TYPE, //#replace < 1.20.5 ? IGNYServer.RENDER_BOX_PACKET_ID,
+                //#if < 1.20.5
+                /*$$(client, handler, buf, responseSender) -> {
+                    BlockPos pos = buf.readBlockPos();
+                    int color = buf.readInt();
+                    int duration = buf.readInt();
+                    boolean permanent = buf.readBoolean();
+                    boolean depthTest = buf.readBoolean();
+                    double minX = buf.readDouble();
+                    double minY = buf.readDouble();
+                    double minZ = buf.readDouble();
+                    double maxX = buf.readDouble();
+                    double maxY = buf.readDouble();
+                    double maxZ = buf.readDouble();
+                    boolean withLine = buf.readBoolean();
+                    boolean lineDepthTest = buf.readBoolean();
+                    boolean smooth = buf.readBoolean();
+                    client.execute(() -> BoxRenderer.addBox(pos, color, duration, permanent, depthTest, minX, minY, minZ, maxX, maxY, maxZ, withLine, lineDepthTest, smooth));
+                }$$*/
                 //#else
                 (payload, context) -> {
                     BlockPos pos = payload.pos();
@@ -126,7 +114,7 @@ public class IGNYClientRegister {
 
     private static void registerTickEvent() {
         ClientTickEvents.
-                //#if MC >= 26.1
+                //#if >= 26.1
                 //$$ END_LEVEL_TICK
                 //#else
                         END_WORLD_TICK

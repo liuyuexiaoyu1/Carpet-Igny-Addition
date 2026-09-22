@@ -13,11 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(HopperBlock.class)
 public class HopperBlockMixin {
     @Inject(method = "checkPoweredState", at = @At(value = "HEAD"), cancellable = true)
-    //#if MC >= 12002
-    private void checkPoweredState(Level level, BlockPos pos, BlockState state, CallbackInfo ci)
-    //#else
-    //$$ private void checkPoweredState(Level level, BlockPos pos, BlockState state, int flags, CallbackInfo ci)
-    //#endif
+    private void checkPoweredState(Level level, BlockPos pos, BlockState state, CallbackInfo ci) //#replace < 1.20.2 ? private void checkPoweredState(Level level, BlockPos pos, BlockState state, int flags, CallbackInfo ci)
     {
         if (!BetterEasyPlaceProtocolHandler.isEasyPlaceState()) {
             return;

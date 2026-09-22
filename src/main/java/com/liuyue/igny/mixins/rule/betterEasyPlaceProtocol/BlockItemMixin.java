@@ -120,12 +120,12 @@ public abstract class BlockItemMixin {
         return result;
     }
 
-    //#if MC >= 26.3
-    //$$ @WrapOperation(
-    //$$          method = "place",
-    //$$          at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/BlockItem;updateCustomBlockEntityTag(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)Z")
-    //$$  )
-    //$$  private boolean igny_betterEasyPlaceProtocolItemStack(Level level, Player player, BlockPos pos, ItemStack stack, Operation<Boolean> original, @Local(argsOnly = true) BlockPlaceContext context)
+    //#if >= 26.3
+    /*$$@WrapOperation(
+             method = "place",
+             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/BlockItem;updateCustomBlockEntityTag(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)Z")
+     )
+    private boolean igny_betterEasyPlaceProtocolItemStack(Level level, Player player, BlockPos pos, ItemStack stack, Operation<Boolean> original, @Local(argsOnly = true) BlockPlaceContext context)$$*/
     //#else
     @WrapOperation(
             method = "place",
@@ -136,18 +136,10 @@ public abstract class BlockItemMixin {
     {
         ItemStack newStack = BetterEasyPlaceProtocolHandler.applyItemStackProtocolData(stack, context);
         if (newStack == null) {
-            //#if MC >= 26.3
-            //$$ return original.call(level, player, pos, stack);
-            //#else
-            return original.call(instance, pos, level, player, stack, state);
-            //#endif
+            return original.call(instance, pos, level, player, stack, state); //#replace >= 26.3 ? return original.call(level, player, pos, stack);
         }
-        //#if MC >= 26.3
-        //$$ boolean result = original.call(level, player, pos, newStack);
-        //#else
-        boolean result = original.call(instance, pos, level, player, newStack, state);
-        //#endif
-        //#if MC >= 12001
+        boolean result = original.call(instance, pos, level, player, newStack, state); //#replace >= 26.3 ? boolean result = original.call(level, player, pos, newStack);
+        //#if >= 1.20.1
         double relativeHitZ = getRelativeHitZ(context.getClickLocation(), context.getClickedPos());
         int protocolValue = decodeProtocolValueFromHitDim(relativeHitZ);
         if ((protocolValue & 0b100_0000_0000) != 0) {

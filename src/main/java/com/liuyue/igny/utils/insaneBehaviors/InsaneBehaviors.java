@@ -66,18 +66,14 @@ public class InsaneBehaviors {
         counter = 0;
         resolution = 2;
         c.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                 Component.translatable("igny.command.insanebehaviors.reset"), false);
         return 1;
     }
 
     public static int getState(CommandSourceStack c) {
         c.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                 Component.translatable("igny.command.insanebehaviors.getstate", resolution, counter), false);
         return 1;
     }
@@ -86,9 +82,7 @@ public class InsaneBehaviors {
         resolution = _resolution;
         counter = _counter;
         c.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                 Component.translatable("igny.command.insanebehaviors.setState", resolution, counter), false);
         return 1;
     }

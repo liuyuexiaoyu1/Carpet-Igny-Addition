@@ -7,17 +7,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#if MC>=12103
-//$$ import net.minecraft.server.level.ServerLevel;
-//#endif
+//?>= 1.21.3 ? import net.minecraft.server.level.ServerLevel;
 
 @Mixin(WitherSkeleton.class)
 public class WitherSkeletonMixin {
     @Inject(method ="doHurtTarget", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z"), cancellable = true)
     private void doHurtTarget(
-            //#if MC>=12103
-            //$$ ServerLevel level,
-            //#endif
+            //?>= 1.21.3 ? ServerLevel level,
             Entity entity, CallbackInfoReturnable<Boolean> cir) {
         if (IGNYSettings.NO_WITHER_EFFECT.value()) {
             cir.setReturnValue(true);

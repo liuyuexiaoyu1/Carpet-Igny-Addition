@@ -4,14 +4,8 @@ import carpet.utils.Translations;
 import ch.endte.syncmatica.communication.ExchangeTarget;
 import ch.endte.syncmatica.communication.MessageType;
 import ch.endte.syncmatica.communication.ServerCommunicationManager;
-//#if MC <= 12004
-//$$ import ch.endte.syncmatica.ServerPlacement;
-//#else
-import ch.endte.syncmatica.data.ServerPlacement;
-//#endif
-//#if MC > 12004
-import ch.endte.syncmatica.network.PacketType;
-//#endif
+import ch.endte.syncmatica.data.ServerPlacement; //#replace <= 1.20.4 ? import ch.endte.syncmatica.ServerPlacement;
+import ch.endte.syncmatica.network.PacketType; //?> 1.20.4
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.utils.CommandUtil;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -26,9 +20,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#if MC <= 12004
-//$$ import net.minecraft.resources.ResourceLocation;
-//#endif
+//?<= 1.20.4 ? import net.minecraft.resources.ResourceLocation;
 
 import java.util.Map;
 
@@ -43,9 +35,9 @@ public abstract class ServerCommunicationManagerMixin {
     @Shadow
     public abstract void sendMessage(ExchangeTarget client, MessageType type, String identifier);
 
-    //#if MC <= 12004
-    //$$  @Inject(method = "handle", at = @At(value = "INVOKE", target = "Lch/endte/syncmatica/communication/ServerCommunicationManager;getModifier(Lch/endte/syncmatica/ServerPlacement;)Lch/endte/syncmatica/communication/exchange/Exchange;"), require = 0, cancellable = true)
-    //$$  private void handlePacket(ExchangeTarget source, ResourceLocation id, FriendlyByteBuf packetBuf, CallbackInfo ci, @Local(name = "placement") ServerPlacement placement) {
+    //#if <= 1.20.4
+    /*$$@Inject(method = "handle", at = @At(value = "INVOKE", target = "Lch/endte/syncmatica/communication/ServerCommunicationManager;getModifier(Lch/endte/syncmatica/ServerPlacement;)Lch/endte/syncmatica/communication/exchange/Exchange;"), require = 0, cancellable = true)
+    private void handlePacket(ExchangeTarget source, ResourceLocation id, FriendlyByteBuf packetBuf, CallbackInfo ci, @Local(name = "placement") ServerPlacement placement) {$$*/
     //#else
     @Inject(method = "handle", at = @At(value = "INVOKE", target = "Lch/endte/syncmatica/communication/ServerCommunicationManager;getModifier(Lch/endte/syncmatica/data/ServerPlacement;)Lch/endte/syncmatica/communication/exchange/Exchange;"), require = 0, cancellable = true)
     private void handlePacket(ExchangeTarget source, PacketType type, FriendlyByteBuf packetBuf, CallbackInfo ci, @Local(name = "placement") ServerPlacement placement) {

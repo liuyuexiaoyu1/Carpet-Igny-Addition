@@ -4,26 +4,24 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-//#if MC >= 12103
-//$$ import net.minecraft.world.item.crafting.CraftingInput;
-//$$ import java.util.Optional;
-//$$ import com.liuyue.igny.mixins.rule.uncraftingTable.ShapelessRecipeAccessor;
+//#if >= 1.21.3
+/*$$import net.minecraft.world.item.crafting.CraftingInput;
+import java.util.Optional;
+import com.liuyue.igny.mixins.rule.uncraftingTable.ShapelessRecipeAccessor;$$*/
 //#endif
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
-//#if MC >= 12002
-import net.minecraft.world.item.crafting.RecipeHolder;
-//#endif
+import net.minecraft.world.item.crafting.RecipeHolder; //?>= 1.20.2
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-//#if MC >= 12103
-//$$ import java.util.Iterator;
-//$$ import net.minecraft.core.Holder;
-//$$ import net.minecraft.world.item.Item;
+//#if >= 1.21.3
+/*$$import java.util.Iterator;
+import net.minecraft.core.Holder;
+import net.minecraft.world.item.Item;$$*/
 //#endif
 
 import java.util.ArrayList;
@@ -122,7 +120,7 @@ public final class UncraftingTable {
     }
 
     private static String keyOf(Level level, Object holder) {
-        //#if MC >= 12002
+        //#if >= 1.20.2
         if (holder instanceof RecipeHolder<?> recipeHolder) {
             return recipeHolder.id().toString();
         }
@@ -156,28 +154,24 @@ public final class UncraftingTable {
             return null;
         }
 
-        //#if MC >= 12002
-        return holder instanceof RecipeHolder<?> recipeHolder && recipeHolder.value() instanceof CraftingRecipe recipe ? recipe : null;
-        //#else
-        //$$ return holder instanceof CraftingRecipe recipe ? recipe : null;
-        //#endif
+        return holder instanceof RecipeHolder<?> recipeHolder && recipeHolder.value() instanceof CraftingRecipe recipe ? recipe : null; //#replace < 1.20.2 ? return holder instanceof CraftingRecipe recipe ? recipe : null;
     }
 
     private static ItemStack outputOf(Level level, CraftingRecipe recipe) {
-        //#if MC >= 26.1
+        //#if >= 26.1
         //$$ ItemStack[] grid = decompose(recipe);
 
-        //$$ if (grid == null) {
-        //$$     return ItemStack.EMPTY;
-        //$$ }
+        /*$$if (grid == null) {
+            return ItemStack.EMPTY;
+        }$$*/
 
         //$$ return recipe.assemble(CraftingInput.of(3, 3, Arrays.asList(grid)));
-        //#elseif MC >= 12103
+        //#elseif >= 1.21.3
         //$$ ItemStack[] grid = decompose(recipe);
 
-        //$$ if (grid == null) {
-        //$$     return ItemStack.EMPTY;
-        //$$ }
+        /*$$if (grid == null) {
+            return ItemStack.EMPTY;
+        }$$*/
 
         //$$ return recipe.assemble(CraftingInput.of(3, 3, Arrays.asList(grid)), level.registryAccess());
         //#else
@@ -191,21 +185,21 @@ public final class UncraftingTable {
         int height = 3;
         List<ItemStack> items = new ArrayList<>();
 
-        //#if MC >= 12103
-        //$$ if (recipe instanceof ShapedRecipe shaped) {
-        //$$     for (Optional<Ingredient> optional : shaped.getIngredients()) {
-        //$$         items.add(optional.map(UncraftingTable::representative).orElse(ItemStack.EMPTY));
-        //$$     }
+        //#if >= 1.21.3
+        /*$$if (recipe instanceof ShapedRecipe shaped) {
+            for (Optional<Ingredient> optional : shaped.getIngredients()) {
+                items.add(optional.map(UncraftingTable::representative).orElse(ItemStack.EMPTY));
+        }$$*/
         //$$
-        //$$     width = shaped.getWidth();
-        //$$     height = shaped.getHeight();
-        //$$ } else if (recipe instanceof ShapelessRecipe shapeless) {
-        //$$     for (Ingredient ingredient : ((ShapelessRecipeAccessor) shapeless).igny$ingredients()) {
-        //$$         items.add(representative(ingredient));
-        //$$     }
-        //$$ } else {
-        //$$     return null;
-        //$$ }
+        /*$$width = shaped.getWidth();
+            height = shaped.getHeight();
+        } else if (recipe instanceof ShapelessRecipe shapeless) {
+            for (Ingredient ingredient : ((ShapelessRecipeAccessor) shapeless).igny$ingredients()) {
+                items.add(representative(ingredient));
+        }
+        } else {
+            return null;
+        }$$*/
         //#else
         if (recipe instanceof ShapedRecipe shaped) {
             for (Ingredient ingredient : shaped.getIngredients()) {
@@ -258,9 +252,9 @@ public final class UncraftingTable {
             return ItemStack.EMPTY;
         }
 
-        //#if MC >= 12103
-        //$$ Iterator<Holder<Item>> iterator = ingredient.items().iterator();
-        //$$ return iterator.hasNext() ? single(new ItemStack(iterator.next().value())) : ItemStack.EMPTY;
+        //#if >= 1.21.3
+        /*$$Iterator<Holder<Item>> iterator = ingredient.items().iterator();
+        return iterator.hasNext() ? single(new ItemStack(iterator.next().value())) : ItemStack.EMPTY;$$*/
         //#else
         ItemStack[] stacks = ingredient.getItems();
         return stacks.length == 0 ? ItemStack.EMPTY : single(stacks[0]);

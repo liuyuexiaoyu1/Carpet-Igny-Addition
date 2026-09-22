@@ -126,31 +126,31 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 12102
-    //$$ public static final RuleAccessor<Boolean> PROJECTILE_DUPLICATION_REINTRODUCED = register(
-    //$$         RuleFactory.of("projectileDuplicationReintroduced", false)
-    //$$                 .addCategories(FEATURE, PORTING)
-    //$$                 .build()
-    //$$ );
+    //#if >= 1.21.2
+    /*$$public static final RuleAccessor<Boolean> PROJECTILE_DUPLICATION_REINTRODUCED = register(
+            RuleFactory.of("projectileDuplicationReintroduced", false)
+                    .addCategories(FEATURE, PORTING)
+                    .build()
+    );$$*/
     //#endif
 
-    //#if MC >= 12104
-    //$$ public static final RuleAccessor<Boolean> SKELETONS_PICKUP_SWORDS_REINTRODUCED = register(
-    //$$         RuleFactory.of("skeletonsPickupSwordsReintroduced", false)
-    //$$                 .addCategories(FEATURE, PORTING)
-    //$$                 .build()
-    //$$ );
+    //#if >= 1.21.4
+    /*$$public static final RuleAccessor<Boolean> SKELETONS_PICKUP_SWORDS_REINTRODUCED = register(
+            RuleFactory.of("skeletonsPickupSwordsReintroduced", false)
+                    .addCategories(FEATURE, PORTING)
+                    .build()
+    );$$*/
     //#endif
 
-    //#if MC >= 12102
-    //$$ public static final RuleAccessor<Boolean> TELEPORT_INHERIT_MINECARTS_MOTION_REINTRODUCED = register(
-    //$$         RuleFactory.of("teleportInheritMinecartsMotionReintroduced", false)
-    //$$                 .addCategories(FEATURE, PORTING)
-    //$$                 .build()
-    //$$ );
+    //#if >= 1.21.2
+    /*$$public static final RuleAccessor<Boolean> TELEPORT_INHERIT_MINECARTS_MOTION_REINTRODUCED = register(
+            RuleFactory.of("teleportInheritMinecartsMotionReintroduced", false)
+                    .addCategories(FEATURE, PORTING)
+                    .build()
+    );$$*/
     //#endif
 
-    //#if MC < 12109
+    //#if < 1.21.9
     public static final RuleAccessor<Boolean> TNT_MINECART_EMPTY_DAMAGE_SOURCE_FIX = register(
             RuleFactory.of("tntMinecartEmptyDamageSourceFix", false)
                     .addCategories(FEATURE)
@@ -158,7 +158,7 @@ public class IGNYSettings {
     );
     //#endif
 
-    //#if MC < 12111
+    //#if < 1.21.11
     public static final RuleAccessor<Boolean> FAKE_PLAYER_BOAT_YAW_FIX = register(
             RuleFactory.of("fakePlayerBoatYawFix", false)
                     .addCategories(FEATURE, BUGFIX)
@@ -192,12 +192,12 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 12106
-    //$$ public static final RuleAccessor<Boolean> HAPPY_GHAST_NO_CLIP = register(
-    //$$         RuleFactory.of("happyGhastNoClip", false)
-    //$$                 .addCategories(SURVIVAL, CLIENT, FEATURE)
-    //$$                 .build()
-    //$$ );
+    //#if >= 1.21.6
+    /*$$public static final RuleAccessor<Boolean> HAPPY_GHAST_NO_CLIP = register(
+            RuleFactory.of("happyGhastNoClip", false)
+                    .addCategories(SURVIVAL, CLIENT, FEATURE)
+                    .build()
+    );$$*/
     //#endif
 
     public static final RuleAccessor<Boolean> NO_WITHER_EFFECT = register(
@@ -206,27 +206,27 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC>=12106
-    //$$ public static final RuleAccessor<Boolean> LOCATOR_BAR_NO_FAKE_PLAYER = register(
-    //$$         RuleFactory.of("locatorBarNoFakePlayer", false)
-    //$$                 .addCategories(FEATURE)
-    //$$                 .addListener((source, value) -> {
-    //$$                      if (source != null) {
-    //$$                          net.minecraft.server.players.PlayerList list;
-    //$$                          list = source.getServer().getPlayerList();
-    //$$                          for (net.minecraft.server.level.ServerPlayer player : list.getPlayers()) {
-    //$$                              if (!(player instanceof carpet.patches.EntityPlayerMPFake)) continue;
-    //$$                              net.minecraft.server.waypoints.ServerWaypointManager manager = player.level().getWaypointManager();
-    //$$                              if (value) {
-    //$$                                  manager.removePlayer(player);
-    //$$                              } else {
-    //$$                                  manager.addPlayer(player);
-    //$$                              }
-    //$$                          }
-    //$$                      }
-    //$$                  })
-    //$$                 .build()
-    //$$ );
+    //#if >= 1.21.6
+    /*$$public static final RuleAccessor<Boolean> LOCATOR_BAR_NO_FAKE_PLAYER = register(
+            RuleFactory.of("locatorBarNoFakePlayer", false)
+                    .addCategories(FEATURE)
+                    .addListener((source, value) -> {
+                         if (source != null) {
+                             net.minecraft.server.players.PlayerList list;
+                             list = source.getServer().getPlayerList();
+                             for (net.minecraft.server.level.ServerPlayer player : list.getPlayers()) {
+                                 if (!(player instanceof carpet.patches.EntityPlayerMPFake)) continue;
+                                 net.minecraft.server.waypoints.ServerWaypointManager manager = player.level().getWaypointManager();
+                                 if (value) {
+                                     manager.removePlayer(player);
+                                 } else {
+                                     manager.addPlayer(player);
+                                 }
+                             }
+                         }
+                     })
+                    .build()
+    );$$*/
     //#endif
 
     public static final RuleAccessor<Boolean> FAKE_PLAYER_LOGIN_LOGOUT_NO_CHAT_INFO = register(
@@ -261,7 +261,7 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 12005
+    //#if >= 1.20.5
     public static final RuleAccessor<Integer> TRIAL_SPAWNER_COOL_DOWN = register(
             RuleFactory.of("trialSpawnerCoolDown", 36000)
                     .addCategories(FEATURE)
@@ -349,7 +349,7 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 12005
+    //#if >= 1.20.5
     public static final RuleAccessor<Boolean> INSTANT_VAULT_SPAWN_LOOT = register(
             RuleFactory.of("instantVaultSpawnLoot", false)
                     .addCategories(CREATIVE, FEATURE)
@@ -383,7 +383,7 @@ public class IGNYSettings {
     );
     //#endif
 
-    //#if MC >= 12000
+    //#if >= 1.20.0
     public static final RuleAccessor<Boolean> SAFE_SOUND_SUPPRESSION = register(
             RuleFactory.of("safeSoundSuppression", false)
                     .addCategories(FEATURE)
@@ -426,7 +426,7 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 12006
+    //#if >= 1.20.6
     public static final RuleAccessor<CommandPermissionLevel> COMMAND_CUSTOM_ITEM_MAX_STACK_SIZE = register(
             RuleFactory.of("commandCustomItemMaxStackSize", CommandPermissionLevel.FALSE)
                     .setCommand()
@@ -453,12 +453,12 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 12111
-    //$$ public static final RuleAccessor<Boolean> ALLOW_INVALID_MOTION = register(
-    //$$         RuleFactory.of("allowInvalidMotion", false)
-    //$$                 .addCategories(FEATURE)
-    //$$                 .build()
-    //$$ );
+    //#if >= 1.21.11
+    /*$$public static final RuleAccessor<Boolean> ALLOW_INVALID_MOTION = register(
+            RuleFactory.of("allowInvalidMotion", false)
+                    .addCategories(FEATURE)
+                    .build()
+    );$$*/
     //#endif
 
     public static final RuleAccessor<Boolean> ACCELERATE_BABY_VILLAGER_GROWTH = register(
@@ -617,12 +617,12 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 26.1
-    //$$ public static final RuleAccessor<Boolean> TRIPWIRE_HOOK_DUPE_REINTRODUCED = register(
-    //$$         RuleFactory.of("tripwireHookDupeReintroduced", false)
-    //$$                 .addCategories(FEATURE, PORTING)
-    //$$                 .build()
-    //$$ );
+    //#if >= 26.1
+    /*$$public static final RuleAccessor<Boolean> TRIPWIRE_HOOK_DUPE_REINTRODUCED = register(
+            RuleFactory.of("tripwireHookDupeReintroduced", false)
+                    .addCategories(FEATURE, PORTING)
+                    .build()
+    );$$*/
     //#endif
 
     public static final RuleAccessor<Boolean> SHOW_CLASS_MIXIN_LIST = register(
@@ -686,12 +686,12 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 26.2
-    //$$ public static final RuleAccessor<Boolean> COMPARATOR_DUPE_REINTRODUCED = register(
-    //$$         RuleFactory.of("comparatorDupeReintroduced", false)
-    //$$                 .addCategories(FEATURE, PORTING)
-    //$$                 .build()
-    //$$ );
+    //#if >= 26.2
+    /*$$public static final RuleAccessor<Boolean> COMPARATOR_DUPE_REINTRODUCED = register(
+            RuleFactory.of("comparatorDupeReintroduced", false)
+                    .addCategories(FEATURE, PORTING)
+                    .build()
+    );$$*/
     //#endif
 
     public static final RuleAccessor<Boolean> FESTIVE_EASTER_EGG = register(
@@ -713,12 +713,12 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 12102
-    //$$ public static final RuleAccessor<Boolean> GHOST_ENDER_PEARL_FIX = register(
-    //$$         RuleFactory.of("ghostEnderPearlFix", false)
-    //$$                 .addCategories(BUGFIX)
-    //$$                 .build()
-    //$$ );
+    //#if >= 1.21.2
+    /*$$public static final RuleAccessor<Boolean> GHOST_ENDER_PEARL_FIX = register(
+            RuleFactory.of("ghostEnderPearlFix", false)
+                    .addCategories(BUGFIX)
+                    .build()
+    );$$*/
     //#endif
 
     public static final RuleAccessor<Boolean> BETTER_FLIPPIN_CACTUS = register(
@@ -770,12 +770,12 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 12104
-    //$$ public static final RuleAccessor<Boolean> STICKY_RESIN_BLOCK = register(
-    //$$         RuleFactory.of("stickyResinBlock", false)
-    //$$                 .addCategories(SURVIVAL, FEATURE)
-    //$$                 .build()
-    //$$ );
+    //#if >= 1.21.4
+    /*$$public static final RuleAccessor<Boolean> STICKY_RESIN_BLOCK = register(
+            RuleFactory.of("stickyResinBlock", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );$$*/
     //#endif
 
     public static final RuleAccessor<Boolean> CONVENIENT_REGENERATE_POWDER_SNOW = register(
@@ -822,23 +822,23 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 26.2
-    //$$ public static final RuleAccessor<Boolean> ALLOW_INVALID_BEACON_EFFECT = register(
-    //$$         RuleFactory.of("allowInvalidBeaconEffect", false)
-    //$$                 .addCategories(SURVIVAL, PORTING, FEATURE)
-    //$$                 .build()
-    //$$ );
+    //#if >= 26.2
+    /*$$public static final RuleAccessor<Boolean> ALLOW_INVALID_BEACON_EFFECT = register(
+            RuleFactory.of("allowInvalidBeaconEffect", false)
+                    .addCategories(SURVIVAL, PORTING, FEATURE)
+                    .build()
+    );$$*/
     //#endif
 
-    //#if MC >= 26.2
-    //$$ public static final RuleAccessor<Boolean>  ENTITY_ID_COLLISION_REINTRODUCE = register(
-    //$$         RuleFactory.of("entityIDCollisionReintroduce", false)
-    //$$                 .addCategories(PORTING, FEATURE)
-    //$$                 .build()
-    //$$ );
+    //#if >= 26.2
+    /*$$public static final RuleAccessor<Boolean>  ENTITY_ID_COLLISION_REINTRODUCE = register(
+            RuleFactory.of("entityIDCollisionReintroduce", false)
+                    .addCategories(PORTING, FEATURE)
+                    .build()
+    );$$*/
     //#endif
 
-    //#if MC < 26.2
+    //#if < 26.2
     public static final RuleAccessor<Boolean>  ENTITY_ID_COLLISION_FIX = register(
             RuleFactory.of("entityIDCollisionFix", false)
                     .addCategories(BUGFIX, FEATURE)
@@ -864,12 +864,12 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 26.1
-    //$$ public static final RuleAccessor<Boolean> ENDER_DRAGON_REMOVE_SKIP_REINTRODUCE = register(
-    //$$         RuleFactory.of("enderDragonRemoveSkipReintroduce", false)
-    //$$                 .addCategories(PORTING, FEATURE)
-    //$$                 .build()
-    //$$ );
+    //#if >= 26.1
+    /*$$public static final RuleAccessor<Boolean> ENDER_DRAGON_REMOVE_SKIP_REINTRODUCE = register(
+            RuleFactory.of("enderDragonRemoveSkipReintroduce", false)
+                    .addCategories(PORTING, FEATURE)
+                    .build()
+    );$$*/
     //#endif
 
     public static final RuleAccessor<Boolean> VISIBLE_SPECTATORS = register(
@@ -914,23 +914,19 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 26.1
-    //$$ public static final RuleAccessor<Boolean> EMPTY_CHAT_SCREEN_CAN_COMPLETE_PLAYER_NAME = register(
-    //$$         RuleFactory.of("emptyChatScreenCanCompletePlayerName", false)
-    //$$                 .addCategories(FEATURE)
-    //$$                 .setClient()
-    //$$                 .build()
-    //$$ );
+    //#if >= 26.1
+    /*$$public static final RuleAccessor<Boolean> EMPTY_CHAT_SCREEN_CAN_COMPLETE_PLAYER_NAME = register(
+            RuleFactory.of("emptyChatScreenCanCompletePlayerName", false)
+                    .addCategories(FEATURE)
+                    .setClient()
+                    .build()
+    );$$*/
     //#endif
 
     public static final RuleAccessor<Boolean> SCALABLELUX_COMPATIBLE = register(
             RuleFactory.of("scalableLuxCompatible", false)
                     .addCategories(FEATURE)
-                    //#if MC >= 12101
-                    .addValidator(ModValidator.createValidator("scalablelux", "ScalableLux"))
-                    //#else
-                    //$$ .addValidator(ModValidator.createValidator("starlight", "StarLight"))
-                    //#endif
+                    .addValidator(ModValidator.createValidator("scalablelux", "ScalableLux")) //#replace < 1.21.1 ? .addValidator(ModValidator.createValidator("starlight", "StarLight"))
                     .build()
     );
 
@@ -946,7 +942,7 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC < 26.3
+    //#if < 26.3
     public static final RuleAccessor<Boolean> SPECTATOR_CLICK_PORTAL_TELEPORT = register(
             RuleFactory.of("spectatorClickPortalTeleport", false)
                     .addCategories(FEATURE)
@@ -954,36 +950,36 @@ public class IGNYSettings {
     );
     //#endif
 
-    //#if MC >= 12109
-    //$$ public static final RuleAccessor<Boolean> COPPER_GOLEM_DROP_ONLY_NORMAL = register(
-    //$$         RuleFactory.of("copperGolemDropOnlyNormal", false)
-    //$$                 .addCategories(SURVIVAL, FEATURE)
-    //$$                 .build()
-    //$$ );
+    //#if >= 1.21.9
+    /*$$public static final RuleAccessor<Boolean> COPPER_GOLEM_DROP_ONLY_NORMAL = register(
+            RuleFactory.of("copperGolemDropOnlyNormal", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );$$*/
     //#endif
 
-    //#if MC >= 26.3
-    //$$ public static final RuleAccessor<Boolean> THE_END_TERRAIN_MISSING_REINTRODUCED = register(
-    //$$         RuleFactory.of("theEndTerrainMissingReintroduced", false)
-    //$$                 .addCategories(SURVIVAL, PORTING, FEATURE)
-    //$$                 .build()
-    //$$ );
+    //#if >= 26.3
+    /*$$public static final RuleAccessor<Boolean> THE_END_TERRAIN_MISSING_REINTRODUCED = register(
+            RuleFactory.of("theEndTerrainMissingReintroduced", false)
+                    .addCategories(SURVIVAL, PORTING, FEATURE)
+                    .build()
+    );$$*/
     //#endif
 
-    //#if MC >= 12110
-    //$$ public static final RuleAccessor<Boolean> SPECTATOR_KEEP_LEASH_CONNECTION_REINTRODUCED = register(
-    //$$         RuleFactory.of("spectatorKeepLeashConnectionReintroduced", false)
-    //$$                 .addCategories(SURVIVAL, PORTING, FEATURE)
-    //$$                 .build()
-    //$$ );
+    //#if >= 1.21.10
+    /*$$public static final RuleAccessor<Boolean> SPECTATOR_KEEP_LEASH_CONNECTION_REINTRODUCED = register(
+            RuleFactory.of("spectatorKeepLeashConnectionReintroduced", false)
+                    .addCategories(SURVIVAL, PORTING, FEATURE)
+                    .build()
+    );$$*/
     //#endif
 
-    //#if MC >= 12105
-    //$$ public static final RuleAccessor<Boolean> HUGE_MUSHROOM_DESTROY_UNBREAKABLE_REINTRODUCED = register(
-    //$$         RuleFactory.of("hugeMushroomDestroyUnbreakableReintroduced", false)
-    //$$                 .addCategories(SURVIVAL, PORTING, FEATURE)
-    //$$                 .build()
-    //$$ );
+    //#if >= 1.21.5
+    /*$$public static final RuleAccessor<Boolean> HUGE_MUSHROOM_DESTROY_UNBREAKABLE_REINTRODUCED = register(
+            RuleFactory.of("hugeMushroomDestroyUnbreakableReintroduced", false)
+                    .addCategories(SURVIVAL, PORTING, FEATURE)
+                    .build()
+    );$$*/
     //#endif
 
     public static final RuleAccessor<Boolean> KELP_NEVER_NATURAL_GROWS = register(
@@ -1004,20 +1000,20 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 26.2
-    //$$ public static final RuleAccessor<Boolean> DISABLE_TRIPWIRE_GENERATE_INSTANT_SCHEDULED_TICK = register(
-    //$$         RuleFactory.of("disableTripwireGenerateInstantScheduledTick", false)
-    //$$                 .addCategories(BUGFIX, FEATURE)
-    //$$                 .build()
-    //$$ );
+    //#if >= 26.2
+    /*$$public static final RuleAccessor<Boolean> DISABLE_TRIPWIRE_GENERATE_INSTANT_SCHEDULED_TICK = register(
+            RuleFactory.of("disableTripwireGenerateInstantScheduledTick", false)
+                    .addCategories(BUGFIX, FEATURE)
+                    .build()
+    );$$*/
     //#endif
 
-    //#if MC >= 26.1
-    //$$ public static final RuleAccessor<Boolean> PREVENT_DOLPHIN_ITEM_DROP_ANIMATION_CLOGGING = register(
-    //$$         RuleFactory.of("preventDolphinItemDropAnimationClogging", false)
-    //$$                 .addCategories(PORTING, FEATURE)
-    //$$                 .build()
-    //$$ );
+    //#if >= 26.1
+    /*$$public static final RuleAccessor<Boolean> PREVENT_DOLPHIN_ITEM_DROP_ANIMATION_CLOGGING = register(
+            RuleFactory.of("preventDolphinItemDropAnimationClogging", false)
+                    .addCategories(PORTING, FEATURE)
+                    .build()
+    );$$*/
     //#endif
 
     public static final RuleAccessor<Boolean> DISPENSER_ENTITY_RETRIEVAL = register(
@@ -1032,12 +1028,12 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 12111
-    //$$ public static final RuleAccessor<Boolean> SEQUENTIAL_ARROW_HIT_ENTITY_REINTRODUCED = register(
-    //$$         RuleFactory.of("sequentialArrowHitEntityReintroduced", false)
-    //$$                 .addCategories(PORTING, FEATURE)
-    //$$                 .build()
-    //$$ );
+    //#if >= 1.21.11
+    /*$$public static final RuleAccessor<Boolean> SEQUENTIAL_ARROW_HIT_ENTITY_REINTRODUCED = register(
+            RuleFactory.of("sequentialArrowHitEntityReintroduced", false)
+                    .addCategories(PORTING, FEATURE)
+                    .build()
+    );$$*/
     //#endif
 
     public static final RuleAccessor<Boolean> DISABLE_TNT_DISPENSE = register(
@@ -1071,7 +1067,7 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC >= 12004
+    //#if >= 1.20.4
     public static final RuleAccessor<Boolean> OPEN_DECORATED_POT_GUI = register(
             RuleFactory.of("openDecoratedPotGui", false)
                     .addCategories(SURVIVAL, FEATURE)
@@ -1122,7 +1118,7 @@ public class IGNYSettings {
                     .build()
     );
 
-    //#if MC < 26.1
+    //#if < 26.1
     public static final RuleAccessor<Boolean> BETTER_POINTED_DRIPSTONE_GROW = register(
             RuleFactory.of("betterPointedDripstoneGrow", false)
                     .addCategories(SURVIVAL, FEATURE)

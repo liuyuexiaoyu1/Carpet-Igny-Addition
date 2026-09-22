@@ -28,15 +28,9 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import org.spongepowered.asm.mixin.Mixin;
-//#if MC < 12006
-//$$ import com.liuyue.igny.utils.compat.DummyClass;
-//#endif
+//?< 1.20.6 ? import com.liuyue.igny.utils.compat.DummyClass;
 
-//#if MC >= 12006
-@Mixin(value = AbstractContainerMenu.class, priority = 900)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
+@Mixin(value = AbstractContainerMenu.class, priority = 900) //#replace < 1.20.6 ? @Mixin(DummyClass.class)
 public abstract class AbstractContainerMenuMixin {
     @WrapMethod(method = "getRedstoneSignalFromContainer(Lnet/minecraft/world/Container;)I")
     private static int getRedstoneSignalFromContainer(Container inventory, Operation<Integer> original) {

@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#if MC >= 12002
+//#if >= 1.20.2
 //$$ import net.minecraft.core.dispenser.BlockSource;
 //#else
 //$$ import net.minecraft.core.BlockSourceImpl;
@@ -30,11 +30,7 @@ public class DropperBlockMixin {
     private static DispenseItemBehavior DISPENSE_BEHAVIOUR;
 
     @Inject(method = "dispenseFrom", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/HopperBlockEntity;getContainerAt(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/Container;", shift = At.Shift.AFTER), cancellable = true)
-    //#if MC >= 12002
-    private void getContainerAt(ServerLevel level, BlockState state, BlockPos pos, CallbackInfo ci, @Local(ordinal = 0) ItemStack itemStack, @Local BlockSource blockSource, @Local int slot, @Local DispenserBlockEntity blockEntity, @Local Direction direction)
-    //#else
-    //$$ private void getContainerAt(ServerLevel level, BlockPos pos, CallbackInfo ci, @Local(ordinal = 0) ItemStack itemStack, @Local BlockSourceImpl blockSource, @Local int slot, @Local DispenserBlockEntity blockEntity, @Local Direction direction)
-    //#endif
+    private void getContainerAt(ServerLevel level, BlockState state, BlockPos pos, CallbackInfo ci, @Local(ordinal = 0) ItemStack itemStack, @Local BlockSource blockSource, @Local int slot, @Local DispenserBlockEntity blockEntity, @Local Direction direction) //#replace < 1.20.2 ? private void getContainerAt(ServerLevel level, BlockPos pos, CallbackInfo ci, @Local(ordinal = 0) ItemStack itemStack, @Local BlockSourceImpl blockSource, @Local int slot, @Local DispenserBlockEntity blockEntity, @Local Direction direction)
     {
         if (level.getBlockEntity(pos.relative(direction)) instanceof LinkedEnderChest chest && !chest.igny$isLinked()) {
             blockEntity.setItem(slot, DISPENSE_BEHAVIOUR.dispense(blockSource, itemStack));

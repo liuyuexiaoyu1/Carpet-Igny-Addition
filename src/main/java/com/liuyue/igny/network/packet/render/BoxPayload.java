@@ -1,6 +1,6 @@
 package com.liuyue.igny.network.packet.render;
 
-//#if MC >= 12005
+//#if >= 1.20.5
 import com.liuyue.igny.network.PacketUtil;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -21,11 +21,9 @@ public record BoxPayload(
         boolean lineDepthTest,
         boolean smooth
 )
-        //#if MC >= 12005
-        implements CustomPacketPayload
-        //#endif
+        implements CustomPacketPayload //?>= 1.20.5
 {
-    //#if MC >= 12005
+    //#if >= 1.20.5
     public static final Type<BoxPayload> TYPE = PacketUtil.createId("render_box");
 
     @Override

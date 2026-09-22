@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.openDecoratedPotGui;
 
-//#if MC >= 12005
+//#if >= 1.20.5
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.helper.inventory.DecoratedPotContainer;
 import com.liuyue.igny.helper.inventory.DecoratedPotMenu;
@@ -25,14 +25,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //#endif
 import org.spongepowered.asm.mixin.Mixin;
 
-//#if MC >= 12005
-@Mixin(DecoratedPotBlock.class)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
+@Mixin(DecoratedPotBlock.class) //#replace < 1.20.5 ? @Mixin(DummyClass.class)
 public class DecoratedPotBlockMixin {
 
-    //#if MC >= 12005
+    //#if >= 1.20.5
     @Inject(method = "useWithoutItem", at = @At("HEAD"), cancellable = true)
     private void useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
         if (!IGNYSettings.OPEN_DECORATED_POT_GUI.value()) return;

@@ -12,32 +12,20 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#if MC >= 12102
-//$$ import net.minecraft.world.level.redstone.Orientation;
-//#endif
+//?>= 1.21.2 ? import net.minecraft.world.level.redstone.Orientation;
 
 @Mixin(NeighborUpdater.class)
 public interface NeighborUpdaterMixin {
     @Inject(method = "executeShapeUpdate", at = @At("HEAD"), cancellable = true)
-    //#if MC >= 12102
-    //$$ private static void executeShapeUpdate(LevelAccessor levelAccessor, Direction direction, BlockPos blockPos, BlockPos blockPos2, BlockState blockState, int i, int j, CallbackInfo ci) {
-    //#else
-    private static void executeShapeUpdate(LevelAccessor levelAccessor, Direction direction, BlockState blockState, BlockPos blockPos, BlockPos blockPos2, int i, int j, CallbackInfo ci) {
-        //#endif
+    private static void executeShapeUpdate(LevelAccessor levelAccessor, Direction direction, BlockState blockState, BlockPos blockPos, BlockPos blockPos2, int i, int j, CallbackInfo ci) { //#replace >= 1.21.2 ? private static void executeShapeUpdate(LevelAccessor levelAccessor, Direction direction, BlockPos blockPos, BlockPos blockPos2, BlockState blockState, int i, int j, CallbackInfo ci) {
         if (IGNYSettings.STRUCTURE_BLOCK_NO_BLOCK_UPDATE.value() && (IGNYSettings.noUpdatePos.contains(blockPos)|| IGNYSettings.noUpdatePos.contains(blockPos2))) ci.cancel();
     }
 
     @SuppressWarnings("all")
     @Inject(method = "executeUpdate", at = @At("HEAD"), cancellable = true)
-    //#if MC >= 12102
-    //$$ private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, Orientation orientation, boolean bl, CallbackInfo ci) {
-    //#else
-    private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, BlockPos blockPos2, boolean bl, CallbackInfo ci) {
-        //#endif
+    private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, BlockPos blockPos2, boolean bl, CallbackInfo ci) { //#replace >= 1.21.2 ? private static void executeUpdate(Level level, BlockState blockState, BlockPos blockPos, Block block, Orientation orientation, boolean bl, CallbackInfo ci) {
         if (IGNYSettings.STRUCTURE_BLOCK_NO_BLOCK_UPDATE.value() && (IGNYSettings.noUpdatePos.contains(blockPos)
-                //#if MC < 12102
-                || IGNYSettings.noUpdatePos.contains(blockPos2)
-                //#endif
+                || IGNYSettings.noUpdatePos.contains(blockPos2) //?< 1.21.2
         )) {
             ci.cancel();
             return;

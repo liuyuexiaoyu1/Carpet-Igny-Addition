@@ -54,14 +54,14 @@ public final class CommandPermissionLevel {
         if (this == TRUE) return true;
         if (this == FALSE) return false;
         if (source == null) return false;
-        //#if MC >= 12111
-        //$$ return switch (this.option) {
-        //$$     case "0" -> net.minecraft.commands.Commands.LEVEL_ALL.check(source.permissions());
-        //$$     case "1" -> net.minecraft.commands.Commands.LEVEL_MODERATORS.check(source.permissions());
-        //$$     case "3" -> net.minecraft.commands.Commands.LEVEL_ADMINS.check(source.permissions());
-        //$$     case "4" -> net.minecraft.commands.Commands.LEVEL_OWNERS.check(source.permissions());
-        //$$     default -> net.minecraft.commands.Commands.LEVEL_GAMEMASTERS.check(source.permissions());
-        //$$ };
+        //#if >= 1.21.11
+        /*$$return switch (this.option) {
+            case "0" -> net.minecraft.commands.Commands.LEVEL_ALL.check(source.permissions());
+            case "1" -> net.minecraft.commands.Commands.LEVEL_MODERATORS.check(source.permissions());
+            case "3" -> net.minecraft.commands.Commands.LEVEL_ADMINS.check(source.permissions());
+            case "4" -> net.minecraft.commands.Commands.LEVEL_OWNERS.check(source.permissions());
+            default -> net.minecraft.commands.Commands.LEVEL_GAMEMASTERS.check(source.permissions());
+        };$$*/
         //#else
         return switch (this.option) {
             case "ops", "2" -> source.hasPermission(2);

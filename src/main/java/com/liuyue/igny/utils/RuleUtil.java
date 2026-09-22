@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import java.util.Objects;
 
 public class RuleUtil {
-    //#if MC >= 12005
+    //#if >= 1.20.5
     public static Boolean canSoundSuppression(String name) {
         if ("false".equalsIgnoreCase(IGNYSettings.SIMPLE_SOUND_SUPPRESSION.value())) {
             return false;
@@ -33,11 +33,7 @@ public class RuleUtil {
         if ("false".equalsIgnoreCase(IGNYSettings.SIMPLE_ENTITY_ID_SUPPRESSION.value())) {
             return false;
         }
-        //#if MC >= 12110
-        //$$ String name = player.getGameProfile().name();
-        //#else
-        String name = player.getGameProfile().getName();
-        //#endif
+        String name = player.getGameProfile().getName(); //#replace >= 1.21.10 ? String name = player.getGameProfile().name();
         if ("true".equalsIgnoreCase(IGNYSettings.SIMPLE_ENTITY_ID_SUPPRESSION.value())) {
             return "eIDSuppression".equalsIgnoreCase(name);
         }
@@ -72,10 +68,10 @@ public class RuleUtil {
 
     public static boolean isNightmarishBlock(Block block) {
         return block.equals(Blocks.BUDDING_AMETHYST)
-                //#if MC >= 12005
+                //#if >= 1.20.5
                 || block.equals(Blocks.TRIAL_SPAWNER)
                 || block.equals(Blocks.VAULT)
-                //#elseif MC >= 12003
+                //#elseif >= 1.20.3
                 //$$ || block.equals(Blocks.TRIAL_SPAWNER)
                 //#endif
                 ;

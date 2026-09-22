@@ -53,9 +53,7 @@ public class FixnotepitchCommmand {
         final int changedCount = calculateNoteBlockChanges(level, minX, minY, minZ, maxX, maxY, maxZ, targetPitch);
 
         source.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                         Component.translatable("igny.command.fixnotepitch.success", changedCount, targetPitch),
                 true
         );

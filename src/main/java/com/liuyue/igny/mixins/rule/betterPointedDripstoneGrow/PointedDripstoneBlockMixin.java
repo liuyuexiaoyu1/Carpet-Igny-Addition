@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.betterPointedDripstoneGrow;
 
-//#if MC < 26.1
+//#if < 26.1
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
@@ -15,13 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //#endif
 import org.spongepowered.asm.mixin.Mixin;
 
-//#if MC >= 26.1
-//$$ @Mixin(DummyClass.class)
-//#else
-@Mixin(PointedDripstoneBlock.class)
-//#endif
+@Mixin(PointedDripstoneBlock.class) //#replace >= 26.1 ? @Mixin(DummyClass.class)
 public class PointedDripstoneBlockMixin {
-    //#if MC < 26.1
+    //#if < 26.1
     @Inject(method = "canGrow", at = @At(value = "HEAD"), cancellable = true)
     private static void canGrow(BlockState dripstoneState, BlockState state, CallbackInfoReturnable<Boolean> cir) {
         if (IGNYSettings.BETTER_POINTED_DRIPSTONE_GROW.value()) {

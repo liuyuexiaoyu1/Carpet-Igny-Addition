@@ -20,10 +20,10 @@ import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-//#if MC < 12005
-//$$ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-//$$ import net.minecraft.network.FriendlyByteBuf;
-//$$ import com.liuyue.igny.IGNYServer;
+//#if < 1.20.5
+/*$$import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.network.FriendlyByteBuf;
+import com.liuyue.igny.IGNYServer;$$*/
 //#endif
 
 import java.util.List;
@@ -45,16 +45,16 @@ public abstract class BeaconBlockEntityMixin {
         if (logger == null || !IGNYLoggers.beacon || !logger.hasOnlineSubscribers()) return original.call(instance, aClass, aabb);
         if (instance.isClientSide()) return original.call(instance, aClass, aabb);
         if (logger.hasOnlineSubscribers() && !instance.isClientSide() && instance instanceof ServerLevel serverLevel) {
-            //#if MC < 12005
-            //$$ FriendlyByteBuf buf = PacketByteBufs.create();
-            //$$ buf.writeBlockPos(pos);
-            //$$ buf.writeInt(0x4400FFFF);
-            //$$ buf.writeInt(90);
-            //$$ buf.writeBoolean(false);
-            //$$ buf.writeBoolean(true);
-            //$$ buf.writeDouble(aabb.minX); buf.writeDouble(aabb.minY); buf.writeDouble(aabb.minZ);
-            //$$ buf.writeDouble(aabb.maxX); buf.writeDouble(aabb.maxY); buf.writeDouble(aabb.maxZ);
-            //$$ buf.writeBoolean(true); buf.writeBoolean(false); buf.writeBoolean(true);
+            //#if < 1.20.5
+            /*$$FriendlyByteBuf buf = PacketByteBufs.create();
+            buf.writeBlockPos(pos);
+            buf.writeInt(0x4400FFFF);
+            buf.writeInt(90);
+            buf.writeBoolean(false);
+            buf.writeBoolean(true);
+            buf.writeDouble(aabb.minX); buf.writeDouble(aabb.minY); buf.writeDouble(aabb.minZ);
+            buf.writeDouble(aabb.maxX); buf.writeDouble(aabb.maxY); buf.writeDouble(aabb.maxZ);
+            buf.writeBoolean(true); buf.writeBoolean(false); buf.writeBoolean(true);$$*/
             //#else
             BoxPayload payload = new BoxPayload(
                     pos, 0x2000FFFF, 90, false, true, aabb,
@@ -67,18 +67,14 @@ public abstract class BeaconBlockEntityMixin {
             chunkSource.chunkMap.getPlayers(chunk.getPos(), false)
                     .forEach(player -> {
                         String name = player.getGameProfile().
-                                //#if MC >= 12110
+                                //#if >= 1.21.10
                                 //$$ name();
                                 //#else
                                         getName();
                         //#endif
                         if (!((LoggerAccessor) logger).getSubscribedOnlinePlayers().containsKey(name)) return;
 
-                        //#if MC >= 12005
-                        if (ServerPlayNetworking.canSend(player, BoxPayload.TYPE)) ServerPlayNetworking.send(player, payload);
-                        //#else
-                        //$$ if (ServerPlayNetworking.canSend(player, IGNYServer.RENDER_BOX_PACKET_ID)) ServerPlayNetworking.send(player, IGNYServer.RENDER_BOX_PACKET_ID, buf);
-                        //#endif
+                        if (ServerPlayNetworking.canSend(player, BoxPayload.TYPE)) ServerPlayNetworking.send(player, payload); //#replace < 1.20.5 ? if (ServerPlayNetworking.canSend(player, IGNYServer.RENDER_BOX_PACKET_ID)) ServerPlayNetworking.send(player, IGNYServer.RENDER_BOX_PACKET_ID, buf);
                     });
         }
         return original.call(instance, aClass, aabb);
@@ -99,14 +95,14 @@ public abstract class BeaconBlockEntityMixin {
                 !logger.hasOnlineSubscribers()) return original.call(list);
 
         if (logger.hasOnlineSubscribers() && level instanceof ServerLevel serverLevel && (list.isEmpty() || updateBase(level, pos.getX(), pos.getY(), pos.getZ()) == 0)) {
-            //#if MC < 12005
-            //$$ FriendlyByteBuf stopBuf = PacketByteBufs.create();
-            //$$ stopBuf.writeBlockPos(pos);
-            //$$ stopBuf.writeInt(0); stopBuf.writeInt(0);
-            //$$ stopBuf.writeBoolean(false); stopBuf.writeBoolean(true);
-            //$$ stopBuf.writeDouble(beacon.getBlockPos().getX()); stopBuf.writeDouble(beacon.getBlockPos().getY()); stopBuf.writeDouble(beacon.getBlockPos().getZ());
-            //$$ stopBuf.writeDouble(beacon.getBlockPos().getX()); stopBuf.writeDouble(beacon.getBlockPos().getY()); stopBuf.writeDouble(beacon.getBlockPos().getZ());
-            //$$ stopBuf.writeBoolean(true); stopBuf.writeBoolean(false); stopBuf.writeBoolean(true);
+            //#if < 1.20.5
+            /*$$FriendlyByteBuf stopBuf = PacketByteBufs.create();
+            stopBuf.writeBlockPos(pos);
+            stopBuf.writeInt(0); stopBuf.writeInt(0);
+            stopBuf.writeBoolean(false); stopBuf.writeBoolean(true);
+            stopBuf.writeDouble(beacon.getBlockPos().getX()); stopBuf.writeDouble(beacon.getBlockPos().getY()); stopBuf.writeDouble(beacon.getBlockPos().getZ());
+            stopBuf.writeDouble(beacon.getBlockPos().getX()); stopBuf.writeDouble(beacon.getBlockPos().getY()); stopBuf.writeDouble(beacon.getBlockPos().getZ());
+            stopBuf.writeBoolean(true); stopBuf.writeBoolean(false); stopBuf.writeBoolean(true);$$*/
             //#else
             BoxPayload stopPayload = new BoxPayload(
                     beacon.getBlockPos(), 0, 0, false, true, new AABB(beacon.getBlockPos()),
@@ -116,18 +112,14 @@ public abstract class BeaconBlockEntityMixin {
 
             for (ServerPlayer player : serverLevel.getServer().getPlayerList().getPlayers()) {
                 String name = player.getGameProfile().
-                        //#if MC >= 12110
+                        //#if >= 1.21.10
                         //$$ name();
                         //#else
                                 getName();
                 //#endif
                 if (!((LoggerAccessor) logger).getSubscribedOnlinePlayers().containsKey(name)) continue;
 
-                //#if MC >= 12005
-                if (ServerPlayNetworking.canSend(player, BoxPayload.TYPE)) ServerPlayNetworking.send(player, stopPayload);
-                //#else
-                //$$ if (ServerPlayNetworking.canSend(player, IGNYServer.RENDER_BOX_PACKET_ID)) ServerPlayNetworking.send(player, IGNYServer.RENDER_BOX_PACKET_ID, stopBuf);
-                //#endif
+                if (ServerPlayNetworking.canSend(player, BoxPayload.TYPE)) ServerPlayNetworking.send(player, stopPayload); //#replace < 1.20.5 ? if (ServerPlayNetworking.canSend(player, IGNYServer.RENDER_BOX_PACKET_ID)) ServerPlayNetworking.send(player, IGNYServer.RENDER_BOX_PACKET_ID, stopBuf);
             }
         }
         return original.call(list);

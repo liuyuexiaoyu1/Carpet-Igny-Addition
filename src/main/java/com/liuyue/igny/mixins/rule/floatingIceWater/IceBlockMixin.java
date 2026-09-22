@@ -2,9 +2,9 @@ package com.liuyue.igny.mixins.rule.floatingIceWater;
 
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.core.BlockPos;
-//#if MC >= 26.3
-//$$ import net.minecraft.server.level.ServerLevel;
-//$$ import net.minecraft.server.level.ServerPlayer;
+//#if >= 26.3
+/*$$import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;$$*/
 //#else
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -21,9 +21,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(IceBlock.class)
 public class IceBlockMixin {
-    //#if MC >= 26.3
-    //$$ @Inject(method = "playerDestroy",at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"), cancellable = true)
-    //$$ private void spawnWater(ServerLevel level, ServerPlayer player, BlockPos blockPos, BlockState state, BlockEntity blockEntity, ItemStack destroyedWith, CallbackInfo ci)
+    //#if >= 26.3
+    /*$$@Inject(method = "playerDestroy",at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"), cancellable = true)
+    private void spawnWater(ServerLevel level, ServerPlayer player, BlockPos blockPos, BlockState state, BlockEntity blockEntity, ItemStack destroyedWith, CallbackInfo ci)$$*/
     //#else
     @Inject(method = "playerDestroy",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getBlockState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;"), cancellable = true)
     private void spawnWater(Level level, Player player, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, ItemStack itemStack, CallbackInfo ci)

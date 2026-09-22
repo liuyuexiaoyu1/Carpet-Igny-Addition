@@ -19,12 +19,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.HashMap;
 import java.util.Map;
 
-//#if MC >= 12110
-//$$ import net.minecraft.client.input.MouseButtonEvent;
-//#endif
-//#if MC >= 26.1
+//?>= 1.21.10 ? import net.minecraft.client.input.MouseButtonEvent;
+//#if >= 26.1
 //$$ import net.minecraft.client.gui.GuiGraphicsExtractor;
-//#elseif MC > 11904
+//#elseif > 1.19.4
 import net.minecraft.client.gui.GuiGraphics;
 //#else
 //$$ import com.mojang.blaze3d.vertex.PoseStack;
@@ -81,21 +79,13 @@ public abstract class TitleScreenMixin extends Screen {
     }
 
     @Inject(method = "mouseClicked", at = @At("RETURN"))
-    //#if MC >= 12110
-    //$$ private void onButtonClicked(MouseButtonEvent event, boolean doubleClick, CallbackInfoReturnable<Boolean> cir)
-    //#else
-    private void onButtonClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir)
-    //#endif
+    private void onButtonClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) //#replace >= 1.21.10 ? private void onButtonClicked(MouseButtonEvent event, boolean doubleClick, CallbackInfoReturnable<Boolean> cir)
     {
         if (!isAprilFoolsActive || !cir.getReturnValueZ() || !EasterEggDataManager.INSTANCE.isAprilFoolsActive()) return;
 
         for (Renderable renderable : ((ScreenAccessor) this).getRenderalbe()) {
             if (renderable instanceof AbstractWidget widget && widget != surrenderButton) {
-                //#if MC >= 12110
-                //$$ if (widget.isMouseOver(event.x(), event.y()))
-                //#else
-                if (widget.isMouseOver(mouseX, mouseY))
-                //#endif
+                if (widget.isMouseOver(mouseX, mouseY)) //#replace >= 1.21.10 ? if (widget.isMouseOver(event.x(), event.y()))
                 {
                     String key = getTranslationKey(widget);
                     if ("menu.singleplayer".equals(key) || "menu.multiplayer".equals(key)) {
@@ -126,14 +116,10 @@ public abstract class TitleScreenMixin extends Screen {
         }
     }
 
-    //#if MC >= 26.1
-    //$$ @Inject(method = "extractRenderState", at = @At("HEAD"))
-    //#else
-    @Inject(method = "render", at = @At("HEAD"))
-    //#endif
-    //#if MC >= 26.1
+    @Inject(method = "render", at = @At("HEAD")) //#replace >= 26.1 ? @Inject(method = "extractRenderState", at = @At("HEAD"))
+    //#if >= 26.1
     //$$ private void applyPclPhysics(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a, CallbackInfo ci)
-    //#elseif MC > 11904
+    //#elseif > 1.19.4
     private void applyPclPhysics(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci)
     //#else
     //$$ private void applyPclPhysics(PoseStack poseStack, int mouseX, int mouseY, float partialTick, CallbackInfo ci)

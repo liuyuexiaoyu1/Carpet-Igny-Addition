@@ -13,12 +13,8 @@ import net.minecraft.nbt.TagParser;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-//#if MC >= 12105
-//$$ import net.minecraft.util.ProblemReporter;
-//#endif
-//#if MC >= 12105
-//$$ import java.util.Optional;
-//#endif
+//?>= 1.21.5 ? import net.minecraft.util.ProblemReporter;
+//?>= 1.21.5 ? import java.util.Optional;
 
 public class LinkedContainerManager extends BaseDataManager<Map<String, String>> {
     public static final LinkedContainerManager INSTANCE = new LinkedContainerManager();
@@ -64,36 +60,24 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
         data.forEach((key, snbt) -> {
             LinkedContainer container = get(key);
             try {
-                //#if MC >= 12105
-                //$$ CompoundTag nbt = TagParser.parseCompoundFully(snbt);
+                CompoundTag nbt = TagParser.parseTag(snbt); //#replace >= 1.21.5 ? CompoundTag nbt = TagParser.parseCompoundFully(snbt);
+                //#if >= 1.21.6
+                /*$$var input = net.minecraft.world.level.storage.TagValueInput.create(
+                                     ProblemReporter.DISCARDING,
+                                     provider,
+                                     nbt
+                             );
+                             input.read("Items", net.minecraft.world.item.component.ItemContainerContents.CODEC).ifPresent(contents -> {
+                                 container.clearContent();
+                                 contents.copyInto(container.getItems());
+                                 // for (int i = 0; i < container.getContainerSize(); i++) {
+                                 //     container.setItem(i, contents.getStack(i));
+                                 // }
+                });$$*/
                 //#else
-                CompoundTag nbt = TagParser.parseTag(snbt);
-                //#endif
-                //#if MC >= 12106
-                //$$ var input = net.minecraft.world.level.storage.TagValueInput.create(
-                //$$                      ProblemReporter.DISCARDING,
-                //$$                      provider,
-                //$$                      nbt
-                //$$              );
-                //$$              input.read("Items", net.minecraft.world.item.component.ItemContainerContents.CODEC).ifPresent(contents -> {
-                //$$                  container.clearContent();
-                //$$                  contents.copyInto(container.getItems());
-                //$$                  // for (int i = 0; i < container.getContainerSize(); i++) {
-                //$$                  //     container.setItem(i, contents.getStack(i));
-                //$$                  // }
-                //$$              });
-                //#else
-                //#if MC >= 12105
-                //$$ Optional<ListTag> itemsTag = nbt.getList("Items");
-                //#else
-                ListTag itemsTag = nbt.getList("Items", Tag.TAG_COMPOUND);
-                //#endif
-                //#if MC >= 12005
-                //#if MC >= 12105
-                //$$ itemsTag.ifPresent(tag -> container.fromTag(tag, provider));
-                //#else
-                container.fromTag(itemsTag, provider);
-                //#endif
+                ListTag itemsTag = nbt.getList("Items", Tag.TAG_COMPOUND); //#replace >= 1.21.5 ? Optional<ListTag> itemsTag = nbt.getList("Items");
+                //#if >= 1.20.5
+                container.fromTag(itemsTag, provider); //#replace >= 1.21.5 ? itemsTag.ifPresent(tag -> container.fromTag(tag, provider));
                 //#else
                 //$$ container.fromTag(itemsTag);
                 //#endif

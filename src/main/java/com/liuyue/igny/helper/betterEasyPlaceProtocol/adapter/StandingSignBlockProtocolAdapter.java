@@ -60,7 +60,7 @@ public class StandingSignBlockProtocolAdapter implements BlockProtocolStateAdapt
         return ProtocolType.ADDED;
     }
 
-    //#if MC >= 12001
+    //#if >= 1.20.1
     @Override
     public int igny$toProtocolValueAddition(ItemStack fromStack) {
         int attributes = 0;
@@ -70,11 +70,7 @@ public class StandingSignBlockProtocolAdapter implements BlockProtocolStateAdapt
         }
         attributes |= encodeSignTextFromTag(tag, "front_text", BIT_GLOWING, BIT_COLOR_MASK, BIT_COLOR_SHIFT);
         attributes |= encodeSignTextFromTag(tag, "back_text", BIT_BACK_GLOWING, BIT_BACK_COLOR_MASK, BIT_BACK_COLOR_SHIFT);
-        //#if MC >= 12105
-        //$$ if (tag.getBoolean("is_waxed").orElse(false)) attributes |= BIT_WAXED;
-        //#else
-        if (tag.getBoolean("is_waxed")) attributes |= BIT_WAXED;
-        //#endif
+        if (tag.getBoolean("is_waxed")) attributes |= BIT_WAXED; //#replace >= 1.21.5 ? if (tag.getBoolean("is_waxed").orElse(false)) attributes |= BIT_WAXED;
         return attributes;
     }
 
@@ -100,22 +96,22 @@ public class StandingSignBlockProtocolAdapter implements BlockProtocolStateAdapt
         return setBlockEntityTag(stackCopy, tag);
     }
 
-    //#if MC >= 12105
-    //$$ private static int encodeSignTextFromTag(CompoundTag tag, String key, int glowingBit, int colorMask, int colorShift) {
-    //$$     int attributes = 0;
-    //$$     CompoundTag text = tag.getCompound(key).orElse(null);
-    //$$     if (text != null && !text.isEmpty()) {
-    //$$         if (text.getBoolean("has_glowing_text").orElse(false)) attributes |= glowingBit;
-    //$$         String colorName = text.getString("color").orElse("");
-    //$$         for (DyeColor c : DyeColor.values()) {
-    //$$             if (c.getName().equals(colorName)) {
-    //$$                 attributes |= (c.ordinal() & 0b1111) << colorShift;
-    //$$                 break;
-    //$$             }
-    //$$         }
-    //$$     }
-    //$$     return attributes;
-    //$$ }
+    //#if >= 1.21.5
+    /*$$private static int encodeSignTextFromTag(CompoundTag tag, String key, int glowingBit, int colorMask, int colorShift) {
+        int attributes = 0;
+        CompoundTag text = tag.getCompound(key).orElse(null);
+        if (text != null && !text.isEmpty()) {
+            if (text.getBoolean("has_glowing_text").orElse(false)) attributes |= glowingBit;
+            String colorName = text.getString("color").orElse("");
+            for (DyeColor c : DyeColor.values()) {
+                if (c.getName().equals(colorName)) {
+                    attributes |= (c.ordinal() & 0b1111) << colorShift;
+                    break;
+                }
+            }
+        }
+        return attributes;
+    }$$*/
     //#else
     private static int encodeSignTextFromTag(CompoundTag tag, String key, int glowingBit, int colorMask, int colorShift) {
         int attributes = 0;
@@ -135,11 +131,7 @@ public class StandingSignBlockProtocolAdapter implements BlockProtocolStateAdapt
     //#endif
 
     private static void applySignTextProperties(CompoundTag tag, String key, DyeColor color, boolean glowing) {
-        //#if MC >= 12105
-        //$$ CompoundTag text = tag.getCompound(key).orElse(null);
-        //#else
-        CompoundTag text = tag.getCompound(key);
-        //#endif
+        CompoundTag text = tag.getCompound(key); //#replace >= 1.21.5 ? CompoundTag text = tag.getCompound(key).orElse(null);
         if (text == null) {
             text = new CompoundTag();
             tag.put(key, text);
@@ -147,11 +139,7 @@ public class StandingSignBlockProtocolAdapter implements BlockProtocolStateAdapt
         if (!text.contains("messages")) {
             net.minecraft.nbt.ListTag messages = new net.minecraft.nbt.ListTag();
             for (int i = 0; i < 4; ++i) {
-                //#if MC >= 12110
-                //$$ messages.add(net.minecraft.nbt.StringTag.valueOf(""));
-                //#else
-                messages.add(net.minecraft.nbt.StringTag.valueOf("\"\""));
-                //#endif
+                messages.add(net.minecraft.nbt.StringTag.valueOf("\"\"")); //#replace >= 1.21.10 ? messages.add(net.minecraft.nbt.StringTag.valueOf(""));
             }
             text.put("messages", messages);
         }
@@ -160,53 +148,53 @@ public class StandingSignBlockProtocolAdapter implements BlockProtocolStateAdapt
         tag.put(key, text);
     }
     //#else
-    //$$ @Override
-    //$$ public int igny$toProtocolValueAddition(ItemStack fromStack) {
-    //$$     int attributes = 0;
-    //$$     CompoundTag tag = getBlockEntityTag(fromStack);
-    //$$     if (tag == null) {
-    //$$         return 0;
-    //$$     }
-    //$$     if (tag.getBoolean("GlowingText")) attributes |= BIT_GLOWING;
-    //$$     String colorName = tag.getString("Color");
-    //$$     for (DyeColor c : DyeColor.values()) {
-    //$$         if (c.getName().equals(colorName)) {
-    //$$             attributes |= (c.ordinal() & 0b1111) << BIT_COLOR_SHIFT;
-    //$$             break;
-    //$$         }
-    //$$     }
-    //$$     return attributes;
-    //$$ }
+    /*$$@Override
+    public int igny$toProtocolValueAddition(ItemStack fromStack) {
+        int attributes = 0;
+        CompoundTag tag = getBlockEntityTag(fromStack);
+        if (tag == null) {
+            return 0;
+    }
+        if (tag.getBoolean("GlowingText")) attributes |= BIT_GLOWING;
+        String colorName = tag.getString("Color");
+        for (DyeColor c : DyeColor.values()) {
+            if (c.getName().equals(colorName)) {
+                attributes |= (c.ordinal() & 0b1111) << BIT_COLOR_SHIFT;
+                break;
+        }
+            }
+        return attributes;
+    }$$*/
     //$$
-    //$$ @Override
-    //$$ public @NotNull ItemStack igny$fromProtocolValueAddition(int extraProtocolValue, ItemStack fromStack) {
-    //$$     ItemStack stackCopy = fromStack.copy();
-    //$$     boolean glowing = (extraProtocolValue & BIT_GLOWING) != 0;
-    //$$     int colorOrdinal = (extraProtocolValue & BIT_COLOR_MASK) >>> BIT_COLOR_SHIFT;
-    //$$     DyeColor[] colors = DyeColor.values();
-    //$$     DyeColor color = colorOrdinal < colors.length ? colors[colorOrdinal] : DyeColor.BLACK;
-    //$$     CompoundTag tag = getBlockEntityTag(stackCopy);
-    //$$     if (tag == null) {
-    //$$         tag = new CompoundTag();
-    //$$     }
-    //$$     tag.putString("Color", color.getName());
-    //$$     tag.putBoolean("GlowingText", glowing);
-    //$$     return setBlockEntityTag(stackCopy, tag);
-    //$$ }
+    /*$$@Override
+    public @NotNull ItemStack igny$fromProtocolValueAddition(int extraProtocolValue, ItemStack fromStack) {
+        ItemStack stackCopy = fromStack.copy();
+        boolean glowing = (extraProtocolValue & BIT_GLOWING) != 0;
+        int colorOrdinal = (extraProtocolValue & BIT_COLOR_MASK) >>> BIT_COLOR_SHIFT;
+        DyeColor[] colors = DyeColor.values();
+        DyeColor color = colorOrdinal < colors.length ? colors[colorOrdinal] : DyeColor.BLACK;
+        CompoundTag tag = getBlockEntityTag(stackCopy);
+        if (tag == null) {
+            tag = new CompoundTag();
+        }
+        tag.putString("Color", color.getName());
+        tag.putBoolean("GlowingText", glowing);
+        return setBlockEntityTag(stackCopy, tag);
+    }$$*/
     //#endif
 
-    //#if MC < 12005
-    //$$ private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
-    //$$     return stack.getTagElement("BlockEntityTag");
-    //$$ }
-    //$$ private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
-    //$$     ItemStack stackCopy = stack.copy();
-    //$$     tag.putString("id", "minecraft:sign");
-    //$$     stackCopy.getOrCreateTag().put("BlockEntityTag", tag);
-    //$$     return stackCopy;
-    //$$ }
+    //#if < 1.20.5
+    /*$$private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
+        return stack.getTagElement("BlockEntityTag");
+    }
+    private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
+        ItemStack stackCopy = stack.copy();
+        tag.putString("id", "minecraft:sign");
+        stackCopy.getOrCreateTag().put("BlockEntityTag", tag);
+        return stackCopy;
+    }$$*/
     //#endif
-    //#if MC >= 12005 && MC < 12110
+    //#if 1.20.5..1.21.10
     private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
         net.minecraft.world.item.component.CustomData data = stack.get(net.minecraft.core.component.DataComponents.BLOCK_ENTITY_DATA);
         return data == null ? null : data.copyTag();
@@ -219,21 +207,21 @@ public class StandingSignBlockProtocolAdapter implements BlockProtocolStateAdapt
         return stackCopy;
     }
     //#endif
-    //#if MC >= 12110
-    //$$ private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
-    //$$     net.minecraft.world.item.component.TypedEntityData<?> data = stack.get(net.minecraft.core.component.DataComponents.BLOCK_ENTITY_DATA);
-    //$$     return data == null ? null : data.copyTagWithoutId();
-    //$$ }
+    //#if >= 1.21.10
+    /*$$private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
+        net.minecraft.world.item.component.TypedEntityData<?> data = stack.get(net.minecraft.core.component.DataComponents.BLOCK_ENTITY_DATA);
+        return data == null ? null : data.copyTagWithoutId();
+    }$$*/
     //$$
-    //$$ private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
-    //$$     ItemStack stackCopy = stack.copy();
-    //$$     stackCopy.set(net.minecraft.core.component.DataComponents.BLOCK_ENTITY_DATA,
-    //#if MC >= 26.2
+    /*$$private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
+        ItemStack stackCopy = stack.copy();
+    stackCopy.set(net.minecraft.core.component.DataComponents.BLOCK_ENTITY_DATA,$$*/
+    //#if >= 26.2
     //$$             net.minecraft.world.item.component.TypedEntityData.of(net.minecraft.world.level.block.entity.BlockEntityTypes.SIGN, tag));
     //#else
     //$$             net.minecraft.world.item.component.TypedEntityData.of(net.minecraft.world.level.block.entity.BlockEntityType.SIGN, tag));
     //#endif
-    //$$     return stackCopy;
-    //$$ }
+    /*$$return stackCopy;
+    }$$*/
     //#endif
 }

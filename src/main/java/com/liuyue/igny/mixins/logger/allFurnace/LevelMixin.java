@@ -20,10 +20,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 
-//#if MC < 12005
-//$$ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-//$$ import net.minecraft.network.FriendlyByteBuf;
-//$$ import com.liuyue.igny.IGNYServer;
+//#if < 1.20.5
+/*$$import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.network.FriendlyByteBuf;
+import com.liuyue.igny.IGNYServer;$$*/
 //#endif
 
 @Mixin(Level.class)
@@ -47,28 +47,24 @@ public abstract class LevelMixin {
     @Unique
     private void removeHighlightToClient(ServerLevel level, BlockPos pos) {
         if (!level.isClientSide()) {
-            //#if MC < 12005
-            //$$ FriendlyByteBuf buf = PacketByteBufs.create();
-            //$$ buf.writeBlockPos(pos);
+            //#if < 1.20.5
+            /*$$FriendlyByteBuf buf = PacketByteBufs.create();
+            buf.writeBlockPos(pos);$$*/
             //#endif
             level.players().stream()
                     .filter(player -> player instanceof ServerPlayer)
                     .forEach(player -> {
                         if (ServerPlayNetworking.canSend(player,
-                                //#if MC >= 12005
-                                RemoveHighlightPayload.TYPE
-                                //#else
-                                //$$ IGNYServer.REMOVE_HIGHLIGHT_PACKET_ID
-                                //#endif
+                                RemoveHighlightPayload.TYPE //#replace < 1.20.5 ? IGNYServer.REMOVE_HIGHLIGHT_PACKET_ID
 
                         )) {
                             ServerPlayNetworking.send(
                                     player,
-                                    //#if MC >= 12005
+                                    //#if >= 1.20.5
                                     new RemoveHighlightPayload(pos)
                                     //#else
-                                    //$$ IGNYServer.REMOVE_HIGHLIGHT_PACKET_ID,
-                                    //$$ buf
+                                    /*$$IGNYServer.REMOVE_HIGHLIGHT_PACKET_ID,
+                                    buf$$*/
                                     //#endif
                             );
                         }

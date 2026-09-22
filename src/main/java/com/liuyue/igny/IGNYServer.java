@@ -16,9 +16,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-//#if MC < 12005
-//$$ import net.minecraft.resources.ResourceLocation;
-//#endif
+//?< 1.20.5 ? import net.minecraft.resources.ResourceLocation;
 
 import java.util.Map;
 
@@ -32,12 +30,12 @@ public class IGNYServer implements CarpetExtension {
     private static MinecraftServer minecraftServer;
     private static final IGNYServer INSTANCE = new IGNYServer();
 
-    //#if MC < 12005
-    //$$ public static final ResourceLocation HIGHLIGHT_PACKET_ID = new ResourceLocation(MOD_ID, "highlight_block");
-    //$$ public static final ResourceLocation REMOVE_HIGHLIGHT_PACKET_ID = new ResourceLocation(MOD_ID, "remove_highlight_block");
-    //$$ public static final ResourceLocation SYNC_STACK_SIZE_PACKET_ID = new ResourceLocation(MOD_ID, "sync_custom_stack_size");
-    //$$ public static final ResourceLocation RENDER_BOX_PACKET_ID = new ResourceLocation(MOD_ID, "render_box");
-    //$$ public static final ResourceLocation SYNC_LINKED_ENDER_CHEST_PACKET_ID = new ResourceLocation(MOD_ID, "sync_linked_ender_chest");
+    //#if < 1.20.5
+    /*$$public static final ResourceLocation HIGHLIGHT_PACKET_ID = new ResourceLocation(MOD_ID, "highlight_block");
+    public static final ResourceLocation REMOVE_HIGHLIGHT_PACKET_ID = new ResourceLocation(MOD_ID, "remove_highlight_block");
+    public static final ResourceLocation SYNC_STACK_SIZE_PACKET_ID = new ResourceLocation(MOD_ID, "sync_custom_stack_size");
+    public static final ResourceLocation RENDER_BOX_PACKET_ID = new ResourceLocation(MOD_ID, "render_box");
+    public static final ResourceLocation SYNC_LINKED_ENDER_CHEST_PACKET_ID = new ResourceLocation(MOD_ID, "sync_linked_ender_chest");$$*/
     //#endif
 
     public static IGNYServer getInstance() {
@@ -96,9 +94,7 @@ public class IGNYServer implements CarpetExtension {
 
     @Override
     public void onPlayerLoggedIn(ServerPlayer player) {
-        //#if MC >= 12006
-        PacketUtil.sendCustomStackSizeToClient(player);
-        //#endif
+        PacketUtil.sendCustomStackSizeToClient(player); //?>= 1.20.6
         TickUtil.checkTickRate(minecraftServer);
     }
 

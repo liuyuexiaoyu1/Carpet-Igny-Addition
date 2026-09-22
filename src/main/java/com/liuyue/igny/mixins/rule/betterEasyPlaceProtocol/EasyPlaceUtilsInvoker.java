@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.betterEasyPlaceProtocol;
 
-//#if MC >= 12101
+//#if >= 1.21.1
 import fi.dy.masa.litematica.util.EasyPlaceUtils;
 import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -10,13 +10,9 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.Mixin;
 
 
-//#if MC <= 12006
-//$$ @Mixin(DummyClass.class)
-//#else
-@Mixin(EasyPlaceUtils.class)
-//#endif
+@Mixin(EasyPlaceUtils.class) //#replace <= 1.20.6 ? @Mixin(DummyClass.class)
 public interface EasyPlaceUtilsInvoker {
-    //#if MC >= 12101
+    //#if >= 1.21.1
     @Invoker("cacheEasyPlacePosition")
     static void invokeCacheEasyPlacePosition(BlockPos pos) {}
     //#endif

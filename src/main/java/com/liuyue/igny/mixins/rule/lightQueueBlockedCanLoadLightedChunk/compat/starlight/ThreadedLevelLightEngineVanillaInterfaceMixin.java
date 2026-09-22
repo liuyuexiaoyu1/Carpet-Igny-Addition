@@ -5,11 +5,7 @@ import com.liuyue.igny.IGNYSettings;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.level.chunk.ChunkAccess;
-//#if MC >= 12101
-import net.minecraft.world.level.chunk.status.ChunkStatus;
-//#else
-//$$ import net.minecraft.world.level.chunk.ChunkStatus;
-//#endif
+import net.minecraft.world.level.chunk.status.ChunkStatus; //#replace < 1.21.1 ? import net.minecraft.world.level.chunk.ChunkStatus;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -29,11 +25,7 @@ public abstract class ThreadedLevelLightEngineVanillaInterfaceMixin {
     @Unique
     private static boolean alreadyLighted(ChunkAccess chunk) {
         return chunk != null
-                //#if MC >= 12101
-                && chunk.getPersistedStatus().isOrAfter(ChunkStatus.LIGHT)
-                //#else
-                //$$ && chunk.getStatus().isOrAfter(ChunkStatus.LIGHT)
-                //#endif
+                && chunk.getPersistedStatus().isOrAfter(ChunkStatus.LIGHT) //#replace < 1.21.1 ? && chunk.getStatus().isOrAfter(ChunkStatus.LIGHT)
                 && chunk.isLightCorrect();
     }
 

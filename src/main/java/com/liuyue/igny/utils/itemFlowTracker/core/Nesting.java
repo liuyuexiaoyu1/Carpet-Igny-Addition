@@ -6,14 +6,12 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-//#if MC >= 12005
+//#if >= 1.20.5
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 //#endif
-//#if MC >= 26.1
-//$$ import net.minecraft.world.item.ItemStackTemplate;
-//#endif
+//?>= 26.1 ? import net.minecraft.world.item.ItemStackTemplate;
 
 public final class Nesting {
     private static final int MAX_DEPTH = 4;
@@ -30,7 +28,7 @@ public final class Nesting {
             return mark;
         }
 
-        //#if MC >= 12005
+        //#if >= 1.20.5
         return inContents(
                 stack.get(DataComponents.CONTAINER),
                 stack.get(DataComponents.BUNDLE_CONTENTS),
@@ -77,32 +75,32 @@ public final class Nesting {
         return entity instanceof Container container ? inContainer(container) : null;
     }
 
-    //#if MC >= 12005
+    //#if >= 1.20.5
     @Nullable
     private static TrackMark inContents(
             @Nullable ItemContainerContents container,
             @Nullable BundleContents bundle,
             int depth) {
-        //#if MC >= 26.1
-        //$$ if (container != null) {
-        //$$     for (ItemStackTemplate nested : container.nonEmptyItems()) {
-        //$$         TrackMark mark = inTemplate(nested, depth + 1);
+        //#if >= 26.1
+        /*$$if (container != null) {
+            for (ItemStackTemplate nested : container.nonEmptyItems()) {
+        TrackMark mark = inTemplate(nested, depth + 1);$$*/
         //$$
-        //$$         if (mark != null) {
-        //$$             return mark;
-        //$$         }
-        //$$     }
-        //$$ }
+        /*$$if (mark != null) {
+                    return mark;
+                }
+            }
+        }$$*/
         //$$
-        //$$ if (bundle != null) {
-        //$$     for (ItemStackTemplate nested : bundle.items()) {
-        //$$         TrackMark mark = inTemplate(nested, depth + 1);
+        /*$$if (bundle != null) {
+            for (ItemStackTemplate nested : bundle.items()) {
+        TrackMark mark = inTemplate(nested, depth + 1);$$*/
         //$$
-        //$$         if (mark != null) {
-        //$$             return mark;
-        //$$         }
-        //$$     }
-        //$$ }
+        /*$$if (mark != null) {
+                    return mark;
+        }
+                }
+        }$$*/
         //#else
         if (container != null) {
             for (ItemStack nested : container.nonEmptyItems()) {
@@ -129,17 +127,17 @@ public final class Nesting {
     }
     //#endif
 
-    //#if MC >= 26.1
-    //$$ @Nullable
-    //$$ private static TrackMark inTemplate(ItemStackTemplate template, int depth) {
-    //$$     if (depth >= MAX_DEPTH) {
-    //$$         return null;
-    //$$     }
+    //#if >= 26.1
+    /*$$@Nullable
+    private static TrackMark inTemplate(ItemStackTemplate template, int depth) {
+        if (depth >= MAX_DEPTH) {
+        return null;
+    }$$*/
     //$$
-    //$$     return inContents(
-    //$$             template.get(DataComponents.CONTAINER),
-    //$$             template.get(DataComponents.BUNDLE_CONTENTS),
-    //$$             depth);
-    //$$ }
+    /*$$return inContents(
+                template.get(DataComponents.CONTAINER),
+                template.get(DataComponents.BUNDLE_CONTENTS),
+                depth);
+    }$$*/
     //#endif
 }

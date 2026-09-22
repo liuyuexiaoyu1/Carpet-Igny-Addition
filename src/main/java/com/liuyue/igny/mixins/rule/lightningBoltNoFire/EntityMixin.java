@@ -19,11 +19,7 @@ public abstract class EntityMixin {
     @Inject(method = "thunderHit", at = @At(value = "HEAD"), cancellable = true)
     private void onThunderHit(ServerLevel serverLevel, LightningBolt lightningBolt, CallbackInfo ci) {
         if (IGNYSettings.LIGHTNING_BOLT_NO_FIRE.value()) {
-            //#if MC >= 12102
-            //$$ ((Entity) (Object) this).hurtServer(serverLevel, this.damageSources().lightningBolt(), 5.0F);
-            //#else
-            ((Entity) (Object) this).hurt(this.damageSources().lightningBolt(), 5.0F);
-            //#endif
+            ((Entity) (Object) this).hurt(this.damageSources().lightningBolt(), 5.0F); //#replace >= 1.21.2 ? ((Entity) (Object) this).hurtServer(serverLevel, this.damageSources().lightningBolt(), 5.0F);
             ci.cancel();
         }
     }

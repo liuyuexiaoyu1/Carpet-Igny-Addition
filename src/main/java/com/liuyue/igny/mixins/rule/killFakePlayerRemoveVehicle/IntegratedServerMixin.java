@@ -12,11 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(IntegratedServer.class)
 public class IntegratedServerMixin {
-    //#if MC >= 26.1
-    //$$ @Inject(method = "lambda$halt$0", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/players/PlayerList;remove(Lnet/minecraft/server/level/ServerPlayer;)V"))
-    //#else
-    @Inject(method = "method_4816", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/players/PlayerList;remove(Lnet/minecraft/server/level/ServerPlayer;)V"))
-    //#endif
+    @Inject(method = "method_4816", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/players/PlayerList;remove(Lnet/minecraft/server/level/ServerPlayer;)V")) //#replace >= 26.1 ? @Inject(method = "lambda$halt$0", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/players/PlayerList;remove(Lnet/minecraft/server/level/ServerPlayer;)V"))
     private void removeFakePlayer(CallbackInfo ci, @Local ServerPlayer serverPlayer) {
         if (serverPlayer instanceof EntityPlayerMPFake) {
             RuleUtil.removeVehicle(serverPlayer);

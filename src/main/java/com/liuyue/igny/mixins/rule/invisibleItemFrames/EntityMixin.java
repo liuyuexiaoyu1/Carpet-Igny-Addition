@@ -1,9 +1,7 @@
 package com.liuyue.igny.mixins.rule.invisibleItemFrames;
 
 import com.liuyue.igny.IGNYSettings;
-//#if MC > 12006
-import net.minecraft.core.component.DataComponents;
-//#endif
+import net.minecraft.core.component.DataComponents; //?> 1.20.6
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.decoration.ItemFrame;
@@ -37,11 +35,7 @@ public class EntityMixin {
                 case "false" -> {}
                 case "true" -> cir.setReturnValue(true);
                 default -> Optional.ofNullable(
-                        //#if MC > 12006
-                        itemStack.get(DataComponents.CUSTOM_NAME)
-                        //#else
-                        //$$ itemStack.getDisplayName()
-                        //#endif
+                        itemStack.get(DataComponents.CUSTOM_NAME) //#replace <= 1.20.6 ? itemStack.getDisplayName()
                         )
                         .map(Component::getString)
                         .ifPresent(name -> {

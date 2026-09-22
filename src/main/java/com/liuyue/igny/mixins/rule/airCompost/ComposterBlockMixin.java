@@ -3,9 +3,9 @@ package com.liuyue.igny.mixins.rule.airCompost;
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
-//#if MC >= 12102
+//#if >= 1.21.2
 //$$ import net.minecraft.world.InteractionResult;
-//#elseif MC >= 12005
+//#elseif >= 1.20.5
 import net.minecraft.world.ItemInteractionResult;
 //#else
 //$$ import net.minecraft.world.InteractionResult;
@@ -30,14 +30,10 @@ public class ComposterBlockMixin extends Block {
         super(properties);
     }
 
-    //#if MC <= 12004
-    //$$ @Inject(method = "use", at = @At(value = "HEAD"), cancellable = true)
-    //#else
-    @Inject(method = "useItemOn", at = @At(value = "HEAD"), cancellable = true)
-    //#endif
-    //#if MC >= 12102
+    @Inject(method = "useItemOn", at = @At(value = "HEAD"), cancellable = true) //#replace <= 1.20.4 ? @Inject(method = "use", at = @At(value = "HEAD"), cancellable = true)
+    //#if >= 1.21.2
     //$$ private void useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir)
-    //#elseif MC >= 12005
+    //#elseif >= 1.20.5
     private void useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<ItemInteractionResult> cir)
     //#else
     //$$ private void use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir)
@@ -45,7 +41,7 @@ public class ComposterBlockMixin extends Block {
     {
         if (IGNYSettings.AIR_COMPOST.value()) {
             int i = state.getValue(ComposterBlock.LEVEL);
-            //#if MC >= 12005
+            //#if >= 1.20.5
             if (i < 8 && stack.is(Items.AIR))
             //#else
                 //$$ if (i < 8 && player.getItemInHand(hand).is(Items.AIR))
@@ -61,9 +57,9 @@ public class ComposterBlockMixin extends Block {
                     }
                     level.levelEvent(1500, pos, state != blockState ? 1 : 0);
                 }
-                //#if MC >= 12102
+                //#if >= 1.21.2
                 //$$ cir.setReturnValue(InteractionResult.SUCCESS);
-                //#elseif MC >= 12005
+                //#elseif >= 1.20.5
                 cir.setReturnValue(ItemInteractionResult.sidedSuccess(level.isClientSide()));
                 //#else
                 //$$ cir.setReturnValue(InteractionResult.sidedSuccess(level.isClientSide()));

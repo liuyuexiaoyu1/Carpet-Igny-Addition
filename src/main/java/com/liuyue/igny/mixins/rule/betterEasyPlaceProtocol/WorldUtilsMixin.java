@@ -20,9 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
-//#if MC <= 12006
-//$$ import org.spongepowered.asm.mixin.Shadow;
-//#endif
+//?<= 1.20.6 ? import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -30,11 +28,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Restriction(require = @Condition("litematica"))
 @Mixin(WorldUtils.class)
 public abstract class WorldUtilsMixin {
-    //#if MC <= 12006
-    //$$ @Shadow private static void cacheEasyPlacePosition(BlockPos pos) {}
-    //#endif
+    //?<= 1.20.6 ? @Shadow private static void cacheEasyPlacePosition(BlockPos pos) {}
 
-    //#if MC < 26.2
+    //#if < 26.2
     @Inject(
             method = "applyCarpetProtocolHitVec",
             at = @At(value = "RETURN"),
@@ -100,11 +96,7 @@ public abstract class WorldUtilsMixin {
             mc.gameMode.useItemOn(mc.player, hand, hitResult);
             ctx.stateClient = mc.level.getBlockState(pos);
         }
-        //#if MC <= 12006
-        //$$ cacheEasyPlacePosition(pos);
-        //#else
-        EasyPlaceUtilsInvoker.invokeCacheEasyPlacePosition(pos);
-        //#endif
+        EasyPlaceUtilsInvoker.invokeCacheEasyPlacePosition(pos); //#replace <= 1.20.6 ? cacheEasyPlacePosition(pos);
         cir.setReturnValue(InteractionResult.SUCCESS);
     }
 

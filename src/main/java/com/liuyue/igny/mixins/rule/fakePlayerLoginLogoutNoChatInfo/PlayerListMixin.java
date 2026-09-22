@@ -19,7 +19,7 @@ public class PlayerListMixin {
     @WrapOperation(method="placeNewPlayer",at = @At(value = "INVOKE", target = "Lnet/minecraft/server/players/PlayerList;broadcastSystemMessage(Lnet/minecraft/network/chat/Component;Z)V"))
     private void broadcastSystemMessage(PlayerList instance, Component component, boolean bl, Operation<Void> original,@Local(argsOnly = true) ServerPlayer serverPlayer) {
         if (serverPlayer instanceof EntityPlayerMPFake) {
-            //#if MC >= 12003
+            //#if >= 1.20.3
             String fakeName = serverPlayer.getName().getString();
 
             boolean isVaultFake = false;
@@ -40,9 +40,7 @@ public class PlayerListMixin {
             }
             //#endif
             if (
-                //#if MC >= 12003
-                    isVaultFake ||
-                //#endif
+                    isVaultFake || //?>= 1.20.3
             IGNYSettings.FAKE_PLAYER_LOGIN_LOGOUT_NO_CHAT_INFO.value()) {
                 return;
             }

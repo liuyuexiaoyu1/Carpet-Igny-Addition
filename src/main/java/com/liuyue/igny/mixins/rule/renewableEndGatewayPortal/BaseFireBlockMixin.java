@@ -3,26 +3,18 @@ package com.liuyue.igny.mixins.rule.renewableEndGatewayPortal;
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-//#if MC >= 26.2
-//$$ import net.minecraft.world.entity.EntityTypes;
-//#else
-import net.minecraft.world.entity.EntityType;
-//#endif
+import net.minecraft.world.entity.EntityType; //#replace >= 26.2 ? import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-//#if MC >= 26.2
-//$$ import net.minecraft.world.phys.Vec3;
-//#endif
+//?>= 26.2 ? import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#if MC >= 12102
-//$$ import net.minecraft.world.entity.EntitySpawnReason;
-//#endif
+//?>= 1.21.2 ? import net.minecraft.world.entity.EntitySpawnReason;
 
 import java.util.List;
 
@@ -41,8 +33,8 @@ public class BaseFireBlockMixin {
             }
             if (canPlacePortal) {
                 level.setBlock(pos, Blocks.END_GATEWAY.defaultBlockState(), 3);
-                //#if MC >= 12102
-                //#if MC >= 26.2
+                //#if >= 1.21.2
+                //#if >= 26.2
                 //$$ LightningBolt lightningBolt = EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
                 //#else
                 //$$ LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
@@ -51,11 +43,7 @@ public class BaseFireBlockMixin {
                 LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level);
                 //#endif
                 if (lightningBolt != null) {
-                    //#if MC >= 26.2
-                    //$$ lightningBolt.snapTo(Vec3.atCenterOf(pos));
-                    //#else
-                    lightningBolt.moveTo(pos.getCenter());
-                    //#endif
+                    lightningBolt.moveTo(pos.getCenter()); //#replace >= 26.2 ? lightningBolt.snapTo(Vec3.atCenterOf(pos));
                     level.addFreshEntity(lightningBolt);
                 }
                 ci.cancel();

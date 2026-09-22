@@ -1,6 +1,6 @@
 package com.liuyue.igny.network.packet.config;
 
-//#if MC >= 12006
+//#if >= 1.20.6
 import com.liuyue.igny.network.PacketUtil;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -9,11 +9,9 @@ import org.jetbrains.annotations.NotNull;
 //#endif
 
 public record SyncLinkedEnderChestPayload(String key)
-        //#if MC >= 12006
-        implements CustomPacketPayload
-        //#endif
+        implements CustomPacketPayload //?>= 1.20.6
 {
-    //#if MC >= 12006
+    //#if >= 1.20.6
     public static final Type<SyncLinkedEnderChestPayload> TYPE = PacketUtil.createId("sync_linked_ender_chest");
 
     @Override

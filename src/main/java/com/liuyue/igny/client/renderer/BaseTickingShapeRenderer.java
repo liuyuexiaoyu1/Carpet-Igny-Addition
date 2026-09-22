@@ -43,11 +43,7 @@ public abstract class BaseTickingShapeRenderer {
             this.minX = minX; this.minY = minY; this.minZ = minZ;
             this.maxX = maxX; this.maxY = maxY; this.maxZ = maxZ;
 
-            //#if MC >= 26.2
-            //$$ Vec3 center = Vec3.atCenterOf(pos);
-            //#else
-            Vec3 center = pos.getCenter();
-            //#endif
+            Vec3 center = pos.getCenter(); //#replace >= 26.2 ? Vec3 center = Vec3.atCenterOf(pos);
             if (smooth) {
                 this.curMinX = center.x; this.curMinY = center.y; this.curMinZ = center.z;
                 this.curMaxX = center.x; this.curMaxY = center.y; this.curMaxZ = center.z;
@@ -151,11 +147,7 @@ public abstract class BaseTickingShapeRenderer {
 
     public void remove(BlockPos pos, String suffix) {
         ResourceLocation id = getId(pos);
-        //#if MC <= 12006
-        //$$ if (suffix != null) id = ResourceLocation.tryParse(id.toString() + "_" + suffix);
-        //#else
-        if (suffix != null) id = ResourceLocation.parse(id.toString() + "_" + suffix);
-        //#endif
+        if (suffix != null) id = ResourceLocation.parse(id.toString() + "_" + suffix); //#replace <= 1.20.6 ? if (suffix != null) id = ResourceLocation.tryParse(id.toString() + "_" + suffix);
         ShapeData data = TICKING_SHAPES.get(id);
         if (data != null) {
             if (data.smooth) data.isRemoving = true;
@@ -164,11 +156,7 @@ public abstract class BaseTickingShapeRenderer {
     }
 
     public ResourceLocation getId(BlockPos pos) {
-        //#if MC <= 12006
-        //$$ return new ResourceLocation(prefix + "_" + pos.getX() + "_" + pos.getY() + "_" + pos.getZ());
-        //#else
-        return ResourceLocation.fromNamespaceAndPath(IGNYServer.MOD_ID, prefix + "_" + pos.getX() + "_" + pos.getY() + "_" + pos.getZ());
-        //#endif
+        return ResourceLocation.fromNamespaceAndPath(IGNYServer.MOD_ID, prefix + "_" + pos.getX() + "_" + pos.getY() + "_" + pos.getZ()); //#replace <= 1.20.6 ? return new ResourceLocation(prefix + "_" + pos.getX() + "_" + pos.getY() + "_" + pos.getZ());
     }
 
     protected Color parseColor(int argbColor) {

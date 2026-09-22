@@ -14,11 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-//#if MC >= 12101
-@Restriction(require = @Condition("scalablelux"))
-//#else
-//$$ @Restriction(require = @Condition("starlight"))
-//#endif
+@Restriction(require = @Condition("scalablelux")) //#replace < 1.21.1 ? @Restriction(require = @Condition("starlight"))
 @Mixin(StarLightInterface.class)
 public class StarLightInterfaceMixin {
     @Inject(method = "blockChange", at = @At(value = "HEAD"), cancellable = true)

@@ -18,11 +18,7 @@ import java.util.Map;
 
 public final class EntityHighlights {
     private static final long PRUNE_TICKS = 200L;
-    //#if MC >= 26.2
-    //$$ private static final Block OUTLINE_BLOCK = Blocks.STAINED_GLASS.white();
-    //#else
-    private static final Block OUTLINE_BLOCK = Blocks.WHITE_STAINED_GLASS;
-    //#endif
+    private static final Block OUTLINE_BLOCK = Blocks.WHITE_STAINED_GLASS; //#replace >= 26.2 ? private static final Block OUTLINE_BLOCK = Blocks.STAINED_GLASS.white();
     private static final DisplayIndex<Integer, HighlightEntry> DISPLAYS = new DisplayIndex<>();
 
     public static void tick(ServerLevel level) {

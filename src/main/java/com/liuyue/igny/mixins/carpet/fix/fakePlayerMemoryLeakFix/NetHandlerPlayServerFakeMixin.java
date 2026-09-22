@@ -11,23 +11,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-//#if MC >= 12002
-import net.minecraft.server.network.CommonListenerCookie;
-//#endif
+import net.minecraft.server.network.CommonListenerCookie; //?>= 1.20.2
 
 @Mixin(NetHandlerPlayServerFake.class)
 public class NetHandlerPlayServerFakeMixin extends ServerGamePacketListenerImpl {
-    //#if MC >= 12002
-    public NetHandlerPlayServerFakeMixin(MinecraftServer server, Connection connection, ServerPlayer player, CommonListenerCookie cookie)
-    //#else
-    //$$ public NetHandlerPlayServerFakeMixin(MinecraftServer server, Connection connection, ServerPlayer player)
-    //#endif
+    public NetHandlerPlayServerFakeMixin(MinecraftServer server, Connection connection, ServerPlayer player, CommonListenerCookie cookie) //#replace < 1.20.2 ? public NetHandlerPlayServerFakeMixin(MinecraftServer server, Connection connection, ServerPlayer player)
     {
-        //#if MC >= 12002
-        super(server, connection, player, cookie);
-        //#else
-        //$$ super(server, connection, player);
-        //#endif
+        super(server, connection, player, cookie); //#replace < 1.20.2 ? super(server, connection, player);
     }
 
     @Inject(method = "send", at = @At(value = "HEAD"))

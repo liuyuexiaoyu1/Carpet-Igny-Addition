@@ -4,11 +4,11 @@ import com.liuyue.igny.helper.inventory.LinkedContainer;
 import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.utils.interfaces.linkableEnderChest.LinkedEnderChest;
 import net.minecraft.core.BlockPos;
-//#if MC >= 12005
+//#if >= 1.20.5
 import net.minecraft.core.component.DataComponents;
 //#else
-//$$ import net.minecraft.nbt.Tag;
-//$$ import net.minecraft.nbt.CompoundTag;
+/*$$import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.CompoundTag;$$*/
 //#endif
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -27,9 +27,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#if MC >= 12109
-//$$ import net.minecraft.world.entity.ContainerUser;
-//#endif
+//?>= 1.21.9 ? import net.minecraft.world.entity.ContainerUser;
 
 @Mixin(EnderChestBlockEntity.class)
 public class EnderChestBlockEntityMixin extends BlockEntity implements Container, LinkedEnderChest {
@@ -41,12 +39,12 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     public Container igny$getContainer() {
         if (!LinkedContainerManager.isRuleFully()) return null;
         EnderChestBlockEntity self = (EnderChestBlockEntity)(Object) this;
-        //#if MC >= 12005
+        //#if >= 1.20.5
         Component component = self.components().get(DataComponents.CUSTOM_NAME);
         //#else
-        //$$ CompoundTag tag = self.saveWithFullMetadata();
-        //$$ Component component = tag.contains("CustomName", Tag.TAG_STRING)
-        //$$         ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;
+        /*$$CompoundTag tag = self.saveWithFullMetadata();
+        Component component = tag.contains("CustomName", Tag.TAG_STRING)
+        ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;$$*/
         //#endif
         if (component != null) {
             return LinkedContainerManager.get(
@@ -61,29 +59,15 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     public boolean igny$isLinked() {
         if (!LinkedContainerManager.isRuleEnabled()) return false;
         EnderChestBlockEntity self = (EnderChestBlockEntity)(Object)this;
-        //#if MC >= 12005
-        return self.components().has(DataComponents.CUSTOM_NAME);
-        //#else
-        //$$ return self.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING);
-        //#endif
+        return self.components().has(DataComponents.CUSTOM_NAME); //#replace < 1.20.5 ? return self.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING);
     }
 
     @SuppressWarnings("all")
     @Inject(method = "startOpen", at = @At("HEAD"), cancellable = true)
-    //#if MC >= 12109
-    //$$ private void forceStartOpen(ContainerUser player, CallbackInfo ci)
-    //#else
-    private void forceStartOpen(Player player, CallbackInfo ci)
-    //#endif
+    private void forceStartOpen(Player player, CallbackInfo ci) //#replace >= 1.21.9 ? private void forceStartOpen(ContainerUser player, CallbackInfo ci)
     {
-        //#if MC >= 12109
-        //$$ if (!(player instanceof Player)) return;
-        //#endif
-        //#if MC >= 12005
-        if (LinkedContainerManager.isRuleEnabled() && this.components().has(DataComponents.CUSTOM_NAME))
-        //#else
-        //$$ if (LinkedContainerManager.isRuleEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
-        //#endif
+        //?>= 1.21.9 ? if (!(player instanceof Player)) return;
+        if (LinkedContainerManager.isRuleEnabled() && this.components().has(DataComponents.CUSTOM_NAME)) //#replace < 1.20.5 ? if (LinkedContainerManager.isRuleEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         {
             if (!this.remove && !((Player) player).isSpectator()) {
                 this.level.blockEvent(this.worldPosition, Blocks.ENDER_CHEST, 1, 1);
@@ -95,20 +79,10 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
 
     @SuppressWarnings("all")
     @Inject(method = "stopOpen", at = @At("HEAD"), cancellable = true)
-    //#if MC >= 12109
-    //$$ private void forceStopOpen(ContainerUser player, CallbackInfo ci)
-    //#else
-    private void forceStopOpen(Player player, CallbackInfo ci)
-    //#endif
+    private void forceStopOpen(Player player, CallbackInfo ci) //#replace >= 1.21.9 ? private void forceStopOpen(ContainerUser player, CallbackInfo ci)
     {
-        //#if MC >= 12109
-        //$$ if (!(player instanceof Player)) return;
-        //#endif
-        //#if MC >= 12005
-        if (LinkedContainerManager.isRuleEnabled() && this.components().has(DataComponents.CUSTOM_NAME))
-        //#else
-        //$$ if (LinkedContainerManager.isRuleEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
-        //#endif
+        //?>= 1.21.9 ? if (!(player instanceof Player)) return;
+        if (LinkedContainerManager.isRuleEnabled() && this.components().has(DataComponents.CUSTOM_NAME)) //#replace < 1.20.5 ? if (LinkedContainerManager.isRuleEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         {
             if (!this.remove && !((Player) player).isSpectator()) {
                 this.level.blockEvent(this.worldPosition, Blocks.ENDER_CHEST, 1, 0);
@@ -121,18 +95,14 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     @SuppressWarnings("all")
     @Unique
     private Container igny$getVirtualContainer() {
-        //#if MC >= 12005
-        if (LinkedContainerManager.isRuleFully() && this.components().has(DataComponents.CUSTOM_NAME))
-        //#else
-        //$$ if (LinkedContainerManager.isRuleFully() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
-        //#endif
+        if (LinkedContainerManager.isRuleFully() && this.components().has(DataComponents.CUSTOM_NAME)) //#replace < 1.20.5 ? if (LinkedContainerManager.isRuleFully() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         {
-            //#if MC >= 12005
+            //#if >= 1.20.5
             String name = this.components().get(DataComponents.CUSTOM_NAME).getString();
             //#else
-            //$$ CompoundTag tag = this.saveWithFullMetadata();
-            //$$ String name = tag.contains("CustomName", Tag.TAG_STRING)
-            //$$         ? Component.Serializer.fromJson(tag.getString("CustomName")).getString() : null;
+            /*$$CompoundTag tag = this.saveWithFullMetadata();
+            String name = tag.contains("CustomName", Tag.TAG_STRING)
+            ? Component.Serializer.fromJson(tag.getString("CustomName")).getString() : null;$$*/
             //#endif
             return LinkedContainerManager.get(name);
         }
@@ -186,11 +156,7 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
 
     @Override
     public boolean stillValid(Player player) {
-        //#if MC >= 12005
-        if (LinkedContainerManager.isRuleEnabled() && this.components().has(DataComponents.CUSTOM_NAME))
-        //#else
-        //$$ if (LinkedContainerManager.isRuleEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
-        //#endif
+        if (LinkedContainerManager.isRuleEnabled() && this.components().has(DataComponents.CUSTOM_NAME)) //#replace < 1.20.5 ? if (LinkedContainerManager.isRuleEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         {
             return Container.stillValidBlockEntity(this, player);
         }
@@ -204,11 +170,11 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     public void setLevel(Level level) {
         super.setLevel(level);
         if (level != null && !level.isClientSide()) {
-            //#if MC >= 12005
+            //#if >= 1.20.5
             Component customName = this.components().get(DataComponents.CUSTOM_NAME);
             //#else
-            //$$ CompoundTag tag = this.saveWithFullMetadata();
-            //$$ Component customName = tag.contains("CustomName", Tag.TAG_STRING) ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;
+            /*$$CompoundTag tag = this.saveWithFullMetadata();
+            Component customName = tag.contains("CustomName", Tag.TAG_STRING) ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;$$*/
             //#endif
             if (customName != null) {
                 this.registerToLinkedContainer(customName.getString());
@@ -220,12 +186,12 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     public void setChanged() {
         super.setChanged();
         if (level != null && !level.isClientSide()) {
-            //#if MC >= 12005
+            //#if >= 1.20.5
             Component customName = this.components().get(DataComponents.CUSTOM_NAME);
             //#else
-            //$$ CompoundTag tag = this.saveWithFullMetadata();
-            //$$ Component customName = tag.contains("CustomName", Tag.TAG_STRING)
-            //$$         ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;
+            /*$$CompoundTag tag = this.saveWithFullMetadata();
+            Component customName = tag.contains("CustomName", Tag.TAG_STRING)
+            ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;$$*/
             //#endif
             if (customName != null) {
                 this.registerToLinkedContainer(customName.getString());
@@ -250,11 +216,11 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
 
     @Unique
     private void unregisterFromLinkedContainer() {
-        //#if MC >= 12005
+        //#if >= 1.20.5
         Component customName = this.components().get(DataComponents.CUSTOM_NAME);
         //#else
-        //$$ CompoundTag tag = this.saveWithFullMetadata();
-        //$$ Component customName = tag.contains("CustomName", Tag.TAG_STRING) ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;
+        /*$$CompoundTag tag = this.saveWithFullMetadata();
+        Component customName = tag.contains("CustomName", Tag.TAG_STRING) ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;$$*/
         //#endif
         if (customName != null) {
             LinkedContainer linked = LinkedContainerManager.get(customName.getString());
@@ -265,11 +231,11 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     @Inject(method = "lidAnimateTick", at = @At(value = "HEAD"), cancellable = true)
     private static void lidAnimateTick(Level level, BlockPos pos, BlockState state, EnderChestBlockEntity blockEntity, CallbackInfo ci) {
         if (!level.isClientSide()) {
-            //#if MC >= 12005
+            //#if >= 1.20.5
             Component customName = blockEntity.components().get(DataComponents.CUSTOM_NAME);
             //#else
-            //$$ CompoundTag tag = blockEntity.saveWithFullMetadata();
-            //$$ Component customName = tag.contains("CustomName", Tag.TAG_STRING) ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;
+            /*$$CompoundTag tag = blockEntity.saveWithFullMetadata();
+            Component customName = tag.contains("CustomName", Tag.TAG_STRING) ? Component.Serializer.fromJson(tag.getString("CustomName")) : null;$$*/
             //#endif
             if (customName != null) {
                 LinkedContainer linked = LinkedContainerManager.get(customName.getString());
@@ -279,22 +245,22 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
         }
     }
     
-    //#if MC < 12005
+    //#if < 1.20.5
     //$$  @Unique private Component customName;
     //$$  
-    //$$  @Override
-    //$$  public void load(CompoundTag tag) {
-    //$$      super.load(tag);
-    //$$      if (tag.contains("CustomName", Tag.TAG_STRING)) {
-    //$$          this.customName = Component.Serializer.fromJson(tag.getString("CustomName"));
-    //$$      }
-    //$$  }
-    //$$  @Override
-    //$$  public void saveAdditional(CompoundTag tag) {
-    //$$      super.saveAdditional(tag);
-    //$$      if (this.customName != null) {
-    //$$          tag.putString("CustomName", Component.Serializer.toJson(this.customName));
-    //$$      }
-    //$$  }
+    /*$$@Override
+     public void load(CompoundTag tag) {
+         super.load(tag);
+         if (tag.contains("CustomName", Tag.TAG_STRING)) {
+             this.customName = Component.Serializer.fromJson(tag.getString("CustomName"));
+         }
+     }
+     @Override
+     public void saveAdditional(CompoundTag tag) {
+         super.saveAdditional(tag);
+         if (this.customName != null) {
+             tag.putString("CustomName", Component.Serializer.toJson(this.customName));
+         }
+    }$$*/
     //#endif
 }

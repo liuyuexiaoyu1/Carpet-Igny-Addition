@@ -13,9 +13,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#if MC >= 26.3
-//$$ import net.minecraft.core.Holder;
-//$$ import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProvider;
+//#if >= 26.3
+/*$$import net.minecraft.core.Holder;
+import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProvider;$$*/
 //#else
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 //#endif
@@ -24,9 +24,9 @@ import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 public abstract class EnchantedCountIncreaseFunctionMixin {
     @Shadow protected abstract boolean hasLimit();
 
-    //#if MC >= 26.3
+    //#if >= 26.3
     //$$ @Shadow @Final private Holder<ContextFloatProvider> count;
-    //#elseif MC >= 26.1
+    //#elseif >= 26.1
     //$$ @Shadow @Final private NumberProvider count;
     //#else
     @Shadow @Final private NumberProvider value;
@@ -36,9 +36,9 @@ public abstract class EnchantedCountIncreaseFunctionMixin {
 
     @Inject(method = "run", at = @At(value = "HEAD"), cancellable = true)
     private void run(ItemStack itemStack, LootContext lootContext, CallbackInfoReturnable<ItemStack> cir) {
-        //#if MC >= 26.3
+        //#if >= 26.3
         //$$ DamageSource damageSource = lootContext.getOptional(LootContextParams.DAMAGE_SOURCE);
-        //#elseif MC >= 12102
+        //#elseif >= 1.21.2
         //$$ DamageSource damageSource = lootContext.getOptionalParameter(LootContextParams.DAMAGE_SOURCE);
         //#else
         DamageSource damageSource = lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE);
@@ -47,24 +47,16 @@ public abstract class EnchantedCountIncreaseFunctionMixin {
                 damageSource != null &&
                 damageSource.getDirectEntity() instanceof PrimedTnt &&
                 ((PrimedTnt) damageSource.getDirectEntity()).getOwner() == null) {
-            //#if MC >= 26.3
+            //#if >= 26.3
             //$$ float f = 3 * this.count.value().getFloat(lootContext);
-            //#elseif MC >= 26.1
+            //#elseif >= 26.1
             //$$ float f = 3 * this.count.getFloat(lootContext);
             //#else
             float f = 3 * this.value.getFloat(lootContext);
             //#endif
             itemStack.grow(Math.round(f));
-            //#if MC <= 12004
-            //$$ if (this.hasLimit() && itemStack.getCount() > this.limit) {
-            //#else
-            if (this.hasLimit()) {
-                //#endif
-                //#if MC <= 12004
-                //$$ itemStack.setCount(this.limit);
-                //#else
-                itemStack.limitSize(this.limit);
-                //#endif
+            if (this.hasLimit()) { //#replace <= 1.20.4 ? if (this.hasLimit() && itemStack.getCount() > this.limit) {
+                itemStack.limitSize(this.limit); //#replace <= 1.20.4 ? itemStack.setCount(this.limit);
             }
             cir.setReturnValue(itemStack);
         }

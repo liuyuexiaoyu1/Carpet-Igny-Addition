@@ -43,7 +43,7 @@ public abstract class ThreadedLevelLightEngineMixin extends LevelLightEngine {
                 && chunk.isLightCorrect();
     }
 
-    //#if MC > 11904
+    //#if > 1.19.4
     @Inject(
             method = "initializeLight(Lnet/minecraft/world/level/chunk/ChunkAccess;Z)Ljava/util/concurrent/CompletableFuture;",
             at = @At("HEAD"),
@@ -84,15 +84,13 @@ public abstract class ThreadedLevelLightEngineMixin extends LevelLightEngine {
         if (lighted && alreadyLighted(chunk)) {
             ChunkPos pos = chunk.getPos();
             chunk.setLightCorrect(true);
-            //#if MC <= 11904
-            //$$ super.retainData(pos, false);
-            //#endif
+            //?<= 1.19.4 ? super.retainData(pos, false);
             ((ChunkMapInvoker)this.chunkMap).invokeReleaseLightTicket(pos);
             cir.setReturnValue(CompletableFuture.completedFuture(chunk));
         }
     }
 
-    //#if MC >= 12002
+    //#if >= 1.20.2
     @Inject(
             method = "waitForPendingTasks(II)Ljava/util/concurrent/CompletableFuture;",
             at = @At("HEAD"),

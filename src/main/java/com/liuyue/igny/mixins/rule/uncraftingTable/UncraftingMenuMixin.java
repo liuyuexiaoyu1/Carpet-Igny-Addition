@@ -5,11 +5,7 @@ import com.liuyue.igny.utils.uncraftingTable.UncraftingState;
 import com.liuyue.igny.utils.uncraftingTable.UncraftingTable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-//#if MC >= 26.1
-//$$ import net.minecraft.world.inventory.ContainerInput;
-//#else
-import net.minecraft.world.inventory.ClickType;
-//#endif
+import net.minecraft.world.inventory.ClickType; //#replace >= 26.1 ? import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.inventory.ResultContainer;
 import net.minecraft.world.inventory.Slot;
@@ -20,18 +16,16 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#if MC >= 26.3
-//$$ import net.minecraft.util.Prediction;
-//#endif
+//?>= 26.3 ? import net.minecraft.util.Prediction;
 
 import java.util.List;
 
 @Mixin(AbstractContainerMenu.class)
 public abstract class UncraftingMenuMixin {
 
-    //#if MC >= 26.1
-    //$$ @Inject(method = "clicked", at = @At("HEAD"), cancellable = true)
-    //$$ private void igny$uncraftingClick(int slotId, int button, ContainerInput clickType, Player player, CallbackInfo ci) {
+    //#if >= 26.1
+    /*$$@Inject(method = "clicked", at = @At("HEAD"), cancellable = true)
+    private void igny$uncraftingClick(int slotId, int button, ContainerInput clickType, Player player, CallbackInfo ci) {$$*/
     //#else
     @Inject(method = "clicked", at = @At("HEAD"), cancellable = true)
     private void igny$uncraftingClick(int slotId, int button, ClickType clickType, Player player, CallbackInfo ci) {
@@ -179,11 +173,7 @@ public abstract class UncraftingMenuMixin {
             state.igny$setUncraftWritten(null);
 
             if (!player.getInventory().add(products)) {
-                //#if MC >= 26.3
-                //$$ player.drop(products, false, Prediction.PREDICTED);
-                //#else
-                player.drop(products, false);
-                //#endif
+                player.drop(products, false); //#replace >= 26.3 ? player.drop(products, false, Prediction.PREDICTED);
             }
 
             menu.broadcastChanges();
@@ -199,21 +189,21 @@ public abstract class UncraftingMenuMixin {
         UncraftingTable.readGrid(menu, state.igny$uncraftWritten());
     }
 
-    //#if MC >= 26.1
-    //$$ @Unique
-    //$$ private static boolean igny$isThrow(ContainerInput clickType) {
-    //$$     return clickType == ContainerInput.THROW;
-    //$$ }
+    //#if >= 26.1
+    /*$$@Unique
+    private static boolean igny$isThrow(ContainerInput clickType) {
+        return clickType == ContainerInput.THROW;
+    }$$*/
     //$$
-    //$$ @Unique
-    //$$ private static boolean igny$isPickup(ContainerInput clickType) {
-    //$$     return clickType == ContainerInput.PICKUP;
-    //$$ }
+    /*$$@Unique
+    private static boolean igny$isPickup(ContainerInput clickType) {
+        return clickType == ContainerInput.PICKUP;
+    }$$*/
     //$$
-    //$$ @Unique
-    //$$ private static boolean igny$isQuickMove(ContainerInput clickType) {
-    //$$     return clickType == ContainerInput.QUICK_MOVE;
-    //$$ }
+    /*$$@Unique
+    private static boolean igny$isQuickMove(ContainerInput clickType) {
+        return clickType == ContainerInput.QUICK_MOVE;
+    }$$*/
     //#else
     @Unique
     private static boolean igny$isThrow(ClickType clickType) {

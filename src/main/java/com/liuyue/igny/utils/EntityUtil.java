@@ -2,13 +2,9 @@ package com.liuyue.igny.utils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-//#if MC >= 12101
-import net.minecraft.world.level.block.Portal;
-//#endif
+import net.minecraft.world.level.block.Portal; //?>= 1.21.1
 import net.minecraft.world.phys.AABB;
-//#if MC <= 12006
-//$$ import net.minecraft.world.level.block.Blocks;
-//#endif
+//?<= 1.20.6 ? import net.minecraft.world.level.block.Blocks;
 
 public class EntityUtil {
     public static BlockPos findPortalInBoundingBox(ServerLevel level, AABB box) {
@@ -23,11 +19,7 @@ public class EntityUtil {
             for (int y = minY; y <= maxY; y++) {
                 for (int z = minZ; z <= maxZ; z++) {
                     BlockPos pos = new BlockPos(x, y, z);
-                    //#if MC <= 12006
-                    //$$ if (level.getBlockState(pos).is(Blocks.END_PORTAL) || level.getBlockState(pos).is(Blocks.NETHER_PORTAL))
-                    //#else
-                    if (level.getBlockState(pos).getBlock() instanceof Portal)
-                    //#endif
+                    if (level.getBlockState(pos).getBlock() instanceof Portal) //#replace <= 1.20.6 ? if (level.getBlockState(pos).is(Blocks.END_PORTAL) || level.getBlockState(pos).is(Blocks.NETHER_PORTAL))
                     {
                         return pos;
                     }

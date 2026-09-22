@@ -12,18 +12,16 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#if MC <= 12004
-//$$ import net.minecraft.world.InteractionHand;
-//#endif
+//?<= 1.20.4 ? import net.minecraft.world.InteractionHand;
 
 @Mixin(BedBlock.class)
 public class BedBlockMixin {
-    //#if MC >= 26.3
-    //$$ @Inject(method = "destroyOnUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"), cancellable = true)
-    //$$ private void useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, CallbackInfoReturnable<InteractionResult> cir)
-    //#elseif MC <= 12004
-    //$$ @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"), cancellable = true)
-    //$$ private void useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir)
+    //#if >= 26.3
+    /*$$@Inject(method = "destroyOnUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"), cancellable = true)
+    private void useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, CallbackInfoReturnable<InteractionResult> cir)$$*/
+    //#elseif <= 1.20.4
+    /*$$@Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"), cancellable = true)
+    private void useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir)$$*/
     //#else
     @Inject(method = "useWithoutItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"), cancellable = true)
     private void useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir)

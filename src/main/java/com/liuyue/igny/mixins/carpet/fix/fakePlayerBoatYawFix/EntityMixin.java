@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.carpet.fix.fakePlayerBoatYawFix;
 
-//#if MC < 12111
+//#if < 1.21.11
 import carpet.patches.EntityPlayerMPFake;
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -14,10 +14,10 @@ import net.minecraft.world.entity.Entity;
 
 @Mixin(Entity.class)
 public class EntityMixin {
-    //#if MC < 12111
-    //#if MC >= 12109
-    //$$ @Inject(method = "startRiding(Lnet/minecraft/world/entity/Entity;ZZ)Z",at= @At(value = "RETURN"))
-    //$$ private void startRiding(Entity entity, boolean bl, boolean bl2, CallbackInfoReturnable<Boolean> cir) {
+    //#if < 1.21.11
+    //#if >= 1.21.9
+    /*$$@Inject(method = "startRiding(Lnet/minecraft/world/entity/Entity;ZZ)Z",at= @At(value = "RETURN"))
+    private void startRiding(Entity entity, boolean bl, boolean bl2, CallbackInfoReturnable<Boolean> cir) {$$*/
     //#else
     @Inject(method = "startRiding(Lnet/minecraft/world/entity/Entity;Z)Z",at= @At(value = "RETURN"))
     private void startRiding(Entity entity, boolean bl, CallbackInfoReturnable<Boolean> cir) {

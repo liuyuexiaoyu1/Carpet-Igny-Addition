@@ -1,6 +1,6 @@
 package com.liuyue.igny.helper.inventory;
 
-//#if MC >= 12005
+//#if >= 1.20.5
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;

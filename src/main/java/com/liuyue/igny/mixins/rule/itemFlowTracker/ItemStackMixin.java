@@ -35,7 +35,7 @@ public abstract class ItemStackMixin implements TrackedStack {
         Tracking.spread((ItemStack) (Object) this, cir.getReturnValue());
     }
 
-    //#if MC >= 12001
+    //#if >= 1.20.1
     @Inject(method = "copyAndClear", at = @At(value = "RETURN"))
     private void igny$copyAndClear(CallbackInfoReturnable<ItemStack> cir) {
         Tracking.spread((ItemStack) (Object) this, cir.getReturnValue());
@@ -52,7 +52,7 @@ public abstract class ItemStackMixin implements TrackedStack {
         Tracking.onSplit((ItemStack) (Object) this, cir.getReturnValue());
     }
 
-    //#if MC >= 12006
+    //#if >= 1.20.6
     @Inject(method = "transmuteCopyIgnoreEmpty", at = @At(value = "RETURN"))
     private void igny$transmuteCopy(ItemLike item, int count, CallbackInfoReturnable<ItemStack> cir) {
         Tracking.spread((ItemStack) (Object) this, cir.getReturnValue());

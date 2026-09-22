@@ -105,9 +105,7 @@ public class ItemFlowTrackerCommand {
 
         if (sessions.isEmpty()) {
             source.sendSuccess(
-                    //#if MC > 11904
-                    () ->
-                    //#endif
+                    () -> //?> 1.19.4
                     Component.translatable("igny.command.itemFlowTracker.status_empty"), false);
             return 0;
         }
@@ -119,9 +117,7 @@ public class ItemFlowTrackerCommand {
                     session.budget(),
                     session.capacity());
             source.sendSuccess(
-                    //#if MC > 11904
-                    () ->
-                    //#endif
+                    () -> //?> 1.19.4
                     line, false);
         }
 
@@ -135,9 +131,7 @@ public class ItemFlowTrackerCommand {
 
         ItemFlowTracker.clearAll();
         context.getSource().sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                 Component.translatable("igny.command.itemFlowTracker.clear_success"), true);
         return 1;
     }
@@ -159,9 +153,7 @@ public class ItemFlowTrackerCommand {
         Tracking.set(stack, mark);
         Component name = stack.getHoverName();
         source.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                 Component.translatable("igny.command.itemFlowTracker.mark_held_success", name, label(mark)), false);
         return 1;
     }
@@ -190,9 +182,7 @@ public class ItemFlowTrackerCommand {
         int count = marked;
         Component label = label(last);
         source.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                 Component.translatable("igny.command.itemFlowTracker.mark_targets_success", count, label), false);
         return count;
     }

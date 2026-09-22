@@ -25,14 +25,8 @@ public abstract class NoteBlockMixin extends Block {
     }
 
     @Override
-    //#if MC <= 12005
-    //$$ @SuppressWarnings("deprecation")
-    //#endif
-    //#if MC <= 12004
-    //$$ public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
-    //#else
-    public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
-        //#endif
+    //?<= 1.20.5 ? @SuppressWarnings("deprecation")
+    public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) { //#replace <= 1.20.4 ? public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
         if (IGNYSettings.NOTE_BLOCK_SELF_CHECK.value()) {
             boolean bl2 = level.hasNeighborSignal(blockPos);
             if (bl2 != blockState.getValue(POWERED)) {

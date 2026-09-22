@@ -10,11 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(AbstractHugeMushroomFeature.class)
-//#if MC >= 26.3
-//$$ public interface AbstractHugeMushroomFeatureMixin
-//#else
-public class AbstractHugeMushroomFeatureMixin
-    //#endif
+public class AbstractHugeMushroomFeatureMixin //#replace >= 26.3 ? public interface AbstractHugeMushroomFeatureMixin
 {
     @WrapOperation(method = "placeMushroomBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;isAir()Z"))
     private boolean isAir(BlockState instance, Operation<Boolean> original) {

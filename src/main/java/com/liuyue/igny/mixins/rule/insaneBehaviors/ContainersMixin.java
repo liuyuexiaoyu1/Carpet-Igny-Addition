@@ -15,11 +15,7 @@ import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.Containers;
-//#if MC >= 26.2
-//$$ import net.minecraft.world.entity.EntityTypes;
-//#else
-import net.minecraft.world.entity.EntityType;
-//#endif
+import net.minecraft.world.entity.EntityType; //#replace >= 26.2 ? import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -46,11 +42,7 @@ public class ContainersMixin {
         }
         ArrayList<Float> unitList = nextEvenlyDistributedPoint(6);
 
-        //#if MC >= 26.2
-        //$$ double g = EntityTypes.ITEM.getWidth();
-        //#else
-        double g = EntityType.ITEM.getWidth();
-        //#endif
+        double g = EntityType.ITEM.getWidth(); //#replace >= 26.2 ? double g = EntityTypes.ITEM.getWidth();
         double h = 1.0 - g;
         double i = g / 2.0;
         double j = Math.floor(originX) + unitList.get(3) * h + i;

@@ -2,9 +2,7 @@ package com.liuyue.igny.mixins.rule.visibleSpectators;
 
 import com.liuyue.igny.IGNYSettings;
 import com.mojang.authlib.GameProfile;
-//#if MC < 12106
-import net.minecraft.core.BlockPos;
-//#endif
+import net.minecraft.core.BlockPos; //?< 1.21.6
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -19,17 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin extends Player {
-    //#if MC >= 12106
-    //$$ public ServerPlayerMixin(Level level, GameProfile gameProfile)
-    //#else
-    public ServerPlayerMixin(Level level, BlockPos pos, float yRot, GameProfile gameProfile)
-    //#endif
+    public ServerPlayerMixin(Level level, BlockPos pos, float yRot, GameProfile gameProfile) //#replace >= 1.21.6 ? public ServerPlayerMixin(Level level, GameProfile gameProfile)
     {
-        //#if MC >= 12106
-        //$$ super(level, gameProfile);
-        //#else
-        super(level, pos, yRot, gameProfile);
-        //#endif
+        super(level, pos, yRot, gameProfile); //#replace >= 1.21.6 ? super(level, gameProfile);
     }
 
     @Shadow

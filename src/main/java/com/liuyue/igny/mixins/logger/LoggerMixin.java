@@ -30,11 +30,7 @@ public class LoggerMixin {
     @Inject(method = "onPlayerConnect", at = @At("RETURN"))
     private void onPlayerConnect(Player player, boolean firstTime, CallbackInfo ci) {
         String playerName = player.getGameProfile()
-                //#if MC >= 12110
-                //$$ .name();
-                //#else
-                .getName();
-        //#endif
+                .getName(); //#replace >= 1.21.10 ? .name();
         if (subscribedOnlinePlayers.containsKey(playerName)) {
             IGNYLoggers.handleChange(CarpetServer.minecraft_server, (Logger) (Object) this, playerName, this.subscribedOnlinePlayers.get(playerName), true);
         }
@@ -43,11 +39,7 @@ public class LoggerMixin {
     @Inject(method = "onPlayerDisconnect", at = @At("RETURN"))
     private void onPlayerDisconnect(Player player, CallbackInfo ci) {
         String playerName = player.getGameProfile()
-                //#if MC >= 12110
-                //$$ .name();
-                //#else
-                .getName();
-        //#endif
+                .getName(); //#replace >= 1.21.10 ? .name();
         IGNYLoggers.handleChange(CarpetServer.minecraft_server,(Logger) (Object) this, playerName, null, false);
     }
 }

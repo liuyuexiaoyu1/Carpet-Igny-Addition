@@ -17,17 +17,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#if MC < 12003
-//$$ import java.util.function.Predicate;
-//#endif
+//?< 1.20.3 ? import java.util.function.Predicate;
 
 @Mixin(LayeredCauldronBlock.class)
 public class LayeredCauldronBlockMixin {
-    //#if MC >= 12003
+    //#if >= 1.20.3
     @Shadow @Final private Biome.Precipitation precipitationType;
     //#else
-    //$$ @Shadow @Final private Predicate<Biome.Precipitation> fillPredicate;
-    //$$ @Shadow @Final public static Predicate<Biome.Precipitation> RAIN;
+    /*$$@Shadow @Final private Predicate<Biome.Precipitation> fillPredicate;
+    @Shadow @Final public static Predicate<Biome.Precipitation> RAIN;$$*/
     //#endif
 
     @ModifyVariable(method = "receiveStalactiteDrip", at = @At(value = "HEAD"), argsOnly = true)
@@ -41,11 +39,7 @@ public class LayeredCauldronBlockMixin {
     @Inject(method = "canReceiveStalactiteDrip", at = @At(value = "RETURN"), cancellable = true)
     private void canReceiveStalactiteDrip(Fluid fluid, CallbackInfoReturnable<Boolean> cir) {
         if (IGNYSettings.CONVENIENT_REGENERATE_POWDER_SNOW.value() && !cir.getReturnValueZ()) {
-            //#if MC >= 12003
-            cir.setReturnValue(fluid == Fluids.WATER && this.precipitationType == Biome.Precipitation.SNOW);
-            //#else
-            //$$ cir.setReturnValue(fluid == Fluids.WATER && this.fillPredicate == RAIN);
-            //#endif
+            cir.setReturnValue(fluid == Fluids.WATER && this.precipitationType == Biome.Precipitation.SNOW); //#replace < 1.20.3 ? cir.setReturnValue(fluid == Fluids.WATER && this.fillPredicate == RAIN);
         }
     }
 }

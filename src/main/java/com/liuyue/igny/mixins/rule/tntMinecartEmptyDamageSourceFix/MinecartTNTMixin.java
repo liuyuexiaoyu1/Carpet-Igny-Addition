@@ -14,9 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#if MC >= 12103
-//$$ import net.minecraft.server.level.ServerLevel;
-//#endif
+//?>= 1.21.3 ? import net.minecraft.server.level.ServerLevel;
 
 @Mixin(MinecartTNT.class)
 public abstract class MinecartTNTMixin {
@@ -27,16 +25,10 @@ public abstract class MinecartTNTMixin {
     private DamageSource ignitionSource;
 
     @Inject(
-            //#if MC >= 12103
-            //$$ method = "hurtServer",
-            //#else
-            method = "hurt",
-            //#endif
+            method = "hurt", //#replace >= 1.21.3 ? method = "hurtServer",
             at = @At("HEAD"), cancellable = true)
     private void onHurt(
-            //#if MC >= 12103
-            //$$ ServerLevel serverLevel,
-            //#endif
+            //?>= 1.21.3 ? ServerLevel serverLevel,
             DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (IGNYSettings.TNT_MINECART_EMPTY_DAMAGE_SOURCE_FIX.value()) {
             var direct = source.getDirectEntity();
@@ -50,23 +42,15 @@ public abstract class MinecartTNTMixin {
 
     @Inject(method = "destroy", at = @At("HEAD"), cancellable = true)
     private void onDestroy(
-            //#if MC >= 12103
-            //$$ ServerLevel serverLevel,
-            //#endif
+            //?>= 1.21.3 ? ServerLevel serverLevel,
             DamageSource source, CallbackInfo ci) {
         if (IGNYSettings.TNT_MINECART_EMPTY_DAMAGE_SOURCE_FIX.value()) {
             MinecartTNT self = (MinecartTNT) (Object) this;
             double speed = self.getDeltaMovement().horizontalDistanceSqr();
             if (!newDamageSourceIgnitesTnt(source) && speed < 0.01D) {
                 self.destroy(
-                        //#if MC >= 12103
-                        //$$ serverLevel,
-                        //#endif
-                        //#if MC < 12103
-                        //$$ source
-                        //#else
-                        this.getDropItem()
-                        //#endif
+                        //?>= 1.21.3 ? serverLevel,
+                        this.getDropItem() //#replace < 1.21.3 ? source
                 );
                 ci.cancel();
                 return;

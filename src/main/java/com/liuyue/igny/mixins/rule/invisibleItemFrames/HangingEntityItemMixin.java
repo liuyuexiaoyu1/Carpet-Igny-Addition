@@ -2,9 +2,7 @@ package com.liuyue.igny.mixins.rule.invisibleItemFrames;
 
 import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.sugar.Local;
-//#if MC >= 12005
-import net.minecraft.core.component.DataComponents;
-//#endif
+import net.minecraft.core.component.DataComponents; //?>= 1.20.5
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.decoration.HangingEntity;
 import net.minecraft.world.entity.decoration.ItemFrame;
@@ -25,11 +23,7 @@ public class HangingEntityItemMixin {
         ItemStack stack = context.getItemInHand();
         String ruleValue = IGNYSettings.INVISIBLE_ITEM_FRAMES.value();
         if (!ruleValue.toLowerCase(Locale.ROOT).equals("false") && !ruleValue.toLowerCase(Locale.ROOT).equals("true")) {
-            //#if MC >= 12005
-            if (entity instanceof ItemFrame && stack.has(DataComponents.CUSTOM_NAME))
-            //#else
-            //$$ if (entity instanceof ItemFrame && stack.hasCustomHoverName())
-            //#endif
+            if (entity instanceof ItemFrame && stack.has(DataComponents.CUSTOM_NAME)) //#replace < 1.20.5 ? if (entity instanceof ItemFrame && stack.hasCustomHoverName())
             {
                 entity.setCustomName(stack.getHoverName());
             }

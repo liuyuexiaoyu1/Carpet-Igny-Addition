@@ -6,11 +6,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
-//#if MC >= 12005
-import net.minecraft.core.component.DataComponents;
-//#else
-//$$ import net.minecraft.nbt.Tag;
-//#endif
+import net.minecraft.core.component.DataComponents; //#replace < 1.20.5 ? import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
@@ -26,9 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-//#if MC >= 12109
-//$$ import net.minecraft.core.Direction;
-//#endif
+//?>= 1.21.9 ? import net.minecraft.core.Direction;
 
 import java.util.OptionalInt;
 
@@ -39,27 +33,15 @@ public class EnderChestBlockMixin extends Block {
     }
 
     @SuppressWarnings("all")
-    //#if MC >= 12005
-    @WrapOperation(method = "useWithoutItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;openMenu(Lnet/minecraft/world/MenuProvider;)Ljava/util/OptionalInt;"))
-    //#else
-    //$$ @WrapOperation(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;openMenu(Lnet/minecraft/world/MenuProvider;)Ljava/util/OptionalInt;"))
-    //#endif
+    @WrapOperation(method = "useWithoutItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;openMenu(Lnet/minecraft/world/MenuProvider;)Ljava/util/OptionalInt;")) //#replace < 1.20.5 ? @WrapOperation(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;openMenu(Lnet/minecraft/world/MenuProvider;)Ljava/util/OptionalInt;"))
     private OptionalInt openMenu(Player instance, MenuProvider menu, Operation<OptionalInt> original, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos blockPos, @Local PlayerEnderChestContainer chestContainer) {
         BlockEntity be = level.getBlockEntity(blockPos);
-        //#if MC < 12005
-        //$$ if (!(be instanceof EnderChestBlockEntity chest) || !be.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
-        //#else
-        if (!(be instanceof EnderChestBlockEntity chest) || !chest.components().has(DataComponents.CUSTOM_NAME))
-        //#endif
+        if (!(be instanceof EnderChestBlockEntity chest) || !chest.components().has(DataComponents.CUSTOM_NAME)) //#replace < 1.20.5 ? if (!(be instanceof EnderChestBlockEntity chest) || !be.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         {
             return original.call(instance, menu);
         }
         ((ViewingChest) instance).igny$setContextChest(chest);
-        //#if MC < 12005
-        //$$ String name = Component.Serializer.fromJson(be.saveWithFullMetadata().getString("CustomName")).getString();
-        //#else
-        String name = be.components().get(DataComponents.CUSTOM_NAME).getString();
-        //#endif
+        String name = be.components().get(DataComponents.CUSTOM_NAME).getString(); //#replace < 1.20.5 ? String name = Component.Serializer.fromJson(be.saveWithFullMetadata().getString("CustomName")).getString();
         PlayerEnderChestContainer container = LinkedContainerManager.isRuleEnabled() ? LinkedContainerManager.get(name) : chestContainer;
         int size = container.getContainerSize();
         int rows = container.getContainerSize() / 9;
@@ -81,11 +63,7 @@ public class EnderChestBlockMixin extends Block {
 
     @SuppressWarnings("deprecation")
     @Override
-    //#if MC >= 12109
-    //$$ public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction)
-    //#else
-    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos)
-    //#endif
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) //#replace >= 1.21.9 ? public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction)
     {
         if (!LinkedContainerManager.isRuleFully()) return 0;
         BlockEntity be = level.getBlockEntity(pos);
@@ -95,11 +73,7 @@ public class EnderChestBlockMixin extends Block {
         return 0;
     }
 
-    //#if MC >= 12109
-    //$$ @WrapOperation(method = "getTicker", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;isClientSide()Z"))
-    //#else
-    @WrapOperation(method = "getTicker", at = @At(value = "FIELD", target = "Lnet/minecraft/world/level/Level;isClientSide:Z", opcode = Opcodes.GETFIELD))
-    //#endif
+    @WrapOperation(method = "getTicker", at = @At(value = "FIELD", target = "Lnet/minecraft/world/level/Level;isClientSide:Z", opcode = Opcodes.GETFIELD)) //#replace >= 1.21.9 ? @WrapOperation(method = "getTicker", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;isClientSide()Z"))
     private boolean getTicker(Level instance, Operation<Boolean> original) {
         return true;
     }

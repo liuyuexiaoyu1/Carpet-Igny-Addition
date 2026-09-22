@@ -22,7 +22,7 @@
 
 package com.liuyue.igny.mixins.commands.customItemMaxStackSize;
 
-//#if MC >= 12003
+//#if >= 1.20.3
 import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -35,13 +35,9 @@ import net.minecraft.world.level.block.CrafterBlock;
 //$$ import com.liuyue.igny.utils.compat.DummyClass;
 //#endif
 import org.spongepowered.asm.mixin.Mixin;
-//#if MC >= 12003
-@Mixin(value = CrafterBlock.class, priority = 900)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
+@Mixin(value = CrafterBlock.class, priority = 900) //#replace < 1.20.3 ? @Mixin(DummyClass.class)
 public class CrafterBlockMixin {
-    //#if MC >= 12003
+    //#if >= 1.20.3
     @WrapOperation(method = "dispenseItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/HopperBlockEntity;addItem(Lnet/minecraft/world/Container;Lnet/minecraft/world/Container;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/core/Direction;)Lnet/minecraft/world/item/ItemStack;"))
     private ItemStack dispenseItem(Container from, Container to, ItemStack stack, Direction side, Operation<ItemStack> original) {
         boolean changed = IGNYSettings.itemStackCountChanged.get();

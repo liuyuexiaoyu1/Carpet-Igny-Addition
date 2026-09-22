@@ -214,6 +214,7 @@
     "rule.linkableEnderChest.PlayerMixin",
     "rule.linkableEnderChest.compat.ams.PlayerEnderChestContainerMixin",
     "rule.linkableEnderChest.compat.quickshulker.ServerPlayerGameModeMixin",
+    "rule.linkableEnderChest.compat.minihud.InventoryOverlayHandlerMixin",
     "rule.linkableEnderChest.compat.servux.ServuxEntitiesHandlerMixin",
     "rule.liquidNeverSpread.FlowingFluidMixin",
     "rule.liquidNeverSpread.LiquidBlockMixin",

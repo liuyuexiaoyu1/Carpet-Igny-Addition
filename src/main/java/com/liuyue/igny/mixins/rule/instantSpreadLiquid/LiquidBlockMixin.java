@@ -6,11 +6,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
-//#if MC >= 12103
-//$$ import net.minecraft.world.level.ScheduledTickAccess;
-//#else
-import net.minecraft.world.level.LevelAccessor;
-//#endif
+import net.minecraft.world.level.LevelAccessor; //#replace >= 1.21.3 ? import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.Fluid;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,9 +23,9 @@ public class LiquidBlockMixin {
         original.call(instance, pos, fluid, i);
     }
 
-    //#if MC >= 12103
-    //$$ @WrapOperation(method = "updateShape", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/ScheduledTickAccess;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/material/Fluid;I)V"))
-    //$$ private void scheduleTick2(ScheduledTickAccess instance, BlockPos pos, Fluid fluid, int delay, Operation<Void> original)
+    //#if >= 1.21.3
+    /*$$@WrapOperation(method = "updateShape", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/ScheduledTickAccess;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/material/Fluid;I)V"))
+    private void scheduleTick2(ScheduledTickAccess instance, BlockPos pos, Fluid fluid, int delay, Operation<Void> original)$$*/
     //#else
     @WrapOperation(method = "updateShape", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/LevelAccessor;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/material/Fluid;I)V"))
     private void scheduleTick2(LevelAccessor instance, BlockPos pos, Fluid fluid, int delay, Operation<Void> original)

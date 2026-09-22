@@ -21,9 +21,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#if MC >= 26.3
-//$$ import net.minecraft.world.item.component.SwingAnimation;
-//#endif
+//?>= 26.3 ? import net.minecraft.world.item.component.SwingAnimation;
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
@@ -45,11 +43,7 @@ public class ItemStackMixin {
         BlockState clickedState = level.getBlockState(clickedPos);
 
         BlockPos targetPos;
-        //#if MC <= 12001
-        //$$ if (clickedState.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(level, clickedPos, clickedState, Fluids.LAVA))
-        //#else
-        if (clickedState.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(player, level, clickedPos, clickedState, Fluids.LAVA))
-        //#endif
+        if (clickedState.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(player, level, clickedPos, clickedState, Fluids.LAVA)) //#replace <= 1.20.1 ? if (clickedState.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(level, clickedPos, clickedState, Fluids.LAVA))
         {
             targetPos = clickedPos;
         } else {
@@ -57,11 +51,7 @@ public class ItemStackMixin {
         }
 
         BlockState targetState = level.getBlockState(targetPos);
-        //#if MC <= 12001
-        //$$ boolean canPlaceInContainer = targetState.getBlock() instanceof LiquidBlockContainer lc && lc.canPlaceLiquid(level, targetPos, targetState, Fluids.LAVA);
-        //#else
-        boolean canPlaceInContainer = targetState.getBlock() instanceof LiquidBlockContainer lc && lc.canPlaceLiquid(player, level, targetPos, targetState, Fluids.LAVA);
-        //#endif
+        boolean canPlaceInContainer = targetState.getBlock() instanceof LiquidBlockContainer lc && lc.canPlaceLiquid(player, level, targetPos, targetState, Fluids.LAVA); //#replace <= 1.20.1 ? boolean canPlaceInContainer = targetState.getBlock() instanceof LiquidBlockContainer lc && lc.canPlaceLiquid(level, targetPos, targetState, Fluids.LAVA);
         boolean canReplace = targetState.canBeReplaced(Fluids.LAVA);
 
         if (!targetState.isAir() && !canPlaceInContainer && !canReplace) {
@@ -79,11 +69,7 @@ public class ItemStackMixin {
             level.setBlock(targetPos, Fluids.LAVA.defaultFluidState().createLegacyBlock(), 3);
         }
 
-        //#if MC <= 12005
-        //$$ if (!player.getAbilities().instabuild)
-        //#else
-        if (!player.hasInfiniteMaterials())
-        //#endif
+        if (!player.hasInfiniteMaterials()) //#replace <= 1.20.5 ? if (!player.getAbilities().instabuild)
         {
             offhand.shrink(1);
         }
@@ -93,11 +79,7 @@ public class ItemStackMixin {
         if (player instanceof ServerPlayer serverPlayer) {
             serverPlayer.awardStat(net.minecraft.stats.Stats.ITEM_USED.get(Items.MAGMA_BLOCK));
         }
-        //#if MC >= 26.3
-        //$$ player.swing(InteractionHand.OFF_HAND, SwingAnimation.DEFAULT, true);
-        //#else
-        player.swing(InteractionHand.OFF_HAND);
-        //#endif
+        player.swing(InteractionHand.OFF_HAND); //#replace >= 26.3 ? player.swing(InteractionHand.OFF_HAND, SwingAnimation.DEFAULT, true);
         cir.setReturnValue(InteractionResult.SUCCESS);
     }
 }

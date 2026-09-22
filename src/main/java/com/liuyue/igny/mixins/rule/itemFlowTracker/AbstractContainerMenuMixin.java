@@ -168,10 +168,6 @@ public abstract class AbstractContainerMenuMixin {
             return false;
         }
 
-        //#if MC >= 12005
-        return ItemStack.isSameItemSameComponents(first, second);
-        //#else
-        //$$ return ItemStack.isSameItemSameTags(first, second);
-        //#endif
+        return ItemStack.isSameItemSameComponents(first, second); //#replace < 1.20.5 ? return ItemStack.isSameItemSameTags(first, second);
     }
 }

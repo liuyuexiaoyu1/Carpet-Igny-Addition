@@ -49,7 +49,7 @@ public class PlayerOperateCommand {
                                 Commands.argument("player", StringArgumentType.string())
                                         .suggests(PlayerOperateCommand::suggestOnlinePlayers)
                                         .then(Commands.literal("task")
-                                                //#if MC >= 12003
+                                                //#if >= 1.20.3
                                                 .then(
                                                         Commands.literal("vault")
                                                                 .executes(ctx -> startVaultTask(ctx, 130, 100 , 21))
@@ -141,9 +141,7 @@ public class PlayerOperateCommand {
         }
 
         source.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                 message, false);
         return stoppedCount;
     }
@@ -179,9 +177,7 @@ public class PlayerOperateCommand {
         }
 
         source.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                 message, false);
         return pausedCount;
     }
@@ -217,9 +213,7 @@ public class PlayerOperateCommand {
         }
 
         source.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                 message, false);
         return resumedCount;
     }
@@ -231,9 +225,7 @@ public class PlayerOperateCommand {
         boolean paused = TaskManager.pauseTask(playerName);
         if (paused) {
             source.sendSuccess(
-                    //#if MC > 11904
-                    () ->
-                    //#endif
+                    () -> //?> 1.19.4
                             Component.translatable("igny.command.playerOperate.task_paused_success", playerName),
                     false
             );
@@ -256,9 +248,7 @@ public class PlayerOperateCommand {
         boolean resumed = TaskManager.resumeTask(playerName);
         if (resumed) {
             source.sendSuccess(
-                    //#if MC > 11904
-                    () ->
-                    //#endif
+                    () -> //?> 1.19.4
                             Component.translatable("igny.command.playerOperate.task_resumed_success", playerName),
                     false
             );
@@ -299,9 +289,7 @@ public class PlayerOperateCommand {
                 String.valueOf(cycles);
 
         source.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                         Component.translatable("igny.command.playerOperate.pressuse_started",
                                 playerName, duration, interval, cyclesStr),
                 false
@@ -329,9 +317,7 @@ public class PlayerOperateCommand {
         ITask task = RotationTask.getOrCreate(source, playerName, interval, rotationAngle);
         task.start();
         source.sendSuccess(
-                //#if MC > 11904
-                () ->
-                        //#endif
+                () -> //?> 1.19.4
                         Component.translatable("igny.command.playerOperate.rotation_started",
                                 playerName, interval, rotationAngle),
                 false
@@ -350,7 +336,7 @@ public class PlayerOperateCommand {
                 builder
         );
     }
-    //#if MC >= 12003
+    //#if >= 1.20.3
     private static int startVaultTaskWithArg(CommandContext<CommandSourceStack> context) {
         int maxCycles = IntegerArgumentType.getInteger(context, "maxCycles");
         int onlineDuration = IntegerArgumentType.getInteger(context, "onlineDuration");
@@ -377,9 +363,7 @@ public class PlayerOperateCommand {
         task.start();
 
         source.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                         Component.translatable("igny.command.playerOperate.vault_started", playerName, maxCycles, onlineDuration, waitingDuration),
                 false
         );
@@ -394,9 +378,7 @@ public class PlayerOperateCommand {
         boolean stopped = TaskManager.stopTask(playerName);
         if (stopped) {
             source.sendSuccess(
-                    //#if MC > 11904
-                    () ->
-                    //#endif
+                    () -> //?> 1.19.4
                             Component.translatable("igny.command.playerOperate.task_stopped_success", playerName),
                     false
             );
@@ -413,9 +395,7 @@ public class PlayerOperateCommand {
 
         if (tasks.isEmpty()) {
             source.sendSuccess(
-                    //#if MC > 11904
-                    () ->
-                    //#endif
+                    () -> //?> 1.19.4
                             Component.translatable("igny.command.playerOperate.list_no_tasks"),
                     false
             );
@@ -445,9 +425,7 @@ public class PlayerOperateCommand {
                 .append(Component.literal("\n"));
 
         source.sendSuccess(
-                //#if MC > 11904
-                () ->
-                //#endif
+                () -> //?> 1.19.4
                 header, false);
 
         for (ITask task : tasks) {
@@ -481,9 +459,7 @@ public class PlayerOperateCommand {
                     .append(stopButton);
 
             source.sendSuccess(
-                    //#if MC > 11904
-                    () ->
-                    //#endif
+                    () -> //?> 1.19.4
                     taskInfo, false);
         }
 
@@ -494,13 +470,13 @@ public class PlayerOperateCommand {
         if (disabled) {
             return Component.literal("§8" + text.getString().replaceAll("§[0-9a-f]", ""))
                     .withStyle(style -> style
-                                    //#if MC>=12105
-                                    //$$ .withItalic(true)
-                                    //$$ .withHoverEvent(new HoverEvent.ShowText(
-                                    //$$     hoverText.copy()
-                                    //$$         .append(Component.literal(" "))
-                                    //$$         .append(Component.translatable("igny.command.playerOperate.hover_disabled"))
-                                    //$$ ))
+                                    //#if >= 1.21.5
+                                    /*$$.withItalic(true)
+                                    .withHoverEvent(new HoverEvent.ShowText(
+                                        hoverText.copy()
+                                            .append(Component.literal(" "))
+                                            .append(Component.translatable("igny.command.playerOperate.hover_disabled"))
+                                    ))$$*/
                                     //#else
                                     .withItalic(true)
                                     .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
@@ -513,9 +489,9 @@ public class PlayerOperateCommand {
         } else {
             return text.copy()
                     .withStyle(style -> style
-                                    //#if MC>=12105
-                                    //$$ .withClickEvent(new ClickEvent.RunCommand(command))
-                                    //$$ .withHoverEvent(new HoverEvent.ShowText(hoverText))
+                                    //#if >= 1.21.5
+                                    /*$$.withClickEvent(new ClickEvent.RunCommand(command))
+                                    .withHoverEvent(new HoverEvent.ShowText(hoverText))$$*/
                                     //#else
                                     .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command))
                                     .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverText))
@@ -527,9 +503,9 @@ public class PlayerOperateCommand {
     private static Component createGlobalControlButton(Component text, String command, Component hoverText) {
         return text.copy()
                 .withStyle(style -> style
-                                //#if MC>=12105
-                                //$$ .withClickEvent(new ClickEvent.RunCommand(command))
-                                //$$ .withHoverEvent(new HoverEvent.ShowText(hoverText))
+                                //#if >= 1.21.5
+                                /*$$.withClickEvent(new ClickEvent.RunCommand(command))
+                                .withHoverEvent(new HoverEvent.ShowText(hoverText))$$*/
                                 //#else
                                 .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command))
                                 .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverText))

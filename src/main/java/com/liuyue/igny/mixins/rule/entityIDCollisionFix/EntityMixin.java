@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.entityIDCollisionFix;
 
-//#if MC >= 26.2
+//#if >= 26.2
 //$$ import com.liuyue.igny.utils.compat.DummyClass;
 //#else
 import com.liuyue.igny.IGNYSettings;
@@ -18,13 +18,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 //#endif
 import org.spongepowered.asm.mixin.Mixin;
 
-//#if MC >= 26.2
-//$$ @Mixin(DummyClass.class)
-//#else
-@Mixin(Entity.class)
-//#endif
+@Mixin(Entity.class) //#replace >= 26.2 ? @Mixin(DummyClass.class)
 public class EntityMixin {
-    //#if MC < 26.2
+    //#if < 26.2
     @Shadow
     private int id;
 

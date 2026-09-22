@@ -11,9 +11,7 @@ import net.minecraft.world.level.block.entity.EnderChestBlockEntity;
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-//#if MC >= 12109
-//$$ import net.minecraft.world.entity.ContainerUser;
-//#endif
+//?>= 1.21.9 ? import net.minecraft.world.entity.ContainerUser;
 
 public class LinkedContainer extends PlayerEnderChestContainer {
 
@@ -36,11 +34,7 @@ public class LinkedContainer extends PlayerEnderChestContainer {
     }
 
     @Override
-    //#if MC >= 12109
-    //$$ public void startOpen(ContainerUser player)
-    //#else
-    public void startOpen(Player player)
-    //#endif
+    public void startOpen(Player player) //#replace >= 1.21.9 ? public void startOpen(ContainerUser player)
     {
         if (player instanceof ViewingChest) {
             EnderChestBlockEntity chest = ((ViewingChest) player).igny$getContextChest();
@@ -51,11 +45,7 @@ public class LinkedContainer extends PlayerEnderChestContainer {
     }
 
     @Override
-    //#if MC >= 12109
-    //$$ public void stopOpen(ContainerUser player)
-    //#else
-    public void stopOpen(Player player)
-    //#endif
+    public void stopOpen(Player player) //#replace >= 1.21.9 ? public void stopOpen(ContainerUser player)
     {
         if (player instanceof ViewingChest) {
             EnderChestBlockEntity chest = ((ViewingChest) player).igny$getContextChest();
@@ -73,22 +63,18 @@ public class LinkedContainer extends PlayerEnderChestContainer {
     }
 
     public Tag igny$createItemsTag(HolderLookup.Provider provider) {
-        //#if MC >= 12105
-        //$$ com.mojang.serialization.DynamicOps<net.minecraft.nbt.Tag> ops = net.minecraft.resources.RegistryOps.create(net.minecraft.nbt.NbtOps.INSTANCE, provider);
-        //$$ java.util.List<net.minecraft.world.item.ItemStack> list = new java.util.ArrayList<>();
-        //$$ for (int i = 0; i < this.getContainerSize(); i++) {
-        //$$     list.add(this.getItem(i));
-        //$$ }
-        //$$ net.minecraft.world.item.component.ItemContainerContents contents = net.minecraft.world.item.component.ItemContainerContents.fromItems(list);
-        //$$ return net.minecraft.world.item.component.ItemContainerContents.CODEC.encodeStart(ops, contents)
-        //$$         .resultOrPartial(err -> com.liuyue.igny.IGNYServer.LOGGER.error("Encoding error: {}", err))
-        //$$         .orElse(null);
+        //#if >= 1.21.5
+        /*$$com.mojang.serialization.DynamicOps<net.minecraft.nbt.Tag> ops = net.minecraft.resources.RegistryOps.create(net.minecraft.nbt.NbtOps.INSTANCE, provider);
+        java.util.List<net.minecraft.world.item.ItemStack> list = new java.util.ArrayList<>();
+        for (int i = 0; i < this.getContainerSize(); i++) {
+            list.add(this.getItem(i));
+        }
+        net.minecraft.world.item.component.ItemContainerContents contents = net.minecraft.world.item.component.ItemContainerContents.fromItems(list);
+        return net.minecraft.world.item.component.ItemContainerContents.CODEC.encodeStart(ops, contents)
+                .resultOrPartial(err -> com.liuyue.igny.IGNYServer.LOGGER.error("Encoding error: {}", err))
+        .orElse(null);$$*/
         //#else
-        //#if MC >= 12005
-        return this.createTag(provider);
-        //#else
-        //$$ return this.createTag();
-        //#endif
+        return this.createTag(provider); //#replace < 1.20.5 ? return this.createTag();
         //#endif
     }
 

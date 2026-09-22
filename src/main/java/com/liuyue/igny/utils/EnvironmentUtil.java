@@ -16,31 +16,19 @@ public class EnvironmentUtil {
 
     public static String getMinecraftVersionId()
     {
-        //#if MC >= 12108
-        //$$ return getMinecraftVersion().id();
-        //#else
-        return getMinecraftVersion().getId();
-        //#endif
+        return getMinecraftVersion().getId(); //#replace >= 1.21.8 ? return getMinecraftVersion().id();
     }
 
     @SuppressWarnings("unused")
     public static String getMinecraftVersionName()
     {
-        //#if MC >= 12108
-        //$$ return getMinecraftVersion().name();
-        //#else
-        return getMinecraftVersion().getName();
-        //#endif
+        return getMinecraftVersion().getName(); //#replace >= 1.21.8 ? return getMinecraftVersion().name();
     }
 
     @SuppressWarnings("unused")
     public static boolean isMinecraftUnobfuscated()
     {
-        //#if MC >= 26.1
-        //$$ return true;
-        //#else
-        return getMinecraftVersionId().endsWith("_unobfuscated");
-        //#endif
+        return getMinecraftVersionId().endsWith("_unobfuscated"); //#replace >= 26.1 ? return true;
     }
 
     @SuppressWarnings("unused")

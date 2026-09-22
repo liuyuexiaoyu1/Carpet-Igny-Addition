@@ -26,12 +26,12 @@ public abstract class LeverBlockMixin extends FaceAttachedHorizontalDirectionalB
         if (!level.isClientSide() && blockState.getValue(LeverBlock.POWERED)) {
             Direction connected = getDirection(blockState);
             Direction direction = connected.getOpposite();
-            //#if MC >= 12105
-            //$$ net.minecraft.world.level.redstone.Orientation orientation =
-            //$$         net.minecraft.world.level.redstone.ExperimentalRedstoneUtils.initialOrientation(
-            //$$                 level, direction, direction.getAxis().isHorizontal() ? Direction.UP : blockState.getValue(FACING));
-            //$$ level.updateNeighborsAt(blockPos, (LeverBlock) (Object) this, orientation);
-            //$$ level.updateNeighborsAt(blockPos.relative(direction), (LeverBlock) (Object) this, orientation);
+            //#if >= 1.21.5
+            /*$$net.minecraft.world.level.redstone.Orientation orientation =
+                    net.minecraft.world.level.redstone.ExperimentalRedstoneUtils.initialOrientation(
+                            level, direction, direction.getAxis().isHorizontal() ? Direction.UP : blockState.getValue(FACING));
+            level.updateNeighborsAt(blockPos, (LeverBlock) (Object) this, orientation);
+            level.updateNeighborsAt(blockPos.relative(direction), (LeverBlock) (Object) this, orientation);$$*/
             //#else
             level.updateNeighborsAt(blockPos, (LeverBlock) (Object) this);
             level.updateNeighborsAt(blockPos.relative(direction), (LeverBlock) (Object) this);

@@ -15,11 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(ServerGamePacketListenerImpl.class)
 public class ServerGamePacketListenerImplMixin {
     @WrapOperation(
-            //#if MC >= 26.1
-            //$$ method = "lambda$handleChat$1",
-            //#else
-            method = "method_45064",
-            //#endif
+            method = "method_45064", //#replace >= 26.1 ? method = "lambda$handleChat$1",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/server/network/ServerGamePacketListenerImpl;broadcastChatMessage(Lnet/minecraft/network/chat/PlayerChatMessage;)V"

@@ -11,27 +11,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import com.mojang.authlib.GameProfile;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-//#if MC >= 12109
-//$$ import java.util.UUID;
-//#endif
+//?>= 1.21.9 ? import java.util.UUID;
 
 @Mixin(EntityPlayerMPFake.class)
 public abstract class EntityPlayerMPFakeMixin {
-    //#if MC >= 12003
-    //#if MC >= 12109
-    //$$ @ModifyVariable(method = "createFake", at = @At("STORE"), name = "uuid")
-    //$$ private static UUID modifyGameProfile(UUID value, @Local(argsOnly = true, name = "arg0") String username) {
+    //#if >= 1.20.3
+    //#if >= 1.21.9
+    /*$$@ModifyVariable(method = "createFake", at = @At("STORE"), name = "uuid")
+    private static UUID modifyGameProfile(UUID value, @Local(argsOnly = true, name = "arg0") String username) {$$*/
     //#else
     @ModifyVariable(method = "createFake", at = @At("STORE"), name = "gameprofile")
     private static GameProfile modifyGameProfile(GameProfile value, @Local(argsOnly = true, name = "arg0") String username) {
     //#endif
         for (ITask task : TaskManager.getAllActiveTasks()) {
             if (task instanceof VaultTask vaultTask && username.equals(vaultTask.getPendingFakeName())) {
-                //#if MC >= 12109
-                //$$ return UUIDUtil.createOfflinePlayerUUID(username);
-                //#else
-                return new GameProfile(UUIDUtil.createOfflinePlayerUUID(username), username);
-                //#endif
+                return new GameProfile(UUIDUtil.createOfflinePlayerUUID(username), username); //#replace >= 1.21.9 ? return UUIDUtil.createOfflinePlayerUUID(username);
             }
         }
         return value;

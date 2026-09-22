@@ -2,9 +2,7 @@ package com.liuyue.igny.mixins.rule.linkableEnderChest.compat.quickshulker;
 
 import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.utils.interfaces.linkableEnderChest.ViewingChest;
-//#if MC >= 12005
-import net.minecraft.core.component.DataComponents;
-//#endif
+import net.minecraft.core.component.DataComponents; //?>= 1.20.5
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,14 +20,10 @@ public class ServerPlayerGameModeMixin {
     @WrapMethod(method = "useItem")
     private InteractionResult useItem(ServerPlayer player, Level level, ItemStack stack, InteractionHand hand, Operation<InteractionResult> original) {
         if (LinkedContainerManager.isRuleEnabled()) {
-            //#if MC >= 12005
-            if (stack.is(Items.ENDER_CHEST) && stack.has(DataComponents.CUSTOM_NAME))
-            //#else
-            //$$ if (stack.is(Items.ENDER_CHEST) && stack.hasCustomHoverName())
-            //#endif
+            if (stack.is(Items.ENDER_CHEST) && stack.has(DataComponents.CUSTOM_NAME)) //#replace < 1.20.5 ? if (stack.is(Items.ENDER_CHEST) && stack.hasCustomHoverName())
             {
                 try {
-                    //#if MC >= 12005
+                    //#if >= 1.20.5
                     String name = stack.get(DataComponents.CUSTOM_NAME).getString();
                     ((ViewingChest) player).igny$setLinkedKey(name);
                     //#else

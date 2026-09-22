@@ -21,9 +21,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-//#if MC >= 12003
+//#if >= 1.20.3
 //#endif
-//#if MC >= 12105
+//#if >= 1.21.5
 //$$ import net.minecraft.world.level.block.FlowerBedBlock;
 //#else
 //$$ import net.minecraft.world.level.block.PinkPetalsBlock;
@@ -65,11 +65,7 @@ public class BetterEasyPlaceProtocolHandler {
         register(PistonBaseBlock.class, new PistonBaseBlockProtocolAdapter());
         register(PoweredRailBlock.class, new PoweredRailBlockProtocolAdapter());
         register(RailBlock.class, new RailBlockProtocolAdapter());
-        //#if MC >= 26.3
-        //$$ register(RedstoneWireBlock.class, new RedStoneWireBlockProtocolAdapter());
-        //#else
-        register(RedStoneWireBlock.class, new RedStoneWireBlockProtocolAdapter());
-        //#endif
+        register(RedStoneWireBlock.class, new RedStoneWireBlockProtocolAdapter()); //#replace >= 26.3 ? register(RedstoneWireBlock.class, new RedStoneWireBlockProtocolAdapter());
         register(RedstoneLampBlock.class, new RedstoneLampBlockProtocolAdapter());
         register(RedstoneWallTorchBlock.class, new RedstoneWallTorchBlockProtocolAdapter());
         register(RepeaterBlock.class, new RepeaterBlockProtocolAdapter());
@@ -84,15 +80,11 @@ public class BetterEasyPlaceProtocolHandler {
         register(TrapDoorBlock.class, new TrapDoorBlockProtocolAdapter());
         register(TurtleEggBlock.class, new TurtleEggBlockProtocolAdapter());
         register(VineBlock.class, new VineBlockProtocolAdapter());
-        //#if MC >= 12003
+        //#if >= 1.20.3
         register(CopperBulbBlock.class, new CopperBulbBlockProtocolAdapter());
         register(CrafterBlock.class, new CrafterBlockProtocolAdapter());
         //#endif
-        //#if MC >= 12105
-        //$$ register(FlowerBedBlock.class, new FlowerBedBlockProtocolAdapter());
-        //#else
-        register(PinkPetalsBlock.class, new FlowerBedBlockProtocolAdapter());
-        //#endif
+        register(PinkPetalsBlock.class, new FlowerBedBlockProtocolAdapter()); //#replace >= 1.21.5 ? register(FlowerBedBlock.class, new FlowerBedBlockProtocolAdapter());
         register(HorizontalDirectionalBlock.class, new HorizontalDirectionalBlockProtocolAdapter());
         register(HopperBlock.class, new HopperBlockProtocolAdapter());
         register(WallBlock.class, new WallBlockProtocolAdapter());
@@ -242,7 +234,7 @@ public class BetterEasyPlaceProtocolHandler {
         return itemStackProtocolDataAdapter.igny$fromProtocolValueAddition(protocolAdditionValue, stack);
     }
 
-    //#if MC >= 12001
+    //#if >= 1.20.1
     public static int encodeSignAttributesFromTag(net.minecraft.nbt.CompoundTag tag) {
         if (tag == null) {
             return 0;
@@ -250,31 +242,27 @@ public class BetterEasyPlaceProtocolHandler {
         int bits = 0;
         bits |= encodeSignTextFromTag(tag, "front_text", 0b10_0000, 6);
         bits |= encodeSignTextFromTag(tag, "back_text", 0b1000_0000_0000, 12);
-        //#if MC >= 12105
-        //$$ if (tag.getBoolean("is_waxed").orElse(false)) bits |= 0b100_0000_0000;
-        //#else
-        if (tag.getBoolean("is_waxed")) bits |= 0b100_0000_0000;
-        //#endif
+        if (tag.getBoolean("is_waxed")) bits |= 0b100_0000_0000; //#replace >= 1.21.5 ? if (tag.getBoolean("is_waxed").orElse(false)) bits |= 0b100_0000_0000;
         return bits;
     }
     //#endif
 
-    //#if MC >= 12105
-    //$$ private static int encodeSignTextFromTag(net.minecraft.nbt.CompoundTag tag, String key, int glowingBit, int colorShift) {
-    //$$     int bits = 0;
-    //$$     net.minecraft.nbt.CompoundTag text = tag.getCompound(key).orElse(null);
-    //$$     if (text != null && !text.isEmpty()) {
-    //$$         if (text.getBoolean("has_glowing_text").orElse(false)) bits |= glowingBit;
-    //$$         String colorName = text.getString("color").orElse("");
-    //$$         for (net.minecraft.world.item.DyeColor c : net.minecraft.world.item.DyeColor.values()) {
-    //$$             if (c.getName().equals(colorName)) {
-    //$$                 bits |= (c.ordinal() & 0b1111) << colorShift;
-    //$$                 break;
-    //$$             }
-    //$$         }
-    //$$     }
-    //$$     return bits;
-    //$$ }
+    //#if >= 1.21.5
+    /*$$private static int encodeSignTextFromTag(net.minecraft.nbt.CompoundTag tag, String key, int glowingBit, int colorShift) {
+        int bits = 0;
+        net.minecraft.nbt.CompoundTag text = tag.getCompound(key).orElse(null);
+        if (text != null && !text.isEmpty()) {
+            if (text.getBoolean("has_glowing_text").orElse(false)) bits |= glowingBit;
+            String colorName = text.getString("color").orElse("");
+            for (net.minecraft.world.item.DyeColor c : net.minecraft.world.item.DyeColor.values()) {
+                if (c.getName().equals(colorName)) {
+                    bits |= (c.ordinal() & 0b1111) << colorShift;
+                    break;
+                }
+            }
+        }
+        return bits;
+    }$$*/
     //#else
     private static int encodeSignTextFromTag(net.minecraft.nbt.CompoundTag tag, String key, int glowingBit, int colorShift) {
         int bits = 0;
@@ -294,7 +282,7 @@ public class BetterEasyPlaceProtocolHandler {
     //#endif
 
     public static int encodeBlockEntityProtocolAddition(BlockEntity blockEntity) {
-        //#if MC >= 12003
+        //#if >= 1.20.3
         if (blockEntity instanceof net.minecraft.world.level.block.entity.CrafterBlockEntity crafterBlockEntity) {
             int bits = 0;
             for (int i = 0; i < 9; ++i) {
@@ -309,33 +297,25 @@ public class BetterEasyPlaceProtocolHandler {
             BeaconBlockEntityAccessor accessor = (BeaconBlockEntityAccessor) beaconBlockEntity;
             return BeaconBlockProtocolAdapter.encodeEffects(accessor.igny$getPrimaryPower(), accessor.igny$getSecondaryPower());
         }
-        //#if MC >= 12001
+        //#if >= 1.20.1
         if (blockEntity instanceof net.minecraft.world.level.block.entity.SignBlockEntity signBlockEntity) {
             int bits = 0;
-            //#if MC >= 26.3
-            //$$ net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getText(net.minecraft.world.level.block.entity.SignTextSlot.FRONT);
-            //#else
-            net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getFrontText();
-            //#endif
+            net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getFrontText(); //#replace >= 26.3 ? net.minecraft.world.level.block.entity.SignText frontText = signBlockEntity.getText(net.minecraft.world.level.block.entity.SignTextSlot.FRONT);
             if (frontText.hasGlowingText()) bits |= 0b10_0000;
             bits |= (frontText.getColor().ordinal() & 0b1111) << 6;
-            //#if MC >= 26.3
-            //$$ net.minecraft.world.level.block.entity.SignText backText = signBlockEntity.getText(net.minecraft.world.level.block.entity.SignTextSlot.BACK);
-            //#else
-            net.minecraft.world.level.block.entity.SignText backText = signBlockEntity.getBackText();
-            //#endif
+            net.minecraft.world.level.block.entity.SignText backText = signBlockEntity.getBackText(); //#replace >= 26.3 ? net.minecraft.world.level.block.entity.SignText backText = signBlockEntity.getText(net.minecraft.world.level.block.entity.SignTextSlot.BACK);
             if (backText.hasGlowingText()) bits |= 0b1000_0000_0000;
             bits |= (backText.getColor().ordinal() & 0b1111) << 12;
             if (signBlockEntity.isWaxed()) bits |= 0b100_0000_0000;
             return bits;
         }
         //#else
-        //$$ if (blockEntity instanceof net.minecraft.world.level.block.entity.SignBlockEntity signBlockEntity) {
-        //$$     int bits = 0;
-        //$$     if (signBlockEntity.hasGlowingText()) bits |= 0b10_0000;
-        //$$     bits |= (signBlockEntity.getColor().ordinal() & 0b1111) << 6;
-        //$$     return bits;
-        //$$ }
+        /*$$if (blockEntity instanceof net.minecraft.world.level.block.entity.SignBlockEntity signBlockEntity) {
+            int bits = 0;
+            if (signBlockEntity.hasGlowingText()) bits |= 0b10_0000;
+            bits |= (signBlockEntity.getColor().ordinal() & 0b1111) << 6;
+            return bits;
+        }$$*/
         //#endif
         return 0;
     }
@@ -345,22 +325,22 @@ public class BetterEasyPlaceProtocolHandler {
             return 0;
         }
         try {
-            //#if MC >= 12001
+            //#if >= 1.20.1
             if (tag.contains("front_text")) {
                 return encodeSignAttributesFromTag(tag);
             }
             return 0;
             //#else
-            //$$ int bits = 0;
-            //$$ if (tag.getBoolean("GlowingText")) bits |= 0b10_0000;
-            //$$ String colorName = tag.getString("Color");
-            //$$ for (net.minecraft.world.item.DyeColor c : net.minecraft.world.item.DyeColor.values()) {
-            //$$     if (c.getName().equals(colorName)) {
-            //$$         bits |= (c.ordinal() & 0b1111) << 6;
-            //$$         break;
-            //$$     }
-            //$$ }
-            //$$ return bits;
+            /*$$int bits = 0;
+            if (tag.getBoolean("GlowingText")) bits |= 0b10_0000;
+            String colorName = tag.getString("Color");
+            for (net.minecraft.world.item.DyeColor c : net.minecraft.world.item.DyeColor.values()) {
+                if (c.getName().equals(colorName)) {
+                    bits |= (c.ordinal() & 0b1111) << 6;
+                    break;
+    }
+        }
+            return bits;$$*/
             //#endif
         } catch (Exception e) {
             return 0;

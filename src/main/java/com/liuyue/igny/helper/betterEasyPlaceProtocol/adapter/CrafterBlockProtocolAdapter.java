@@ -1,6 +1,6 @@
 package com.liuyue.igny.helper.betterEasyPlaceProtocol.adapter;
 
-//#if MC >= 12003
+//#if >= 1.20.3
 
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.ItemStackProtocolDataAdapter;
@@ -12,24 +12,20 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-//#if MC >= 12005
+//#if >= 1.20.5
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 //#endif
-//#if MC >= 12005 && MC < 12110
-import net.minecraft.world.item.component.CustomData;
-//#endif
-//#if MC >= 12110
+import net.minecraft.world.item.component.CustomData; //?MC >= 12005 && MC < 12110
+//#if >= 1.21.10
 //$$ import net.minecraft.world.item.component.TypedEntityData;
-//#if MC >= 26.2
+//#if >= 26.2
 //$$ import net.minecraft.world.level.block.entity.BlockEntityTypes;
 //#else
 //$$ import net.minecraft.world.level.block.entity.BlockEntityType;
 //#endif
 //#endif
-//#if MC < 12005
-//$$ import net.minecraft.nbt.CompoundTag;
-//#endif
+//?< 1.20.5 ? import net.minecraft.nbt.CompoundTag;
 
 public class CrafterBlockProtocolAdapter implements BlockProtocolStateAdapter, ItemStackProtocolDataAdapter {
     public static final CrafterBlockProtocolAdapter INSTANCE = new CrafterBlockProtocolAdapter();
@@ -103,25 +99,25 @@ public class CrafterBlockProtocolAdapter implements BlockProtocolStateAdapter, I
     }
 
     
-    //#if MC < 12005
-    //$$ private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
-    //$$     return stack.getTagElement("BlockEntityTag");
-    //$$ }
-    //$$ private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
-    //$$     ItemStack stackCopy = stack.copy();
-    //$$     tag.putString("id", "minecraft:crafter");
-    //$$     CompoundTag beTag = stackCopy.getTagElement("BlockEntityTag");
-    //$$     if (beTag == null) {
-    //$$         beTag = tag;
-    //$$         stackCopy.getOrCreateTag().put("BlockEntityTag", beTag);
-    //$$     } else {
-    //$$         beTag.putString("id", "minecraft:crafter");
-    //$$         beTag.putIntArray("disabled_slots", tag.getIntArray("disabled_slots"));
-    //$$     }
-    //$$     return stackCopy;
-    //$$ }
+    //#if < 1.20.5
+    /*$$private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
+        return stack.getTagElement("BlockEntityTag");
+    }
+    private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
+        ItemStack stackCopy = stack.copy();
+        tag.putString("id", "minecraft:crafter");
+        CompoundTag beTag = stackCopy.getTagElement("BlockEntityTag");
+        if (beTag == null) {
+            beTag = tag;
+            stackCopy.getOrCreateTag().put("BlockEntityTag", beTag);
+        } else {
+            beTag.putString("id", "minecraft:crafter");
+            beTag.putIntArray("disabled_slots", tag.getIntArray("disabled_slots"));
+        }
+        return stackCopy;
+    }$$*/
     //#endif
-    //#if MC >= 12005 && MC < 12110
+    //#if 1.20.5..1.21.10
     private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
         CustomData data = stack.get(DataComponents.BLOCK_ENTITY_DATA);
         return data == null ? null : data.copyTag();
@@ -134,30 +130,30 @@ public class CrafterBlockProtocolAdapter implements BlockProtocolStateAdapter, I
         return stackCopy;
     }
     //#endif
-    //#if MC >= 12110
-    //$$ private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
-    //$$     TypedEntityData<?> data = stack.get(DataComponents.BLOCK_ENTITY_DATA);
-    //$$     return data == null ? null : data.copyTagWithoutId();
-    //$$ }
-    //$$ private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
-    //$$     ItemStack stackCopy = stack.copy();
-    //#if MC >= 26.2
+    //#if >= 1.21.10
+    /*$$private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
+        TypedEntityData<?> data = stack.get(DataComponents.BLOCK_ENTITY_DATA);
+        return data == null ? null : data.copyTagWithoutId();
+    }
+    private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
+    ItemStack stackCopy = stack.copy();$$*/
+    //#if >= 26.2
     //$$     stackCopy.set(DataComponents.BLOCK_ENTITY_DATA, TypedEntityData.of(BlockEntityTypes.CRAFTER, tag));
     //#else
     //$$     stackCopy.set(DataComponents.BLOCK_ENTITY_DATA, TypedEntityData.of(BlockEntityType.CRAFTER, tag));
     //#endif
-    //$$     return stackCopy;
-    //$$ }
+    /*$$return stackCopy;
+    }$$*/
     //#endif
 
     
-    //#if MC >= 12105
-    //$$ private static int[] getDisabledSlots(CompoundTag tag) {
-    //$$     if (!tag.contains("disabled_slots")) {
-    //$$         return new int[0];
-    //$$     }
-    //$$     return tag.getIntArray("disabled_slots").orElseGet(() -> new int[0]);
-    //$$ }
+    //#if >= 1.21.5
+    /*$$private static int[] getDisabledSlots(CompoundTag tag) {
+        if (!tag.contains("disabled_slots")) {
+            return new int[0];
+    }
+        return tag.getIntArray("disabled_slots").orElseGet(() -> new int[0]);
+    }$$*/
     //#else
     private static int[] getDisabledSlots(CompoundTag tag) {
         if (!tag.contains("disabled_slots", 11)) {

@@ -9,24 +9,18 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#if MC >= 12102
-//$$ import net.minecraft.world.level.block.state.BlockState;
-//$$ import net.minecraft.server.level.ServerLevel;
+//#if >= 1.21.2
+/*$$import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.server.level.ServerLevel;$$*/
 //#endif
 
 @Mixin(FlowingFluid.class)
 public class FlowingFluidMixin {
     @Inject(method = "spread", at = @At(value = "HEAD"), cancellable = true)
     private void spread(
-            //#if MC >= 12102
-            //$$ ServerLevel level,
-            //#else
-            Level level,
-            //#endif
+            Level level, //#replace >= 1.21.2 ? ServerLevel level,
             BlockPos pos,
-            //#if MC >= 12102
-            //$$ BlockState blockState,
-            //#endif
+            //?>= 1.21.2 ? BlockState blockState,
             FluidState state, CallbackInfo ci) {
         if (!IGNYSettings.LIQUID_NEVER_SPREAD.value().equals("false")) {
             if (IGNYSettings.LIQUID_NEVER_SPREAD.value().equals("true") || state.isSource()) {

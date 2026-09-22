@@ -46,11 +46,7 @@ public abstract class ThrowableProjectileMixin extends Projectile {
                 this.applyInertia();
                 this.applyGravity();
                 this.setPos(nx, ny, nz);
-                //#if MC>=12105
-                //$$ ((EntityInvoker) self).invokeApplyEffectsFromBlocks();
-                //#else
-                this.applyEffectsFromBlocks();
-                //#endif
+                this.applyEffectsFromBlocks(); //#replace >= 1.21.5 ? ((EntityInvoker) self).invokeApplyEffectsFromBlocks();
                 ci.cancel();
             }
 

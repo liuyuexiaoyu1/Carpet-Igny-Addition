@@ -23,11 +23,7 @@ public class BoxRenderer extends BaseTickingShapeRenderer {
         INSTANCE.processUpdate(id, pos, color, durationTicks, permanent, depthTest, smooth, minX, minY, minZ, maxX, maxY, maxZ);
 
         if (withLine) {
-            //#if MC <= 12006
-            //$$ ResourceLocation lineId = ResourceLocation.tryParse(id.toString() + "_line");
-            //#else
-            ResourceLocation lineId = ResourceLocation.parse(id.toString() + "_line");
-            //#endif
+            ResourceLocation lineId = ResourceLocation.parse(id.toString() + "_line"); //#replace <= 1.20.6 ? ResourceLocation lineId = ResourceLocation.tryParse(id.toString() + "_line");
             INSTANCE.processUpdate(lineId, pos, 0xFFFFFFFF, durationTicks, permanent, lineDepthTest, smooth, minX, minY, minZ, maxX, maxY, maxZ);
         }
     }
@@ -57,11 +53,7 @@ public class BoxRenderer extends BaseTickingShapeRenderer {
     @Override
     protected void updateShape(ResourceLocation id, ShapeData data) {
         Color color = parseColor(data.color);
-        //#if MC >= 26.2
-        //$$ Vec3 center = Vec3.atCenterOf(data.pos);
-        //#else
-        Vec3 center = data.pos.getCenter();
-        //#endif
+        Vec3 center = data.pos.getCenter(); //#replace >= 26.2 ? Vec3 center = Vec3.atCenterOf(data.pos);
         double p = data.currentSize;
 
         if (!data.smooth){

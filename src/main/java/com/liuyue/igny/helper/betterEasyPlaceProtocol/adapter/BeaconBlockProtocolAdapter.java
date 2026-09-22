@@ -2,9 +2,7 @@ package com.liuyue.igny.helper.betterEasyPlaceProtocol.adapter;
 
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter;
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.ItemStackProtocolDataAdapter;
-//#if MC >= 12005
-import net.minecraft.core.Holder;
-//#endif
+import net.minecraft.core.Holder; //?>= 1.20.5
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
@@ -14,24 +12,20 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-//#if MC >= 12005
+//#if >= 1.20.5
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 //#endif
-//#if MC >= 12005 && MC < 12110
-import net.minecraft.world.item.component.CustomData;
-//#endif
-//#if MC >= 12110
+import net.minecraft.world.item.component.CustomData; //?MC >= 12005 && MC < 12110
+//#if >= 1.21.10
 //$$ import net.minecraft.world.item.component.TypedEntityData;
-//#if MC >= 26.2
+//#if >= 26.2
 //$$ import net.minecraft.world.level.block.entity.BlockEntityTypes;
 //#else
 //$$ import net.minecraft.world.level.block.entity.BlockEntityType;
 //#endif
 //#endif
-//#if MC < 12005
-//$$ import net.minecraft.nbt.CompoundTag;
-//#endif
+//?< 1.20.5 ? import net.minecraft.nbt.CompoundTag;
 
 public class BeaconBlockProtocolAdapter implements BlockProtocolStateAdapter, ItemStackProtocolDataAdapter {
     public static final BeaconBlockProtocolAdapter INSTANCE = new BeaconBlockProtocolAdapter();
@@ -92,53 +86,41 @@ public class BeaconBlockProtocolAdapter implements BlockProtocolStateAdapter, It
         return setBlockEntityTag(stackCopy, tag);
     }
 
-    //#if MC >= 12005
-    public static int encodeEffects(@Nullable Holder<MobEffect> primary, @Nullable Holder<MobEffect> secondary)
-    //#else
-    //$$ public static int encodeEffects(@Nullable MobEffect primary, @Nullable MobEffect secondary)
-    //#endif
+    public static int encodeEffects(@Nullable Holder<MobEffect> primary, @Nullable Holder<MobEffect> secondary) //#replace < 1.20.5 ? public static int encodeEffects(@Nullable MobEffect primary, @Nullable MobEffect secondary)
     {
         int p = 0;
         int s = 0;
         if (primary != null) {
-            //#if MC >= 12005
-            MobEffect effect = primary.value();
-            //#else
-            //$$ MobEffect effect = primary;
-            //#endif
+            MobEffect effect = primary.value(); //#replace < 1.20.5 ? MobEffect effect = primary;
             p = BuiltInRegistries.MOB_EFFECT.getId(effect) + 1;
         }
         if (secondary != null) {
-            //#if MC >= 12005
-            MobEffect effect = secondary.value();
-            //#else
-            //$$ MobEffect effect = secondary;
-            //#endif
+            MobEffect effect = secondary.value(); //#replace < 1.20.5 ? MobEffect effect = secondary;
             s = BuiltInRegistries.MOB_EFFECT.getId(effect) + 1;
         }
         return (p << 7) | s;
     }
 
-    //#if MC < 12005
-    //$$ private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
-    //$$     return stack.getTagElement("BlockEntityTag");
-    //$$ }
-    //$$ private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
-    //$$     ItemStack stackCopy = stack.copy();
-    //$$     tag.putString("id", "minecraft:beacon");
-    //$$     CompoundTag beTag = stackCopy.getTagElement("BlockEntityTag");
-    //$$     if (beTag == null) {
-    //$$         beTag = tag;
-    //$$         stackCopy.getOrCreateTag().put("BlockEntityTag", beTag);
-    //$$     } else {
-    //$$         beTag.putString("id", "minecraft:beacon");
-    //$$         beTag.putString("primary_effect", tag.getString("primary_effect"));
-    //$$         beTag.putString("secondary_effect", tag.getString("secondary_effect"));
-    //$$     }
-    //$$     return stackCopy;
-    //$$ }
+    //#if < 1.20.5
+    /*$$private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
+        return stack.getTagElement("BlockEntityTag");
+    }
+    private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
+        ItemStack stackCopy = stack.copy();
+        tag.putString("id", "minecraft:beacon");
+        CompoundTag beTag = stackCopy.getTagElement("BlockEntityTag");
+        if (beTag == null) {
+            beTag = tag;
+            stackCopy.getOrCreateTag().put("BlockEntityTag", beTag);
+        } else {
+            beTag.putString("id", "minecraft:beacon");
+            beTag.putString("primary_effect", tag.getString("primary_effect"));
+            beTag.putString("secondary_effect", tag.getString("secondary_effect"));
+        }
+        return stackCopy;
+    }$$*/
     //#endif
-    //#if MC >= 12005 && MC < 12110
+    //#if 1.20.5..1.21.10
     private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
         CustomData data = stack.get(DataComponents.BLOCK_ENTITY_DATA);
         return data == null ? null : data.copyTag();
@@ -151,19 +133,19 @@ public class BeaconBlockProtocolAdapter implements BlockProtocolStateAdapter, It
         return stackCopy;
     }
     //#endif
-    //#if MC >= 12110
-    //$$ private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
-    //$$     TypedEntityData<?> data = stack.get(DataComponents.BLOCK_ENTITY_DATA);
-    //$$     return data == null ? null : data.copyTagWithoutId();
-    //$$ }
-    //$$ private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
-    //$$     ItemStack stackCopy = stack.copy();
-    //#if MC >= 26.2
+    //#if >= 1.21.10
+    /*$$private static @Nullable CompoundTag getBlockEntityTag(ItemStack stack) {
+        TypedEntityData<?> data = stack.get(DataComponents.BLOCK_ENTITY_DATA);
+        return data == null ? null : data.copyTagWithoutId();
+    }
+    private static ItemStack setBlockEntityTag(ItemStack stack, CompoundTag tag) {
+    ItemStack stackCopy = stack.copy();$$*/
+    //#if >= 26.2
     //$$     stackCopy.set(DataComponents.BLOCK_ENTITY_DATA, TypedEntityData.of(BlockEntityTypes.BEACON, tag));
     //#else
     //$$     stackCopy.set(DataComponents.BLOCK_ENTITY_DATA, TypedEntityData.of(BlockEntityType.BEACON, tag));
     //#endif
-    //$$     return stackCopy;
-    //$$ }
+    /*$$return stackCopy;
+    }$$*/
     //#endif
 }

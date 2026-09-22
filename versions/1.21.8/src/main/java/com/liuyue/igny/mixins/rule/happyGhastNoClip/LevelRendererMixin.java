@@ -5,20 +5,14 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.LevelRenderer;
-//#if MC >= 26.2
-//$$ import net.minecraft.client.Camera;
-//#endif
+//?>= 26.2 ? import net.minecraft.client.Camera;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-//#if MC >= 26.2
-//$$ @Mixin(value = Camera.class, priority = 1100)
-//#else
-@Mixin(value = LevelRenderer.class, priority = 1100)
-//#endif
+@Mixin(value = LevelRenderer.class, priority = 1100) //#replace >= 26.2 ? @Mixin(value = Camera.class, priority = 1100)
 public class LevelRendererMixin {
-    //#if MC >= 26.1
-    //#if MC >= 26.2
+    //#if >= 26.1
+    //#if >= 26.2
     //$$ @WrapOperation(method = "extractRenderState",at= @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isSpectator()Z"))
     //#else
     //$$ @WrapOperation(method = "update", at= @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isSpectator()Z"))

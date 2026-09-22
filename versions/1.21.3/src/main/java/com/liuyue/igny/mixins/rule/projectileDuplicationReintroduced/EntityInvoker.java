@@ -9,9 +9,9 @@ public interface EntityInvoker {
     @Invoker("applyGravity")
     void invokeApplyGravity();
 
-    //#if MC>=12105
-    //$$ @Invoker("applyEffectsFromBlocks")
-    //$$ void invokeApplyEffectsFromBlocks();
+    //#if >= 1.21.5
+    /*$$@Invoker("applyEffectsFromBlocks")
+    void invokeApplyEffectsFromBlocks();$$*/
     //#endif
 
 }

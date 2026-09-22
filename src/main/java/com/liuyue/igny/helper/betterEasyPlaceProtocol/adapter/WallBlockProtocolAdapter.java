@@ -16,11 +16,11 @@ public class WallBlockProtocolAdapter implements BlockProtocolStateAdapter {
 
     @Override
     public int igny$toProtocolValue(int protocolValue, BlockState fromState) {
-        //#if MC >= 12105
-        //$$ WallSide north = fromState.getValue(WallBlock.NORTH);
-        //$$ WallSide east = fromState.getValue(WallBlock.EAST);
-        //$$ WallSide south = fromState.getValue(WallBlock.SOUTH);
-        //$$ WallSide west = fromState.getValue(WallBlock.WEST);
+        //#if >= 1.21.5
+        /*$$WallSide north = fromState.getValue(WallBlock.NORTH);
+        WallSide east = fromState.getValue(WallBlock.EAST);
+        WallSide south = fromState.getValue(WallBlock.SOUTH);
+        WallSide west = fromState.getValue(WallBlock.WEST);$$*/
         //#else
         WallSide north = fromState.getValue(WallBlock.NORTH_WALL);
         WallSide east = fromState.getValue(WallBlock.EAST_WALL);
@@ -48,11 +48,11 @@ public class WallBlockProtocolAdapter implements BlockProtocolStateAdapter {
         boolean up = ((extraProtocolValue >> 8) & 0b1) == 0b1;
 
         return fromState
-                //#if MC >= 12105
-                //$$ .setValue(WallBlock.NORTH, north)
-                //$$ .setValue(WallBlock.EAST, east)
-                //$$ .setValue(WallBlock.SOUTH, south)
-                //$$ .setValue(WallBlock.WEST, west)
+                //#if >= 1.21.5
+                /*$$.setValue(WallBlock.NORTH, north)
+                .setValue(WallBlock.EAST, east)
+                .setValue(WallBlock.SOUTH, south)
+                .setValue(WallBlock.WEST, west)$$*/
                 //#else
                 .setValue(WallBlock.NORTH_WALL, north)
                 .setValue(WallBlock.EAST_WALL, east)

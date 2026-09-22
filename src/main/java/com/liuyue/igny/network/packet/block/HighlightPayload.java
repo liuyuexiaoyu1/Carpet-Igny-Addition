@@ -1,6 +1,6 @@
 package com.liuyue.igny.network.packet.block;
 
-//#if MC >= 12005
+//#if >= 1.20.5
 import com.liuyue.igny.network.PacketUtil;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -9,11 +9,9 @@ import org.jetbrains.annotations.NotNull;
 //#endif
 import net.minecraft.core.BlockPos;
 public record HighlightPayload(BlockPos pos, int color, int durationTicks, boolean permanent)
-        //#if MC >= 12005
-        implements CustomPacketPayload
-        //#endif
+        implements CustomPacketPayload //?>= 1.20.5
 {
-    //#if MC >= 12005
+    //#if >= 1.20.5
     public static final Type<HighlightPayload> TYPE = PacketUtil.createId("highlight_block");
 
     @Override

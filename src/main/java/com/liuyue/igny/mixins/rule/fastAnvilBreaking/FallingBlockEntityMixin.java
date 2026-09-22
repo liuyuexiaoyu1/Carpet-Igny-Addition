@@ -2,9 +2,7 @@ package com.liuyue.igny.mixins.rule.fastAnvilBreaking;
 
 import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.sugar.Local;
-//#if MC >= 12102
-//$$ import net.minecraft.server.level.ServerLevel;
-//#endif
+//?>= 1.21.2 ? import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.item.FallingBlockEntity;
@@ -35,19 +33,11 @@ public class FallingBlockEntityMixin {
             BlockPos endPos = new BlockPos(blockPos.getX(), level.getMaxBuildHeight(), blockPos.getZ());
             List<FallingBlockEntity> fallingEntities = self.level().getEntitiesOfClass(
                     FallingBlockEntity.class,
-                    //#if MC >= 26.2
-                    //$$ new AABB(Vec3.atCenterOf(blockPos), Vec3.atCenterOf(endPos))
-                    //#else
-                    new AABB(blockPos.getCenter(), endPos.getCenter())
-                    //#endif
+                    new AABB(blockPos.getCenter(), endPos.getCenter()) //#replace >= 26.2 ? new AABB(Vec3.atCenterOf(blockPos), Vec3.atCenterOf(endPos))
             );
             for (FallingBlockEntity entity : fallingEntities) {
                 if (entity.getBlockState().is(BlockTags.ANVIL)) {
-                    //#if MC >= 12102
-                    //$$ entity.spawnAtLocation((ServerLevel) level, entity.getBlockState().getBlock());
-                    //#else
-                    entity.spawnAtLocation(entity.getBlockState().getBlock());
-                    //#endif
+                    entity.spawnAtLocation(entity.getBlockState().getBlock()); //#replace >= 1.21.2 ? entity.spawnAtLocation((ServerLevel) level, entity.getBlockState().getBlock());
                     entity.discard();
                 }
             }

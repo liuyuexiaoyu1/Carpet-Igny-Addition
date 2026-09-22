@@ -2,11 +2,7 @@ package com.liuyue.igny.helper.betterEasyPlaceProtocol.adapter;
 
 import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.BlockProtocolStateAdapter;
 import net.minecraft.world.item.context.BlockPlaceContext;
-//#if MC >= 26.3
-//$$ import net.minecraft.world.level.block.RedstoneWireBlock;
-//#else
-import net.minecraft.world.level.block.RedStoneWireBlock;
-//#endif
+import net.minecraft.world.level.block.RedStoneWireBlock; //#replace >= 26.3 ? import net.minecraft.world.level.block.RedstoneWireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RedstoneSide;
 import org.jetbrains.annotations.NotNull;
@@ -22,11 +18,11 @@ public class RedStoneWireBlockProtocolAdapter implements BlockProtocolStateAdapt
 
     @Override
     public int igny$toProtocolValue(int protocolValue, BlockState fromState) {
-        //#if MC >= 26.3
-        //$$ boolean isDot = !fromState.getValue(RedstoneWireBlock.NORTH).isConnected()
-        //$$         && !fromState.getValue(RedstoneWireBlock.EAST).isConnected()
-        //$$         && !fromState.getValue(RedstoneWireBlock.SOUTH).isConnected()
-        //$$         && !fromState.getValue(RedstoneWireBlock.WEST).isConnected();
+        //#if >= 26.3
+        /*$$boolean isDot = !fromState.getValue(RedstoneWireBlock.NORTH).isConnected()
+                && !fromState.getValue(RedstoneWireBlock.EAST).isConnected()
+                && !fromState.getValue(RedstoneWireBlock.SOUTH).isConnected()
+        && !fromState.getValue(RedstoneWireBlock.WEST).isConnected();$$*/
         //#else
         boolean isDot = !fromState.getValue(RedStoneWireBlock.NORTH).isConnected()
                 && !fromState.getValue(RedStoneWireBlock.EAST).isConnected()
@@ -42,11 +38,11 @@ public class RedStoneWireBlockProtocolAdapter implements BlockProtocolStateAdapt
         if (!isDot) {
             return fromState;
         }
-        //#if MC >= 26.3
-        //$$ return fromState.setValue(RedstoneWireBlock.NORTH, RedstoneSide.NONE)
-        //$$         .setValue(RedstoneWireBlock.EAST, RedstoneSide.NONE)
-        //$$         .setValue(RedstoneWireBlock.SOUTH, RedstoneSide.NONE)
-        //$$         .setValue(RedstoneWireBlock.WEST, RedstoneSide.NONE);
+        //#if >= 26.3
+        /*$$return fromState.setValue(RedstoneWireBlock.NORTH, RedstoneSide.NONE)
+                .setValue(RedstoneWireBlock.EAST, RedstoneSide.NONE)
+                .setValue(RedstoneWireBlock.SOUTH, RedstoneSide.NONE)
+        .setValue(RedstoneWireBlock.WEST, RedstoneSide.NONE);$$*/
         //#else
         return fromState.setValue(RedStoneWireBlock.NORTH, RedstoneSide.NONE)
                 .setValue(RedStoneWireBlock.EAST, RedstoneSide.NONE)

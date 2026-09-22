@@ -3,12 +3,12 @@ package com.liuyue.igny.mixins.rule.dyedFrog;
 import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-//#if MC >= 12105
+//#if >= 1.21.5
 //$$ import net.minecraft.world.entity.animal.frog.FrogVariants;
 //$$ import net.minecraft.core.registries.Registries;
 //#endif
 import net.minecraft.world.entity.animal.FrogVariant;
-//#if MC > 12004
+//#if > 1.20.4
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 //#endif
@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#if MC >= 12106
+//#if >= 1.21.6
 //$$ import net.minecraft.world.level.storage.ValueInput;
 //$$ import net.minecraft.world.level.storage.ValueOutput;
 //#endif
@@ -48,11 +48,7 @@ public class TadpoleMixin {
     @WrapOperation(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/frog/Tadpole;isFood(Lnet/minecraft/world/item/ItemStack;)Z"))
     private boolean isFood(Tadpole instance, ItemStack itemStack, Operation<Boolean> original) {
         if (IGNYSettings.DYED_FROG.value()) {
-            //#if MC >= 26.2
-            //$$ return itemStack.is(Items.DYE.green()) || itemStack.is(Items.DYE.lightGray()) || itemStack.is(Items.DYE.orange()) || original.call(instance, itemStack);
-            //#else
-            return itemStack.is(Items.GREEN_DYE) || itemStack.is(Items.LIGHT_GRAY_DYE) || itemStack.is(Items.ORANGE_DYE) || original.call(instance, itemStack);
-            //#endif
+            return itemStack.is(Items.GREEN_DYE) || itemStack.is(Items.LIGHT_GRAY_DYE) || itemStack.is(Items.ORANGE_DYE) || original.call(instance, itemStack); //#replace >= 26.2 ? return itemStack.is(Items.DYE.green()) || itemStack.is(Items.DYE.lightGray()) || itemStack.is(Items.DYE.orange()) || original.call(instance, itemStack);
         }
         return original.call(instance, itemStack);
     }
@@ -60,10 +56,10 @@ public class TadpoleMixin {
     @Inject(method = "feed", at = @At(value = "HEAD"))
     private void feed(Player player, ItemStack itemStack, CallbackInfo ci) {
         switch (itemStack.getItem()) {
-            //#if MC >= 26.2
-            //$$ case Item item when item == Items.DYE.green() -> greenDyeCount++;
-            //$$ case Item item when item ==  Items.DYE.lightGray() -> grayDyeCount++;
-            //$$ case Item item when item == Items.DYE.orange() -> orangeDyeCount++;
+            //#if >= 26.2
+            /*$$case Item item when item == Items.DYE.green() -> greenDyeCount++;
+            case Item item when item ==  Items.DYE.lightGray() -> grayDyeCount++;
+            case Item item when item == Items.DYE.orange() -> orangeDyeCount++;$$*/
             //#else
             case Item item when item == Items.GREEN_DYE -> greenDyeCount++;
             case Item item when item ==  Items.LIGHT_GRAY_DYE -> grayDyeCount++;
@@ -74,41 +70,37 @@ public class TadpoleMixin {
     }
 
     @WrapOperation(
-            //#if MC >= 26.1
+            //#if >= 26.1
             //$$ method = "lambda$ageUp$0",
-            //#elseif MC >= 12103
+            //#elseif >= 1.21.3
             //$$ method = "method_63651",
             //#else
             method = "ageUp()V",
             //#endif
             at = @At(
                     value = "INVOKE",
-                    //#if MC <= 12004
-                    //$$ target = "Lnet/minecraft/world/entity/animal/frog/Frog;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;"
-                    //#else
-                    target = "Lnet/minecraft/world/entity/animal/frog/Frog;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;"
-                    //#endif
+                    target = "Lnet/minecraft/world/entity/animal/frog/Frog;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;" //#replace <= 1.20.4 ? target = "Lnet/minecraft/world/entity/animal/frog/Frog;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;"
             )
     )
     @SuppressWarnings("unchecked")
-    //#if MC <= 12004
+    //#if <= 1.20.4
     //$$ private SpawnGroupData finalizeSpawn(Frog instance, ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, SpawnGroupData spawnGroupData, CompoundTag tag, Operation<SpawnGroupData> original) {
-    //$$     SpawnGroupData result = original.call(instance, serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData, tag);
+    //$$ SpawnGroupData result = original.call(instance, serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData, tag);
     //#else
     private SpawnGroupData finalizeSpawn(Frog instance, ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, SpawnGroupData spawnGroupData, Operation<SpawnGroupData> original) {
         SpawnGroupData result = original.call(instance, serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData);
         //#endif
-        //#if MC <= 12004
-        //$$ List<Map.Entry<FrogVariant, Integer>> stats = new ArrayList<>();
-        //$$ stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.COLD, greenDyeCount));
-        //$$ stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.WARM, grayDyeCount));
-        //$$ stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.TEMPERATE, orangeDyeCount));
+        //#if <= 1.20.4
+        /*$$List<Map.Entry<FrogVariant, Integer>> stats = new ArrayList<>();
+        stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.COLD, greenDyeCount));
+        stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.WARM, grayDyeCount));
+        stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.TEMPERATE, orangeDyeCount));$$*/
         //#else
         List<Map.Entry<ResourceKey<FrogVariant>, Integer>> stats = new ArrayList<>();
-        //#if MC >= 12105
-        //$$ stats.add(new AbstractMap.SimpleEntry<>(FrogVariants.COLD, greenDyeCount));
-        //$$ stats.add(new AbstractMap.SimpleEntry<>(FrogVariants.WARM, grayDyeCount));
-        //$$ stats.add(new AbstractMap.SimpleEntry<>(FrogVariants.TEMPERATE, orangeDyeCount));
+        //#if >= 1.21.5
+        /*$$stats.add(new AbstractMap.SimpleEntry<>(FrogVariants.COLD, greenDyeCount));
+        stats.add(new AbstractMap.SimpleEntry<>(FrogVariants.WARM, grayDyeCount));
+        stats.add(new AbstractMap.SimpleEntry<>(FrogVariants.TEMPERATE, orangeDyeCount));$$*/
         //#else
         stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.COLD, greenDyeCount));
         stats.add(new AbstractMap.SimpleEntry<>(FrogVariant.WARM, grayDyeCount));
@@ -119,11 +111,11 @@ public class TadpoleMixin {
         stats.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
         Map.Entry<?, Integer> winner = stats.getFirst();
         if (winner.getValue() > 0 && winner.getKey() != null) {
-            //#if MC <= 12004
+            //#if <= 1.20.4
             //$$ instance.setVariant((FrogVariant) winner.getKey());
             //#else
-            //#if MC >= 12103
-            //#if MC >= 12105
+            //#if >= 1.21.3
+            //#if >= 1.21.5
             //$$ serverLevelAccessor.registryAccess().lookup(Registries.FROG_VARIANT).flatMap(registry -> registry.get((ResourceKey<FrogVariant>) winner.getKey())).ifPresent(holder -> instance.getEntityData().set(FrogAccessor.getVariantId(), holder));
             //#else
             //$$ instance.setVariant(BuiltInRegistries.FROG_VARIANT.getOrThrow((ResourceKey<FrogVariant>) winner.getKey()));
@@ -137,11 +129,7 @@ public class TadpoleMixin {
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
-    //#if MC >= 12106
-    //$$ private void saveCounts(ValueOutput nbt, CallbackInfo ci) {
-    //#else
-    private void saveCounts(CompoundTag nbt, CallbackInfo ci) {
-        //#endif
+    private void saveCounts(CompoundTag nbt, CallbackInfo ci) { //#replace >= 1.21.6 ? private void saveCounts(ValueOutput nbt, CallbackInfo ci) {
         nbt.putInt("GreenDyeCount", greenDyeCount);
         nbt.putInt("GrayDyeCount", grayDyeCount);
         nbt.putInt("OrangeDyeCount", orangeDyeCount);
@@ -149,16 +137,12 @@ public class TadpoleMixin {
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
-    //#if MC >= 12106
-    //$$ private void loadCounts(ValueInput nbt, CallbackInfo ci) {
-    //#else
-    private void loadCounts(CompoundTag nbt, CallbackInfo ci) {
-        //#endif
-        //#if MC >= 12105
-        //$$ this.greenDyeCount = nbt.getInt("GreenDyeCount").orElse(0);
-        //$$ this.grayDyeCount = nbt.getInt("GrayDyeCount").orElse(0);
-        //$$ this.orangeDyeCount = nbt.getInt("OrangeDyeCount").orElse(0);
-        //$$ this.slimeBallCount = nbt.getInt("SlimeBallCount").orElse(0);
+    private void loadCounts(CompoundTag nbt, CallbackInfo ci) { //#replace >= 1.21.6 ? private void loadCounts(ValueInput nbt, CallbackInfo ci) {
+        //#if >= 1.21.5
+        /*$$this.greenDyeCount = nbt.getInt("GreenDyeCount").orElse(0);
+        this.grayDyeCount = nbt.getInt("GrayDyeCount").orElse(0);
+        this.orangeDyeCount = nbt.getInt("OrangeDyeCount").orElse(0);
+        this.slimeBallCount = nbt.getInt("SlimeBallCount").orElse(0);$$*/
         //#else
         this.greenDyeCount = nbt.getInt("GreenDyeCount");
         this.grayDyeCount = nbt.getInt("GrayDyeCount");

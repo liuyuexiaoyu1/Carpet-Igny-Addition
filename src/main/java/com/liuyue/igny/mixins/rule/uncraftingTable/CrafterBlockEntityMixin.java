@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class CrafterBlockEntityMixin {
 
     @Inject(method = "canPlaceItem", at = @At(value = "HEAD"), cancellable = true)
-    private void canPlaceItem(int slot, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+    private void igny$lockGrid(int slot, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         if (!UncraftingTable.isUncraftMode(((CrafterBlockEntity) (Object) this).getCustomName())) {
             return;
         }

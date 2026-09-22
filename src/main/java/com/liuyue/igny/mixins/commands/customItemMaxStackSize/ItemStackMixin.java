@@ -32,15 +32,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#if MC < 12006
-//$$ import com.liuyue.igny.utils.compat.DummyClass;
-//#endif
+//?< 1.20.6 ? import com.liuyue.igny.utils.compat.DummyClass;
 
-//#if MC >= 12006
-@Mixin(value = ItemStack.class, priority = 999)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
+@Mixin(value = ItemStack.class, priority = 999) //#replace < 1.20.6 ? @Mixin(DummyClass.class)
 public class ItemStackMixin {
     @Unique
     private final ItemStack thisStack = (ItemStack) (Object) this;
@@ -53,7 +47,7 @@ public class ItemStackMixin {
         }
     }
 
-    //#if MC < 26.1
+    //#if < 26.1
     @Inject(method = "getMaxStackSize", at = @At("RETURN"), cancellable = true)
     private void getMaxStackSize(CallbackInfoReturnable<Integer> cir) {
         Item item = thisStack.getItem();

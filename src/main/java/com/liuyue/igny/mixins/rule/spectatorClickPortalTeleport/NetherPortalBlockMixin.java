@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.spectatorClickPortalTeleport;
 
-//#if MC >= 12101
+//#if >= 1.21.1
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -16,13 +16,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //#endif
 import org.spongepowered.asm.mixin.Mixin;
 
-//#if MC >= 12101
-@Mixin(NetherPortalBlock.class)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
+@Mixin(NetherPortalBlock.class) //#replace < 1.21.1 ? @Mixin(DummyClass.class)
 public class NetherPortalBlockMixin {
-    //#if MC >= 12101
+    //#if >= 1.21.1
     @Inject(method = "getExitPortal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getOptionalValue(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/util/Optional;"), cancellable = true)
     private void getExitPortal(ServerLevel level, Entity entity, BlockPos pos, BlockPos exitPos, boolean isNether, WorldBorder worldBorder, CallbackInfoReturnable<DimensionTransition> cir) {
         if (IGNYSettings.SPECTATOR_CLICK_PORTAL_TELEPORT.value() && entity.isSpectator()) {

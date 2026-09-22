@@ -14,9 +14,9 @@ import org.jetbrains.annotations.Nullable;
 public class FlowerBedBlockProtocolAdapter implements MultiStageBlockProtocolStateAdapter, BlockProtocolStateAdapter {
     public static final FlowerBedBlockProtocolAdapter INSTANCE = new FlowerBedBlockProtocolAdapter();
 
-    //#if MC >= 12105
-    //$$ private static final Property<Direction> FACING = net.minecraft.world.level.block.FlowerBedBlock.FACING;
-    //$$ private static final IntegerProperty AMOUNT = net.minecraft.world.level.block.FlowerBedBlock.AMOUNT;
+    //#if >= 1.21.5
+    /*$$private static final Property<Direction> FACING = net.minecraft.world.level.block.FlowerBedBlock.FACING;
+    private static final IntegerProperty AMOUNT = net.minecraft.world.level.block.FlowerBedBlock.AMOUNT;$$*/
     //#else
     private static final Property<Direction> FACING = net.minecraft.world.level.block.PinkPetalsBlock.FACING;
     private static final IntegerProperty AMOUNT = net.minecraft.world.level.block.PinkPetalsBlock.AMOUNT;
@@ -25,10 +25,10 @@ public class FlowerBedBlockProtocolAdapter implements MultiStageBlockProtocolSta
     public FlowerBedBlockProtocolAdapter() {
     }
 
-    //#if MC >= 12105
-    //$$ private static boolean isTarget(BlockState state) {
-    //$$     return state.getBlock() instanceof net.minecraft.world.level.block.FlowerBedBlock;
-    //$$ }
+    //#if >= 1.21.5
+    /*$$private static boolean isTarget(BlockState state) {
+        return state.getBlock() instanceof net.minecraft.world.level.block.FlowerBedBlock;
+    }$$*/
     //#else
     private static boolean isTarget(BlockState state) {
         return state.getBlock() instanceof net.minecraft.world.level.block.PinkPetalsBlock;

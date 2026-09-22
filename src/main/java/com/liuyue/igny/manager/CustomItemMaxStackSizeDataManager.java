@@ -1,6 +1,6 @@
 package com.liuyue.igny.manager;
 
-//#if MC >= 12006
+//#if >= 1.20.6
 
 import com.google.gson.reflect.TypeToken;
 import com.liuyue.igny.network.PacketUtil;
@@ -18,7 +18,7 @@ import java.util.*;
 import java.util.function.Predicate;
 //#endif
 
-//#if MC >= 12006
+//#if >= 1.20.6
 public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<String, Integer>> {
     public static final CustomItemMaxStackSizeDataManager INSTANCE = new CustomItemMaxStackSizeDataManager();
 
@@ -134,13 +134,13 @@ public class CustomItemMaxStackSizeDataManager extends BaseDataManager<Map<Strin
                 ResourceLocation rl = ResourceLocation.tryParse(pattern);
                 if (rl != null) {
                     Item item = BuiltInRegistries.ITEM.
-                            //#if MC >= 12102
+                            //#if >= 1.21.2
                             //$$ getValue(rl);
                             //#else
                                     get(rl);
                     //#endif
                     if (item != BuiltInRegistries.ITEM.
-                            //#if MC >= 12102
+                            //#if >= 1.21.2
                             //$$ getValue(BuiltInRegistries.ITEM.getDefaultKey()))
                             //#else
                                     get(BuiltInRegistries.ITEM.getDefaultKey()))

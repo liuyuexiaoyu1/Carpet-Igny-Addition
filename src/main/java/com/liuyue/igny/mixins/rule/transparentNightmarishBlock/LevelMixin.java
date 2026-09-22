@@ -123,11 +123,7 @@ public abstract class LevelMixin {
                 BlockBehaviour.BlockStateBase state = (BlockBehaviour.BlockStateBase) (Object) this;
                 if (state instanceof BlockState blockState) {
                     if (RuleUtil.isNightmarishBlock(blockState.getBlock())) {
-                        //#if MC >= 26.3
-                        //$$ cir.setReturnValue(PushReaction.POPPED);
-                        //#else
-                        cir.setReturnValue(PushReaction.DESTROY);
-                        //#endif
+                        cir.setReturnValue(PushReaction.DESTROY); //#replace >= 26.3 ? cir.setReturnValue(PushReaction.POPPED);
                     }
                 }
             }

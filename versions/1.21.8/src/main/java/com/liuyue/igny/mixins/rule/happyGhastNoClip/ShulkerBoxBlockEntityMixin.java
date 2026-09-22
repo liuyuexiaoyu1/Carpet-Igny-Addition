@@ -17,11 +17,7 @@ public class ShulkerBoxBlockEntityMixin {
     ))
     private PushReaction getPistonPushReaction(Entity instance, Operation<PushReaction> original) {
         if (NoClipHelper.isActiveGhastOrRider(instance)) {
-            //#if MC >= 26.3
-            //$$ return PushReaction.IGNORE_ENTITY;
-            //#else
-            return PushReaction.IGNORE;
-            //#endif
+            return PushReaction.IGNORE; //#replace >= 26.3 ? return PushReaction.IGNORE_ENTITY;
         }
 
         return original.call(instance);

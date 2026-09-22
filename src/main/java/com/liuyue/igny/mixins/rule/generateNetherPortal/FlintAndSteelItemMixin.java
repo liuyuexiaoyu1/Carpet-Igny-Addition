@@ -75,9 +75,9 @@ public class FlintAndSteelItemMixin {
 
         ItemStack itemStack = context.getItemInHand();
         itemStack.hurtAndBreak(1, player,
-                //#if MC >= 12109
+                //#if >= 1.21.9
                 //$$ context.getHand().asEquipmentSlot()
-                //#elseif MC >= 12005
+                //#elseif >= 1.20.5
                 LivingEntity.getSlotForHand(context.getHand())
                 //#else
                 //$$ p -> p.broadcastBreakEvent(context.getHand())
@@ -92,11 +92,7 @@ public class FlintAndSteelItemMixin {
     private void modifyFlag(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
         if (flag) {
             flag = false;
-            //#if MC >= 12102
-            //$$ cir.setReturnValue(InteractionResult.SUCCESS);
-            //#else
-            cir.setReturnValue(InteractionResult.sidedSuccess(context.getLevel().isClientSide()));
-            //#endif
+            cir.setReturnValue(InteractionResult.sidedSuccess(context.getLevel().isClientSide())); //#replace >= 1.21.2 ? cir.setReturnValue(InteractionResult.SUCCESS);
         }
     }
 
