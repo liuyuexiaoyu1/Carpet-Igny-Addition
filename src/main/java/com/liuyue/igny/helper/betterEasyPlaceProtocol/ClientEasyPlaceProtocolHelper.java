@@ -103,16 +103,16 @@ public class ClientEasyPlaceProtocolHelper {
                     continue;
                 }
                 LitematicaBlockStateContainer container = schematic.getSubRegionContainer(regionName);
-                Map<BlockPos, CompoundTag> blockEntityMap = schematic.getBlockEntityMapForRegion(regionName);
+                Map<BlockPos, CompoundTag> blockEntityMap = schematic.getBlockEntityMapForRegion(regionName); //#replace >= 1.21.11 ? Map<BlockPos, fi.dy.masa.malilib.util.data.tag.CompoundData> blockEntityMap = schematic.getBlockEntityMapForRegion(regionName);
                 if (container == null || blockEntityMap == null || blockEntityMap.isEmpty()) {
                     continue;
                 }
                 BlockPos schematicPos = SchematicUtils.getSchematicContainerPositionFromWorldPosition(
                         pos, schematic, regionName, schematicPlacement, placement, container);
                 if (schematicPos != null) {
-                    CompoundTag nbt = blockEntityMap.get(schematicPos);
+                    CompoundTag nbt = blockEntityMap.get(schematicPos); //#replace >= 1.21.11 ? fi.dy.masa.malilib.util.data.tag.CompoundData nbt = blockEntityMap.get(schematicPos);
                     if (nbt != null) {
-                        return nbt;
+                        return nbt; //#replace >= 1.21.11 ? return fi.dy.masa.malilib.util.data.tag.converter.DataConverterNbt.toVanillaCompound(nbt);
                     }
                 }
             }
