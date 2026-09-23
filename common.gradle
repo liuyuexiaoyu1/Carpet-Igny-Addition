@@ -88,10 +88,14 @@ dependencies {
 	if (mcVersion < 12003) {
 		autoCompileOnly ("com.github.End-Tech:syncmatica:${project.syncmatica_version}") {
 			exclude group: "net.fabricmc.fabric-api"
+			exclude group: "fi.dy.masa.litematica"
+			exclude group: "fi.dy.masa.malilib"
 		}
 	} else {
 		autoCompileOnly ("com.github.sakura-ryoko:syncmatica:${project.syncmatica_version}") {
 			exclude group: "net.fabricmc.fabric-api"
+			exclude group: "fi.dy.masa.litematica"
+			exclude group: "fi.dy.masa.malilib"
 		}
 	}
 
