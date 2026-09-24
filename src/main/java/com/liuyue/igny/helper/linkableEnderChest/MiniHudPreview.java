@@ -11,7 +11,7 @@ import fi.dy.masa.malilib.util.data.tag.CompoundData;$$*/
 import net.minecraft.nbt.CompoundTag;
 //#endif
 
-//?>= 1.21.11 ? @SuppressWarnings("deprecation")
+@SuppressWarnings("deprecation")
 public final class MiniHudPreview {
 
     //#if >= 1.21.11

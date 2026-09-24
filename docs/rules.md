@@ -1576,3 +1576,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 复制方块状态 (copyBlockState) `🐛Beta`
+
+对着目标方块按Ctrl+Shift+中键时，把目标方块的方块状态与方块实体数据一并复制到手上的物品。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `CLIENT`, `CREATIVE`, `FEATURE`

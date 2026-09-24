@@ -1218,7 +1218,14 @@ public class IGNYSettings {
 
     public static final RuleAccessor<Boolean> UNCRAFTING_TABLE = register(
             RuleFactory.of("uncraftingTable", false)
-                    .addCategories(IGNY, SURVIVAL, FEATURE)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> COPY_BLOCK_STATE = register(
+            RuleFactory.of("copyBlockState", false)
+                    .addCategories(CREATIVE, FEATURE)
+                    .setClient()
                     .build()
     );
 }

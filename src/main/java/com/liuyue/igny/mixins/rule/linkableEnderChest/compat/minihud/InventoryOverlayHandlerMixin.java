@@ -24,11 +24,11 @@ import net.minecraft.nbt.CompoundTag;
 
 @Restriction(require = @Condition("minihud"))
 @Mixin(InventoryOverlayHandler.class)
-//?>= 1.21.11 ? @SuppressWarnings("deprecation")
+@SuppressWarnings("deprecation")
 public abstract class InventoryOverlayHandlerMixin {
 
     //#if >= 1.21.11
-    /*$$@Inject(method = "getTargetInventoryFromBlock", at = @At("HEAD"), cancellable = true)
+    /*$$@Inject(method = "getTargetInventoryFromBlock", at = @At(value = "HEAD"), cancellable = true)
     private void igny$linkedChestPreview(Level level, BlockPos pos, BlockEntity blockEntity, CompoundData data, CallbackInfoReturnable<InventoryOverlayContext> cir) {
         MinecraftServer server = level.getServer();
         if (server == null || !server.isSingleplayer() || !(blockEntity instanceof LinkedEnderChest linked)) {

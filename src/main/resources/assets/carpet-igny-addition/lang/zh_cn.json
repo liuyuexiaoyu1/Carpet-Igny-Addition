@@ -531,5 +531,7 @@
   "carpet.rule.itemFlowTrackerPersistentTrail.desc": "开启后轨迹永不消失，直到关闭规则或执行 /itemflowtracker clear；关闭时轨迹会在 200 tick 后消失",
   "carpet.rule.uncraftingTable.name": "拆解台",
   "carpet.rule.uncraftingTable.desc": "允许将物品放入工作台的结果槽并将其分解。\n同一产物有多个配方时，对着结果槽按丢弃键可轮换到下一个配方",
-  "carpet.rule.uncraftingTable.extra.0": "该规则同样适用于合成器。将合成器命名为配方索引对应的数字即可使用（例如对应第一个配方时命名为1）"
+  "carpet.rule.uncraftingTable.extra.0": "该规则同样适用于合成器。将合成器命名为配方索引对应的数字即可使用（例如对应第一个配方时命名为1）",
+  "carpet.rule.copyBlockState.name": "复制方块状态",
+  "carpet.rule.copyBlockState.desc": "对着目标方块按Ctrl+Shift+中键时，把目标方块的方块状态与方块实体数据一并复制到手上的物品"
 }

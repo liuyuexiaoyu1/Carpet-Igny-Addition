@@ -1574,3 +1574,12 @@ This rule also applies to the Crafter. To use it, name the Crafter with the numb
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## copyBlockState `🐛Beta`
+
+Pressing Ctrl+Shift+middle-click on the targeted block copies its block state and block entity data onto the held item.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `IGNY`, `CLIENT`, `CREATIVE`, `FEATURE`
