@@ -1433,9 +1433,9 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
-## 轻松放置可放置含水方块 (easyPlaceCanPlaceWaterloggedBlock)
+## 轻松放置可放置含水方块 (easyPlaceCanPlaceWaterloggedBlock) `🐛Beta 更改`
 
-当`betterEasyPlaceProtocol`规则开启时，轻松放置可以同步投影中含水方块的含水状态。
+当`betterEasyPlaceProtocol`规则开启时，轻松放置可以同步投影中含水方块的含水状态，使用时需要消耗副手上的冰物品。
 
 - 类型: `boolean`
 - 默认值: `false`

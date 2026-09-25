@@ -8,6 +8,7 @@ import com.liuyue.igny.utils.interfaces.betterEasyPlaceProtocol.ItemStackProtoco
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -177,8 +178,14 @@ public class BetterEasyPlaceProtocolHandler {
             }
             if ((additionValue & EasyPlaceExtraProtocolHelper.WATERLOGGED_BIT) != 0
                     && baseState.hasProperty(BlockStateProperties.WATERLOGGED)
-                    && IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value()) {
-                baseState = baseState.setValue(BlockStateProperties.WATERLOGGED, true);
+                    && IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value()
+                    && context.getPlayer() != null
+            ) {
+                ItemStack itemStack = context.getPlayer().getOffhandItem();
+                if (itemStack.is(Items.ICE)) {
+                    itemStack.shrink(1);
+                    baseState = baseState.setValue(BlockStateProperties.WATERLOGGED, true);
+                }
             }
         }
         return baseState;
@@ -215,8 +222,14 @@ public class BetterEasyPlaceProtocolHandler {
         }
         if ((additionValue & EasyPlaceExtraProtocolHelper.WATERLOGGED_BIT) != 0
                 && baseState.hasProperty(BlockStateProperties.WATERLOGGED)
-                && IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value()) {
-            baseState = baseState.setValue(BlockStateProperties.WATERLOGGED, true);
+                && IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value()
+                && context.getPlayer() != null
+        ) {
+            ItemStack itemStack = context.getPlayer().getOffhandItem();
+            if (itemStack.is(Items.ICE)) {
+                itemStack.shrink(1);
+                baseState = baseState.setValue(BlockStateProperties.WATERLOGGED, true);
+            }
         }
         return baseState;
     }

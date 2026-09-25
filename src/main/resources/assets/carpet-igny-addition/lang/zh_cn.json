@@ -496,7 +496,7 @@
   "carpet.rule.containerBreakNoRandomMomentum.name": "容器破坏随机动量移除",
   "carpet.rule.containerBreakNoRandomMomentum.desc": "破坏容器扔出物品时的随机动量将被移除",
   "carpet.rule.easyPlaceCanPlaceWaterloggedBlock.name": "轻松放置可放置含水方块",
-  "carpet.rule.easyPlaceCanPlaceWaterloggedBlock.desc": "当betterEasyPlaceProtocol规则开启时，轻松放置可以同步投影中含水方块的含水状态",
+  "carpet.rule.easyPlaceCanPlaceWaterloggedBlock.desc": "当betterEasyPlaceProtocol规则开启时，轻松放置可以同步投影中含水方块的含水状态，使用时需要消耗副手上的冰物品",
 
   "carpet.rule.insaneBehaviors.name": "疯狂行为",
   "carpet.rule.insaneBehaviors.desc": "让投掷器和弹射物（以及被活塞破坏方块的掉落位置与速度）的随机速度按系统化的方式遍历所有可能的最极端值，然后反复遍历介于其间的所有中点，某种意义上相当于尝试一个分辨率缓慢增加的3维/5维\"网格\"中的每一个点。\n对于投掷器和弹射物，此设置决定最大值对应旧的gaussian随机限制（\"extreme\"），还是1.19引入的三角分布随机限制（\"sensible\"）。两种设置在活塞破坏方块时功能相同。\n`/insanebehaviors <reset/getstate/setstate>` 命令参见 `/carpet commandInsaneBehaviors`。\n注意：insaneBehaviors 使用一个全局迭代器：任何触发事件都会使所有其他 insaneBehaviors 事件也步进一次迭代",

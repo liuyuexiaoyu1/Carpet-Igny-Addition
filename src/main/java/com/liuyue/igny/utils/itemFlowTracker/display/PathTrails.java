@@ -38,6 +38,8 @@ public final class PathTrails {
         private final Vec3 start;
         private Vec3 end;
         private double trimmed;
+
+        /** How far the item moved along this segment per tick; the faster the segment, the faster it fades. */
         private double speed;
         private int life = LIFETIME_TICKS;
 
@@ -162,24 +164,33 @@ public final class PathTrails {
             }
 
             List<Marker> kept = new ArrayList<>(markers.size());
+            boolean blocked = false;
 
             for (Marker marker : markers) {
                 --marker.life;
 
-                if (marker.life <= 0) {
-                    marker.trimmed += marker.speed;
-                    double span = marker.end.distanceTo(marker.start);
-
-                    if (marker.trimmed >= span - MIN_SEGMENT) {
-                        marker.display.remove();
-                        continue;
-                    }
-
-                    marker.display.transform(Shapes.segment(marker.start, marker.end, marker.trimmed));
+                // The trail retreats strictly in order: a segment may only start vanishing once every
+                // segment ahead of it is completely gone. Life keeps ticking while a segment waits, so one
+                // that is already due shrinks the moment it gets its turn.
+                if (blocked || marker.life > 0) {
+                    blocked = true;
+                    marker.display.sync();
+                    kept.add(marker);
+                    continue;
                 }
 
+                marker.trimmed += marker.speed;
+                double span = marker.end.distanceTo(marker.start);
+
+                if (marker.trimmed >= span - MIN_SEGMENT) {
+                    marker.display.remove();
+                    continue;
+                }
+
+                marker.display.transform(Shapes.segment(marker.start, marker.end, marker.trimmed));
                 marker.display.sync();
                 kept.add(marker);
+                blocked = true;
             }
 
             markers.clear();

@@ -1,16 +1,9 @@
 package com.liuyue.igny.utils.display;
 
-import com.liuyue.igny.mixins.rule.itemFlowTracker.accessors.BlockDisplayAccessor;
-import com.liuyue.igny.mixins.rule.itemFlowTracker.accessors.DisplayAccessor;
-import com.liuyue.igny.mixins.rule.itemFlowTracker.accessors.ItemDisplayAccessor;
-import com.liuyue.igny.mixins.rule.itemFlowTracker.accessors.SetPassengersPacketAccessor;
+import com.liuyue.igny.mixins.rule.itemFlowTracker.accessors.*;
 import com.mojang.math.Transformation;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-import net.minecraft.network.protocol.game.ClientboundRemoveEntitiesPacket;
-import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Brightness;
@@ -23,15 +16,12 @@ import net.minecraft.world.level.block.AbstractChestBlock;
 import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.DecoratedPotBlock; //?>= 1.20.3
+import net.minecraft.world.level.block.DecoratedPotBlock; //? >= 1.20.3
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.Arrays;
 
 public final class VirtualDisplay {
     //#if >= 26.2
@@ -44,18 +34,13 @@ public final class VirtualDisplay {
     private static final EntityType<Display.ItemDisplay> ITEM_TYPE = EntityType.ITEM_DISPLAY;
     //#endif
 
-    private static final double VIEW_RANGE = 96.0D;
-    private static final double VIEW_RANGE_SQR = VIEW_RANGE * VIEW_RANGE;
     private static final float VIEW_RANGE_DATA = 2.0F;
 
     private final ServerLevel level;
     private final Display entity;
-    private final Set<UUID> viewers = new HashSet<>();
 
-    @Nullable
-    private Entity vehicle;
+    private boolean tracked;
 
-    private boolean dataDirty = true;
     private double lastWidth = -1.0D;
     private double lastHeight = -1.0D;
 
@@ -120,13 +105,11 @@ public final class VirtualDisplay {
     public VirtualDisplay glow(int rgb) {
         this.entity.setGlowingTag(true);
         ((DisplayAccessor) this.entity).igny$setGlowColorOverride(rgb);
-        this.dataDirty = true;
         return this;
     }
 
     public VirtualDisplay bright() {
         ((DisplayAccessor) this.entity).igny$setBrightnessOverride(Brightness.FULL_BRIGHT);
-        this.dataDirty = true;
         return this;
     }
 
@@ -134,18 +117,29 @@ public final class VirtualDisplay {
         if (transformation != null) {
             ((DisplayAccessor) this.entity).igny$setTransformation(transformation);
             this.entity.setPos(this.entity.getX(), this.entity.getY(), this.entity.getZ());
-            this.dataDirty = true;
         }
 
         return this;
     }
 
     public VirtualDisplay ride(Entity vehicle) {
-        this.vehicle = vehicle;
+        ((EntityAccessor) this.entity).igny$setVehicle(vehicle);
         return this;
     }
 
+    public void sync() {
+        if (this.tracked) {
+            return;
+        }
+
+        this.tracked = true;
+        ((VirtualSenders) this.level.getChunkSource().chunkMap)
+                .igny$trackVirtual(this.entity, this::announceRide);
+    }
+
     public void follow(Entity entity) {
+        this.entity.setPos(entity.getX(), entity.getY(), entity.getZ());
+
         AABB box = entity.getBoundingBox();
 
         if (this.lastWidth != box.getXsize() || this.lastHeight != box.getYsize()) {
@@ -157,90 +151,24 @@ public final class VirtualDisplay {
         this.sync();
     }
 
-    public void sync() {
-        @Nullable List<SynchedEntityData.DataValue<?>> data =
-                this.dataDirty ? this.entity.getEntityData().getNonDefaultValues() : null;
-
-        if (data != null && data.isEmpty()) {
-            data = null;
-        }
-
-        double x = this.entity.getX();
-        double y = this.entity.getY();
-        double z = this.entity.getZ();
-        int id = this.entity.getId();
-
-        for (ServerPlayer player : this.level.players()) {
-            UUID viewer = player.getUUID();
-
-            if (!this.visibleTo(player, x, y, z)) {
-                if (this.viewers.remove(viewer)) {
-                    player.connection.send(new ClientboundRemoveEntitiesPacket(id));
-                }
-                continue;
-            }
-
-            if (!this.viewers.add(viewer)) {
-                if (data != null) {
-                    player.connection.send(new ClientboundSetEntityDataPacket(id, data));
-                }
-                continue;
-            }
-
-            player.connection.send(new ClientboundAddEntityPacket(
-                    id, this.entity.getUUID(), x, y, z,
-                    0.0F, 0.0F, this.entity.getType(), 0, Vec3.ZERO, 0.0D));
-
-            if (data != null) {
-                player.connection.send(new ClientboundSetEntityDataPacket(id, data));
-            }
-
-            if (this.vehicle != null) {
-                player.connection.send(this.passengersPacket());
-            }
-        }
-
-        this.dataDirty = false;
+    public void remove() {
+        ((VirtualSenders) this.level.getChunkSource().chunkMap)
+                .igny$untrackVirtual(this.entity);
     }
 
-    public void remove() {
-        if (this.viewers.isEmpty()) {
+
+    private void announceRide(ServerPlayer player) {
+        Entity mount = this.entity.getVehicle();
+
+        if (mount == null) {
             return;
         }
 
-        ClientboundRemoveEntitiesPacket packet = new ClientboundRemoveEntitiesPacket(this.entity.getId());
-
-        for (ServerPlayer player : this.level.players()) {
-            if (this.viewers.remove(player.getUUID())) {
-                player.connection.send(packet);
-            }
-        }
-
-        this.viewers.clear();
-    }
-
-    private boolean visibleTo(ServerPlayer player, double x, double y, double z) {
-        if (player.distanceToSqr(x, y, z) > VIEW_RANGE_SQR) {
-            return false;
-        }
-
-        if (this.vehicle == null) {
-            return true;
-        }
-
-        if (player.level() != this.level) {
-            return false;
-        }
-
-        return this.level.getChunkSource().chunkMap
-                .getPlayers(this.vehicle.chunkPosition(), false)
-                .contains(player);
-    }
-
-    private ClientboundSetPassengersPacket passengersPacket() {
-        if (this.vehicle == null) return null;
-        ClientboundSetPassengersPacket packet = new ClientboundSetPassengersPacket(this.vehicle);
-        ((SetPassengersPacketAccessor) packet).igny$setPassengers(new int[]{this.entity.getId()});
-        return packet;
+        ClientboundSetPassengersPacket packet = new ClientboundSetPassengersPacket(mount);
+        int[] passengers = packet.getPassengers();
+        int[] withDisplay = Arrays.copyOf(passengers, passengers.length + 1);
+        withDisplay[passengers.length] = this.entity.getId();
+        ((SetPassengersPacketAccessor) packet).igny$setPassengers(withDisplay);
+        player.connection.send(packet);
     }
 }
