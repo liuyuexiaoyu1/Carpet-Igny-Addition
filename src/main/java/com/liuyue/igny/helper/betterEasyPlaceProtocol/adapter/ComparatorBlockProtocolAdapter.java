@@ -28,9 +28,7 @@ public class ComparatorBlockProtocolAdapter implements BlockProtocolStateAdapter
         };
         boolean isSubtract = fromState.getValue(ComparatorBlock.MODE) == ComparatorMode.SUBTRACT;
         int modeBits = isSubtract ? 0b0100 : 0;
-        boolean isPowered = fromState.getValue(ComparatorBlock.POWERED);
-        int poweredBits = isPowered ? 0b1000 : 0;
-        return (protocolValue & ~0b1111) | facingBits | modeBits | poweredBits;
+        return (protocolValue & ~0b1111) | facingBits | modeBits;
     }
 
     @Override
@@ -46,12 +44,10 @@ public class ComparatorBlockProtocolAdapter implements BlockProtocolStateAdapter
         ComparatorMode mode = (extraProtocolValue & 0b0100) != 0
                 ? ComparatorMode.SUBTRACT
                 : ComparatorMode.COMPARE;
-        boolean isPowered = (extraProtocolValue & 0b1000) != 0;
 
         return fromState
                 .setValue(HorizontalDirectionalBlock.FACING, facing)
-                .setValue(ComparatorBlock.MODE, mode)
-                .setValue(ComparatorBlock.POWERED, isPowered);
+                .setValue(ComparatorBlock.MODE, mode);
     }
 
     @Override

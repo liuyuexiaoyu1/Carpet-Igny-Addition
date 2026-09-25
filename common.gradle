@@ -154,9 +154,12 @@ dependencies {
     autoImplementation ("carpet:fabric-carpet:${project.carpet_core_version}") {
 		exclude group: "net.fabricmc.fabric-api"
 	}
+
 	autoCompileOnly(project.starlight_dependency) {
 		exclude group: "net.fabricmc.fabric-api"
 	}
+
+	include(implementation 'cn.6tail:lunar:1.7.7')
 }
 
 String MIXIN_CONFIG_PATH = 'carpet-igny-addition.mixins.json'

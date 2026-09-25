@@ -18,9 +18,9 @@ public class PistonBaseBlockProtocolAdapter implements BlockProtocolStateAdapter
     @Override
     public int igny$toProtocolValue(int protocolValue, BlockState fromState) {
         int bits = protocolValue;
-        if (fromState.getValue(PistonBaseBlock.EXTENDED)) {
-            bits |= 0b0001_0000;
-        }
+//        if (fromState.getValue(PistonBaseBlock.EXTENDED)) {
+//            bits |= 0b0001_0000;
+//        }
         bits |= ((fromState.getValue(PistonBaseBlock.FACING).ordinal() + 1) & 0b0000_0111) << 5;
         return bits;
     }

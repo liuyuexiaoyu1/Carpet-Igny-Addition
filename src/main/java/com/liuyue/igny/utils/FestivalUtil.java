@@ -1,5 +1,7 @@
 package com.liuyue.igny.utils;
 
+import com.nlf.calendar.Lunar;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 
@@ -14,5 +16,10 @@ public class FestivalUtil {
     public static boolean isAuthorsBirthday() {
         LocalDate now = LocalDate.now(BEIJING_ZONE);
         return now.getMonthValue() == 11 && now.getDayOfMonth() == 2;
+    }
+
+    public static boolean isMidAutumnDay() {
+        Lunar now = new Lunar();
+        return now.getMonth() == 8 && now.getDay() == 15;
     }
 }

@@ -53,9 +53,7 @@ public class BetterEasyPlaceProtocolHandler {
         register(ComposterBlock.class, new ComposterBlockProtocolAdapter());
         register(BaseCoralWallFanBlock.class, new CoralWallFanBlockProtocolAdapter());
         register(DaylightDetectorBlock.class, new DaylightDetectorBlockProtocolAdapter());
-        register(DetectorRailBlock.class, new DetectorRailBlockProtocolAdapter());
         register(FaceAttachedHorizontalDirectionalBlock.class, new FaceAttachedHorizontalDirectionalBlockProtocolAdapter());
-        register(FenceGateBlock.class, new FenceGateBlockProtocolAdapter());
         register(HugeMushroomBlock.class, new HugeMushroomBlockProtocolAdapter());
         register(JigsawBlock.class, new JigsawBlockProtocolAdapter());
         register(LanternBlock.class, new LanternBlockProtocolAdapter());
@@ -64,11 +62,9 @@ public class BetterEasyPlaceProtocolHandler {
         register(MultifaceBlock.class, new MultifaceBlockProtocolAdapter());
         register(NoteBlock.class, new NoteBlockProtocolAdapter());
         register(PistonBaseBlock.class, new PistonBaseBlockProtocolAdapter());
-        register(PoweredRailBlock.class, new PoweredRailBlockProtocolAdapter());
         register(RailBlock.class, new RailBlockProtocolAdapter());
         register(RedStoneWireBlock.class, new RedStoneWireBlockProtocolAdapter()); //#replace >= 26.3 ? register(RedstoneWireBlock.class, new RedStoneWireBlockProtocolAdapter());
         register(RedstoneLampBlock.class, new RedstoneLampBlockProtocolAdapter());
-        register(RedstoneWallTorchBlock.class, new RedstoneWallTorchBlockProtocolAdapter());
         register(RepeaterBlock.class, new RepeaterBlockProtocolAdapter());
         register(SeaPickleBlock.class, new SeaPickleBlockProtocolAdapter());
         register(SkullBlock.class, new SkullBlockProtocolAdapter());
@@ -78,7 +74,6 @@ public class BetterEasyPlaceProtocolHandler {
         register(WallHangingSignBlock.class, new CeilingHangingSignBlockProtocolAdapter());
         register(CeilingHangingSignBlock.class, new  CeilingHangingSignBlockProtocolAdapter());
         register(StructureBlock.class, new StructureBlockProtocolAdapter());
-        register(TrapDoorBlock.class, new TrapDoorBlockProtocolAdapter());
         register(TurtleEggBlock.class, new TurtleEggBlockProtocolAdapter());
         register(VineBlock.class, new VineBlockProtocolAdapter());
         //#if >= 1.20.3
@@ -89,7 +84,6 @@ public class BetterEasyPlaceProtocolHandler {
         register(HorizontalDirectionalBlock.class, new HorizontalDirectionalBlockProtocolAdapter());
         register(HopperBlock.class, new HopperBlockProtocolAdapter());
         register(WallBlock.class, new WallBlockProtocolAdapter());
-        register(CrossCollisionBlock.class,  new CrossCollisionBlockProtocolAdapter());
     }
 
     private static boolean easyPlaceState = false;

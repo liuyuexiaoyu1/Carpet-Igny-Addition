@@ -35,6 +35,7 @@
     "compat.accessor.fapi.AbstractChanneledNetworkAddonAccessor",
     "compat.fapi.AbstractNetworkAddonMixin",
     "debug.TranslationsMixin",
+    "easterEgg.DimensionTypeMixin",
     "easterEgg.PlayerListMixin",
     "easterEgg.ServerGamePacketListenerImplMixin",
     "exceptions.PacketUtilsMixin",
@@ -326,14 +327,14 @@
     "rule.uncraftingTable.CraftingMenuMixin",
     "rule.uncraftingTable.ShapelessRecipeAccessor",
     "rule.uncraftingTable.UncraftingMenuMixin",
-    "util.virtualDisplay.ChunkMapMixin",
-    "util.virtualDisplay.TrackedEntityMixin",
     "rule.visibleSpectators.ServerPlayerMixin",
     "rule.wardenNeverDig.WardenMixin",
     "rule.waterCanPushSquid.WaterAnimalMixin",
     "rule.wetSpongeCanAbsorbLava.WetSpongeBlockMixin",
     "rule.wifiBeacon.BeaconBlockEntityAccessor",
-    "rule.wifiBeacon.BeaconBlockEntityMixin"
+    "rule.wifiBeacon.BeaconBlockEntityMixin",
+    "util.virtualDisplay.ChunkMapMixin",
+    "util.virtualDisplay.TrackedEntityMixin"
   ],
   "client": [
     "easterEgg.ScreenAccessor",

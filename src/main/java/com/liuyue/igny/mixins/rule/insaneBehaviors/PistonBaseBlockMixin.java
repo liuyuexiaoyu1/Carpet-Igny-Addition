@@ -46,10 +46,13 @@ public class PistonBaseBlockMixin {
         }
         if (levelAccessor instanceof ServerLevel) {
             Level level = (ServerLevel) levelAccessor;
-            Block.getDrops(blockState, (ServerLevel)levelAccessor, blockPos, blockEntity).forEach(itemStack -> {
-                customPopResource(level, blockPos, itemStack);
-            });
+            //#if >= 26.4
+            /*$$Block.getDrops(blockState, (ServerLevel)levelAccessor, blockPos, blockEntity, null, ItemStack.EMPTY).forEach(itemStack -> customPopResource(level, blockPos, itemStack));
+            blockState.spawnAfterBreak((ServerLevel)levelAccessor, blockPos, ItemStack.EMPTY, true, null);$$*/
+            //#else
+            Block.getDrops(blockState, (ServerLevel)levelAccessor, blockPos, blockEntity).forEach(itemStack -> customPopResource(level, blockPos, itemStack));
             blockState.spawnAfterBreak((ServerLevel)levelAccessor, blockPos, ItemStack.EMPTY, true);
+            //#endif
         }
     }
 
