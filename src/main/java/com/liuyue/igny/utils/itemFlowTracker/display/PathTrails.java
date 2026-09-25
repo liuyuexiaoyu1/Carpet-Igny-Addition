@@ -39,7 +39,6 @@ public final class PathTrails {
         private Vec3 end;
         private double trimmed;
 
-        /** How far the item moved along this segment per tick; the faster the segment, the faster it fades. */
         private double speed;
         private int life = LIFETIME_TICKS;
 
@@ -169,9 +168,6 @@ public final class PathTrails {
             for (Marker marker : markers) {
                 --marker.life;
 
-                // The trail retreats strictly in order: a segment may only start vanishing once every
-                // segment ahead of it is completely gone. Life keeps ticking while a segment waits, so one
-                // that is already due shrinks the moment it gets its turn.
                 if (blocked || marker.life > 0) {
                     blocked = true;
                     marker.display.sync();

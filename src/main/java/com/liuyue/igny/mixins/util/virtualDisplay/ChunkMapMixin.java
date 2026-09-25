@@ -2,6 +2,7 @@ package com.liuyue.igny.mixins.util.virtualDisplay;
 
 import com.liuyue.igny.utils.display.VirtualSenders;
 import com.liuyue.igny.utils.display.VirtualTracked;
+import net.minecraft.core.SectionPos;
 import net.minecraft.server.level.ChunkMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,6 +31,10 @@ public abstract class ChunkMapMixin implements VirtualSenders {
 
     @Unique
     private final Map<Entity, ChunkMap.TrackedEntity> igny$virtualTracked = new IdentityHashMap<>();
+
+
+    @Unique
+    private int igny$knownPlayerCount = -1;
 
     @Override
     public void igny$trackVirtual(Entity entity, Consumer<ServerPlayer> pairingHook) {
@@ -69,6 +74,13 @@ public abstract class ChunkMapMixin implements VirtualSenders {
         }
     }
 
+    @Inject(method = "move(Lnet/minecraft/server/level/ServerPlayer;)V", at = @At(value = "RETURN"))
+    private void igny$onPlayerMoved(ServerPlayer player, CallbackInfo ci) {
+        for (ChunkMap.TrackedEntity tracked : this.igny$virtualTracked.values()) {
+            tracked.updatePlayer(player);
+        }
+    }
+
     @Inject(method = "tick(Ljava/util/function/BooleanSupplier;)V", at = @At(value = "RETURN"))
     private void igny$tickVirtualDisplays(BooleanSupplier hasTimeLeft, CallbackInfo ci) {
         if (this.igny$virtualTracked.isEmpty()) {
@@ -76,10 +88,22 @@ public abstract class ChunkMapMixin implements VirtualSenders {
         }
 
         List<ServerPlayer> players = this.level.players();
+        boolean rosterChanged = players.size() != this.igny$knownPlayerCount;
+        this.igny$knownPlayerCount = players.size();
 
-        for (ChunkMap.TrackedEntity tracked : this.igny$virtualTracked.values()) {
-            tracked.updatePlayers(players);
-            ((VirtualTracked) tracked).igny$sendChanges();
+        for (Map.Entry<Entity, ChunkMap.TrackedEntity> entry : this.igny$virtualTracked.entrySet()) {
+            Entity entity = entry.getKey();
+            ChunkMap.TrackedEntity tracked = entry.getValue();
+            VirtualTracked virtual = (VirtualTracked) tracked;
+
+            SectionPos now = SectionPos.of(entity);
+
+            if (rosterChanged || !now.equals(virtual.igny$lastSectionPos())) {
+                virtual.igny$setLastSectionPos(now);
+                tracked.updatePlayers(players);
+            }
+
+            virtual.igny$sendChanges();
         }
     }
 }

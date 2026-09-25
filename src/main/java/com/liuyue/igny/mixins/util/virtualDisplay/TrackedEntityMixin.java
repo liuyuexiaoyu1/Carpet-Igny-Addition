@@ -3,6 +3,7 @@ package com.liuyue.igny.mixins.util.virtualDisplay;
 import com.liuyue.igny.utils.display.VirtualTracked;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.minecraft.core.SectionPos;
 import net.minecraft.server.level.ChunkMap;
 import net.minecraft.server.level.ServerEntity;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,6 +21,9 @@ public abstract class TrackedEntityMixin implements VirtualTracked {
     @Final
     ServerEntity serverEntity;
 
+    @Shadow
+    SectionPos lastSectionPos;
+
     @Unique
     private Consumer<ServerPlayer> igny$pairingHook = player -> {};
 
@@ -31,6 +35,16 @@ public abstract class TrackedEntityMixin implements VirtualTracked {
     @Override
     public void igny$setPairingHook(Consumer<ServerPlayer> hook) {
         this.igny$pairingHook = hook;
+    }
+
+    @Override
+    public SectionPos igny$lastSectionPos() {
+        return this.lastSectionPos;
+    }
+
+    @Override
+    public void igny$setLastSectionPos(SectionPos pos) {
+        this.lastSectionPos = pos;
     }
 
     @WrapOperation(
