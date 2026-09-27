@@ -35,24 +35,24 @@ public abstract class EnchantedCountIncreaseFunctionMixin {
     @Shadow @Final private int limit;
 
     @Inject(method = "run", at = @At(value = "HEAD"), cancellable = true)
-    private void run(ItemStack itemStack, LootContext lootContext, CallbackInfoReturnable<ItemStack> cir) {
+    private void run(ItemStack itemStack, LootContext context, CallbackInfoReturnable<ItemStack> cir) {
         //#if >= 26.3
-        //$$ DamageSource damageSource = lootContext.getOptional(LootContextParams.DAMAGE_SOURCE);
+        //$$ DamageSource damageSource = context.getOptional(LootContextParams.DAMAGE_SOURCE);
         //#elseif >= 1.21.2
-        //$$ DamageSource damageSource = lootContext.getOptionalParameter(LootContextParams.DAMAGE_SOURCE);
+        //$$ DamageSource damageSource = context.getOptionalParameter(LootContextParams.DAMAGE_SOURCE);
         //#else
-        DamageSource damageSource = lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE);
+        DamageSource damageSource = context.getParamOrNull(LootContextParams.DAMAGE_SOURCE);
         //#endif
         if (IGNYSettings.NO_OWNER_TNT_LOOTING_III.value() &&
                 damageSource != null &&
                 damageSource.getDirectEntity() instanceof PrimedTnt &&
                 ((PrimedTnt) damageSource.getDirectEntity()).getOwner() == null) {
             //#if >= 26.3
-            //$$ float f = 3 * this.count.value().getFloat(lootContext);
+            //$$ float f = 3 * this.count.value().getFloat(context);
             //#elseif >= 26.1
-            //$$ float f = 3 * this.count.getFloat(lootContext);
+            //$$ float f = 3 * this.count.getFloat(context);
             //#else
-            float f = 3 * this.value.getFloat(lootContext);
+            float f = 3 * this.value.getFloat(context);
             //#endif
             itemStack.grow(Math.round(f));
             if (this.hasLimit()) { //#replace <= 1.20.4 ? if (this.hasLimit() && itemStack.getCount() > this.limit) {

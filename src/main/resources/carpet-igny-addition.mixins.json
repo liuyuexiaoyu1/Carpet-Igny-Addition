@@ -36,6 +36,7 @@
     "compat.fapi.AbstractNetworkAddonMixin",
     "debug.TranslationsMixin",
     "easterEgg.DimensionTypeMixin",
+    "easterEgg.MoonPhaseMixin",
     "easterEgg.PlayerListMixin",
     "easterEgg.ServerGamePacketListenerImplMixin",
     "exceptions.PacketUtilsMixin",

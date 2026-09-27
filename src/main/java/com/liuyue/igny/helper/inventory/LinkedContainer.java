@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.entity.EnderChestBlockEntity;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 //?>= 1.21.9 ? import net.minecraft.world.entity.ContainerUser;
 
@@ -19,6 +20,8 @@ public class LinkedContainer extends PlayerEnderChestContainer {
 
     private final Set<EnderChestBlockEntity>
             activeChests = Collections.newSetFromMap(new ConcurrentHashMap<>());
+
+    private final Set<Player> viewers = Collections.newSetFromMap(new WeakHashMap<>());
 
     public LinkedContainer(String key) {
         this.key = key;
@@ -80,6 +83,21 @@ public class LinkedContainer extends PlayerEnderChestContainer {
 
     public boolean isActiveChest(EnderChestBlockEntity chest) {
         return activeChests.contains(chest);
+    }
+
+    public Set<EnderChestBlockEntity> getActiveChests() {
+        return activeChests;
+    }
+
+    public boolean beginOpen(Player viewer) {
+        boolean first = this.viewers.isEmpty();
+        this.viewers.add(viewer);
+        return first;
+    }
+
+    public boolean endOpen(Player viewer) {
+        this.viewers.remove(viewer);
+        return this.viewers.isEmpty();
     }
 
     public void removeActiveChest(EnderChestBlockEntity chest) {

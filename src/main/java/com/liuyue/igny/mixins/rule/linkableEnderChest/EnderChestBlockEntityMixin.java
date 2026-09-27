@@ -3,6 +3,7 @@ package com.liuyue.igny.mixins.rule.linkableEnderChest;
 import com.liuyue.igny.helper.inventory.LinkedContainer;
 import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.utils.interfaces.linkableEnderChest.LinkedEnderChest;
+import com.liuyue.igny.utils.interfaces.linkableEnderChest.ViewingChest;
 import net.minecraft.core.BlockPos;
 //#if >= 1.20.5
 import net.minecraft.core.component.DataComponents;
@@ -67,11 +68,15 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     private void forceStartOpen(Player player, CallbackInfo ci) //#replace >= 1.21.9 ? private void forceStartOpen(ContainerUser player, CallbackInfo ci)
     {
         //?>= 1.21.9 ? if (!(player instanceof Player)) return;
+        if (player == null) return;
         if (LinkedContainerManager.isRuleEnabled() && this.components().has(DataComponents.CUSTOM_NAME)) //#replace < 1.20.5 ? if (LinkedContainerManager.isRuleEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         {
-            if (!this.remove && !((Player) player).isSpectator()) {
-                this.level.blockEvent(this.worldPosition, Blocks.ENDER_CHEST, 1, 1);
-                this.level.playSound(null, worldPosition, SoundEvents.ENDER_CHEST_OPEN, SoundSource.BLOCKS, 0.5F, level.getRandom().nextFloat() * 0.1F + 0.9F);
+            Container opened = this.igny$getVirtualContainer();
+
+            if (opened instanceof LinkedContainer linked) {
+                if (linked.beginOpen((Player) player) && !this.remove && !((Player) player).isSpectator()) {
+                    this.igny$broadcastLinkedOpen(true, !(player instanceof ViewingChest viewing) || viewing.igny$getContextChest() != null);
+                }
             }
             ci.cancel();
         }
@@ -82,11 +87,13 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     private void forceStopOpen(Player player, CallbackInfo ci) //#replace >= 1.21.9 ? private void forceStopOpen(ContainerUser player, CallbackInfo ci)
     {
         //?>= 1.21.9 ? if (!(player instanceof Player)) return;
+        if (player == null) return;
         if (LinkedContainerManager.isRuleEnabled() && this.components().has(DataComponents.CUSTOM_NAME)) //#replace < 1.20.5 ? if (LinkedContainerManager.isRuleEnabled() && this.saveWithFullMetadata().contains("CustomName", Tag.TAG_STRING))
         {
-            if (!this.remove && !((Player) player).isSpectator()) {
-                this.level.blockEvent(this.worldPosition, Blocks.ENDER_CHEST, 1, 0);
-                this.level.playSound(null, worldPosition, SoundEvents.ENDER_CHEST_CLOSE, SoundSource.BLOCKS, 0.5F, level.getRandom().nextFloat() * 0.1F + 0.9F);
+            Container opened = this.igny$getVirtualContainer();
+
+            if (opened instanceof LinkedContainer linked && linked.endOpen((Player) player) && !this.remove && !((Player) player).isSpectator()) {
+                this.igny$broadcastLinkedOpen(false, true);
             }
             ci.cancel();
         }
@@ -161,6 +168,35 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
             return Container.stillValidBlockEntity(this, player);
         }
         return true;
+    }
+
+    @Unique
+    private void igny$broadcastLinkedOpen(boolean opening, boolean allChests) {
+        if (this.level == null) {
+            return;
+        }
+
+        this.level.blockEvent(this.worldPosition, Blocks.ENDER_CHEST, 1, opening ? 1 : 0);
+        this.level.playSound(null, this.worldPosition, opening ? SoundEvents.ENDER_CHEST_OPEN : SoundEvents.ENDER_CHEST_CLOSE, SoundSource.BLOCKS, 0.5F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
+
+        if (!allChests) {
+            return;
+        }
+
+        Container container = this.igny$getVirtualContainer();
+
+        if (!(container instanceof LinkedContainer linked)) {
+            return;
+        }
+
+        for (EnderChestBlockEntity chest : linked.getActiveChests()) {
+            if (chest != (Object) this && !chest.isRemoved()) {
+                Level level = chest.getLevel();
+                if (level != null) {
+                    level.blockEvent(chest.getBlockPos(), Blocks.ENDER_CHEST, 1, opening ? 1 : 0);
+                }
+            }
+        }
     }
 
     @Override
@@ -246,9 +282,9 @@ public class EnderChestBlockEntityMixin extends BlockEntity implements Container
     }
     
     //#if < 1.20.5
-    //$$  @Unique private Component customName;
-    //$$  
-    /*$$@Override
+    /*$$@Unique private Component customName;
+
+     @Override
      public void load(CompoundTag tag) {
          super.load(tag);
          if (tag.contains("CustomName", Tag.TAG_STRING)) {
