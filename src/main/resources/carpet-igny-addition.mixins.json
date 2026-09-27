@@ -8,8 +8,11 @@
   },
   "plugin": "com.liuyue.igny.utils.IGNYMixinConfigPlugin",
   "mixins": [
+    "carpet.CarpetServerMixin",
     "carpet.EntityPlayerMPFakeMixin",
+    "carpet.RuleOwnerTrackerMixin",
     "carpet.SettingsManagerMixin",
+    "carpet.TranslationsMixin",
     "carpet.accessors.EntityPlayerActionPackAccessor",
     "carpet.commands.EntityPlayerActionPackMixin",
     "carpet.commands.PlayerCommandMixin",

@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import static com.liuyue.igny.utils.IGNYRuleCategory.*;
 
@@ -41,6 +42,10 @@ public class IGNYSettings {
     public static final ThreadLocal<@NotNull Boolean> ITEM_FRAME_SAVE_NBT = ThreadLocal.withInitial(() -> false);
 
     private static final Set<RuleContext<?>> RULES = new LinkedHashSet<>();
+
+    public static Set<RuleContext<?>> getRules() {
+        return RULES;
+    }
 
     private static <T> RuleAccessor<T> register(RuleContext<T> context) {
         RULES.add(context);
