@@ -10,6 +10,7 @@ import com.liuyue.igny.manager.RuleChangeDataManager;
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.tracker.RuleChangeTracker;
 import com.liuyue.igny.utils.ClassUtil;
+import com.liuyue.igny.utils.TranslationOwnership;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.fabricmc.loader.api.FabricLoader;
@@ -45,7 +46,7 @@ public abstract class SettingsManagerMixin {
     private void addOperationInfoAfterCurrentValue(CommandSourceStack source, CarpetRule<?> rule, CallbackInfoReturnable<Integer> cir) {
         if (rule != null) {
             if (IGNYSettings.SHOW_RULE_SOURCE.value()) {
-                String id = getModIdByRuleName(rule.name());
+                String id = getModIdByRuleName(rule.settingsManager().identifier(), rule.name());
                 String name = FabricLoader.getInstance()
                         .getModContainer(id)
                         .map(ModContainer::getMetadata)
@@ -75,16 +76,34 @@ public abstract class SettingsManagerMixin {
 
     @Inject(method = "addCarpetRule", at = @At(value = "TAIL"))
     private void addCarpetRule(CarpetRule<?> rule, CallbackInfo ci) {
-        ClassUtil.getModIdFromStack("addCarpetRule", false, modId -> {
-            List<String> rules = IGNYSettings.MOD_RULE_TREE.computeIfAbsent(modId, k -> new ArrayList<>());
-            synchronized (rules) {
-                rules.add(rule.name());
-            }
-        });
+        TranslationOwnership.recordRule(rule.name());
+        String modId = TranslationOwnership.ownerOf(rule.name());
+        if (modId != null) {
+            igny$recordRuleSource(rule, modId);
+        } else {
+            ClassUtil.getModIdFromStack("addCarpetRule", false, id -> igny$recordRuleSource(rule, id));
+        }
     }
 
     @Unique
-    public String getModIdByRuleName(String ruleName) {
+    private static void igny$recordRuleSource(CarpetRule<?> rule, String modId) {
+        List<String> rules = IGNYSettings.MOD_RULE_TREE.computeIfAbsent(modId, k -> new ArrayList<>());
+        synchronized (rules) {
+            if (!rules.contains(rule.name())) {
+                rules.add(rule.name());
+            }
+        }
+        IGNYSettings.RULE_SOURCE.put(rule.settingsManager().identifier() + ":" + rule.name(), modId);
+    }
+
+    @Unique
+    public String getModIdByRuleName(String identifier, String ruleName) {
+        if (identifier != null) {
+            String exact = IGNYSettings.RULE_SOURCE.get(identifier + ":" + ruleName);
+            if (exact != null) {
+                return exact;
+            }
+        }
         for (Map.Entry<String, List<String>> entry : IGNYSettings.MOD_RULE_TREE.entrySet()) {
             List<String> rules = entry.getValue();
             synchronized (rules) {

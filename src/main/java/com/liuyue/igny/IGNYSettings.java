@@ -16,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 import static com.liuyue.igny.utils.IGNYRuleCategory.*;
 
@@ -25,6 +24,7 @@ public class IGNYSettings {
     public static Set<String> CRAMMING_ENTITIES = ConcurrentHashMap.newKeySet();
     public static List<BlockPos> noUpdatePos = new CopyOnWriteArrayList<>();
     public static final Map<String, List<String>> MOD_RULE_TREE = new ConcurrentHashMap<>();
+    public static final Map<String, String> RULE_SOURCE = new ConcurrentHashMap<>();
     public static final ThreadLocal<Boolean> fakePlayerSpawnMemoryLeakFix = ThreadLocal.withInitial(() -> false);
     public static final ThreadLocal<Boolean> itemStackCountChanged = ThreadLocal.withInitial(() -> true);
     public static float originalTPS = 20.0f;
@@ -42,10 +42,6 @@ public class IGNYSettings {
     public static final ThreadLocal<@NotNull Boolean> ITEM_FRAME_SAVE_NBT = ThreadLocal.withInitial(() -> false);
 
     private static final Set<RuleContext<?>> RULES = new LinkedHashSet<>();
-
-    public static Set<RuleContext<?>> getRules() {
-        return RULES;
-    }
 
     private static <T> RuleAccessor<T> register(RuleContext<T> context) {
         RULES.add(context);

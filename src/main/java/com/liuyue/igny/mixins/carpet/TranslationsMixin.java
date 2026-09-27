@@ -28,6 +28,19 @@ public class TranslationsMixin {
         return mapping;
     }
 
+    @WrapOperation(
+            method = "updateLanguage",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lcarpet/utils/Translations;getTranslationFromResourcePath(Ljava/lang/String;)Ljava/util/Map;"
+            )
+    )
+    private static Map<String, String> igny$captureCarpetLang(String path, Operation<Map<String, String>> original) {
+        Map<String, String> mapping = original.call(path);
+        TranslationOwnership.recordLang("carpet", mapping);
+        return mapping;
+    }
+
     @Inject(method = "tr(Ljava/lang/String;)Ljava/lang/String;", at = @At(value = "HEAD"), cancellable = true)
     private static void igny$tr(String key, CallbackInfoReturnable<String> cir) {
         Map<String, String> lang = igny$ownerLang(key);
