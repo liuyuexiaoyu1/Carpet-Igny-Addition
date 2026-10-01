@@ -105,12 +105,18 @@ dependencies {
 		transitive = false
 	}
 
+	configurations.all {
+		resolutionStrategy {
+			cacheChangingModulesFor 0, 'seconds'
+		}
+	}
+
 	if (!unobfuscated) {
-		autoRuntimeOnly ('me.fallenbreath:mixin-auditor:0.2.0-u') {
+		autoRuntimeOnly ('com.github.liuyuexiaoyu1.mixin-auditor:mixin-auditor-o:master-SNAPSHOT') {
 			exclude group: "net.fabricmc.fabric-api"
 		}
 	} else {
-		autoRuntimeOnly ('me.fallenbreath:mixin-auditor:0.2.0-o') {
+		autoRuntimeOnly ('com.github.liuyuexiaoyu1.mixin-auditor:mixin-auditor-u:master-SNAPSHOT') {
 			exclude group: "net.fabricmc.fabric-api"
 		}
 	}
@@ -172,6 +178,7 @@ JavaVersion MIXIN_COMPATIBILITY_LEVEL = JAVA_COMPATIBILITY
 loom {
     accessWidenerPath = file("src/main/resources/carpet-igny-addition.accesswidener")
 	def commonVmArgs = ['-Dmixin.debug.export=true', '-Dmixin.debug.countInjections=false']
+	def auditConfigFilter = "-DmixinAuditor.configFilter=${project.findProperty('mixinAuditConfigFilter') ?: 'carpet-igny-addition'}"
 	runConfigs.configureEach {
 		// to make sure it generates all "Minecraft Client (:subproject_name)" applications
 		ideConfigGenerated = true
@@ -182,13 +189,14 @@ loom {
 		// run server, but with mixin auditor enabled
 		serverMixinAudit {
 			server()
-			vmArgs(*commonVmArgs, '-DmixinAuditor.audit=true')
+			vmArgs(*commonVmArgs, '-DmixinAuditor.audit=true', auditConfigFilter)
 		}
 
 		// run client, but with mixin auditor enabled
 		clientMixinAudit {
 			client()
-			vmArgs(*commonVmArgs, '-DmixinAuditor.audit=true', '-DmixinAuditor.when=game_init')
+			runDir "../../run/${project.name}-clientMixinAudit"
+			vmArgs(*commonVmArgs, '-DmixinAuditor.audit=true', '-DmixinAuditor.when=game_init', auditConfigFilter)
 		}
 	}
 }

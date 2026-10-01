@@ -165,16 +165,61 @@ jobs:
             - SHA-256: `${{ steps.file_info.outputs.hash }}`
             - Built from: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
-      - name: Publish Minecraft Mods
+      - name: Publish to Modrinth
         uses: Kira-NT/mc-publish@v3.3
         continue-on-error: true
         with:
           modrinth-id: 7PCm6yD1
           modrinth-token: ${{ secrets.MODRINTH_API_TOKEN }}
 
+          files: ${{ steps.file_info.outputs.path }}
+
+          name: ${{ format('{0} v{1} for mc{2}', steps.properties_g.outputs.mod_name, steps.properties_g.outputs.mod_version, steps.properties_v.outputs.minecraft_version) }}
+          version: ${{ format('v{1}-mc{0}', steps.properties_v.outputs.minecraft_version, steps.properties_g.outputs.mod_version) }}
+          version-type: release
+
+          loaders: fabric
+          game-versions: ${{ steps.properties_v.outputs.game_versions }}
+          game-version-filter: any
+          dependencies: |-
+            carpet(required)
+            fabric-api(required)
+          modrinth-changelog: ${{ steps.changelog.outputs.result }}
+
+          retry-attempts: 3
+          retry-delay: 10000
+
+      - name: Publish to CurseForge
+        uses: Kira-NT/mc-publish@v3.3
+        continue-on-error: true
+        with:
           curseforge-id: 1479191
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
+          files: ${{ steps.file_info.outputs.path }}
+
+          name: ${{ format('{0} v{1} for mc{2}', steps.properties_g.outputs.mod_name, steps.properties_g.outputs.mod_version, steps.properties_v.outputs.minecraft_version) }}
+          version: ${{ format('v{1}-mc{0}', steps.properties_v.outputs.minecraft_version, steps.properties_g.outputs.mod_version) }}
+          version-type: release
+
+          loaders: fabric
+          # CurseForge only accepts version names it knows about, and they do not always match
+          # Modrinth's naming. Set curseforge_game_versions in the version's gradle.properties to
+          # override this per node, otherwise game_versions is used as-is.
+          game-versions: ${{ steps.properties_v.outputs.curseforge_game_versions || steps.properties_v.outputs.game_versions }}
+          game-version-filter: any
+          dependencies: |-
+            carpet(required)
+            fabric-api(required)
+          curseforge-changelog: ${{ steps.changelog.outputs.result }}
+
+          retry-attempts: 3
+          retry-delay: 10000
+
+      - name: Publish to GitHub
+        uses: Kira-NT/mc-publish@v3.3
+        continue-on-error: true
+        with:
           github-tag: ${{ steps.release_info.outputs.tag_name }}
           github-token: ${{ github.token }}
 
@@ -191,8 +236,6 @@ jobs:
             carpet(required)
             fabric-api(required)
           github-changelog: ${{ steps.get_release.outputs.body }}
-          modrinth-changelog: ${{ steps.changelog.outputs.result }}
-          curseforge-changelog: ${{ steps.changelog.outputs.result }}
 
           retry-attempts: 3
           retry-delay: 10000
