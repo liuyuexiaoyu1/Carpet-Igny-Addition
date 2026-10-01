@@ -52,15 +52,16 @@ public class VaultBlockEntityServerMixin {
                     serverLevel.addFreshEntity(itemEntity);
                 }
             }
-            BlockState newState = blockState.setValue(
-                    VaultBlock.STATE,
-                    VaultState.ACTIVE
-            );
-            VaultBlockEntityServerInvoker.invokeSetVaultState(
-                    serverLevel, blockPos, blockState, newState,
-                    vaultConfig, vaultSharedData
-            );
-            newState.updateNeighbourShapes(serverLevel, blockPos, 6);
+            for (int i = 0; i < 2; i++) {
+                BlockState newState = blockState.setValue(
+                        VaultBlock.STATE,
+                        i == 0 ? VaultState.UNLOCKING : VaultState.ACTIVE
+                );
+                VaultBlockEntityServerInvoker.invokeSetVaultState(
+                        serverLevel, blockPos, blockState, newState,
+                        vaultConfig, vaultSharedData
+                );
+            }
             ci.cancel();
         }
     }

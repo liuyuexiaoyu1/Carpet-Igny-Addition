@@ -14,11 +14,17 @@ import java.util.List;
 
 @Mixin(FireworkRocketEntity.class)
 public abstract class FireworkRocketEntityMixin {
+    //#if >= 26.4
+    /*$$@WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;addDeltaMovement(DDD)V", ordinal = 0))
+    private void handleGroupMovement(LivingEntity instance, double x, double y, double z, Operation<Void> original)$$*/
+    //#else
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V", ordinal = 0))
-    private void handleGroupMovement(LivingEntity instance, Vec3 vec3, Operation<Void> original) {
+    private void handleGroupMovement(LivingEntity instance, Vec3 vec3, Operation<Void> original)
+    //#endif
+    {
         if (IGNYSettings.FIREWORKS_STACKING.value() != 1) {
             if (!(instance instanceof Player player) || !player.isFallFlying()) {
-                original.call(instance, vec3);
+                original.call(instance, vec3); //#replace >= 26.4 ? original.call(instance, x, y, z);
                 return;
             }
             List<FireworkRocketEntity> peers = instance.level().getEntitiesOfClass(
@@ -27,7 +33,7 @@ public abstract class FireworkRocketEntityMixin {
                     rocket -> ((FireworkRocketEntityAccessor) rocket).getAttachedToEntity() == player
             );
             if (peers.isEmpty()) {
-                original.call(instance, vec3);
+                original.call(instance, vec3); //#replace >= 26.4 ? original.call(instance, x, y, z);
                 return;
             }
             int maxStack = IGNYSettings.FIREWORKS_STACKING.value();
@@ -40,9 +46,9 @@ public abstract class FireworkRocketEntityMixin {
             double deltaX = (look.x * 0.1 + (look.x * dynamicLimit - currentVel.x) * 0.5) * countWeight;
             double deltaY = (look.y * 0.1 + (look.y * dynamicLimit - currentVel.y) * 0.5) * countWeight;
             double deltaZ = (look.z * 0.1 + (look.z * dynamicLimit - currentVel.z) * 0.5) * countWeight;
-            original.call(instance, currentVel.add(deltaX, deltaY, deltaZ));
+            original.call(instance, currentVel.add(deltaX, deltaY, deltaZ)); //#replace >= 26.4 ? original.call(instance, deltaX, deltaY, deltaZ);
             return;
         }
-        original.call(instance, vec3);
+        original.call(instance, vec3); //#replace >= 26.4 ? original.call(instance, x, y, z);
     }
 }
