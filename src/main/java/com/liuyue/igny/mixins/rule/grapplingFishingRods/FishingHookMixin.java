@@ -24,7 +24,7 @@ public abstract class FishingHookMixin {
     @Inject(
             method = "<init>(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/Level;II)V", //#replace == 1.21.3 ? method = "<init>(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/Level;IILnet/minecraft/world/item/ItemStack;)V",
             at = @At(value = "RETURN"))
-    private void igny$boostThrow(Player player, Level level, int i, int j, CallbackInfo ci) //#replace == 1.21.3 ? private void igny$boostThrow(Player player, Level level, int i, int j, CallbackInfo ci, ItemStack itemStack)
+    private void igny$boostThrow(Player player, Level level, int i, int j, CallbackInfo ci) //#replace == 1.21.3 ? private void igny$boostThrow(Player player, Level level, int i, int j, ItemStack itemStack, CallbackInfo ci)
     {
         this.igny$boost();
     }
