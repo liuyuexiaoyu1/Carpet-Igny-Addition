@@ -69,7 +69,7 @@ public final class LinkedChestPreviewCache {
         //#if >= 1.20.5
         Component name = stack.get(DataComponents.CUSTOM_NAME);
         //#else
-        /*$$Component name = stack.hasCustomHoverName() ? stack.getHoverName() : null;$$*/
+        //$$Component name = stack.hasCustomHoverName() ? stack.getHoverName() : null;
         //#endif
         return name == null ? null : name.getString();
     }
