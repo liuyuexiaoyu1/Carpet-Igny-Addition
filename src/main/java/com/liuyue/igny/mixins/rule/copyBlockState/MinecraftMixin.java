@@ -14,7 +14,7 @@ import net.minecraft.world.item.component.BlockItemStateProperties;
 //#else
 //$$ import net.minecraft.nbt.CompoundTag;
 //#endif
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.LevelReader; //#replace <= 1.20.2 ? import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
@@ -35,8 +35,14 @@ public class MinecraftMixin {
     @Nullable
     public HitResult hitResult;
 
+    //#if <= 1.20.2
+    /*$$@WrapOperation(method = "pickBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/Block;getCloneItemStack(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;"))
+    private ItemStack pickBlock(Block instance, BlockGetter levelReader, BlockPos pos, BlockState state, Operation<ItemStack> original)$$*/
+    //#else
     @WrapOperation(method = "pickBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/Block;getCloneItemStack(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;"))
-    private ItemStack pickBlock(Block instance, LevelReader levelReader, BlockPos pos, BlockState state, Operation<ItemStack> original) {
+    private ItemStack pickBlock(Block instance, LevelReader levelReader, BlockPos pos, BlockState state, Operation<ItemStack> original)
+    //#endif
+    {
         ItemStack itemStack = original.call(instance, levelReader, pos, state);
         if (IGNYSettings.COPY_BLOCK_STATE.value()) {
             LocalPlayer player = Minecraft.getInstance().player;

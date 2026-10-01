@@ -57,6 +57,17 @@ jobs:
           mkdir -p ./run
           echo eula=true > ./run/eula.txt
           ./gradlew runServerMixinAudit
+
+      - name: Run mixin audit check for Minecraft Client
+        if: ${{ inputs.mixin_audit }}
+        timeout-minutes: 30
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          python3 .github/workflows/scripts/strip_mixins.py
+          xvfb-run --auto-servernum ./gradlew runClientMixinAudit
       
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
