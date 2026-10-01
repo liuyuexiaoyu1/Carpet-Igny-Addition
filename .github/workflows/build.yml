@@ -65,9 +65,12 @@ jobs:
           LIBGL_ALWAYS_SOFTWARE: '1'
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb
+          sudo apt-get install -y xvfb libgl1-mesa-dri libglx-mesa0 mesa-utils
+          sudo apt-get install -y libflite1 libflite-dev || echo "libflite unavailable, the narrator error will remain"
+          FLITE=$(find /usr/lib -name 'libflite.so.*' -print -quit 2>/dev/null)
+          if [ -n "$FLITE" ]; then sudo ln -sf "$FLITE" "$(dirname "$FLITE")/libflite.so"; fi
           python3 .github/workflows/scripts/strip_mixins.py
-          xvfb-run --auto-servernum ./gradlew runClientMixinAudit
+          xvfb-run --auto-servernum --server-args="-screen 0 1280x1024x24" ./gradlew runClientMixinAudit --continue
       
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
