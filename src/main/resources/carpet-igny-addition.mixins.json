@@ -251,8 +251,8 @@
     "rule.noWitherEffect.WitherRoseBlockMixin",
     "rule.noWitherEffect.WitherSkeletonMixin",
     "rule.noWitherEffect.WitherSkullMixin",
-    "rule.noZombifiedPiglinNetherPortalSpawn.NetherPortalBlockMixin",
     "rule.noZombieReinforcement.ZombieMixin",
+    "rule.noZombifiedPiglinNetherPortalSpawn.NetherPortalBlockMixin",
     "rule.openDecoratedPotGui.DecoratedPotBlockMixin",
     "rule.optimizedSpawning.NaturalSpawnerMixin",
     "rule.optimizedTNTErrorScopeFix.ExplosionMixin",
@@ -301,6 +301,7 @@
     "rule.spawnMaxCountIgnoresChunkOverlap.ServerChunkCacheAccessor",
     "rule.spawnMaxCountIgnoresChunkOverlap.ServerLevelAccessor",
     "rule.spectatorCanOperateContainer.ServerGamePacketListenerImplMixin",
+    "rule.spectatorCanOperateContainer.ServerPlayerGameModeMixin",
     "rule.spectatorClickPortalTeleport.BlockBehaviourInvoker",
     "rule.spectatorClickPortalTeleport.EntityInvoker",
     "rule.spectatorClickPortalTeleport.NetherPortalBlockMixin",
@@ -367,6 +368,9 @@
     "rule.killFakePlayerRemoveVehicle.IntegratedServerMixin",
     "rule.linkableEnderChest.compat.quickshulker.AbstractContainerScreenMixin",
     "rule.playerLowHungryValueCanSprint.LocalPlayerMixin",
+    "rule.spectatorCanOperateContainer.GuiMixin",
+    "rule.spectatorCanOperateContainer.CrafterScreenMixin",
+    "rule.spectatorCanOperateContainer.MultiPlayerGameModeMixin",
     "rule.survivalFlyNoClip.LevelRendererMixin"
   ],
   "injectors": {

@@ -43,6 +43,16 @@ public class ServerGamePacketListenerImplMixin {
         return igny$treatAsRegularPlayer(instance, original);
     }
 
+    //#if >= 1.20.4
+    @WrapOperation(method = "handleContainerSlotStateChanged", at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/level/ServerPlayer;isSpectator()Z"
+    ))
+    private boolean containerSlotStateChanged(ServerPlayer instance, Operation<Boolean> original) {
+        return igny$treatAsRegularPlayer(instance, original);
+    }
+    //#endif
+
     @Unique
     private static boolean igny$treatAsRegularPlayer(ServerPlayer player, Operation<Boolean> original) {
         if (IGNYSettings.SPECTATOR_CAN_OPERATE_CONTAINER.value() && player.isSpectator()) {

@@ -3,7 +3,11 @@ package com.liuyue.igny.helper;
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-//? >= 1.21.6 ? import net.minecraft.world.entity.animal.HappyGhast;
+//#if >= 1.21.11
+//$$ import net.minecraft.world.entity.animal.happyghast.HappyGhast;
+//#elseif >= 1.21.6
+//$$ import net.minecraft.world.entity.animal.HappyGhast;
+//#endif
 
 public final class NoClipHelper {
 

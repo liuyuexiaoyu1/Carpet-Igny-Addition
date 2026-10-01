@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.minecraft.core.RegistryAccess;$$*/
 //#else
 //#if >= 1.21.8
-/*$$import net.minecraft.core.RegistryAccess;$$*/
+//$$import net.minecraft.core.RegistryAccess;
 //#endif
 //#endif
 

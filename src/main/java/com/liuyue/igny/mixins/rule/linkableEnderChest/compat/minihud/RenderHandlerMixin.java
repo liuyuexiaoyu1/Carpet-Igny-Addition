@@ -1,6 +1,5 @@
 package com.liuyue.igny.mixins.rule.linkableEnderChest.compat.minihud;
 
-//#if >= 1.21
 import com.liuyue.igny.client.LinkedChestPreviewCache;
 import fi.dy.masa.minihud.event.RenderHandler;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
@@ -11,16 +10,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#if >= 1.21.11
-/*$$import fi.dy.masa.malilib.render.GuiContext;$$*/
+//$$import fi.dy.masa.malilib.render.GuiContext;
 //#else
 import net.minecraft.client.gui.GuiGraphics;
 //#endif
-//#else
-/*$$import com.liuyue.igny.utils.compat.DummyClass;
-import org.spongepowered.asm.mixin.Mixin;$$*/
-//#endif
 
-//#if >= 1.21
 @Restriction(require = @Condition("minihud"))
 @Mixin(RenderHandler.class)
 public class RenderHandlerMixin {
@@ -47,8 +41,3 @@ public class RenderHandlerMixin {
     }
     //#endif
 }
-//#else
-/*$$@Mixin(DummyClass.class)
-public class RenderHandlerMixin {
-}$$*/
-//#endif
