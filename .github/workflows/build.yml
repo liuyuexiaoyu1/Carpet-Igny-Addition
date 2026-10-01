@@ -56,7 +56,7 @@ jobs:
         run: |
           mkdir -p ./run
           echo eula=true > ./run/eula.txt
-          ./gradlew runServerMixinAudit
+          ./gradlew runServerMixinAudit --continue
 
       - name: Run mixin audit check for Minecraft Client
         if: ${{ inputs.mixin_audit }}

@@ -105,18 +105,12 @@ dependencies {
 		transitive = false
 	}
 
-	configurations.all {
-		resolutionStrategy {
-			cacheChangingModulesFor 0, 'seconds'
-		}
-	}
-
 	if (!unobfuscated) {
-		autoRuntimeOnly ('com.github.liuyuexiaoyu1.mixin-auditor:mixin-auditor-o:master-SNAPSHOT') {
+		autoRuntimeOnly ('com.github.liuyuexiaoyu1.mixin-auditor:mixin-auditor-o:0.2.1') {
 			exclude group: "net.fabricmc.fabric-api"
 		}
 	} else {
-		autoRuntimeOnly ('com.github.liuyuexiaoyu1.mixin-auditor:mixin-auditor-u:master-SNAPSHOT') {
+		autoRuntimeOnly ('com.github.liuyuexiaoyu1.mixin-auditor:mixin-auditor-u:0.2.1') {
 			exclude group: "net.fabricmc.fabric-api"
 		}
 	}
