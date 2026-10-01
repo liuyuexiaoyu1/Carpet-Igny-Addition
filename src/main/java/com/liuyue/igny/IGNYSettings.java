@@ -1256,4 +1256,10 @@ public class IGNYSettings {
                     .addCategories(SURVIVAL, ENTERTAINMENT, FEATURE)
                     .build()
     );
+
+    public static final RuleAccessor<Boolean> NO_ZOMBIE_REINFORCEMENT = register(
+            RuleFactory.of("noZombieReinforcement", false)
+                    .addCategories(FEATURE)
+                    .build()
+    );
 }

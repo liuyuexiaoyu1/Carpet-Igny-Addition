@@ -1,6 +1,5 @@
 package com.liuyue.igny.mixins.rule.linkableEnderChest.compat.malilib;
 
-//#if >= 1.21
 import com.liuyue.igny.client.LinkedChestPreviewCache;
 import fi.dy.masa.malilib.util.InventoryUtils;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
@@ -20,12 +19,7 @@ import net.minecraft.core.RegistryAccess;$$*/
 /*$$import net.minecraft.core.RegistryAccess;$$*/
 //#endif
 //#endif
-//#else
-/*$$import com.liuyue.igny.utils.compat.DummyClass;
-import org.spongepowered.asm.mixin.Mixin;$$*/
-//#endif
 
-//#if >= 1.21
 @Restriction(require = @Condition("malilib"))
 @Mixin(InventoryUtils.class)
 public class InventoryUtilsMixin {
@@ -58,8 +52,3 @@ public class InventoryUtilsMixin {
     //#endif
     //#endif
 }
-//#else
-/*$$@Mixin(DummyClass.class)
-public class InventoryUtilsMixin {
-}$$*/
-//#endif

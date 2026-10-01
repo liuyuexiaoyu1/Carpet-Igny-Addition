@@ -374,5 +374,6 @@
   "carpet.rule.survivalFlyNoClip.desc": "While flying in survival or adventure mode, pass through blocks and entities like a spectator",
   "carpet.rule.spectatorCanOperateContainer.desc": "While in spectator mode, players can take and place items in containers and their own inventory, and can use the recipe book and container buttons",
   "carpet.rule.grapplingFishingRods.desc": "The thrown bobber ignores gravity and drag, and reeling it in while hooked onto a block or entity pulls the player toward it",
-  "carpet.rule.commandFly.desc": "Use the /fly command to toggle flight"
+  "carpet.rule.commandFly.desc": "Use the /fly command to toggle flight",
+  "carpet.rule.noZombieReinforcement.desc": "Zombies no longer call for reinforcements when hurt"
 }

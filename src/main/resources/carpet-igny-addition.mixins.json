@@ -252,6 +252,7 @@
     "rule.noWitherEffect.WitherSkeletonMixin",
     "rule.noWitherEffect.WitherSkullMixin",
     "rule.noZombifiedPiglinNetherPortalSpawn.NetherPortalBlockMixin",
+    "rule.noZombieReinforcement.ZombieMixin",
     "rule.openDecoratedPotGui.DecoratedPotBlockMixin",
     "rule.optimizedSpawning.NaturalSpawnerMixin",
     "rule.optimizedTNTErrorScopeFix.ExplosionMixin",

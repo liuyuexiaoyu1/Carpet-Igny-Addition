@@ -1623,3 +1623,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `ENTERTAINMENT`, `FEATURE`
+
+## 僵尸不再呼叫增援 (noZombieReinforcement) `🐛Beta`
+
+僵尸受击时不再呼叫增援。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`

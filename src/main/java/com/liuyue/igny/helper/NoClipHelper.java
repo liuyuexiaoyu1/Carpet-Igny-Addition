@@ -3,14 +3,9 @@ package com.liuyue.igny.helper;
 import com.liuyue.igny.IGNYSettings;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-//#if >= 1.21.6
-import net.minecraft.world.entity.animal.HappyGhast;
-//#endif
+//? >= 1.21.6 ? import net.minecraft.world.entity.animal.HappyGhast;
 
 public final class NoClipHelper {
-
-    private NoClipHelper() {
-    }
 
     public static boolean isActiveFlyingPlayer(Entity entity) {
         return IGNYSettings.SURVIVAL_FLY_NO_CLIP.value()
@@ -21,7 +16,7 @@ public final class NoClipHelper {
     }
 
     //#if >= 1.21.6
-    public static boolean isHappyGhastNoClip() {
+    /*$$public static boolean isHappyGhastNoClip() {
         return IGNYSettings.HAPPY_GHAST_NO_CLIP.value();
     }
 
@@ -39,6 +34,6 @@ public final class NoClipHelper {
 
     public static boolean isActiveGhastOrRider(Entity entity) {
         return isActiveGhast(entity) || isActiveRider(entity);
-    }
+    }$$*/
     //#endif
 }

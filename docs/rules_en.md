@@ -1621,3 +1621,12 @@ The thrown bobber ignores gravity and drag, and reeling it in while hooked onto 
 - Default Value: `false`
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `ENTERTAINMENT`, `FEATURE`
+
+## noZombieReinforcement `🐛Beta`
+
+Zombies no longer call for reinforcements when hurt.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`

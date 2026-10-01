@@ -545,5 +545,7 @@
   "carpet.rule.spectatorCanOperateContainer.name": "旁观者可操作容器",
   "carpet.rule.spectatorCanOperateContainer.desc": "旁观者模式下可以正常拿取和放置容器内的物品、操作自己的背包，也能使用配方书和容器按钮",
   "carpet.rule.grapplingFishingRods.name": "抓钩钓鱼竿",
-  "carpet.rule.grapplingFishingRods.desc": "抛出的浮漂不再受重力与阻尼影响，钩住方块或实体后收竿会把玩家朝目标方向拉动"
+  "carpet.rule.grapplingFishingRods.desc": "抛出的浮漂不再受重力与阻尼影响，钩住方块或实体后收竿会把玩家朝目标方向拉动",
+  "carpet.rule.noZombieReinforcement.name": "僵尸不再呼叫增援",
+  "carpet.rule.noZombieReinforcement.desc": "僵尸受击时不再呼叫增援"
 }
