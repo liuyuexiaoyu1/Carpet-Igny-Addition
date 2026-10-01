@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.happyGhastNoClip;
+package com.liuyue.igny.mixins.rule.survivalFlyNoClip;
 
 import com.liuyue.igny.helper.NoClipHelper;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -22,6 +22,6 @@ public class LevelRendererMixin {
     @WrapOperation(method = "renderLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isSpectator()Z"))
     private boolean isSpectator(LocalPlayer instance, Operation<Boolean> original) {
         //#endif
-        return original.call(instance) || NoClipHelper.isActiveRider(instance);
+        return original.call(instance) || NoClipHelper.isActiveFlyingPlayer(instance);
     }
 }

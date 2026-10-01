@@ -38,15 +38,6 @@ Records and displays rule change history including operator, timestamp, newValue
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `COMMAND`, `FEATURE`
 
-## fakePlayerCanPush
-
-Fake players can be pushed by other players' collisions.
-
-- Type: `boolean`
-- Default value: `true`
-- Suggested options: `false`, `true`
-- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
-
 ## wetSpongeCanAbsorbLava
 
 Wet sponges can absorb lava and turn into regular sponges when touching lava.
@@ -1564,7 +1555,7 @@ Requires the `itemFlowTracker` rule to be enabled.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## uncraftingTable `🐛Beta`
+## uncraftingTable
 
 Allows placing items into the crafting table's result slot to uncraft them.  
 If multiple recipes exist for the same output, press the drop key while hovering over the result slot to cycle through them.  
@@ -1575,7 +1566,7 @@ This rule also applies to the Crafter. To use it, name the Crafter with the numb
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## copyBlockState `🐛Beta`
+## copyBlockState
 
 Pressing Ctrl+Shift+middle-click on the targeted block copies its block state and block entity data onto the held item.
 
@@ -1583,3 +1574,50 @@ Pressing Ctrl+Shift+middle-click on the targeted block copies its block state an
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CLIENT`, `CREATIVE`, `FEATURE`
+
+## fakePlayerNoCollision `🐛Beta`
+
+Migrated from the `fakePlayerCanPush` rule.
+
+When enabled, fake players no longer push or get pushed by other players.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `CLIENT`, `FEATURE`
+
+## commandFly `🐛Beta`
+
+Use the /fly command to toggle flight.
+
+- Type: `string`
+- Default Value: `false`
+- Suggested Options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `IGNY`, `SURVIVAL`, `COMMAND`, `FEATURE`
+
+## survivalFlyNoClip `🐛Beta`
+
+While flying in survival or adventure mode, pass through blocks and entities like a spectator.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `CLIENT`, `FEATURE`
+
+## spectatorCanOperateContainer `🐛Beta`
+
+While in spectator mode, players can take and place items in containers and their own inventory, and can use the recipe book and container buttons.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`
+
+## grapplingFishingRods `🐛Beta`
+
+The thrown bobber ignores gravity and drag, and reeling it in while hooked onto a block or entity pulls the player toward it.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `ENTERTAINMENT`, `FEATURE`

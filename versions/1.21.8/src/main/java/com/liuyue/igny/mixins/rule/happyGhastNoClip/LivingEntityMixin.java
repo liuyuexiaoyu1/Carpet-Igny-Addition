@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.happyGhastNoClip;
 
-import com.liuyue.igny.helper.happyGhastNoClip.NoClipHelper;
+import com.liuyue.igny.helper.NoClipHelper;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.server.level.ServerLevel;

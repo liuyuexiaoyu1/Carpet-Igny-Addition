@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.happyGhastNoClip;
+package com.liuyue.igny.mixins.rule.survivalFlyNoClip;
 
 import com.liuyue.igny.helper.NoClipHelper;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -11,22 +11,16 @@ import org.spongepowered.asm.mixin.injection.At;
 public class PlayerMixin {
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;isSpectator()Z"))
     private boolean isSpectatorWrap(Player instance, Operation<Boolean> original) {
-        return original.call(instance) || NoClipHelper.isActiveRider(instance);
+        return original.call(instance) || NoClipHelper.isActiveFlyingPlayer(instance);
     }
 
-    @WrapOperation(method = "aiStep", at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/player/Player;isSpectator()Z")
-    )
+    @WrapOperation(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;isSpectator()Z"))
     private boolean collidesWithEntities(Player instance, Operation<Boolean> original) {
-        return original.call(instance) || NoClipHelper.isActiveRider(instance);
+        return original.call(instance) || NoClipHelper.isActiveFlyingPlayer(instance);
     }
 
-    @WrapOperation(method = "updatePlayerPose", at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/player/Player;isSpectator()Z")
-    )
+    @WrapOperation(method = "updatePlayerPose", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;isSpectator()Z"))
     private boolean spectatorsDontPose(Player instance, Operation<Boolean> original) {
-        return original.call(instance) || NoClipHelper.isActiveRider(instance);
+        return original.call(instance) || NoClipHelper.isActiveFlyingPlayer(instance);
     }
 }

@@ -35,7 +35,8 @@ public class IGNYServer implements CarpetExtension {
     public static final ResourceLocation REMOVE_HIGHLIGHT_PACKET_ID = new ResourceLocation(MOD_ID, "remove_highlight_block");
     public static final ResourceLocation SYNC_STACK_SIZE_PACKET_ID = new ResourceLocation(MOD_ID, "sync_custom_stack_size");
     public static final ResourceLocation RENDER_BOX_PACKET_ID = new ResourceLocation(MOD_ID, "render_box");
-    public static final ResourceLocation SYNC_LINKED_ENDER_CHEST_PACKET_ID = new ResourceLocation(MOD_ID, "sync_linked_ender_chest");$$*/
+    public static final ResourceLocation SYNC_LINKED_ENDER_CHEST_PACKET_ID = new ResourceLocation(MOD_ID, "sync_linked_ender_chest");
+    public static final ResourceLocation LINKED_CHEST_CONTENT_PACKET_ID = new ResourceLocation(MOD_ID, "linked_chest_content");$$*/
     //#endif
 
     public static IGNYServer getInstance() {
@@ -72,6 +73,7 @@ public class IGNYServer implements CarpetExtension {
         CustomItemMaxStackSizeCommand.register(dispatcher, commandBuildContext);
         InsaneBehaviorsCommand.register(dispatcher);
         ItemFlowTrackerCommand.register(dispatcher);
+        FlyCommand.register(dispatcher);
     }
 
     @Override

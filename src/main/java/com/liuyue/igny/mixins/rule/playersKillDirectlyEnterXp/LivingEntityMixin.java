@@ -30,8 +30,8 @@ public class LivingEntityMixin {
             if (damageSource != null && !instance.level().isClientSide() && damageSource.getEntity() instanceof Player player) {
                 int xp = instance.getExperienceReward((ServerLevel) instance.level(), instance); //#replace <= 1.20.6 ? int xp = instance.getExperienceReward();
                 if (xp > 0) {
-                    ExperienceOrb orb = new ExperienceOrb(instance.level(),
-                            instance.getX(), instance.getY() + 0.5, instance.getZ(), xp);
+                    ExperienceOrb orb = new ExperienceOrb(player.level(),
+                            player.getX(), player.getY() + 0.5, player.getZ(), xp);
                     player.takeXpDelay = 0;
                     orb.playerTouch(player);
                 }

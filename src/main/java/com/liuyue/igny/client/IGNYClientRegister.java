@@ -7,6 +7,7 @@ import com.liuyue.igny.client.renderer.world.HighlightBlocksRenderer;
 import com.liuyue.igny.manager.CustomItemMaxStackSizeDataManager;
 import com.liuyue.igny.network.packet.block.HighlightPayload;
 import com.liuyue.igny.network.packet.block.RemoveHighlightPayload;
+import com.liuyue.igny.network.packet.config.LinkedChestContentPayload;
 import com.liuyue.igny.network.packet.config.SyncCustomStackSizePayload;
 import com.liuyue.igny.network.packet.render.BoxPayload;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
@@ -17,6 +18,9 @@ import net.minecraft.world.phys.AABB;
 //#if < 1.20.5
 /*$$import com.liuyue.igny.IGNYServer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;$$*/
 //#else
 //$$ import com.liuyue.igny.network.packet.block.HighlightPayload;
@@ -108,6 +112,24 @@ public class IGNYClientRegister {
                             BoxRenderer.addBox(pos, color, duration, permanent, depthTest, minX, minY, minZ, maxX, maxY, maxZ, withLine, lineDepthTest, smooth)
                     );
                 }
+                //#endif
+        );
+        ClientPlayNetworking.registerGlobalReceiver(
+                LinkedChestContentPayload.TYPE, //#replace < 1.20.5 ? IGNYServer.LINKED_CHEST_CONTENT_PACKET_ID,
+                //#if < 1.20.5
+                /*$$(client, handler, buf, responseSender) -> {
+                    String key = buf.readUtf();
+                    int size = buf.readVarInt();
+                    List<ItemStack> items = new ArrayList<>(size);
+                    for (int i = 0; i < size; i++) {
+                        items.add(buf.readItem());
+                    }
+                    client.execute(() -> LinkedChestPreviewCache.accept(key, items));
+                }$$*/
+                //#else
+                (payload, context) -> context.client().execute(() ->
+                        LinkedChestPreviewCache.accept(payload.key(), payload.items())
+                )
                 //#endif
         );
     }

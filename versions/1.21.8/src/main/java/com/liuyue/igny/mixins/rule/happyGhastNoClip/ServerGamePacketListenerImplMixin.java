@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.happyGhastNoClip;
 
-import com.liuyue.igny.helper.happyGhastNoClip.NoClipHelper;
+import com.liuyue.igny.helper.NoClipHelper;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelReader;

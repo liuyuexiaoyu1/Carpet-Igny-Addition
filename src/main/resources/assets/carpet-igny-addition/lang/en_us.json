@@ -16,6 +16,8 @@
   "igny.command.enderchest.no_permission": "You don't have permission to drop ender chest items",
   "igny.command.enderchest.real_player_op_only": "Only operators can drop ender chest items of real players",
   "igny.command.fixnotepitch.success": "Successfully changed %s note blocks to pitch %s",
+  "igny.command.fly.enabled": "§aFlying enabled",
+  "igny.command.fly.disabled": "§cFlying disabled",
   "igny.command.playerOperate.no_tasks": "§cNo tasks available",
   "igny.command.playerOperate.no_running_tasks": "§cNo running tasks",
   "igny.command.playerOperate.task_stopped": "§7[PlayerOperate] §cStopped §f%d §ctask(s)",
@@ -123,11 +125,13 @@
   "igny.prerequisite_rule": "rule needs to be enabled",
   "igny.syncmatica_not_permission": "No Permission",
 
+  "carpet.category.porting": "porting",
+  "carpet.category.entertainment": "entertainment",
   "carpet.rule.wardenNeverDig.desc":"Warden Never Dig",
   "carpet.rule.playerLevitationFreeShulkerBullet.desc":"Player Immune to Shulker Levitation",
   "carpet.rule.playerMiningFatigueFreeGuardian.desc": "Player Immune to Guardian Mining Fatigue",
   "carpet.rule.showRuleChangeHistory.desc": "Records and displays rule change history including operator, timestamp, newValue, and original value when rules are modified",
-  "carpet.rule.fakePlayerCanPush.desc": "Fake players can be pushed by other players' collisions",
+  "carpet.rule.fakePlayerNoCollision.desc": "When enabled, fake players no longer push or get pushed by other players",
   "carpet.rule.wetSpongeCanAbsorbLava.desc": "Wet Sponges can absorb lava (turn into dry sponges)",
   "carpet.rule.commandPlayerEnderChestDrop.desc": "Permission to drop ender chest items",
   "carpet.rule.commandPlayerEnderChestDrop.extra.0": "Usage: /player <name> drop all - drops inventory + ender chest (if permitted)",
@@ -366,5 +370,9 @@
   "carpet.rule.itemFlowTrackerPersistentTrail.desc": "When enabled the trail never disappears until the rule is turned off or /itemflowtracker clear is used; otherwise its markers fade after 200 ticks",
   "carpet.rule.uncraftingTable.desc": "Allows placing items into the crafting table's result slot to uncraft them.\nIf multiple recipes exist for the same output, press the drop key while hovering over the result slot to cycle through them",
   "carpet.rule.uncraftingTable.extra.0": "This rule also applies to the Crafter. To use it, name the Crafter with the number corresponding to the recipe index (e.g., name it \"1\" for the first recipe)",
-  "carpet.rule.copyBlockState.desc": "Pressing Ctrl+Shift+middle-click on the targeted block copies its block state and block entity data onto the held item"
+  "carpet.rule.copyBlockState.desc": "Pressing Ctrl+Shift+middle-click on the targeted block copies its block state and block entity data onto the held item",
+  "carpet.rule.survivalFlyNoClip.desc": "While flying in survival or adventure mode, pass through blocks and entities like a spectator",
+  "carpet.rule.spectatorCanOperateContainer.desc": "While in spectator mode, players can take and place items in containers and their own inventory, and can use the recipe book and container buttons",
+  "carpet.rule.grapplingFishingRods.desc": "The thrown bobber ignores gravity and drag, and reeling it in while hooked onto a block or entity pulls the player toward it",
+  "carpet.rule.commandFly.desc": "Use the /fly command to toggle flight"
 }

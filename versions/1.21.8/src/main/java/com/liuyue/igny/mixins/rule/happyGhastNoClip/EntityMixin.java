@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.happyGhastNoClip;
 
-import com.liuyue.igny.helper.happyGhastNoClip.NoClipHelper;
+import com.liuyue.igny.helper.NoClipHelper;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.animal.HappyGhast;
@@ -35,7 +35,7 @@ public abstract class EntityMixin {
             return;
         }
 
-        if (self instanceof Player player && !player.isPassenger() && NoClipHelper.isActive()) {
+        if (self instanceof Player player && !player.isPassenger() && NoClipHelper.isHappyGhastNoClip()) {
             List<HappyGhast> ghasts = player.level().getEntitiesOfClass(HappyGhast.class, player.getBoundingBox().inflate(1.0D));
 
             for (HappyGhast ghast : ghasts) {

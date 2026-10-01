@@ -3,6 +3,7 @@ package com.liuyue.igny.network;
 //#if >= 1.20.5
 import com.liuyue.igny.network.packet.block.HighlightPayload;
 import com.liuyue.igny.network.packet.block.RemoveHighlightPayload;
+import com.liuyue.igny.network.packet.config.LinkedChestContentPayload;
 import com.liuyue.igny.network.packet.config.SyncCustomStackSizePayload;
 import com.liuyue.igny.network.packet.config.SyncLinkedEnderChestPayload;
 import com.liuyue.igny.network.packet.render.BoxPayload;
@@ -16,12 +17,14 @@ public class PacketRegistry {
         /*$$PayloadTypeRegistry.clientboundPlay().register(HighlightPayload.TYPE, HighlightPayload.CODEC);
         PayloadTypeRegistry.clientboundPlay().register(RemoveHighlightPayload.TYPE, RemoveHighlightPayload.CODEC);
         PayloadTypeRegistry.clientboundPlay().register(SyncCustomStackSizePayload.TYPE, SyncCustomStackSizePayload.CODEC);
-        PayloadTypeRegistry.clientboundPlay().register(BoxPayload.TYPE, BoxPayload.CODEC);$$*/
+        PayloadTypeRegistry.clientboundPlay().register(BoxPayload.TYPE, BoxPayload.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(LinkedChestContentPayload.TYPE, LinkedChestContentPayload.CODEC);$$*/
         //#else
         PayloadTypeRegistry.playS2C().register(HighlightPayload.TYPE, HighlightPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(RemoveHighlightPayload.TYPE, RemoveHighlightPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(SyncCustomStackSizePayload.TYPE, SyncCustomStackSizePayload.CODEC);
         PayloadTypeRegistry.playS2C().register(BoxPayload.TYPE, BoxPayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(LinkedChestContentPayload.TYPE, LinkedChestContentPayload.CODEC);
         //#endif
     }
 

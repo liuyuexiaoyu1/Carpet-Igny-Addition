@@ -12,6 +12,9 @@ public class IGNYClient implements ClientModInitializer {
         IGNYClientRegister.register();
         EasterEggDataManager.INSTANCE.load();
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> HighlightBlocksRenderer.INSTANCE.clear());
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, sender) -> BaseDataManager.clearAll());
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, sender) -> {
+            BaseDataManager.clearAll();
+            LinkedChestPreviewCache.clear();
+        });
     }
 }

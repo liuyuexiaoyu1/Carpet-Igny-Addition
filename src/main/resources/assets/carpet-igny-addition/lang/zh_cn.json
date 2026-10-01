@@ -16,6 +16,8 @@
   "igny.command.enderchest.no_permission": "你没有权限丢弃末影箱物品",
   "igny.command.enderchest.real_player_op_only": "只有管理员玩家可以丢弃真玩家的末影箱物品",
   "igny.command.fixnotepitch.success": "已将%s个音符盒的音高修改为%s",
+  "igny.command.fly.enabled": "§a飞行已开启",
+  "igny.command.fly.disabled": "§c飞行已关闭",
   "igny.command.playerOperate.no_tasks": "§c没有可用任务",
   "igny.command.playerOperate.no_running_tasks": "§c没有正在运行的任务",
   "igny.command.playerOperate.task_stopped": "§7[PlayerOperate] §c已停止§f%d§c个任务",
@@ -122,6 +124,8 @@
   "igny.prerequisite_rule": "规则未启用",
   "igny.syncmatica_not_permission": "权限不足",
 
+  "carpet.category.porting": "移植",
+  "carpet.category.entertainment": "娱乐",
   "carpet.rule.wardenNeverDig.name": "监守者永不钻地",
   "carpet.rule.wardenNeverDig.desc": "让监守者永远不会钻地",
   "carpet.rule.playerLevitationFreeShulkerBullet.name": "潜影贝攻击玩家没有漂浮效果",
@@ -130,8 +134,8 @@
   "carpet.rule.playerMiningFatigueFreeGuardian.desc": "让远古守卫者锁定玩家时没有挖掘疲劳效果",
   "carpet.rule.showRuleChangeHistory.name": "显示规则变更记录",
   "carpet.rule.showRuleChangeHistory.desc": "在规则的值变更的时候，会记录并且在规则详情中显示操作者、操作时间、原始值和用户输入的值",
-  "carpet.rule.fakePlayerCanPush.name": "假玩家可以被推动",
-  "carpet.rule.fakePlayerCanPush.desc": "假玩家受到其他玩家的碰撞时，不会移动（被推动）",
+  "carpet.rule.fakePlayerNoCollision.name": "假玩家无碰撞",
+  "carpet.rule.fakePlayerNoCollision.desc": "开启后假玩家与其他玩家之间不会互相推动",
   "carpet.rule.wetSpongeCanAbsorbLava.name": "湿海绵吸收熔岩",
   "carpet.rule.wetSpongeCanAbsorbLava.desc": "湿海绵可以吸收熔岩（变为海绵）",
   "carpet.rule.commandPlayerEnderChestDrop.name": "丢弃玩家末影箱物品命令权限",
@@ -533,5 +537,13 @@
   "carpet.rule.uncraftingTable.desc": "允许将物品放入工作台的结果槽并将其分解。\n同一产物有多个配方时，对着结果槽按丢弃键可轮换到下一个配方",
   "carpet.rule.uncraftingTable.extra.0": "该规则同样适用于合成器。将合成器命名为配方索引对应的数字即可使用（例如对应第一个配方时命名为1）",
   "carpet.rule.copyBlockState.name": "复制方块状态",
-  "carpet.rule.copyBlockState.desc": "对着目标方块按Ctrl+Shift+中键时，把目标方块的方块状态与方块实体数据一并复制到手上的物品"
+  "carpet.rule.copyBlockState.desc": "对着目标方块按Ctrl+Shift+中键时，把目标方块的方块状态与方块实体数据一并复制到手上的物品",
+  "carpet.rule.commandFly.name": "飞行命令权限",
+  "carpet.rule.commandFly.desc": "使用/fly命令切换飞行状态",
+  "carpet.rule.survivalFlyNoClip.name": "生存飞行无碰撞",
+  "carpet.rule.survivalFlyNoClip.desc": "生存或冒险模式下处于飞行状态时穿透方块与实体，效果类似旁观者",
+  "carpet.rule.spectatorCanOperateContainer.name": "旁观者可操作容器",
+  "carpet.rule.spectatorCanOperateContainer.desc": "旁观者模式下可以正常拿取和放置容器内的物品、操作自己的背包，也能使用配方书和容器按钮",
+  "carpet.rule.grapplingFishingRods.name": "抓钩钓鱼竿",
+  "carpet.rule.grapplingFishingRods.desc": "抛出的浮漂不再受重力与阻尼影响，钩住方块或实体后收竿会把玩家朝目标方向拉动"
 }

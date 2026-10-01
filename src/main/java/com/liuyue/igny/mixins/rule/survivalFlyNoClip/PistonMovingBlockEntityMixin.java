@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.happyGhastNoClip;
+package com.liuyue.igny.mixins.rule.survivalFlyNoClip;
 
 import com.liuyue.igny.helper.NoClipHelper;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -15,17 +15,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PistonMovingBlockEntityMixin {
     @Inject(method = "moveEntityByPiston", at = @At("HEAD"), cancellable = true)
     private static void moveEntityByPiston(Direction direction, Entity instance, double d, Direction direction2, CallbackInfo ci) {
-        if (NoClipHelper.isActiveGhastOrRider(instance)) {
+        if (NoClipHelper.isActiveFlyingPlayer(instance)) {
             ci.cancel();
         }
     }
 
-    @WrapOperation(method = "moveCollidedEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;setDeltaMovement(DDD)V"))
-    private static void setDeltaMovement(Entity instance, double d, double e, double f, Operation<Void> original) {
-        if (NoClipHelper.isActiveGhastOrRider(instance)) {
+    @WrapOperation(method = "moveCollidedEntities", at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/entity/Entity;setDeltaMovement(DDD)V"
+    ))
+    private static void setDeltaMovement(Entity instance, double x, double y, double z, Operation<Void> original) {
+        if (NoClipHelper.isActiveFlyingPlayer(instance)) {
             return;
         }
-
-        original.call(instance, d, e, f);
+        original.call(instance, x, y, z);
     }
 }

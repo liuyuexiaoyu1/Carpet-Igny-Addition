@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.happyGhastNoClip;
+package com.liuyue.igny.mixins.rule.survivalFlyNoClip;
 
 import com.liuyue.igny.helper.NoClipHelper;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -21,16 +21,14 @@ public class StandingAndWallBlockItemMixin {
             value = "INVOKE",
             target = "Lnet/minecraft/world/level/LevelReader;isUnobstructed(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Z"
     ))
-    private boolean isUnobstructed(
-            LevelReader instance, BlockState blockState, BlockPos blockPos, CollisionContext collisionContext, Operation<Boolean> original, @Local(argsOnly = true) BlockPlaceContext blockPlaceContext
-    ) {
+    private boolean isUnobstructed(LevelReader instance, BlockState blockState, BlockPos blockPos, CollisionContext collisionContext,
+                                   Operation<Boolean> original,
+                                   @Local(argsOnly = true) BlockPlaceContext blockPlaceContext) {
         Player player = blockPlaceContext.getPlayer();
-
-        if (NoClipHelper.isActiveRider(player)) {
+        if (NoClipHelper.isActiveFlyingPlayer(player)) {
             VoxelShape voxelShape = blockState.getCollisionShape(instance, blockPos, collisionContext);
             return voxelShape.isEmpty() || instance.isUnobstructed(player, voxelShape.move(blockPos.getX(), blockPos.getY(), blockPos.getZ()));
         }
-
         return original.call(instance, blockState, blockPos, collisionContext);
     }
 }

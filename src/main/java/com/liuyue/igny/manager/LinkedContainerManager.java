@@ -24,6 +24,10 @@ public class LinkedContainerManager extends BaseDataManager<Map<String, String>>
         return INSTANCE.containers.computeIfAbsent(key, LinkedContainer::new);
     }
 
+    public static LinkedContainer peek(String key) {
+        return key == null ? null : INSTANCE.containers.get(key);
+    }
+
     public static boolean isRuleEnabled() {
         return IGNYSettings.LINKEABLE_ENDER_CHEST.value() != LinkedContainerSetting.FALSE;
     }

@@ -1,4 +1,4 @@
-package com.liuyue.igny.mixins.rule.happyGhastNoClip;
+package com.liuyue.igny.mixins.rule.survivalFlyNoClip;
 
 import com.liuyue.igny.helper.NoClipHelper;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -16,10 +16,9 @@ public class ShulkerBoxBlockEntityMixin {
             target = "Lnet/minecraft/world/entity/Entity;getPistonPushReaction()Lnet/minecraft/world/level/material/PushReaction;"
     ))
     private PushReaction getPistonPushReaction(Entity instance, Operation<PushReaction> original) {
-        if (NoClipHelper.isActiveGhastOrRider(instance)) {
+        if (NoClipHelper.isActiveFlyingPlayer(instance)) {
             return PushReaction.IGNORE; //#replace >= 26.3 ? return PushReaction.IGNORE_ENTITY;
         }
-
         return original.call(instance);
     }
 }

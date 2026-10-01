@@ -1,6 +1,6 @@
 ## Commands
 
-### Fixnotepitch (`fixnotepitch`)
+## Note Block Pitch (`/fixnotepitch`)
 
 ### Syntax
 `/fixnotepitch <pos1> <pos2> [<pitch>]`
@@ -10,6 +10,7 @@
 - Sets the note pitch of all note blocks within the cuboid region defined by `<pos1>` and `<pos2>` to `<pitch>`.
 
 ## Player Operation (`/playerOperate`)
+
 ### Syntax
 - `/playerOperate ..`
     - `...<player>`
@@ -29,11 +30,11 @@
 - `/playerOperate ..`
     - `...<player>`: Fake player.
         - `...task`
-            - `...vault [<maxCycles>]`: Makes the fake player perform a vault-opening task.
+            - `...vault [<maxCycles>] [<onlineDuration>] [<waitingDuration>]` `MC>=1.20.3`: Makes the fake player perform a vault-opening task.
                 - Makes `<player>` hold right-click for `<onlineDuration>` game ticks then log out, and spawns a `<player>_1` fake player after `<waitingDuration>` game ticks with the same position and rotation. `<player>_1` continues holding right-click for `<onlineDuration>` ticks then logs out, spawns `<player>_2` after `<waitingDuration>` ticks, looping until `<player>_[<maxCycles>]`.
                 - `[<maxCycles>]` defaults to 130, `[<onlineDuration>]` defaults to 100, `[<waitingDuration>]` defaults to 21.
             - `...pressUse <interval> <duration> [<cycles>]`: Makes the fake player repeatedly hold right-click for `<duration>` ticks every `<interval>` ticks, repeating for `[<cycles>]` times. If `[<cycles>]` is omitted, it defaults to infinite repetition. When `[<cycles>]` is 1, the `<interval>` value is ignored.
-            - `...rotation <interval> <angle>` Makes the fake player rotate `<angle>` degrees every `<interval>` ticks, rotating clockwise.
+            - `...rotation <interval> <angle>` Makes the fake player rotate `<angle>` degrees every `<interval>` ticks.
         - `...stop`: Stops all tasks for this player.
         - `...pause`: Pauses the player's current task.
         - `...resume`: Resumes the player's paused task.
@@ -42,7 +43,7 @@
     - `...pauseAll`: Pauses all running tasks.
     - `...resumeAll`: Resumes all paused tasks.
 
-## ClearLightQueue
+## Clear Light Queue (`/clearlightqueue`)
 
 ### Syntax
 - `/clearlightqueue`
@@ -90,7 +91,7 @@
     - `...clear`
     - `...list`
 
-### Effect
+### Effects
 - `/customItemMaxStackSize` Modifies the maximum stack size for specific items.
     - `...set` Sets the custom max stack size for a specified item.
         - `<itemStack>`: The target item.
@@ -148,3 +149,11 @@ Requires the `itemFlowTracker` rule to be enabled.
         - `[<track_path>]` is the trail sampling interval in ticks; it defaults to 5, and 0 turns the trail off.
     - `...status` lists every live tracking session and its remaining budget.
     - `...clear` stops every tracking session and removes all highlights.
+
+## Fly (`/fly`) `🐛Beta`
+
+### Syntax
+- `/fly`
+
+### Effects
+- `/fly` toggles the flight state of the executing player.

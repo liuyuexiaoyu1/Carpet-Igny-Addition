@@ -90,9 +90,10 @@ public class IGNYSettings {
                     .build()
     );
 
-    public static final RuleAccessor<Boolean> FAKE_PLAYER_CAN_PUSH = register(
-            RuleFactory.of("fakePlayerCanPush", true)
+    public static final RuleAccessor<Boolean> FAKE_PLAYER_NO_COLLISION = register(
+            RuleFactory.of("fakePlayerNoCollision", false)
                     .addCategories(SURVIVAL, FEATURE)
+                    .setClient()
                     .build()
     );
 
@@ -1227,6 +1228,32 @@ public class IGNYSettings {
             RuleFactory.of("copyBlockState", false)
                     .addCategories(CREATIVE, FEATURE)
                     .setClient()
+                    .build()
+    );
+
+    public static final RuleAccessor<CommandPermissionLevel> COMMAND_FLY = register(
+            RuleFactory.of("commandFly", CommandPermissionLevel.FALSE)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .setCommand()
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> SURVIVAL_FLY_NO_CLIP = register(
+            RuleFactory.of("survivalFlyNoClip", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .setClient()
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> SPECTATOR_CAN_OPERATE_CONTAINER = register(
+            RuleFactory.of("spectatorCanOperateContainer", false)
+                    .addCategories(FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> GRAPPLING_FISHING_RODS = register(
+            RuleFactory.of("grapplingFishingRods", false)
+                    .addCategories(SURVIVAL, ENTERTAINMENT, FEATURE)
                     .build()
     );
 }
