@@ -66,6 +66,7 @@ public abstract class UncraftingMenuMixin {
             int amount = button == 0 ? carried.getCount() : 1;
 
             if (products.isEmpty() && !state.igny$uncrafting()) {
+                UncraftingTable.returnGrid(menu, player);
                 ItemStack placed = UncraftingTable.single(carried);
                 placed.setCount(amount);
                 List<?> candidates = UncraftingTable.decomposable(placed)
@@ -129,7 +130,7 @@ public abstract class UncraftingMenuMixin {
             state.igny$setUncraftCandidates(refreshed);
 
             if (refreshed.isEmpty()) {
-                UncraftingTable.clearGrid(menu);
+                UncraftingTable.returnGrid(menu, player);
                 state.igny$setUncraftBase(null);
                 UncraftingTable.readGrid(menu, state.igny$uncraftWritten());
                 result.setChanged();
@@ -151,7 +152,7 @@ public abstract class UncraftingMenuMixin {
 
         if (igny$isPickup(clickType) && carried.isEmpty() && button == 0) {
             result.set(ItemStack.EMPTY);
-            UncraftingTable.clearGrid(menu);
+            UncraftingTable.returnGrid(menu, player);
             state.igny$setUncraftCandidates(null);
             state.igny$setUncraftBase(null);
             state.igny$setUncraftWritten(null);
@@ -163,7 +164,7 @@ public abstract class UncraftingMenuMixin {
 
         if (igny$isQuickMove(clickType)) {
             result.set(ItemStack.EMPTY);
-            UncraftingTable.clearGrid(menu);
+            UncraftingTable.returnGrid(menu, player);
             state.igny$setUncraftCandidates(null);
             state.igny$setUncraftBase(null);
             state.igny$setUncraftWritten(null);

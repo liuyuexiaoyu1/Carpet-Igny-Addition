@@ -162,7 +162,7 @@ public abstract class CraftingMenuMixin implements UncraftingState {
         ItemStack products = result.getItem();
         result.set(ItemStack.EMPTY);
 
-        UncraftingTable.clearGrid(menu);
+        UncraftingTable.returnGrid(menu, player);
 
         this.igny$setUncraftCandidates(null);
         this.igny$setUncraftBase(null);

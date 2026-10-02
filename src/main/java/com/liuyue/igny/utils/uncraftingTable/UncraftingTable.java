@@ -409,6 +409,28 @@ public final class UncraftingTable {
         writeGrid(menu, null);
     }
 
+    public static void returnGrid(AbstractContainerMenu menu, net.minecraft.world.entity.player.Player player) {
+        CraftingContainer container = gridContainer(menu);
+
+        if (container == null) {
+            return;
+        }
+
+        for (int i = 0; i < container.getContainerSize(); i++) {
+            ItemStack stack = container.getItem(i);
+
+            if (stack.isEmpty()) {
+                continue;
+            }
+
+            container.setItem(i, ItemStack.EMPTY);
+
+            if (!player.getInventory().add(stack)) {
+                player.drop(stack, false); //#replace >= 26.3 ? player.drop(stack, false, net.minecraft.util.Prediction.PREDICTED);
+            }
+        }
+    }
+
     public static boolean gridEmpty(@Nullable CraftingContainer container) {
         if (container == null) {
             return true;
