@@ -21,14 +21,17 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public final class LinkedChestPreviewCache {
     private static final long REFRESH_INTERVAL_MS = 500L;
+    private static final long PREVIEW_TTL_MS = 100L;
     private static final Map<String, List<ItemStack>> CONTENT = new ConcurrentHashMap<>();
     private static final Map<String, Long> REQUESTED_AT = new ConcurrentHashMap<>();
     private static String previewKey;
+    private static long previewStamp;
 
     private LinkedChestPreviewCache() {}
 
     public static void beginPreview(ItemStack stack) {
         previewKey = keyOf(stack);
+        previewStamp = System.currentTimeMillis();
         if (previewKey != null) {
             request(previewKey);
         }
@@ -40,7 +43,10 @@ public final class LinkedChestPreviewCache {
 
     public static PlayerEnderChestContainer previewContainer() {
         String key = previewKey;
-        List<ItemStack> items = key == null ? null : CONTENT.get(key);
+        if (key == null || System.currentTimeMillis() - previewStamp > PREVIEW_TTL_MS) {
+            return null;
+        }
+        List<ItemStack> items = CONTENT.get(key);
         if (items == null) {
             return null;
         }

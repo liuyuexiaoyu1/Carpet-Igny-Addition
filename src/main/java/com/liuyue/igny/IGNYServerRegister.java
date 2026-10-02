@@ -4,7 +4,6 @@ import com.liuyue.igny.helper.inventory.LinkedContainer;
 import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.network.packet.config.LinkedChestContentPayload;
 import com.liuyue.igny.network.packet.config.SyncLinkedEnderChestPayload;
-import com.liuyue.igny.utils.interfaces.linkableEnderChest.ViewingChest;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -32,12 +31,9 @@ public class IGNYServerRegister {
                     Player player = context.player();
                     //#endif
                     context.server().execute(() -> { //#replace < 1.20.5 ? server.execute(() -> {
-                        if (chestName == null || chestName.isEmpty()) {
-                            ((ViewingChest) player).igny$setLinkedKey(null);
-                        } else {
-                            ((ViewingChest) player).igny$setLinkedKey(chestName);
+                        if (chestName != null && !chestName.isEmpty()) {
+                            sendLinkedChestContent(player, chestName);
                         }
-                        sendLinkedChestContent(player, chestName);
                     });
                 }
         );
