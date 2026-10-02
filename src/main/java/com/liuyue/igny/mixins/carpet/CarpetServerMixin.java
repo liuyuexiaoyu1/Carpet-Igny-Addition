@@ -13,15 +13,18 @@ import java.util.function.Consumer;
 
 @Mixin(CarpetServer.class)
 public class CarpetServerMixin {
+
+    @SuppressWarnings("unchecked")
     @WrapOperation(
             method = "onGameStarted",
             at = @At(value = "INVOKE", target = "Ljava/util/List;forEach(Ljava/util/function/Consumer;)V")
     )
     private static void igny$trackCurrentExtension(List<CarpetExtension> instance, Consumer<?> consumer, Operation<Void> original) {
+        Consumer<CarpetExtension> action = (Consumer<CarpetExtension>) consumer;
         for (CarpetExtension extension : instance) {
             TranslationOwnership.enter(extension);
             try {
-                original.call(instance, consumer);
+                action.accept(extension);
             } finally {
                 TranslationOwnership.exit();
             }
