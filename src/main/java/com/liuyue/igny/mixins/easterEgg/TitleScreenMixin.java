@@ -74,7 +74,7 @@ public abstract class TitleScreenMixin extends Screen {
                 .bounds(this.width - 80 - 4, this.height - 32, 80, 20)
                 .build();
 
-        this.surrenderButton.visible = false;
+        this.surrenderButton.visible = false; //#replace >= 26.4 ? this.surrenderButton.setVisible(true);
         this.addRenderableWidget(this.surrenderButton);
     }
 
@@ -209,8 +209,9 @@ public abstract class TitleScreenMixin extends Screen {
             widget.setX((int) Math.round(pos.x));
             widget.setY((int) Math.round(pos.y));
             totalFleeDistance += vel.length();
-            if (this.surrenderButton != null && !this.surrenderButton.visible && totalFleeDistance > 1.0) {
-                this.surrenderButton.visible = true;
+            if (this.surrenderButton != null && !this.surrenderButton.visible && totalFleeDistance > 1.0) //#replace >= 26.4 ? if (this.surrenderButton != null && !this.surrenderButton.isVisible() && totalFleeDistance > 1.0)
+            {
+                this.surrenderButton.visible = true; //#replace >= 26.4 ? this.surrenderButton.setVisible(true);
             }
         }
     }
