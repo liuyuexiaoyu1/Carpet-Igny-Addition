@@ -3,6 +3,7 @@ package com.liuyue.igny.utils.uncraftingTable;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 //#if >= 1.21.3
 /*$$import net.minecraft.world.item.crafting.CraftingInput;
@@ -24,10 +25,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;$$*/
 //#endif
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @SuppressWarnings("deprecation")
 public final class UncraftingTable {
@@ -68,17 +67,34 @@ public final class UncraftingTable {
         return result;
     }
 
+    private static final Map<RecipeManager, Map<Item, List<?>>> CANDIDATE_CACHE =
+            Collections.synchronizedMap(new WeakHashMap<>());
+
     public static List<?> candidates(Level level, ItemStack product) {
         if (product.isEmpty()) {
             return List.of();
         }
 
-        RecipeManager manager = level.getServer() == null ? null : level.getServer().getRecipeManager();
+        RecipeManager manager = level.getRecipeManager();
 
-        if (manager == null) {
-            return List.of();
+        Map<Item, List<?>> perManager;
+
+        synchronized (CANDIDATE_CACHE) {
+            perManager = CANDIDATE_CACHE.computeIfAbsent(manager, ignored -> new ConcurrentHashMap<>());
         }
 
+        Item item = product.getItem();
+        List<?> all = perManager.get(item);
+
+        if (all == null) {
+            all = scan(manager, level, item);
+            perManager.put(item, all);
+        }
+
+        return refine(level, all, product.getCount());
+    }
+
+    private static List<?> scan(RecipeManager manager, Level level, net.minecraft.world.item.Item item) {
         List<Object> found = new ArrayList<>();
 
         for (Object holder : manager.getRecipes()) {
@@ -90,7 +106,7 @@ public final class UncraftingTable {
 
             ItemStack output = outputOf(level, recipe);
 
-            if (output.isEmpty() || output.getItem() != product.getItem()) {
+            if (output.isEmpty() || output.getItem() != item) {
                 continue;
             }
 
@@ -100,23 +116,62 @@ public final class UncraftingTable {
                 continue;
             }
 
-            int applications = product.getCount() / Math.max(1, output.getCount());
-            boolean reachable = applications > 0;
-
-            for (int i = 0; reachable && i < base.length; i++) {
-                if (!base[i].isEmpty() && applications > base[i].getMaxStackSize()) {
-                    reachable = false;
-                }
-            }
-
-            if (reachable) {
-                found.add(holder);
-            }
+            found.add(holder);
         }
 
         found.sort(Comparator.comparing(holder -> keyOf(level, holder)));
 
         return found;
+    }
+
+    public static List<?> refine(Level level, @Nullable List<?> candidates, int productCount) {
+        if (candidates == null || candidates.isEmpty()) {
+            return List.of();
+        }
+
+        List<Object> kept = new ArrayList<>(candidates.size());
+
+        for (Object holder : candidates) {
+            if (reachable(level, holder, productCount)) {
+                kept.add(holder);
+            }
+        }
+
+        return kept;
+    }
+
+    private static boolean reachable(Level level, @Nullable Object holder, int productCount) {
+        CraftingRecipe recipe = recipeOf(holder);
+
+        if (recipe == null) {
+            return false;
+        }
+
+        ItemStack output = outputOf(level, recipe);
+
+        if (output.isEmpty()) {
+            return false;
+        }
+
+        int applications = productCount / Math.max(1, output.getCount());
+
+        if (applications <= 0) {
+            return false;
+        }
+
+        ItemStack[] base = decompose(recipe);
+
+        if (base == null) {
+            return false;
+        }
+
+        for (ItemStack stack : base) {
+            if (!stack.isEmpty() && applications > stack.getMaxStackSize()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private static String keyOf(Level level, Object holder) {
@@ -312,6 +367,7 @@ public final class UncraftingTable {
         try {
             for (int i = 0; i < container.getContainerSize(); i++) {
                 ItemStack material = base != null && i < base.length ? base[i] : ItemStack.EMPTY;
+                if (material == null) continue;
 
                 if (material.isEmpty()) {
                     container.setItem(i, ItemStack.EMPTY);

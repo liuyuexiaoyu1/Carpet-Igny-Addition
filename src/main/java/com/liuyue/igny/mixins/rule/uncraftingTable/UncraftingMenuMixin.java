@@ -30,10 +30,6 @@ public abstract class UncraftingMenuMixin {
     @Inject(method = "clicked", at = @At("HEAD"), cancellable = true)
     private void igny$uncraftingClick(int slotId, int button, ClickType clickType, Player player, CallbackInfo ci) {
     //#endif
-        if (player.level().isClientSide()) {
-            return;
-        }
-
         if (!IGNYSettings.UNCRAFTING_TABLE.value()) {
             return;
         }
@@ -98,7 +94,7 @@ public abstract class UncraftingMenuMixin {
                     menu.setCarried(carried);
                     List<?> current = state.igny$uncraftCandidates();
                     Object selected = current == null || current.isEmpty() ? null : current.get(Math.min(state.igny$uncraftIndex(), current.size() - 1));
-                    List<?> refreshed = UncraftingTable.candidates(player.level(), products);
+                    List<?> refreshed = UncraftingTable.refine(player.level(), current, products.getCount());
                     int at = selected == null ? -1 : refreshed.indexOf(selected);
                     state.igny$setUncraftCandidates(refreshed);
                     state.igny$setUncraftIndex(Math.max(at, 0));
@@ -129,7 +125,7 @@ public abstract class UncraftingMenuMixin {
             }
 
             Object selected = candidates.get(Math.min(state.igny$uncraftIndex(), candidates.size() - 1));
-            List<?> refreshed = UncraftingTable.candidates(player.level(), products);
+            List<?> refreshed = UncraftingTable.refine(player.level(), candidates, products.getCount());
             state.igny$setUncraftCandidates(refreshed);
 
             if (refreshed.isEmpty()) {
