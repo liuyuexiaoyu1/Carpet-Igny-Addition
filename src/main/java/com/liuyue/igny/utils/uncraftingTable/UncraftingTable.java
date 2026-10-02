@@ -1,5 +1,6 @@
 package com.liuyue.igny.utils.uncraftingTable;
 
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.inventory.Slot;
@@ -75,7 +76,11 @@ public final class UncraftingTable {
             return List.of();
         }
 
-        RecipeManager manager = level.getRecipeManager();
+        RecipeManager manager = level.getRecipeManager(); //#replace >= 1.21.3 ? RecipeManager manager = level.recipeAccess() instanceof RecipeManager recipeManager ? recipeManager : null;
+
+        if (manager == null) {
+            return List.of();
+        }
 
         Map<Item, List<?>> perManager;
 
@@ -409,7 +414,7 @@ public final class UncraftingTable {
         writeGrid(menu, null);
     }
 
-    public static void returnGrid(AbstractContainerMenu menu, net.minecraft.world.entity.player.Player player) {
+    public static void returnGrid(AbstractContainerMenu menu, Player player) {
         CraftingContainer container = gridContainer(menu);
 
         if (container == null) {
