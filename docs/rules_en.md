@@ -1575,7 +1575,7 @@ Pressing Ctrl+Shift+middle-click on the targeted block copies its block state an
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CLIENT`, `CREATIVE`, `FEATURE`
 
-## fakePlayerNoCollision `🐛Beta`
+## fakePlayerNoCollision
 
 Migrated from the `fakePlayerCanPush` rule.
 
@@ -1586,7 +1586,7 @@ When enabled, fake players no longer push or get pushed by other players.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `CLIENT`, `FEATURE`
 
-## commandFly `🐛Beta`
+## commandFly
 
 Use the /fly command to toggle flight.
 
@@ -1595,7 +1595,7 @@ Use the /fly command to toggle flight.
 - Suggested Options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `IGNY`, `SURVIVAL`, `COMMAND`, `FEATURE`
 
-## survivalFlyNoClip `🐛Beta`
+## survivalFlyNoClip
 
 While flying in survival or adventure mode, pass through blocks and entities like a spectator.
 
@@ -1604,7 +1604,7 @@ While flying in survival or adventure mode, pass through blocks and entities lik
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `CLIENT`, `FEATURE`
 
-## spectatorCanOperateContainer `🐛Beta`
+## spectatorCanOperateContainer
 
 While in spectator mode, players can take and place items in containers and their own inventory, and can use the recipe book and container buttons.
 
@@ -1613,7 +1613,7 @@ While in spectator mode, players can take and place items in containers and thei
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## grapplingFishingRods `🐛Beta`
+## grapplingFishingRods
 
 The thrown bobber ignores gravity and drag, and reeling it in while hooked onto a block or entity pulls the player toward it.
 
@@ -1622,7 +1622,7 @@ The thrown bobber ignores gravity and drag, and reeling it in while hooked onto 
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `ENTERTAINMENT`, `FEATURE`
 
-## noZombieReinforcement `🐛Beta`
+## noZombieReinforcement
 
 Zombies no longer call for reinforcements when hurt.
 

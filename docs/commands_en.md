@@ -150,7 +150,7 @@ Requires the `itemFlowTracker` rule to be enabled.
     - `...status` lists every live tracking session and its remaining budget.
     - `...clear` stops every tracking session and removes all highlights.
 
-## Fly (`/fly`) `🐛Beta`
+## Fly (`/fly`)
 
 ### Syntax
 - `/fly`

@@ -1577,7 +1577,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CLIENT`, `CREATIVE`, `FEATURE`
 
-## 假玩家无碰撞 (fakePlayerNoCollision) `🐛Beta`
+## 假玩家无碰撞 (fakePlayerNoCollision)
 
 由`假玩家可以被推动 (fakePlayerCanPush)规则`迁移而来。
 
@@ -1588,7 +1588,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `CLIENT`, `FEATURE`
 
-## 飞行指令权限 (commandFly) `🐛Beta`
+## 飞行指令权限 (commandFly)
 
 使用/fly命令切换飞行状态。
 
@@ -1597,7 +1597,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `IGNY`, `SURVIVAL`, `COMMAND`, `FEATURE`
 
-## 生存飞行无碰撞 (survivalFlyNoClip) `🐛Beta`
+## 生存飞行无碰撞 (survivalFlyNoClip)
 
 生存或冒险模式下处于飞行状态时穿透方块与实体，效果类似旁观者。
 
@@ -1606,7 +1606,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `CLIENT`, `FEATURE`
 
-## 旁观者可操作容器 (spectatorCanOperateContainer) `🐛Beta`
+## 旁观者可操作容器 (spectatorCanOperateContainer)
 
 旁观者模式下可以正常拿取和放置容器内的物品、操作自己的背包，也能使用配方书和容器按钮。
 
@@ -1615,7 +1615,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 抓钩钓鱼竿 (grapplingFishingRods) `🐛Beta`
+## 抓钩钓鱼竿 (grapplingFishingRods)
 
 抛出的浮漂不再受重力与阻尼影响，钩住方块或实体后收竿会把玩家朝目标方向拉动。
 
@@ -1624,7 +1624,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `ENTERTAINMENT`, `FEATURE`
 
-## 僵尸不再呼叫增援 (noZombieReinforcement) `🐛Beta`
+## 僵尸不再呼叫增援 (noZombieReinforcement)
 
 僵尸受击时不再呼叫增援。
 
