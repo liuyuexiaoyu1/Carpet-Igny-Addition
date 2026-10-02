@@ -106,11 +106,11 @@ dependencies {
 	}
 
 	if (!unobfuscated) {
-		autoRuntimeOnly ('com.github.liuyuexiaoyu1.mixin-auditor:mixin-auditor-o:0.2.4') {
+		autoRuntimeOnly ('com.github.liuyuexiaoyu1.mixin-auditor:mixin-auditor-o:0.2.5') {
 			exclude group: "net.fabricmc.fabric-api"
 		}
 	} else {
-		autoRuntimeOnly ('com.github.liuyuexiaoyu1.mixin-auditor:mixin-auditor-u:0.2.4') {
+		autoRuntimeOnly ('com.github.liuyuexiaoyu1.mixin-auditor:mixin-auditor-u:0.2.5') {
 			exclude group: "net.fabricmc.fabric-api"
 		}
 	}
