@@ -157,6 +157,7 @@
     "rule.ghostEnderPearlFix.ServerPlayerMixin",
     "rule.globalDaylightDetector.DaylightDetectorBlockMixin",
     "rule.grapplingFishingRods.FishingHookMixin",
+    "rule.grapplingFishingRods.PlayerMixin",
     "rule.happyGhastNoClip.BlockItemMixin",
     "rule.happyGhastNoClip.EntityMixin",
     "rule.happyGhastNoClip.HappyGhastInvoker",

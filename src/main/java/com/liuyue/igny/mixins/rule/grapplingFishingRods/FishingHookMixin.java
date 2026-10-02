@@ -1,6 +1,7 @@
 package com.liuyue.igny.mixins.rule.grapplingFishingRods;
 
 import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.utils.interfaces.grapplingFishingRods.GrappleFallGuard;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
@@ -120,6 +121,12 @@ public abstract class FishingHookMixin {
             return;
         }
         player.addDeltaMovement(pull.normalize().scale(3.0).add(0.0, 0.3, 0.0));
+
+        // 记一次免摔，落地时由 PlayerMixin 消费掉
+        if (player instanceof GrappleFallGuard guard) {
+            guard.igny$setGrappleFallGuard(true);
+        }
+
         //#if < 1.21.11
         player.hasImpulse = true;
         //#endif
