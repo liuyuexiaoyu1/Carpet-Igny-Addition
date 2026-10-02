@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-//? >= 1.21.3 ? import net.minecraft.world.item.ItemStack;
+//? == 1.21.3 ? import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -50,15 +50,19 @@ public abstract class FishingHookMixin {
         return stop;
     }
 
-    @WrapOperation(method = "tick", at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/phys/Vec3;add(DDD)Lnet/minecraft/world/phys/Vec3;"
-    ))
-    private Vec3 igny$skipGravity(Vec3 instance, double x, double y, double z, Operation<Vec3> original) {
+    //#if >= 26.4
+    /*$$@WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/FishingHook;addDeltaMovement(DDD)V"))
+    private void igny$skipGravity(FishingHook instance, double x, double y, double z, Operation<Void> original)$$*/
+    //#else
+    @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/Vec3;add(DDD)Lnet/minecraft/world/phys/Vec3;"))
+    private Vec3 igny$skipGravity(Vec3 instance, double x, double y, double z, Operation<Vec3> original)
+    //#endif
+    {
         if (IGNYSettings.GRAPPLING_FISHING_RODS.value() && x == 0.0 && y == -0.03 && z == 0.0) {
-            return instance;
+            return instance; //#replace >= 26.4 ? original.call(instance, 0d, 0d, 0d);
+            //? >= 26.4 ? return;
         }
-        return original.call(instance, x, y, z);
+        return original.call(instance, x, y, z); //#replace >= 26.4 ? original.call(instance, x, y, z);
     }
 
     @WrapOperation(method = "tick", at = @At(
