@@ -4,6 +4,7 @@ import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
+//? >= 1.21.11 ? import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -35,7 +36,7 @@ public abstract class FishingHookMixin {
             return;
         }
         FishingHook self = (FishingHook) (Object) this;
-        self.setDeltaMovement(self.getDeltaMovement().scale(2.5));
+        self.setDeltaMovement(self.getDeltaMovement().scale(1.8));
     }
 
     @WrapOperation(method = "tick", at = @At(
@@ -78,7 +79,7 @@ public abstract class FishingHookMixin {
 
     @ModifyConstant(method = "shouldStopFishing", constant = @Constant(doubleValue = 1024.0))
     private double igny$extendRange(double original) {
-        return IGNYSettings.GRAPPLING_FISHING_RODS.value() ? 10000.0 : original;
+        return IGNYSettings.GRAPPLING_FISHING_RODS.value() ? original * 3 : original;
     }
 
     @WrapOperation(method = "retrieve", at = @At(
@@ -107,6 +108,10 @@ public abstract class FishingHookMixin {
         } else if (!level.noCollision(hook.getBoundingBox().inflate(0.5))) {
             target = hook.position();
         }
+        else if (level.getWorldBorder().getDistanceToBorder(hook.getX(), hook.getZ()) < 0.5) //#replace >= 1.21.11 ? else if (level instanceof ServerLevel serverLevel && serverLevel.getWorldBorder().getDistanceToBorder(hook.getX(), hook.getZ()) < 0.5)
+        {
+            target = hook.position();
+        }
         if (target == null) {
             return;
         }
@@ -114,7 +119,7 @@ public abstract class FishingHookMixin {
         if (pull.length() <= 0.01) {
             return;
         }
-        player.addDeltaMovement(pull.normalize().scale(4.0));
+        player.addDeltaMovement(pull.normalize().scale(3.0).add(0.0, 0.3, 0.0));
         //#if < 1.21.11
         player.hasImpulse = true;
         //#endif
