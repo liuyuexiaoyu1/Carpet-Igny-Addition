@@ -98,11 +98,7 @@ public abstract class FishingHookMixin {
     @Unique
     private static void igny$grapple(FishingHook hook, Player player) {
         Entity hooked = hook.getHookedIn();
-        //#if >= 1.20.1
-        Level level = hook.level();
-        //#else
-        //$$ Level level = hook.level;
-        //#endif
+        Level level = hook.level(); //#replace < 1.20.1 ? Level level = hook.level;
         Vec3 target = null;
         if (hooked != null) {
             target = hooked.position();
