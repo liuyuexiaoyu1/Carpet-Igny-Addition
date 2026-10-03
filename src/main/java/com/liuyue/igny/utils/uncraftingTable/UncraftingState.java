@@ -26,6 +26,10 @@ public interface UncraftingState {
 
     void igny$setUncraftWritten(int @Nullable [] written);
 
+    int igny$uncraftPer();
+
+    void igny$setUncraftPer(int per);
+
     default boolean igny$uncrafting() {
         return this.igny$uncraftCandidates() != null;
     }

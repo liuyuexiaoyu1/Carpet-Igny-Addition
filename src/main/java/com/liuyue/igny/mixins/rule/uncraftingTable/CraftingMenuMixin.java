@@ -37,6 +37,19 @@ public abstract class CraftingMenuMixin implements UncraftingState {
     @Unique
     private int @Nullable [] igny$uncraftWritten;
 
+    @Unique
+    private int igny$uncraftPer = 1;
+
+    @Override
+    public int igny$uncraftPer() {
+        return this.igny$uncraftPer;
+    }
+
+    @Override
+    public void igny$setUncraftPer(int per) {
+        this.igny$uncraftPer = Math.max(1, per);
+    }
+
     @Override
     @Nullable
     public List<?> igny$uncraftCandidates() {
@@ -98,50 +111,58 @@ public abstract class CraftingMenuMixin implements UncraftingState {
 
         int[] written = this.igny$uncraftWritten();
         CraftingContainer grid = UncraftingTable.gridContainer(menu);
+        ItemStack[] base = this.igny$uncraftBase();
 
-        if (written == null || grid == null) {
+        if (grid == null || base == null) {
             ci.cancel();
             return;
         }
 
-        int layers = 0;
-        int applications = 0;
+        Slot result = menu.slots.getFirst();
 
-        for (int i = 0; i < written.length && i < grid.getContainerSize(); i++) {
-            if (written[i] <= 0) {
+        if (result.getItem().isEmpty()) {
+            ci.cancel();
+            return;
+        }
+
+        int factor = Integer.MAX_VALUE;
+        boolean any = false;
+
+        for (int i = 0; i < base.length && i < grid.getContainerSize(); i++) {
+            ItemStack material = base[i];
+
+            if (material == null || material.isEmpty()) {
                 continue;
             }
 
-            if (written[i] > applications) {
-                applications = written[i];
-            }
-
-            int taken = written[i] - grid.getItem(i).getCount();
-
-            if (taken > layers) {
-                layers = taken;
-            }
+            any = true;
+            factor = Math.min(factor, grid.getItem(i).getCount() / Math.max(1, material.getCount()));
         }
-        Slot result = menu.slots.getFirst();
 
-        if (layers > 0) {
-            int per = applications > 0 ? Math.max(1, result.getItem().getCount() / applications) : 1;
-            int left = result.getItem().getCount() - layers * per;
-
-            if (left <= 0) {
-                result.set(ItemStack.EMPTY);
-                this.igny$setUncraftCandidates(null);
-                this.igny$setUncraftBase(null);
-                this.igny$setUncraftWritten(null);
-                ci.cancel();
-                return;
-            }
-
-            ItemStack products = UncraftingTable.single(result.getItem());
-            products.setCount(left);
-            result.set(products);
-            result.setChanged();
+        if (!any) {
+            ci.cancel();
+            return;
         }
+
+        if (factor == Integer.MAX_VALUE) {
+            factor = 0;
+        }
+
+        int products = factor * this.igny$uncraftPer();
+
+        if (products <= 0) {
+            result.set(ItemStack.EMPTY);
+            this.igny$setUncraftCandidates(null);
+            this.igny$setUncraftBase(null);
+            this.igny$setUncraftWritten(null);
+            ci.cancel();
+            return;
+        }
+
+        ItemStack shown = result.getItem().copy();
+        shown.setCount(products);
+        result.set(shown);
+        result.setChanged();
 
         UncraftingTable.readGrid(menu, written);
         ci.cancel();
@@ -162,7 +183,7 @@ public abstract class CraftingMenuMixin implements UncraftingState {
         ItemStack products = result.getItem();
         result.set(ItemStack.EMPTY);
 
-        UncraftingTable.returnGrid(menu, player);
+        UncraftingTable.clearGrid(menu);
 
         this.igny$setUncraftCandidates(null);
         this.igny$setUncraftBase(null);

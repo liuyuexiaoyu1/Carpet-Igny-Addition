@@ -156,7 +156,6 @@ public abstract class UncraftingMenuMixin {
             state.igny$setUncraftCandidates(null);
             state.igny$setUncraftBase(null);
             state.igny$setUncraftWritten(null);
-            menu.setCarried(products);
             menu.broadcastChanges();
             ci.cancel();
             return;
@@ -168,11 +167,6 @@ public abstract class UncraftingMenuMixin {
             state.igny$setUncraftCandidates(null);
             state.igny$setUncraftBase(null);
             state.igny$setUncraftWritten(null);
-
-            if (!player.getInventory().add(products)) {
-                player.drop(products, false); //#replace >= 26.3 ? player.drop(products, false, Prediction.PREDICTED);
-            }
-
             menu.broadcastChanges();
             ci.cancel();
         }
@@ -181,6 +175,7 @@ public abstract class UncraftingMenuMixin {
     @Unique
     private void igny$rewrite(AbstractContainerMenu menu, UncraftingState state, Player player, @Nullable Object entry, int products) {
         int per = UncraftingTable.outputCount(player.level(), entry);
+        state.igny$setUncraftPer(per);
         state.igny$setUncraftBase(entry == null ? null : UncraftingTable.gridOf(entry));
         UncraftingTable.writeGrid(menu, state.igny$uncraftBase(), products / per);
         UncraftingTable.readGrid(menu, state.igny$uncraftWritten());

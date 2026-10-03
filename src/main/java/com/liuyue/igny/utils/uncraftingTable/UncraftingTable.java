@@ -71,6 +71,9 @@ public final class UncraftingTable {
     private static final Map<RecipeManager, Map<Item, List<?>>> CANDIDATE_CACHE =
             Collections.synchronizedMap(new WeakHashMap<>());
 
+    private static final Map<Object, int[]> REACHABLE_METRICS =
+            Collections.synchronizedMap(new WeakHashMap<>());
+
     public static List<?> candidates(Level level, ItemStack product) {
         if (product.isEmpty()) {
             return List.of();
@@ -146,37 +149,67 @@ public final class UncraftingTable {
     }
 
     private static boolean reachable(Level level, @Nullable Object holder, int productCount) {
+        int[] metrics = reachableMetrics(level, holder);
+
+        if (metrics == null) {
+            return false;
+        }
+
+        int applications = productCount / Math.max(1, metrics[0]);
+
+        return applications > 0 && applications <= metrics[1];
+    }
+
+    @Nullable
+    private static int[] reachableMetrics(Level level, @Nullable Object holder) {
+        if (holder == null) {
+            return null;
+        }
+
+        synchronized (REACHABLE_METRICS) {
+            if (REACHABLE_METRICS.containsKey(holder)) {
+                return REACHABLE_METRICS.get(holder);
+            }
+        }
+
+        int[] computed = computeReachableMetrics(level, holder);
+
+        synchronized (REACHABLE_METRICS) {
+            REACHABLE_METRICS.put(holder, computed);
+        }
+
+        return computed;
+    }
+
+    @Nullable
+    private static int[] computeReachableMetrics(Level level, Object holder) {
         CraftingRecipe recipe = recipeOf(holder);
 
         if (recipe == null) {
-            return false;
+            return null;
         }
 
         ItemStack output = outputOf(level, recipe);
 
         if (output.isEmpty()) {
-            return false;
-        }
-
-        int applications = productCount / Math.max(1, output.getCount());
-
-        if (applications <= 0) {
-            return false;
+            return null;
         }
 
         ItemStack[] base = decompose(recipe);
 
         if (base == null) {
-            return false;
+            return null;
         }
 
+        int bound = Integer.MAX_VALUE;
+
         for (ItemStack stack : base) {
-            if (!stack.isEmpty() && applications > stack.getMaxStackSize()) {
-                return false;
+            if (!stack.isEmpty()) {
+                bound = Math.min(bound, stack.getMaxStackSize());
             }
         }
 
-        return true;
+        return new int[]{output.getCount(), bound};
     }
 
     private static String keyOf(Level level, Object holder) {
@@ -338,8 +371,8 @@ public final class UncraftingTable {
     }
 
     public static int outputCount(Level level, @Nullable Object holder) {
-        CraftingRecipe recipe = recipeOf(holder);
-        return recipe == null ? 1 : Math.max(1, outputOf(level, recipe).getCount());
+        int[] metrics = reachableMetrics(level, holder);
+        return metrics == null ? 1 : Math.max(1, metrics[0]);
     }
 
     public static void writeGrid(AbstractContainerMenu menu, @Nullable ItemStack[] grid) {
