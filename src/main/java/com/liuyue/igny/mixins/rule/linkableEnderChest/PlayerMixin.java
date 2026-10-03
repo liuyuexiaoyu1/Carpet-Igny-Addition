@@ -13,18 +13,29 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
 public class PlayerMixin implements ViewingChest {
+    @Unique private static final long IGNY_LINKED_KEY_TTL_MS = 1000L;
+
     @Unique private String igny$linkedKey = null;
+    @Unique private long igny$linkedKeyStamp = 0L;
     @Unique private EnderChestBlockEntity igny$contextChest = null;
 
-    @Override public void igny$setLinkedKey(String key) { this.igny$linkedKey = key; }
+    @Override public void igny$setLinkedKey(String key) {
+        this.igny$linkedKey = key;
+        this.igny$linkedKeyStamp = System.currentTimeMillis();
+    }
     @Override public String igny$getLinkedKey() { return this.igny$linkedKey; }
     @Override public void igny$setContextChest(EnderChestBlockEntity chest) { this.igny$contextChest = chest; }
     @Override public EnderChestBlockEntity igny$getContextChest() { return this.igny$contextChest; }
 
     @Inject(method = "getEnderChestInventory", at = @At("HEAD"), cancellable = true)
     private void getEnderChestInventory(CallbackInfoReturnable<PlayerEnderChestContainer> cir) {
-        if (LinkedContainerManager.isRuleEnabled() && this.igny$linkedKey != null) {
-            cir.setReturnValue(LinkedContainerManager.get(this.igny$linkedKey));
+        String key = this.igny$linkedKey;
+        if (key == null || !LinkedContainerManager.isRuleEnabled()) {
+            return;
         }
+        if (System.currentTimeMillis() - this.igny$linkedKeyStamp > IGNY_LINKED_KEY_TTL_MS) {
+            return;
+        }
+        cir.setReturnValue(LinkedContainerManager.get(key));
     }
 }

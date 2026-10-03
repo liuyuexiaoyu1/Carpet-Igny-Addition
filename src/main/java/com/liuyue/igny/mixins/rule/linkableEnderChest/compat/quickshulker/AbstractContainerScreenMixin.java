@@ -57,9 +57,10 @@ public abstract class AbstractContainerScreenMixin {
         //#if < 1.20.5
         /*$$FriendlyByteBuf buf = PacketByteBufs.create();
         buf.writeUtf(customName);
+        buf.writeBoolean(true);
         ClientPlayNetworking.send(IGNYServer.SYNC_LINKED_ENDER_CHEST_PACKET_ID, buf);$$*/
         //#else
-        ClientPlayNetworking.send(new SyncLinkedEnderChestPayload(customName));
+        ClientPlayNetworking.send(new SyncLinkedEnderChestPayload(customName, true));
         //#endif
     }
 }

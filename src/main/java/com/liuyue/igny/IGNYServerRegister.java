@@ -4,6 +4,7 @@ import com.liuyue.igny.helper.inventory.LinkedContainer;
 import com.liuyue.igny.manager.LinkedContainerManager;
 import com.liuyue.igny.network.packet.config.LinkedChestContentPayload;
 import com.liuyue.igny.network.packet.config.SyncLinkedEnderChestPayload;
+import com.liuyue.igny.utils.interfaces.linkableEnderChest.ViewingChest;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -26,13 +27,19 @@ public class IGNYServerRegister {
                 (payload, context) -> { //#replace < 1.20.5 ? (server, player, impl, buf, sender) -> {
                     //#if < 1.20.5
                     //$$ String chestName = buf.readUtf();
+                    //$$ boolean open = buf.readBoolean();
                     //#else
                     String chestName = payload.key();
+                    boolean open = payload.open();
                     Player player = context.player();
                     //#endif
                     context.server().execute(() -> { //#replace < 1.20.5 ? server.execute(() -> {
                         if (chestName != null && !chestName.isEmpty()) {
-                            sendLinkedChestContent(player, chestName);
+                            if (open) {
+                                prepareLinkedChest(player, chestName);
+                            } else {
+                                sendLinkedChestContent(player, chestName);
+                            }
                         }
                     });
                 }
@@ -66,5 +73,23 @@ public class IGNYServerRegister {
         //#else
         ServerPlayNetworking.send(serverPlayer, new LinkedChestContentPayload(key, items));
         //#endif
+    }
+
+    private static void prepareLinkedChest(Player player, String key) {
+        if (!(player instanceof ServerPlayer)) {
+            return;
+        }
+        if (!(player instanceof ViewingChest viewing)) {
+            return;
+        }
+
+        viewing.igny$setContextChest(null);
+        if (!LinkedContainerManager.isRuleEnabled()) {
+            return;
+        }
+        if (LinkedContainerManager.peek(key) == null) {
+            return;
+        }
+        viewing.igny$setLinkedKey(key);
     }
 }

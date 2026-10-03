@@ -8,7 +8,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import org.jetbrains.annotations.NotNull;
 //#endif
 
-public record SyncLinkedEnderChestPayload(String key)
+public record SyncLinkedEnderChestPayload(String key, boolean open)
         implements CustomPacketPayload //?>= 1.20.6
 {
     //#if >= 1.20.6
@@ -21,12 +21,13 @@ public record SyncLinkedEnderChestPayload(String key)
             new StreamCodec<>() {
                 @Override
                 public @NotNull SyncLinkedEnderChestPayload decode(RegistryFriendlyByteBuf buf) {
-                    return new SyncLinkedEnderChestPayload(buf.readUtf());
+                    return new SyncLinkedEnderChestPayload(buf.readUtf(), buf.readBoolean());
                 }
 
                 @Override
                 public void encode(RegistryFriendlyByteBuf buf, SyncLinkedEnderChestPayload value) {
                     buf.writeUtf(value.key());
+                    buf.writeBoolean(value.open());
                 }
             };
     //#endif
