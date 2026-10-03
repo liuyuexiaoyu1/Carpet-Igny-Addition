@@ -1635,7 +1635,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 末影龙火球可被击飞 (deflectableDragonFireball) `🐛Beta` `MC>=1.20.6`
+## 末影龙火球可被击飞 (deflectableDragonFireball) `🐛Beta`
 
 末影龙火球可以像火焰弹一样被近战武器或箭击飞。
 

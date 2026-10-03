@@ -15,7 +15,7 @@ public class ServerPlayerGameModeMixin {
     @WrapOperation(method = "useItemOn", at = @At(value = "FIELD", target = "Lnet/minecraft/server/level/ServerPlayerGameMode;gameModeForPlayer:Lnet/minecraft/world/level/GameType;", opcode = Opcodes.GETFIELD, ordinal = 0))
     private GameType igny$spectatorOpenContainer(ServerPlayerGameMode instance, Operation<GameType> original) {
         GameType gameMode = original.call(instance);
-        if (IGNYSettings.SPECTATOR_CAN_OPERATE_CONTAINER.value() &&  gameMode == GameType.SPECTATOR) {
+        if (IGNYSettings.SPECTATOR_CAN_OPERATE_CONTAINER.value() && gameMode == GameType.SPECTATOR) {
             return GameType.SURVIVAL;
         }
         return gameMode;

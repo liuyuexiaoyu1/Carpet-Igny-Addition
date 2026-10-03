@@ -55,9 +55,10 @@ public class ServerGamePacketListenerImplMixin {
 
     @Unique
     private static boolean igny$treatAsRegularPlayer(ServerPlayer player, Operation<Boolean> original) {
-        if (IGNYSettings.SPECTATOR_CAN_OPERATE_CONTAINER.value() && player.isSpectator()) {
+        boolean result = original.call(player);
+        if (IGNYSettings.SPECTATOR_CAN_OPERATE_CONTAINER.value() && player.isSpectator() && !result) {
             return false;
         }
-        return original.call(player);
+        return result;
     }
 }

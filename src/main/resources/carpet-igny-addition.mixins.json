@@ -105,6 +105,7 @@
     "rule.copperGolemDropOnlyNormal.BlockMixin",
     "rule.copyBlockState.ServerGamePacketListenerImplMixin",
     "rule.creativeDestroyWaterloggedBlockNoWater.ServerPlayerGameModeMixin",
+    "rule.deflectableDragonFireball.DragonFireballMixin",
     "rule.deflectableDragonFireball.EntityTypeMixin",
     "rule.deflectableDragonFireball.TypedInstanceMixin",
     "rule.disableChickenEggLaying.ChickenMixin",
