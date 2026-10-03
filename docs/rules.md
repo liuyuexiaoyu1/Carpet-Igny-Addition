@@ -1652,3 +1652,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `PORTING`, `FEATURE`
+
+## 允许同一游戏刻接收多个移动数据包 (allowMultipleMovePacketsPerTick) `🐛Beta` `MC>=26.3`
+
+重新引入客户端可在同一游戏刻内发送多个玩家移动数据包而不被踢出服务器，回退了26.3-snapshot-10的更改。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `PORTING`, `FEATURE`

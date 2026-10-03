@@ -65,6 +65,7 @@
     "rule.allowInvalidBeaconEffect.BeaconMenuMixin",
     "rule.allowInvalidMotion.EntityMixin",
     "rule.allowInvalidMotion.Vec3Mixin",
+    "rule.allowMultipleMovePacketsPerTick.ServerGamePacketListenerImplMixin",
     "rule.alwaysAvailableGameMasterBlocks.PlayerMixin",
     "rule.betterEasyPlaceProtocol.BaseRailBlockMixin",
     "rule.betterEasyPlaceProtocol.BeaconBlockEntityAccessor",

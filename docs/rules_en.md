@@ -1633,7 +1633,7 @@ Zombies no longer call for reinforcements when hurt.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## deflectableDragonFireball 🐛Beta
+## deflectableDragonFireball `🐛Beta`
 
 Dragon fireballs can be deflected by melee attacks and arrows, just like fireballs.
 
@@ -1642,9 +1642,18 @@ Dragon fireballs can be deflected by melee attacks and arrows, just like firebal
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## minecartClientRidingStateSyncReintroduced `MC>=26.3`
+## minecartClientRidingStateSyncReintroduced `🐛Beta` `MC>=26.3`
 
 Reintroduces the client-side riding state sync for minecarts, so the client also actively calls the ride method and returns a success result when the riding conditions are met, reverting a change made in 26.3-snapshot-7.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `PORTING`, `FEATURE`
+
+## allowMultipleMovePacketsPerTick `🐛Beta` `MC>=26.3`
+
+Reintroduces the ability for clients to send multiple player move packets within the same tick without being kicked from the server, reverting the change made in 26.3-snapshot-10.
 
 - Type: `boolean`
 - Default Value: `false`

@@ -1277,4 +1277,12 @@ public class IGNYSettings {
                     .build()
     );$$*/
     //#endif
+
+    //#if >= 26.3
+    /*$$public static final RuleAccessor<Boolean> ALLOW_MULTIPLE_MOVE_PACKETS_PER_TICK = register(
+            RuleFactory.of("allowMultipleMovePacketsPerTick", false)
+                    .addCategories(PORTING, FEATURE)
+                    .build()
+    );$$*/
+    //#endif
 }
