@@ -69,7 +69,7 @@ public class EasyPlaceExtraProtocolHelper {
     }
 
     public static int waterloggedBit(BlockState state) {
-        if (!IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value()) {
+        if (IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value().equals("false")) {
             return 0;
         }
         if (!(state.getBlock() instanceof SimpleWaterloggedBlock)) {

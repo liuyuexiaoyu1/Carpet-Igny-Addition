@@ -1281,7 +1281,7 @@ When holding a magma block in your off-hand, placing the magma block places lava
 
 ## sequentialArrowHitEntityReintroduced `MC>=1.21.11`
 
-Reintroduces the behavior where an arrow calculates and collides with all entities along its path one by one, reverting the change from 25w41a.
+Reintroduces the behavior where an arrow detects and collides with entities along its path one by one, reverting the change from 25w41a.
 
 - Type: `boolean`
 - Default value: `false`
@@ -1397,7 +1397,7 @@ Water flow can push squids.
 
 ## netherPortalsAlwaysOnRoof
 
-Nether portals are always placed at Y = 128 or above when created.
+Nether portals are always placed at Y = 128 or above when created in the Nether.
 
 - Type: `boolean`
 - Default value: `false`
@@ -1424,7 +1424,9 @@ Removes random momentum from items dropped when a container is destroyed.
 
 ## easyPlaceCanPlaceWaterloggedBlock `🐛Beta Modify`
 
-Allows the easy place mode to sync the waterlogged state of waterloggable blocks placed from schematics when the betterEasyPlaceProtocol rule is enabled. When used, it consumes an ice item from the offhand.
+Allows the easy place mode to sync the waterlogged state of waterloggable blocks placed from schematics when the betterEasyPlaceProtocol rule is enabled. When used, it consumes an ice item from the offhand.  
+`offhand`: consumes an ice item from the offhand when used  
+`true`: does not consume any item when used
 
 - Type: `boolean`
 - Default value: `false`
@@ -1630,3 +1632,21 @@ Zombies no longer call for reinforcements when hurt.
 - Default Value: `false`
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
+
+## deflectableDragonBreath 🐛Beta `MC>=1.20.6`
+
+Dragon fireballs can be deflected by melee attacks and arrows, just like fireballs.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`
+
+## minecartClientRidingStateSyncReintroduced `MC>=26.3`
+
+Reintroduces the client-side riding state sync for minecarts, so the client also actively calls the ride method and returns a success result when the riding conditions are met, reverting a change made in 26.3-snapshot-7.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `PORTING`, `FEATURE`

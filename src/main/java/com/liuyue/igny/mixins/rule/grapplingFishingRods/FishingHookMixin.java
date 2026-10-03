@@ -80,7 +80,7 @@ public abstract class FishingHookMixin {
 
     @ModifyConstant(method = "shouldStopFishing", constant = @Constant(doubleValue = 1024.0))
     private double igny$extendRange(double original) {
-        return IGNYSettings.GRAPPLING_FISHING_RODS.value() ? original * 3 : original;
+        return IGNYSettings.GRAPPLING_FISHING_RODS.value() ? original * 5 : original;
     }
 
     @WrapOperation(method = "retrieve", at = @At(
@@ -116,9 +116,8 @@ public abstract class FishingHookMixin {
         if (pull.length() <= 0.01) {
             return;
         }
-        player.addDeltaMovement(pull.normalize().scale(3.0).add(0.0, 0.3, 0.0));
+        player.addDeltaMovement(pull.normalize().scale(3.0).add(0.0, 0.4, 0.0));
 
-        // 记一次免摔，落地时由 PlayerMixin 消费掉
         if (player instanceof GrappleFallGuard guard) {
             guard.igny$setGrappleFallGuard(true);
         }

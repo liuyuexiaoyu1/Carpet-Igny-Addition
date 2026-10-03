@@ -1134,9 +1134,10 @@ public class IGNYSettings {
                     .build()
     );
 
-    public static final RuleAccessor<Boolean> EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK = register(
-            RuleFactory.of("easyPlaceCanPlaceWaterloggedBlock", false)
+    public static final RuleAccessor<String> EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK = register(
+            RuleFactory.of("easyPlaceCanPlaceWaterloggedBlock", "false")
                     .addCategories(SURVIVAL, FEATURE)
+                    .addOptions("false", "offhand", "true")
                     .addValidator(PrerequisiteRuleValidator.createValidator(IGNYSettings.BETTER_EASY_PLACE_PROTOCOL, true))
                     .setClient()
                     .build()
@@ -1262,4 +1263,18 @@ public class IGNYSettings {
                     .addCategories(FEATURE)
                     .build()
     );
+
+    public static final RuleAccessor<Boolean> DEFLECTABLE_DRAGON_BREATH = register(
+            RuleFactory.of("deflectableDragonBreath", false)
+                    .addCategories(FEATURE)
+                    .build()
+    );
+
+    //#if >= 26.3
+    /*$$public static final RuleAccessor<Boolean> MINECART_CLIENT_SIDE_RIDING_STATE_SYNC_REINTRODUCED = register(
+            RuleFactory.of("minecartClientRidingStateSyncReintroduced", false)
+                    .addCategories(PORTING, FEATURE)
+                    .build()
+    );$$*/
+    //#endif
 }

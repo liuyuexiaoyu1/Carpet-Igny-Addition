@@ -172,12 +172,15 @@ public class BetterEasyPlaceProtocolHandler {
             }
             if ((additionValue & EasyPlaceExtraProtocolHelper.WATERLOGGED_BIT) != 0
                     && baseState.hasProperty(BlockStateProperties.WATERLOGGED)
-                    && IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value()
+                    && IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value().equals("false")
                     && context.getPlayer() != null
             ) {
                 ItemStack itemStack = context.getPlayer().getOffhandItem();
                 if (itemStack.is(Items.ICE)) {
-                    itemStack.shrink(1);
+                    if (IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value().equals("offhand") && !context.getPlayer().getAbilities().instabuild)
+                    {
+                        itemStack.shrink(1);
+                    }
                     baseState = baseState.setValue(BlockStateProperties.WATERLOGGED, true);
                 }
             }
@@ -216,12 +219,14 @@ public class BetterEasyPlaceProtocolHandler {
         }
         if ((additionValue & EasyPlaceExtraProtocolHelper.WATERLOGGED_BIT) != 0
                 && baseState.hasProperty(BlockStateProperties.WATERLOGGED)
-                && IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value()
+                && !IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value().equals("false")
                 && context.getPlayer() != null
         ) {
             ItemStack itemStack = context.getPlayer().getOffhandItem();
             if (itemStack.is(Items.ICE)) {
-                itemStack.shrink(1);
+                if (IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value().equals("offhand") && !context.getPlayer().getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
                 baseState = baseState.setValue(BlockStateProperties.WATERLOGGED, true);
             }
         }

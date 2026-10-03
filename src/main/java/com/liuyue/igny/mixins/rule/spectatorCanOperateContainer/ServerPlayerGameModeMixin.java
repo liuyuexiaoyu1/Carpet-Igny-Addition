@@ -3,7 +3,6 @@ package com.liuyue.igny.mixins.rule.spectatorCanOperateContainer;
 import com.liuyue.igny.IGNYSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.world.level.GameType;
 import org.objectweb.asm.Opcodes;

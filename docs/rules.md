@@ -1281,9 +1281,9 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 重新引入箭矢逐一碰撞实体 (sequentialArrowHitEntityReintroduced) `MC>=1.21.11`
+## 重新引入箭矢逐一检测并碰撞实体 (sequentialArrowHitEntityReintroduced) `MC>=1.21.11`
 
-重新引入箭矢会逐一计算并碰撞路径上的所有实体的行为，回退了25w41a的更改。
+重新引入箭矢会逐一检测并碰撞沿途实体的行为，回退了25w41a的更改。
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -1399,7 +1399,7 @@ true: 物品展示框内含物品时将会隐形。
 
 ## 下界传送门永远置于上层 (netherPortalsAlwaysOnRoof)
 
-创建下界传送门时，最低生成高度处于Y轴坐标128格处。
+当在下界生成下界传送门时，最低生成高度处于Y轴坐标128格处。
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -1426,7 +1426,9 @@ true: 物品展示框内含物品时将会隐形。
 
 ## 轻松放置可放置含水方块 (easyPlaceCanPlaceWaterloggedBlock) `🐛Beta 更改`
 
-当`betterEasyPlaceProtocol`规则开启时，轻松放置可以同步投影中含水方块的含水状态，使用时需要消耗副手上的冰物品。
+当`betterEasyPlaceProtocol`规则开启时，轻松放置可以同步投影中含水方块的含水状态，使用时需要消耗副手上的冰物品。  
+`offhand`: 使用时会消耗副手上的冰物品  
+`true`: 使用时不会消耗物品
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -1632,3 +1634,21 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
+
+## 龙息可被击飞 (deflectableDragonBreath) `🐛Beta` `MC>=1.20.6`
+
+发射出去的龙息可以像火焰弹一样被近战武器或箭击飞。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`
+
+## 重新引入矿车客户端骑乘状态同步 (minecartClientRidingStateSyncReintroduced) `🐛Beta` `MC>=26.3`
+
+重新引入矿车在客户端侧的骑乘状态同步逻辑，使客户端在满足骑乘条件时也主动调用骑乘方法并返回成功结果，回退了26.3-snapshot-7的更改。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `PORTING`, `FEATURE`
