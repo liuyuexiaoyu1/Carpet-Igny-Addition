@@ -1633,7 +1633,7 @@ Zombies no longer call for reinforcements when hurt.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## deflectableDragonBreath 🐛Beta `MC>=1.20.6`
+## deflectableDragonFireball 🐛Beta `MC>=1.20.6`
 
 Dragon fireballs can be deflected by melee attacks and arrows, just like fireballs.
 

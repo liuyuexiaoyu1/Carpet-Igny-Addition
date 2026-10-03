@@ -1635,9 +1635,9 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 龙息可被击飞 (deflectableDragonBreath) `🐛Beta` `MC>=1.20.6`
+## 末影龙火球可被击飞 (deflectableDragonFireball) `🐛Beta` `MC>=1.20.6`
 
-发射出去的龙息可以像火焰弹一样被近战武器或箭击飞。
+末影龙火球可以像火焰弹一样被近战武器或箭击飞。
 
 - 类型: `boolean`
 - 默认值: `false`

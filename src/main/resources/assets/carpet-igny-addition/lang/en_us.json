@@ -378,6 +378,6 @@
   "carpet.rule.grapplingFishingRods.desc": "The thrown bobber ignores gravity and drag, and reeling it in while hooked onto a block or entity pulls the player toward it",
   "carpet.rule.commandFly.desc": "Use the /fly command to toggle flight",
   "carpet.rule.noZombieReinforcement.desc": "Zombies no longer call for reinforcements when hurt",
-  "carpet.rule.deflectableDragonBreath.desc": "Dragon fireballs can be deflected by melee attacks and arrows, just like fireballs",
+  "carpet.rule.deflectableDragonFireball.desc": "Dragon fireballs can be deflected by melee attacks and arrows, just like fireballs",
   "carpet.rule.minecartClientRidingStateSyncReintroduced.desc": "Reintroduces the client-side riding state sync for minecarts, so the client also actively calls the ride method and returns a success result when the riding conditions are met, reverting a change made in 26.3-snapshot-7"
 }

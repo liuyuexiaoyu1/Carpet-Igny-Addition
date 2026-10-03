@@ -1264,8 +1264,8 @@ public class IGNYSettings {
                     .build()
     );
 
-    public static final RuleAccessor<Boolean> DEFLECTABLE_DRAGON_BREATH = register(
-            RuleFactory.of("deflectableDragonBreath", false)
+    public static final RuleAccessor<Boolean> DEFLECTABLE_DRAGON_FIREBALL = register(
+            RuleFactory.of("deflectableDragonFireball", false)
                     .addCategories(FEATURE)
                     .build()
     );

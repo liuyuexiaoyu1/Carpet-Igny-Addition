@@ -549,8 +549,8 @@
   "carpet.rule.grapplingFishingRods.desc": "抛出的浮漂不再受重力与阻尼影响，钩住方块或实体后收竿会把玩家朝目标方向拉动",
   "carpet.rule.noZombieReinforcement.name": "僵尸不再呼叫增援",
   "carpet.rule.noZombieReinforcement.desc": "僵尸受击时不再呼叫增援",
-  "carpet.rule.deflectableDragonBreath.name": "龙息可被击飞",
-  "carpet.rule.deflectableDragonBreath.desc": "发射出去的龙息可以像火焰弹一样被近战武器或箭击飞",
+  "carpet.rule.deflectableDragonFireball.name": "末影龙火球可被击飞",
+  "carpet.rule.deflectableDragonFireball.desc": "末影龙火球可以像火焰弹一样被近战武器或箭击飞",
   "carpet.rule.minecartClientRidingStateSyncReintroduced.name": "重新引入矿车客户端骑乘状态同步",
   "carpet.rule.minecartClientRidingStateSyncReintroduced.desc": "重新引入矿车在客户端侧的骑乘状态同步逻辑，使客户端在满足骑乘条件时也主动调用骑乘方法并返回成功结果，回退了26.3-snapshot-7的更改"
 }
