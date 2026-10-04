@@ -1305,4 +1305,10 @@ public class IGNYSettings {
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );
+
+    public static final RuleAccessor<Boolean> NO_LAVA_WATER_BLOCK_GENERATE = register(
+            RuleFactory.of("noLavaWaterBlockGenerate", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
 }

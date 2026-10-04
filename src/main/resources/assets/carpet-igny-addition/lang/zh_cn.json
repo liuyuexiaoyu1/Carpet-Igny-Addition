@@ -560,5 +560,7 @@
   "carpet.rule.vehicleNoSpearBreak.name": "载具免疫长矛破坏",
   "carpet.rule.vehicleNoSpearBreak.desc": "载具无法被长矛破坏",
   "carpet.rule.decoratedPotNoProjectileBreak.name": "饰纹陶罐免疫弹射物破坏",
-  "carpet.rule.decoratedPotNoProjectileBreak.desc": "饰纹陶罐无法被箭、三叉戟等弹射物击碎"
+  "carpet.rule.decoratedPotNoProjectileBreak.desc": "饰纹陶罐无法被箭、三叉戟等弹射物击碎",
+  "carpet.rule.noLavaWaterBlockGenerate.name": "熔岩与水不生成方块",
+  "carpet.rule.noLavaWaterBlockGenerate.desc": "岩浆与水接触时不会生成方块"
 }

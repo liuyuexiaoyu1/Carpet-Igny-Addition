@@ -26,7 +26,7 @@ public class FlowingFluidMixin {
     //#endif
     {
         if (IGNYSettings.INSTANT_SPREAD_LIQUID.value() && instance instanceof ServerLevel serverLevel) {
-                ((ServerLevelInvoker) serverLevel).invokeTickFluid(pos, fluid);
+            ((ServerLevelInvoker) serverLevel).invokeTickFluid(pos, fluid);
             return;
         }
         original.call(instance, pos, fluid, i);

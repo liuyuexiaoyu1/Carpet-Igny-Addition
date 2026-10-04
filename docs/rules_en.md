@@ -1686,3 +1686,12 @@ Decorated Pots cannot be broken by arrows, tridents and other projectiles.
 - Default Value: `false`
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## noLavaWaterBlockGenerate `🐛Beta`
+
+Lava and water will not generate blocks when they meet.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

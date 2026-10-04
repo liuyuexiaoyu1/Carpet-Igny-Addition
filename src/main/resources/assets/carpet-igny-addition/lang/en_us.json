@@ -384,5 +384,6 @@
   "carpet.rule.noClipNoBlockPlacement.desc": "While creative no-clip, survival flight no-clip or happy ghast no-clip is active, blocks cannot be placed when your line of sight is inside a block",
   "carpet.rule.blockInsideNoPlacement.desc": "Cannot place blocks when your line of sight is inside a block",
   "carpet.rule.vehicleNoSpearBreak.desc": "Vehicles cannot be broken by spear weapons",
-  "carpet.rule.decoratedPotNoProjectileBreak.desc": "Decorated Pots cannot be broken by arrows, tridents and other projectiles"
+  "carpet.rule.decoratedPotNoProjectileBreak.desc": "Decorated Pots cannot be broken by arrows, tridents and other projectiles",
+  "carpet.rule.noLavaWaterBlockGenerate.desc": "Lava and water will not generate blocks when they meet"
 }
