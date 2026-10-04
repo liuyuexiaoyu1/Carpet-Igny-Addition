@@ -1285,4 +1285,10 @@ public class IGNYSettings {
                     .build()
     );$$*/
     //#endif
+
+    public static final RuleAccessor<Boolean> BLOCK_INSIDE_NO_PLACEMENT = register(
+            RuleFactory.of("blockInsideNoPlacement", false)
+                    .addCategories(FEATURE)
+                    .build()
+    );
 }

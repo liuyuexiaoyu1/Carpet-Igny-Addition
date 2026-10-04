@@ -17,6 +17,7 @@ public class IGNYServerMod implements ModInitializer {
     private static String version;
     public static final List<String> CARPET_ADDITION_MOD_IDS;
     public static final boolean LITHIUM = FabricLoader.getInstance().isModLoaded("lithium");
+    public static final boolean TIS = FabricLoader.getInstance().isModLoaded("carpet-tis-addition");
 
     static {
         ArrayList<String> mods = new ArrayList<>();

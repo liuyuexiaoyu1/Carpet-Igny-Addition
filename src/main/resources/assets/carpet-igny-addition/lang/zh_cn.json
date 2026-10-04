@@ -554,5 +554,7 @@
   "carpet.rule.minecartClientRidingStateSyncReintroduced.name": "重新引入矿车客户端骑乘状态同步",
   "carpet.rule.minecartClientRidingStateSyncReintroduced.desc": "重新引入矿车在客户端侧的骑乘状态同步逻辑，使客户端在满足骑乘条件时也主动调用骑乘方法并返回成功结果，回退了26.3-snapshot-7的更改",
   "carpet.rule.allowMultipleMovePacketsPerTick.name": "允许同一游戏刻接收多个移动数据包",
-  "carpet.rule.allowMultipleMovePacketsPerTick.desc": "重新引入客户端可在同一游戏刻内发送多个玩家移动数据包而不被踢出服务器，回退了26.3-snapshot-10的更改"
+  "carpet.rule.allowMultipleMovePacketsPerTick.desc": "重新引入客户端可在同一游戏刻内发送多个玩家移动数据包而不被踢出服务器，回退了26.3-snapshot-10的更改",
+  "carpet.rule.blockInsideNoPlacement.name": "方块内部禁止放置",
+  "carpet.rule.blockInsideNoPlacement.desc": "视线位于方块内部时无法放置方块"
 }

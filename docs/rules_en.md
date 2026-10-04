@@ -1659,3 +1659,12 @@ Reintroduces the ability for clients to send multiple player move packets within
 - Default Value: `false`
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `PORTING`, `FEATURE`
+
+## blockInsideNoPlacement `🐛Beta`
+
+Cannot place blocks when your line of sight is inside a block.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `FEATURE`

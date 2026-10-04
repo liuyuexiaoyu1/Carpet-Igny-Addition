@@ -1,8 +1,14 @@
 package com.liuyue.igny.helper;
 
+import com.liuyue.igny.IGNYServerMod;
 import com.liuyue.igny.IGNYSettings;
+import com.liuyue.igny.mixins.rule.survivalFlyNoClip.compat.tis.CreativeNoClipHelperInvoker;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 //#if >= 1.21.11
 //$$ import net.minecraft.world.entity.animal.happyghast.HappyGhast;
 //#elseif >= 1.21.6
@@ -17,6 +23,31 @@ public final class NoClipHelper {
                 && !player.isCreative()
                 && player.getAbilities().mayfly
                 && player.getAbilities().flying;
+    }
+    public static boolean isNoClipping(Player player) {
+        if (isActiveFlyingPlayer(player)) {
+            return true;
+        }
+        //#if >= 1.21.6
+        /*$$if (isActiveRider(player)) {
+            return true;
+        }$$*/
+        //#endif
+        return IGNYServerMod.TIS && CreativeNoClipHelperInvoker.igny$isNoClipPlayer(player);
+    }
+
+    public static boolean isEyeInsideBlock(Player player, Level level) {
+        Vec3 eye = player.getEyePosition();
+        BlockPos pos = BlockPos.containing(eye);
+        BlockState state = level.getBlockState(pos);
+
+        if (state.isAir()) {
+            return false;
+        }
+
+        var shape = state.getCollisionShape(level, pos);
+
+        return !shape.isEmpty() && shape.bounds().move(pos).contains(eye);
     }
 
     //#if >= 1.21.6

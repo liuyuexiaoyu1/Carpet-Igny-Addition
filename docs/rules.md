@@ -1661,3 +1661,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `PORTING`, `FEATURE`
+
+## 方块内部禁止放置 (blockInsideNoPlacement) `🐛Beta`
+
+视线位于方块内部时无法放置方块。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `FEATURE`
