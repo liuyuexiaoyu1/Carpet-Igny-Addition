@@ -1668,3 +1668,12 @@ Cannot place blocks when your line of sight is inside a block.
 - Default Value: `false`
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
+
+## vehicleNoSpearBreak `🐛Beta` `MC>=1.21.11`
+
+Vehicles cannot be broken by spear weapons.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

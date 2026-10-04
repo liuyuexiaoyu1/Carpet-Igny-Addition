@@ -1670,3 +1670,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
+
+## 载具免疫长矛破坏 (vehicleNoSpearBreak) `🐛Beta` `MC>=1.21.11`
+
+载具无法被长矛破坏。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

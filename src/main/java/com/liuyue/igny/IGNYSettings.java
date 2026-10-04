@@ -1291,4 +1291,12 @@ public class IGNYSettings {
                     .addCategories(FEATURE)
                     .build()
     );
+
+    //#if >= 1.21.11
+    /*$$public static final RuleAccessor<Boolean> VEHICLE_NO_SPEAR_BREAK = register(
+            RuleFactory.of("vehicleNoSpearBreak", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );$$*/
+    //#endif
 }
