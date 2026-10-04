@@ -1,8 +1,10 @@
 package com.liuyue.igny.rule.listeners;
 
+import carpet.CarpetExtension;
 import carpet.CarpetServer;
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.RuleHelper;
+import carpet.api.settings.SettingsManager;
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.mixins.carpet.features.enableAllRules.SettingsManagerInvoker;
 import com.liuyue.igny.rule.RuleListener;
@@ -13,13 +15,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class ChangeAllRulesListener implements RuleListener<Boolean> {
     private final Map<String, String> previousValues = new HashMap<>();
 
     @Override
     public void onChanged(@Nullable CommandSourceStack source, Boolean value) {
-        if (Boolean.TRUE.equals(value)) {
+        if (value) {
             enableAll(source);
         } else {
             restoreAll(source);
@@ -29,7 +32,7 @@ public class ChangeAllRulesListener implements RuleListener<Boolean> {
     private void enableAll(@Nullable CommandSourceStack source) {
         previousValues.clear();
 
-        CarpetServer.forEachManager(manager -> {
+        forEachManager(manager -> {
             for (CarpetRule<?> rule : manager.getCarpetRules()) {
                 if (IGNYSettings.ALL_RULES_ENABLED.name().equals(rule.name())) continue;
 
@@ -44,7 +47,7 @@ public class ChangeAllRulesListener implements RuleListener<Boolean> {
     }
 
     private void restoreAll(@Nullable CommandSourceStack source) {
-        CarpetServer.forEachManager(manager -> {
+        forEachManager(manager -> {
             for (CarpetRule<?> rule : manager.getCarpetRules()) {
                 String key = manager.identifier() + ":" + rule.name();
                 String oldValue = previousValues.get(key);
@@ -54,6 +57,18 @@ public class ChangeAllRulesListener implements RuleListener<Boolean> {
             }
         });
         previousValues.clear();
+    }
+
+    private void forEachManager(Consumer<SettingsManager> consumer) {
+        if (CarpetServer.settingsManager != null) {
+            consumer.accept(CarpetServer.settingsManager);
+        }
+        for (CarpetExtension ext : CarpetServer.extensions) {
+            SettingsManager sm = ext.extensionSettingsManager();
+            if (sm != null) {
+                consumer.accept(sm);
+            }
+        }
     }
 
     private String pickValue(CarpetRule<?> rule) {
