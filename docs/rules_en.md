@@ -1695,3 +1695,12 @@ Lava and water will not generate blocks when they meet.
 - Default Value: `false`
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## enableAllRules `🐛Beta`
+
+Set all rules to enabled: boolean rules are set to true, string and enum rules prefer 'on' or 'true' and otherwise pick a random non-default value.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `ENTERTAINMENT`, `FEATURE`

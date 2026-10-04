@@ -15,6 +15,7 @@
     "carpet.accessors.EntityPlayerActionPackAccessor",
     "carpet.commands.EntityPlayerActionPackMixin",
     "carpet.commands.PlayerCommandMixin",
+    "carpet.features.enableAllRules.SettingsManagerInvoker",
     "carpet.features.fakePlayerNoMiningCoolDown.EntityPlayerActionPackMixin",
     "carpet.features.showRuleSource.SettingsManagerMixin",
     "carpet.features.twoChangedRuleValueSetDefault.SettingsManagerMixin",

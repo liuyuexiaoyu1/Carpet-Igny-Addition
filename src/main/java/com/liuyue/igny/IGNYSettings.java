@@ -5,6 +5,7 @@ import carpet.api.settings.CarpetRule;
 import carpet.api.settings.SettingsManager;
 import com.liuyue.igny.manager.LinkedContainerManager.LinkedContainerSetting;
 import com.liuyue.igny.rule.*;
+import com.liuyue.igny.rule.listeners.ChangeAllRulesListener;
 import com.liuyue.igny.rule.validators.EntityValidator;
 import com.liuyue.igny.rule.validators.ModValidator;
 import com.liuyue.igny.rule.validators.PrerequisiteRuleValidator;
@@ -1309,6 +1310,13 @@ public class IGNYSettings {
     public static final RuleAccessor<Boolean> NO_LAVA_WATER_BLOCK_GENERATE = register(
             RuleFactory.of("noLavaWaterBlockGenerate", false)
                     .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> ALL_RULES_ENABLED = register(
+            RuleFactory.of("enableAllRules", false)
+                    .addCategories(ENTERTAINMENT, FEATURE)
+                    .addListener(new ChangeAllRulesListener())
                     .build()
     );
 }

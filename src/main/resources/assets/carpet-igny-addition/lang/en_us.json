@@ -385,5 +385,6 @@
   "carpet.rule.blockInsideNoPlacement.desc": "Cannot place blocks when your line of sight is inside a block",
   "carpet.rule.vehicleNoSpearBreak.desc": "Vehicles cannot be broken by spear weapons",
   "carpet.rule.decoratedPotNoProjectileBreak.desc": "Decorated Pots cannot be broken by arrows, tridents and other projectiles",
-  "carpet.rule.noLavaWaterBlockGenerate.desc": "Lava and water will not generate blocks when they meet"
+  "carpet.rule.noLavaWaterBlockGenerate.desc": "Lava and water will not generate blocks when they meet",
+  "carpet.rule.enableAllRules.desc": "Set all rules to enabled: boolean rules are set to true, string and enum rules prefer 'on' or 'true' and otherwise pick a random non-default value"
 }
