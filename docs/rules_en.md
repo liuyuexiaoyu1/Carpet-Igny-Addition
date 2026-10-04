@@ -1677,3 +1677,12 @@ Vehicles cannot be broken by spear weapons.
 - Default Value: `false`
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## decoratedPotNoProjectileBreak `🐛Beta`
+
+Decorated Pots cannot be broken by arrows, tridents and other projectiles.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

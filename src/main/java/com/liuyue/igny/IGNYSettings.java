@@ -1299,4 +1299,10 @@ public class IGNYSettings {
                     .build()
     );$$*/
     //#endif
+
+    public static final RuleAccessor<Boolean> DECORATED_POT_PREJECTILE_BREAK = register(
+            RuleFactory.of("decoratedPotNoProjectileBreak", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
 }

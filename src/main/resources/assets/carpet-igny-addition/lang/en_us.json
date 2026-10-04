@@ -383,5 +383,6 @@
   "carpet.rule.allowMultipleMovePacketsPerTick.desc": "Reintroduces the ability for clients to send multiple player move packets within the same tick without being kicked from the server, reverting the change made in 26.3-snapshot-10",
   "carpet.rule.noClipNoBlockPlacement.desc": "While creative no-clip, survival flight no-clip or happy ghast no-clip is active, blocks cannot be placed when your line of sight is inside a block",
   "carpet.rule.blockInsideNoPlacement.desc": "Cannot place blocks when your line of sight is inside a block",
-  "carpet.rule.vehicleNoSpearBreak.desc": "Vehicles cannot be broken by spear weapons"
+  "carpet.rule.vehicleNoSpearBreak.desc": "Vehicles cannot be broken by spear weapons",
+  "carpet.rule.decoratedPotNoProjectileBreak.desc": "Decorated Pots cannot be broken by arrows, tridents and other projectiles"
 }

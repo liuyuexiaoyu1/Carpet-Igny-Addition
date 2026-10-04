@@ -1679,3 +1679,12 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 饰纹陶罐免疫弹射物破坏 (decoratedPotNoProjectileBreak) `🐛Beta`
+
+饰纹陶罐无法被箭、三叉戟等弹射物击碎。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
