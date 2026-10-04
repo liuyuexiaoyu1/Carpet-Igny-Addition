@@ -43,24 +43,11 @@ public class FlintAndSteelItemMixin {
         }
         Direction face = context.getClickedFace();
         BlockPos targetPos = pos.relative(face);
-        if (!level.isEmptyBlock(targetPos) && !level.getBlockState(targetPos).is(Blocks.FIRE)) {
-            return;
-        }
-        if (BaseFireBlockInvoker.isPortal(level,targetPos,face)) {
-            return;
-        }
         BlockState targetState = level.getBlockState(targetPos);
-        if (!targetState.is(Blocks.FIRE) && !targetState.is(Blocks.AIR)) {
+        if (!targetState.is(Blocks.FIRE) && !targetState.is(Blocks.AIR) && !targetState.is(Blocks.NETHER_PORTAL)) {
             return;
         }
         Direction.Axis portalAxis = getPortalAxisFromFace(face, player, clickedState);
-        if (clickedState.is(Blocks.NETHER_PORTAL)) {
-            Direction.Axis existingAxis = clickedState.getValue(NetherPortalBlock.AXIS);
-            if ((existingAxis == Direction.Axis.Z && portalAxis == Direction.Axis.X) ||
-                    (existingAxis == Direction.Axis.X && portalAxis == Direction.Axis.Z)) {
-                return;
-            }
-        }
 
         BlockState portalState = Blocks.NETHER_PORTAL.defaultBlockState()
                 .setValue(NetherPortalBlock.AXIS, portalAxis);

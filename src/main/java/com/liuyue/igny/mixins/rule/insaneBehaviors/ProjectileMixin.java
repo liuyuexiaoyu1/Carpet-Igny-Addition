@@ -15,6 +15,7 @@ import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.utils.insaneBehaviors.InsaneBehaviors;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,9 +33,10 @@ public class ProjectileMixin {
             value = "INVOKE",
             target = "Lnet/minecraft/world/phys/Vec3;add(DDD)Lnet/minecraft/world/phys/Vec3;"
     ))
-    private Vec3 add(Vec3 vec3, double d, double e, double f, Operation<Vec3> original, double deltaMovementX, double deltaMovementY, double deltaMovementZ, float deltaMovementMultiplier, float divergence) {
+    private Vec3 igny$weirdVelocity(Vec3 instance, double dx, double dy, double dz, Operation<Vec3> original,
+                                    @Local(argsOnly = true, ordinal = 1) float divergence) {
         if (IGNYSettings.INSANE_BEHAVIORS.value().equals("off")) {
-            return original.call(vec3, d, e, f);
+            return original.call(instance, dx, dy, dz);
         }
 
         ArrayList<Float> unitList = InsaneBehaviors.nextEvenlyDistributedPoint(3);
@@ -56,7 +58,7 @@ public class ProjectileMixin {
             );
             default -> throw new IllegalStateException("Unexpected insaneBehaviors value: " + IGNYSettings.INSANE_BEHAVIORS.value());
         };
-        return original.call(vec3, vec3.x + velocity.x, vec3.y + velocity.y, vec3.z + velocity.z);
+        return original.call(instance, velocity.x, velocity.y, velocity.z);
     }
 
 }

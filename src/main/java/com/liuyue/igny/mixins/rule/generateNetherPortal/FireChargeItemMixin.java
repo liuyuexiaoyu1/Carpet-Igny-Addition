@@ -48,20 +48,10 @@ public abstract class FireChargeItemMixin {
         Direction face = context.getClickedFace();
         BlockPos targetPos = context.getClickedPos().relative(face);
         BlockState targetState = level.getBlockState(targetPos);
-        if (!targetState.is(Blocks.FIRE) && !targetState.is(Blocks.AIR)) {
-            return result;
-        }
-        if (BaseFireBlockInvoker.isPortal(level, targetPos, face)) {
+        if (!targetState.is(Blocks.FIRE) && !targetState.is(Blocks.AIR) && !targetState.is(Blocks.NETHER_PORTAL)) {
             return result;
         }
         Direction.Axis portalAxis = getPortalAxisFromFace(face, player, clickedState);
-        if (clickedState.is(Blocks.NETHER_PORTAL)) {
-            Direction.Axis existingAxis = clickedState.getValue(NetherPortalBlock.AXIS);
-            if ((existingAxis == Direction.Axis.Z && portalAxis == Direction.Axis.X) ||
-                    (existingAxis == Direction.Axis.X && portalAxis == Direction.Axis.Z)) {
-                return result;
-            }
-        }
 
         BlockState portalState = Blocks.NETHER_PORTAL.defaultBlockState()
                 .setValue(NetherPortalBlock.AXIS, portalAxis);
