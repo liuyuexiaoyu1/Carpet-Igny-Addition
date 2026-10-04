@@ -1424,7 +1424,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `CREATIVE`, `FEATURE`
 
-## 轻松放置可放置含水方块 (easyPlaceCanPlaceWaterloggedBlock) `🐛Beta 更改`
+## 轻松放置可放置含水方块 (easyPlaceCanPlaceWaterloggedBlock)
 
 当`betterEasyPlaceProtocol`规则开启时，轻松放置可以同步投影中含水方块的含水状态，使用时需要消耗副手上的冰物品。  
 `offhand`: 使用时会消耗副手上的冰物品  
@@ -1635,7 +1635,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 末影龙火球可被击飞 (deflectableDragonFireball) `🐛Beta`
+## 末影龙火球可被击飞 (deflectableDragonFireball)
 
 末影龙火球可以像火焰弹一样被近战武器或箭击飞。
 
@@ -1644,7 +1644,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 重新引入矿车客户端骑乘状态同步 (minecartClientRidingStateSyncReintroduced) `🐛Beta` `MC>=26.3`
+## 重新引入矿车客户端骑乘状态同步 (minecartClientRidingStateSyncReintroduced) `MC>=26.3`
 
 重新引入矿车在客户端侧的骑乘状态同步逻辑，使客户端在满足骑乘条件时也主动调用骑乘方法并返回成功结果，回退了26.3-snapshot-7的更改。
 
@@ -1653,7 +1653,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `PORTING`, `FEATURE`
 
-## 允许同一游戏刻接收多个移动数据包 (allowMultipleMovePacketsPerTick) `🐛Beta` `MC>=26.3`
+## 允许同一游戏刻接收多个移动数据包 (allowMultipleMovePacketsPerTick) `MC>=26.3`
 
 重新引入客户端可在同一游戏刻内发送多个玩家移动数据包而不被踢出服务器，回退了26.3-snapshot-10的更改。
 
@@ -1662,7 +1662,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `PORTING`, `FEATURE`
 
-## 方块内部禁止放置 (blockInsideNoPlacement) `🐛Beta`
+## 方块内部禁止放置 (blockInsideNoPlacement)
 
 视线位于方块内部时无法放置方块。
 
@@ -1671,7 +1671,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `FEATURE`
 
-## 载具免疫长矛破坏 (vehicleNoSpearBreak) `🐛Beta` `MC>=1.21.11`
+## 载具免疫长矛破坏 (vehicleNoSpearBreak) `MC>=1.21.11`
 
 载具无法被长矛破坏。
 
@@ -1680,7 +1680,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 饰纹陶罐免疫弹射物破坏 (decoratedPotNoProjectileBreak) `🐛Beta`
+## 饰纹陶罐免疫弹射物破坏 (decoratedPotNoProjectileBreak)
 
 饰纹陶罐无法被箭、三叉戟等弹射物击碎。
 
@@ -1689,7 +1689,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 熔岩与水不生成方块 (noLavaWaterBlockGenerate) `🐛Beta`
+## 熔岩与水不生成方块 (noLavaWaterBlockGenerate)
 
 岩浆与水接触时不会生成方块。
 
@@ -1698,7 +1698,7 @@ true: 物品展示框内含物品时将会隐形。
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## 开启所有规则 (enableAllRules) `🐛Beta`
+## 开启所有规则 (enableAllRules)
 
 将所有规则设为开启，布尔规则设为true，字符串和枚举规则优先选择on或true，否则随机选择非默认值。
 

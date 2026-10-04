@@ -1422,7 +1422,7 @@ Removes random momentum from items dropped when a container is destroyed.
 - Suggested options: `false`, `true`
 - Categories: `IGNY`, `CREATIVE`, `FEATURE`
 
-## easyPlaceCanPlaceWaterloggedBlock `🐛Beta Modify`
+## easyPlaceCanPlaceWaterloggedBlock
 
 Allows the easy place mode to sync the waterlogged state of waterloggable blocks placed from schematics when the betterEasyPlaceProtocol rule is enabled. When used, it consumes an ice item from the offhand.  
 `offhand`: consumes an ice item from the offhand when used  
@@ -1633,7 +1633,7 @@ Zombies no longer call for reinforcements when hurt.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## deflectableDragonFireball `🐛Beta`
+## deflectableDragonFireball
 
 Dragon fireballs can be deflected by melee attacks and arrows, just like fireballs.
 
@@ -1642,7 +1642,7 @@ Dragon fireballs can be deflected by melee attacks and arrows, just like firebal
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## minecartClientRidingStateSyncReintroduced `🐛Beta` `MC>=26.3`
+## minecartClientRidingStateSyncReintroduced `MC>=26.3`
 
 Reintroduces the client-side riding state sync for minecarts, so the client also actively calls the ride method and returns a success result when the riding conditions are met, reverting a change made in 26.3-snapshot-7.
 
@@ -1651,7 +1651,7 @@ Reintroduces the client-side riding state sync for minecarts, so the client also
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `PORTING`, `FEATURE`
 
-## allowMultipleMovePacketsPerTick `🐛Beta` `MC>=26.3`
+## allowMultipleMovePacketsPerTick `MC>=26.3`
 
 Reintroduces the ability for clients to send multiple player move packets within the same tick without being kicked from the server, reverting the change made in 26.3-snapshot-10.
 
@@ -1660,7 +1660,7 @@ Reintroduces the ability for clients to send multiple player move packets within
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `PORTING`, `FEATURE`
 
-## blockInsideNoPlacement `🐛Beta`
+## blockInsideNoPlacement
 
 Cannot place blocks when your line of sight is inside a block.
 
@@ -1669,7 +1669,7 @@ Cannot place blocks when your line of sight is inside a block.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `FEATURE`
 
-## vehicleNoSpearBreak `🐛Beta` `MC>=1.21.11`
+## vehicleNoSpearBreak `MC>=1.21.11`
 
 Vehicles cannot be broken by spear weapons.
 
@@ -1678,7 +1678,7 @@ Vehicles cannot be broken by spear weapons.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## decoratedPotNoProjectileBreak `🐛Beta`
+## decoratedPotNoProjectileBreak
 
 Decorated Pots cannot be broken by arrows, tridents and other projectiles.
 
@@ -1687,7 +1687,7 @@ Decorated Pots cannot be broken by arrows, tridents and other projectiles.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## noLavaWaterBlockGenerate `🐛Beta`
+## noLavaWaterBlockGenerate
 
 Lava and water will not generate blocks when they meet.
 
@@ -1696,7 +1696,7 @@ Lava and water will not generate blocks when they meet.
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
 
-## enableAllRules `🐛Beta`
+## enableAllRules
 
 Set all rules to enabled: boolean rules are set to true, string and enum rules prefer 'on' or 'true' and otherwise pick a random non-default value.
 
