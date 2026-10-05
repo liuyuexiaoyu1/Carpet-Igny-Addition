@@ -5,10 +5,8 @@ import carpet.api.settings.CarpetRule;
 import carpet.api.settings.SettingsManager;
 import com.liuyue.igny.manager.LinkedContainerManager.LinkedContainerSetting;
 import com.liuyue.igny.rule.*;
-import com.liuyue.igny.rule.listeners.ChangeAllRulesListener;
-import com.liuyue.igny.rule.validators.EntityValidator;
-import com.liuyue.igny.rule.validators.ModValidator;
-import com.liuyue.igny.rule.validators.PrerequisiteRuleValidator;
+import com.liuyue.igny.rule.listeners.*;
+import com.liuyue.igny.rule.validators.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -1315,6 +1313,7 @@ public class IGNYSettings {
 
     public static final RuleAccessor<Boolean> ALL_RULES_ENABLED = register(
             RuleFactory.of("enableAllRules", false)
+                    .addValidator(ConfirmRuleValidator.create("enableAllRules"))
                     .addCategories(ENTERTAINMENT, FEATURE)
                     .addListener(new ChangeAllRulesListener())
                     .build()

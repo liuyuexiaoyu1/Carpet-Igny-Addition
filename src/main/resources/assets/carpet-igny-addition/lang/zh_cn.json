@@ -123,6 +123,7 @@
   "igny.mod_not_found": "模组未安装",
   "igny.prerequisite_rule": "规则未启用",
   "igny.syncmatica_not_permission": "权限不足",
+  "igny.rule.confirm.pending": "请在60秒内以相同的值再次执行同一条命令，以应用 %s = %s",
 
   "carpet.category.porting": "移植",
   "carpet.category.entertainment": "娱乐",

@@ -192,7 +192,7 @@ public class BuiltRule<T> implements CarpetRule<T> {
 
     private void set(@Nullable CommandSourceStack source, T value, String userInput) throws InvalidRuleValueException {
         for (ValueValidator<T> valueValidator : this.valueValidators) {
-            if (!valueValidator.validate(value)) {
+            if (!valueValidator.validate(source, value)) {
                 if (source != null && source.getEntity() instanceof net.minecraft.server.level.ServerPlayer) {
                     valueValidator.notifyFailure(source, this, userInput);
                     throw valueValidator.shouldSendDetail() ? new InvalidRuleValueException("Invalid value for rule " + this.name + ": " + userInput) : new InvalidRuleValueException();

@@ -124,6 +124,7 @@
   "igny.mod_not_found": "is not installed",
   "igny.prerequisite_rule": "rule needs to be enabled",
   "igny.syncmatica_not_permission": "No Permission",
+  "igny.rule.confirm.pending": "Run the same command with the same value again within 60 seconds to apply %s = %s",
 
   "carpet.category.porting": "porting",
   "carpet.category.entertainment": "entertainment",

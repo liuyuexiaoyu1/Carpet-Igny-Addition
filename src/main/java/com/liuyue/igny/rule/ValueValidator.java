@@ -23,7 +23,6 @@
 package com.liuyue.igny.rule;
 
 import carpet.api.settings.CarpetRule;
-import carpet.utils.Messenger;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 
@@ -32,6 +31,10 @@ import java.util.function.Supplier;
 
 public interface ValueValidator<T> {
     boolean validate(T newValue);
+
+    default boolean validate(CommandSourceStack source, T newValue) {
+        return validate(newValue);
+    }
 
     Component errorMessage();
 
