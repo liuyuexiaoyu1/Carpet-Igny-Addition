@@ -172,7 +172,7 @@ public class BetterEasyPlaceProtocolHandler {
             }
             if ((additionValue & EasyPlaceExtraProtocolHelper.WATERLOGGED_BIT) != 0
                     && baseState.hasProperty(BlockStateProperties.WATERLOGGED)
-                    && IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value().equals("false")
+                    && !IGNYSettings.EASY_PLACE_CAN_PLACE_WATERLOGGED_BLOCK.value().equals("false")
                     && context.getPlayer() != null
             ) {
                 ItemStack itemStack = context.getPlayer().getOffhandItem();
