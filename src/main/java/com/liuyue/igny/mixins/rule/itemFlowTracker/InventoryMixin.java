@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.itemFlowTracker;
 
-import com.liuyue.igny.utils.itemFlowTracker.core.Tracking;
+import  com.liuyue.igny.helper.itemFlowTracker.core.Tracking;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,8 +1,8 @@
 package com.liuyue.igny.mixins.rule.itemFlowTracker;
 
-import com.liuyue.igny.utils.itemFlowTracker.core.TrackMark;
-import com.liuyue.igny.utils.itemFlowTracker.core.TrackedStack;
-import com.liuyue.igny.utils.itemFlowTracker.core.Tracking;
+import  com.liuyue.igny.helper.itemFlowTracker.core.TrackMark;
+import  com.liuyue.igny.helper.itemFlowTracker.core.TrackedStack;
+import  com.liuyue.igny.helper.itemFlowTracker.core.Tracking;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;

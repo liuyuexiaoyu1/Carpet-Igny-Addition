@@ -564,5 +564,9 @@
   "carpet.rule.noLavaWaterBlockGenerate.name": "熔岩与水不生成方块",
   "carpet.rule.noLavaWaterBlockGenerate.desc": "岩浆与水接触时不会生成方块",
   "carpet.rule.enableAllRules.name": "开启所有规则",
-  "carpet.rule.enableAllRules.desc": "将所有规则设为开启，布尔规则设为true，字符串和枚举规则优先选择on或true，否则随机选择非默认值"
+  "carpet.rule.enableAllRules.desc": "将所有规则设为开启，布尔规则设为true，字符串和枚举规则优先选择on或true，否则随机选择非默认值",
+  "carpet.rule.tridentMultipleDamageReintroduced.name": "重新引入三叉戟多次伤害实体",
+  "carpet.rule.tridentMultipleDamageReintroduced.desc": "重新引入同一把投掷的三叉戟可重复对多个实体造成伤害的行为，回退了25w44a的更改",
+  "carpet.rule.windChargeNoBlockStateChange.name": "风弹不改变方块状态",
+  "carpet.rule.windChargeNoBlockStateChange.desc": "风弹和风爆附魔不再改变方块状态，也不会因此打落展示框之类的悬挂实体"
 }

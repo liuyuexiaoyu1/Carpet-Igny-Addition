@@ -1319,4 +1319,16 @@ public class IGNYSettings {
                     .addListener(new ChangeAllRulesListener())
                     .build()
     );
+
+    public static final RuleAccessor<Boolean> TRIDENT_MULTIPLE_DAMAGE_REINTRODUCED = register(
+            RuleFactory.of("tridentMultipleDamageReintroduced", false)
+                    .addCategories(PORTING, FEATURE)
+                    .build()
+    );
+
+    public static final RuleAccessor<Boolean> WIND_CHARGE_NO_BLOCK_STATE_CHANGE = register(
+            RuleFactory.of("windChargeNoBlockStateChange", false)
+                    .addCategories(SURVIVAL, FEATURE)
+                    .build()
+    );
 }

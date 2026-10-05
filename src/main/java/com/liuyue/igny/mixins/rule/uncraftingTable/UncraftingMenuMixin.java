@@ -1,8 +1,8 @@
 package com.liuyue.igny.mixins.rule.uncraftingTable;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.utils.uncraftingTable.UncraftingState;
-import com.liuyue.igny.utils.uncraftingTable.UncraftingTable;
+import com.liuyue.igny.helper.uncraftingTable.UncraftingState;
+import com.liuyue.igny.helper.uncraftingTable.UncraftingTable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType; //#replace >= 26.1 ? import net.minecraft.world.inventory.ContainerInput;

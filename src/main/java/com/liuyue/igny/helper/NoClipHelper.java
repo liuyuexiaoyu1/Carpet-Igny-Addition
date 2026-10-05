@@ -1,8 +1,7 @@
 package com.liuyue.igny.helper;
 
-import com.liuyue.igny.IGNYServerMod;
+import carpet.CarpetSettings;
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.mixins.rule.survivalFlyNoClip.compat.tis.CreativeNoClipHelperInvoker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -33,7 +32,7 @@ public final class NoClipHelper {
             return true;
         }$$*/
         //#endif
-        return IGNYServerMod.TIS && CreativeNoClipHelperInvoker.igny$isNoClipPlayer(player);
+        return CarpetSettings.creativeNoClip && player.isCreative() && player.getAbilities().flying;
     }
 
     public static boolean isEyeInsideBlock(Player player, Level level) {

@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.ArrayList;
 
-import static com.liuyue.igny.utils.insaneBehaviors.InsaneBehaviors.nextEvenlyDistributedPoint;
+import static com.liuyue.igny.helper.insaneBehaviors.InsaneBehaviors.nextEvenlyDistributedPoint;
 
 @Mixin(PistonBaseBlock.class)
 public class PistonBaseBlockMixin {

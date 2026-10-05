@@ -13,7 +13,7 @@ package com.liuyue.igny.commands;
 
 import com.liuyue.igny.IGNYSettings;
 import com.liuyue.igny.utils.CommandUtil;
-import com.liuyue.igny.utils.insaneBehaviors.InsaneBehaviors;
+import com.liuyue.igny.helper.insaneBehaviors.InsaneBehaviors;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.minecraft.commands.CommandSourceStack;

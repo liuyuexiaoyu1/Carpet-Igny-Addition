@@ -1706,3 +1706,21 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `ENTERTAINMENT`, `FEATURE`
+
+## 重新引入三叉戟多次伤害实体 (tridentMultipleDamageReintroduced) `🐛Beta`
+
+重新引入同一把投掷的三叉戟可重复对多个实体造成伤害的行为，回退了25w44a的更改。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `PORTING`, `FEATURE`
+
+## 风弹不改变方块状态 (windChargeNoBlockStateChange) `🐛Beta`
+
+风弹和风爆附魔不再改变方块状态，也不会因此打落展示框之类的悬挂实体。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `SURVIVAL`, `FEATURE`

@@ -1,6 +1,5 @@
 package com.liuyue.igny.helper.uncraftingTable;
 
-import com.liuyue.igny.utils.uncraftingTable.UncraftingTable;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;

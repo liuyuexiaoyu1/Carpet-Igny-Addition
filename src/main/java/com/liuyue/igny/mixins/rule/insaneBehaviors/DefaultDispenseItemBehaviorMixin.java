@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.ArrayList;
 
-import static com.liuyue.igny.utils.insaneBehaviors.InsaneBehaviors.*;
+import static com.liuyue.igny.helper.insaneBehaviors.InsaneBehaviors.*;
 
 @Mixin(DefaultDispenseItemBehavior.class)
 public class DefaultDispenseItemBehaviorMixin {

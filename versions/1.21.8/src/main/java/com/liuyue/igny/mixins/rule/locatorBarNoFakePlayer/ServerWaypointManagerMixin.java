@@ -3,6 +3,7 @@ package com.liuyue.igny.mixins.rule.locatorBarNoFakePlayer;
 import carpet.patches.EntityPlayerMPFake;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.waypoints.ServerWaypointManager;
+import net.minecraft.world.waypoints.WaypointTransmitter;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,6 +21,11 @@ public abstract class ServerWaypointManagerMixin {
     @Inject(method = "addPlayer", at = @At(value = "HEAD"), cancellable = true)
     private void addPlayer(ServerPlayer player, CallbackInfo ci) {
         if (IGNYSettings.LOCATOR_BAR_NO_FAKE_PLAYER.value() && player instanceof EntityPlayerMPFake) ci.cancel();
+    }
+
+    @Inject(method = "trackWaypoint(Lnet/minecraft/world/waypoints/WaypointTransmitter;)V", at = @At(value = "HEAD"), cancellable = true)
+    private void trackWaypoint(WaypointTransmitter transmitter, CallbackInfo ci) {
+        if (IGNYSettings.LOCATOR_BAR_NO_FAKE_PLAYER.value() && transmitter instanceof EntityPlayerMPFake) ci.cancel();
     }
 }
 

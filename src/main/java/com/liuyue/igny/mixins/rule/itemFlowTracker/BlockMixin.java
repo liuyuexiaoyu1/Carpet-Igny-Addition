@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.itemFlowTracker;
 
-import com.liuyue.igny.utils.itemFlowTracker.core.TrackingWatch;
+import  com.liuyue.igny.helper.itemFlowTracker.core.TrackingWatch;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;

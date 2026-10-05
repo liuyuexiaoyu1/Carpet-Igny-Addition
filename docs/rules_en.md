@@ -1704,3 +1704,21 @@ Set all rules to enabled: boolean rules are set to true, string and enum rules p
 - Default Value: `false`
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `ENTERTAINMENT`, `FEATURE`
+
+## tridentMultipleDamageReintroduced `🐛Beta`
+
+Reintroduces the behavior where the same thrown trident can damage multiple entities repeatedly, reverting the change made in 25w44a.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `PORTING`, `FEATURE`
+
+## windChargeNoBlockStateChange `🐛Beta`
+
+Wind charges and wind burst no longer change block states, and will not knock down hanging entities such as item frames as a result.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `SURVIVAL`, `FEATURE`

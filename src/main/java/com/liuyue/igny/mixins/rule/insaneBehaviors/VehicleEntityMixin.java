@@ -12,7 +12,7 @@
 package com.liuyue.igny.mixins.rule.insaneBehaviors;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.utils.insaneBehaviors.InsaneBehaviors;
+import com.liuyue.igny.helper.insaneBehaviors.InsaneBehaviors;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.entity.item.ItemEntity;

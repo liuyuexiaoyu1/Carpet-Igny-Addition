@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileDeflection;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.ThrownTrident;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -34,10 +35,17 @@ public abstract class AbstractArrowMixin extends Projectile {
 
     @Shadow
     protected abstract @Nullable EntityHitResult findHitEntity(Vec3 start, Vec3 end);
+    @Unique
+    private boolean igny$enabled() {
+        AbstractArrow self = (AbstractArrow) (Object) this;
+        return IGNYSettings.SEQUENTIAL_ARROW_HIT_ENTITY_REINTRODUCED.value()
+                && !(IGNYSettings.TRIDENT_MULTIPLE_DAMAGE_REINTRODUCED.value()
+                && self instanceof ThrownTrident);
+    }
 
     @WrapOperation(method = "stepMoveAndHit", at = @At(value = "NEW", target = "(Ljava/util/Collection;)Ljava/util/ArrayList;"))
     private ArrayList<?> onListInit(Collection<?> c, Operation<ArrayList<?>> original) {
-        if (IGNYSettings.SEQUENTIAL_ARROW_HIT_ENTITY_REINTRODUCED.value()) {
+        if (this.igny$enabled()) {
             return new ArrayList<>();
         }
         return original.call(c);
@@ -45,7 +53,7 @@ public abstract class AbstractArrowMixin extends Projectile {
 
     @WrapOperation(method = "stepMoveAndHit", at = @At(value = "INVOKE", target = "Ljava/util/ArrayList;sort(Ljava/util/Comparator;)V"))
     private void sort(ArrayList<?> instance, Comparator<?> c, Operation<Void> original) {
-        if (IGNYSettings.SEQUENTIAL_ARROW_HIT_ENTITY_REINTRODUCED.value()) {
+        if (this.igny$enabled()) {
             return;
         }
         original.call(instance, c);
@@ -53,7 +61,7 @@ public abstract class AbstractArrowMixin extends Projectile {
 
     @ModifyVariable(method = "stepMoveAndHit",at = @At(value = "STORE"))
     private EntityHitResult onModifyList(EntityHitResult original, @Local(ordinal = 0) Vec3 pos, @Local(argsOnly = true) BlockHitResult result) {
-        if (IGNYSettings.SEQUENTIAL_ARROW_HIT_ENTITY_REINTRODUCED.value()) {
+        if (this.igny$enabled()) {
             entityHitResult = this.findHitEntity(pos, result.getLocation());
             return entityHitResult;
         }
@@ -62,7 +70,7 @@ public abstract class AbstractArrowMixin extends Projectile {
 
     @WrapOperation(method = "stepMoveAndHit", at = @At(value = "INVOKE", target = "Ljava/util/ArrayList;isEmpty()Z"))
     private boolean isEmpty(ArrayList<?> instance, Operation<Boolean> original) {
-        if (IGNYSettings.SEQUENTIAL_ARROW_HIT_ENTITY_REINTRODUCED.value()) {
+        if (this.igny$enabled()) {
             return entityHitResult == null;
         }
         return original.call(instance);
@@ -70,7 +78,7 @@ public abstract class AbstractArrowMixin extends Projectile {
 
     @WrapOperation(method = "stepMoveAndHit", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/arrow/AbstractArrow;hitTargetsOrDeflectSelf(Ljava/util/Collection;)Lnet/minecraft/world/entity/projectile/ProjectileDeflection;"))
     private ProjectileDeflection hitTargetsOrDeflectSelf(AbstractArrow instance, Collection<EntityHitResult> hitResults, Operation<ProjectileDeflection> original) {
-        if (IGNYSettings.SEQUENTIAL_ARROW_HIT_ENTITY_REINTRODUCED.value()) {
+        if (this.igny$enabled()) {
             EntityHitResult result = entityHitResult;
             entityHitResult = null;
             return this.hitTargetOrDeflectSelf(result);

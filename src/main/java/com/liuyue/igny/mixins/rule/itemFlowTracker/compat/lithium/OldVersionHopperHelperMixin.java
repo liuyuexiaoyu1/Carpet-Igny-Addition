@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.itemFlowTracker.compat.lithium;
 
-import com.liuyue.igny.utils.itemFlowTracker.compat.lithium.HopperTransfer;
+import  com.liuyue.igny.helper.itemFlowTracker.compat.lithium.HopperTransfer;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;

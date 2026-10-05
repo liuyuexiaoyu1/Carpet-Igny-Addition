@@ -2,7 +2,7 @@ package com.liuyue.igny.mixins.rule.playerOperationLimiter;
 
 import carpet.patches.EntityPlayerMPFake;
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.utils.rule.playerOperationLimiter.SafeServerPlayerEntity;
+import com.liuyue.igny.helper.playerOperationLimiter.SafeServerPlayerEntity;
 import net.minecraft.server.level.ServerPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -12,7 +12,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ServerPlayer.class)
 public class ServerPlayerMixin implements SafeServerPlayerEntity {
+    @Unique
     private int igny$breakCountPerTick = 0;
+    @Unique
     private int igny$placeCountPerTick = 0;
 
     @Inject(method = "tick", at = @At("HEAD"))

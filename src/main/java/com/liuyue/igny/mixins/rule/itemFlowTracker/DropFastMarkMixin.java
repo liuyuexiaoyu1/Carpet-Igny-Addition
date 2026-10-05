@@ -1,9 +1,9 @@
 package com.liuyue.igny.mixins.rule.itemFlowTracker;
 
 import com.liuyue.igny.utils.ItemUtil;
-import com.liuyue.igny.utils.itemFlowTracker.ItemFlowTrackerSettings;
-import com.liuyue.igny.utils.itemFlowTracker.core.Tracking;
-import com.liuyue.igny.utils.itemFlowTracker.core.TrackingWatch;
+import  com.liuyue.igny.helper.itemFlowTracker.ItemFlowTrackerSettings;
+import  com.liuyue.igny.helper.itemFlowTracker.core.Tracking;
+import  com.liuyue.igny.helper.itemFlowTracker.core.TrackingWatch;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;

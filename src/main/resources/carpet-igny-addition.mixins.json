@@ -341,6 +341,7 @@
     "rule.teleportInheritMinecartsMotionReintroduced.EndPortalBlockMixin",
     "rule.teleportInheritMinecartsMotionReintroduced.EntityMixin",
     "rule.teleportInheritMinecartsMotionReintroduced.NetherPortalBlockMixin",
+    "rule.tridentMultipleDamageReintroduced.AbstractArrowMixin",
     "rule.theEndCanCreateNetherPortal.BaseFireBlockMixin",
     "rule.theEndTerrainMissingReintroduced.EndIslandDensityFunctionMixin",
     "rule.tntMinecartEmptyDamageSourceFix.EntityInvoker",
@@ -367,6 +368,9 @@
     "rule.wetSpongeCanAbsorbLava.WetSpongeBlockMixin",
     "rule.wifiBeacon.BeaconBlockEntityAccessor",
     "rule.wifiBeacon.BeaconBlockEntityMixin",
+    "rule.windChargeNoBlockStateChange.BlockStateBaseMixin",
+    "rule.windChargeNoBlockStateChange.ExplosionMixin",
+    "rule.windChargeNoBlockStateChange.ServerExplosionMixin",
     "util.virtualDisplay.ChunkMapMixin",
     "util.virtualDisplay.TrackedEntityMixin"
   ],

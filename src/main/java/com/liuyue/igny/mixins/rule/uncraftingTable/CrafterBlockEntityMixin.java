@@ -1,6 +1,6 @@
 package com.liuyue.igny.mixins.rule.uncraftingTable;
 
-import com.liuyue.igny.utils.uncraftingTable.UncraftingTable;
+import com.liuyue.igny.helper.uncraftingTable.UncraftingTable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.CrafterBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;

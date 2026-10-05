@@ -12,7 +12,7 @@
 package com.liuyue.igny.mixins.rule.insaneBehaviors;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.utils.insaneBehaviors.InsaneBehaviors;
+import com.liuyue.igny.helper.insaneBehaviors.InsaneBehaviors;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.ArrayList;
 
-import static com.liuyue.igny.utils.insaneBehaviors.InsaneBehaviors.mapUnitVelocityToTriangularDistribution;
+import static com.liuyue.igny.helper.insaneBehaviors.InsaneBehaviors.mapUnitVelocityToTriangularDistribution;
 
 @Mixin(Projectile.class)
 public class ProjectileMixin {

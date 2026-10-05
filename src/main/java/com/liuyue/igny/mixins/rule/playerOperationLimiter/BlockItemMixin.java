@@ -1,7 +1,7 @@
 package com.liuyue.igny.mixins.rule.playerOperationLimiter;
 
 import com.liuyue.igny.IGNYSettings;
-import com.liuyue.igny.utils.rule.playerOperationLimiter.SafeServerPlayerEntity;
+import com.liuyue.igny.helper.playerOperationLimiter.SafeServerPlayerEntity;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
