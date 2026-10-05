@@ -12,10 +12,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = BlockItem.class, priority = 1050)
+@Mixin(value = BlockItem.class, priority = 999)
 public class BlockItemMixin {
 
-    @Inject(method = "canPlace", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "canPlace", at = @At(value = "HEAD"), cancellable = true)
     private void igny$noPlacementInsideBlock(BlockPlaceContext context, BlockState state, CallbackInfoReturnable<Boolean> cir) {
         if (!IGNYSettings.BLOCK_INSIDE_NO_PLACEMENT.value()) {
             return;
