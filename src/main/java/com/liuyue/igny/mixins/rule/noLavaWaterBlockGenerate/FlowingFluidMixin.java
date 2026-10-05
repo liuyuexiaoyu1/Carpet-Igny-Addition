@@ -21,6 +21,7 @@ public class FlowingFluidMixin {
     //#else
     @WrapOperation(method = "spreadTo", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/LevelAccessor;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"))
     private boolean igny$setBlock(LevelAccessor instance, BlockPos pos, BlockState state, int flags, Operation<Boolean> original)
+    //#endif
     {
         if (igny$wouldMixLavaAndWater(instance, pos, state)) {
             return false;
@@ -28,7 +29,6 @@ public class FlowingFluidMixin {
         return original.call(instance, pos, state, flags); //#replace >= 26.3 ? return original.call(instance, pos, state);
     }
 
-    //#endif
     @Unique
     private static boolean igny$wouldMixLavaAndWater(LevelAccessor level, BlockPos pos, BlockState state) {
         if (!IGNYSettings.NO_LAVA_WATER_BLOCK_GENERATE.value()) {
