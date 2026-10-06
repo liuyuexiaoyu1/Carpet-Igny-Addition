@@ -84,6 +84,7 @@ public class BetterEasyPlaceProtocolHandler {
         register(HorizontalDirectionalBlock.class, new HorizontalDirectionalBlockProtocolAdapter());
         register(HopperBlock.class, new HopperBlockProtocolAdapter());
         register(WallBlock.class, new WallBlockProtocolAdapter());
+        register(DetectorRailBlock.class, new DetectorRailBlockProtocolAdapter());
     }
 
     private static boolean easyPlaceState = false;

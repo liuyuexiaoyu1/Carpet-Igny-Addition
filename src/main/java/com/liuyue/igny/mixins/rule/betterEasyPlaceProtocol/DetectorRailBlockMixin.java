@@ -17,6 +17,8 @@ public abstract class DetectorRailBlockMixin {
         if (!BetterEasyPlaceProtocolHandler.isEasyPlaceState()) {
             return;
         }
-        ci.cancel();
+        if (pos.equals(BetterEasyPlaceProtocolHandler.getPlaceTargetPos()) && BetterEasyPlaceProtocolHandler.getPlaceTargetBlock() instanceof DetectorRailBlock) {
+            ci.cancel();
+        }
     }
 }
