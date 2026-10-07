@@ -14,32 +14,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BaseRailBlock.class)
 public abstract class BaseRailBlockMixin {
+
     @Inject(
             method = "updateState(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Z)Lnet/minecraft/world/level/block/state/BlockState;",
-            at = @At("HEAD"),
+            at = @At(value = "HEAD"),
             cancellable = true
     )
-    private void igny_cancelUpdate(BlockState state, Level world, BlockPos pos, boolean forceUpdate, CallbackInfoReturnable<BlockState> cir) {
-        if (!BetterEasyPlaceProtocolHandler.isEasyPlaceState()) {
-            return;
+    private void igny_cancelUpdateState(BlockState state, Level world, BlockPos pos, boolean forceUpdate, CallbackInfoReturnable<BlockState> cir) {
+        if (BetterEasyPlaceProtocolHandler.isEasyPlaceState()
+                && BetterEasyPlaceProtocolHandler.hasPlaceFlag(BetterEasyPlaceProtocolHandler.EASY_PLACE_RAIL_BLOCK_NO_SHAPE_UPDATE)) {
+            cir.setReturnValue(state);
         }
-        if (!BetterEasyPlaceProtocolHandler.hasPlaceFlag(BetterEasyPlaceProtocolHandler.EASY_PLACE_RAIL_BLOCK_NO_SHAPE_UPDATE)) {
-            return;
-        }
-        cir.setReturnValue(state);
     }
 
-    //#if >= 1.21.3
-    /*$$@Inject(method = "neighborChanged", at = @At("HEAD"), cancellable = true)
-    private void igny_cancelNeighborUpdate(BlockState state, Level world, BlockPos pos, Block block, net.minecraft.world.level.redstone.Orientation orientation, boolean isMoving, CallbackInfo ci) {$$*/
-    //#else
-    @Inject(method = "neighborChanged", at = @At("HEAD"), cancellable = true)
-    private void igny_cancelNeighborUpdate(BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving, CallbackInfo ci) {
-    //#endif
-        if (!BetterEasyPlaceProtocolHandler.isEasyPlaceState()) {
-            return;
-        }
-        if (BetterEasyPlaceProtocolHandler.getPlaceTargetBlock() instanceof BaseRailBlock) {
+    @Inject(
+            method = "updateState(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Block;)V",
+            at = @At(value = "HEAD"),
+            cancellable = true
+    )
+    private void igny_cancelUpdateStateFromBlock(BlockState state, Level world, BlockPos pos, Block changedBlock, CallbackInfo ci) {
+        if (BetterEasyPlaceProtocolHandler.isEasyPlaceState()
+                && BetterEasyPlaceProtocolHandler.hasPlaceFlag(BetterEasyPlaceProtocolHandler.EASY_PLACE_RAIL_BLOCK_NO_SHAPE_UPDATE)) {
             ci.cancel();
         }
     }

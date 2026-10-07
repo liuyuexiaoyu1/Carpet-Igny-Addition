@@ -11,6 +11,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 //? == 1.21.3 ? import net.minecraft.world.item.ItemStack;
@@ -72,9 +73,13 @@ public abstract class FishingHookMixin {
     ))
     private boolean igny$grappleWhenLineBreaks(FishingHook instance, Player player, Operation<Boolean> original) {
         boolean stop = original.call(instance, player);
-        if (stop && IGNYSettings.GRAPPLING_FISHING_RODS.value()) {
+
+        boolean hasRod = player.getMainHandItem().is(Items.FISHING_ROD) || player.getOffhandItem().is(Items.FISHING_ROD);
+
+        if (stop && hasRod && IGNYSettings.GRAPPLING_FISHING_RODS.value()) {
             igny$grapple(instance, player);
         }
+
         return stop;
     }
 
@@ -138,11 +143,12 @@ public abstract class FishingHookMixin {
             return;
         }
 
-        self.setPos(
-                Mth.clamp(next.x, border.getMinX(), border.getMaxX()),
-                next.y,
-                Mth.clamp(next.z, border.getMinZ(), border.getMaxZ())
-        );
+        double cx = Mth.clamp(next.x, border.getMinX(), border.getMaxX());
+        double cz = Mth.clamp(next.z, border.getMinZ(), border.getMaxZ());
+        if (level.noCollision(self, self.getBoundingBox().move(cx - next.x, 0.0, cz - next.z))) {
+            self.setPos(cx, next.y, cz);
+        }
+
         self.setDeltaMovement(Vec3.ZERO);
     }
 
