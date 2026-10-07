@@ -7,6 +7,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 //? >= 1.21.11 ? import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 //? == 1.21.3 ? import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -31,13 +33,37 @@ public abstract class FishingHookMixin {
         this.igny$boost();
     }
 
+    @Shadow
+    protected void pullEntity(Entity entity) {
+        throw new AssertionError();
+    }
+
+    @Unique
+    private boolean igny$borderCheck = true;
+
     @Unique
     private void igny$boost() {
         if (!IGNYSettings.GRAPPLING_FISHING_RODS.value()) {
             return;
         }
+
         FishingHook self = (FishingHook) (Object) this;
-        self.setDeltaMovement(self.getDeltaMovement().scale(1.8));
+        Player owner = self.getPlayerOwner();
+
+        if (owner == null) {
+            return;
+        }
+
+        //#if >= 1.21.11
+        /*$$this.igny$borderCheck = !(self.level() instanceof ServerLevel serverLevel)
+                || serverLevel.getWorldBorder().isWithinBounds(self.getX(), self.getZ());$$*/
+        //#else
+        this.igny$borderCheck = self.level().getWorldBorder().isWithinBounds(self.getX(), self.getZ());
+        //#endif
+
+        double speed = self.getDeltaMovement().length() * 1.8;
+
+        self.setDeltaMovement(owner.getLookAngle().scale(speed));
     }
 
     @WrapOperation(method = "tick", at = @At(
@@ -56,7 +82,16 @@ public abstract class FishingHookMixin {
     /*$$@WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/FishingHook;addDeltaMovement(DDD)V"))
     private void igny$skipGravity(FishingHook instance, double x, double y, double z, Operation<Void> original)$$*/
     //#else
-    @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/Vec3;add(DDD)Lnet/minecraft/world/phys/Vec3;"))
+    @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/Vec3;add(DDD)Lnet/minecraft/world/phys/Vec3;", ordinal = 0))
+    private Vec3 igny$skipAimAssist(Vec3 instance, double x, double y, double z, Operation<Vec3> original) {
+        if (IGNYSettings.GRAPPLING_FISHING_RODS.value()) {
+            return instance;
+        }
+
+        return original.call(instance, x, y, z);
+    }
+
+    @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/Vec3;add(DDD)Lnet/minecraft/world/phys/Vec3;", ordinal = 1))
     private Vec3 igny$skipGravity(Vec3 instance, double x, double y, double z, Operation<Vec3> original)
     //#endif
     {
@@ -78,6 +113,39 @@ public abstract class FishingHookMixin {
         return original.call(instance, factor);
     }
 
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void igny$stopAtWorldBorder(CallbackInfo ci) {
+        if (!IGNYSettings.GRAPPLING_FISHING_RODS.value()) {
+            return;
+        }
+
+        FishingHook self = (FishingHook) (Object) this;
+
+        if (!this.igny$borderCheck) {
+            return;
+        }
+        Level level = self.level();
+        Vec3 next = self.position().add(self.getDeltaMovement());
+
+        //#if >= 1.21.11
+        /*$$net.minecraft.world.level.border.WorldBorder border = level instanceof ServerLevel serverLevel
+                ? serverLevel.getWorldBorder() : null;$$*/
+        //#else
+        net.minecraft.world.level.border.WorldBorder border = level.getWorldBorder();
+        //#endif
+
+        if (border == null || border.isWithinBounds(next.x, next.z)) {
+            return;
+        }
+
+        self.setPos(
+                Mth.clamp(next.x, border.getMinX(), border.getMaxX()),
+                next.y,
+                Mth.clamp(next.z, border.getMinZ(), border.getMaxZ())
+        );
+        self.setDeltaMovement(Vec3.ZERO);
+    }
+
     @ModifyConstant(method = "shouldStopFishing", constant = @Constant(doubleValue = 1024.0))
     private double igny$extendRange(double original) {
         return IGNYSettings.GRAPPLING_FISHING_RODS.value() ? original * 5 : original;
@@ -96,16 +164,22 @@ public abstract class FishingHookMixin {
     }
 
     @Unique
-    private static void igny$grapple(FishingHook hook, Player player) {
+    private void igny$grapple(FishingHook hook, Player player) {
         Entity hooked = hook.getHookedIn();
         Level level = hook.level(); //#replace < 1.20.1 ? Level level = hook.level;
         Vec3 target = null;
         if (hooked != null) {
-            target = hooked.position();
+            if (hooked instanceof Player) {
+                target = hooked.position();
+            } else {
+                this.pullEntity(hooked);
+
+                return;
+            }
         } else if (!level.noCollision(hook.getBoundingBox().inflate(0.5))) {
             target = hook.position();
         }
-        else if (level.getWorldBorder().getDistanceToBorder(hook.getX(), hook.getZ()) < 0.5) //#replace >= 1.21.11 ? else if (level instanceof ServerLevel serverLevel && serverLevel.getWorldBorder().getDistanceToBorder(hook.getX(), hook.getZ()) < 0.5)
+        else if (level.getWorldBorder().getDistanceToBorder(hook.getX(), hook.getZ()) < 1) //#replace >= 1.21.11 ? else if (level instanceof ServerLevel serverLevel && serverLevel.getWorldBorder().getDistanceToBorder(hook.getX(), hook.getZ()) < 0.5)
         {
             target = hook.position();
         }
