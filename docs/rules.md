@@ -1724,3 +1724,21 @@ true: 物品展示框内含物品时将会隐形。
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## 重新引入低版本弹射 (legacyBounceReintroduced) `🐛Beta` `MC>=26.2`
+
+把可弹跳方块的弹射动量还原为低版本的纯反射公式，并恢复水平碰撞时清零被撞方向速度的行为，回退了26.2-snapshot-1的更改。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `PORTING`, `FEATURE`
+
+## 重新引入双精度空气阻力 (doubleAirDragReintroduced) `🐛Beta` `MC>=26.2`
+
+把空气阻力从float还原为double精度，回退了26.2-snapshot-6的更改。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `IGNY`, `PORTING`, `FEATURE`

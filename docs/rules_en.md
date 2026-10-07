@@ -1722,3 +1722,21 @@ Wind charges and wind burst no longer change block states, and will not knock do
 - Default Value: `false`
 - Suggested Options: `false`, `true`
 - Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+
+## legacyBounceReintroduced `🐛Beta` `MC>=26.2`
+
+Reintroduces the pure-reflection bounce momentum for bouncy blocks and restores zeroing the collided axis on horizontal collision, reverting the changes made in 26.2-snapshot-1.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `PORTING`, `FEATURE`
+
+## doubleAirDragReintroduced `🐛Beta` `MC>=26.2`
+
+Reintroduces double-precision air drag, reverting the changes made in 26.2-snapshot-6.
+
+- Type: `boolean`
+- Default Value: `false`
+- Suggested Options: `false`, `true`
+- Categories: `IGNY`, `PORTING`, `FEATURE`

@@ -1,7 +1,10 @@
 package com.liuyue.igny.utils.interfaces.grapplingFishingRods;
 
-public interface GrappleFallGuard {
-    void igny$setGrappleFallGuard(boolean active);
+import net.minecraft.world.phys.Vec3;
 
-    boolean igny$getGrappleFallGuard();
+public interface GrappleFallGuard {
+    void igny$startGrappleImpulse(Vec3 impactPos);
+    boolean igny$isGrappleImpulseActive();
+    Vec3 igny$getGrappleImpactPos();
+    void igny$tickGrappleImpulse();
 }

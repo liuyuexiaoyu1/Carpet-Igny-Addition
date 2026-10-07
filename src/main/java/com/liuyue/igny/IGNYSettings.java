@@ -1146,6 +1146,7 @@ public class IGNYSettings {
             RuleFactory.of("insaneBehaviors", "off")
                     .addCategories(CREATIVE, FEATURE)
                     .addOptions("extreme", "sensible", "off")
+                    .setCommand()
                     .build()
     );
 
@@ -1172,6 +1173,7 @@ public class IGNYSettings {
     public static final RuleAccessor<CommandPermissionLevel> COMMAND_INSANE_BEHAVIORS = register(
             RuleFactory.of("commandInsaneBehaviors", CommandPermissionLevel.OPS)
                     .addCategories(CREATIVE, FEATURE)
+                    .setCommand()
                     .build()
     );
 
@@ -1183,8 +1185,8 @@ public class IGNYSettings {
 
     public static final RuleAccessor<Boolean> ITEM_FLOW_TRACKER = register(
             RuleFactory.of("itemFlowTracker", false)
-                    .setCommand()
                     .addCategories(SURVIVAL, FEATURE)
+                    .setCommand()
                     .build()
     );
 
@@ -1205,8 +1207,8 @@ public class IGNYSettings {
 
     public static final RuleAccessor<CommandPermissionLevel> COMMAND_ITEM_FLOW_TRACKER = register(
             RuleFactory.of("commandItemFlowTracker", CommandPermissionLevel.OPS)
-                    .setCommand()
                     .addCategories(SURVIVAL, FEATURE)
+                    .setCommand()
                     .addValidator(PrerequisiteRuleValidator.createValidator(IGNYSettings.ITEM_FLOW_TRACKER, true))
                     .build()
     );
@@ -1330,4 +1332,20 @@ public class IGNYSettings {
                     .addCategories(SURVIVAL, FEATURE)
                     .build()
     );
+
+    //#if >= 26.2
+    /*$$public static final RuleAccessor<Boolean> LEGACY_BOUNCE_REINTRODUCED = register(
+            RuleFactory.of("legacyBounceReintroduced", false)
+                    .addCategories(PORTING, FEATURE)
+                    .build()
+    );$$*/
+    //#endif
+
+    //#if >= 26.2
+    /*$$public static final RuleAccessor<Boolean> DOUBLE_AIR_DRAG_REINTRODUCED = register(
+            RuleFactory.of("doubleAirDragReintroduced", false)
+                    .addCategories(PORTING, FEATURE)
+                    .build()
+    );$$*/
+    //#endif
 }

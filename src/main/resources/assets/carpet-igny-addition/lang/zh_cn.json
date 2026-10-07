@@ -569,5 +569,9 @@
   "carpet.rule.tridentMultipleDamageReintroduced.name": "重新引入三叉戟多次伤害实体",
   "carpet.rule.tridentMultipleDamageReintroduced.desc": "重新引入同一把投掷的三叉戟可重复对多个实体造成伤害的行为，回退了25w44a的更改",
   "carpet.rule.windChargeNoBlockStateChange.name": "风弹不改变方块状态",
-  "carpet.rule.windChargeNoBlockStateChange.desc": "风弹和风爆附魔不再改变方块状态，也不会因此打落展示框之类的悬挂实体"
+  "carpet.rule.windChargeNoBlockStateChange.desc": "风弹和风爆附魔不再改变方块状态，也不会因此打落展示框之类的悬挂实体",
+  "carpet.rule.legacyBounceReintroduced.name": "重新引入低版本弹射",
+  "carpet.rule.legacyBounceReintroduced.desc": "把可弹跳方块的弹射动量还原为低版本的纯反射公式，并恢复水平碰撞时清零被撞方向速度的行为，回退了26.2-snapshot-1的更改",
+  "carpet.rule.doubleAirDragReintroduced.name": "重新引入双精度空气阻力",
+  "carpet.rule.doubleAirDragReintroduced.desc": "把空气阻力从float还原为double精度，回退了26.2-snapshot-6的更改"
 }

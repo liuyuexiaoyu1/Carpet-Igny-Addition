@@ -389,5 +389,7 @@
   "carpet.rule.noLavaWaterBlockGenerate.desc": "Lava and water will not generate blocks when they meet",
   "carpet.rule.enableAllRules.desc": "Set all rules to enabled: boolean rules are set to true, string and enum rules prefer 'on' or 'true' and otherwise pick a random non-default value",
   "carpet.rule.tridentMultipleDamageReintroduced.desc": "Reintroduces the behavior where the same thrown trident can damage multiple entities repeatedly, reverting the change made in 25w44a",
-  "carpet.rule.windChargeNoBlockStateChange.desc": "Wind charges and wind burst no longer change block states, and will not knock down hanging entities such as item frames as a result"
+  "carpet.rule.windChargeNoBlockStateChange.desc": "Wind charges and wind burst no longer change block states, and will not knock down hanging entities such as item frames as a result",
+  "carpet.rule.legacyBounceReintroduced.desc": "Reintroduces the pure-reflection bounce momentum for bouncy blocks and restores zeroing the collided axis on horizontal collision, reverting the changes made in 26.2-snapshot-1",
+  "carpet.rule.doubleAirDragReintroduced.desc": "Reintroduces double-precision air drag, reverting the changes made in 26.2-snapshot-6"
 }
