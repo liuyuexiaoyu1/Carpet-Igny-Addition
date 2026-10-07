@@ -69,8 +69,13 @@ public abstract class PlayerMixin extends LivingEntity implements GrappleFallGua
         igny$tickGrappleImpulse();
     }
 
-    @Inject(method = "causeFallDamage", at = @At("HEAD"), cancellable = true)
-    private void igny$grappleFallDamage(float fallDistance, float multiplier, DamageSource source, CallbackInfoReturnable<Boolean> cir) {
+    //#if >= 1.21.5
+    /*$$@Inject(method = "causeFallDamage", at = @At(value = "HEAD"), cancellable = true)
+    private void igny$skipGrappleFallDamage(double fallDistance, float multiplier, DamageSource source, CallbackInfoReturnable<Boolean> cir) {$$*/
+    //#else
+    @Inject(method = "causeFallDamage", at = @At(value = "HEAD"), cancellable = true)
+    private void igny$skipGrappleFallDamage(float fallDistance, float multiplier, DamageSource source, CallbackInfoReturnable<Boolean> cir) {
+    //#endif
         if (!IGNYSettings.GRAPPLING_FISHING_RODS.value() || !igny$grappleImpulseActive) {
             return;
         }
