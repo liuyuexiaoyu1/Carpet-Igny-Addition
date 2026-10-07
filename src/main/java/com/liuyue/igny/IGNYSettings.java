@@ -1222,7 +1222,7 @@ public class IGNYSettings {
 
     public static final RuleAccessor<Boolean> UNCRAFTING_TABLE = register(
             RuleFactory.of("uncraftingTable", false)
-                    .addCategories(SURVIVAL, FEATURE)
+                    .addCategories(SURVIVAL, ENTERTAINMENT, FEATURE)
                     .build()
     );
 
@@ -1268,6 +1268,7 @@ public class IGNYSettings {
     public static final RuleAccessor<Boolean> DEFLECTABLE_DRAGON_FIREBALL = register(
             RuleFactory.of("deflectableDragonFireball", false)
                     .addCategories(FEATURE)
+                    .setClient()
                     .build()
     );
 

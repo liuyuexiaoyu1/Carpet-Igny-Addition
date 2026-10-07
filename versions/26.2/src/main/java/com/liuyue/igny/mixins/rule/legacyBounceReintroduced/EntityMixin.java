@@ -38,19 +38,22 @@ public abstract class EntityMixin {
             return;
         }
 
-        if (self.isSuppressingBounce() || effectState.is(BlockTags.SUPPRESSES_BOUNCE)) {
-            return;
-        }
-
         double blockBounciness = effectState.getBlock().getBounceRestitution();
         if (!(self instanceof LivingEntity)) {
             blockBounciness *= 0.8;
         }
 
-        final double restitution = Math.max(this.getEntityBounciness(), blockBounciness);
+        final double restitution = self.isSuppressingBounce() || effectState.is(BlockTags.SUPPRESSES_BOUNCE)
+                ? 0.0
+                : Math.max(this.getEntityBounciness(), blockBounciness);
+
         final Vec3 delta = self.getDeltaMovement();
-        if (restitution > 0.0 && delta.y < 0.0) {
-            self.setDeltaMovement(delta.x, -delta.y * restitution, delta.z);
+        if (restitution > 0.0) {
+            if (delta.y < 0.0) {
+                self.setDeltaMovement(delta.x, -delta.y * restitution, delta.z);
+            }
+        } else {
+            self.setDeltaMovement(delta.x, 0.0, delta.z);
         }
         ci.cancel();
     }

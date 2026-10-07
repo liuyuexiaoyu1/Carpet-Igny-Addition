@@ -1568,7 +1568,7 @@ true: 物品展示框内含物品时将会隐形。
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
-- 分类: `IGNY`, `SURVIVAL`, `FEATURE`
+- 分类: `IGNY`, `SURVIVAL`, `ENTERTAINMENT`, `FEATURE`
 
 ## 复制方块状态 (copyBlockState)
 
@@ -1642,7 +1642,7 @@ true: 物品展示框内含物品时将会隐形。
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
-- 分类: `IGNY`, `FEATURE`
+- 分类: `IGNY` `CLIENT`, `FEATURE`
 
 ## 重新引入矿车客户端骑乘状态同步 (minecartClientRidingStateSyncReintroduced) `MC>=26.3`
 

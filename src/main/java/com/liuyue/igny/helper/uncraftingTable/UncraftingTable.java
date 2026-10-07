@@ -120,6 +120,12 @@ public final class UncraftingTable {
 
             ItemStack[] base = decompose(recipe);
 
+            // Bleaching recipes such as orange_wool + white_dye -> white_wool would let a white
+            // item be taken apart into a white dye plus a coloured item, an infinite dye loop.
+            if (isWhiteVariant(output) && containsDye(base)) {
+                continue;
+            }
+
             if (base == null) {
                 continue;
             }
@@ -347,11 +353,50 @@ public final class UncraftingTable {
 
         //#if >= 1.21.3
         /*$$Iterator<Holder<Item>> iterator = ingredient.items().iterator();
-        return iterator.hasNext() ? single(new ItemStack(iterator.next().value())) : ItemStack.EMPTY;$$*/
+        ItemStack fallback = ItemStack.EMPTY;
+        while (iterator.hasNext()) {
+            ItemStack candidate = new ItemStack(iterator.next().value());
+            if (fallback.isEmpty()) {
+                fallback = candidate;
+            }
+            if (isWhiteVariant(candidate)) {
+                return single(candidate);
+            }
+        }
+        return single(fallback);$$*/
         //#else
         ItemStack[] stacks = ingredient.getItems();
-        return stacks.length == 0 ? ItemStack.EMPTY : single(stacks[0]);
+        if (stacks.length == 0) {
+            return ItemStack.EMPTY;
+        }
+
+        for (ItemStack stack : stacks) {
+            if (isWhiteVariant(stack)) {
+                return single(stack);
+            }
+        }
+
+        return single(stacks[0]);
         //#endif
+    }
+
+    private static boolean containsDye(@Nullable ItemStack[] base) {
+        if (base == null) {
+            return false;
+        }
+
+        for (ItemStack stack : base) {
+            if (!stack.isEmpty() && stack.getItem() instanceof net.minecraft.world.item.DyeItem) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static boolean isWhiteVariant(ItemStack stack) {
+        String path = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath();
+        return path.startsWith("white_");
     }
 
     public static ItemStack single(ItemStack stack) {

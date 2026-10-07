@@ -130,7 +130,7 @@ public abstract class UncraftingMenuMixin {
             state.igny$setUncraftCandidates(refreshed);
 
             if (refreshed.isEmpty()) {
-                UncraftingTable.returnGrid(menu, player);
+                UncraftingTable.clearGrid(menu);
                 state.igny$setUncraftBase(null);
                 UncraftingTable.readGrid(menu, state.igny$uncraftWritten());
                 result.setChanged();
@@ -152,7 +152,8 @@ public abstract class UncraftingMenuMixin {
 
         if (igny$isPickup(clickType) && carried.isEmpty() && button == 0) {
             result.set(ItemStack.EMPTY);
-            UncraftingTable.returnGrid(menu, player);
+            UncraftingTable.clearGrid(menu);
+            menu.setCarried(products);
             state.igny$setUncraftCandidates(null);
             state.igny$setUncraftBase(null);
             state.igny$setUncraftWritten(null);
@@ -163,7 +164,10 @@ public abstract class UncraftingMenuMixin {
 
         if (igny$isQuickMove(clickType)) {
             result.set(ItemStack.EMPTY);
-            UncraftingTable.returnGrid(menu, player);
+            if (!products.isEmpty() && !player.getInventory().add(products)) {
+                player.drop(products, false); //#replace >= 26.3 ? player.drop(products, false, net.minecraft.util.Prediction.PREDICTED);
+            }
+            UncraftingTable.clearGrid(menu);
             state.igny$setUncraftCandidates(null);
             state.igny$setUncraftBase(null);
             state.igny$setUncraftWritten(null);

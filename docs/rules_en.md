@@ -1566,7 +1566,7 @@ This rule also applies to the Crafter. To use it, name the Crafter with the numb
 - Type: `boolean`
 - Default value: `false`
 - Suggested options: `false`, `true`
-- Categories: `IGNY`, `SURVIVAL`, `FEATURE`
+- Categories: `IGNY`, `SURVIVAL`, `ENTERTAINMENT`, `FEATURE`
 
 ## copyBlockState
 
@@ -1640,7 +1640,7 @@ Dragon fireballs can be deflected by melee attacks and arrows, just like firebal
 - Type: `boolean`
 - Default Value: `false`
 - Suggested Options: `false`, `true`
-- Categories: `IGNY`, `FEATURE`
+- Categories: `IGNY`, `CLIENT`, `FEATURE`
 
 ## minecartClientRidingStateSyncReintroduced `MC>=26.3`
 

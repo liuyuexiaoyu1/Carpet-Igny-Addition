@@ -71,11 +71,11 @@ public abstract class PlayerMixin extends LivingEntity implements GrappleFallGua
 
     //#if >= 1.21.5
     /*$$@Inject(method = "causeFallDamage", at = @At(value = "HEAD"), cancellable = true)
-    private void igny$skipGrappleFallDamage(double fallDistance, float multiplier, DamageSource source, CallbackInfoReturnable<Boolean> cir) {$$*/
+        private void igny$skipGrappleFallDamage(double fallDistance, float multiplier, DamageSource source, CallbackInfoReturnable<Boolean> cir) {$$*/
     //#else
     @Inject(method = "causeFallDamage", at = @At(value = "HEAD"), cancellable = true)
     private void igny$skipGrappleFallDamage(float fallDistance, float multiplier, DamageSource source, CallbackInfoReturnable<Boolean> cir) {
-    //#endif
+        //#endif
         if (!IGNYSettings.GRAPPLING_FISHING_RODS.value() || !igny$grappleImpulseActive) {
             return;
         }
@@ -93,7 +93,7 @@ public abstract class PlayerMixin extends LivingEntity implements GrappleFallGua
             cir.setReturnValue(false);
             return;
         }
-        float reduced = Math.min(fallDistance, (float)(startY - self.getY()));
+        float reduced = Math.min((float) fallDistance, (float)(startY - self.getY()));
         igny$grappleImpulseActive = false;
         igny$grappleImpactPos = null;
         igny$grappleGraceTime = 0;
