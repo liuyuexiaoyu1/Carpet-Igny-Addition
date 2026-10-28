@@ -1,12 +1,16 @@
 package com.liuyue.igny.utils;
 
 import com.nlf.calendar.Lunar;
+import com.nlf.calendar.Solar;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 
 public class FestivalUtil {
     private static final ZoneId BEIJING_ZONE = ZoneId.of("Asia/Shanghai");
+
+    private static volatile LocalDate midAutumnDate;
+    private static volatile boolean midAutumn;
 
     public static boolean isAprilFoolsDay() {
         LocalDate now = LocalDate.now();
@@ -19,7 +23,16 @@ public class FestivalUtil {
     }
 
     public static boolean isMidAutumnDay() {
-        Lunar now = new Lunar();
-        return now.getMonth() == 8 && now.getDay() == 15;
+        LocalDate today = LocalDate.now(BEIJING_ZONE);
+
+        if (today.equals(midAutumnDate)) {
+            return midAutumn;
+        }
+
+        Lunar lunar = Solar.fromYmd(today.getYear(), today.getMonthValue(), today.getDayOfMonth()).getLunar();
+        boolean value = lunar.getMonth() == 8 && lunar.getDay() == 15;
+        midAutumn = value;
+        midAutumnDate = today;
+        return value;
     }
 }
