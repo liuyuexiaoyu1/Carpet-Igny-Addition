@@ -1,6 +1,8 @@
 package com.liuyue.igny.mixins.rule.piglinNeutralBehavior;
 
 import com.liuyue.igny.IGNYSettings;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
@@ -26,8 +28,12 @@ public class PiglinAiMixin {
         if (IGNYSettings.PIGLIN_NEUTRAL_BEHAVIOR.value()) ci.cancel();
     }
 
-    @Inject(method = "findNearestValidAttackTarget", at = @At(value = "HEAD"), cancellable = true)
-    private static void findNearestValidAttackTarget(Piglin piglin, CallbackInfoReturnable<Optional<? extends LivingEntity>> cir) { //#replace >= 1.21.2 ? private static void findNearestValidAttackTarget(ServerLevel level, Piglin piglin, CallbackInfoReturnable<Optional<? extends LivingEntity>> cir) {
-        if (IGNYSettings.PIGLIN_NEUTRAL_BEHAVIOR.value()) cir.setReturnValue(Optional.empty());
+    @WrapMethod(method = "findNearestValidAttackTarget")
+    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(Piglin piglin, Operation<Optional<? extends LivingEntity>> original) { //#replace >= 1.21.2 ? private static Optional<? extends LivingEntity> findNearestValidAttackTarget(ServerLevel level, Piglin piglin, Operation<Optional<? extends LivingEntity>> original) {
+        Optional<? extends LivingEntity> result = original.call(piglin); //#replace >= 1.21.2 ? Optional<? extends LivingEntity> result = original.call(level, piglin);
+        if (!IGNYSettings.PIGLIN_NEUTRAL_BEHAVIOR.value()) {
+            return result;
+        }
+        return result.filter(target -> !(target instanceof Player));
     }
 }

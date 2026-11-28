@@ -15,7 +15,7 @@ public class AbstractHugeMushroomFeatureMixin //#replace >= 26.3 ? public interf
     @WrapOperation(method = "placeMushroomBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;isAir()Z"))
     private boolean isAir(BlockState instance, Operation<Boolean> original) {
         if (IGNYSettings.HUGE_MUSHROOM_DESTROY_UNBREAKABLE_REINTRODUCED.value()) {
-            return instance.isSolidRender();
+            return !instance.isSolidRender();
         }
         return original.call(instance);
     }
@@ -23,7 +23,7 @@ public class AbstractHugeMushroomFeatureMixin //#replace >= 26.3 ? public interf
     @WrapOperation(method = "placeMushroomBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/tags/TagKey;)Z"))
     private boolean is(BlockState instance, TagKey<?> tagKey, Operation<Boolean> original) {
         if (IGNYSettings.HUGE_MUSHROOM_DESTROY_UNBREAKABLE_REINTRODUCED.value()) {
-            return instance.isSolidRender();
+            return !instance.isSolidRender();
         }
         return original.call(instance, tagKey);
     }
